@@ -688,7 +688,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       cancelProduct$.next();
       cancelWindRose$.next();
     };
-  }, []);
+  }, [enhancedDispatch]);
   useEffect(() => {
     if (neonContextIsFinal || neonContextHasError) {
       enhancedDispatch(ActionCreator.storeFinalizedNeonContextState(neonContextState));

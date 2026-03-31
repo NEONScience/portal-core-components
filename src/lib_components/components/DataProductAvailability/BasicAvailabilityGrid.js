@@ -43,6 +43,7 @@ export default function BasicAvailabilityGrid(config) {
   */
   const {
     svgRef,
+    view,
     data,
     sites = { value: [], validValues: [] },
     allSites = {},
@@ -61,9 +62,9 @@ export default function BasicAvailabilityGrid(config) {
   }
 
   /**
-     Sanity Check: data must exist and have rows
+     Sanity Check: view and data must exist and have rows
   */
-  if (!data || !data.rows) {
+  if (!view || !data || !data.rows) {
     return null;
   }
 
@@ -124,8 +125,8 @@ export default function BasicAvailabilityGrid(config) {
      be visible.
   */
   const getLabelWidth = () => {
-    if (data.view === 'products') return SVG.PRODUCT_LABEL_WIDTH;
-    return data.view === 'ungrouped' ? SVG.UNGROUPED_LABEL_WIDTH : SVG.GROUPED_LABEL_WIDTH;
+    if (view.view === 'products') return SVG.PRODUCT_LABEL_WIDTH;
+    return view.view === 'ungrouped' ? SVG.UNGROUPED_LABEL_WIDTH : SVG.GROUPED_LABEL_WIDTH;
   };
   const getMinTimeOffset = () => 0 - (SVG.ABS_MAX_DATA_WIDTH - (svgWidth - getLabelWidth()));
   const getYearStartX = (year) => {
@@ -403,7 +404,7 @@ export default function BasicAvailabilityGrid(config) {
   const validSitesSet = new Set(sites.validValues);
 
   if (sites.value.length) {
-    switch (data.view) {
+    switch (view.view) {
       case 'summary':
         viewSelections.summary = (sites.value.length === sites.validValues.length)
           ? 'full'
@@ -416,9 +417,9 @@ export default function BasicAvailabilityGrid(config) {
         });
         break;
       default: // domains, states
-        Object.keys(siteViewMaps[data.view]).forEach((entry) => {
+        Object.keys(siteViewMaps[view.view]).forEach((entry) => {
           const viewSites = new Set(
-            siteViewMaps[data.view][entry].filter((s) => validSitesSet.has(s)),
+            siteViewMaps[view.view][entry].filter((s) => validSitesSet.has(s)),
           );
           const intersection = new Set([...viewSites].filter((s) => sitesSet.has(s)));
           if (!intersection.size) { return; }
@@ -431,7 +432,7 @@ export default function BasicAvailabilityGrid(config) {
   const toggleSelection = (key) => {
     if (!setSitesValue) { return; }
     let allSitesForKey = new Set();
-    switch (data.view) {
+    switch (view.view) {
       case 'summary':
         allSitesForKey = new Set(sites.validValues);
         break;
@@ -440,7 +441,7 @@ export default function BasicAvailabilityGrid(config) {
         allSitesForKey = new Set([key]);
         break;
       default: // domains, states
-        allSitesForKey = new Set(siteViewMaps[data.view][key].filter((s) => validSitesSet.has(s)));
+        allSitesForKey = new Set(siteViewMaps[view.view][key].filter((s) => validSitesSet.has(s)));
         break;
     }
     let newSelectedSitesSet;
@@ -486,7 +487,7 @@ export default function BasicAvailabilityGrid(config) {
       .attr('x', labelX)
       .attr('y', SVG.LABEL_FONT_SIZE - (SVG.CELL_PADDING / 2))
       .attr('fill', fill)
-      .text(data.getLabel.text(rowKey));
+      .text(view.getLabel.text(rowKey));
     SVG_STYLES.apply(text, 'rowLabel');
     const mask = rowLabelG.append('rect')
       .attr('x', 0)
@@ -505,7 +506,7 @@ export default function BasicAvailabilityGrid(config) {
       setTimeout(() => toggleSelection(rowKey), 15);
     } : (event, d) => {};
     mask.on('click', maskClick);
-    mask.append('svg:title').text(data.getLabel.title(rowKey));
+    mask.append('svg:title').text(view.getLabel.title(rowKey));
   });
 
   /**

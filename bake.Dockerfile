@@ -16,7 +16,7 @@ RUN rm -rf /app/build-temp
 # Build production container with only necessary artifacts
 
 FROM portal-web-server-builder:current AS server-builder-parent
-FROM alpine:3.20
+FROM alpine:3.23
 
 EXPOSE 3006
 

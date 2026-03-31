@@ -517,7 +517,9 @@ export default function TimeSeriesViewerGraph() {
       dispatch({ type: 'regenerateGraphData', graphData });
     });
   });
-
+  // Disabling this rule as we are using refs to track state about
+  // and interact with Dygraphs, which is managed outside of React
+  /* eslint-disable react-hooks/refs */
   if (state.status === TIME_SERIES_VIEWER_STATUS.READY) {
     // Determine the set of axes and their units
     const previousAxisCount = axisCountRef.current;
@@ -550,6 +552,7 @@ export default function TimeSeriesViewerGraph() {
       graphOptions[`${axis.axis}label`] = axis.units;
     });
   }
+  /* eslint-enable react-hooks/refs */
 
   // Callback to refresh graph dimensions for current DOM
   const handleResize = useCallback(() => {
@@ -652,6 +655,9 @@ export default function TimeSeriesViewerGraph() {
     selectionDigest,
     state.status,
     state.graphData.data,
+    // Disabling this rule as we are using refs to track state about
+    // and interact with Dygraphs, which is managed outside of React
+    // eslint-disable-next-line react-hooks/refs
     graphOptions,
     dygraphRef,
     handleResize,
@@ -713,6 +719,9 @@ export default function TimeSeriesViewerGraph() {
   const getPngDimensions = () => (
     `${graphState.pngDimensions[0] || '?'}px x ${graphState.pngDimensions[1] || '?'}px`
   );
+  // Disabling this rule as we are using refs to track state about
+  // the DOM directly outside of react for image download support
+  /* eslint-disable react-hooks/refs */
   const downloadImageButton = (
     <Button
       size="small"
@@ -727,6 +736,7 @@ export default function TimeSeriesViewerGraph() {
       Download Image (png)
     </Button>
   );
+  /* eslint-enable react-hooks/refs */
 
   // Toggle Series Visibility Button
   const { series } = state.graphData;

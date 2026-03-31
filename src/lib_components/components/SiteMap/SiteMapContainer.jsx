@@ -1293,6 +1293,11 @@ const SiteMapContainer = (inProps) => {
           {renderMapTableToggleButtonGroup()}
           {renderLegendButton()}
         </div>
+        {/*
+          Disabling this lint rule here intentionally as we are managing the
+          ref / HTMLElement directly
+        */}
+        {/* eslint-disable-next-line react-hooks/refs */}
         {renderSelectionSummary()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -87,11 +87,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const Menu = (props: MenuProps) => {
   const { apps } = props;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const [anchorRefEl, setAnchorRefEl] = useState<HTMLElement | null>(null);
 
   // handle menu toggle
   const handleToggle = () => {
+    setAnchorRefEl(anchorRef.current);
     setOpen((prevOpen) => !prevOpen);
   };
 
@@ -112,9 +114,9 @@ const Menu = (props: MenuProps) => {
   };
 
   // handle a menu selection
-  const handleMenuItemClick = (event: React.MouseEvent<EventTarget>, url: string) => {
+  const handleMenuItemClick = useCallback((url: string) => {
     window.location.href = url;
-  };
+  }, []);
 
   return (
     <div className={classes.toolbarContainer}>
@@ -143,7 +145,7 @@ const Menu = (props: MenuProps) => {
         <Popper
           className={classes.menuContainer}
           open={open}
-          anchorEl={anchorRef.current}
+          anchorEl={anchorRefEl}
           role="presentation"
           transition
         >
@@ -168,13 +170,15 @@ const Menu = (props: MenuProps) => {
                         key={app.name}
                       >
                         <Card
-                          onClick={(event) => handleMenuItemClick(event, app.url)}
+                          onClick={(event) => handleMenuItemClick(app.url)}
                           key={app.url}
                           className={classes.card}
                         >
                           <CardContent className={classes.cardContent}>
                             <LaunchIcon fontSize="large" />
-                            <Typography variant="subtitle1" gutterBottom style={{ lineHeight: 1 }}>{app.name}</Typography>
+                            <Typography variant="subtitle1" gutterBottom style={{ lineHeight: 1 }}>
+                              {app.name}
+                            </Typography>
                             {app.description}
                           </CardContent>
                         </Card>

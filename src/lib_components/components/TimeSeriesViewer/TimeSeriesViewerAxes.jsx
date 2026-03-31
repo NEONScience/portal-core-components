@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
@@ -379,6 +379,17 @@ const YAxisRangeOption = (props) => {
 };
 YAxisRangeOption.propTypes = PropTypes.oneOf(['y1', 'y2']).isRequired;
 
+const rollPeriodReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'setActiveRollPeriod':
+      newState.activeRollPeriod = action.activeRollPeriod;
+      return newState;
+    default:
+      return state;
+  }
+};
+
 /**
    x Axis - Roll Period Option
 */
@@ -402,17 +413,21 @@ const RollPeriodOption = () => {
 
   // Local state for the slider value as we change it. This lets us change the value with a
   // controlled slider component without having to send all updates through the main context reducer
-  const [activeRollPeriod, setActiveRollPeriod] = useState(currentRollPeriod);
+  const initialState = { activeRollPeriod: currentRollPeriod };
+  const [rollPeriodState, rollPeriodDispatch] = useReducer(rollPeriodReducer, initialState);
   const [isActivelySetting, setIsActivelySetting] = useState(false);
   useEffect(() => {
-    if (activeRollPeriod !== currentRollPeriod && !isActivelySetting) {
-      setActiveRollPeriod(currentRollPeriod);
+    if (rollPeriodState.activeRollPeriod !== currentRollPeriod && !isActivelySetting) {
+      rollPeriodDispatch({
+        type: 'setActiveRollPeriod',
+        activeRollPeriod: currentRollPeriod,
+      });
     }
   }, [
-    activeRollPeriod,
+    rollPeriodState,
+    rollPeriodDispatch,
     currentRollPeriod,
     isActivelySetting,
-    setActiveRollPeriod,
   ]);
 
   // Determine slider marks
@@ -435,14 +450,18 @@ const RollPeriodOption = () => {
         className={classes.horizSlider}
         marks={marks}
         data-selenium="time-series-viewer.options.roll-period-slider"
-        value={activeRollPeriod}
+        value={rollPeriodState.activeRollPeriod}
         valueLabelDisplay="auto"
         valueLabelFormat={(x) => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
         onMouseDown={() => { setIsActivelySetting(true); }}
         onChange={(event, value) => {
-          setActiveRollPeriod(Math.min(Math.max(value, rollMin), rollMax));
+          const newActiveRollPeriod = Math.min(Math.max(value, rollMin), rollMax);
+          rollPeriodDispatch({
+            type: 'setActiveRollPeriod',
+            activeRollPeriod: newActiveRollPeriod,
+          });
         }}
         onChangeCommitted={(event, value) => {
           setIsActivelySetting(false);

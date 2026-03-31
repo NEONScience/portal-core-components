@@ -14,7 +14,7 @@ const nextConfig = {
   distDir: 'build',
   basePath: '/core-components-next',
   reactStrictMode: false,
-  trailingSlash: true,
+  trailingSlash: false,
   compiler: {
     emotion: true,
   },

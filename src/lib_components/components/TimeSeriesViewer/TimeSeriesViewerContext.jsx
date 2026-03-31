@@ -3,6 +3,8 @@ import React, {
   useContext,
   useEffect,
   useReducer,
+  useMemo,
+  useState,
 } from 'react';
 import PropTypes, { number } from 'prop-types';
 
@@ -1517,15 +1519,6 @@ const reducer = (state, action) => {
   }
 };
 
-/**
- * Defines a lookup of state key to a boolean
- * designating whether or not that instance of the context
- * should pull the state from the session storage and restore.
- * Keeping this lookup outside of the context provider function
- * as to not incur lifecycle interference by storing with useState.
- */
-const restoreStateLookup = {};
-
 export const defaultProps = {
   timeSeriesUniqueId: 0,
   mode: VIEWER_MODE.DEFAULT,
@@ -1551,7 +1544,7 @@ const Provider = (inProps) => {
   /**
      Initial State and Reducer Setup
   */
-  let initialState = cloneDeep(DEFAULT_STATE);
+  const initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
@@ -1567,23 +1560,39 @@ const Provider = (inProps) => {
   initialState.release = releaseProp;
   initialState.selection = applyDefaultsToSelection(initialState);
 
-  // get the state from storage if present
+  // Get the state from storage if present
   const { productCode } = initialState.product;
+  // Initialize the storage state and restore state
   const stateKey = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
-  if (typeof restoreStateLookup[stateKey] === 'undefined') {
-    restoreStateLookup[stateKey] = true;
-  }
-  const shouldRestoreState = restoreStateLookup[stateKey];
-  const stateStorage = makeStateStorage(stateKey);
-  const savedState = stateStorage.readState();
-  if (savedState && shouldRestoreState) {
-    restoreStateLookup[stateKey] = false;
-    const convertedState = convertStateFromStorage(savedState);
-    stateStorage.removeState();
-    initialState = convertedState;
-  }
-
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const stateStorage = useMemo(() => makeStateStorage(stateKey), [stateKey]);
+  // Determine initial state from session storage once
+  const [initState] = useState(() => {
+    const savedState = stateStorage.readState();
+    const hasSavedState = exists(savedState);
+    let sessionInitialState;
+    let restoredStateFromStorage = false;
+    if (hasSavedState) {
+      sessionInitialState = convertStateFromStorage(savedState);
+      restoredStateFromStorage = true;
+    } else {
+      sessionInitialState = initialState;
+    }
+    return {
+      restoredStateFromStorage,
+      initialState: sessionInitialState,
+    };
+  });
+  // Determine initialized state from stored state once
+  const appliedInitialState = initState.restoredStateFromStorage
+    ? initState.initialState
+    : initialState;
+  const [state, dispatch] = useReducer(reducer, appliedInitialState);
+  // Clean up session state
+  useEffect(() => {
+    if (initState.restoredStateFromStorage) {
+      stateStorage.removeState();
+    }
+  }, [stateStorage, initState]);
 
   const { viewerStatus } = state;
 
@@ -1596,7 +1605,6 @@ const Provider = (inProps) => {
       next: () => {
         if (!NeonEnvironment.enableGlobalSignInState) return;
         if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.READY) return;
-        restoreStateLookup[stateKey] = false;
         const convertedState = convertStateForStorage(state);
         stateStorage.saveState(convertedState);
       },

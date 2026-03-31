@@ -312,6 +312,8 @@ const AopDataViewer = (inProps) => {
   useEffect(() => {
     if (!fetchCalled) {
       handleFetchProductByCode();
+      // Disabling as this component will be deprecated
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFetchCalled(true);
     }
     if (fetchSucceeded && (!currentSelection.site || !currentSelection.sliderMarks.length)) {

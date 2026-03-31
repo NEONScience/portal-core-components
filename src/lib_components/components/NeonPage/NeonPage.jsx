@@ -2,8 +2,11 @@ import React, {
   useRef,
   useState,
   useEffect,
+  useMemo,
   useCallback,
   useLayoutEffect,
+  useTransition,
+  useReducer,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -359,6 +362,40 @@ NeonErrorPage.propTypes = {
   resetErrorBoundary: PropTypes.func.isRequired,
 };
 
+const drupalAssetsReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'fetchDrupalCss':
+      newState.fetchStatus = 'fetching';
+      return newState;
+    case 'fetchDrupalCssSuccess':
+      newState.fetchStatus = 'success';
+      return newState;
+    case 'fetchDrupalCssError':
+      newState.fetchStatus = 'error';
+      return newState;
+    default:
+      return state;
+  }
+};
+
+const notificationsReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'fetchNotifications':
+      newState.fetchStatus = 'fetching';
+      return newState;
+    case 'fetchNotificationsSuccess':
+      newState.fetchStatus = 'success';
+      return newState;
+    case 'fetchNotificationsError':
+      newState.fetchStatus = 'error';
+      return newState;
+    default:
+      return state;
+  }
+};
+
 const defaultProps = {
   breadcrumbHomeHref: '/',
   breadcrumbs: [],
@@ -449,23 +486,39 @@ const NeonPage = (inProps) => {
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every((link) => link.component)
     : false;
-  const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
-    sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
-  );
+  const sidebarHashMap = useMemo(() => ((
+    !hasSidebarLinks ? {} : Object.fromEntries(
+      sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
+    )
+  // Note that the compiler is not aware that this value is not being modified
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
+  )), [hasSidebarLinks, sidebarLinks]);
   const initialCurrentSidebarHash = hasSidebarLinks ? sidebarLinks[0].hash || '#' : '#';
   const [currentSidebarHash, setCurrentSidebarHash] = useState(initialCurrentSidebarHash);
-  const [hashInitialized, setHashInitialized] = useState(false);
+  const hashInitializedRef = useRef(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false); // for small viewports only
 
   // Get the vertical pixel offset for the content associated to any sidebar link by hash
-  const getSidebarLinkScrollPosition = useCallback((hash) => {
-    if (!hasSidebarLinks || sidebarLinksAsStandaloneChildren || !contentRef.current) { return -1; }
+  const getSidebarLinkScrollPosition = useCallback((hash, inSidebarLinksAsStandaloneChildren) => {
+    if (!hasSidebarLinks || inSidebarLinksAsStandaloneChildren || !contentRef.current) {
+      return -1;
+    }
     const headerOffset = (headerRef.current || {}).offsetHeight || 0;
     const stickyOffset = belowMd ? (sidebarRef.current || {}).offsetHeight || 0 : 0;
     if (hash === '#') { return 0; }
     const anchor = contentRef.current.querySelector(hash);
     return !anchor ? -1 : anchor.offsetTop + headerOffset - stickyOffset - Theme.spacing(5);
-  }, [hasSidebarLinks, sidebarLinksAsStandaloneChildren, belowMd]);
+  }, [
+    hasSidebarLinks,
+    belowMd,
+    contentRef,
+    headerRef,
+    sidebarRef,
+  ]);
+
+  const handleHashNav = useCallback((hashNav) => {
+    window.location.hash = hashNav;
+  }, []);
 
   /**
      Effect - For sidebarLinks pages, on successful load, if hash is present then update the current
@@ -479,18 +532,18 @@ const NeonPage = (inProps) => {
       // If standard sidebar mode (scroll to content) also perform the scroll offset here
       if (!sidebarLinksAsStandaloneChildren) {
         window.setTimeout(() => {
-          window.scrollTo(0, getSidebarLinkScrollPosition(hash));
+          window.scrollTo(0, getSidebarLinkScrollPosition(hash, sidebarLinksAsStandaloneChildren));
         }, 0);
       }
     };
     // Handle URL-defined hash on initial load
-    if (document.location.hash && !hashInitialized) {
+    if (document.location.hash && !hashInitializedRef.current) {
+      hashInitializedRef.current = true;
       // Ensure the document hash maps to a defined hash or '#' at all times
       if (!Object.keys(sidebarHashMap).includes(document.location.hash)) {
-        document.location.hash = '#';
+        handleHashNav('#');
       }
       handleHashChange();
-      setHashInitialized(true);
     }
     // Set max-height on sidebar links container when the sidebar is sticky so the links get
     // a dedicated scrollbar instead of clipping
@@ -508,7 +561,7 @@ const NeonPage = (inProps) => {
     // Set up event listener / handler for user-input scroll events for standard scrolling pages
     const handleScroll = () => {
       const scrollBreaks = sidebarLinks.map((link) => ({
-        y: getSidebarLinkScrollPosition(link.hash || '#'),
+        y: getSidebarLinkScrollPosition(link.hash || '#', sidebarLinksAsStandaloneChildren),
         hash: link.hash || '#',
       }));
       // Determine the current scrolled-to hash. If at the max scroll always go to the last hash.
@@ -534,10 +587,10 @@ const NeonPage = (inProps) => {
     sidebarHashMap,
     sidebarUnsticky,
     hasSidebarLinks,
-    hashInitialized,
-    setHashInitialized,
+    hashInitializedRef,
     currentSidebarHash,
     setCurrentSidebarHash,
+    handleHashNav,
     sidebarLinksContainerRef,
     getSidebarLinkScrollPosition,
     sidebarLinksAsStandaloneChildren,
@@ -546,14 +599,24 @@ const NeonPage = (inProps) => {
   /**
      Effect - Load Drupal CSS
   */
-  const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
+  const initialDrupalFetchStatusState = {
+    fetchStatus: useSomeDrupalAssets
+      ? FETCH_STATUS.AWAITING_CALL
+      : FETCH_STATUS.SUCCESS,
+  };
+  const [fetchDrupalCssState, fetchDrupalCssDispatch] = useReducer(
+    drupalAssetsReducer,
+    initialDrupalFetchStatusState,
+  );
+  const isDrupalCssStatusFinished = (fetchDrupalCssState.fetchStatus === FETCH_STATUS.SUCCESS);
   useEffect(() => {
     if (!useSomeDrupalAssets) {
-      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
       return;
     }
-    if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
-    setDrupalCssStatus(FETCH_STATUS.FETCHING);
+    if (fetchDrupalCssState.fetchStatus !== FETCH_STATUS.AWAITING_CALL) {
+      return;
+    }
+    fetchDrupalCssDispatch({ type: 'fetchDrupalCss' });
     fetch(REMOTE_ASSETS[DRUPAL_THEME_CSS].url)
       .then((response) => {
         if (!response.ok) {
@@ -576,39 +639,49 @@ const NeonPage = (inProps) => {
         } catch (e) {
           console.error(e); // eslint-disable-line no-console
         }
-        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+        fetchDrupalCssDispatch({ type: 'fetchDrupalCssSuccess' });
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.error(err);
-        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+        fetchDrupalCssDispatch({ type: 'fetchDrupalCssSuccess' });
       });
-  }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
+  }, [useSomeDrupalAssets, fetchDrupalCssState, fetchDrupalCssDispatch]);
 
   /**
      Liferay Notifications
    */
-  const cancellationSubject$ = new Subject();
-  const notificationDismissals = cookies.get('dismissed-notifications') || [];
+  const cancellationSubject$ = useMemo(() => new Subject(), []);
+  const dismissedNotificationsCookie = cookies.get('dismissed-notifications');
+  const notificationDismissals = useMemo(() => {
+    if (dismissedNotificationsCookie) {
+      return dismissedNotificationsCookie;
+    }
+    return [];
+  }, [dismissedNotificationsCookie]);
 
-  let initialFetchStatus = null;
+  const initialFetchStatusState = {
+    fetchStatus: null,
+  };
   let initialNotifications = [];
   if (notification !== null && notification.length) {
     const notificationPropId = generateNotificationId(notification);
-    initialFetchStatus = 'success';
+    initialFetchStatusState.fetchStatus = 'success';
     initialNotifications = [{
       id: notificationPropId,
       message: notification,
       dismissed: notificationDismissals.includes(notificationPropId),
     }];
   }
-
-  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
+  const [fetchNotificationState, fetchNotificationDispatch] = useReducer(
+    notificationsReducer,
+    initialFetchStatusState,
+  );
   const [notifications, setNotifications] = useState(initialNotifications);
 
   // Handle a successful response from the notifications endpoint
-  const handleFetchNotificationsSuccess = (response) => {
-    setFetchNotificationsStatus('success');
+  const handleFetchNotificationsSuccess = useCallback((response) => {
+    fetchNotificationDispatch({ type: 'fetchNotificationsSuccess' });
     if (!Array.isArray(response.notifications)) { return; }
     setNotifications(
       response.notifications.map((message) => {
@@ -617,13 +690,13 @@ const NeonPage = (inProps) => {
         return { id, message, dismissed };
       }),
     );
-  };
+  }, [fetchNotificationDispatch, setNotifications, notificationDismissals]);
 
   // If the endpoint fails don't bother with any visible error. Just let it go.
-  const handleFetchNotificationsError = () => {
-    setFetchNotificationsStatus('error');
+  const handleFetchNotificationsError = useCallback(() => {
+    fetchNotificationDispatch({ type: 'fetchNotificationsError' });
     setNotifications([]);
-  };
+  }, [fetchNotificationDispatch, setNotifications]);
 
   const handleHideNotifications = () => {
     const updatedDismissals = notifications.map((n) => n.id);
@@ -640,8 +713,8 @@ const NeonPage = (inProps) => {
      Effect - Fetch notifications
   */
   useEffect(() => {
-    if (fetchNotificationsStatus !== null) { return; }
-    setFetchNotificationsStatus('fetching');
+    if (fetchNotificationState.fetchStatus !== null) { return; }
+    fetchNotificationDispatch({ type: 'fetchNotifications' });
     getJson(
       getLiferayNotificationsApiPath(),
       handleFetchNotificationsSuccess,
@@ -650,7 +723,13 @@ const NeonPage = (inProps) => {
       undefined,
       true,
     );
-  }, [fetchNotificationsStatus]);
+  }, [
+    fetchNotificationState,
+    handleFetchNotificationsSuccess,
+    handleFetchNotificationsError,
+    cancellationSubject$,
+    notificationDismissals,
+  ]);
 
   /**
      Render functions
@@ -941,7 +1020,7 @@ const NeonPage = (inProps) => {
               unstickyDrupalHeader={unstickyDrupalHeader}
               notifications={notifications}
               onShowNotifications={handleShowNotifications}
-              drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+              drupalCssLoaded={isDrupalCssStatusFinished}
               showSkeleton={showHeaderSkeleton}
             />
           )}
@@ -969,7 +1048,7 @@ const NeonPage = (inProps) => {
             </footer>
           ) : (
             <NeonFooter
-              drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+              drupalCssLoaded={isDrupalCssStatusFinished}
               showSkeleton={showFooterSkeleton}
             />
           )}

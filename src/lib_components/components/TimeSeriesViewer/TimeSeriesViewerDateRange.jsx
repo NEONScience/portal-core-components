@@ -1,8 +1,11 @@
 import React, {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useState,
   useRef,
+  useMemo,
+  useReducer,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -61,6 +64,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const dateRangeReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'setActivelySelectingDateRange':
+      newState.activelySelectingDateRange = action.activelySelectingDateRange;
+      return newState;
+    default:
+      return state;
+  }
+};
+
 const TimeSeriesViewerDateRange = (props) => {
   const classes = useStyles(Theme);
   const { dateRangeSliderRef } = props;
@@ -68,30 +82,41 @@ const TimeSeriesViewerDateRange = (props) => {
   const { sites: allSites } = neonContextData;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const { dateRange: currentRange } = state.selection;
+  const {
+    dateRange: currentRange,
+    sites: stateSelectionSites,
+  } = state.selection;
   let selectableRange = state.product.dateRange;
-  const displayRange = state.product.continuousDateRange;
+  const {
+    sites: stateProductSites,
+    continuousDateRange: displayRange,
+  } = state.product;
   const displayMin = 0;
   const displayMax = displayRange.length - 1;
   let sliderMin = displayRange.indexOf(selectableRange[0]);
   let sliderMax = displayRange.indexOf(selectableRange[1]);
 
-  const [activelySelectingDateRange, setActivelySelectingDateRange] = useState([...currentRange]);
+  const initialState = { activelySelectingDateRange: [...currentRange] };
+  const [dateRangeState, dateRangeDispatch] = useReducer(dateRangeReducer, initialState);
   const [activelySelecting, setActivelySelecting] = useState(false);
-  const sliderValue = activelySelectingDateRange.map((v, i) => (
-    displayRange.indexOf(activelySelectingDateRange[i] || currentRange[i])
+  const sliderValue = dateRangeState.activelySelectingDateRange.map((v, i) => (
+    displayRange.indexOf(dateRangeState.activelySelectingDateRange[i] || currentRange[i])
   ));
   useEffect(() => {
     if ((
-      currentRange[0] !== activelySelectingDateRange[0]
-        || currentRange[1] !== activelySelectingDateRange[1]
+      currentRange[0] !== dateRangeState.activelySelectingDateRange[0]
+        || currentRange[1] !== dateRangeState.activelySelectingDateRange[1]
     ) && !activelySelecting) {
-      setActivelySelectingDateRange([...currentRange]);
+      const action = {
+        type: 'setActivelySelectingDateRange',
+        activelySelectingDateRange: [...currentRange],
+      };
+      dateRangeDispatch(action);
     }
   }, [
     activelySelecting,
-    activelySelectingDateRange,
-    setActivelySelectingDateRange,
+    dateRangeState,
+    dateRangeDispatch,
     currentRange,
   ]);
 
@@ -117,42 +142,53 @@ const TimeSeriesViewerDateRange = (props) => {
   }
 
   // Derive site and availability values for the AvailabilityGrid
-  const availabilityDateRange = { value: currentRange, validValues: selectableRange };
-  const selectedSites = state.selection.sites.map((site) => site.siteCode);
-  const availabilitySites = { value: selectedSites, validValues: selectedSites };
-  const availabilityData = {
+  const availabilityDateRange = useMemo(() => ({
+    value: currentRange,
+    validValues: selectableRange,
+  }), [currentRange, selectableRange]);
+  const selectedSites = stateSelectionSites.map((site) => site.siteCode);
+  const availabilitySites = useMemo(() => ({
+    value: selectedSites,
+    validValues: selectedSites,
+  }), [selectedSites]);
+  const availabilityView = useMemo(() => ({
     view: 'sites',
     name: 'Site',
     selectable: true,
-    rows: {},
     getLabel: {
       text: (key) => key,
       title: (key) => (allSites[key] ? allSites[key].description : key),
     },
-  };
-  selectedSites.forEach((siteCode) => {
-    let provAvailableMonths = [];
-    const avaReleases = state.product.sites[siteCode].availableReleases;
-    if (Array.isArray(avaReleases)) {
-      const provRelease = avaReleases.find((value) => value.release === 'PROVISIONAL');
-      if (provRelease) {
-        provAvailableMonths = provRelease.availableMonths;
-      }
-    }
-    availabilityData.rows[siteCode] = {};
-    state.product.sites[siteCode].availableMonths.forEach((month) => {
-      let status = 'available';
-      if (provAvailableMonths && (provAvailableMonths.length > 0)) {
-        if (provAvailableMonths.includes(month)) {
-          status = 'available-provisional';
+  }), [allSites]);
+  const availabilityData = useMemo(() => {
+    const newAvailabilityData = {
+      rows: {},
+    };
+    selectedSites.forEach((siteCode) => {
+      let provAvailableMonths = [];
+      const avaReleases = stateProductSites[siteCode].availableReleases;
+      if (Array.isArray(avaReleases)) {
+        const provRelease = avaReleases.find((value) => value.release === 'PROVISIONAL');
+        if (provRelease) {
+          provAvailableMonths = provRelease.availableMonths;
         }
       }
-      if (!availabilityData.rows[siteCode][month]) {
-        availabilityData.rows[siteCode][month] = new Set();
-      }
-      availabilityData.rows[siteCode][month].add(status);
+      newAvailabilityData.rows[siteCode] = {};
+      stateProductSites[siteCode].availableMonths.forEach((month) => {
+        let status = 'available';
+        if (provAvailableMonths && (provAvailableMonths.length > 0)) {
+          if (provAvailableMonths.includes(month)) {
+            status = 'available-provisional';
+          }
+        }
+        if (!newAvailabilityData.rows[siteCode][month]) {
+          newAvailabilityData.rows[siteCode][month] = new Set();
+        }
+        newAvailabilityData.rows[siteCode][month].add(status);
+      });
     });
-  });
+    return newAvailabilityData;
+  }, [selectedSites, stateProductSites]);
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (selectedSites.length + 1);
 
@@ -164,6 +200,7 @@ const TimeSeriesViewerDateRange = (props) => {
   const svgRef = useRef(null);
   const handleSvgRedraw = useCallback(() => {
     BasicAvailabilityGrid({
+      view: availabilityView,
       data: availabilityData,
       svgRef,
       allSites,
@@ -174,14 +211,15 @@ const TimeSeriesViewerDateRange = (props) => {
   }, [
     svgRef,
     allSites,
+    availabilityView,
     availabilityData,
     availabilitySites,
     availabilityDateRange,
     setDateRangeValue,
   ]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     handleSvgRedraw();
-  });
+  }, [handleSvgRedraw]);
 
   // Render nothing if no selectable range is available or no sites are yet selected
   if (!displayRange.length || !selectedSites.length) {
@@ -248,10 +286,16 @@ const TimeSeriesViewerDateRange = (props) => {
       valueLabelFormat={(x) => displayRange[x]}
       onMouseDown={() => { setActivelySelecting(true); }}
       onChange={(event, values) => {
-        setActivelySelectingDateRange([
+        const sliderRange = [
           Math.max(values[0], sliderMin),
           Math.min(values[1], sliderMax),
-        ].map((x) => displayRange[x]));
+        ];
+        const mappedDisplayRange = sliderRange.map((x) => displayRange[x]);
+        const action = {
+          type: 'setActivelySelectingDateRange',
+          activelySelectingDateRange: mappedDisplayRange,
+        };
+        dateRangeDispatch(action);
       }}
       onChangeCommitted={(event, values) => {
         setActivelySelecting(false);

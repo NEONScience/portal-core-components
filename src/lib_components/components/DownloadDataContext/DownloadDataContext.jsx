@@ -3,6 +3,8 @@ import React, {
   useContext,
   useReducer,
   useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -1117,15 +1119,6 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-/**
- * Defines a lookup of state key to a boolean
- * designating whether or not that instance of the context
- * should pull the state from the session storage and restore.
- * Keeping this lookup outside of the context provider function
- * as to not incur lifecycle interference by storing with useState.
- */
-const restoreStateLookup = {};
-
 const defaultProps = {
   downloadDataContextUniqueId: 0,
   stateObservable: null,
@@ -1148,22 +1141,40 @@ const Provider = (inProps) => {
     children,
   } = props;
 
-  // get the initial state from storage if present, else get from props.
-  let initialState = getInitialStateFromProps(props);
+  // Get the initial state from storage if present, else get from props.
+  const initialState = getInitialStateFromProps(props);
   const { productCode: product } = initialState.productData;
+  // Initialize the storage state and restore state
   const stateKey = `downloadDataContextState-${product}-${downloadDataContextUniqueId}`;
-  if (typeof restoreStateLookup[stateKey] === 'undefined') {
-    restoreStateLookup[stateKey] = true;
-  }
-  const shouldRestoreState = restoreStateLookup[stateKey];
-  const stateStorage = makeStateStorage(stateKey);
-  const savedState = stateStorage.readState();
-  if (savedState && shouldRestoreState) {
-    restoreStateLookup[stateKey] = false;
-    stateStorage.removeState();
-    initialState = convertAOPInitialState(savedState, initialState);
-  }
-  const [state, dispatch] = useReducer(wrappedReducer, initialState);
+  const stateStorage = useMemo(() => makeStateStorage(stateKey), [stateKey]);
+  // Determine initial state from session storage once
+  const [initState] = useState(() => {
+    const savedState = stateStorage.readState();
+    const hasSavedState = exists(savedState);
+    let sessionInitialState;
+    let restoredStateFromStorage = false;
+    if (hasSavedState) {
+      sessionInitialState = convertAOPInitialState(savedState, initialState);
+      restoredStateFromStorage = true;
+    } else {
+      sessionInitialState = initialState;
+    }
+    return {
+      restoredStateFromStorage,
+      initialState: sessionInitialState,
+    };
+  });
+  // Determine initialized state from stored state once
+  const appliedInitialState = initState.restoredStateFromStorage
+    ? initState.initialState
+    : initialState;
+  const [state, dispatch] = useReducer(wrappedReducer, appliedInitialState);
+  // Clean up session state
+  useEffect(() => {
+    if (initState.restoredStateFromStorage) {
+      stateStorage.removeState();
+    }
+  }, [stateStorage, initState]);
 
   const { downloadContextIsActive, dialogOpen } = state;
 
@@ -1175,7 +1186,6 @@ const Provider = (inProps) => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
         if (!downloadContextIsActive || !dialogOpen) return;
-        restoreStateLookup[stateKey] = false;
         stateStorage.saveState(convertStateForStorage(state));
       },
     });
@@ -1186,7 +1196,7 @@ const Provider = (inProps) => {
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
-  const manifestRequest$ = new Subject();
+  const manifestRequest$ = useMemo(() => new Subject(), []);
   manifestRequest$.subscribe((request) => (
     getManifestAjaxObservable(request)
       .pipe(

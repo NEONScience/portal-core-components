@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
 
 import { ReplaySubject } from 'rxjs';
 
@@ -107,7 +107,7 @@ const MyAppComponent = () => {
   // Don't forget to dispatch 'setBroadcastDone' at this level so that we stop
   // broadcasting updates at the top level after one time, until another update is
   // made in this component that explicitly triggers a subsequent broadcast.
-  const higherOrderSubject = new ReplaySubject(1);
+  const higherOrderSubject = useMemo(() => new ReplaySubject(1), []);
   useEffect(() => {
     if (myAppState.downloadState.broadcast) {
       higherOrderSubject.next(myAppState.downloadState);

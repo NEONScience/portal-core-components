@@ -104,14 +104,19 @@ export default function FullWidthVisualization(inProps) {
     };
   }, [vizRef, handleResize]);
 
+  let divStyle = { width: '100%', minWidth: `${minWidth}px` };
+  if (containerStyle) {
+    divStyle = containerStyle;
+  }
+  const divDataProps = {};
+  if (other['data-selenium']) {
+    divDataProps['data-selenium'] = other['data-selenium'];
+  }
   const divProps = {
     ref: containerRef,
-    style: { width: '100%', minWidth: `${minWidth}px` },
+    style: divStyle,
+    ...divDataProps,
   };
-  if (containerStyle) {
-    divProps.style = containerStyle;
-  }
-  if (other['data-selenium']) { divProps['data-selenium'] = other['data-selenium']; }
 
   return (
     <div {...divProps}>

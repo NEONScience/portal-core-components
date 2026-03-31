@@ -330,7 +330,7 @@ const WindRose: React.FC = (): React.JSX.Element => {
 
   useEffect(() => {
     renderWindRoseChart(currentChartData as []);
-  }, [currentChartData]);
+  }, [renderWindRoseChart, currentChartData]);
 
   const loadingContainerStyle = {
     top: '30%',

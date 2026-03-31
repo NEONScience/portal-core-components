@@ -1,5 +1,9 @@
-/* eslint-disable react/no-unused-prop-types */
-import React, { useCallback, Dispatch } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useRef,
+  Dispatch,
+} from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -39,6 +43,9 @@ export enum NeonAuthDisplayType {
   MENU_CUSTOM = 'MENU_CUSTOM',
 }
 
+// This lint rule is confused here as these props are used in
+// the NeonAuth component.
+/* eslint-disable react/no-unused-prop-types */
 export interface NeonAuthProps {
   loginType: NeonAuthType;
   logoutType: NeonAuthType;
@@ -47,6 +54,7 @@ export interface NeonAuthProps {
   logoutPath: string;
   accountPath: string;
 }
+/* eslint-enable react/no-unused-prop-types */
 
 const useStyles: StylesHook = makeStyles((theme: MuiThemeType) => ({
   button: {
@@ -96,11 +104,13 @@ const AccountMenu = (props: AccountMenuProps) => {
     },
   ] = NeonContext.useNeonContextState();
   const user = userData?.data?.user;
-  const containerRef = React.useRef<null | HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [containerRefEl, setContainerRefEl] = useState<HTMLElement | null>(null);
   const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+    setContainerRefEl(containerRef.current);
     setAnchorEl(event.currentTarget);
   };
   const handleMyAccountNav = (): void => {
@@ -109,8 +119,7 @@ const AccountMenu = (props: AccountMenuProps) => {
   const handleClose = (): void => {
     setAnchorEl(null);
   };
-  // eslint-disable-next-line no-undef-init
-  let avatarAlt = undefined;
+  let avatarAlt;
   if (exists(user)) {
     if (isStringNonEmpty(user.name)) {
       avatarAlt = user.name;
@@ -154,7 +163,7 @@ const AccountMenu = (props: AccountMenuProps) => {
       </Box>
       <div ref={containerRef} className={classes.accountMenuContainer}>
         <Menu
-          container={containerRef.current}
+          container={containerRefEl}
           anchorEl={anchorEl}
           id="account-menu"
           open={open}

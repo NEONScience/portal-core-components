@@ -56,7 +56,7 @@ const rules = {
   ...jsxA11yPlugin.configs.recommended.rules,
   ...importPlugin.configs.recommended.rules,
   ...reactPlugin.configs.recommended.rules,
-  // ...reactHooksPlugin.configs.recommended.rules,
+  ...reactHooksPlugin.configs.recommended.rules,
   ...nextPlugin.configs.recommended.rules,
   ...nextPlugin.configs['core-web-vitals'].rules,
 

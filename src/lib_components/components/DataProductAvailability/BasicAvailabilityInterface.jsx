@@ -1,8 +1,9 @@
 import React, {
   useState,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useCallback,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -135,7 +136,7 @@ const BasicAvailabilityInterface = (inProps) => {
   /**
      Sort methods and directions
   */
-  const SORT_METHODS = {
+  const SORT_METHODS = useMemo(() => ({
     states: {
       label: 'by State',
       getSortFunction: (ret) => (a, b) => {
@@ -158,27 +159,27 @@ const BasicAvailabilityInterface = (inProps) => {
       label: 'by Site',
       getSortFunction: (ret) => (a, b) => (a < b ? ret[0] : ret[1]),
     },
-  };
+  }), [allStates, allSites]);
   const SORT_DIRECTIONS = ['ASC', 'DESC'];
 
-  const PRODUCT_LOOKUP = {};
-  dataProducts.forEach((product) => {
-    PRODUCT_LOOKUP[product.dataProductCode] = product.dataProductTitle;
-  });
+  const PRODUCT_LOOKUP = useMemo(() => {
+    const lookup = {};
+    dataProducts.forEach((product) => {
+      lookup[product.dataProductCode] = product.dataProductTitle;
+    });
+    return lookup;
+  }, [dataProducts]);
 
   /**
      State: Views
      Contain and sort the availability data.
      Afford different methods for presenting/grouping data along the y-axis (geospatial)
   */
-  const views = {
+  const views = useMemo(() => ({
     summary: {
       view: 'summary',
       name: 'Summary',
       selectable: true,
-      rows: {
-        summary: {},
-      },
       getLabel: {
         text: () => 'ALL ',
         title: () => 'All Sites',
@@ -188,7 +189,6 @@ const BasicAvailabilityInterface = (inProps) => {
       view: 'sites',
       name: 'Site',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => key,
         title: (key) => allSites[key].description,
@@ -198,7 +198,6 @@ const BasicAvailabilityInterface = (inProps) => {
       view: 'states',
       name: 'State',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => ` ${key} `,
         title: (key) => allStates[key].name,
@@ -208,7 +207,6 @@ const BasicAvailabilityInterface = (inProps) => {
       view: 'domains',
       name: 'Domain',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => `${key} `,
         title: (key) => allDomains[key].name,
@@ -232,14 +230,12 @@ const BasicAvailabilityInterface = (inProps) => {
       view: 'products',
       name: 'Product',
       selectable: false,
-      rows: {},
       getLabel: {
         text: (key) => key,
         title: (key) => PRODUCT_LOOKUP[key],
       },
     },
-  };
-  views.ungrouped.rows = views.sites.rows;
+  }), [allDomains, allStates, allSites, PRODUCT_LOOKUP]);
   const selectableViewKeys = Object.keys(views).filter((key) => views[key].selectable);
 
   /**
@@ -309,25 +305,27 @@ const BasicAvailabilityInterface = (inProps) => {
   const handleSelectNoneSites = () => {
     setSitesValue([]);
   };
-  const handleSelectAllDateRange = () => {
-    setDateRangeValue(dateRange.validValues);
+  const handleSelectAllDateRange = (inValidValues) => {
+    setDateRangeValue(inValidValues);
   };
-  const handleSelectLatestYearDateRange = () => {
-    const start = TIME.getYearMonthMoment(dateRange.validValues[1]).subtract(11, 'months').format('YYYY-MM');
+  const handleSelectLatestYearDateRange = (inDateRange) => {
+    const start = TIME.getYearMonthMoment(inDateRange.validValues[1])
+      .subtract(11, 'months')
+      .format('YYYY-MM');
     setDateRangeValue([
-      start < dateRange.validValues[0] ? dateRange.validValues[0] : start,
-      dateRange.validValues[1],
+      start < inDateRange.validValues[0] ? inDateRange.validValues[0] : start,
+      inDateRange.validValues[1],
     ]);
   };
-  const handleChangeStartDate = (newStartDate) => {
+  const handleChangeStartDate = (inDateRange, newStartDate) => {
     setDateRangeValue([
       newStartDate.format('YYYY-MM'),
-      dateRange.value[1],
+      inDateRange.value[1],
     ]);
   };
-  const handleChangeEndDate = (newEndDate) => {
+  const handleChangeEndDate = (inDateRange, newEndDate) => {
     setDateRangeValue([
-      dateRange.value[0],
+      inDateRange.value[0],
       newEndDate.format('YYYY-MM'),
     ]);
   };
@@ -344,19 +342,6 @@ const BasicAvailabilityInterface = (inProps) => {
     }
     setCurrentView(newView);
   };
-
-  let sortedSites = [];
-  const applySort = () => {
-    if (currentView !== 'ungrouped') { return; }
-    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
-    // (though of course a user will read it top-down).
-    const sortReturns = [
-      currentSortDirection === 'ASC' ? 1 : -1,
-      currentSortDirection === 'ASC' ? -1 : 1,
-    ];
-    sortedSites = Object.keys(views.ungrouped.rows);
-    sortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
-  };
   const handleChangeSortMethod = (event) => {
     const newSortMethod = event.target.value;
     if (
@@ -370,7 +355,6 @@ const BasicAvailabilityInterface = (inProps) => {
       });
     }
     setCurrentSortMethod(newSortMethod);
-    applySort();
   };
   const handleChangeSortDirection = (event, newSortDirection) => {
     if (
@@ -384,7 +368,6 @@ const BasicAvailabilityInterface = (inProps) => {
       });
     }
     setCurrentSortDirection(newSortDirection);
-    applySort();
   };
 
   /**
@@ -395,82 +378,137 @@ const BasicAvailabilityInterface = (inProps) => {
      all aggregation views.
      TODO: Add other statuses. Currently the only status is "available".
   */
-  let siteCodes = [];
   const { siteCodes: propsSiteCodes } = props;
   const { siteCodes: contextSiteCodes } = productData;
-  if (propsSiteCodes && propsSiteCodes.length) {
-    siteCodes = propsSiteCodes;
-  } else if (contextSiteCodes && contextSiteCodes.length) {
-    siteCodes = contextSiteCodes;
-  }
-  siteCodes.forEach((site) => {
-    const { siteCode, availableMonths, availableReleases } = site;
-    if (!allSites[siteCode]) { return; }
-    const { stateCode, domainCode } = allSites[siteCode];
-    if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
-    let provAvailableMonths = [];
-    if (delineateRelease && Array.isArray(availableReleases)) {
-      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
-      if (provRelease) {
-        provAvailableMonths = provRelease.availableMonths;
-      }
+  const siteCodes = useMemo(() => {
+    let computedSiteCodes = [];
+    if (propsSiteCodes && propsSiteCodes.length) {
+      computedSiteCodes = propsSiteCodes;
+    } else if (contextSiteCodes && contextSiteCodes.length) {
+      computedSiteCodes = contextSiteCodes;
     }
-    views.sites.rows[siteCode] = {};
-    views.states.rows[stateCode] = views.states.rows[stateCode] || {};
-    views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
-    availableMonths.forEach((month) => {
-      let status = availabilityStatusType || 'available';
-      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
-        if (provAvailableMonths.includes(month)) {
-          status = 'available-provisional';
+    return computedSiteCodes;
+  }, [propsSiteCodes, contextSiteCodes]);
+  const viewData = useMemo(() => {
+    const newViewData = {};
+    Object.keys(views).forEach((key) => {
+      newViewData[key] = {
+        rows: {},
+      };
+      if (key === 'summary') {
+        newViewData[key].rows.summary = {};
+      }
+    });
+    siteCodes.forEach((site) => {
+      const { siteCode, availableMonths, availableReleases } = site;
+      if (!allSites[siteCode]) { return; }
+      const { stateCode, domainCode } = allSites[siteCode];
+      if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
+      let provAvailableMonths = [];
+      if (delineateRelease && Array.isArray(availableReleases)) {
+        const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+        if (provRelease) {
+          provAvailableMonths = provRelease.availableMonths;
         }
       }
-      if (!views.summary.rows.summary[month]) {
-        views.summary.rows.summary[month] = new Set();
-      }
-      if (!views.sites.rows[siteCode][month]) {
-        views.sites.rows[siteCode][month] = new Set();
-      }
-      if (!views.states.rows[stateCode][month]) {
-        views.states.rows[stateCode][month] = new Set();
-      }
-      if (!views.domains.rows[domainCode][month]) {
-        views.domains.rows[domainCode][month] = new Set();
-      }
-      views.summary.rows.summary[month].add(status);
-      views.sites.rows[siteCode][month].add(status);
-      views.states.rows[stateCode][month].add(status);
-      views.domains.rows[domainCode][month].add(status);
+      newViewData.sites.rows[siteCode] = {};
+      newViewData.states.rows[stateCode] = newViewData.states.rows[stateCode] || {};
+      newViewData.domains.rows[domainCode] = newViewData.domains.rows[domainCode] || {};
+      availableMonths.forEach((month) => {
+        let status = availabilityStatusType || 'available';
+        if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+          if (provAvailableMonths.includes(month)) {
+            status = 'available-provisional';
+          }
+        }
+        if (!newViewData.summary.rows.summary[month]) {
+          newViewData.summary.rows.summary[month] = new Set();
+        }
+        if (!newViewData.sites.rows[siteCode][month]) {
+          newViewData.sites.rows[siteCode][month] = new Set();
+        }
+        if (!newViewData.states.rows[stateCode][month]) {
+          newViewData.states.rows[stateCode][month] = new Set();
+        }
+        if (!newViewData.domains.rows[domainCode][month]) {
+          newViewData.domains.rows[domainCode][month] = new Set();
+        }
+        newViewData.summary.rows.summary[month].add(status);
+        newViewData.sites.rows[siteCode][month].add(status);
+        newViewData.states.rows[stateCode][month].add(status);
+        newViewData.domains.rows[domainCode][month].add(status);
+      });
     });
-  });
-  dataProducts.forEach((product) => {
-    const { dataProductCode, availableMonths, availableReleases } = product;
-    let provAvailableMonths = [];
-    if (delineateRelease && Array.isArray(availableReleases)) {
-      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
-      if (provRelease) {
-        provAvailableMonths = provRelease.availableMonths;
-      }
-    }
-    views.products.rows[dataProductCode] = {};
-    availableMonths.forEach((month) => {
-      let status = availabilityStatusType || 'available';
-      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
-        if (provAvailableMonths.includes(month)) {
-          status = 'available-provisional';
+    dataProducts.forEach((product) => {
+      const { dataProductCode, availableMonths, availableReleases } = product;
+      let provAvailableMonths = [];
+      if (delineateRelease && Array.isArray(availableReleases)) {
+        const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+        if (provRelease) {
+          provAvailableMonths = provRelease.availableMonths;
         }
       }
-      if (!views.products.rows[dataProductCode][month]) {
-        views.products.rows[dataProductCode][month] = new Set();
-      }
-      views.products.rows[dataProductCode][month].add(status);
+      newViewData.products.rows[dataProductCode] = {};
+      availableMonths.forEach((month) => {
+        let status = availabilityStatusType || 'available';
+        if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+          if (provAvailableMonths.includes(month)) {
+            status = 'available-provisional';
+          }
+        }
+        if (!newViewData.products.rows[dataProductCode][month]) {
+          newViewData.products.rows[dataProductCode][month] = new Set();
+        }
+        newViewData.products.rows[dataProductCode][month].add(status);
+      });
     });
-  });
-  if (!downloadContextIsActive) {
-    const summaryMonths = Object.keys(views.summary.rows.summary).sort();
-    dateRange.validValues[0] = summaryMonths[0]; // eslint-disable-line prefer-destructuring
-    dateRange.validValues[1] = summaryMonths.pop();
-  }
+    newViewData.ungrouped.rows = newViewData.sites.rows;
+    return newViewData;
+  }, [
+    views,
+    siteCodes,
+    dataProducts,
+    allSites,
+    downloadContextIsActive,
+    availabilityStatusType,
+    delineateRelease,
+    sites.validValues,
+  ]);
+  const appliedDateRange = useMemo(() => {
+    if (!downloadContextIsActive) {
+      const summaryMonths = Object.keys(viewData.summary.rows.summary).sort();
+      const summaryDateRange = {
+        ...dateRange,
+      };
+      // eslint-disable-next-line prefer-destructuring
+      summaryDateRange.validValues[0] = summaryMonths[0];
+      summaryDateRange.validValues[1] = summaryMonths.pop();
+      return summaryDateRange;
+    }
+    return {
+      ...dateRange,
+    };
+  }, [viewData, downloadContextIsActive, dateRange]);
+  const sortedSites = useMemo(() => {
+    if (currentView !== 'ungrouped') {
+      return [];
+    }
+    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
+    // (though of course a user will read it top-down).
+    const sortReturns = [
+      currentSortDirection === 'ASC' ? 1 : -1,
+      currentSortDirection === 'ASC' ? -1 : 1,
+    ];
+    const calcSortedSites = Object.keys(viewData.ungrouped.rows);
+    calcSortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
+    return calcSortedSites;
+  }, [
+    currentView,
+    currentSortDirection,
+    currentSortMethod,
+    viewData,
+    SORT_METHODS,
+  ]);
 
   /**
      Redraw setup
@@ -479,33 +517,34 @@ const BasicAvailabilityInterface = (inProps) => {
 
   const handleSvgRedraw = useCallback(() => {
     BasicAvailabilityGrid({
-      data: views[currentView],
+      view: views[currentView],
+      data: viewData[currentView],
       svgRef,
       allSites,
       sites,
       sortedSites,
       setSitesValue,
-      dateRange,
+      dateRange: appliedDateRange,
       setDateRangeValue,
       selectionEnabled,
     });
   }, [
     svgRef,
     views,
+    viewData,
     currentView,
     allSites,
     sites,
     sortedSites,
     setSitesValue,
-    dateRange,
+    appliedDateRange,
     setDateRangeValue,
     selectionEnabled,
   ]);
 
-  useEffect(() => {
-    applySort();
+  useLayoutEffect(() => {
     handleSvgRedraw();
-  });
+  }, [handleSvgRedraw]);
 
   let justify = 'end';
   if (currentView === 'ungrouped') {
@@ -747,10 +786,10 @@ const BasicAvailabilityInterface = (inProps) => {
                   label="Start"
                   data-selenium="data-product-availability.date-range-start"
                   orientation="portrait"
-                  value={TIME.getYearMonthMoment(dateRange.value[0])}
-                  onChange={(newDate) => handleChangeStartDate(newDate)}
-                  minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
-                  maxDate={TIME.getYearMonthMoment(dateRange.value[1])}
+                  value={TIME.getYearMonthMoment(appliedDateRange.value[0])}
+                  onChange={(newDate) => handleChangeStartDate(appliedDateRange, newDate)}
+                  minDate={TIME.getYearMonthMoment(appliedDateRange.validValues[0])}
+                  maxDate={TIME.getYearMonthMoment(appliedDateRange.value[1])}
                   slotProps={{
                     textField: {
                       size: 'small',
@@ -764,10 +803,10 @@ const BasicAvailabilityInterface = (inProps) => {
                   label="End"
                   data-selenium="data-product-availability.date-range-end"
                   orientation="portrait"
-                  value={TIME.getYearMonthMoment(dateRange.value[1])}
-                  onChange={(newDate) => handleChangeEndDate(newDate)}
-                  minDate={TIME.getYearMonthMoment(dateRange.value[0])}
-                  maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
+                  value={TIME.getYearMonthMoment(appliedDateRange.value[1])}
+                  onChange={(newDate) => handleChangeEndDate(appliedDateRange, newDate)}
+                  minDate={TIME.getYearMonthMoment(appliedDateRange.value[0])}
+                  maxDate={TIME.getYearMonthMoment(appliedDateRange.validValues[1])}
                   slotProps={{
                     textField: {
                       size: 'small',
@@ -781,14 +820,14 @@ const BasicAvailabilityInterface = (inProps) => {
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.all-years-button"
-              onClick={handleSelectAllDateRange}
+              onClick={() => handleSelectAllDateRange(appliedDateRange.validValues)}
             >
               Select All Years
             </Button>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.latest-year-button"
-              onClick={handleSelectLatestYearDateRange}
+              onClick={() => handleSelectLatestYearDateRange(appliedDateRange)}
               style={{ marginLeft: Theme.spacing(1) }}
             >
               Select Latest Year
@@ -826,7 +865,7 @@ const BasicAvailabilityInterface = (inProps) => {
   /**
      Render: Final Component
   */
-  const currentRows = views[currentView].rows;
+  const currentRows = viewData[currentView].rows;
   const currentRowCount = Object.keys(currentRows).length;
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (currentRowCount + 1);

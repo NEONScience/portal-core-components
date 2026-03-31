@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { makeStyles } from '@mui/styles';
 import Link from '@mui/material/Link';
@@ -29,21 +29,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EnhancedAvailability = () => {
-  const [initialized, setInitialized] = useState(false);
+  const initializedRef = useRef(false);
   const [loading, setLoading] = useState(true);
   const [availability, setAvailability] = useState({});
   const [selectedProductCode, setSelectedProductCode] = useState(null);
 
   useEffect(() => {
-    if (!initialized) {
-      setInitialized(true);
+    if (!initializedRef.current) {
+      initializedRef.current = true;
       crunch((result) => {
         setAvailability(result);
         setSelectedProductCode('DP1.20093.001'); // result.products[0].productCode
         setLoading(false);
       });
     }
-  }, [initialized, setInitialized, setLoading, setAvailability]);
+  }, [initializedRef, setLoading, setAvailability]);
 
   const productIdx = !availability.products ? -1
     : availability.products.findIndex((p) => p.productCode === selectedProductCode);

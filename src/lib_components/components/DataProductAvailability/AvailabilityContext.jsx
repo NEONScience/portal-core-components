@@ -3,6 +3,9 @@ import React, {
   useContext,
   useEffect,
   useReducer,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,6 +19,7 @@ import { AvailabilityPropTypes } from './AvailabilityUtils';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
 import { resolveProps } from '../../util/defaultProps';
+import { exists } from '../../util/typeUtil';
 
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
 const DEFAULT_STATE = {
@@ -200,15 +204,6 @@ const useAvailabilityState = () => {
   return hookResponse;
 };
 
-/**
- * Defines a lookup of state key to a boolean
- * designating whether or not that instance of the context
- * should pull the state from the session storage and restore.
- * Keeping this lookup outside of the context provider function
- * as to not incur lifecycle interference by storing with useState.
- */
-const restoreStateLookup = {};
-
 const defaultProps = {
   dataAvailabilityUniqueId: 0,
   sites: [],
@@ -225,30 +220,44 @@ const Provider = (inProps) => {
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
 
+  // Initialize the storage state and restore state
   const key = `availabilityContextState-${dataAvailabilityUniqueId}`;
-  if (typeof restoreStateLookup[key] === 'undefined') {
-    restoreStateLookup[key] = true;
-  }
-  const shouldRestoreState = restoreStateLookup[key];
-  const stateStorage = makeStateStorage(key);
-  const savedState = stateStorage.readState();
-
-  /**
-     Initial State and Reducer Setup
-  */
-  let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
-  initialState.tables = extractTables(initialState);
-  if (neonContextIsFinal && !neonContextHasError && !savedState) {
-    initialState = hydrateNeonContextData(initialState, neonContextData);
-  }
-
-  if (savedState && shouldRestoreState) {
-    restoreStateLookup[key] = false;
-    stateStorage.removeState();
-    initialState = savedState;
-  }
-
-  const [state, dispatch] = useReducer(reducer, calculateRows(initialState));
+  const stateStorage = useMemo(() => makeStateStorage(key), [key]);
+  // Compute the initial context state when props change
+  const contextState = useMemo(() => {
+    let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
+    initialState.tables = extractTables(initialState);
+    if (neonContextIsFinal && !neonContextHasError) {
+      initialState = hydrateNeonContextData(initialState, neonContextData);
+    }
+    return initialState;
+  }, [sites, neonContextData, neonContextIsFinal, neonContextHasError]);
+  // Determine initial state from session storage once
+  const [initState] = useState(() => {
+    const savedState = stateStorage.readState();
+    const hasSavedState = exists(savedState);
+    let initialState = null;
+    let restoredStateFromStorage = false;
+    if (hasSavedState) {
+      initialState = savedState;
+      restoredStateFromStorage = true;
+    }
+    return {
+      restoredStateFromStorage,
+      initialState,
+    };
+  });
+  // Determine initialized state from stored state once
+  const appliedInitialState = initState.restoredStateFromStorage
+    ? initState.initialState
+    : contextState;
+  const [state, dispatch] = useReducer(reducer, calculateRows(appliedInitialState));
+  // Clean up session state
+  useEffect(() => {
+    if (initState.restoredStateFromStorage) {
+      stateStorage.removeState();
+    }
+  }, [stateStorage, initState]);
 
   // The current sign in process uses a separate domain. This function
   // persists the current state in storage when the button is clicked
@@ -258,7 +267,6 @@ const Provider = (inProps) => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
         if (!NeonEnvironment.enableGlobalSignInState) return;
-        restoreStateLookup[key] = false;
         stateStorage.saveState(state);
       },
     });

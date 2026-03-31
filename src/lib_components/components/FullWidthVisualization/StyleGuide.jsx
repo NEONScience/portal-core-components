@@ -45,14 +45,11 @@ const useStyles = makeStyles((theme) => ({
 export default function StyleGuide() {
   const classes = useStyles(Theme);
 
-  const myVizRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const ref5 = useRef(null);
 
   const [vizHidden, setVizHidden] = useState(false);
   const [redraws, setRedraws] = useState(0);
@@ -81,8 +78,8 @@ import FullWidthVisualization from 'portal-core-components/lib/components/FullWi
         dynamically sized visualization element (e.g. the svg, canvas, iframe, etc.)
       </DocBlock>
       <ExampleBlock>
-        <FullWidthVisualization vizRef={myVizRefs[0]}>
-          <div ref={myVizRefs[0]} className={classes.viz_0} />
+        <FullWidthVisualization vizRef={ref1}>
+          <div ref={ref1} className={classes.viz_0} />
         </FullWidthVisualization>
       </ExampleBlock>
       <CodeBlock>
@@ -107,13 +104,13 @@ const myVizRef = useRef(null);
         100% width, so treat it as such when including other content.
       </DocBlock>
       <ExampleBlock>
-        <FullWidthVisualization vizRef={myVizRefs[1]}>
+        <FullWidthVisualization vizRef={ref2}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum,
             sapien id accumsan aliquam, nisl leo vulputate lorem, ac vestibulum sapien
             nibh ut sapien. Aenean bibendum risus nisl, vel facilisis ex pellentesque in.
           </p>
-          <div ref={myVizRefs[1]} className={classes.viz_1} />
+          <div ref={ref2} className={classes.viz_1} />
           <hr />
           <p>Some more content that comes after...</p>
         </FullWidthVisualization>
@@ -145,8 +142,8 @@ const myVizRef = useRef(null);
         dropping below a threshold even if the container does.
       </DocBlock>
       <ExampleBlock>
-        <FullWidthVisualization vizRef={myVizRefs[2]} minWidth={600}>
-          <div ref={myVizRefs[2]} className={classes.viz_2} />
+        <FullWidthVisualization vizRef={ref3} minWidth={600}>
+          <div ref={ref3} className={classes.viz_2} />
         </FullWidthVisualization>
       </ExampleBlock>
       <CodeBlock>
@@ -185,10 +182,10 @@ const myVizRef = useRef(null);
       </DocBlock>
       <ExampleBlock>
         <FullWidthVisualization
-          vizRef={myVizRefs[3]}
+          vizRef={ref4}
           deriveHeightFromWidth={(width) => Math.floor(width / 2)}
         >
-          <div ref={myVizRefs[3]} className={classes.viz_3} />
+          <div ref={ref4} className={classes.viz_3} />
         </FullWidthVisualization>
       </ExampleBlock>
       <CodeBlock>
@@ -225,10 +222,10 @@ const getHeight = width => Math.floor(width / 2);
         <div style={{ width: '100%' }}>
           <div style={{ display: vizHidden ? 'none' : 'block' }}>
             <FullWidthVisualization
-              vizRef={myVizRefs[4]}
+              vizRef={ref5}
               handleRedraw={() => setRedraws(redraws + 1)}
             >
-              <div ref={myVizRefs[4]} className={classes.viz_4}>
+              <div ref={ref5} className={classes.viz_4}>
                 {`Redraws: ${redraws}`}
               </div>
             </FullWidthVisualization>
