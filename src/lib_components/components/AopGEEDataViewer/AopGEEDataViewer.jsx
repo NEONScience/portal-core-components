@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AopDataViewerIcon from '@material-ui/icons/SatelliteOutlined';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import UAParser from 'ua-parser-js';
 
@@ -64,16 +65,11 @@ const isMobileDevice = () => {
   return isMobile;
 };
 
-const handleLaunchMobileOrDesktopWindow = () => {
-  // const GEE_DESKTOP_VIEWER_URL = 'https://neon-prod-earthengine.projects.earthengine.app/'
-  //   + 'view/neon-aop-gee-data-viewer---desktop';
-  // const GEE_MOBILE_VIEWER_URL = 'https://neon-prod-earthengine.projects.earthengine.app/'
-  //   + 'view/aop-gee-data-viewer---mobile';
+const getMobileOrDesktopUrl = () => {
   if (isMobileDevice()) {
-    window.open(NeonEnvironment.getAopGEEMobileUrl(), '_blank', 'noopener,noreferrer');
-  } else {
-    window.open(NeonEnvironment.getAopGEEDesktopUrl(), '_blank', 'noopener,noreferrer');
+    return NeonEnvironment.getAopGEEMobileUrl();
   }
+  return NeonEnvironment.getAopGEEDesktopUrl();
 };
 
 /**
@@ -81,20 +77,24 @@ const handleLaunchMobileOrDesktopWindow = () => {
 */
 const AopGEEDataViewer = (props) => {
   const classes = useStyles(Theme);
-  const AOP_BUTTON_NAME = 'AOP GEE Data Viewer';
+  const aopButtonName = 'AOP GEE Data Viewer';
+  const tooltip = 'Launch the AOP Google Earth Engine data visuialization tool.';
+  const url = getMobileOrDesktopUrl();
   return (
-    <Button
-      data-gtm="explore-data-products.aop-data-viewer-button"
-      // data-gtm-product-code={productCode}
-      // data-selenium={`browse-data-products-page.products.${productCode}.aop-data-viewer-button`}
-      className={classes.productPaperButton}
-      variant="outlined"
-      color="primary"
-      endIcon={<AopDataViewerIcon />}
-      onClick={() => handleLaunchMobileOrDesktopWindow()}
-    >
-      {AOP_BUTTON_NAME}
-    </Button>
+    <Tooltip placement="right" title={tooltip}>
+      <Button
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="outlined"
+        data-gtm="explore-data-products.aop-gee-data-viewer-button"
+        className={classes.productPaperButton}
+        color="primary"
+        endIcon={<AopDataViewerIcon />}
+      >
+        {aopButtonName}
+      </Button>
+    </Tooltip>
   );
 };
 
