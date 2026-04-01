@@ -44,6 +44,8 @@ export interface INeonEnvironment {
     getTaxonTypeDataProductsPath: () => string;
     getAuthPath: Record<string, () => string>;
     authTopics: Record<string, () => string>;
+    getAopGEEDesktopUrl: () => Undef<string>;
+    getAopGEEMobileUrl: () => Undef<string>;
     getVisusProductsBaseUrl: () => Undef<string>;
     getVisusIframeBaseUrl: () => Undef<string>;
     getRouterBasePath: () => string;

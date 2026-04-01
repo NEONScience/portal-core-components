@@ -1,4 +1,5 @@
 export { default as AopDataViewer } from './components/AopDataViewer';
+export { default as AopGEEDataViewer } from './components/AopGEEDataViewer';
 export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';

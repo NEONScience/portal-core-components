@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-rszyw5ofcfihiqja02-gxpmi2-3qakndhpeauil4hga" type="hidden" name="form_build_id" value="form-rsZyW5OFCFihiqja02-GxPMi2_3qakndhPeAuiL4HgA" />
+</div><input autocomplete="off" data-drupal-selector="form-licmyde0dravin0wctwcpt5wcxxh50-fduu-m3npdp8" type="hidden" name="form_build_id" value="form-LiCmYDE0draVin0WCTWcPt5WCXxh50-FDUu-m3NpdP8" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -86,7 +86,7 @@ export default html = `<header class="header" role="banner">
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/asu-neon-biorepository-staff" class="menu__link" data-plugin-id="menu-link-content8a58fd73-a95d-456c-8c50-ea70a4cdb0ae" data-drupal-link-system-path="node/14869">ASU Biorepository Staff</a>
+          <a href="https://www.neonscience.org/asu-neon-biorepository-staff" class="menu__link" data-plugin-id="menu-link-content8a58fd73-a95d-456c-8c50-ea70a4cdb0ae" data-drupal-link-system-path="node/14869">ASU NEON Biorepository Staff</a>
 
                   </li>
               <li  class="menu__item">
@@ -114,6 +114,10 @@ export default html = `<header class="header" role="banner">
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/about/faq" class="menu__link" data-plugin-id="menu-link-content20c10622-fa09-415a-aeae-c3dfc67c7748" data-drupal-link-system-path="node/10545">FAQ</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/user-accounts" class="menu__link" data-plugin-id="menu-link-contentad23ac3e-1e03-4d2f-8910-83b8fc03fef9" data-drupal-link-system-path="node/8563">User Accounts</a>
 
                   </li>
               <li  class="menu__item">
@@ -291,7 +295,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/guidelines-policies" class="menu__link" data-plugin-id="menu-link-contentdfbf44da-4c25-48ab-83c6-1e7bcbd5e7f1" data-drupal-link-system-path="node/11642">Using Data</a>
+          <a href="https://www.neonscience.org/data/using-data" class="menu__link" data-plugin-id="menu-link-contentdfbf44da-4c25-48ab-83c6-1e7bcbd5e7f1" data-drupal-link-system-path="node/11642">Using Data</a>
 
           
             
@@ -314,7 +318,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/guidelines-policies/citing" class="menu__link" data-plugin-id="menu-link-content5193b582-56f1-4a16-88ab-b20b999f65ba" data-drupal-link-system-path="node/11644">Acknowledging and Citing NEON</a>
+          <a href="https://www.neonscience.org/data/guidelines-policies/citing" class="menu__link" data-plugin-id="menu-link-content5193b582-56f1-4a16-88ab-b20b999f65ba" data-drupal-link-system-path="node/11644">Acknowledging and Citing NEON</a>
 
                   </li>
               <li  class="menu__item">
@@ -505,7 +509,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/data-samples/data/spatial-data-maps" class="menu__link" data-plugin-id="menu-link-content28111453-dfce-423a-9b97-f10a8380f666" data-drupal-link-system-path="node/10547">Spatial Layers &amp; Printable Maps</a>
+          <a href="https://www.neonscience.org/field-sites/spatial-data-maps" class="menu__link" data-plugin-id="menu-link-content28111453-dfce-423a-9b97-f10a8380f666" data-drupal-link-system-path="node/10547">Spatial Data Layers &amp; Maps</a>
 
                   </li>
       
@@ -557,10 +561,6 @@ export default html = `<header class="header" role="banner">
                   </li>
               <li  class="menu__item">
           <a href="https://www.neonscience.org/resources/research-support/letters-support" class="menu__link" data-plugin-id="menu-link-content80c4026c-822d-4141-a0bd-62592e63a66e" data-drupal-link-system-path="node/8731">Letters of Support</a>
-
-                  </li>
-              <li  class="menu__item">
-          <a href="https://www.neonscience.org/resources/research-support/mobile-deployment-platforms" class="menu__link" data-plugin-id="menu-link-content2bf78c84-4644-49a3-b954-16f26e60fa01" data-drupal-link-system-path="node/7751">Mobile Deployment Platforms</a>
 
                   </li>
               <li  class="menu__item">
@@ -780,11 +780,15 @@ export default html = `<header class="header" role="banner">
                       <ul  class="menu menu--main" data-depth="2">
 
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/advisory-groups/steac" class="menu__link" data-plugin-id="menu-link-content2805ed89-40f1-468a-8114-e1ea19b4d0c6" data-drupal-link-system-path="node/7563">Science, Technology &amp; Education Advisory Committee</a>
+          <a href="https://www.neonscience.org/about/advisory-groups/steac" class="menu__link" data-plugin-id="menu-link-content2805ed89-40f1-468a-8114-e1ea19b4d0c6" data-drupal-link-system-path="node/7563">Science, Technology &amp; Education Advisory Committee (STEAC)</a>
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-plugin-id="menu-link-content8badae4b-878e-4ed6-9369-27630c59049d" data-drupal-link-system-path="node/6273">Technical Working Groups</a>
+          <a href="https://www.neonscience.org/about/advisory-groups/iac" class="menu__link" data-plugin-id="menu-link-contentedf8b2f7-64ad-4962-b228-caa49bc70c03" data-drupal-link-system-path="node/14802">Innovation Advisory Committee (IAC)</a>
+
+                  </li>
+              <li  class="menu__item">
+          <a href="https://www.neonscience.org/about/advisory-groups/twgs" class="menu__link" data-plugin-id="menu-link-content8badae4b-878e-4ed6-9369-27630c59049d" data-drupal-link-system-path="node/6273">Technical Working Groups (TWG)</a>
 
                   </li>
       
