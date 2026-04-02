@@ -89,4 +89,4 @@ export namespace COLORS {
     };
 }
 export default theme;
-declare const theme: import("@mui/material/styles").Theme;
+declare const theme: import("@mui/material").Theme;

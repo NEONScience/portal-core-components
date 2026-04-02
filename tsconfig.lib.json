@@ -2,6 +2,20 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "lib/"
+    "paths": {
+      "@/components/*": ["./lib/components/*"],
+      "@/flow/*": ["./lib/flow/*"],
+      "@/images/*": ["./lib/images/*"],
+      "@/parser/*": ["./lib/parser/*"],
+      "@/remoteAssets/*": ["./lib/remoteAssets/*"],
+      "@/remoteAssetsMap/*": ["./lib/remoteAssetsMap/*"],
+      "@/service/*": ["./lib/service/*"],
+      "@/sharedState/*": ["./lib/sharedState/*"],
+      "@/staticJSON/*": ["./lib/staticJSON/*"],
+      "@/types/*": ["./lib/types/*"],
+      "@/util/*": ["./lib/util/*"],
+      "@/vendor/*": ["./lib/vendor/*"],
+      "@/workers/*": ["./lib/workers/*"]
+    },
   }
 }

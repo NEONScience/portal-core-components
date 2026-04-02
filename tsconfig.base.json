@@ -12,10 +12,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "noEmit": true,
@@ -23,6 +25,7 @@
     "allowJs": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
     "incremental": true,
     "types": [
       "@types/wicg-file-system-access"

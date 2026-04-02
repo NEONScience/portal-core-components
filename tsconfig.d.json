@@ -6,6 +6,7 @@
     "outDir": "./lib",
     "noEmit": false,
     "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": false,
     "newLine": "lf",
     "incremental": false,
     "types": [

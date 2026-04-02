@@ -2,21 +2,20 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "src/lib_components/",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/flow/*": ["flow/*"],
-      "@/images/*": ["images/*"],
-      "@/parser/*": ["parser/*"],
-      "@/remoteAssets/*": ["remoteAssets/*"],
-      "@/remoteAssetsMap/*": ["remoteAssetsMap/*"],
-      "@/service/*": ["service/*"],
-      "@/sharedState/*": ["sharedState/*"],
-      "@/staticJSON/*": ["staticJSON/*"],
-      "@/types/*": ["types/*"],
-      "@/util/*": ["util/*"],
-      "@/vendor/*": ["vendor/*"],
-      "@/workers/*": ["workers/*"]
+      "@/components/*": ["./src/lib_components/components/*"],
+      "@/flow/*": ["./src/lib_components/flow/*"],
+      "@/images/*": ["./src/lib_components/images/*"],
+      "@/parser/*": ["./src/lib_components/parser/*"],
+      "@/remoteAssets/*": ["./src/lib_components/remoteAssets/*"],
+      "@/remoteAssetsMap/*": ["./src/lib_components/remoteAssetsMap/*"],
+      "@/service/*": ["./src/lib_components/service/*"],
+      "@/sharedState/*": ["./src/lib_components/sharedState/*"],
+      "@/staticJSON/*": ["./src/lib_components/staticJSON/*"],
+      "@/types/*": ["./src/lib_components/types/*"],
+      "@/util/*": ["./src/lib_components/util/*"],
+      "@/vendor/*": ["./src/lib_components/vendor/*"],
+      "@/workers/*": ["./src/lib_components/workers/*"]
     },
   }
 }
