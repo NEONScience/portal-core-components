@@ -11,7 +11,7 @@ import Cookies from 'universal-cookie';
 
 import uniqueId from 'lodash/uniqueId';
 
-import { Subject } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -49,7 +49,7 @@ import BrowserWarning from './BrowserWarning';
 import LiferayNotifications from './LiferayNotifications';
 import DrupalAssetService from '../../service/DrupalAssetService';
 
-import { getJson } from '../../util/rxUtil';
+import { getJsonObservable } from '../../util/rxUtil';
 import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
@@ -552,7 +552,6 @@ const NeonPage = (props) => {
   /**
      Liferay Notifications
    */
-  const cancellationSubject$ = new Subject();
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
 
   let initialFetchStatus = null;
@@ -571,7 +570,7 @@ const NeonPage = (props) => {
   const [notifications, setNotifications] = useState(initialNotifications);
 
   // Handle a successful response from the notifications endpoint
-  const handleFetchNotificationsSuccess = (response) => {
+  const handleFetchNotificationsSuccess = (response, newNotifications) => {
     setFetchNotificationsStatus('success');
 
     // *** MOCKING LIFERAY MESSAGE TO ENSURE COMPATIBILITY WITH expiringApiToken ***
@@ -579,17 +578,14 @@ const NeonPage = (props) => {
     response.notifications = ['this is a liferay notification test'];
 
     if (!Array.isArray(response.notifications)) { return; }
-    setNotifications((n) => {
-      const allNotifications = n.concat(response.notifications.map((message) => {
-        const id = generateNotificationId(message);
-        const dismissed = notificationDismissals.includes(id);
-        return { id, message, dismissed };
-      }));
-      return allNotifications;
+    response.notifications.forEach((message) => {
+      const id = generateNotificationId(message);
+      const dismissed = notificationDismissals.includes(id);
+      newNotifications.push({ id, message, dismissed });
     });
   };
 
-  const handleUserInfoFetchNotificationsSuccess = (response) => {
+  const handleUserInfoFetchNotificationsSuccess = (response, newNotifications) => {
     setFetchNotificationsStatus('success');
     // verifies user is logged in
     if (!response?.data?.user) { return; }
@@ -601,10 +597,7 @@ const NeonPage = (props) => {
       const message = 'Your token has expired.  Please reach out to NEON to renew.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
-      setNotifications((n) => {
-        n.push({ id, message, dismissed });
-        return n;
-      });
+      newNotifications.push({ id, message, dismissed });
     }
   };
 
@@ -631,23 +624,33 @@ const NeonPage = (props) => {
   useEffect(() => {
     if (fetchNotificationsStatus !== null) { return; }
     setFetchNotificationsStatus('fetching');
-    getJson(
-      getLiferayNotificationsApiPath(),
-      handleFetchNotificationsSuccess,
-      handleFetchNotificationsError,
-      cancellationSubject$,
-      undefined,
-      true,
-    );
 
-    getJson(
-      NeonEnvironment.getFullAuthPath('userInfo'),
-      handleUserInfoFetchNotificationsSuccess,
-      handleFetchNotificationsError,
-      cancellationSubject$,
-      undefined,
-      true,
-    );
+    forkJoin({
+      lifeRayNotifications: getJsonObservable(
+        getLiferayNotificationsApiPath(),
+        undefined,
+        true,
+      ),
+      userAuthNotifications: getJsonObservable(
+        NeonEnvironment.getFullAuthPath('userInfo'),
+        undefined,
+        true,
+      ),
+    }).subscribe({
+      next: (values) => {
+        const newNotifications = [];
+        handleFetchNotificationsSuccess(
+          values.lifeRayNotifications.response,
+          newNotifications,
+        );
+        handleUserInfoFetchNotificationsSuccess(
+          values.userAuthNotifications.response,
+          newNotifications,
+        );
+        setNotifications([...newNotifications]);
+      },
+      error: () => { handleFetchNotificationsError(); },
+    });
   }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
