@@ -48,7 +48,9 @@ variables must be set to reference the appropriate API endpoints.
 
 **`NEXT_PUBLIC_NEON_API_HOST_OVERRIDE`**
 
-Set this environment variable to the desired API host without a trailing slash (e.g. "https://data.neonscience.org"). Note that this is a build time environment variable and if set within `.env.production` will impact *all* deployments.
+Set this environment variable to the desired API host without a trailing slash (e.g. "https://data.neonscience.org"). Note that this is a build time environment variable and if set within `.env.production` will impact *all* deployments. Preferentially override this value with a local environment variable:
+
+**`NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_NEON_API_HOST_OVERRIDE`**
 
 #### Production
 

@@ -165,7 +165,7 @@
     }
   },
   "scripts": {
-    "start": "next dev",
+    "start": "NEXT_PUBLIC_NEON_API_HOST_OVERRIDE=$NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_NEON_API_HOST_OVERRIDE next dev",
     "start:lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next dev",
     "start:next-start": "next start",
     "start:next-start-lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next start",
