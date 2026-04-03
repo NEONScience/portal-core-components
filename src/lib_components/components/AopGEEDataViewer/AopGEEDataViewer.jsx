@@ -11,46 +11,18 @@ import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
-const MIN_IFRAME_WIDTH = 240;
-
 /**
    Setup: CSS classes
 */
 const useStyles = makeStyles((theme) => ({
-  selectionForm: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  iframe: {
-    minWidth: `${MIN_IFRAME_WIDTH}px`,
-    minHeight: `${MIN_IFRAME_WIDTH}px`,
-    border: `1px solid ${theme.palette.grey[700]}`,
-  },
-  divider: {
-    margin: theme.spacing(2, 0),
-  },
-  label: {
-    color: theme.palette.grey[500],
-    fontSize: '0.9rem',
-    marginBottom: theme.spacing(0.5),
-  },
-  optgroup: {
-    fontWeight: Theme.typography.fontWeightMedium,
-  },
-  tooltipIconButton: {
-    marginTop: theme.spacing(-0.5),
-    marginLeft: theme.spacing(0.5),
-  },
-  openInNewLink: {
-    display: 'block',
-    width: '100%',
-    textAlign: 'right',
-    marginTop: theme.spacing(0.5),
-    fontSize: '0.8rem',
-  },
-  openInNewIcon: {
-    fontSize: '0.95rem',
-    margin: theme.spacing(0, 0.5, -0.25, 0),
+  productPaperButton: {
+    width: 'fit-content',
+    whiteSpace: 'nowrap',
+    marginBottom: theme.spacing(1.5),
+    borderColor: theme.palette.primary.main,
+    '& span': {
+      pointerEvents: 'none',
+    },
   },
 }));
 
