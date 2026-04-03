@@ -573,10 +573,6 @@ const NeonPage = (props) => {
   const handleFetchNotificationsSuccess = (response, newNotifications) => {
     setFetchNotificationsStatus('success');
 
-    // *** MOCKING LIFERAY MESSAGE TO ENSURE COMPATIBILITY WITH expiringApiToken ***
-    // *** REMOVE AFTER TESTING! ***
-    response.notifications = ['this is a liferay notification test'];
-
     if (!Array.isArray(response.notifications)) { return; }
     response.notifications.forEach((message) => {
       const id = generateNotificationId(message);
@@ -590,11 +586,8 @@ const NeonPage = (props) => {
     // verifies user is logged in
     if (!response?.data?.user) { return; }
 
-    // *** MOCK expiringApiToken.  REMOVE WHEN IMPLEMENTED ON BACKEND! ***
-    response.data.expiringApiToken = true;
-
     if (response.data.expiringApiToken) {
-      const message = 'Your token has expired.  Please reach out to NEON to renew.';
+      const message = 'An API Token associated with your account has expired.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
       newNotifications.push({ id, message, dismissed });
