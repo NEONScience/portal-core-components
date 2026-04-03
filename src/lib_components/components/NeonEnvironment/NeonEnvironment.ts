@@ -48,8 +48,6 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
   'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
-  'REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL',
-  'REACT_APP_NEON_VISUS_IFRAME_BASE_URL',
   'REACT_APP_NEON_API_HOST_OVERRIDE',
   'REACT_APP_BIOREPO_HOST_OVERRIDE',
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
@@ -106,8 +104,6 @@ export interface INeonEnvironment {
 
   getAopGEEDesktopUrl: () => Undef<string>;
   getAopGEEMobileUrl: () => Undef<string>;
-  getVisusProductsBaseUrl: () => Undef<string>;
-  getVisusIframeBaseUrl: () => Undef<string>;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -215,10 +211,7 @@ const NeonEnvironment: INeonEnvironment = {
   getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
 
   getAopGEEDesktopUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP,
-  getAopGEEMobileUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
-
-  getVisusProductsBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_PRODUCTS_BASE_URL,
-  getVisusIframeBaseUrl: (): Undef<string> => process.env.REACT_APP_NEON_VISUS_IFRAME_BASE_URL,
+  getAopGEEMobileUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
 
   getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',
