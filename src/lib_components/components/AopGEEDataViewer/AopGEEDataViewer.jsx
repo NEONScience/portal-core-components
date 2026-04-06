@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AopDataViewerIcon from '@material-ui/icons/SatelliteOutlined';
 import Tooltip from '@material-ui/core/Tooltip';
+import PropTypes from 'prop-types';
 
 import UAParser from 'ua-parser-js';
 
@@ -16,7 +17,6 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 */
 const useStyles = makeStyles((theme) => ({
   productPaperButton: {
-    width: 'fit-content',
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(1.5),
     borderColor: theme.palette.primary.main,
@@ -48,6 +48,9 @@ const getMobileOrDesktopUrl = () => {
    Main Function
 */
 const AopGEEDataViewer = (props) => {
+  const {
+    isFullWidth,
+  } = props;
   const classes = useStyles(Theme);
   const aopButtonName = 'AOP GEE Data Viewer';
   const tooltip = 'Launch the AOP Google Earth Engine data visuialization tool.';
@@ -61,6 +64,7 @@ const AopGEEDataViewer = (props) => {
         variant="outlined"
         data-gtm="explore-data-products.aop-gee-data-viewer-button"
         className={classes.productPaperButton}
+        fullWidth={isFullWidth}
         color="primary"
         endIcon={<AopDataViewerIcon />}
       >
@@ -68,6 +72,14 @@ const AopGEEDataViewer = (props) => {
       </Button>
     </Tooltip>
   );
+};
+
+AopGEEDataViewer.propTypes = {
+  isFullWidth: PropTypes.bool,
+};
+
+AopGEEDataViewer.defaultProps = {
+  isFullWidth: true,
 };
 
 const WrappedAopGEEDataViewer = Theme.getWrappedComponent(

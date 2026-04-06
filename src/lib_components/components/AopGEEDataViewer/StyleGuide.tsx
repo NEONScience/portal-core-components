@@ -1,9 +1,12 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -21,6 +24,51 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '8px',
   },
 }));
+
+const state = {
+  states: [true, false, 'bogus'],
+};
+
+const AopGeeViewerDemo = (): JSX.Element => {
+  const classes = useStyles(Theme);
+  const [selectedState, setSelectedState] = useState(0);
+  const handleChange = (event: any) => {
+    setSelectedState(event.target.value);
+  };
+  return (
+    <div style={{ width: '100%' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography
+            variant="h5"
+            component="h3"
+            id="full-width-select-label"
+            className={classes.title}
+          >
+            Is Full Width
+          </Typography>
+          <Select
+            id="all-aop-products-select"
+            aria-labelledby="full-width-select-label"
+            variant="outlined"
+            value={selectedState}
+            onChange={handleChange}
+            style={{ width: 'fit-content', marginBottom: '32px' }}
+          >
+            {state.states.map((val: any) => ((
+              <MenuItem key={val} value={val}>
+                {`${val}`}
+              </MenuItem>
+            )))}
+          </Select>
+        </Grid>
+        <Grid item xs={12}>
+          <AopGEEDataViewer isFullWidth={selectedState} />
+        </Grid>
+      </Grid>
+    </div>
+  );
+};
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
@@ -42,21 +90,22 @@ import AopGEEDataViewer from 'portal-core-components/lib/components/AopGEEDataVi
       <DocBlock>
         { /* @ts-ignore */ }
         The AOP GEE Data Viewer button checks for mobile or desktop device and openes
-        the corresponding GEE Viewer in a new window or tab.
+        the corresponding GEE Viewer in a new window or tab. It defaults to taking up
+        the full width unless isFullWidth is set to false in which case it fits contents.
       </DocBlock>
       <ExampleBlock>
-        <AopGEEDataViewer />
+        <AopGEEDataViewer isFullWidth={false} />
       </ExampleBlock>
       <CodeBlock>
         {`
-<AopGEEDataViewer />
+<AopGEEDataViewer isFullWidth={false} />
         `}
       </CodeBlock>
 
       <Divider className={classes.divider} />
       <Typography variant="h5" component="h3" gutterBottom>Demo</Typography>
       <ExampleBlock>
-        <AopGEEDataViewer />
+        <AopGeeViewerDemo />
       </ExampleBlock>
 
       <Divider className={classes.divider} />
@@ -64,8 +113,9 @@ import AopGEEDataViewer from 'portal-core-components/lib/components/AopGEEDataVi
 
       <DocBlock>
         { /* @ts-ignore */ }
-        No parameters can be passed to the Google earth Engine at this time so failures only happen
-        when the Google earth Engine has issues or the link has been changed.
+        Any invalid paramaters to the component are ignored and no parameters can be passed to
+        the Google earth Engine at this time so failures only happen
+        when the Google earth Engine has issues or the link changes.
       </DocBlock>
     </>
   );
