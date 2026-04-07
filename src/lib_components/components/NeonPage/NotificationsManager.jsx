@@ -6,7 +6,7 @@ import { string } from 'prop-types';
 
 import Cookies from 'universal-cookie';
 
-import NeonContext from '../NeonContext/NeonContext';
+import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import { getJsonObservable } from '../../util/rxUtil';
 import LiferayNotifications from './LiferayNotifications';
 import {
@@ -30,7 +30,11 @@ const NotificationsManager = ({ initialNotification }) => {
     }];
   }
 
-  const [{ isActive, auth: { userData } }] = NeonContext.useNeonContextState();
+  const [{
+    isActive,
+    auth: { userData },
+    fetches: { auth: authFetches },
+  }] = NeonContext.useNeonContextState();
   const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
   const [notifications, setNotifications] = useState(initialNotifications);
   const [isAllNotificationsFetched, setIsAllNotificationsFetched] = useState(false);
@@ -71,9 +75,13 @@ const NotificationsManager = ({ initialNotification }) => {
     setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
   };
 
-  const handleNotificationSetup = () => {
-    if (isAllNotificationsFetched) { return; }
+  const handleNotificationSetup = async () => {
+    if (
+      isAllNotificationsFetched
+      || fetchNotificationsStatus === 'fetching'
+    ) { return; }
 
+    setFetchNotificationsStatus('fetching');
     getJsonObservable(
       getLiferayNotificationsApiPath(),
       undefined,
@@ -94,21 +102,16 @@ const NotificationsManager = ({ initialNotification }) => {
   };
 
   /**
-   Effect - Fetch liferay notifications
-  */
-  useEffect(() => {
-    if (fetchNotificationsStatus !== null) { return; }
-    setFetchNotificationsStatus('fetching');
-    handleNotificationSetup();
-  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
    Effect - Listen for userData/auth fetch
   */
   useEffect(() => {
-    if (!userData) { return; }
+    if (
+      authFetches.status !== FETCH_STATUS.SUCCESS
+      && authFetches.status !== FETCH_STATUS.ERROR
+    ) { return; }
+
     handleNotificationSetup();
-  }, [userData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userData, authFetches]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <LiferayNotifications
