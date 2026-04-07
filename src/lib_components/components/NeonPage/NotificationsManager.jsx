@@ -30,9 +30,10 @@ const NotificationsManager = ({ initialNotification }) => {
     }];
   }
 
-  const context = NeonContext.useNeonContextState();
+  const [{ isActive, auth: { userData } }] = NeonContext.useNeonContextState();
   const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
   const [notifications, setNotifications] = useState(initialNotifications);
+  const [isAllNotificationsFetched, setIsAllNotificationsFetched] = useState(false);
 
   // Handle a successful response from the notifications endpoint
   const handleFetchNotificationsSuccess = (response, newNotifications) => {
@@ -48,9 +49,9 @@ const NotificationsManager = ({ initialNotification }) => {
 
   const handleUserInfoNotifications = (newNotifications) => {
     // verifies user is logged in
-    if (!context[0].isActive || !context[0].auth?.userData?.data?.user) { return; }
+    if (!isActive || !userData?.data?.user) { return; }
 
-    if (context[0]?.auth?.userData?.data?.expiringApiToken) {
+    if (userData?.data?.expiringApiToken) {
       const message = 'An API Token associated with your account has expired.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
@@ -71,6 +72,8 @@ const NotificationsManager = ({ initialNotification }) => {
   };
 
   const handleNotificationSetup = () => {
+    if (isAllNotificationsFetched) { return; }
+
     getJsonObservable(
       getLiferayNotificationsApiPath(),
       undefined,
@@ -84,6 +87,7 @@ const NotificationsManager = ({ initialNotification }) => {
         );
         handleUserInfoNotifications(newNotifications);
         setNotifications([...newNotifications]);
+        setIsAllNotificationsFetched(true);
       },
       error: () => { handleFetchNotificationsError(); },
     });
@@ -102,9 +106,9 @@ const NotificationsManager = ({ initialNotification }) => {
    Effect - Listen for userData/auth fetch
   */
   useEffect(() => {
-    if (!context[0].auth.userData) { return; }
+    if (!userData) { return; }
     handleNotificationSetup();
-  }, [context[0].auth.userData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [userData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <LiferayNotifications
