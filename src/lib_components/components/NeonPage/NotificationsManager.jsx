@@ -5,9 +5,10 @@ import React, {
 import { string } from 'prop-types';
 
 import Cookies from 'universal-cookie';
+import { Subject } from 'rxjs';
 
 import NeonContext from '../NeonContext/NeonContext';
-import { getJsonObservable } from '../../util/rxUtil';
+import { getJson } from '../../util/rxUtil';
 import LiferayNotifications from './LiferayNotifications';
 import {
   generateNotificationId,
@@ -17,6 +18,7 @@ import {
 const NotificationsManager = ({ initialNotification }) => {
   const cookies = new Cookies();
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
+  const cancellationSubject$ = new Subject();
 
   let initialFetchStatus = null;
   let initialNotifications = [];
@@ -40,27 +42,27 @@ const NotificationsManager = ({ initialNotification }) => {
 
   const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
-
     if (!Array.isArray(response.notifications)) { return; }
+
+    const newNotifications = [...notifications];
     response.notifications.forEach((message) => {
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
-      setNotifications((n) => {
-        n.push({ id, message, dismissed });
-        return n;
-      });
+      newNotifications.push({ id, message, dismissed });
     });
+    setNotifications(newNotifications);
   };
 
   const handleUserInfoNotifications = () => {
     // verifies user is logged in
     if (!isActive || !userData?.data?.user) { return; }
 
-    if (userData?.data?.expiringApiToken) {
-      const message = 'An API Token associated with your account has expired.';
+    setIsUserStatusNotificationsFetched(true);
+
+    if (userData?.data?.expiringApiToken === true) {
+      const message = 'An API Token associated with your account is expiring soon.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
-      setIsUserStatusNotificationsFetched(true);
       setNotifications((n) => {
         n.push({ id, message, dismissed });
         return n;
@@ -87,20 +89,14 @@ const NotificationsManager = ({ initialNotification }) => {
     if (fetchNotificationsStatus !== null) { return; }
     setFetchNotificationsStatus('fetching');
 
-    getJsonObservable(
+    getJson(
       getLiferayNotificationsApiPath(),
+      handleFetchNotificationsSuccess,
+      handleFetchNotificationsError,
+      cancellationSubject$,
       undefined,
       true,
-    ).subscribe({
-      next: (values) => {
-        const newNotifications = [];
-        handleFetchNotificationsSuccess(
-          values.response,
-          newNotifications,
-        );
-      },
-      error: () => { handleFetchNotificationsError(); },
-    });
+    );
   }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -108,7 +104,7 @@ const NotificationsManager = ({ initialNotification }) => {
   */
   useEffect(() => {
     if (!userData || isUserStatusNotificationsFetched) { return; }
-    handleUserInfoNotifications([]);
+    handleUserInfoNotifications();
   }, [userData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
