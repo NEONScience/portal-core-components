@@ -6,7 +6,7 @@ import { string } from 'prop-types';
 
 import Cookies from 'universal-cookie';
 
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonContext from '../NeonContext/NeonContext';
 import { getJsonObservable } from '../../util/rxUtil';
 import LiferayNotifications from './LiferayNotifications';
 import {
@@ -33,25 +33,26 @@ const NotificationsManager = ({ initialNotification }) => {
   const [{
     isActive,
     auth: { userData },
-    fetches: { auth: authFetches },
   }] = NeonContext.useNeonContextState();
   const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
   const [notifications, setNotifications] = useState(initialNotifications);
-  const [isAllNotificationsFetched, setIsAllNotificationsFetched] = useState(false);
+  const [isUserStatusNotificationsFetched, setIsUserStatusNotificationsFetched] = useState(false);
 
-  // Handle a successful response from the notifications endpoint
-  const handleFetchNotificationsSuccess = (response, newNotifications) => {
+  const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
 
     if (!Array.isArray(response.notifications)) { return; }
     response.notifications.forEach((message) => {
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
-      newNotifications.push({ id, message, dismissed });
+      setNotifications((n) => {
+        n.push({ id, message, dismissed });
+        return n;
+      });
     });
   };
 
-  const handleUserInfoNotifications = (newNotifications) => {
+  const handleUserInfoNotifications = () => {
     // verifies user is logged in
     if (!isActive || !userData?.data?.user) { return; }
 
@@ -59,7 +60,11 @@ const NotificationsManager = ({ initialNotification }) => {
       const message = 'An API Token associated with your account has expired.';
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
-      newNotifications.push({ id, message, dismissed });
+      setIsUserStatusNotificationsFetched(true);
+      setNotifications((n) => {
+        n.push({ id, message, dismissed });
+        return n;
+      });
     }
   };
 
@@ -75,13 +80,13 @@ const NotificationsManager = ({ initialNotification }) => {
     setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
   };
 
-  const handleNotificationSetup = async () => {
-    if (
-      isAllNotificationsFetched
-      || fetchNotificationsStatus === 'fetching'
-    ) { return; }
-
+  /**
+   Effect - Fetch liferay notifications
+  */
+  useEffect(() => {
+    if (fetchNotificationsStatus !== null) { return; }
     setFetchNotificationsStatus('fetching');
+
     getJsonObservable(
       getLiferayNotificationsApiPath(),
       undefined,
@@ -93,25 +98,18 @@ const NotificationsManager = ({ initialNotification }) => {
           values.response,
           newNotifications,
         );
-        handleUserInfoNotifications(newNotifications);
-        setNotifications([...newNotifications]);
-        setIsAllNotificationsFetched(true);
       },
       error: () => { handleFetchNotificationsError(); },
     });
-  };
+  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    Effect - Listen for userData/auth fetch
   */
   useEffect(() => {
-    if (
-      authFetches.status !== FETCH_STATUS.SUCCESS
-      && authFetches.status !== FETCH_STATUS.ERROR
-    ) { return; }
-
-    handleNotificationSetup();
-  }, [userData, authFetches]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!userData || isUserStatusNotificationsFetched) { return; }
+    handleUserInfoNotifications([]);
+  }, [userData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <LiferayNotifications
