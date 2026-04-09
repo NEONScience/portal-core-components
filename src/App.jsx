@@ -15,8 +15,8 @@ import { isStringNonEmpty } from './lib_components/util/typeUtil';
 const BasicComponents = React.lazy(
   () => import('./components/BasicComponents'),
 );
-const AopDataViewerStyleGuide = React.lazy(
-  () => import('./lib_components/components/AopDataViewer/StyleGuide'),
+const AopGEEDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/AopGEEDataViewer/StyleGuide'),
 );
 const CardStyleGuide = React.lazy(
   () => import('./lib_components/components/Card/StyleGuide'),
@@ -125,11 +125,11 @@ const sidebarLinks = [
     icon: BasicComponentsIcon,
   },
   {
-    name: 'AOP Data Viewer',
-    hash: '#AopDataViewer',
+    name: 'AOP Google Earth Engine Data Viewer',
+    hash: '#AopGEEDataViewer',
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
-        <AopDataViewerStyleGuide />
+        <AopGEEDataViewerStyleGuide />
       </Suspense>
     ),
   },
