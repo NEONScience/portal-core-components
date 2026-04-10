@@ -1,3 +1,4 @@
 export function getJson(url: string, callback: any, errorCallback: any, cancellationSubject$: any, headers?: Object | undefined, cors?: boolean): import("rxjs").Subscription;
 export default getJson;
 export function forkJoinWithProgress(arrayOfObservables: any): import("rxjs").Observable<import("rxjs").Observable<unknown>[]>;
+export function getJsonObservable(url: string, headers?: Object | undefined, cors?: boolean): import("rxjs").Observable<any>;

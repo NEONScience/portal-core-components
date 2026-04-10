@@ -7,7 +7,12 @@ import { string } from 'prop-types';
 import Cookies from 'universal-cookie';
 import { Subject } from 'rxjs';
 
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+
 import NeonContext from '../NeonContext/NeonContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import RouteService from '../../service/RouteService';
 import { getJson } from '../../util/rxUtil';
 import LiferayNotifications from './LiferayNotifications';
 import {
@@ -15,7 +20,38 @@ import {
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
 
-const NotificationsManager = ({ initialNotification }) => {
+const myAccountLink = (
+  <Link href={NeonEnvironment.route.buildAccountRoute()} target="_blank">
+    My Account
+  </Link>
+);
+
+const contactUsLink = (
+  <Link href={RouteService.getContactUsPath()} target="_blank">
+    Contact Us
+  </Link>
+);
+
+/* eslint-disable react/jsx-one-expression-per-line */
+const TOKEN_EXPIRY_MESSAGE = (
+  <div>
+    <Typography variant="subtitle2" gutterBottom>
+      API Token Expiration Notice
+    </Typography>
+    <Typography variant="body2">
+      An API Token associated with your account is expiring soon. If you would
+      like a new token, please navigate to your {myAccountLink} page.
+      At the bottom of your account page,
+      click on the “Get API Token” button. You can delete an expired token by
+      clicking the three dots under the Actions column.
+      If you have any questions or issues, please let us know through our {contactUsLink} form.
+    </Typography>
+  </div>
+);
+/* eslint-enable react/jsx-one-expression-per-line */
+
+const NotificationsManager = (props) => {
+  const { initialNotification } = props;
   const cookies = new Cookies();
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
   const cancellationSubject$ = new Subject();
@@ -43,7 +79,6 @@ const NotificationsManager = ({ initialNotification }) => {
   const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
     if (!Array.isArray(response.notifications)) { return; }
-
     const newNotifications = [...notifications];
     response.notifications.forEach((message) => {
       const id = generateNotificationId(message);
@@ -56,24 +91,28 @@ const NotificationsManager = ({ initialNotification }) => {
   const handleUserInfoNotifications = () => {
     // verifies user is logged in
     if (!isActive || !userData?.data?.user) { return; }
-
     setIsUserStatusNotificationsFetched(true);
-
     if (userData?.data?.expiringApiToken === true) {
-      const message = 'An API Token associated with your account is expiring soon.';
-      const id = generateNotificationId(message);
+      const idObject = {
+        message: TOKEN_EXPIRY_MESSAGE,
+      };
+      const id = generateNotificationId(JSON.stringify(idObject));
       const dismissed = notificationDismissals.includes(id);
-      setNotifications((n) => {
-        n.push({ id, message, dismissed });
-        return n;
-      });
+      const newNotifications = [...notifications];
+      const newNotification = {
+        id,
+        dismissed,
+        message: TOKEN_EXPIRY_MESSAGE,
+        isReactNode: true,
+      };
+      newNotifications.push(newNotification);
+      setNotifications(newNotifications);
     }
   };
 
   // If the endpoint fails don't bother with any visible error. Just let it go.
   const handleFetchNotificationsError = () => {
     setFetchNotificationsStatus('error');
-    setNotifications([]);
   };
 
   const handleHideNotifications = () => {
@@ -88,7 +127,6 @@ const NotificationsManager = ({ initialNotification }) => {
   useEffect(() => {
     if (fetchNotificationsStatus !== null) { return; }
     setFetchNotificationsStatus('fetching');
-
     getJson(
       getLiferayNotificationsApiPath(),
       handleFetchNotificationsSuccess,
@@ -97,7 +135,8 @@ const NotificationsManager = ({ initialNotification }) => {
       undefined,
       true,
     );
-  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchNotificationsStatus]);
 
   /**
    Effect - Listen for userData/auth fetch
@@ -105,7 +144,8 @@ const NotificationsManager = ({ initialNotification }) => {
   useEffect(() => {
     if (!userData || isUserStatusNotificationsFetched) { return; }
     handleUserInfoNotifications();
-  }, [userData]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData, isUserStatusNotificationsFetched]);
 
   return (
     <LiferayNotifications

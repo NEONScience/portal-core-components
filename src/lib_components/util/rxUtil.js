@@ -28,7 +28,6 @@ const getRequest = (url, headers, cors) => {
     request.crossDomain = true;
     request.withCredentials = true;
   }
-
   return request;
 };
 
@@ -125,6 +124,5 @@ export const getJsonObservable = (
       return of(error);
     }),
   );
-
   return rxObs$;
 };

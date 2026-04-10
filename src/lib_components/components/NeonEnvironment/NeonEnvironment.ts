@@ -241,7 +241,6 @@ const NeonEnvironment: INeonEnvironment = {
       `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.home()}`
     ),
     buildAccountRoute: () => (
-      // TODO: replace with web host once switch over happens
       `${NeonEnvironment.getApiHost()}${NeonEnvironment.route.account()}`
     ),
   },

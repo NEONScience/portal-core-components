@@ -4,7 +4,7 @@ declare namespace LiferayNotifications {
     namespace propTypes {
         const notifications: PropTypes.Requireable<(PropTypes.InferProps<{
             id: PropTypes.Validator<string>;
-            message: PropTypes.Validator<string>;
+            message: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
             dismissed: PropTypes.Validator<boolean>;
         }> | null | undefined)[]>;
         const onHideNotifications: PropTypes.Requireable<(...args: any[]) => any>;
