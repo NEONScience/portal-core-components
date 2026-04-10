@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "aop-gee-data-viewer",
+  "main": "./AopGEEDataViewer.jsx",
+  "module": "./AopGEEDataViewer.js"
+}

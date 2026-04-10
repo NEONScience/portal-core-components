@@ -230,6 +230,9 @@ declare function useNeonContextState(): ({
             };
             OH: {
                 name: string;
+                /**
+                   CONTEXT
+                */
                 center: number[];
                 zoom: number;
             };
@@ -437,6 +440,9 @@ declare function useNeonContextState(): ({
             };
         };
         timeSeriesDataProducts: {
+            productCodes: string[];
+        };
+        aopDataProducts: {
             productCodes: string[];
         };
         stateSites: {};
@@ -663,6 +669,9 @@ declare function useNeonContextState(): ({
             };
             OH: {
                 name: string;
+                /**
+                   CONTEXT
+                */
                 center: number[];
                 zoom: number;
             };
@@ -872,6 +881,9 @@ declare function useNeonContextState(): ({
         timeSeriesDataProducts: {
             productCodes: string[];
         };
+        aopDataProducts: {
+            productCodes: string[];
+        };
         stateSites: {};
         domainSites: {};
     };
@@ -922,6 +934,7 @@ declare namespace DEFAULT_STATE {
         export { statesJSON as states };
         export { domainsJSON as domains };
         export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
+        export { aopDataProductsJSON as aopDataProducts };
         export const stateSites: {};
         export const domainSites: {};
     }
@@ -975,4 +988,5 @@ declare namespace ProviderPropTypes {
 import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
 import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
+import aopDataProductsJSON from "../../staticJSON/aopDataProducts.json";
 import PropTypes from "prop-types";

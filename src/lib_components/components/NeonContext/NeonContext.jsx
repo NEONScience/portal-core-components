@@ -19,6 +19,7 @@ import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+import aopDataProductsJSON from '../../staticJSON/aopDataProducts.json';
 import BundleParser from '../../parser/BundleParser';
 import { existsNonEmpty } from '../../util/typeUtil';
 
@@ -47,6 +48,7 @@ const DEFAULT_STATE = {
     states: statesJSON,
     domains: domainsJSON,
     timeSeriesDataProducts: timeSeriesDataProductsJSON,
+    aopDataProducts: aopDataProductsJSON,
     stateSites: {}, // derived when sites is fetched
     domainSites: {}, // derived when sites is fetched
   },
