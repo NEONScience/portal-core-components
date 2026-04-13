@@ -46,6 +46,7 @@ export interface INeonEnvironment {
     authTopics: Record<string, () => string>;
     getAopGEEDesktopUrl: () => Undef<string>;
     getAopGEEMobileUrl: () => Undef<string>;
+    getAopGEEVideoUrl: () => Undef<string>;
     getRouterBasePath: () => string;
     getRouterBaseHomePath: () => string;
     getApiHostOverride: () => string;

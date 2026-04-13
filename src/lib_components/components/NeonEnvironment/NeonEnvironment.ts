@@ -105,6 +105,7 @@ export interface INeonEnvironment {
 
   getAopGEEDesktopUrl: () => Undef<string>;
   getAopGEEMobileUrl: () => Undef<string>;
+  getAopGEEVideoUrl: () => Undef<string>;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -213,6 +214,7 @@ const NeonEnvironment: INeonEnvironment = {
 
   getAopGEEDesktopUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP,
   getAopGEEMobileUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
+  getAopGEEVideoUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_VIDEO,
 
   getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',
