@@ -19,6 +19,7 @@ import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
+import { existsNonEmpty } from '../../util/typeUtil';
 
 const myAccountLink = (
   <Link href={NeonEnvironment.route.buildAccountRoute()} target="_blank">
@@ -56,11 +57,9 @@ const NotificationsManager = (props) => {
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
   const cancellationSubject$ = new Subject();
 
-  let initialFetchStatus = null;
   let initialNotifications = [];
   if (initialNotification !== null && initialNotification.length) {
     const notificationPropId = generateNotificationId(initialNotification);
-    initialFetchStatus = 'success';
     initialNotifications = [{
       id: notificationPropId,
       message: initialNotification,
@@ -72,20 +71,22 @@ const NotificationsManager = (props) => {
     isActive,
     auth: { userData },
   }] = NeonContext.useNeonContextState();
-  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
-  const [notifications, setNotifications] = useState(initialNotifications);
+  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(null);
+  const [manualNotifications, setManualNotifications] = useState(initialNotifications);
+  const [liferayNotifications, setLiferayNotifications] = useState([]);
+  const [userInfoNotifications, setUserInfoNotifications] = useState([]);
   const [isUserStatusNotificationsFetched, setIsUserStatusNotificationsFetched] = useState(false);
 
   const handleFetchNotificationsSuccess = (response) => {
     setFetchNotificationsStatus('success');
     if (!Array.isArray(response.notifications)) { return; }
-    const newNotifications = [...notifications];
+    const newNotifications = [...liferayNotifications];
     response.notifications.forEach((message) => {
       const id = generateNotificationId(message);
       const dismissed = notificationDismissals.includes(id);
       newNotifications.push({ id, message, dismissed });
     });
-    setNotifications(newNotifications);
+    setLiferayNotifications(newNotifications);
   };
 
   const handleUserInfoNotifications = () => {
@@ -98,7 +99,7 @@ const NotificationsManager = (props) => {
       };
       const id = generateNotificationId(JSON.stringify(idObject));
       const dismissed = notificationDismissals.includes(id);
-      const newNotifications = [...notifications];
+      const newNotifications = [...userInfoNotifications];
       const newNotification = {
         id,
         dismissed,
@@ -106,7 +107,7 @@ const NotificationsManager = (props) => {
         isReactNode: true,
       };
       newNotifications.push(newNotification);
-      setNotifications(newNotifications);
+      setUserInfoNotifications(newNotifications);
     }
   };
 
@@ -116,9 +117,22 @@ const NotificationsManager = (props) => {
   };
 
   const handleHideNotifications = () => {
-    const updatedDismissals = notifications.map((n) => n.id);
+    const dismissNotifications = [
+      ...manualNotifications,
+      ...liferayNotifications,
+      ...userInfoNotifications,
+    ];
+    const updatedDismissals = dismissNotifications.map((n) => n.id);
     cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
-    setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
+    if (existsNonEmpty(manualNotifications)) {
+      setManualNotifications(manualNotifications.map((n) => ({ ...n, dismissed: true })));
+    }
+    if (existsNonEmpty(liferayNotifications)) {
+      setLiferayNotifications(liferayNotifications.map((n) => ({ ...n, dismissed: true })));
+    }
+    if (existsNonEmpty(userInfoNotifications)) {
+      setUserInfoNotifications(userInfoNotifications.map((n) => ({ ...n, dismissed: true })));
+    }
   };
 
   /**
@@ -147,9 +161,15 @@ const NotificationsManager = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData, isUserStatusNotificationsFetched]);
 
+  const appliedNotifications = [
+    ...manualNotifications,
+    ...liferayNotifications,
+    ...userInfoNotifications,
+  ];
+
   return (
     <LiferayNotifications
-      notifications={notifications}
+      notifications={appliedNotifications}
       onHideNotifications={handleHideNotifications}
     />
   );
