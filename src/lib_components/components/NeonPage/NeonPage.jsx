@@ -7,11 +7,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import Cookies from 'universal-cookie';
-
 import uniqueId from 'lodash/uniqueId';
-
-import { Subject } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -46,22 +42,14 @@ import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
-import LiferayNotifications from './LiferayNotifications';
+import NotificationsManager from './NotificationsManager';
 import DrupalAssetService from '../../service/DrupalAssetService';
-
-import { getJson } from '../../util/rxUtil';
-import {
-  generateNotificationId,
-  getLiferayNotificationsApiPath,
-} from '../../util/liferayNotificationsUtil';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 import './styles.css';
 
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
-
-const cookies = new Cookies();
 
 // Global CSS
 const GlobalCss = withStyles({
@@ -550,73 +538,6 @@ const NeonPage = (props) => {
   }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
 
   /**
-     Liferay Notifications
-   */
-  const cancellationSubject$ = new Subject();
-  const notificationDismissals = cookies.get('dismissed-notifications') || [];
-
-  let initialFetchStatus = null;
-  let initialNotifications = [];
-  if (notification !== null && notification.length) {
-    const notificationPropId = generateNotificationId(notification);
-    initialFetchStatus = 'success';
-    initialNotifications = [{
-      id: notificationPropId,
-      message: notification,
-      dismissed: notificationDismissals.includes(notificationPropId),
-    }];
-  }
-
-  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(initialFetchStatus);
-  const [notifications, setNotifications] = useState(initialNotifications);
-
-  // Handle a successful response from the notifications endpoint
-  const handleFetchNotificationsSuccess = (response) => {
-    setFetchNotificationsStatus('success');
-    if (!Array.isArray(response.notifications)) { return; }
-    setNotifications(
-      response.notifications.map((message) => {
-        const id = generateNotificationId(message);
-        const dismissed = notificationDismissals.includes(id);
-        return { id, message, dismissed };
-      }),
-    );
-  };
-
-  // If the endpoint fails don't bother with any visible error. Just let it go.
-  const handleFetchNotificationsError = () => {
-    setFetchNotificationsStatus('error');
-    setNotifications([]);
-  };
-
-  const handleHideNotifications = () => {
-    const updatedDismissals = notifications.map((n) => n.id);
-    cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
-    setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
-  };
-
-  const handleShowNotifications = () => {
-    cookies.remove('dismissed-notifications');
-    setNotifications(notifications.map((n) => ({ ...n, dismissed: false })));
-  };
-
-  /**
-     Effect - Fetch notifications
-  */
-  useEffect(() => {
-    if (fetchNotificationsStatus !== null) { return; }
-    setFetchNotificationsStatus('fetching');
-    getJson(
-      getLiferayNotificationsApiPath(),
-      handleFetchNotificationsSuccess,
-      handleFetchNotificationsError,
-      cancellationSubject$,
-      undefined,
-      true,
-    );
-  }, [fetchNotificationsStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
      Render functions
    */
   const renderTitle = () => {
@@ -901,8 +822,6 @@ const NeonPage = (props) => {
           <NeonHeader
             ref={headerRef}
             unstickyDrupalHeader={unstickyDrupalHeader}
-            notifications={notifications}
-            onShowNotifications={handleShowNotifications}
             drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
             showSkeleton={showHeaderSkeleton}
           />
@@ -920,9 +839,8 @@ const NeonPage = (props) => {
             {content}
           </div>
         </Container>
-        <LiferayNotifications
-          notifications={notifications}
-          onHideNotifications={handleHideNotifications}
+        <NotificationsManager
+          initialNotification={notification}
         />
         <BrowserWarning />
         {customFooter ? (

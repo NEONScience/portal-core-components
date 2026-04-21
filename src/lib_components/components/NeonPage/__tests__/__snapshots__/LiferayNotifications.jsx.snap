@@ -19,20 +19,32 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
       <div
         id="neon-data-portal-notifications"
       >
-        <div
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "bar",
+        <div>
+          <div
+            className="makeStyles-notificationDiv-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "bar",
+              }
             }
-          }
-        />
-        <div
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "<b>HTML</b>",
+          />
+          <hr
+            className="MuiDivider-root"
+          />
+        </div>
+        <div>
+          <div
+            className="makeStyles-notificationDiv-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<b>HTML</b>",
+              }
             }
-          }
-        />
+          />
+          <hr
+            className="MuiDivider-root"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -94,20 +106,32 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
       <div
         id="neon-data-portal-notifications"
       >
-        <div
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "bar",
+        <div>
+          <div
+            className="makeStyles-notificationDiv-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "bar",
+              }
             }
-          }
-        />
-        <div
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "<b>HTML</b>",
+          />
+          <hr
+            className="MuiDivider-root"
+          />
+        </div>
+        <div>
+          <div
+            className="makeStyles-notificationDiv-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<b>HTML</b>",
+              }
             }
-          }
-        />
+          />
+          <hr
+            className="MuiDivider-root"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '33%',
     },
   },
+  notificationDiv: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
 }));
 
 const LiferayNotifications = (props) => {
@@ -37,13 +42,28 @@ const LiferayNotifications = (props) => {
 
   const renderNotificationContent = () => (
     <div id="neon-data-portal-notifications">
-      {notifications.map((notification) => (
-        <div
-          key={notification.id}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: notification.message }}
-        />
-      ))}
+      {notifications.map((notification) => {
+        if (notification.isReactNode === true) {
+          return (
+            <div key={notification.id}>
+              <div className={classes.notificationDiv}>
+                {notification.message}
+              </div>
+              <Divider />
+            </div>
+          );
+        }
+        return (
+          <div key={notification.id}>
+            <div
+              className={classes.notificationDiv}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: notification.message }}
+            />
+            <Divider />
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -76,7 +96,10 @@ LiferayNotifications.propTypes = {
   notifications: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
+      message: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string,
+      ]).isRequired,
       dismissed: PropTypes.bool.isRequired,
     }),
   ),

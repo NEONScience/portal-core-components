@@ -208,13 +208,13 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases`
   ),
   getDataSamplesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples`
+    `${NeonEnvironment.getWebHost()}/data`
   ),
   getSamplesPath: (): string => (
     `${NeonEnvironment.getWebHost()}/samples`
   ),
   getDataSamplesDataPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/data`
+    `${NeonEnvironment.getWebHost()}/data`
   ),
   getDataAvailabilityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-availability`
@@ -246,31 +246,25 @@ const RouteService: IRouteService = {
   ),
 
   getTaxonomicListsPath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/taxonomic-lists`
   ),
   getDataProductCitationDownloadUrl: (): string => (
-    // TODO: replace with web host once switch over happens
     NeonEnvironment.getApiHost()
   ),
   getDataProductExploreSearchPath: (query: string): string => (
     `${RouteService.getDataProductExplorePath()}?search=${encodeURIComponent(query)}`
   ),
   getDataProductExplorePath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/data-products/explore`
   ),
   getProductDetailPath: (productCode: string, release?: string): string => {
     const releasePath = isStringNonEmpty(release) ? `/${release}` : '';
-    // TODO: replace with web host once switch over happens
     return `${NeonEnvironment.getApiHost()}/data-products/${productCode}${releasePath}`;
   },
   getPrototypeDatasetsPath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/prototype-datasets`
   ),
   getPrototypeDatasetDetailPath: (uuid: string): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/prototype-datasets/${uuid}`
   ),
 };
