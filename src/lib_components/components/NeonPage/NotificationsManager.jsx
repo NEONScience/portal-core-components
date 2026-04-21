@@ -13,12 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import RouteService from '../../service/RouteService';
-import { getJson } from '../../util/rxUtil';
 import LiferayNotifications from './LiferayNotifications';
 import {
   generateNotificationId,
   getLiferayNotificationsApiPath,
 } from '../../util/liferayNotificationsUtil';
+import { getJson } from '../../util/rxUtil';
 import { existsNonEmpty } from '../../util/typeUtil';
 
 const myAccountLink = (
@@ -51,9 +51,10 @@ const TOKEN_EXPIRY_MESSAGE = (
 );
 /* eslint-enable react/jsx-one-expression-per-line */
 
+const cookies = new Cookies();
+
 const NotificationsManager = (props) => {
   const { initialNotification } = props;
-  const cookies = new Cookies();
   const notificationDismissals = cookies.get('dismissed-notifications') || [];
   const cancellationSubject$ = new Subject();
 

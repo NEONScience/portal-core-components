@@ -383,7 +383,7 @@ describe('Utils - manifestUtil', () => {
         ],
         siteCodes: ['JERC', 'BONA'],
         includeDocs: true,
-        includeProvisional: false,
+        includeProvisional: null,
       });
     });
   });

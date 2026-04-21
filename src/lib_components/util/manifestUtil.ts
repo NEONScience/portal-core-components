@@ -149,7 +149,6 @@ export const downloadAopManifest = (
   config: ManifestConfig,
   s3Files: Record<string, unknown>,
   documentation = 'include',
-  provisionalData = 'exclude',
 ) => {
   const siteCodes: string[] = [];
   const s3FileValues: Record<string, unknown>[] = s3Files.validValues as Record<string, unknown>[];
@@ -176,7 +175,6 @@ export const downloadAopManifest = (
     });
 
   const includeDocs = documentation === 'include';
-  const includeProvisional = provisionalData === 'include';
   const productCodeParam: string = config.productCode.startsWith('NEON.DOM.SITE')
     ? config.productCode
     : `NEON.DOM.SITE.${config.productCode}`;
@@ -190,7 +188,7 @@ export const downloadAopManifest = (
     manifestFiles: manifestS3Files,
     siteCodes,
     includeDocs,
-    includeProvisional,
+    includeProvisional: null,
   };
 
   return downloadManifest(manifestRequest);
