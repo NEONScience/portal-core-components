@@ -54,6 +54,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_WEB_HOST_OVERRIDE',
   'REACT_APP_NEON_WS_HOST_OVERRIDE',
   'REACT_APP_NEON_FETCH_DRUPAL_ASSETS',
+  'REACT_APP_NEON_SAE_DATA_VIEWER',
 ];
 
 const EnvType = {
@@ -105,6 +106,8 @@ export interface INeonEnvironment {
 
   getAopGEEDesktopUrl: () => Undef<string>;
   getAopGEEMobileUrl: () => Undef<string>;
+
+  getSaeViewerUrl: () => Undef<string>;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -213,6 +216,8 @@ const NeonEnvironment: INeonEnvironment = {
 
   getAopGEEDesktopUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP,
   getAopGEEMobileUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
+
+  getSaeViewerUrl: (): Undef<string> => process.env.REACT_APP_NEON_SAE_DATA_VIEWER,
 
   getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',

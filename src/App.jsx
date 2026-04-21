@@ -69,6 +69,9 @@ const NeonPageStyleGuide = React.lazy(
 const ReleaseFilterStyleGuide = React.lazy(
   () => import('./lib_components/components/ReleaseFilter/StyleGuide'),
 );
+const SaeDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/SaeDataViewer/StyleGuide'),
+);
 const SiteChipStyleGuide = React.lazy(
   () => import('./lib_components/components/SiteChip/StyleGuide'),
 );
@@ -283,6 +286,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <ReleaseFilterStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'SAE Data Viewer',
+    hash: '#SaeDataViewer',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <SaeDataViewerStyleGuide />
       </Suspense>
     ),
   },
