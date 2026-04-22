@@ -170,6 +170,21 @@ export interface IRouteService {
    * @returns The path
    */
   getTaxonomicListsPath: () => string;
+
+  /**
+   * Gets the SAE Data Visuialization page path
+   * @returns The path
+   */
+  getSaeViewerUrl: () => string;
+  /**
+   * Gets the SAE Data Visuialization page path with the following paramaters
+   * @param product The dataproduct 13 or 9 characters e.g. (DP1.00099.001 or DP1.00099)
+   * @param site Site Code
+   * @param startDate Data start date (YYYY-MM-DD)
+   * @param endDate Data end date (YYYY-MM-DD)
+   * @returns The path
+   */
+  getSaeViewerUrlPath: (product:string, site?:string, startDate?:string, endDate?:string) => string;
 }
 
 const RouteService: IRouteService = {
@@ -267,6 +282,27 @@ const RouteService: IRouteService = {
   getPrototypeDatasetDetailPath: (uuid: string): string => (
     `${NeonEnvironment.getApiHost()}/prototype-datasets/${uuid}`
   ),
+  getSaeViewerUrl: () : string => (
+    // TODO: replace with web host once switch over happens
+    `${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`
+  ),
+  getSaeViewerUrlPath: (product:string, site?:string, startDate?:string, endDate?:string)
+  : string => {
+    const url = new URL(`${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`);
+    if (product) {
+      url.searchParams.set('product', product);
+    }
+    if (site) {
+      url.searchParams.set('site', site);
+    }
+    if (startDate) {
+      url.searchParams.set('start_date', startDate);
+    }
+    if (endDate) {
+      url.searchParams.set('end_date', endDate);
+    }
+    return url.href;
+  },
 };
 
 Object.freeze(RouteService);
