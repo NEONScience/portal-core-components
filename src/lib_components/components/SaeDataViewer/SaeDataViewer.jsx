@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+// import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import RouteService from '../../service/RouteService';
 
 /**
    Setup: CSS classes
@@ -38,19 +39,21 @@ const SaeDataViewer = (props) => {
   const classes = useStyles(Theme);
   const saeButtonName = 'SAE Data Viewer';
   const tooltip = 'Launch the SAE data visuialization tool.';
-  const url = new URL(NeonEnvironment.getSaeViewerUrl());
-  if (site) {
-    url.searchParams.set('site', site);
-  }
-  if (product) {
-    url.searchParams.set('product', product);
-  }
-  if (startDate) {
-    url.searchParams.set('start_date', startDate);
-  }
-  if (endDate) {
-    url.searchParams.set('end_date', endDate);
-  }
+
+  const url = RouteService.getSaeViewerUrlPath(product, site, startDate, endDate);
+  // const url = new URL(NeonEnvironment.getSaeViewerUrl());
+  // if (site) {
+  //   url.searchParams.set('site', site);
+  // }
+  // if (product) {
+  //   url.searchParams.set('product', product);
+  // }
+  // if (startDate) {
+  //   url.searchParams.set('start_date', startDate);
+  // }
+  // if (endDate) {
+  //   url.searchParams.set('end_date', endDate);
+  // }
   return (
     <Tooltip placement="right" title={tooltip}>
       <Button
