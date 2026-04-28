@@ -17,7 +17,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import NeonContext from '../NeonContext/NeonContext';
 import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
 
-import SaeDataViewer from './SaeDataViewer';
+import SaeDataViewerButton from './SaeDataViewerButton';
 import Theme from '../Theme/Theme';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +39,6 @@ const SaeViewerDemo = (): JSX.Element => {
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const {
     sites,
-    // saeDataproducts: saeDataProductsJSON = { productCodes: [] },
   } = neonContextData;
   const { productCodes: saeDataProducts } = saeDataProductsJSON;
   const [isFullWidth, setFullWidth] = useState(false);
@@ -65,12 +64,6 @@ const SaeViewerDemo = (): JSX.Element => {
   };
   function renderSiteList() {
     const sitesArray = Object.values(sites);
-    // if (sitesArray !== undefined && sitesArray.length > 0) {
-    //   const firstSite = (sitesArray[0] as any).siteCode;
-    //   if (selectedSite === undefined) {
-    //     setSelectedSite(firstSite);
-    //   }
-    // }
     return sitesArray.filter((site: any) => (site.terrain === 'TERRESTRIAL')).map((site: any) => ((
       <MenuItem key={site.siteCode} value={site.siteCode}>
         {`${site.siteCode}`}
@@ -188,7 +181,7 @@ const SaeViewerDemo = (): JSX.Element => {
           </Select>
         </Grid>
         <Grid item xs={12}>
-          <SaeDataViewer
+          <SaeDataViewerButton
             isFullWidth={isFullWidth}
             site={selectedSite}
             product={product}
@@ -211,7 +204,7 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import SaeDataViewer from 'portal-core-components/lib/components/SaeDataViewer';
+import SaeDataViewerButton from 'portal-core-components/lib/components/SaeDataViewerButton';
         `}
       </CodeBlock>
 
@@ -223,11 +216,11 @@ import SaeDataViewer from 'portal-core-components/lib/components/SaeDataViewer';
         isFullWidth is set to false in which case it fits contents.
       </DocBlock>
       <ExampleBlock>
-        <SaeDataViewer isFullWidth={false} />
+        <SaeDataViewerButton isFullWidth={false} />
       </ExampleBlock>
       <CodeBlock>
         {`
-<SaeDataViewer isFullWidth={false} />
+<SaeDataViewerButton isFullWidth={false} />
         `}
       </CodeBlock>
 
