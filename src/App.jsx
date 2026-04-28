@@ -27,6 +27,9 @@ const ChipStyleGuide = React.lazy(
 const CitationsStyleGuide = React.lazy(
   () => import('./lib_components/components/Citation/StyleGuide'),
 );
+const CustomButtonStyleGuide = React.lazy(
+  () => import('./lib_components/components/Button/StyleGuide'),
+);
 const DataProductAvailabilityStyleGuide = React.lazy(
   () => import('./lib_components/components/DataProductAvailability/StyleGuide'),
 );
@@ -160,6 +163,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <CitationsStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Custom Buttons',
+    hash: '#CustomButtons',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <CustomButtonStyleGuide />
       </Suspense>
     ),
   },

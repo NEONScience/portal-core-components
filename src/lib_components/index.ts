@@ -13,6 +13,7 @@ export { default as NeonRouter } from './components/NeonRouter';
 export { default as SaeDataViewer } from './components/SaeDataViewer';
 export { default as SiteChip } from './components/SiteChip';
 export { default as SiteMap } from './components/SiteMap';
+export { default as SplitButton } from './components/Button';
 export { default as Theme } from './components/Theme';
 
 // Secondary lib exports (everything else, including legacy stuff that may
