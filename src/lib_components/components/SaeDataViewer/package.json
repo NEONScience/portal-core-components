@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "sae-data-viewer",
-  "main": "./SaeDataViewer.jsx",
-  "module": "./SaeDataViewer.js"
-}

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 /**
    Main Function
 */
-const SaeDataViewer = (props) => {
+const SaeDataViewerButton = (props) => {
   const {
     isFullWidth,
     site,
@@ -59,7 +59,7 @@ const SaeDataViewer = (props) => {
   );
 };
 
-SaeDataViewer.propTypes = {
+SaeDataViewerButton.propTypes = {
   isFullWidth: PropTypes.bool,
   site: PropTypes.string,
   product: PropTypes.string,
@@ -67,7 +67,7 @@ SaeDataViewer.propTypes = {
   endDate: PropTypes.string,
 };
 
-SaeDataViewer.defaultProps = {
+SaeDataViewerButton.defaultProps = {
   isFullWidth: true,
   site: '',
   product: '',
@@ -76,7 +76,7 @@ SaeDataViewer.defaultProps = {
 };
 
 const WrappedSaeDataViewer = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(SaeDataViewer),
+  NeonContext.getWrappedComponent(SaeDataViewerButton),
 );
 
 export default WrappedSaeDataViewer;
