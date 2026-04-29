@@ -184,7 +184,12 @@ export interface IRouteService {
    * @param endDate Data end date (YYYY-MM-DD)
    * @returns The path
    */
-  getSaeViewerUrlPath: (product:string, site?:string, startDate?:string, endDate?:string) => string;
+  getSaeViewerUrlPath: (
+    product:string,
+    site?:string,
+    startDate?:string,
+    endDate?:string
+  ) => string;
 }
 
 const RouteService: IRouteService = {
@@ -282,12 +287,16 @@ const RouteService: IRouteService = {
   getPrototypeDatasetDetailPath: (uuid: string): string => (
     `${NeonEnvironment.getApiHost()}/prototype-datasets/${uuid}`
   ),
-  getSaeViewerUrl: () : string => (
+  getSaeViewerUrl: (): string => (
     // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`
   ),
-  getSaeViewerUrlPath: (product:string, site?:string, startDate?:string, endDate?:string)
-  : string => {
+  getSaeViewerUrlPath: (
+    product:string,
+    site?:string,
+    startDate?:string,
+    endDate?:string,
+  ): string => {
     const url = new URL(`${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`);
     if (product) {
       url.searchParams.set('product', product);

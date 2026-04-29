@@ -48,7 +48,7 @@ const AopGeeViewerDemo = (): JSX.Element => {
             Is Full Width
           </Typography>
           <Select
-            id="sae-viewer-width-select"
+            id="aop-viewer-width-select"
             aria-labelledby="full-width-select-label"
             variant="outlined"
             value={selectedState}

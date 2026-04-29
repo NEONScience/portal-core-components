@@ -39,7 +39,7 @@ interface SplitButtonProps {
   buttonMenuProps: Nullable<ButtonProps>;
   buttonProps: Nullable<ButtonProps>;
   selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
-  isFullWidth: Boolean;
+  isFullWidth: Nullable<boolean>;
   styleOverrides: Nullable<React.CSSProperties>;
 }
 
@@ -118,8 +118,8 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
     return stateSelectedOption;
   };
 
-  const widthStyle = isFullWidth ? classes.fullWidth : classes.noChange;
-  const iconWidthStyle = isFullWidth ? classes.fitContent : classes.noChange;
+  const widthStyle = exists(isFullWidth) ? classes.fullWidth : classes.noChange;
+  const iconWidthStyle = exists(isFullWidth) ? classes.fitContent : classes.noChange;
   const customStyles = exists(styleOverrides) ? styleOverrides : {};
 
   return (
