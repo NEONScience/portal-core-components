@@ -188,7 +188,7 @@ export interface IRouteService {
     product:string,
     site?:string,
     startDate?:string,
-    endDate?:string
+    endDate?:string,
   ) => string;
 }
 
