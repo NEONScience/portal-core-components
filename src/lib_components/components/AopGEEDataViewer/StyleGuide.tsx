@@ -31,7 +31,7 @@ const state = {
 
 const AopGeeViewerDemo = (): JSX.Element => {
   const classes = useStyles(Theme);
-  const [selectedState, setSelectedState] = useState(0);
+  const [selectedState, setSelectedState] = useState(false);
   const handleChange = (event: any) => {
     setSelectedState(event.target.value);
   };
@@ -48,7 +48,7 @@ const AopGeeViewerDemo = (): JSX.Element => {
             Is Full Width
           </Typography>
           <Select
-            id="all-aop-products-select"
+            id="aop-viewer-width-select"
             aria-labelledby="full-width-select-label"
             variant="outlined"
             value={selectedState}

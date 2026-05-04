@@ -230,9 +230,6 @@ declare function useNeonContextState(): ({
             };
             OH: {
                 name: string;
-                /**
-                   CONTEXT
-                */
                 center: number[];
                 zoom: number;
             };
@@ -242,7 +239,9 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             OR: {
-                name: string;
+                name: string; /**
+                   HOOK
+                */
                 center: number[];
                 zoom: number;
             };
@@ -443,6 +442,9 @@ declare function useNeonContextState(): ({
             productCodes: string[];
         };
         aopDataProducts: {
+            productCodes: string[];
+        };
+        saeDataProducts: {
             productCodes: string[];
         };
         stateSites: {};
@@ -669,9 +671,6 @@ declare function useNeonContextState(): ({
             };
             OH: {
                 name: string;
-                /**
-                   CONTEXT
-                */
                 center: number[];
                 zoom: number;
             };
@@ -681,7 +680,9 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             OR: {
-                name: string;
+                name: string; /**
+                   HOOK
+                */
                 center: number[];
                 zoom: number;
             };
@@ -884,6 +885,9 @@ declare function useNeonContextState(): ({
         aopDataProducts: {
             productCodes: string[];
         };
+        saeDataProducts: {
+            productCodes: string[];
+        };
         stateSites: {};
         domainSites: {};
     };
@@ -935,6 +939,7 @@ declare namespace DEFAULT_STATE {
         export { domainsJSON as domains };
         export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
         export { aopDataProductsJSON as aopDataProducts };
+        export { saeDataProductsJSON as saeDataProducts };
         export const stateSites: {};
         export const domainSites: {};
     }
@@ -989,4 +994,5 @@ import statesJSON from "../../staticJSON/states.json";
 import domainsJSON from "../../staticJSON/domains.json";
 import timeSeriesDataProductsJSON from "../../staticJSON/timeSeriesDataProducts.json";
 import aopDataProductsJSON from "../../staticJSON/aopDataProducts.json";
+import saeDataProductsJSON from "../../staticJSON/saeDataProducts.json";
 import PropTypes from "prop-types";

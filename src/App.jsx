@@ -27,6 +27,9 @@ const ChipStyleGuide = React.lazy(
 const CitationsStyleGuide = React.lazy(
   () => import('./lib_components/components/Citation/StyleGuide'),
 );
+const CustomButtonStyleGuide = React.lazy(
+  () => import('./lib_components/components/Button/StyleGuide'),
+);
 const DataProductAvailabilityStyleGuide = React.lazy(
   () => import('./lib_components/components/DataProductAvailability/StyleGuide'),
 );
@@ -68,6 +71,9 @@ const NeonPageStyleGuide = React.lazy(
 );
 const ReleaseFilterStyleGuide = React.lazy(
   () => import('./lib_components/components/ReleaseFilter/StyleGuide'),
+);
+const SaeDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/SaeDataViewerButton/StyleGuide'),
 );
 const SiteChipStyleGuide = React.lazy(
   () => import('./lib_components/components/SiteChip/StyleGuide'),
@@ -157,6 +163,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <CitationsStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Custom Buttons',
+    hash: '#CustomButtons',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <CustomButtonStyleGuide />
       </Suspense>
     ),
   },
@@ -283,6 +298,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <ReleaseFilterStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'SAE Data Viewer Button',
+    hash: '#SaeDataViewerButton',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <SaeDataViewerStyleGuide />
       </Suspense>
     ),
   },
