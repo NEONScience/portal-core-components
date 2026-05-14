@@ -8,6 +8,7 @@ import BasicComponentsIcon from '@mui/icons-material/ViewModule';
 import NeonPage from '@/components/NeonPage/NeonPage';
 import NeonRouter from '@/components/NeonRouter/NeonRouter';
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import NeonThemeProvider from '@/components/NeonPage/NeonThemeProvider';
 import { isStringNonEmpty } from '@/util/typeUtil';
 
 import Home from './components/Home';
@@ -352,18 +353,20 @@ export default function App() {
     sidebarSubtitle = `version ${appVersion}`;
   }
   return (
-    <NeonRouter>
-      <NeonPage
-        title="NEON Data Portal Core Components"
-        outerPageContainerMaxWidth="3000px"
-        sidebarSubtitle={sidebarSubtitle}
-        sidebarLinks={sidebarLinks}
-        sidebarLinksAsStandaloneChildren
-        useCoreAuth
-        customizeAuthContainer
-      >
-        <Home />
-      </NeonPage>
+    <NeonRouter disableRedirect cleanPath={false}>
+      <NeonThemeProvider>
+        <NeonPage
+          title="NEON Data Portal Core Components"
+          outerPageContainerMaxWidth="3000px"
+          sidebarSubtitle={sidebarSubtitle}
+          sidebarLinks={sidebarLinks}
+          sidebarLinksAsStandaloneChildren
+          useCoreAuth
+          customizeAuthContainer
+        >
+          <Home />
+        </NeonPage>
+      </NeonThemeProvider>
     </NeonRouter>
   );
 }

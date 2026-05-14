@@ -16,6 +16,6 @@
       "@/util/*": ["./src/lib_components/util/*"],
       "@/vendor/*": ["./src/lib_components/vendor/*"],
       "@/workers/*": ["./src/lib_components/workers/*"]
-    },
+    }
   }
 }

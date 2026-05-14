@@ -238,7 +238,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
     appliedCitationReleaseObject = (appliedItem as DataProductCitationItem).releaseObject;
   }
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
-  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<unknown>>)
+  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts(null) as Observable<AjaxResponse<unknown>>)
     .pipe(
       map((response: any) => {
         if (response.response && response.response.data && response.response.data.products) {

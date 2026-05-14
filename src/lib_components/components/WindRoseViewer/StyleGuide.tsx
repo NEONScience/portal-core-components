@@ -92,7 +92,7 @@ const AllProductsTimeSeries = () => {
     windRoseDataProductsJSON.productCodes.includes(product.productCode)
   );
   // Subject and effect to perform and manage the sites GraphQL fetch
-  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<any>>).pipe(
+  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts(null) as Observable<AjaxResponse<any>>).pipe(
     map((response) => {
       if (response.response && response.response.data && response.response.data.products) {
         const products = response.response.data.products

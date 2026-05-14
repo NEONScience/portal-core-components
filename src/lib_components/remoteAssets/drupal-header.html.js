@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-hgwyfoaomixoh5znait0slna8myw-e6rr1v5-w4pstq" type="hidden" name="form_build_id" value="form-hgwyfOAOmiXOh5znAIt0sLna8mYw_e6Rr1V5-w4PSTQ" />
+</div><input autocomplete="off" data-drupal-selector="form-abglugmlynerbn9wbaujmyypd9bw0tehenwwiiv6is4" type="hidden" name="form_build_id" value="form-AbGluGMlYNERBN9WBaujMyypD9bw0teHEnwwiiv6IS4" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -462,7 +462,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item">
-          <a href="https://www.neonscience.org/usage-policies" class="menu__link" data-plugin-id="menu-link-content79ef888e-cc9c-4909-b278-bf9f406b88b9" data-drupal-link-system-path="node/11643">Usage Policies</a>
+          <a href="https://biorepo.neonscience.org/portal/misc/sampleguidelines.php" class="menu__link" data-plugin-id="menu-link-content79ef888e-cc9c-4909-b278-bf9f406b88b9">Sample Guidelines and Policies</a>
 
                   </li>
       

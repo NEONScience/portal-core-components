@@ -5,7 +5,6 @@ import React, {
   useMemo,
   useCallback,
   useLayoutEffect,
-  useTransition,
   useReducer,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -18,15 +17,13 @@ import { Subject } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles, withStyles } from '@mui/styles';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
@@ -66,17 +63,6 @@ import './styles.css';
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
 
 const cookies = new Cookies();
-
-// Global CSS
-const GlobalCss = withStyles({
-  '@global': {
-    code: {
-      fontSize: '115%',
-      padding: Theme.spacing(0.25, 0.5),
-      backgroundColor: 'rgba(0, 0, 0, 0.11)',
-    },
-  },
-})(() => null);
 
 // Function to determine if we're effectively scrolled to the bottom of the page. Used to set
 // current sidebar link to the last one automatically when the associated content for the last link
@@ -313,44 +299,38 @@ export const NeonErrorPage = (props) => {
   // eslint-disable-next-line no-console
   console.error(stack);
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <GlobalCss />
-        <Container className={classes.outerPageContainer}>
-          <div className={classes.pageContent} data-selenium="neon-page.content">
-            <img
-              title="NEON Data Portal"
-              alt="NEON Data Portal"
-              className={classes.errorPageLogo}
-              src={NeonLogo.src}
-            />
-            <Typography variant="h3" component="h1" className={classes.pageTitle}>
-              <ErrorIcon className={classes.errorPageTitleIcon} />
-              Something broke.
-            </Typography>
-            <div>
-              <Typography variant="caption" className={classes.errorPageCaption}>
-                {message}
-              </Typography>
-            </div>
-            <div style={{ display: 'flex' }}>
-              <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
-                Reset and Try Again
-              </Button>
-              <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
-                Return Home
-              </Button>
-            </div>
-          </div>
-          <input
-            type="hidden"
-            data-gtm="react-page-run-time-error.stack"
-            value={`${stack}`}
-          />
-        </Container>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <Container className={classes.outerPageContainer}>
+      <div className={classes.pageContent} data-selenium="neon-page.content">
+        <img
+          title="NEON Data Portal"
+          alt="NEON Data Portal"
+          className={classes.errorPageLogo}
+          src={NeonLogo.src}
+        />
+        <Typography variant="h3" component="h1" className={classes.pageTitle}>
+          <ErrorIcon className={classes.errorPageTitleIcon} />
+          Something broke.
+        </Typography>
+        <div>
+          <Typography variant="caption" className={classes.errorPageCaption}>
+            {message}
+          </Typography>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
+            Reset and Try Again
+          </Button>
+          <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
+            Return Home
+          </Button>
+        </div>
+      </div>
+      <input
+        type="hidden"
+        data-gtm="react-page-run-time-error.stack"
+        value={`${stack}`}
+      />
+    </Container>
   );
 };
 
@@ -1005,57 +985,53 @@ const NeonPage = (inProps) => {
       content = <CurrentComponent />;
     }
     return (
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={Theme}>
-          <CssBaseline />
-          <GlobalCss />
-          {customHeader ? (
-            <header ref={headerRef}>
-              {customHeader}
-            </header>
-          ) : (
-            <NeonHeader
-              customizeAuthContainer={customizeAuthContainer}
-              ref={headerRef}
-              unstickyDrupalHeader={unstickyDrupalHeader}
-              notifications={notifications}
-              onShowNotifications={handleShowNotifications}
-              drupalCssLoaded={isDrupalCssStatusFinished}
-              showSkeleton={showHeaderSkeleton}
-            />
-          )}
-          <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
-            {renderSidebar()}
-            <div
-              className={classes.pageContent}
-              style={{ top: hasSidebar && !breadcrumbs.length ? '12px' : '0px' }}
-              data-selenium="neon-page.content"
-              ref={contentRef}
-            >
-              {renderBreadcrumbs()}
-              {renderTitle()}
-              {content}
-            </div>
-          </Container>
-          <LiferayNotifications
+      <>
+        {customHeader ? (
+          <header ref={headerRef}>
+            {customHeader}
+          </header>
+        ) : (
+          <NeonHeader
+            customizeAuthContainer={customizeAuthContainer}
+            ref={headerRef}
+            unstickyDrupalHeader={unstickyDrupalHeader}
             notifications={notifications}
-            onHideNotifications={handleHideNotifications}
+            onShowNotifications={handleShowNotifications}
+            drupalCssLoaded={isDrupalCssStatusFinished}
+            showSkeleton={showHeaderSkeleton}
           />
-          <BrowserWarning />
-          {customFooter ? (
-            <footer>
-              {customFooter}
-            </footer>
-          ) : (
-            <NeonFooter
-              drupalCssLoaded={isDrupalCssStatusFinished}
-              showSkeleton={showFooterSkeleton}
-            />
-          )}
-          {renderLoading()}
-          {renderError()}
-        </ThemeProvider>
-      </StyledEngineProvider>
+        )}
+        <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
+          {renderSidebar()}
+          <div
+            className={classes.pageContent}
+            style={{ top: hasSidebar && !breadcrumbs.length ? '12px' : '0px' }}
+            data-selenium="neon-page.content"
+            ref={contentRef}
+          >
+            {renderBreadcrumbs()}
+            {renderTitle()}
+            {content}
+          </div>
+        </Container>
+        <LiferayNotifications
+          notifications={notifications}
+          onHideNotifications={handleHideNotifications}
+        />
+        <BrowserWarning />
+        {customFooter ? (
+          <footer>
+            {customFooter}
+          </footer>
+        ) : (
+          <NeonFooter
+            drupalCssLoaded={isDrupalCssStatusFinished}
+            showSkeleton={showFooterSkeleton}
+          />
+        )}
+        {renderLoading()}
+        {renderError()}
+      </>
     );
   };
 
