@@ -248,22 +248,32 @@ const AllProductsTimeSeries = () => {
 
 const StaticTimeSeriesViewer = () => {
   const [timeSeriesState, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const { status, variables } = timeSeriesState;
+  const { isViewerLimitedMode, status, variables } = timeSeriesState;
 
   useEffect(() => {
-    dispatch({
-      type: 'fetchSitePositionsSucceeded',
-      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.sensorPositions,
-      siteCode: 'ABBY',
-    });
-    dispatch({
-      type: 'fetchSiteVariablesSucceeded',
-      csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.variables,
-      siteCode: 'ABBY',
-    });
-  }, [dispatch]);
+    if (isViewerLimitedMode && (status === 'LOADING_META')) {
+      dispatch({ type: 'setInvalidState', message: 'Login required' });
+      return;
+    }
+    if (status === 'LOADING_META') {
+      dispatch({
+        type: 'fetchSitePositionsSucceeded',
+        csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.sensorPositions,
+        siteCode: 'ABBY',
+      });
+      dispatch({
+        type: 'fetchSiteVariablesSucceeded',
+        csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.variables,
+        siteCode: 'ABBY',
+      });
+    }
+  }, [dispatch, status, isViewerLimitedMode]);
 
   useEffect(() => {
+    if (isViewerLimitedMode && (status === 'READY_FOR_DATA')) {
+      dispatch({ type: 'setInvalidState', message: 'Login required' });
+      return;
+    }
     if (status === 'READY_FOR_DATA') {
       const input = {
         csv: DP1_00001_001_ABBY_BASIC_30MIN_2018_12.data,
@@ -287,7 +297,7 @@ const StaticTimeSeriesViewer = () => {
           dispatch({ type: 'staticFetchDataFilesCompleted' });
         });
     }
-  }, [dispatch, status, variables]);
+  }, [dispatch, status, isViewerLimitedMode, variables]);
 
   return (<TimeSeriesViewerContainer />);
 };

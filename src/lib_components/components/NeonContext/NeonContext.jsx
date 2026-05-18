@@ -13,6 +13,7 @@ import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import AuthService from '../NeonAuth/AuthService';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
@@ -22,7 +23,7 @@ import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.
 import aopDataProductsJSON from '../../staticJSON/aopDataProducts.json';
 import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
 import BundleParser from '../../parser/BundleParser';
-import { existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -121,6 +122,79 @@ const useNeonContextState = () => {
     ];
   }
   return hookResponse;
+};
+
+const useNeonContextSessionState = () => {
+  const [
+    {
+      isFinal,
+      auth: {
+        isAuthenticated,
+        userData,
+      },
+    },
+  ] = useNeonContextState();
+  if (NeonEnvironment.sessionDisable) {
+    return {
+      enabled: false,
+      ready: true,
+      authenticated: true,
+      accountValidated: true,
+      accountValidationSteps: [],
+      canAccessData: true,
+      sessionHeaders: {},
+    };
+  }
+  const appliedIsAuthenticated = (isAuthenticated === true);
+  let token = null;
+  let canAccessData = false;
+  let accountValidated = false;
+  let accountValidationSteps = [];
+  if (appliedIsAuthenticated && exists(userData) && exists(userData.data)) {
+    token = userData.token;
+    canAccessData = userData.data.canAccessData === true;
+    accountValidated = userData.data.accountValidated === true;
+    accountValidationSteps = existsNonEmpty(userData.data.accountValidationSteps)
+      ? userData.data.accountValidationSteps
+      : [];
+  }
+  if (!isFinal) {
+    return {
+      enabled: true,
+      ready: false,
+      authenticated: appliedIsAuthenticated,
+      accountValidated,
+      accountValidationSteps,
+      canAccessData,
+      sessionHeaders: {},
+    };
+  }
+  const appliedToken = appliedIsAuthenticated ? token : null;
+  if (isStringNonEmpty(appliedToken)) {
+    const sessionHeaderName = NeonEnvironment.getApiSessionTokenHeader();
+    if (isStringNonEmpty(sessionHeaderName)) {
+      return {
+        enabled: true,
+        ready: true,
+        authenticated: appliedIsAuthenticated,
+        accountValidated,
+        accountValidationSteps,
+        canAccessData,
+        sessionHeaders: {
+          [sessionHeaderName]: appliedToken,
+        },
+      };
+    }
+  }
+  return {
+    enabled: true,
+    ready: true,
+    authenticated: appliedIsAuthenticated,
+    accountValidated,
+    accountValidationSteps,
+    canAccessData,
+    sessionHeaders: {},
+  };
 };
 
 const determineContextFetchFinal = (state) => {
@@ -443,6 +517,7 @@ const getWrappedComponent = (Component) => (props) => {
 const NeonContext = {
   Provider,
   useNeonContextState,
+  useNeonContextSessionState,
   DEFAULT_STATE,
   getWrappedComponent,
   ProviderPropTypes,

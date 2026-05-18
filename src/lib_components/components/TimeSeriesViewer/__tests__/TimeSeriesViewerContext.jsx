@@ -973,6 +973,7 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
         const newState = reducer(modifiedState, { type: 'reinitialize', productCode: 'foo', release: 'bar' });
         expect(newState).toStrictEqual({
           ...DEFAULT_STATE,
+          status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
           release: 'bar',
           product: {
             ...DEFAULT_STATE.product,

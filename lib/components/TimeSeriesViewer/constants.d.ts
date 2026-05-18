@@ -1,4 +1,5 @@
 export declare const TIME_SERIES_VIEWER_STATUS: {
+    AWAITING_PRECONDITIONS: string;
     INIT_PRODUCT: string;
     LOADING_META: string;
     READY_FOR_DATA: string;
@@ -10,6 +11,7 @@ export declare const TIME_SERIES_VIEWER_STATUS: {
 };
 declare const TimeSeriesViewerConstants: {
     TIME_SERIES_VIEWER_STATUS: {
+        AWAITING_PRECONDITIONS: string;
         INIT_PRODUCT: string;
         LOADING_META: string;
         READY_FOR_DATA: string;

@@ -28,6 +28,7 @@ export function getTestableItems(): {
         availabilityView: any;
         productData: any;
         downloadContextIsActive: boolean;
+        downloadStatus: string;
         broadcast: boolean;
         dialogOpen: boolean;
         awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -122,6 +123,7 @@ declare namespace DownloadDataContext {
     export { reducer };
     export { DEFAULT_STATE };
     export { ALL_STEPS };
+    export { DOWNLOAD_STATUS };
     export { getStateObservable };
 }
 declare function Provider(props: any): import("react/jsx-runtime").JSX.Element;
@@ -175,6 +177,7 @@ declare namespace Provider {
 }
 declare function useDownloadDataState(): {
     downloadContextIsActive: boolean;
+    downloadStatus: string;
     broadcast: boolean;
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -258,6 +261,7 @@ declare function useDownloadDataState(): {
 } | ((() => void) | {
     requiredSteps: never[];
     downloadContextIsActive: boolean;
+    downloadStatus: string;
     broadcast: boolean;
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -341,6 +345,8 @@ declare function useDownloadDataState(): {
 declare function reducer(state: any, action: any): any;
 declare namespace DEFAULT_STATE {
     export const downloadContextIsActive: boolean;
+    import downloadStatus = DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
+    export { downloadStatus };
     export const broadcast: boolean;
     export const dialogOpen: boolean;
     export const awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -521,6 +527,11 @@ declare namespace ALL_STEPS {
         const title_6: string;
         export { title_6 as title };
     }
+}
+declare namespace DOWNLOAD_STATUS {
+    const AWAITING_PRECONDITIONS: string;
+    const ALLOW_DOWNLOAD: string;
+    const DISALLOW_DOWNLOAD: string;
 }
 declare function getStateObservable(): import("rxjs").Observable<any>;
 import PropTypes from "prop-types";

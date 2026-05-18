@@ -44,6 +44,7 @@ export const optionalEnvironmentVars = [
   'REACT_APP_NEON_PATH_LD_API',
   'REACT_APP_NEON_PATH_DOWNLOAD_API',
   'REACT_APP_NEON_AUTH_DISABLE_WS',
+  'REACT_APP_NEON_AUTH_DISABLE_SESSION',
   'REACT_APP_NEON_USE_GRAPHQL',
   'REACT_APP_NEON_SHOW_AOP_VIEWER',
   'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
@@ -68,6 +69,7 @@ export interface NeonServerData {
   NeonBioRepoHost: Undef<string>;
   NeonPublicAPITokenHeader: Undef<string>;
   NeonPublicAPIToken: Undef<string>;
+  NeonAPISessionTokenHeader: Undef<string>;
   NeonAuthSilentType: Undef<string>;
 }
 
@@ -78,6 +80,7 @@ export interface INeonEnvironment {
   useGraphql: boolean;
   showAopViewer: boolean;
   authDisableWs: boolean;
+  sessionDisable: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
@@ -132,6 +135,7 @@ export interface INeonEnvironment {
 
   getApiTokenHeader: () => string;
   getApiToken: () => string;
+  getApiSessionTokenHeader: () => string;
   getAuthSilentType: () => AuthSilentType;
 
   getFullApiPath: (path: string) => string;
@@ -152,6 +156,7 @@ const NeonEnvironment: INeonEnvironment = {
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
+  sessionDisable: process.env.REACT_APP_NEON_AUTH_DISABLE_SESSION === 'true',
   enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
@@ -475,6 +480,18 @@ const NeonEnvironment: INeonEnvironment = {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData && (typeof serverData.NeonPublicAPIToken === 'string')) {
       return serverData.NeonPublicAPIToken;
+    }
+    return '';
+  },
+
+  /**
+   * Gets the session token header name
+   * @return {string} The session token header name
+   */
+  getApiSessionTokenHeader: (): string => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonAPISessionTokenHeader === 'string')) {
+      return serverData.NeonAPISessionTokenHeader;
     }
     return '';
   },

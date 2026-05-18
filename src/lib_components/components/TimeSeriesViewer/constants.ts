@@ -1,5 +1,6 @@
 // Every possible top-level status the TimeSeriesViewer component can have
 export const TIME_SERIES_VIEWER_STATUS = {
+  AWAITING_PRECONDITIONS: 'AWAITING_PRECONDITIONS', // Await any preconditions
   INIT_PRODUCT: 'INIT_PRODUCT', // Handling props; fetching product data if needed
   LOADING_META: 'LOADING_META', // Actively loading meta data (sites, variables, and positions)
   READY_FOR_DATA: 'READY_FOR_DATA', // Ready to trigger fetches for data

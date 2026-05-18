@@ -16,13 +16,16 @@ import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
+import NeonContext from '../NeonContext/NeonContext';
 import InfoCard from './InfoCard';
 import WarningCard from './WarningCard';
 import ErrorCard from './ErrorCard';
 import InfoMessageCard from './InfoMessageCard';
+import LoginRequiredCard from './LoginRequiredCard';
 import Theme from '../Theme/Theme';
 
 import { NeonTheme } from '../Theme/types';
+import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles((theme: NeonTheme) => ({
   divider: {
@@ -105,6 +108,18 @@ const propRows = [
 
 export default function StyleGuide() {
   const classes = useStyles(Theme);
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const [
+    {
+      auth: {
+        userData,
+      },
+    },
+  ] = NeonContext.useNeonContextState();
+  const hasUserData = (exists(userData) && exists(userData.data) && exists(userData.data.user));
+  const appliedEmailVerified = hasUserData
+    ? userData.data.user.emailVerified === true
+    : false;
   /* eslint-disable jsx-a11y/anchor-is-valid, react/jsx-one-expression-per-line */
   const link = (
     <Link href="#">
@@ -262,6 +277,53 @@ scelerisque metus. Sit sit tellus risus diam ultrices amet tortor molestie scele
           <ErrorCard
             title="Custom Heading Content"
             message={messageText}
+          />
+        </Paper>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+
+      <Typography variant="h4" component="h2" gutterBottom>
+        Example Login Required Cards
+      </Typography>
+      <DocBlock>
+        Displays login required cards.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginRequiredCard';
+
+<LoginRequiredCard />
+        `}
+      </CodeBlock>
+      <DocBlock>
+        Live demo.
+      </DocBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <LoginRequiredCard
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={neonContextSessionState.accountValidationSteps}
+          />
+        </Paper>
+      </ExampleBlock>
+      <DocBlock>
+        Various test cases.
+      </DocBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <LoginRequiredCard />
+          <LoginRequiredCard details="Custom message." />
+          <LoginRequiredCard
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={[
+              { step: 'verify-email', completed: appliedEmailVerified },
+              { step: 'another-step', completed: false },
+            ]}
           />
         </Paper>
       </ExampleBlock>

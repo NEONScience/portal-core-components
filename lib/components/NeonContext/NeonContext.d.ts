@@ -21,6 +21,7 @@ export function getTestableItems(): {
 declare namespace NeonContext {
     export { Provider };
     export { useNeonContextState };
+    export { useNeonContextSessionState };
     export { DEFAULT_STATE };
     export { getWrappedComponent };
     export { ProviderPropTypes };
@@ -239,9 +240,7 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             OR: {
-                name: string; /**
-                   HOOK
-                */
+                name: string;
                 center: number[];
                 zoom: number;
             };
@@ -680,9 +679,7 @@ declare function useNeonContextState(): ({
                 zoom: number;
             };
             OR: {
-                name: string; /**
-                   HOOK
-                */
+                name: string;
                 center: number[];
                 zoom: number;
             };
@@ -924,6 +921,17 @@ declare function useNeonContextState(): ({
     hasError: boolean;
     whenFinalCalled: boolean;
 })[];
+declare function useNeonContextSessionState(): {
+    enabled: boolean;
+    ready: boolean;
+    authenticated: boolean;
+    accountValidated: boolean;
+    accountValidationSteps: any;
+    canAccessData: boolean;
+    sessionHeaders: {
+        [x: string]: any;
+    };
+};
 declare namespace DEFAULT_STATE {
     namespace data {
         export const sites: {};

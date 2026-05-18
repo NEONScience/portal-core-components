@@ -185,10 +185,10 @@ export interface IRouteService {
    * @returns The path
    */
   getSaeViewerUrlPath: (
-    product:string,
-    site?:string,
-    startDate?:string,
-    endDate?:string,
+    product: string,
+    site?: string,
+    startDate?: string,
+    endDate?: string,
   ) => string;
 }
 
@@ -292,10 +292,10 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`
   ),
   getSaeViewerUrlPath: (
-    product:string,
-    site?:string,
-    startDate?:string,
-    endDate?:string,
+    product: string,
+    site?: string,
+    startDate?: string,
+    endDate?: string,
   ): string => {
     const url = new URL(`${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`);
     if (product) {

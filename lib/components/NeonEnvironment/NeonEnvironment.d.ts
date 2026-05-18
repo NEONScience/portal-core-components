@@ -17,6 +17,7 @@ export interface NeonServerData {
     NeonBioRepoHost: Undef<string>;
     NeonPublicAPITokenHeader: Undef<string>;
     NeonPublicAPIToken: Undef<string>;
+    NeonAPISessionTokenHeader: Undef<string>;
     NeonAuthSilentType: Undef<string>;
 }
 export interface INeonEnvironment {
@@ -26,6 +27,7 @@ export interface INeonEnvironment {
     useGraphql: boolean;
     showAopViewer: boolean;
     authDisableWs: boolean;
+    sessionDisable: boolean;
     enableGlobalSignInState: boolean;
     fetchDrupalAssets: boolean;
     getReactAppName: () => string;
@@ -67,6 +69,7 @@ export interface INeonEnvironment {
     isBioRepoHostValid: (host: string) => boolean;
     getApiTokenHeader: () => string;
     getApiToken: () => string;
+    getApiSessionTokenHeader: () => string;
     getAuthSilentType: () => AuthSilentType;
     getFullApiPath: (path: string) => string;
     getFullJsonLdApiPath: (path: string) => string;

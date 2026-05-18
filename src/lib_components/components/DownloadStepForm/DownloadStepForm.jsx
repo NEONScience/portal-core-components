@@ -53,6 +53,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
+import DataLicenseService from '../../service/DataLicenseService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
@@ -168,6 +169,16 @@ const MarkdownFallbackComponent = (props) => ((
   />
 ));
 
+const dataLicenseLink = (
+  <Link
+    target="_blank"
+    href={DataLicenseService.getDataLicensePath()}
+    data-gtm="download-data-dialog.data-license-link"
+  >
+    {DataLicenseService.getDataLicenseDisplayName()}
+  </Link>
+);
+
 const dataUsageAndCitationPoliciesLink = (
   <Link
     target="_blank"
@@ -236,7 +247,7 @@ const DownloadStepForm = (props) => {
     renderDownloadButton,
   } = props;
   const [state, dispatch] = DownloadDataContext.useDownloadDataState();
-  const { release } = state;
+  const { downloadStatus, release } = state;
   const delineateAvaRelease = ReleaseService.determineDelineateAvaRelease(release.value);
 
   // Effect to keep focus on the file name search field if it was the last filter updated
@@ -443,6 +454,13 @@ const DownloadStepForm = (props) => {
   };
 
   const renderS3FilesStep = () => {
+    if (downloadStatus !== DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD) {
+      return (
+        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+          You must sign in or create and validate an account before proceeding.
+        </Typography>
+      );
+    }
     const {
       s3FileFetches,
       s3FileFetchProgress,
@@ -907,8 +925,9 @@ const DownloadStepForm = (props) => {
     return (
       <div data-selenium="download-data-dialog.step-form.policies">
         <Typography variant="subtitle1" gutterBottom>
-          In order to proceed to download NEON data you must agree to
-          the {dataUsageAndCitationPoliciesLink}.
+          These data are licensed under {dataLicenseLink}.
+          Before downloading NEON data you must agree to the
+          NEON {dataUsageAndCitationPoliciesLink}.
         </Typography>
         <FormControlLabel
           control={checkbox}

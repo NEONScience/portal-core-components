@@ -409,7 +409,18 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
   <h6
     className="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom"
   >
-    In order to proceed to download NEON data you must agree to the 
+    These data are licensed under 
+    <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      data-gtm="download-data-dialog.data-license-link"
+      href="https://creativecommons.org/licenses/by/4.0/"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      target="_blank"
+    >
+      Creative Commons Attribution 4.0 International (CC BY 4.0)
+    </a>
+    . Before downloading NEON data you must agree to the NEON 
     <a
       className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       data-gtm="download-data-dialog.policies-link"
@@ -702,72 +713,16 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
 `;
 
 exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
-<div
-  className="makeStyles-fileTable-2"
-  id="s3Files-selection-table-container"
->
-  <div
-    ComponentPath="material-table"
-    prop-columns="[{\\"title\\":\\"Site\\",\\"field\\":\\"site\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Date\\",\\"field\\":\\"yearMonth\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Visit\\",\\"field\\":\\"visit\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Name\\",\\"field\\":\\"name\\",\\"defaultFilter\\":\\"\\",\\"hidden\\":false},{\\"title\\":\\"Type\\",\\"field\\":\\"type\\",\\"lookup\\":{},\\"defaultFilter\\":[],\\"hidden\\":false},{\\"title\\":\\"Size\\",\\"field\\":\\"size\\",\\"filtering\\":false,\\"removable\\":false}]"
-    prop-components="{\\"Container\\":{\\"propTypes\\":{}}}"
-    prop-data="[{\\"url\\":\\"f1\\",\\"tableData\\":\\"f1\\"},{\\"url\\":\\"f2\\",\\"tableData\\":\\"f2\\"},{\\"url\\":\\"f3\\",\\"tableData\\":\\"f3\\"}]"
-    prop-icons="{\\"Add\\":{},\\"Check\\":{},\\"Clear\\":{},\\"Delete\\":{},\\"DetailPanel\\":{},\\"Edit\\":{},\\"Export\\":{},\\"Filter\\":{},\\"FirstPage\\":{},\\"LastPage\\":{},\\"NextPage\\":{},\\"PreviousPage\\":{},\\"ResetSearch\\":{},\\"Search\\":{},\\"SortArrow\\":{},\\"ThirdStateCheck\\":{},\\"ViewColumn\\":{}}"
-    prop-localization="{\\"pagination\\":{\\"labelRowsSelect\\":\\"files\\"},\\"toolbar\\":{\\"nRowsSelected\\":\\"{0} files selected (12.1 KB uncompressed)\\"},\\"body\\":{\\"emptyDataSourceMessage\\":\\"No files to display. Select more sites, broaden date range, or broaden search / filters.\\"}}"
-    prop-onSelectionChange="[Function]"
-    prop-options="{\\"selection\\":true,\\"showSelectAllCheckbox\\":false,\\"padding\\":\\"dense\\",\\"filtering\\":true,\\"columnsButton\\":false,\\"pageSize\\":10,\\"pageSizeOptions\\":[5,10,50,100],\\"showTitle\\":false,\\"search\\":false,\\"isLoading\\":false}"
-  />
-  <div
-    className="makeStyles-loadingOverlay-4"
-    style={
-      Object {
-        "display": "none",
-      }
+<h6
+  className="MuiTypography-root MuiTypography-subtitle1"
+  style={
+    Object {
+      "marginTop": 24,
     }
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-h6"
-      style={
-        Object {
-          "marginBottom": 32,
-        }
-      }
-    >
-      Loading files (0%)...
-    </h6>
-    <div
-      aria-valuenow={0}
-      className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-determinate"
-      role="progressbar"
-      style={
-        Object {
-          "height": 40,
-          "transform": "rotate(-90deg)",
-          "width": 40,
-        }
-      }
-    >
-      <svg
-        className="MuiCircularProgress-svg"
-        viewBox="22 22 44 44"
-      >
-        <circle
-          className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate"
-          cx={44}
-          cy={44}
-          fill="none"
-          r={20.2}
-          strokeWidth={3.6}
-          style={
-            Object {
-              "strokeDasharray": "126.920",
-              "strokeDashoffset": "126.920px",
-            }
-          }
-        />
-      </svg>
-    </div>
-  </div>
-</div>
+  }
+>
+  You must sign in or create and validate an account before proceeding.
+</h6>
 `;
 
 exports[`DownloadStepForm Step sitesAndDateRange renders correctly 1`] = `
