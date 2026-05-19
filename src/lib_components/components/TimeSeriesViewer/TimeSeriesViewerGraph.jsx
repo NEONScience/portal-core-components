@@ -31,7 +31,8 @@ import HideIcon from '@material-ui/icons/VisibilityOff';
 import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
 
 import DataProductCitation from '../Citation/DataProductCitation';
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
+import TimeSeriesViewerContext, {
+} from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import { isStringNonEmpty } from '../../util/typeUtil';
@@ -208,6 +209,8 @@ const INITIAL_GRAPH_STATE = {
   hiddenSeries: new Set(),
   hiddenQualityFlags: new Set(),
   pngDimensions: [0, 0],
+  filterOutFlaggedData: false,
+  filterOutFlaggedDataPrev: false,
 };
 const graphReducer = (state, action) => {
   const newState = { ...state };
@@ -237,6 +240,9 @@ const graphReducer = (state, action) => {
       } else {
         newState.hiddenQualityFlags = new Set(action.qualityFlags);
       }
+      return newState;
+    case 'toggleFlaggedDataVisibility':
+      newState.filterOutFlaggedData = !state.filterOutFlaggedData;
       return newState;
     case 'purgeRemovedHiddenLabels':
       Array.from(state.hiddenSeries).forEach((label) => {
@@ -279,6 +285,7 @@ export default function TimeSeriesViewerGraph() {
   } = state.selection;
 
   // let data = cloneDeep(NULL_DATA);
+  // console.log("* init graphOptions");
   let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
 
   // Build the axes option
@@ -609,13 +616,100 @@ export default function TimeSeriesViewerGraph() {
     };
   }, [graphInnerContainerRef, handleResize]);
 
+  const filterGraphData = useCallback(() => {
+    if (graphState.filterOutFlaggedData && state.selection.qualityFlags.length > 0) {
+      // Copy data since it will be mutated
+      const dataCopy = cloneDeep(state.graphData.data);
+      // Each data row is an array that consists of its datetime and a data point per site/position.
+      // Loop and consult qualityData (which is a parallel array) to see if it is flagged.
+      // If so, null the data point.
+      // Data is at dataRowIndex, quality is at positionIndex.
+      const positionOffset = 2;
+      let positionCount = 0;
+      let dataPerPositionCount = 0;
+      state.selection.sites.forEach((site) => { positionCount += site.positions.length; });
+      dataPerPositionCount = state.selection.variables.length * positionCount;
+
+      for (let dataIndex = 0; dataIndex < dataCopy.length; dataIndex += 1) {
+        const dataRow = dataCopy[dataIndex];
+        const flagRow = state.graphData.qualityData[dataIndex];
+        let positionIndex = 0;
+        let dataReadIteration = 0;
+
+        for (let dataRowIndex = 1; dataRowIndex < dataRow.length; dataRowIndex += 1) {
+          if (flagRow[positionIndex + positionOffset].some((item) => item === 1)) {
+            dataRow[dataRowIndex] = null;
+          }
+          dataReadIteration += 1;
+
+          // Variable data are grouped in the array by site/position so we only want to advance the
+          // positionIndex once we have scanned that site/position's group of data.
+          if (dataReadIteration === dataPerPositionCount) {
+            positionIndex += 1;
+            dataReadIteration = 0;
+          }
+        }
+      }
+
+      // Get new max value and adjust y axis.
+      // state.graphData.series is roughly parallel to the rows in state.graphData.data so we
+      // can consult that to determine which data value belongs to what axis.  Remember,
+      // there can only be two axes (and therefore units) per chart.
+      let maxValue = 0;
+      let minValue = 9999999999;
+      let axisNum = 1;
+
+      while (axisNum <= 2) {
+        const yAxisProperty = `y${axisNum}`;
+        const { units } = state.selection.yAxes[yAxisProperty];
+
+        if (units !== null) {
+          for (let index = 0; index < dataCopy.length; index += 1) {
+            const dataRow = dataCopy[index];
+
+            // Start at 1 to jump over date data
+            for (let dataRowIndex = 1; dataRowIndex < dataRow.length; dataRowIndex += 1) {
+              const seriesRow = state.graphData.series[dataRowIndex - 1];
+
+              if (seriesRow.units === units) {
+                const datum = dataRow[dataRowIndex];
+                if (datum && datum > maxValue) { maxValue = datum; }
+                if (datum && datum < minValue) { minValue = datum; }
+              }
+            }
+          }
+
+          maxValue += maxValue * 0.1;
+          dispatch({ type: 'selectYAxisCustomRange', axis: yAxisProperty, range: [minValue, maxValue] });
+        }
+        axisNum += 1;
+      }
+
+      return dataCopy;
+    }
+
+    dispatch({ type: 'selectYAxisRangeMode', axis: 'y1', mode: state.selection.yAxes.y1.rangeMode });
+
+    if (state.selection.yAxes.y2.units !== null) {
+      dispatch({ type: 'selectYAxisRangeMode', axis: 'y2', mode: state.selection.yAxes.y2.rangeMode });
+    }
+
+    return state.graphData.data;
+  }, [
+    graphState.filterOutFlaggedData,
+    dispatch,
+    state,
+  ]);
+
   // Effect to apply latest options/data to the graph and force a resize
   useEffect(() => {
     if (state.status !== TIME_SERIES_VIEWER_STATUS.READY) { return; }
+    const filteredGraphData = filterGraphData();
+
     if (dygraphRef.current === null) {
-      dygraphRef.current = new Dygraph(dygraphDomRef.current, state.graphData.data, graphOptions);
+      dygraphRef.current = new Dygraph(dygraphDomRef.current, filteredGraphData, graphOptions);
     } else {
-      dygraphRef.current.updateOptions({ file: state.graphData.data, ...graphOptions });
+      dygraphRef.current.updateOptions({ file: filteredGraphData, ...graphOptions });
       // Detecting an out of bounds date window requires the data
       // to have been updated prior to getting the current axes
       // xAxisRange is the current date window selected by the range selector
@@ -656,6 +750,7 @@ export default function TimeSeriesViewerGraph() {
     dygraphRef,
     handleResize,
     axisCountChangedRef,
+    filterGraphData,
   ]);
 
   // Effect to register a click handler to the legend for series visibility toggling
@@ -766,13 +861,37 @@ export default function TimeSeriesViewerGraph() {
       title="Toggle Visibility for All Quality Flags"
       onClick={toggleQualityFlagsVisibility}
       disabled={qualityFlags.length === 0}
-      style={{ whiteSpace: 'nowrap' }}
+      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1.5) }}
       startIcon={graphState.hiddenQualityFlags.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenQualityFlags.size ? (
         `${belowSm ? '' : 'Show All'} Quality Flags`
       ) : (
         `${belowSm ? '' : 'Hide All'} Quality Flags`
+      )}
+    </Button>
+  );
+
+  // Toggle Hide Flagged Data Button
+  const toggleFlaggedDataVisibility = () => {
+    graphDispatch({ type: 'toggleFlaggedDataVisibility' });
+  };
+
+  const toggleHideFlaggedDataButton = (
+    <Button
+      size="small"
+      color="primary"
+      variant="outlined"
+      title="Toggle Flagged Data"
+      onClick={toggleFlaggedDataVisibility}
+      disabled={qualityFlags.length === 0}
+      style={{ whiteSpace: 'nowrap' }}
+      startIcon={!graphState.filterOutFlaggedData ? <ShowIcon /> : <HideIcon />}
+    >
+      {!graphState.filterOutFlaggedData ? (
+        `${belowSm ? '' : 'Show'} Flagged Data`
+      ) : (
+        `${belowSm ? '' : 'Hide'} Flagged Data`
       )}
     </Button>
   );
@@ -810,6 +929,7 @@ export default function TimeSeriesViewerGraph() {
             {downloadImageButton}
           </div>
           <div style={{ marginTop: Theme.spacing(1.5), textAlign: 'right' }}>
+            {toggleHideFlaggedDataButton}
             {toggleQualityFlagsVisibilityButton}
             {toggleSeriesVisibilityButton}
           </div>

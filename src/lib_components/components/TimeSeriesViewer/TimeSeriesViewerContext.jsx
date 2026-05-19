@@ -1351,23 +1351,6 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
-      /*  uncomment for troubleshooting to get number of points downloaded
-      try {
-        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
-          newState.product.pointTotal = 0;
-        }
-
-        newState.product.pointTotal += action.series.endDateTime.data.length;
-        console.log("newState", newState);
-        // console.log("action", action);
-        console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
-        // console.log("newState.selection.continuousDateRange.length",
-        // newState.selection.continuousDateRange.length);
-      } catch (error) {
-        console.log("my derpy code crashed", action);
-      }
- */
-
       return newState;
 
     // Core Selection Actions
@@ -1403,20 +1386,27 @@ const reducer = (state, action) => {
       calcSelection();
       calcStatus();
       return newState;
-
-    case 'selectYAxisRangeMode':
+    case 'selectYAxisRangeMode': {
       if (
         !state.selection.yAxes[action.axis]
-          || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
+        || !Object.keys(Y_AXIS_RANGE_MODES).includes(action.mode)
       ) { return state; }
+      const prevRangeMode = state.selection.yAxes[action.axis].rangeMode;
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].rangeMode = action.mode;
+      // Short-circuit potential infinitie loops
+      if (JSON.stringify(state.selection.yAxes[action.axis].axisRange)
+        === JSON.stringify(generateYAxisRange(newState.selection.yAxes[action.axis]))
+        && action.mode === prevRangeMode
+      ) { return state; }
+
       if (action.mode !== Y_AXIS_RANGE_MODES.CUSTOM) {
         newState.selection.yAxes[action.axis].axisRange = generateYAxisRange(
           newState.selection.yAxes[action.axis],
         );
       }
       return newState;
+    }
     case 'selectYAxisCustomRange':
       if (!state.selection.yAxes[action.axis]) { return state; }
       if (!(
@@ -1424,8 +1414,16 @@ const reducer = (state, action) => {
           && action.range.every((v) => typeof v === 'number')
           && action.range[0] < action.range[1]
       )) { return state; }
+      // Short-circuit potential infinitie loops
+      if (JSON.stringify(action.range)
+        === JSON.stringify(state.selection.yAxes[action.axis].axisRange)) {
+        return state;
+      }
       newState.selection.isDefault = false;
       newState.selection.yAxes[action.axis].axisRange = action.range;
+      return newState;
+    case 'setYAxisRefreshStatus':
+      newState.yAxisRefreshStatus = action.yAxisRefreshStatus;
       return newState;
     /*
     // This action works in state but dygraphs does not currently support per-axis logscale. =(
