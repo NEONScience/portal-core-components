@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step/Step';
@@ -132,6 +133,12 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
     accountValidationNotesContainer: {
       margin: theme.spacing(1, 0, 0, 0),
     },
+    stepperTopDivider: {
+      margin: theme.spacing(2, 0, 0, 0),
+    },
+    stepperBottomDivider: {
+      margin: theme.spacing(1, 0, 2, 0),
+    },
     validationStepsRoot: {
       width: '100%',
       margin: theme.spacing(2, 0, 2, 0),
@@ -167,6 +174,21 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
   const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
   const [activeStep, setActiveStep] = useState<string>(getInitialActiveStep(appliedSteps));
 
+  const renderStepsCompleted = (): string => {
+    if (appliedSteps.length <= 0) {
+      return 'Complete all validation steps';
+    }
+    const numCompleted = appliedSteps.reduce(
+      (acc: number, item: AccountValidationStep): number => (
+        acc + (item.completed === true ? 1 : 0)
+      ),
+      0,
+    );
+    if (numCompleted === appliedSteps.length) {
+      return 'All steps completed';
+    }
+    return `${numCompleted} of ${appliedSteps.length} completed`;
+  };
   const renderVerticalStepContents = (): JSX.Element|null => {
     if (!belowMd) {
       return null;
@@ -222,9 +244,13 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
         <Typography variant="subtitle2">
           Account Validation Steps
         </Typography>
+        <Typography variant="caption">
+          {renderStepsCompleted()}
+        </Typography>
         <Typography variant="body2" className={classes.accountValidationNotesContainer}>
           Information on account validation link.
         </Typography>
+        <Divider className={classes.stepperTopDivider} />
         <Stepper
           nonLinear
           orientation={belowMd ? 'vertical' : 'horizontal'}
@@ -233,6 +259,7 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
         >
           {renderValidationSteps(appliedSteps)}
         </Stepper>
+        {belowMd ? null : <Divider className={classes.stepperBottomDivider} /> }
         {renderHorizontalStepContents()}
       </div>
     );

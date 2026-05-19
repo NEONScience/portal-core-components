@@ -474,7 +474,8 @@ export default function DownloadDataDialog() {
   const renderLoginRequired = () => {
     const init = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
     const allowDownload = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD;
-    if (init || allowDownload) {
+    const showDownloadButton = fromManifest || fromAOPManifest;
+    if (init || allowDownload || !showDownloadButton) {
       return null;
     }
     return (
