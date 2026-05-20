@@ -23,7 +23,7 @@ export default html = `<header class="header" role="banner">
   <div>
 
 <input data-drupal-selector="edit-openid-connect-client-auth0-login" type="submit" id="edit-openid-connect-client-auth0-login" name="auth0" value="Sign In" class="button js-form-submit form-submit button--search" />
-</div><input autocomplete="off" data-drupal-selector="form-0z37ywkxiaujtuorrx7hagn8rxktakylx5eww1ju8mm" type="hidden" name="form_build_id" value="form-0z37yWKxiAUJTuORrx7hagN8rxKTaKYLX5EwW1JU8MM" />
+</div><input autocomplete="off" data-drupal-selector="form-cy2sfpe7v8xplalrexp3cu7p65-grf34lswvogdnq7o" type="hidden" name="form_build_id" value="form-cy2sfpE7v8XpLAlRexP3CU7p65-grf34LswvOgDNq7o" />
 <input data-drupal-selector="edit-openid-connect-login-form" type="hidden" name="form_id" value="openid_connect_login_form" />
 
 </form>
@@ -395,7 +395,7 @@ export default html = `<header class="header" role="banner">
                       <ul  class="menu menu--main" data-depth="1">
 
               <li  class="menu__item">
-          <a href="https://biorepo.neonscience.org/portal/neon/search/index.php?utm_source=neon_main&amp;utm_medium=directlink" class="menu__link" data-plugin-id="menu-link-content355c07a4-035c-4917-8312-fc81d899d926">Biorepository Sample Portal at ASU</a>
+          <a href="https://biorepo.neonscience.org/portal/neon/search/index.php?utm_source=neon_main&amp;utm_medium=directlink" class="menu__link" data-plugin-id="menu-link-content355c07a4-035c-4917-8312-fc81d899d926">NEON Biorepository Sample Portal at ASU</a>
 
                   </li>
               <li  class="menu__item menu__item--expanded">

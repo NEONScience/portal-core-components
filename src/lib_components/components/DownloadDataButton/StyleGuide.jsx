@@ -17,6 +17,7 @@ import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.10017.001.json';
 import sampleProductDataAeronet from '../../../sampleData/DP1.00043.001.json';
+import sampleProductDataAmeriflux from '../../../sampleData/DP1.00001.001.json';
 import sampleProductDataAop from '../../../sampleData/DP1.30010.001.json';
 import sampleProductDataAopOSPipeline from '../../../sampleData/DP1.30012.001.json';
 import sampleProductDataBold from '../../../sampleData/DP1.20105.001.json';
@@ -152,7 +153,7 @@ const productData = {...};
             <DownloadDataButton label="Download Aeronet Data" />
           </DownloadDataContext.Provider>
           <br /><br />
-          <DownloadDataContext.Provider productData={sampleProductData.data}>
+          <DownloadDataContext.Provider productData={sampleProductDataAmeriflux.data}>
             <DownloadDataButton label="Download AmeriFlux Data" />
           </DownloadDataContext.Provider>
           <br /><br />

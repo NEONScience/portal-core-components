@@ -30,7 +30,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
-import { exists, existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
@@ -1147,6 +1147,27 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
       newState.product.productCode = action.productCode;
       newState.release = action.release;
+      newState.isViewerLimitedMode = action.isViewerLimited;
+      return newState;
+    case 'reinitializeFromLimited':
+      newState = cloneDeep(DEFAULT_STATE);
+      newState.mode = action.mode;
+      newState.isViewerLimitedMode = action.isViewerLimited;
+      if (action.mode === VIEWER_MODE.STATIC) {
+        if (action.productDataProp) {
+          newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+          newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
+          newState.product = parseProductData(action.productDataProp);
+        } else {
+          newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+          newState.product.productCode = action.productCode;
+        }
+        calcSelection();
+      } else {
+        newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+        newState.product.productCode = action.productCode;
+        newState.release = action.release;
+      }
       return newState;
     case 'setInvalidState':
       return softFail(action.message);
@@ -1393,8 +1414,7 @@ const reducer = (state, action) => {
       } catch (error) {
         console.log("my derpy code crashed", action);
       }
- */
-
+      */
       return newState;
 
     // Core Selection Actions
@@ -1593,8 +1613,12 @@ const Provider = (props) => {
   const isViewerLimited = !neonContextSessionState.canAccessData;
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { status: viewerStatus } = state;
+  const {
+    status: viewerStatus,
+    isViewerLimitedMode: stateIsViewerLimitedMode,
+  } = state;
 
+  // Initialize the viewer once when the preconditions are satisfied
   useEffect(() => {
     if (!preconditionsSatisfied) { return; }
     if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
@@ -1614,21 +1638,72 @@ const Provider = (props) => {
     productDataProp,
     releaseProp,
   ]);
-
-  /**
-     Effect - Reinitialize state if the product code prop changed
-  */
+  // Reinitialize the viewer when the limited mode changes after initialization
+  useEffect(() => {
+    if (!preconditionsSatisfied) { return; }
+    if (viewerStatus === TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
+    if (isViewerLimited === stateIsViewerLimitedMode) { return; }
+    let reinitProductCode = null;
+    if (isStringNonEmpty(state.product?.productCode)) {
+      reinitProductCode = state.product.productCode;
+    } else if (isStringNonEmpty(productCodeProp)) {
+      reinitProductCode = productCodeProp;
+    }
+    let reinitRelease = null;
+    if (isStringNonEmpty(state.release)) {
+      reinitRelease = state.release;
+    } else if (isStringNonEmpty(releaseProp)) {
+      reinitRelease = releaseProp;
+    }
+    if (modeProp === VIEWER_MODE.STATIC) {
+      dispatch({
+        type: 'reinitializeFromLimited',
+        productCode: reinitProductCode,
+        productDataProp,
+        release: reinitRelease,
+        mode: modeProp,
+        isViewerLimited,
+      });
+      return;
+    }
+    if (isStringNonEmpty(reinitProductCode)) {
+      dispatch({
+        type: 'reinitializeFromLimited',
+        productCode: reinitProductCode,
+        productDataProp: null,
+        release: reinitRelease,
+        mode: modeProp,
+        isViewerLimited,
+      });
+    }
+  }, [
+    dispatch,
+    preconditionsSatisfied,
+    viewerStatus,
+    isViewerLimited,
+    stateIsViewerLimitedMode,
+    modeProp,
+    productCodeProp,
+    productDataProp,
+    releaseProp,
+    state.product.productCode,
+    state.release,
+  ]);
+  // Reinitialize state if the product code prop, release prop changed
+  // and ignore any changes to limited mode. Ignored when in static mode.
+  // Limited mode will be handled by another effect specifically for that change.
   useEffect(() => {
     if (!preconditionsSatisfied) { return; }
     if (viewerStatus === TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
     // Ignore initialization when in static mode
     if (state.mode === VIEWER_MODE.STATIC) { return; }
+    if (isViewerLimited !== stateIsViewerLimitedMode) { return; }
     if (productCodeProp !== state.product.productCode) {
       dispatch({
         type: 'reinitialize',
         productCode: productCodeProp,
         release: state.release,
-        preconditionsSatisfied,
+        isViewerLimited,
       });
     }
     if (releaseProp !== state.release) {
@@ -1636,7 +1711,7 @@ const Provider = (props) => {
         type: 'reinitialize',
         productCode: state.product.productCode,
         release: releaseProp,
-        preconditionsSatisfied,
+        isViewerLimited,
       });
     }
   }, [
@@ -1647,6 +1722,8 @@ const Provider = (props) => {
     state.release,
     viewerStatus,
     preconditionsSatisfied,
+    isViewerLimited,
+    stateIsViewerLimitedMode,
     dispatch,
   ]);
 

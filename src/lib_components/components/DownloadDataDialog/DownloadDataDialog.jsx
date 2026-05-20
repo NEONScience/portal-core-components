@@ -176,6 +176,9 @@ export default function DownloadDataDialog() {
     if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
+    if (activeStepIndex !== 0) {
+      return null;
+    }
     const availableSiteCodes = (productData.siteCodes || []).map((site) => site.siteCode);
     return (
       <ExternalHostInfo

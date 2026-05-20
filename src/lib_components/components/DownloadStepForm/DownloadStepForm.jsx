@@ -266,33 +266,12 @@ const DownloadStepForm = (props) => {
     value: newValue,
   });
 
-  const renderSitesAndDateRangeStep = () => {
-    const { requiredSteps, provisionalData } = state;
-    const hasProvisionalDataStep = requiredSteps.some((step) => (
-      (step.key === 'provisionalData')
-    ));
-    const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
-    return (
-      <>
-        {!excludeProvisionalData ? null : (
-          <InfoMessageCard
-            title="Provisional Data"
-            messageContent={(
-              <Typography variant="body1">
-                Provisional data are currently being excluded from the download package.
-                To make those data available, include those data from within the
-                Provisional Data step.
-              </Typography>
-            )}
-          />
-        )}
-        <DataProductAvailability
-          data-selenium="download-data-dialog.step-form.sites-and-date-range"
-          delineateRelease={delineateAvaRelease}
-        />
-      </>
-    );
-  };
+  const renderSitesAndDateRangeStep = () => ((
+    <DataProductAvailability
+      data-selenium="download-data-dialog.step-form.sites-and-date-range"
+      delineateRelease={delineateAvaRelease}
+    />
+  ));
 
   const renderDocumentationStep = () => {
     const neonFaqLink = (
@@ -385,6 +364,11 @@ const DownloadStepForm = (props) => {
         NEON Data Revisions and Releases
       </Link>
     );
+    const { requiredSteps, provisionalData } = state;
+    const hasProvisionalDataStep = requiredSteps.some((step) => (
+      (step.key === 'provisionalData')
+    ));
+    const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
     const { value, validValues } = state.provisionalData;
     return (
       <Grid
@@ -393,6 +377,22 @@ const DownloadStepForm = (props) => {
         alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
+        {!excludeProvisionalData ? null : (
+          <Grid item xs={12}>
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Provisional data are currently being excluded from the download package.
+                  To make those data available, include those data by selecting
+                  the <i>Include</i> option.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              )}
+            />
+          </Grid>
+        )}
         <Grid item xs={12} md={6}>
           <FormControl component="fieldset">
             <RadioGroup
