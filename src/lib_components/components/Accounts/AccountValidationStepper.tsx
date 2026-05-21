@@ -31,7 +31,7 @@ const myAccountLink = (
   </Link>
 );
 
-type ValidationStepDisplay = {
+export type ValidationStepDisplay = {
   displayLabel: string,
   getContents: (completed: boolean) => JSX.Element,
 }
@@ -127,6 +127,48 @@ const getActiveStepIndex = (
   return idx;
 };
 
+const hasStep = (
+  activeStep: string,
+  customSteps?: Record<string, ValidationStepDisplay>,
+): boolean => (
+  exists(VALIDATION_STEPS[activeStep])
+    || (exists(customSteps)
+      && exists((customSteps as Record<string, ValidationStepDisplay>)[activeStep]))
+);
+
+const getStepDisplayLabel = (
+  activeStep: string,
+  customSteps?: Record<string, ValidationStepDisplay>,
+): string => {
+  const hasCustomStep = (exists(customSteps)
+    && exists((customSteps as Record<string, ValidationStepDisplay>)[activeStep]));
+  if (hasCustomStep) {
+    const coercedStep = (customSteps as Record<string, ValidationStepDisplay>)[activeStep];
+    return coercedStep.displayLabel;
+  }
+  if (exists(VALIDATION_STEPS[activeStep])) {
+    return VALIDATION_STEPS[activeStep].displayLabel;
+  }
+  return activeStep;
+};
+
+const getStepContents = (
+  activeStep: string,
+  stepCompleted: boolean,
+  customSteps?: Record<string, ValidationStepDisplay>,
+): JSX.Element => {
+  const hasCustomStep = (exists(customSteps)
+    && exists((customSteps as Record<string, ValidationStepDisplay>)[activeStep]));
+  if (hasCustomStep) {
+    const coercedStep = (customSteps as Record<string, ValidationStepDisplay>)[activeStep];
+    return coercedStep.getContents(stepCompleted);
+  }
+  if (exists(VALIDATION_STEPS[activeStep])) {
+    return VALIDATION_STEPS[activeStep].getContents(stepCompleted);
+  }
+  return <div>activeStep</div>;
+};
+
 const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   createStyles({
@@ -156,6 +198,7 @@ export type AccountValidationStepperProps = {
   isAuthenticated: boolean;
   accountValidated: boolean;
   accountValidationSteps: AccountValidationStep[];
+  accountValidationStepDisplay?: Record<string, ValidationStepDisplay>;
 };
 
 const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
@@ -165,6 +208,7 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
     isAuthenticated,
     accountValidated,
     accountValidationSteps,
+    accountValidationStepDisplay,
   }: AccountValidationStepperProps = props;
   const appliedSteps: AccountValidationStep[] = getAppliedSteps(
     isAuthenticated,
@@ -194,8 +238,8 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       return null;
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
-    const stepContents = exists(VALIDATION_STEPS[activeStep])
-      ? VALIDATION_STEPS[activeStep].getContents(stepCompleted)
+    const stepContents = hasStep(activeStep, accountValidationStepDisplay)
+      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <StepContent>
@@ -208,8 +252,8 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       return null;
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
-    const stepContents = exists(VALIDATION_STEPS[activeStep])
-      ? VALIDATION_STEPS[activeStep].getContents(stepCompleted)
+    const stepContents = hasStep(activeStep, accountValidationStepDisplay)
+      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <div className={classes.horizontalContentsContainer}>
@@ -219,8 +263,8 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
   };
   const renderValidationSteps = (steps: AccountValidationStep[]): JSX.Element[] => (
     steps.map((step: AccountValidationStep): JSX.Element => {
-      const stepDisplayLabel = exists(VALIDATION_STEPS[step.step])
-        ? VALIDATION_STEPS[step.step].displayLabel
+      const stepDisplayLabel = hasStep(step.step, accountValidationStepDisplay)
+        ? getStepDisplayLabel(step.step, accountValidationStepDisplay)
         : step.step;
       return (
         <Step key={step.step} completed={step.completed}>
@@ -269,6 +313,10 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       {renderValidation()}
     </div>
   );
+};
+
+AccountValidationStepper.defaultProps = {
+  accountValidationStepDisplay: undefined,
 };
 
 export default AccountValidationStepper;

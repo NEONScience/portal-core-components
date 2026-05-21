@@ -325,6 +325,58 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
               { step: 'another-step', completed: false },
             ]}
           />
+          <LoginRequiredCard
+            customTitle="Custom Title for Card"
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={[
+              { step: 'verify-email', completed: appliedEmailVerified },
+              { step: 'another-step', completed: false },
+            ]}
+            accountValidationStepDisplay={{
+              'verify-email': {
+                displayLabel: 'Custom verify email display label',
+                // eslint-disable-next-line react/no-unstable-nested-components
+                getContents: (completed: boolean): JSX.Element => {
+                  if (!completed) {
+                    return (
+                      <div>
+                        <Typography variant="body2">
+                          Custom verify email incomplete contents
+                        </Typography>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Typography variant="body2">
+                      Custom verify email completed contents
+                    </Typography>
+                  );
+                },
+              },
+              'another-step': {
+                displayLabel: 'Custom another-step display label',
+                // eslint-disable-next-line react/no-unstable-nested-components
+                getContents: (completed: boolean): JSX.Element => {
+                  if (!completed) {
+                    return (
+                      <div>
+                        <Typography variant="body2">
+                          Custom another-step incomplete contents
+                        </Typography>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Typography variant="body2">
+                      Custom another-step completed contents
+                    </Typography>
+                  );
+                },
+              },
+            }}
+          />
         </Paper>
       </ExampleBlock>
 

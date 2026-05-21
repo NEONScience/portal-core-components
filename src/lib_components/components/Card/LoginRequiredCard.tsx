@@ -9,7 +9,7 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 
-import AccountValidationStepper from '../Accounts/AccountValidationStepper';
+import AccountValidationStepper, { ValidationStepDisplay } from '../Accounts/AccountValidationStepper';
 import InfoMessageCard, { InfoMessageCardProps } from './InfoMessageCard';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
@@ -37,22 +37,26 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
   })) as StylesHook;
 
 export type LoginRequiredProps = InfoMessageCardProps & {
+  customTitle?: string;
   isAuthenticated?: boolean;
   details?: string;
   showValidation?: boolean;
   accountValidated?: boolean;
   accountValidationSteps?: AccountValidationStep[];
+  accountValidationStepDisplay?: Record<string, ValidationStepDisplay>;
 };
 
 const LoginRequiredCard: React.FC<LoginRequiredProps> = (
   props: LoginRequiredProps,
 ): JSX.Element => {
   const {
+    customTitle,
     isAuthenticated,
     details,
     showValidation,
     accountValidated,
     accountValidationSteps,
+    accountValidationStepDisplay,
   }: LoginRequiredProps = props;
   const classes = useStyles(Theme);
 
@@ -88,6 +92,7 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
         isAuthenticated={isAuthenticated as boolean}
         accountValidated={accountValidated as boolean}
         accountValidationSteps={accountValidationSteps as AccountValidationStep[]}
+        accountValidationStepDisplay={accountValidationStepDisplay}
       />
     );
   };
@@ -130,7 +135,7 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
   return (
     <InfoMessageCard
       {...props}
-      title="Login Required"
+      title={isStringNonEmpty(customTitle) ? customTitle : 'Login Required'}
       classes={{
         card: classes.card,
         secondaryIcon: classes.cardSecondaryIcon,
@@ -141,11 +146,13 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
 };
 
 LoginRequiredCard.defaultProps = {
+  customTitle: undefined,
   isAuthenticated: false,
   details: undefined,
   showValidation: true,
   accountValidated: undefined,
   accountValidationSteps: undefined,
+  accountValidationStepDisplay: undefined,
 };
 
 export default LoginRequiredCard;
