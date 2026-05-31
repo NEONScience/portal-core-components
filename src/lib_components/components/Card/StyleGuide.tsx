@@ -315,7 +315,13 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
       <ExampleBlock>
         <Paper className={classes.paper}>
           <LoginRequiredCard />
-          <LoginRequiredCard details="Custom message." />
+          <LoginRequiredCard
+            customContent={(
+              <Typography variant="body2">
+                Custom contents
+              </Typography>
+            )}
+          />
           <LoginRequiredCard
             showValidation
             isAuthenticated={neonContextSessionState.authenticated}

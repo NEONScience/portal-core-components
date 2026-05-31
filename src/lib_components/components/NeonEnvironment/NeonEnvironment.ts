@@ -172,6 +172,7 @@ const NeonEnvironment: INeonEnvironment = {
 
   getApiPath: {
     data: (): string => '/data',
+    demoData: (): string => '/demo/data',
     prototype: (): string => '/prototype',
     documents: (): string => '/documents',
     quickStartGuides: (): string => '/documents/quick-start-guides',

@@ -23,6 +23,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import VariablesIcon from '@material-ui/icons/Timeline';
 import AxesIcon from '@material-ui/icons/BorderInner';
 import WarnIcon from '@material-ui/icons/Warning';
+import InfoIcon from '@material-ui/icons/Info';
 import ComputerIcon from '@material-ui/icons/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
@@ -42,6 +43,7 @@ import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
 import TimeSeriesViewerAxes from './TimeSeriesViewerAxes';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
+import TimeSeriesViewerLimitedCard from './TimeSeriesViewerLimitedCard';
 
 // We can't rely on flex-sizing to work during resize events as some components within tabs
 // won't be able to shrink correctly on resize (notably: Data Product Availability charts).
@@ -122,6 +124,9 @@ const useStyles = makeStyles((theme) => ({
     color: Theme.colors.RED[400],
   },
   warningIcon: {
+    color: Theme.colors.GOLD[500],
+  },
+  infoIcon: {
     color: Theme.colors.GOLD[500],
   },
   releaseChip: {
@@ -566,6 +571,7 @@ export default function TimeSeriesViewerContainer() {
             style={{ display: selectedTab === tabId ? 'block' : 'none' }}
             className={classes.tabPanelContainer}
           >
+            <TimeSeriesViewerLimitedCard showInfoOnly />
             <TabComponent {...tabComponentProps} />
           </div>
         );
@@ -574,16 +580,20 @@ export default function TimeSeriesViewerContainer() {
   );
 
   const renderGraphOverlay = () => {
+    const isLoginRequired = state.status === TIME_SERIES_VIEWER_STATUS.LOGIN_REQUIRED;
     const isError = state.status === TIME_SERIES_VIEWER_STATUS.ERROR;
     const isWarning = state.status === TIME_SERIES_VIEWER_STATUS.WARNING;
     const isLoading = !isError && state.status !== TIME_SERIES_VIEWER_STATUS.READY;
-    if (isError || isWarning) {
+    if (isError || isWarning || isLoginRequired) {
+      const icon = isLoginRequired
+        ? (<InfoIcon fontSize="large" className={classes.infoIcon} />)
+        : (<ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />);
       return (
         <div className={classes.graphOverlay}>
           <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
-          <ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />
+          {icon}
         </div>
       );
     }
@@ -609,29 +619,24 @@ export default function TimeSeriesViewerContainer() {
     return null;
   };
 
-  // function complements of Battelle ANNI
-  // move to 'helper' file if one exists
-  const addThousandsSeparator = (numStr) => { /* eslint-disable */
+  const addThousandsSeparator = (numStr) => {
     if (!numStr) {
       return '0';
     }
-
     const numStrString = numStr.toString();
-    let [integer, decimal] = numStrString.split('.');
-
+    const [integer, decimal] = numStrString.split('.');
     let result = '';
     let count = 0;
-
     // Process integer part from right to left
+    // eslint-disable-next-line no-plusplus
     for (let i = integer.length - 1; i >= 0; i--) {
       result = integer[i] + result;
       count += 1;
       // Add comma after every 3 digits, except at the start
       if (count % 3 === 0 && i !== 0) {
-        result = ',' + result;
+        result = `,${result}`;
       }
     }
-
     // Reattach decimal part if present
     return decimal ? `${result}.${decimal}` : result;
   };
@@ -642,9 +647,9 @@ export default function TimeSeriesViewerContainer() {
       ? '--'
       : addThousandsSeparator(state.pointTotal);
 
-    if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state) > POINTS_PERFORMANCE_LIMIT ||
-    TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
-      > POINTS_PERFORMANCE_LIMIT) {
+    const numPointsPos = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+    const numPointsVar = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state);
+    if ((numPointsPos > POINTS_PERFORMANCE_LIMIT) || (numPointsVar > POINTS_PERFORMANCE_LIMIT)) {
       showWarning = true;
     }
 
@@ -658,12 +663,10 @@ export default function TimeSeriesViewerContainer() {
         {pointTotal}
         <span> of </span>
         {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
-
         <span
           className="warningMessage"
           style={{ visibility: showWarning ? 'visible' : 'hidden' }}
         >
-
           <WarnIcon fontSize="medium" />
           Data point total approaching limit; some options are disabled.
         </span>
@@ -673,6 +676,7 @@ export default function TimeSeriesViewerContainer() {
 
   return (
     <div style={{ width: '100%' }}>
+      <TimeSeriesViewerLimitedCard />
       <Card className={classes.graphContainer}>
         <div style={{ position: 'relative' }}>
           {state.product.productCode === loadedProductCode ? (

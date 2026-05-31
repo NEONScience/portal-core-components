@@ -7,6 +7,7 @@ import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
 export const TYPES = {
   DATA_PRODUCTS: 'DATA_PRODUCTS',
+  DEMO_DATA_PRODUCTS: 'DEMO_DATA_PRODUCTS',
   SITES: 'SITES',
   LOCATIONS: 'LOCATIONS',
 };
@@ -36,7 +37,6 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   switch (type) {
     case TYPES.DATA_PRODUCTS:
       if (dimensionality === DIMENSIONALITIES.ONE) {
-        // TODO: Add support for deeper product data when querying for one
         const releaseArgument = !args.release ? '' : `, release: "${args.release}"`;
         const availableReleases = getAvailableReleaseClause(args);
         query = `query Products {
@@ -93,9 +93,38 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
       }
       break;
 
+    case TYPES.DEMO_DATA_PRODUCTS:
+      if (dimensionality === DIMENSIONALITIES.ONE) {
+        const availableReleases = getAvailableReleaseClause(args);
+        query = `query Products {
+          product: demoProduct (productCode: "${args.productCode}") {
+            productCode
+            productName
+            productDescription
+            productScienceTeam
+            productHasExpanded
+            productBasicDescription
+            productExpandedDescription
+            productPublicationFormatType
+            keywords
+            themes
+            siteCodes {
+              siteCode
+              availableMonths
+              ${availableReleases}
+            }
+            releases {
+              release
+              generationDate
+              url
+            }
+          }
+        }`;
+      }
+      break;
+
     case TYPES.SITES:
       if (dimensionality === DIMENSIONALITIES.ONE) {
-        // TODO: Add support for deeper site data when querying for one
         query = `query Sites {
           site (siteCode: "${args.siteCode}") {
             siteCode
@@ -237,6 +266,14 @@ const NeonGraphQL = {
     TYPES.DATA_PRODUCTS,
     DIMENSIONALITIES.ONE,
     { productCode, release, includeAvailableReleases },
+  ),
+  getDemoDataProductByCode: (
+    productCode,
+    includeAvailableReleases = false,
+  ) => getObservableWith(
+    TYPES.DEMO_DATA_PRODUCTS,
+    DIMENSIONALITIES.ONE,
+    { productCode, includeAvailableReleases },
   ),
   getAllDataProducts: (release, includeAvailableReleases = false) => getObservableWith(
     TYPES.DATA_PRODUCTS,

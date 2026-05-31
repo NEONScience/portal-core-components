@@ -6,6 +6,7 @@ export declare const TIME_SERIES_VIEWER_STATUS: {
     LOADING_DATA: string;
     ERROR: string;
     WARNING: string;
+    LOGIN_REQUIRED: string;
     READY_FOR_SERIES: string;
     READY: string;
 };
@@ -18,6 +19,7 @@ declare const TimeSeriesViewerConstants: {
         LOADING_DATA: string;
         ERROR: string;
         WARNING: string;
+        LOGIN_REQUIRED: string;
         READY_FOR_SERIES: string;
         READY: string;
     };

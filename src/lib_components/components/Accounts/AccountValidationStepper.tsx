@@ -13,6 +13,8 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core/styles';
+import CompletedIcon from '@material-ui/icons/CheckCircle';
+import VerifiedEmailIcon from '@material-ui/icons/VerifiedUser';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
@@ -24,7 +26,7 @@ import { exists, existsNonEmpty } from '../../util/typeUtil';
 
 const myAccountLink = (
   <Link
-    target="_self"
+    target="_blank"
     href={NeonEnvironment.route.buildAccountRoute()}
   >
     My Account
@@ -43,17 +45,20 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       if (!completed) {
         return (
           <div>
-            <Typography variant="body2">
+            <Typography variant="body2" style={{ marginBottom: Theme.spacing(2) }}>
               Sign in or create an account before proceeding
             </Typography>
-            <NeonSignInButton />
+            <NeonSignInButton disableMargin />
           </div>
         );
       }
       return (
-        <Typography variant="body2">
-          Sign In Completed
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <Typography variant="body2">
+            Sign In Completed
+          </Typography>
+        </div>
       );
     },
   },
@@ -70,9 +75,12 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
         );
       }
       return (
-        <Typography variant="body2">
-          Verify Email Completed
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <VerifiedEmailIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <Typography variant="body2">
+            Email Verified
+          </Typography>
+        </div>
       );
     },
   },
@@ -166,33 +174,31 @@ const getStepContents = (
   if (exists(VALIDATION_STEPS[activeStep])) {
     return VALIDATION_STEPS[activeStep].getContents(stepCompleted);
   }
-  return <div>activeStep</div>;
+  return <div>{activeStep}</div>;
 };
 
-const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    accountValidationNotesContainer: {
-      margin: theme.spacing(1, 0, 0, 0),
-    },
-    stepperTopDivider: {
-      margin: theme.spacing(2, 0, 0, 0),
-    },
-    stepperBottomDivider: {
-      margin: theme.spacing(1, 0, 2, 0),
-    },
-    validationStepsRoot: {
-      width: '100%',
-      margin: theme.spacing(2, 0, 2, 0),
-    },
-    validationStepperRoot: {
-      margin: theme.spacing(1, 0, 0, 0),
-      backgroundColor: 'transparent',
-    },
-    horizontalContentsContainer: {
-      margin: theme.spacing(0, 0, 0, 4),
-    },
-  })) as StylesHook;
+const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
+  accountValidationNotesContainer: {
+    margin: theme.spacing(1, 0, 0, 0),
+  },
+  stepperTopDivider: {
+    margin: theme.spacing(2, 0, 0, 0),
+  },
+  stepperBottomDivider: {
+    margin: theme.spacing(1, 0, 2, 0),
+  },
+  validationStepsRoot: {
+    width: '100%',
+    margin: theme.spacing(2, 0, 0, 0),
+  },
+  validationStepperRoot: {
+    margin: theme.spacing(1, 0, 0, 0),
+    backgroundColor: 'transparent',
+  },
+  horizontalContentsContainer: {
+    margin: theme.spacing(0, 0, 0, 4),
+  },
+})) as StylesHook;
 
 export type AccountValidationStepperProps = {
   isAuthenticated: boolean;

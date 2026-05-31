@@ -7,6 +7,7 @@ export const TIME_SERIES_VIEWER_STATUS = {
   LOADING_DATA: 'LOADING_DATA', // Actively loading plottable series data
   ERROR: 'ERROR', // Stop everything because problem, do not trigger new fetches no matter what
   WARNING: 'WARNING', // Current selection/data makes a graph not possible; show warning
+  LOGIN_REQUIRED: 'LOGIN_REQUIRED', // Required authenticating in order to proceed
   READY_FOR_SERIES: 'READY_FOR_SERIES', // Ready to re-calculate series data for the graph
   READY: 'READY', // Ready for user input
 };

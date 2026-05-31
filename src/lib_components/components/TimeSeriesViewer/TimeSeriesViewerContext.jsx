@@ -1171,6 +1171,10 @@ const reducer = (state, action) => {
       return newState;
     case 'setInvalidState':
       return softFail(action.message);
+    case 'setLimitedReleaseState':
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOGIN_REQUIRED;
+      newState.displayError = action.message;
+      return newState;
     // Fetch Product Actions
     case 'initFetchProductCalled':
       newState.fetchProduct.status = FETCH_STATUS.FETCHING;
@@ -1187,9 +1191,6 @@ const reducer = (state, action) => {
       calcSelection();
       newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
       return newState;
-
-    case 'initFetchLimitedProductCalled':
-      return softFail('Placeholder for limited viewer implementation');
 
     // Fetch Releases Actions
     case 'initFetchReleasesCalled':
@@ -1735,13 +1736,26 @@ const Provider = (props) => {
     if (state.mode === VIEWER_MODE.STATIC) { return; }
     if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
-    if (isViewerLimited) {
-      // Placeholder for limited viewer implementation
-      dispatch({ type: 'initFetchLimitedProductCalled' });
+    if (isViewerLimited && isStringNonEmpty(state.release)) {
+      // Viewing release data requires authentication
+      dispatch({ type: 'setLimitedReleaseState', message: 'Login required to view release data' });
       return;
     }
+    let graphQLObservable;
+    if (isViewerLimited) {
+      graphQLObservable = NeonGraphQL.getDemoDataProductByCode(
+        state.product.productCode,
+        true,
+      );
+    } else {
+      graphQLObservable = NeonGraphQL.getDataProductByCode(
+        state.product.productCode,
+        state.release,
+        true,
+      );
+    }
     dispatch({ type: 'initFetchProductCalled' });
-    NeonGraphQL.getDataProductByCode(state.product.productCode, state.release, true).pipe(
+    graphQLObservable.pipe(
       map((response) => {
         if (response?.response?.data?.product) {
           dispatch({
@@ -1807,15 +1821,21 @@ const Provider = (props) => {
     if (!preconditionsSatisfied) {
       return;
     }
-    if (isViewerLimited) {
+    if (isViewerLimited && (state.mode === VIEWER_MODE.STATIC)) {
+      return;
+    }
+    if (isViewerLimited && isStringNonEmpty(state.release)) {
+      // Viewing release data requires authentication
       return;
     }
     const getSiteMonthDataURL = (siteCode, month) => {
-      const root = NeonEnvironment.getFullApiPath('data');
+      const root = isViewerLimited
+        ? NeonEnvironment.getFullApiPath('demoData')
+        : NeonEnvironment.getFullApiPath('data');
       const hasRelease = state.release
         && (typeof state.release === 'string')
         && (state.release.length > 0);
-      const releaseParam = hasRelease
+      const releaseParam = (!isViewerLimited && hasRelease)
         ? `?release=${state.release}`
         : '';
       return `${root}/${state.product.productCode}/${siteCode}/${month}${releaseParam}`;

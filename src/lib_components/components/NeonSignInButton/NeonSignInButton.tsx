@@ -21,11 +21,31 @@ const handleButtonClick = () => {
   );
 };
 
-export default function NeonSignInButton() {
+export interface NeonSignInButtonProps {
+  disableMargin?: boolean;
+}
+
+const NeonSignInButton = (props: NeonSignInButtonProps) => {
+  const { disableMargin }: NeonSignInButtonProps = props;
   const classes = useStyles();
+  let appliedClass: string|undefined = classes.signInButton;
+  if (disableMargin === true) {
+    appliedClass = undefined;
+  }
   return (
-    <Button variant="contained" className={classes.signInButton} color="primary" onClick={handleButtonClick}>
+    <Button
+      variant="contained"
+      className={appliedClass}
+      color="primary"
+      onClick={handleButtonClick}
+    >
       Sign In
     </Button>
   );
-}
+};
+
+NeonSignInButton.defaultProps = {
+  disableMargin: undefined,
+};
+
+export default NeonSignInButton;

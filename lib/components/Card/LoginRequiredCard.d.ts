@@ -4,8 +4,8 @@ import { InfoMessageCardProps } from './InfoMessageCard';
 import { AccountValidationStep } from '../../types/account';
 export type LoginRequiredProps = InfoMessageCardProps & {
     customTitle?: string;
+    customContent?: React.ReactNode;
     isAuthenticated?: boolean;
-    details?: string;
     showValidation?: boolean;
     accountValidated?: boolean;
     accountValidationSteps?: AccountValidationStep[];
