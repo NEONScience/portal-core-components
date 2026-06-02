@@ -19,6 +19,7 @@ import VerifiedEmailIcon from '@material-ui/icons/VerifiedUser';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
+import RouteService from '../../service/RouteService';
 import { StylesHook } from '../../types/muiTypes';
 import { NeonTheme } from '../Theme/types';
 import { AccountValidationStep } from '../../types/account';
@@ -30,6 +31,14 @@ const myAccountLink = (
     href={NeonEnvironment.route.buildAccountRoute()}
   >
     My Account
+  </Link>
+);
+const accountInfoLink = (
+  <Link
+    target="_blank"
+    href={RouteService.getUserAccountsPath()}
+  >
+    Learn
   </Link>
 );
 
@@ -298,7 +307,9 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
           {renderStepsCompleted()}
         </Typography>
         <Typography variant="body2" className={classes.accountValidationNotesContainer}>
-          Information on account validation link.
+          {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+          {accountInfoLink} about account validation.
+          {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
         </Typography>
         <Divider className={classes.stepperTopDivider} />
         <Stepper
