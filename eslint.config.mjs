@@ -7,6 +7,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import globals from 'globals';
 
+import stylisticPluginJs from '@stylistic/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
@@ -23,6 +24,7 @@ const compat = new FlatCompat({
 });
 
 const jsPlugins = {
+  '@stylistic': stylisticPluginJs,
   '@next/next': nextPlugin,
   react: reactPlugin,
   'react-hooks': reactHooksPlugin,
@@ -49,6 +51,43 @@ const settings = {
 };
 const jsRules = {
   ...eslint.configs.recommended.rules,
+  ...stylisticPluginJs.configs.recommended.rules,
+
+  '@stylistic/semi': ['error', 'always'],
+  '@stylistic/quote-props': 'off',
+  '@stylistic/space-infix-ops': 'off',
+  '@stylistic/arrow-parens': 'off',
+  '@stylistic/member-delimiter-style': [
+    'error',
+    {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
+    },
+  ],
+  '@stylistic/jsx-one-expression-per-line': 'off',
+  '@stylistic/linebreak-style': ['error', 'unix'],
+  '@stylistic/no-extra-parens': 'off',
+  '@stylistic/no-shadow': 'off',
+  '@stylistic/no-restricted-exports': 'off',
+  '@stylistic/no-unused-vars': 'off',
+  '@stylistic/max-statements-per-line': 'off',
+  '@stylistic/multiline-ternary': 'off',
+  '@stylistic/indent-binary-ops': 'off',
+  '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+  '@stylistic/quotes': ['error', 'single'],
+  '@stylistic/indent': [
+    'error',
+    2,
+    {
+      ignoredNodes: ['TSInterfaceDeclaration'],
+    },
+  ],
 };
 const rules = {
   ...jsRules,
@@ -162,6 +201,7 @@ export default defineConfig([
     files: ['src/lib_components/workers/*.js'],
     rules: {
       'prefer-object-spread': 'off',
+      '@stylistic/prefer-object-spread': 'off',
     },
   },
   {
@@ -179,6 +219,9 @@ export default defineConfig([
       'react/jsx-one-expression-per-line': 'off',
 
       'max-len': 'off',
+
+      '@stylistic/max-len': 'off',
+      '@stylistic/jsx-one-expression-per-line': 'off',
     },
   },
 ]);

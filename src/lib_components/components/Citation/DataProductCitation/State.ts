@@ -23,13 +23,13 @@ export enum ContextStatus {
 }
 
 export interface ContextStatusState {
-  status: ContextStatus,
-  error?: Nullable<UnknownRecord|string>,
+  status: ContextStatus;
+  error?: Nullable<UnknownRecord|string>;
 }
 
 export interface FetchStatusState {
-  status: FetchStatus,
-  error?: Nullable<UnknownRecord|string>,
+  status: FetchStatus;
+  error?: Nullable<UnknownRecord|string>;
 }
 
 export interface ContextFetchStatusState {
@@ -64,7 +64,7 @@ export interface DataState {
 export interface DataProductCitationState {
   productCode: Nullable<string>;
   release: Nullable<string>;
-  component: ContextStatusState
+  component: ContextStatusState;
   fetches: ContextFetchStatusState;
   bundle: CitationBundleState;
   data: DataState;

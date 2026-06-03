@@ -31,9 +31,9 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
   })) as StylesHook;
 
 export interface SyntaxHighlightProps {
-  children: React.ReactNode,
-  language?: string,
-  style?: React.CSSProperties,
+  children: React.ReactNode;
+  language?: string;
+  style?: React.CSSProperties;
 }
 
 const defaultProps = {

@@ -18,7 +18,7 @@ export interface EpicDependencies {
 export type EpicCreator<A extends AnyAction, S extends AnyObject> = (
   action$: A,
   state$: S,
-  { ajax }: EpicDependencies
+  { ajax }: EpicDependencies,
 ) => Epic<A, A, S, EpicDependencies>;
 
 export type AjaxObservableCreator<A extends AnyAction> = (
@@ -29,7 +29,7 @@ export type AjaxObservableCreator<A extends AnyAction> = (
   action?: A,
   takeUntilOperator?: MonoTypeOperatorFunction<any>,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
-  useForkJoin?: boolean
+  useForkJoin?: boolean,
 ) => Observable<AnyAction>;
 
 export type WorkingAction = (data?: any) => any;

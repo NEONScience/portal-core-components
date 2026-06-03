@@ -162,7 +162,7 @@ const Menu = (props: MenuProps) => {
                     spacing={4}
                     alignItems="stretch"
                   >
-                    {apps.map((app: { name: string, description: string, url: string }) => (
+                    {apps.map((app: { name: string; description: string; url: string }) => (
                       <Grid
                         item
                         xs={(apps.length === 1) ? 12 : 6}

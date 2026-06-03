@@ -121,7 +121,7 @@ export interface IEpicService {
     ajaxBodyCreator?: AjaxBodyCreator<A>,
     ajaxRequestInjector?: AjaxRequestInjector<A>,
     useForkJoin?: boolean,
-  ) => Observable<A>
+  ) => Observable<A>;
 }
 
 const transformRequest = <A extends AnyAction>(
@@ -155,10 +155,12 @@ const transformRequests = <A extends AnyAction>(
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   ajaxRequestInjector?: AjaxRequestInjector<A>,
 ): Observable<AjaxResponse<unknown>>[] => (
-    requests.map((request: AjaxConfig, index: number): Observable<AjaxResponse<unknown>> => (
-      transformRequest(ajax, request, action, ajaxBodyCreator, ajaxRequestInjector, index)
-    ))
-  );
+/* eslint-disable indent */
+  requests.map((request: AjaxConfig, index: number): Observable<AjaxResponse<unknown>> => (
+    transformRequest(ajax, request, action, ajaxBodyCreator, ajaxRequestInjector, index)
+  ))
+);
+/* eslint-enable indent */
 
 const createSingleAjaxObservable = <A extends AnyAction>(
   ajax: typeof AjaxCreationMethod,

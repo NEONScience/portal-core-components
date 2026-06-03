@@ -136,7 +136,7 @@ export interface IAuthService {
    */
   fetchUserInfoWithDispatch: (
     dispatch: Dispatch<any>,
-    refreshSubscription?: boolean
+    refreshSubscription?: boolean,
   ) => Subscription;
   /**
    * Parses the user info API response and determines the authenticated state

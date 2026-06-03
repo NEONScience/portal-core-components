@@ -21,14 +21,13 @@ export enum AsyncStateType {
   IDLE,
   WORKING,
   FULLFILLED,
-  FAILED
+  FAILED,
 }
 
 /**
  * Action type union
  */
-export type AsyncActionType =
-  AsyncAction
+export type AsyncActionType = AsyncAction
   | AsyncParamAction
   | AsyncCompletedAction
   | AsyncErrorAction;
@@ -43,7 +42,7 @@ export interface AsyncAction {
  * General parameter passing actions
  */
 export interface AsyncParamAction extends AsyncAction {
-  param?: any
+  param?: any;
 }
 /**
  * Completed async action for propagating the result data
@@ -91,7 +90,7 @@ export interface CoreAsyncFlowActionTypes {
   reset: Nullable<string>;
 }
 
-export type FlowActionTypes = {[key: string]: AsyncFlowActionTypes};
+export type FlowActionTypes = { [key: string]: AsyncFlowActionTypes };
 
 /**
  * Async flow action type wrapper

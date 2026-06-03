@@ -36,11 +36,13 @@ export const withDefaultProps = <T extends AnyRecord>(
   WrappedComponent: React.ComponentType<T>,
   defaultProps: Omit<T, keyof T>,
 ): React.ComponentType<T> => (
-    (props: T): React.JSX.Element => {
-      const resolvedProps = resolveProps(defaultProps, props);
-      return (<WrappedComponent {...(resolvedProps as T)} />);
-    }
-  );
+/* eslint-disable indent */
+  (props: T): React.JSX.Element => {
+    const resolvedProps = resolveProps(defaultProps, props);
+    return (<WrappedComponent {...(resolvedProps as T)} />);
+  }
+);
+/* eslint-enable indent */
 
 export default {
   resolveProps,

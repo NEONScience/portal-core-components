@@ -206,8 +206,8 @@ enum FetchStatus {
 }
 
 interface FetchStatusState {
-  status: FetchStatus,
-  error?: Nullable<UnknownRecord|string>,
+  status: FetchStatus;
+  error?: Nullable<UnknownRecord|string>;
 }
 
 interface DocumentListItemState {

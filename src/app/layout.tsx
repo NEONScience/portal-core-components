@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable @stylistic/jsx-closing-tag-location */
 /* eslint-disable react/no-danger */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable quotes */
+/* eslint-disable @stylistic/quotes */
 
 import React from 'react';
 import type { Metadata } from 'next';

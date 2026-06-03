@@ -79,8 +79,8 @@ interface PositionDisplayOption extends SelectionOption {
 }
 
 export interface FetchStatusState {
-  status: AsyncStateType,
-  error?: Nullable<UnknownRecord|string>,
+  status: AsyncStateType;
+  error?: Nullable<UnknownRecord|string>;
 }
 
 interface WindRoseViewerFetchState {
