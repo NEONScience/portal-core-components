@@ -89,6 +89,7 @@ const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
   },
   fileTypeChip: {
     marginRight: '5px',
+    backgroundColor: 'transparent',
     '&:last-child': {
       marginRight: '0px',
     },
