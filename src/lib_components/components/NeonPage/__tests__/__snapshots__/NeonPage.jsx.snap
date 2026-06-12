@@ -2101,12 +2101,14 @@ exports[`NeonPage renders with sidebar links 1`] = `
             </div>
             <hr
               class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
+              style="width: 236px;"
             />
             <div>
               More
             </div>
             <hr
               class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
+              style="width: 236px;"
             />
             <div
               class="makeStyles-sidebarLinksContainer-431"
@@ -2142,7 +2144,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
             </div>
             <hr
               class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
-              style="margin-bottom: 0px;"
+              style="margin-bottom: 0px; width: 236px;"
             />
           </div>
         </div>
@@ -2208,12 +2210,14 @@ exports[`NeonPage renders with sidebar links 1`] = `
           </div>
           <hr
             class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
+            style="width: 236px;"
           />
           <div>
             More
           </div>
           <hr
             class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
+            style="width: 236px;"
           />
           <div
             class="makeStyles-sidebarLinksContainer-431"
@@ -2249,7 +2253,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
           </div>
           <hr
             class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-432 css-9mgopn-MuiDivider-root"
-            style="margin-bottom: 0px;"
+            style="margin-bottom: 0px; width: 236px;"
           />
         </div>
       </div>
@@ -2355,6 +2359,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
             />
             <hr
               class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-478 css-9mgopn-MuiDivider-root"
+              style="width: 358px;"
             />
             <div
               class="makeStyles-sidebarLinksContainer-477"
@@ -2374,7 +2379,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
             </div>
             <hr
               class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-478 css-9mgopn-MuiDivider-root"
-              style="margin-bottom: 0px;"
+              style="margin-bottom: 0px; width: 358px;"
             />
           </div>
         </div>
@@ -2429,6 +2434,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
           />
           <hr
             class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-478 css-9mgopn-MuiDivider-root"
+            style="width: 358px;"
           />
           <div
             class="makeStyles-sidebarLinksContainer-477"
@@ -2448,7 +2454,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
           </div>
           <hr
             class="MuiDivider-root MuiDivider-fullWidth makeStyles-sidebarDivider-478 css-9mgopn-MuiDivider-root"
-            style="margin-bottom: 0px;"
+            style="margin-bottom: 0px; width: 358px;"
           />
         </div>
       </div>

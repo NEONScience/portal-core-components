@@ -166,6 +166,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.grey[50],
+    border: `1px solid ${theme.palette.grey[200]}`,
+    borderRadius: '4px',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#fff',
@@ -175,6 +177,8 @@ const useStyles = makeStyles((theme) => ({
   legendSeriesActive: {
     backgroundColor: '#fff',
     borderColor: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
   },
   legendSeriesX: {
     whiteSpace: 'nowrap',

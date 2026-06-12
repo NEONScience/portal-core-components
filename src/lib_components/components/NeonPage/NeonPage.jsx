@@ -40,7 +40,7 @@ import ResetIcon from '@mui/icons-material/Autorenew';
 import Skeleton from '@mui/material/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
-import Theme, { COLORS } from '../Theme/Theme';
+import Theme, { COLORS, getThemeSpacingNumber } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
@@ -456,9 +456,6 @@ const NeonPage = (inProps) => {
   const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
   const [overlayDismissed, setOverlayDismissed] = useState(false);
 
-  // MUI5+ now includes the unit in the spacing value, so we need to remove it to get the raw number for calculations
-  const getSpacingNumber = (spacing) => { return Number(spacing.slice(0, -2)); }
-
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
   const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
 
@@ -490,7 +487,9 @@ const NeonPage = (inProps) => {
     const stickyOffset = belowMd ? (sidebarRef.current || {}).offsetHeight || 0 : 0;
     if (hash === '#') { return 0; }
     const anchor = contentRef.current.querySelector(hash);
-    return !anchor ? -1 : anchor.offsetTop + headerOffset - stickyOffset - getSpacingNumber(Theme.spacing(5));
+    return !anchor
+      ? -1
+      : anchor.offsetTop + headerOffset - stickyOffset - getThemeSpacingNumber(Theme.spacing(5));
   }, [
     hasSidebarLinks,
     belowMd,
@@ -815,7 +814,9 @@ const NeonPage = (inProps) => {
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarContainerStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
-    const dividerStyle = !belowMd ? { width: `${sidebarWidth - getSpacingNumber(Theme.spacing(8))}px` } : {};
+    const dividerStyle = !belowMd
+      ? { width: `${sidebarWidth - getThemeSpacingNumber(Theme.spacing(8))}px` }
+      : {};
     const sidebarClassName = sidebarContainerClassNameProp
       ? `${classes.sidebarContainer} ${sidebarContainerClassNameProp}`
       : classes.sidebarContainer;
