@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 
@@ -323,7 +323,7 @@ const TimeSeriesViewerDateRange = (props) => {
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(3) }}>
               <div style={{ ...datePickerContainerStyleProps, marginRight: Theme.spacing(3) }}>
-                <DatePicker
+                <MobileDatePicker
                   data-selenium="time-series-viewer.date-range.start-input"
                   inputVariant="outlined"
                   margin="dense"
@@ -343,7 +343,7 @@ const TimeSeriesViewerDateRange = (props) => {
                 />
               </div>
               <div style={datePickerContainerStyleProps}>
-                <DatePicker
+                <MobileDatePicker
                   data-selenium="time-series-viewer.date-range.end-input"
                   inputVariant="outlined"
                   margin="dense"

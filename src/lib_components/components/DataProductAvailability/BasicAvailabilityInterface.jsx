@@ -33,7 +33,7 @@ import PanIcon from '@mui/icons-material/PanTool';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
@@ -781,7 +781,7 @@ const BasicAvailabilityInterface = (inProps) => {
                   marginRight: Theme.spacing(1.5),
                 }}
               >
-                <DatePicker
+                <MobileDatePicker
                   {...datePickerProps}
                   label="Start"
                   data-selenium="data-product-availability.date-range-start"
@@ -798,7 +798,7 @@ const BasicAvailabilityInterface = (inProps) => {
                 />
               </div>
               <div style={datePickerContainerStyleProps}>
-                <DatePicker
+                <MobileDatePicker
                   {...datePickerProps}
                   label="End"
                   data-selenium="data-product-availability.date-range-end"
