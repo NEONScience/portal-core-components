@@ -27,6 +27,7 @@ export interface INeonEnvironment {
     useGraphql: boolean;
     showAopViewer: boolean;
     authDisableWs: boolean;
+    authDisableBroadcastChannel: boolean;
     sessionDisable: boolean;
     enableGlobalSignInState: boolean;
     fetchDrupalAssets: boolean;

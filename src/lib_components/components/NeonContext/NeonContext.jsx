@@ -16,14 +16,16 @@ import AuthService from '../NeonAuth/AuthService';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
+import BundleParser from '../../parser/BundleParser';
+import BroadcastChannelService from '../../service/BroadcastChannelService';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+
 import sitesJSON from '../../staticJSON/sites.json';
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 import aopDataProductsJSON from '../../staticJSON/aopDataProducts.json';
 import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
-import BundleParser from '../../parser/BundleParser';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -339,7 +341,29 @@ const Provider = (props) => {
     initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { isFinal, whenFinalCalled } = state;
+
+  const {
+    isFinal,
+    whenFinalCalled,
+    auth: {
+      isAuthenticated: stateIsAuthenticated,
+    },
+  } = state;
+
+  useEffect(() => {
+    const authBroadcastChannelMessageHandler = (e) => {
+      if (stateIsAuthenticated) {
+        return;
+      }
+      AuthService.handleLoginMessageFromBroadcastChannel(dispatch);
+    };
+    BroadcastChannelService.addAuthChannelMessageEventListener(authBroadcastChannelMessageHandler);
+    return () => {
+      BroadcastChannelService.removeAuthChannelMessageEventListener(
+        authBroadcastChannelMessageHandler,
+      );
+    };
+  }, [dispatch, stateIsAuthenticated]);
 
   // Method to sanitize partial HTML. As delivered presently there are some markup issues that
   // throw warnings when parsed with HTMLReactParser.
@@ -429,6 +453,10 @@ const Provider = (props) => {
             }
           } else {
             dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
+          }
+          // Send login notification when authenticated
+          if (isAuthenticated) {
+            BroadcastChannelService.sendLoginMessage();
           }
           // Initialize a subscription to the auth WS
           AuthService.watchAuth0(dispatch, cascadeAuthFetches);

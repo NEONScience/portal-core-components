@@ -80,6 +80,7 @@ export interface INeonEnvironment {
   useGraphql: boolean;
   showAopViewer: boolean;
   authDisableWs: boolean;
+  authDisableBroadcastChannel: boolean;
   sessionDisable: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
@@ -156,6 +157,7 @@ const NeonEnvironment: INeonEnvironment = {
   useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
+  authDisableBroadcastChannel: process.env.REACT_APP_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
   sessionDisable: process.env.REACT_APP_NEON_AUTH_DISABLE_SESSION === 'true',
   enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
