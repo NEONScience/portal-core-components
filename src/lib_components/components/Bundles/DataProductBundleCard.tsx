@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { resolveProps } from '../../util/defaultProps';
 import { NeonTheme } from '../Theme/types';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
     padding: '5px 0px',
@@ -58,7 +58,9 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
   inProps: DataProductBundleCardProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     titleContent,
     subTitleContent,
@@ -85,7 +87,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
         )}
         {!exists(detailContent) ? null : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
-          <>{detailContent}</>
+          (<>{detailContent}</>)
         )}
         {!exists(subTitleContent) ? null : (
           <Typography variant="body2">

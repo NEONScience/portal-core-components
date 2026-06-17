@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
@@ -15,14 +15,16 @@ import NeonEnvironment, {
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const attributes = Object.keys(NeonEnvironment)
     .map((key) => {

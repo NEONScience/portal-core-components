@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -17,7 +17,7 @@ import Theme from '../Theme/Theme';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -35,7 +35,9 @@ const defaultProps = {
 
 const ExternalHostInfo = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     productCode,
     expandable,

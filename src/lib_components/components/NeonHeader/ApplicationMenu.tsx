@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { makeStyles, createStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -28,16 +28,18 @@ interface MenuProps {
 }
 
 // declare styles
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles()((theme: Theme) => ({
   menuContainer: {
     zIndex: 1000, // be sure to display the menu over other elements
   },
+
   toolbarContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)', // match shadow of site header
     position: 'relative',
   },
+
   toolbarButtons: {
     display: 'flex',
     marginLeft: 'auto', // align content right
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
   },
+
   paper: {
     padding: theme.spacing(4),
     maxWidth: '500px', // limit width of menu
@@ -65,6 +68,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       clipPath: 'polygon(-5px -5px, calc(100% + 5px) -5px, calc(100% + 5px) calc(100% + 5px))',
     },
   },
+
   card: {
     transition: '0.4s',
     '&:hover': { // raised hover effect for Cards
@@ -75,18 +79,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: '100%', // ensure Cards are equal width
     border: 0, // remove default Card border
   },
+
   cardContent: {
     textAlign: 'center',
   },
+
   gridItem: {
     display: 'flex', // so grid items stretch to equal height
-  },
+  }
 }));
 
 // define the menu component
 const Menu = (props: MenuProps) => {
   const { apps } = props;
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [anchorRefEl, setAnchorRefEl] = useState<HTMLElement | null>(null);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -12,14 +12,16 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const externalHostJsxUrl = 'https://github.com/NEONScience/portal-core-components/blob/master/src/lib_components/components/ExternalHost/ExternalHost.jsx';
   const snackbarUrl = 'https://material-ui.com/components/snackbars/';
 

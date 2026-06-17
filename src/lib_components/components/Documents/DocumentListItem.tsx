@@ -28,10 +28,7 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/SaveAlt';
@@ -63,11 +60,12 @@ import {
 const COMPONENT_XS_UPPER = 480;
 const COMPONENT_SM_UPPER = 805;
 
-const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
   },
+
   listItem: {
     display: 'flex',
     wordBreak: 'break-word',
@@ -79,14 +77,17 @@ const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
       },
     },
   },
+
   listItemSecondarySpacer: {
     margin: muiTheme.spacing(0, 2),
     color: muiTheme.palette.grey[200],
   },
+
   listItemIcon: {
     minWidth: muiTheme.spacing(4),
     marginRight: muiTheme.spacing(1),
   },
+
   fileTypeChip: {
     marginRight: '5px',
     backgroundColor: 'transparent',
@@ -94,25 +95,28 @@ const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
       marginRight: '0px',
     },
   },
+
   fileTypeChipSelected: {
     marginRight: '5px',
     fontWeight: 500,
   },
+
   variantFetchingLabel: {
     lineHeight: '24px',
   },
+
   variantFetchingProgress: {
     marginRight: '36px',
     marginLeft: '36px',
   },
+
   downloadErrorContainer: {
     marginTop: muiTheme.spacing(2),
-  },
+  }
 })) as StylesHook;
 
-const useListItemSecondaryActionStyles = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useListItemSecondaryActionStyles = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     root: {
       display: 'flex',
       alignItems: 'center',
@@ -121,7 +125,7 @@ const useListItemSecondaryActionStyles = makeStyles((muiTheme: MuiTheme) =>
       top: 'unset',
       right: 'unset',
       whiteSpace: 'nowrap',
-    },
+    }
   })) as StylesHook;
 
 enum ActionTypes {
@@ -298,8 +302,12 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  const classes = useStyles(Theme);
-  const listItemSecondaryActionClasses = useListItemSecondaryActionStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles(Theme, {
+    props: Theme,
+  });
   // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [

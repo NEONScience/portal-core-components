@@ -11,10 +11,10 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.6",
-    "@mui/icons-material": "^5.18.0",
+    "@mui/icons-material": "^6.5.0",
     "@mui/lab": "^5.0.0-alpha.177",
-    "@mui/material": "^5.18.0",
-    "@mui/styles": "^5.18.0",
+    "@mui/material": "^6.5.0",
+    "@mui/styles": "^6.5.0",
     "@mui/x-date-pickers": "^7.29.4",
     "@stomp/rx-stomp": "^2.3.0",
     "@stomp/stompjs": "^7.3.0",
@@ -73,6 +73,7 @@
     "rxjs": "^7.8.2",
     "sockjs-client": "^1.6.1",
     "tinycolor2": "^1.6.0",
+    "tss-react": "^4.9.21",
     "ua-parser-js": "^1.0.41",
     "universal-cookie": "^7.2.2",
     "zod": "^3.25.76"
@@ -158,8 +159,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "material-table": {
       "@mui/lab": "^5.0.0-alpha.177",
-      "@mui/material": "^5.18.0",
-      "@mui/styles": "^5.18.0",
+      "@mui/material": "^6.5.0",
+      "@mui/styles": "^6.5.0",
       "jspdf": "^4.2.1",
       "jspdf-autotable": "^5.0.7",
       "prop-types": "^15.8.1",
@@ -168,7 +169,7 @@
     }
   },
   "scripts": {
-    "start": "NEXT_PUBLIC_NEON_API_HOST_OVERRIDE=$NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_NEON_API_HOST_OVERRIDE next dev",
+    "start": "next dev",
     "start:lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next dev",
     "start:next-start": "next start",
     "start:next-start-lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next start",

@@ -14,10 +14,7 @@ import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { PDFViewerOptions } from 'pdfjs-dist/types/web/pdf_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
 
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentService from '../../service/DocumentService';
@@ -36,16 +33,17 @@ pdfjs.GlobalWorkerOptions.workerPort = new Worker(
   { type: 'module' },
 );
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     parentContainer: {
       width: '100%',
     },
+
     container: {
       width: '100%',
       position: 'relative',
     },
+
     pdfViewerContainer: {
       position: 'absolute',
       top: 0,
@@ -58,7 +56,7 @@ const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
           0px 1px 1px 0px rgb(0 0 0 / 14%),
           0px 1px 3px 0px rgb(0 0 0 / 12%)`,
       },
-    },
+    }
   })) as StylesHook;
 
 export interface PdfDocumentViewerProps {
@@ -94,7 +92,9 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
   inProps: PdfDocumentViewerProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as PdfDocumentViewerProps;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     document,
     width,

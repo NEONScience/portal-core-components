@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { Theme as MuiTheme } from '@mui/material';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
@@ -18,46 +15,47 @@ import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { existsNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     container: {
       width: '100%',
       display: 'flex',
       margin: muiTheme.spacing(0, -0.5, -0.5, -0.5),
       flexDirection: 'column',
     },
+
     tabPanels: {
       width: '100%',
       backgroundColor: '#fff',
     },
+
     tabContentContainer: {
       width: '100%',
       padding: muiTheme.spacing(3, 3, 3, 3),
-    },
+    }
   })) as StylesHook;
 
-const useTabsStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useTabsStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     scroller: {
       backgroundColor: muiTheme.palette.grey[200],
     },
+
     scrollButtons: {
       '&.Mui-disabled': {
         opacity: 0.6,
       },
-    },
+    }
   })) as StylesHook;
 
-const useTabStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useTabStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     root: {
       textTransform: 'none',
       opacity: 1,
       maxWidth: 464,
     },
+
     wrapper: {
       display: 'flex',
       flexDirection: 'row',
@@ -67,9 +65,10 @@ const useTabStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
         margin: `${muiTheme.spacing(0, 1, 0, 0)} !important`,
       },
     },
+
     selected: {
       borderBottom: 'none',
-    },
+    }
   })) as StylesHook;
 
 interface DocumentTabModel {
@@ -82,9 +81,15 @@ export interface DocumentTabsProps {
 }
 
 const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): React.JSX.Element => {
-  const classes = useStyles(Theme);
-  const tabClasses = useTabStyles(Theme);
-  const tabsClasses = useTabsStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: tabClasses } = useTabStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: tabsClasses } = useTabsStyles(Theme, {
+    props: Theme,
+  });
   const { documents }: DocumentTabsProps = props;
 
   const initialTabIdx = 0;

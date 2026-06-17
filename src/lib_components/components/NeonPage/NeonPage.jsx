@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Backdrop from '@mui/material/Backdrop';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -94,7 +94,7 @@ if (!window.gtmDataLayer) {
 // NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
 // the Theme import, unlike most other useStyles() instances where the Theme import is passed to the
 // hook as an argument.
-const useStyles = (sidebarWidth) => makeStyles(() => ({
+const useStyles = (sidebarWidth) => makeStyles({ name: 'NeonPage' })(() => ({
   outerPageContainer: {
     display: 'flex',
     position: 'relative',
@@ -295,7 +295,7 @@ export const NeonErrorPage = (props) => {
     error: { message, stack },
     resetErrorBoundary,
   } = props;
-  const classes = useStyles(0)();
+  const { classes } = useStyles(0)();
   // eslint-disable-next-line no-console
   console.error(stack);
   return (
@@ -447,7 +447,7 @@ const NeonPage = (inProps) => {
   const hasSidebarLinks = !sidebarContent && Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
   const hasSidebar = hasSidebarContent || hasSidebarLinks;
 
-  const classes = useStyles(hasSidebar ? sidebarWidth : 0)();
+  const { classes } = useStyles(hasSidebar ? sidebarWidth : 0)();
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -467,9 +467,9 @@ const NeonPage = (inProps) => {
     ? sidebarLinks.every((link) => link.component)
     : false;
   const sidebarHashMap = useMemo(() => ((
-    !hasSidebarLinks ? {} : Object.fromEntries(
+    (!hasSidebarLinks ? {} : Object.fromEntries(
       sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
-    )
+    ))
   // Note that the compiler is not aware that this value is not being modified
   // eslint-disable-next-line react-hooks/preserve-manual-memoization
   )), [hasSidebarLinks, sidebarLinks]);

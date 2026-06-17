@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import { useTheme } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { select } from 'd3-selection';
 import {
@@ -52,7 +52,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 import './styles.css';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   container: {
     width: '100%',
   },
@@ -113,7 +113,9 @@ type DirectionBinLookupType = Record<number, DirectionDefinition>;
 
 const WindRose: React.FC = (): React.JSX.Element => {
   const theme: NeonTheme = useTheme();
-  const classes = useStyles(theme);
+  const { classes } = useStyles(theme, {
+    props: Theme,
+  });
   const state: WindRoseViewerState = useStateContext();
   const dispatch: Dispatch<AnyAction> = useDispatchContext();
   const {

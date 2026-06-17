@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -30,7 +30,8 @@ const makeVizClass = (base, dark, light) => ({
   backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px',
 });
 
-const useStyles = makeStyles((theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -43,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const ref1 = useRef(null);
   const ref2 = useRef(null);

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import DialogBase from '@/components/DialogBase/DialogBase';
 import DocumentList from '@/components/Documents/DocumentList';
@@ -20,7 +20,7 @@ import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     margin: theme.spacing(3, 3, 3, 3),
   },
@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [tabDialogOpen, setTabDialogOpen] = useState(false);
   const exampleDoc: NeonDocument = {

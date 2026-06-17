@@ -5,10 +5,7 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentService from '../../service/DocumentService';
@@ -22,15 +19,15 @@ import { isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 import PdfDocumentViewer from './PdfDocumentViewer';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     container: {
       width: '100%',
     },
+
     iframe: {
       border: 'none',
-    },
+    }
   })) as StylesHook;
 
 export interface DocumentViewerProps {
@@ -64,7 +61,9 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (
   inProps: DocumentViewerProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as DocumentViewerProps;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     document,
     width,

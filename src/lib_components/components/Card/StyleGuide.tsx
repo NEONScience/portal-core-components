@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 
@@ -24,7 +24,7 @@ import PropsTable from '../../../components/PropsTable';
 
 import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -104,7 +104,9 @@ const propRows = [
 ];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   /* eslint-disable jsx-a11y/anchor-is-valid */
   const link = (
     <Link href="#">

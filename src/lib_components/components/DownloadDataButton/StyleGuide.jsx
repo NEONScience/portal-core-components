@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -24,14 +24,16 @@ import sampleProductDataRelease from '../../../sampleData/DP1.00001.001.release.
 import sampleProductDataReleaseProv from '../../../sampleData/DP4.00130.001.release.prov.json';
 import sampleProductDataAopReleaseProv from '../../../sampleData/DP3.30011.001.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const downloadDataContextLink = (
     <Link
       href="#DownloadDataContext"

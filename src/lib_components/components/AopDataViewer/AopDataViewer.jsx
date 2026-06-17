@@ -11,7 +11,7 @@ import { ajax } from 'rxjs/ajax';
 
 import moment from 'moment';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Divider from '@mui/material/Divider';
@@ -44,7 +44,7 @@ const MIN_IFRAME_WIDTH = 240;
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   selectionForm: {
     width: '100%',
     marginBottom: theme.spacing(2),
@@ -142,7 +142,9 @@ const defaultProps = {
 */
 const AopDataViewer = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     productCode,
     showTitle,

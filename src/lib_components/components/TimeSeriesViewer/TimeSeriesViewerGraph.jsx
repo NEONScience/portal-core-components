@@ -18,7 +18,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -97,7 +97,7 @@ const getBaseGraphOptions = () => ({
   ],
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   graphOuterContainer: {
     backgroundColor: '#ffffff',
     padding: theme.spacing(2),
@@ -263,7 +263,9 @@ const graphReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerGraph() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const downloadRef = useRef(null);

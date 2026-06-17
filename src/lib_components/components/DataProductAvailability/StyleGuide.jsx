@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
@@ -22,7 +22,7 @@ import sampleAvaProvData from '../../../sampleData/DP4.00130.001.release.prov.js
 
 import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -83,7 +83,9 @@ const sites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 const dateRange = ['2018-01', '2018-12'];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const DownloadDataContextLink = (
     <Link href="#DownloadDataContext">

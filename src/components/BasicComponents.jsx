@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -37,7 +37,7 @@ import Theme from '@/components/Theme/Theme';
 
 import DocBlock from './DocBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -82,7 +82,9 @@ const marks = [
 ];
 
 export default function BasicComponents() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const styleGuideUrl = 'https://www.figma.com/proto/Oppe8meMyYmzaSeEpXeSfZ/NEON---Styleguide?node-id=736%3A3056&scaling=scale-down-width';
 
   return (
@@ -98,7 +100,7 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
 
       <div style={{ marginBottom: Theme.spacing(4) }}>
-        <Accordion>
+        <Accordion slotProps={{ heading: { component: 'div' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Basic Accordion
           </AccordionSummary>

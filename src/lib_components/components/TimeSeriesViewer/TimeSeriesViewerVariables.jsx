@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -31,7 +31,7 @@ import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -178,7 +178,9 @@ const optionDefaultProps = {
 
 function Option(inProps) {
   const props = resolveProps(optionDefaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     innerRef,
     isFocused,
@@ -311,7 +313,9 @@ const selectStyles = {
    Quality Flags
 */
 const QualityFlags = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
@@ -408,7 +412,9 @@ const QualityFlags = () => {
 };
 
 export default function TimeSeriesViewerVariables() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const selectedVariables = state.selection.variables.map((variable) => ({

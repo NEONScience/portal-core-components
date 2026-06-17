@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,7 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import Theme, { COLORS } from '@/components/Theme/Theme';
 import { resolveProps } from '@/util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   propTableRowGrey: {
     backgroundColor: theme.palette.grey[50],
   },
@@ -32,7 +32,9 @@ const defaultProps = {
 const PropsTable = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { props: propRows, fullHeight } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   return (
     <TableContainer component={Paper} style={fullHeight ? {} : { maxHeight: '70vh' }}>

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import AppBar from '@mui/material/AppBar';
@@ -21,7 +21,7 @@ const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-const useStyles = (belowSm) => makeStyles((theme) => ({
+const useStyles = (belowSm) => makeStyles()((theme) => ({
   dialogTitle: {
     marginLeft: theme.spacing(2),
     flex: 1,
@@ -51,7 +51,9 @@ const defaultProps = {
 const DialogBase = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const classes = useStyles(belowSm)(Theme);
+  const { classes } = useStyles(belowSm, {
+    props: belowSm
+  })(Theme);
 
   const {
     open,

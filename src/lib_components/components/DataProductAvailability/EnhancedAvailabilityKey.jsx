@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -20,7 +20,7 @@ import { resolveProps } from '../../util/defaultProps';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   keyContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -57,7 +57,9 @@ const defaultProps = {
 */
 export default function EnhancedAvailabilityKey(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
   const { selectionEnabled, rollUpPresent } = props;
 

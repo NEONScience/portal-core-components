@@ -8,7 +8,7 @@ import {
 
 import React, { useState } from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
@@ -27,7 +27,7 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -65,7 +65,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const rxjsObservableUrl = 'https://rxjs-dev.firebaseapp.com/guide/observable';
   const dataProductAvailabilityLink = (
     <Link href="#DataProductAvailability">Data Product Availability Chart</Link>

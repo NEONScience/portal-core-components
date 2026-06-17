@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import lzw from 'node-lzw';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Box from '@mui/material/Box';
@@ -50,7 +50,7 @@ import {
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
 
-const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
+const useStyles = (belowSm, belowSmMd) => makeStyles()((theme) => ({
   stepChip: {
     marginRight: theme.spacing(1),
     fontSize: '1rem',
@@ -114,7 +114,7 @@ const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
   },
 }));
 
-const useDialogBaseStyles = (belowSm) => makeStyles((theme) => ({
+const useDialogBaseStyles = (belowSm) => makeStyles()((theme) => ({
   contentPaper: {
     margin: theme.spacing(10, 2, belowSm ? 9 : 2, 2),
     padding: theme.spacing(3),
@@ -127,8 +127,10 @@ export default function DownloadDataDialog() {
   const belowSmMd = useMediaQuery('(max-width: 750px)');
   const belowSmMdStepper = useMediaQuery('(max-width: 700px)');
   const belowMdStepper = useMediaQuery('(max-width: 800px)');
-  const classes = useStyles(belowSm, belowSmMd)(Theme);
-  const dialogBaseClasses = useDialogBaseStyles(belowSm)(Theme);
+  const { classes } = useStyles(belowSm, belowSmMd)(Theme);
+  const { classes: dialogBaseClasses } = useDialogBaseStyles(belowSm, {
+    props: belowSm
+  })(Theme);
 
   /**
      State (from DownloadDataContext)

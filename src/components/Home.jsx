@@ -1,7 +1,7 @@
 /* eslint react/jsx-one-expression-per-line: 0, max-len: 0 */
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -11,14 +11,16 @@ import Theme from '@/components/Theme/Theme';
 
 import DocBlock from './DocBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function Home() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (

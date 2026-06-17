@@ -18,7 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiThemeType } from '@mui/material';
 
 import Logout from '@mui/icons-material/Logout';
@@ -56,7 +56,7 @@ export interface NeonAuthProps {
 }
 /* eslint-enable react/no-unused-prop-types */
 
-const useStyles: StylesHook = makeStyles((theme: MuiThemeType) => ({
+const useStyles: StylesHook = makeStyles()((theme: MuiThemeType) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css
@@ -95,7 +95,9 @@ export interface AccountMenuProps {
 
 const AccountMenu = (props: AccountMenuProps) => {
   const { accountPath, handleLogout } = props;
-  const classes: StringPropsObject = useStyles(Theme);
+  const { classes }: StringPropsObject = useStyles(Theme, {
+    props: Theme,
+  });
   const [
     {
       auth: {
@@ -380,7 +382,9 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
     dispatch,
   ] = NeonContext.useNeonContextState();
 
-  const classes: StringPropsObject = useStyles(Theme);
+  const { classes }: StringPropsObject = useStyles(Theme, {
+    props: Theme,
+  });
 
   const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
   const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);

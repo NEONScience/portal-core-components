@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -40,7 +40,7 @@ const getYearMonthMoment = (yearMonth, day = 15) => (
 const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
 const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
   svg: {
     minWidth: `${svgMinWidth}px`,
     minHeight: `${svgMinHeight}px`,
@@ -76,7 +76,9 @@ const dateRangeReducer = (state, action) => {
 };
 
 const TimeSeriesViewerDateRange = (props) => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { dateRangeSliderRef } = props;
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;

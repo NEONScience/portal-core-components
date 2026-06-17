@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
@@ -26,7 +26,7 @@ import RouteService from '../../service/RouteService';
 import ReleaseService from '../../service/ReleaseService';
 import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   title: {
     fontWeight: 500,
   },
@@ -129,7 +129,9 @@ const defaultProps = {
 
 const ReleaseFilter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     excludeNullRelease,
     horizontal,

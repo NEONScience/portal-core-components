@@ -7,10 +7,7 @@ import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import EmailIcon from '@mui/icons-material/Email';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiThemeType } from '@mui/material';
 
 import moment, { Moment } from 'moment';
@@ -19,9 +16,8 @@ import Theme from '../Theme/Theme';
 import { StringPropsObject, StylesHook } from '../../types/core';
 import { exists } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((theme: MuiThemeType) =>
+  ({
     cardHeaderContainer: {
       padding: '10px',
       '& label.account-title': {
@@ -35,10 +31,12 @@ const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
         width: '120px',
       },
     },
+
     card: {
       margin: 'auto',
       textAlign: 'center',
     },
+
     profileArea: {
       '& img': {
         marginBottom: '15px',
@@ -47,6 +45,7 @@ const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
         marginRight: '10px',
       },
     },
+
     profileInfoArea: {
       width: '100%',
       textAlign: 'left',
@@ -84,6 +83,7 @@ const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
         wordBreak: 'break-all',
       },
     },
+
     emailChipContainer: {
       '& .MuiChip-root': {
         height: '100% !important',
@@ -101,7 +101,7 @@ const useStyles: StylesHook = makeStyles((theme: MuiThemeType) =>
         width: '32px !important',
         height: '32px !important',
       },
-    },
+    }
   })) as StylesHook;
 
 export interface UserCardProps {
@@ -120,7 +120,9 @@ const UserCard = (props: UserCardProps): React.JSX.Element => {
     providers,
     lastLogin,
   }: UserCardProps = props;
-  const classes: StringPropsObject = useStyles(Theme);
+  const { classes }: StringPropsObject = useStyles(Theme, {
+    props: Theme,
+  });
 
   let lastLoginDisplay: string | null = null;
   if (exists(lastLogin)) {

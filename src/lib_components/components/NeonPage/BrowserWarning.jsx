@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Cookies from 'universal-cookie';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import Button from '@mui/material/Button';
@@ -23,7 +23,7 @@ const isBrowserIE = () => (
     || navigator.appVersion.indexOf('Trident/') > -1
 );
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   browserWarning: {
     backgroundColor: theme.palette.error.main,
   },
@@ -41,7 +41,9 @@ const useStyles = makeStyles((theme) => ({
 const cookies = new Cookies();
 
 const BrowserWarning = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const browserIsIE = isBrowserIE();
   const [browserWarningOpen, setBrowserWarningOpen] = useState(browserIsIE);
 

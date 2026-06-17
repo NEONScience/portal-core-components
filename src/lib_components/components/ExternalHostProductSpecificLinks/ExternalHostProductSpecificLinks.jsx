@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
@@ -12,7 +12,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   siteLinksContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -41,7 +41,9 @@ const defaultProps = {
 
 export default function ExternalHostProductSpecificLinks(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const { productCode, siteCodes } = props;
 

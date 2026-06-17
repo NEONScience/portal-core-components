@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import moment from 'moment';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -51,7 +51,7 @@ import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
 // We can't rely on flex-sizing to work during resize events as some components within tabs
 // won't be able to shrink correctly on resize (notably: Data Product Availability charts).
 const VERTICAL_TABS_WIDTH = 150;
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tabsContainer: {
     display: 'flex',
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
@@ -160,7 +160,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useTabsStyles = makeStyles((theme) => ({
+const useTabsStyles = makeStyles()((theme) => ({
   scroller: {
     [theme.breakpoints.up('md')]: {
       backgroundColor: theme.palette.grey[200],
@@ -168,7 +168,7 @@ const useTabsStyles = makeStyles((theme) => ({
   },
 }));
 
-const useTabStyles = makeStyles((theme) => ({
+const useTabStyles = makeStyles()((theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       marginLeft: '-1.5px',
@@ -218,7 +218,9 @@ const useTabStyles = makeStyles((theme) => ({
    Summary Component
 */
 export function TimeSeriesViewerSummary() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const {
@@ -514,9 +516,15 @@ const containerReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerContainer() {
-  const classes = useStyles(Theme);
-  const tabClasses = useTabStyles(Theme);
-  const tabsClasses = useTabsStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: tabClasses } = useTabStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: tabsClasses } = useTabsStyles(Theme, {
+    props: Theme,
+  });
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
 

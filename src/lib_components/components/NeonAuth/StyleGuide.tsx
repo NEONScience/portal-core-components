@@ -10,7 +10,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import AuthService from '@/components/NeonAuth/AuthService';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '@/components/NeonAuth/NeonAuth';
@@ -27,7 +27,7 @@ import PropsTable from '../../../components/PropsTable';
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -238,7 +238,9 @@ export default function StyleGuide() {
       },
     },
   ] = NeonContext.useNeonContextState();
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const hasSsoCookie: boolean = (document.cookie.indexOf(NEON_SSO_COOKIE_NAME) >= 0);
   const [ssoCookieEnabled, setSsoCookieEnabled] = React.useState(hasSsoCookie);
   const handleSsoCookieToggle = (enable: boolean): void => {

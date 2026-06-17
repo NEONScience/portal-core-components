@@ -6,7 +6,7 @@ import tinycolor from 'tinycolor2';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -64,7 +64,7 @@ import {
 import Theme, { COLORS } from '../Theme/Theme';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   selectionSnackbar: {
     width: '100%',
     color: '#000',
@@ -303,7 +303,9 @@ const positionPopup = (
 };
 
 const SiteMapFeature = (props) => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { featureKey } = props;
   const map = useMap();
 

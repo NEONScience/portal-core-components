@@ -24,18 +24,14 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { useTheme } from '@mui/material/styles';
 
 import { exists } from '../../util/typeUtil';
 import { type NeonTheme } from '../Theme/types';
 
-const useStyles = (open: boolean) => makeStyles((theme: NeonTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles = (open: boolean) => makeStyles()((theme: NeonTheme) =>
+  ({
     leafletControlContainer: {
       zIndex: 801,
       boxShadow: 'unset',
@@ -44,6 +40,7 @@ const useStyles = (open: boolean) => makeStyles((theme: NeonTheme) =>
       top: '8px',
       fontFamily: theme.typography.fontFamily,
     },
+
     controlContainer: {
       backgroundColor: '#ffffff',
       cursor: 'default',
@@ -54,27 +51,33 @@ const useStyles = (open: boolean) => makeStyles((theme: NeonTheme) =>
         ? `1px solid ${theme.palette.grey[300]}`
         : `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
     },
+
     controlIconContainer: {
       width: '36px !important',
       height: '36px !important',
     },
+
     controlIcon: {
       verticalAlign: 'center',
     },
+
     controls: {
       padding: theme.spacing(2),
       overflowY: 'auto',
     },
+
     formGroupControl: {
       marginTop: '4px',
       marginBottom: '0px',
     },
+
     controlGroupDivider: {
       margin: '10px 0px',
     },
+
     groupTitle: {
       fontWeight: 600,
-    },
+    }
   }));
 
 export interface BaseLayer {
@@ -144,7 +147,9 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
   } = props;
   const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
   const theme: NeonTheme = useTheme();
-  const classes = useStyles(open)(theme);
+  const { classes } = useStyles(open, {
+    props: open
+  })(theme);
   const divRef: RefObject<HTMLDivElement|null> = useRef<HTMLDivElement>(null);
   const map: L.Map = useMap();
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);

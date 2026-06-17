@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Alert from '@mui/lab/Alert';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -51,7 +51,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardActions: {
     flexWrap: 'wrap',
     marginTop: theme.spacing(-1),
@@ -116,7 +116,9 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     viewState,
     hasManyParents,
   }: DataProductCitationItemViewProps = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
 
   let appliedTextOnly: CitationTextOnlyProps = {

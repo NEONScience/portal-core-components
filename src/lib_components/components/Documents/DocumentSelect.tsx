@@ -5,10 +5,7 @@ import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem from './DocumentListItem';
@@ -22,19 +19,20 @@ import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     container: {
       width: '100%',
     },
+
     selectContainer: {
       width: '100%',
       padding: muiTheme.spacing(3, 0),
     },
+
     selectFormControl: {
       width: '100%',
-    },
+    }
   })) as StylesHook;
 
 export interface DocumentSelectProps {
@@ -44,7 +42,9 @@ export interface DocumentSelectProps {
 const DocumentSelect: React.FC<DocumentSelectProps> = (
   props: DocumentSelectProps,
 ): React.JSX.Element => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { documents }: DocumentSelectProps = props;
 
   const hasDocuments: boolean = existsNonEmpty(documents);

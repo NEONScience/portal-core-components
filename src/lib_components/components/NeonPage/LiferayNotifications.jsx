@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import IconButton from '@mui/material/IconButton';
@@ -11,7 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Theme, { COLORS } from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   notification: {
     color: theme.palette.text.primary,
     backgroundColor: COLORS.GOLD[50],
@@ -37,7 +37,9 @@ const defaultProps = {
 
 const LiferayNotifications = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { notifications, onHideNotifications } = props;
 
   if (!notifications.length || notifications.every((n) => n.dismissed)) { return null; }

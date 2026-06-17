@@ -7,10 +7,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import Skeleton from '@mui/material/Skeleton';
@@ -21,55 +18,63 @@ import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     title: {
       fontWeight: 500,
     },
+
     titleContainer: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-start',
       marginBottom: muiTheme.spacing(1),
     },
+
     selectInput: {
       width: '100%',
       marginBottom: muiTheme.spacing(0.5),
       backgroundColor: '#fff',
     },
+
     descriptionContainer: {
       marginTop: muiTheme.spacing(0.5),
     },
+
     descriptionFlexInnerContainer: {
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
     },
+
     description: {
       display: 'block',
       color: muiTheme.palette.grey[400],
       overflowWrap: 'break-word',
     },
+
     descriptionLabel: {
       fontWeight: 700,
       color: muiTheme.palette.grey[400],
       marginRight: muiTheme.spacing(1),
     },
+
     menuItemSubtitle: {
       color: muiTheme.palette.grey[400],
     },
+
     horizontalFlex: {
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
     },
+
     horizontalDescriptions: {
       marginLeft: Theme.spacing(3),
       '& > div:first-child': {
         marginTop: '-2px !important',
       },
-    },
+    }
   })) as StylesHook;
 
 export interface SidebarFilterOption {
@@ -92,7 +97,9 @@ export interface SidebarFilterProps {
 const SidebarFilter: React.FC<SidebarFilterProps> = (
   props: SidebarFilterProps,
 ): React.JSX.Element => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     title,
     skeleton,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Skeleton from '@mui/material/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
@@ -14,7 +14,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   footerContainer: {
     '& .footer-bottom__wrapper': {
       background: '#4B372E',
@@ -30,7 +30,9 @@ const defaultProps = {
 const NeonFooter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { drupalCssLoaded, showSkeleton } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [{
     isActive: neonContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },

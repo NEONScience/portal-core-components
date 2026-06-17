@@ -22,10 +22,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import { useTheme } from '@mui/material/styles';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ObservatoryIcon from '@mui/icons-material/Public';
 
@@ -44,13 +41,13 @@ const LEAFLET_ATTR_PREFIX = `
 <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
 `;
 
-const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((theme: NeonTheme) =>
+  ({
     mapContainer: {
       width: '100%',
       height: '600px',
     },
+
     mapNavButton: {
       backgroundColor: '#fff !important',
       width: '32px',
@@ -69,12 +66,14 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) =>
         height: '1.2em',
       },
     },
+
     mapNavButtonContainer: {
       position: 'absolute',
       zIndex: 999,
       margin: '0px',
       left: '11px',
     },
+
     observatoryButton: {
       top: '82px',
     },
@@ -201,7 +200,9 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const dispatch: Dispatch<AnyAction> = useContextDispatch();
   const theme: NeonTheme = useTheme();
-  const classes = useStyles(theme);
+  const { classes } = useStyles(theme, {
+    props: theme,
+  });
   const { center }: BasicLeafletMapState = state;
   const map: L.Map = useMapEvents({
     zoomend: (event: L.LeafletEvent): void => {
@@ -268,7 +269,9 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const mapInstanceId = useId();
   const theme: NeonTheme = useTheme();
-  const classes = useStyles(theme);
+  const { classes } = useStyles(theme, {
+    props: theme,
+  });
   const {
     initialZoom,
     initialCenter,

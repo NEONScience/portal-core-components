@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import {
   createTheme,
   responsiveFontSizes,
-  StyledEngineProvider,
   ThemeProvider,
 } from '@mui/material/styles';
 import { useTheme } from '@mui/styles';
@@ -262,14 +261,21 @@ const baseTheme = createTheme({
       styleOverrides: {
         root: {
           padding: '12px 24px',
+          font: 'inherit',
         },
         content: {
           fontSize: '0.95rem',
           fontWeight: 500,
         },
-        expandIcon: {
+        expandIconWrapper: {
+          padding: '12px',
+          borderRadius: '50%',
+          border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
           '&:hover': {
+            padding: '12px',
             backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+            color: COLORS.LIGHT_BLUE[400],
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
           },
         },
       },
@@ -882,12 +888,10 @@ theme.getWrappedComponent = (Component) => (props) => {
   const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
   if ((!currentTheme || !currentTheme.isNeonTheme) && !isJsdom) {
     return (
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...props} />
-        </ThemeProvider>
-      </StyledEngineProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...props} />
+      </ThemeProvider>
     );
   }
   return <Component {...props} />;

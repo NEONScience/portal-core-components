@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
@@ -24,7 +24,7 @@ import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   optionsContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -122,7 +122,9 @@ const useStyles = makeStyles((theme) => ({
    y Axes - Scale Option
 */
 const YAxisScaleOption = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { yAxes, logscale } = state.selection;
   const classNames = {
@@ -181,7 +183,9 @@ const YAxisScaleOption = () => {
 const YAxisRangeOption = (props) => {
   const { axis } = props;
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const classNames = {
     selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
     deselected: classes.optionButton,
@@ -396,7 +400,9 @@ const rollPeriodReducer = (state, action) => {
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { selection } = state;
   const {
     rollPeriod: currentRollPeriod,
@@ -479,7 +485,9 @@ const RollPeriodOption = () => {
    x Axis - Time Step Option
 */
 const TimeStepOption = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableTimeSteps } = state.timeStep;
   const { timeStep: selectedTimeStep } = state.selection;
@@ -556,7 +564,9 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerAxes() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { selection } = state;
   const renderOption = (key) => {

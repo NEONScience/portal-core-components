@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useMemo } from 'react';
 
 import { ReplaySubject } from 'rxjs';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -20,7 +20,7 @@ import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';
 import sampleProductData3 from '../../../sampleData/DP1.00001.001.release.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -180,7 +180,9 @@ const MyAppComponent = () => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const useReducerLink = (
     <Link
       target="_new"

@@ -22,7 +22,7 @@ import {
 
 import debounce from 'lodash/debounce';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
@@ -65,7 +65,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import './SiteMap.css';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   map: {
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
@@ -209,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useAreaSelectionStyles = makeStyles((theme) => ({
+const useAreaSelectionStyles = makeStyles()((theme) => ({
   areaSelection: {
     position: 'absolute',
     pointerEvents: 'none',
@@ -353,7 +353,9 @@ const areaSelectionReducer = (areaSelectionState, action) => {
 };
 
 const LeafletAreaSelectionManager = () => {
-  const classes = useAreaSelectionStyles(Theme);
+  const { classes } = useAreaSelectionStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const { map: { mouseMode: mapMouseMode } } = state;
   const map = useMap();
@@ -757,7 +759,9 @@ const LeafletMapManager = () => {
    Main Component
 */
 const SiteMapLeaflet = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const mapRef = useRef(null);
   const mapInstanceId = useId();
 

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Box from '@mui/material/Box';
@@ -52,7 +52,7 @@ import { SvgDefs } from './AvailabilitySvgComponents';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useSiteChipStyles = makeStyles((theme) => ({
+const useSiteChipStyles = makeStyles()((theme) => ({
   deleteIcon: {
     marginLeft: theme.spacing(-0.25),
   },
@@ -122,10 +122,14 @@ const defaultProps = {
 */
 const BasicAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
-  const siteChipClasses = useSiteChipStyles(Theme);
+  const { classes: siteChipClasses } = useSiteChipStyles(Theme, {
+    props: Theme,
+  });
   const { dataProducts, ...other } = props;
 
   const [

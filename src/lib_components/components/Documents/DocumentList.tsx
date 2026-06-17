@@ -1,10 +1,7 @@
 import React from 'react';
 
 import List from '@mui/material/List';
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
@@ -15,12 +12,11 @@ import { StylesHook } from '../../types/muiTypes';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { Nullable } from '../../types/core';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     list: {
       paddingTop: muiTheme.spacing(0),
-    },
+    }
   })) as StylesHook;
 
 export interface DocumentListProps {
@@ -32,7 +28,9 @@ export interface DocumentListProps {
 }
 
 const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): React.JSX.Element => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     documents,
     makeDownloadableLink,

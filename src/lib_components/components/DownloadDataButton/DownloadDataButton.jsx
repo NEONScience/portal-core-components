@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
@@ -11,7 +11,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 const DownloadDataDialog = React.lazy(() => import('../DownloadDataDialog/DownloadDataDialog'));
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
   gtmCaptureButton: {
     '& span': {
       pointerEvents: 'none',
@@ -30,7 +30,7 @@ const DownloadDataButton = (inProps) => {
     ...other
   } = props;
 
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [{ dialogOpen, productData }, dispatch] = DownloadDataContext.useDownloadDataState();
 

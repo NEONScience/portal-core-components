@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import SyntaxHighlight from '@/components/SyntaxHighlight';
 import Theme from '@/components/Theme/Theme';
@@ -8,7 +8,7 @@ import { resolveProps } from '@/util/defaultProps';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     margin: theme.spacing(2, 0),
     '& code': {
@@ -23,7 +23,9 @@ const defaultProps = {
 
 export default function CodeBlock(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { language, children, ...other } = props;
   return (
     <SyntaxHighlight language={language} className={classes.root} {...other}>

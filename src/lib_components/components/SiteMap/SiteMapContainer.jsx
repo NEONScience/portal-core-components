@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
@@ -66,7 +66,7 @@ import {
 } from './SiteMapUtils';
 
 const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   ':root': {
     fontSize: '24px',
   },
@@ -319,7 +319,9 @@ const defaultProps = {
 
 const SiteMapContainer = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();

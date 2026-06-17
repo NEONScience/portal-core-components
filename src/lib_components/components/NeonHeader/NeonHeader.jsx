@@ -2,7 +2,8 @@ import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -66,7 +67,7 @@ const useStyles = (customize) => {
         display: 'none !important',
       },
     };
-  return makeStyles((theme) => ({
+  return makeStyles()((theme) => ({
     skeletonHeader: {
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
     },
@@ -149,9 +150,9 @@ const useStyles = (customize) => {
       },
       '& .header__search--inner': {
         display: 'flex',
-        '-ms-flex-pack': 'start',
+        msFlexPack: 'start',
         justifyContent: 'flex-start',
-        '-ms-flex-align': 'center',
+        msFlexAlign: 'center',
         alignItems: 'center',
       },
       '& .header__search--inner > .header__search--title': {
@@ -166,18 +167,18 @@ const useStyles = (customize) => {
       },
       '& .header__search--inner > div.search-api-form > form#search-api-form': {
         display: 'flex',
-        '-ms-flex-pack': 'start',
+        msFlexPack: 'start',
         justifyContent: 'flex-start',
-        '-ms-flex-align': 'center',
+        msFlexAlign: 'center',
         alignItems: 'center',
         width: '100%',
       },
       '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item': {
         width: '100%',
         display: 'flex',
-        '-ms-flex-pack': 'start',
+        msFlexPack: 'start',
         justifyContent: 'flex-start',
-        '-ms-flex-align': 'center',
+        msFlexAlign: 'center',
         alignItems: 'center',
         margin: '20px 0',
       },
@@ -243,9 +244,9 @@ const useStyles = (customize) => {
         },
         '& .search-form-mobile.isMobile': {
           display: 'flex',
-          '-ms-flex-pack': 'start',
+          msFlexPack: 'start',
           justifyContent: 'flex-start',
-          '-ms-flex-align': 'center',
+          msFlexAlign: 'center',
           alignItems: 'center',
         },
         '& .search-form-mobile': {
@@ -253,9 +254,9 @@ const useStyles = (customize) => {
         },
         '& .search-form-mobile > div.search-api-form > form#search-api-form': {
           display: 'flex',
-          '-ms-flex-pack': 'start',
+          msFlexPack: 'start',
           justifyContent: 'flex-start',
-          '-ms-flex-align': 'center',
+          msFlexAlign: 'center',
           alignItems: 'center',
           width: '100%',
         },
@@ -346,7 +347,7 @@ const NeonHeader = forwardRef((inProps, headerRef) => {
     showSkeleton,
     customizeAuthContainer,
   } = props;
-  const classes = useStyles(customizeAuthContainer)(Theme);
+  const { classes } = useStyles(customizeAuthContainer)(Theme);
   const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const [{

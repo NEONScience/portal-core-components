@@ -6,7 +6,7 @@ import { of, map, catchError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -26,7 +26,7 @@ import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useDialogBaseStyles = makeStyles((theme) => ({
+const useDialogBaseStyles = makeStyles()((theme) => ({
   contentPaper: {
     margin: theme.spacing(10, 2, 2, 2),
     padding: theme.spacing(3),
@@ -93,7 +93,9 @@ const aopViewerReducer = (state: any, action: any) => {
 };
 
 const AopViewerDemo = (): React.JSX.Element => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [state, dispatch] = useReducer(
     aopViewerReducer,
     cloneDeep(DEFAULT_STATE),
@@ -201,8 +203,12 @@ const AopViewerDemo = (): React.JSX.Element => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
-  const dialogBaseClasses = useDialogBaseStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: dialogBaseClasses } = useDialogBaseStyles(Theme, {
+    props: Theme,
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (

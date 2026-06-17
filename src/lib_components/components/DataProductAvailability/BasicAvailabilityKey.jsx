@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -24,7 +24,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   legendContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -71,7 +71,9 @@ const statusLegendElementDefaultProps = {
 
 const StatusLegendElement = (inProps) => {
   const props = resolveProps(statusLegendElementDefaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { status, dialog } = props;
   if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
     return null;
@@ -122,7 +124,9 @@ const selectionLegendElementDefaultProps = {
 
 const SelectionLegendElement = (inProps) => {
   const props = resolveProps(selectionLegendElementDefaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { variant, dialog } = props;
   if (!['all', 'some'].includes(variant)) {
     return null;
@@ -272,7 +276,9 @@ const basicAvailabilityKeyDefaultProps = {
 
 const BasicAvailabilityKey = (inProps) => {
   const props = resolveProps(basicAvailabilityKeyDefaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     selectionEnabled,
     delineateRelease,

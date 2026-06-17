@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -24,7 +24,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   appBar: {
     position: 'relative',
     paddingRight: '0px !important',
@@ -88,7 +88,9 @@ const MapSelectionButton = (inProps) => {
     onSave,
   } = props;
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogEntered, setDialogEntered] = useState(false);
   const [selection, setSelection] = useState(getDefaultState().selection);

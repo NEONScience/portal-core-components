@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import AppBar from '@mui/material/AppBar';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
@@ -25,7 +25,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 import BasicLeafletMap, { Provider } from '../../../components/BasicLeafletMap';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -374,7 +374,9 @@ const manualLocationData = [
 ];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [tabValue, setTabValue] = useState(0);
 
   return (

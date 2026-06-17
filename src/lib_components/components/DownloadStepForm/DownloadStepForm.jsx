@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -56,7 +56,7 @@ import RouteService from '../../service/RouteService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   copyButton: {
     marginLeft: theme.spacing(2),
   },
@@ -236,7 +236,9 @@ const downloadStepFormDefaultProps = {
 
 const DownloadStepForm = (inProps) => {
   const props = resolveProps(downloadStepFormDefaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const {
     stepKey,

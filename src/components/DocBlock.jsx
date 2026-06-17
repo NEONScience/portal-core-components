@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Typography from '@mui/material/Typography';
 
 import Theme from '@/components/Theme/Theme';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     marginBottom: theme.spacing(2.5),
     '& tt': {
@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DocBlock(props) {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { children } = props;
   return (
     <Typography className={classes.root} component="div">

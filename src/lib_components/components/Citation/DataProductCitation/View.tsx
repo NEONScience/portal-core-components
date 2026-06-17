@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Skeleton from '@mui/material/Skeleton';
@@ -40,7 +40,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   citationTextOnly: {
     color: theme.palette.grey[400],
   },
@@ -81,7 +81,9 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     textOnlyProps,
     showManyParents,
   }: DataProductCitationViewProps = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const state = DataProductCitationContext.useDataProductCitationContextState();
 
   let appliedTextOnly: CitationTextOnlyProps = {

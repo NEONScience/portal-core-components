@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
@@ -127,7 +127,7 @@ const exportCsv = (columns = [], rows = []) => {
   }
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tableContainer: {
     backgroundColor: 'white',
     overflowWrap: 'normal',
@@ -281,7 +281,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SiteMapTable = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const tableRef = useRef(null);
 
   // Neon Context State

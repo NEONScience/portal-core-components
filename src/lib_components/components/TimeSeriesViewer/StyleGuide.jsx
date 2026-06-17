@@ -4,7 +4,7 @@ import { of, map, catchError } from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -36,7 +36,7 @@ import DP1_00001_001_ABBY_BASIC_30MIN_2018_12 from '../../../sampleData/TimeSeri
 
 import productJSON from '../../../sampleData/DP1.00001.001.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -289,7 +289,9 @@ const StaticTimeSeriesViewer = () => {
 };
 
 const StaticTimeSeriesViewerDialog = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -370,7 +372,9 @@ return (
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   return (
     <>

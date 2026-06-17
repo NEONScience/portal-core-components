@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
@@ -42,7 +42,7 @@ const preStyle = {
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -84,7 +84,9 @@ const EnhancedAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { sites: availabilitySites, ...other } = props;
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
 
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Cancel';
 
 import Theme from '../Theme/Theme';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   avatarLarge: {
     '& svg': {
       height: theme.spacing(3),
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useChipStyles = makeStyles((theme) => ({
+const useChipStyles = makeStyles()((theme) => ({
   outlined: {
     color: theme.palette.grey.A200,
   },
@@ -30,8 +30,12 @@ const useChipStyles = makeStyles((theme) => ({
 }));
 
 const SiteChip = (props) => {
-  const classes = useStyles(Theme);
-  const chipClasses = useChipStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
+  const { classes: chipClasses } = useChipStyles(Theme, {
+    props: Theme,
+  });
   const { label, ...otherProps } = props;
 
   // Default optional props

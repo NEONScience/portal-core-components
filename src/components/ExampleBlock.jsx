@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Container from '@mui/material/Container';
 
 import Theme from '@/components/Theme/Theme';
 import { resolveProps } from '@/util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     maxWidth: 'unset !important',
     margin: theme.spacing(2, 0),
@@ -25,7 +25,9 @@ const defaultProps = {
 
 export default function ExampleBlock(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const { column, children } = props;
   return (
     <Container

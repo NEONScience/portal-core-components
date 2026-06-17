@@ -1,9 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-} from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Theme as MuiTheme } from '@mui/material';
 
 import hljs from 'highlight.js/lib/core';
@@ -19,15 +16,14 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('typescript', typescript);
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
+const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
+  ({
     root: {
       margin: muiTheme.spacing(2, 0),
       '& code': {
         padding: `${muiTheme.spacing(0, 2)} !important`,
       },
-    },
+    }
   })) as StylesHook;
 
 export interface SyntaxHighlightProps {
@@ -49,7 +45,9 @@ const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
   inProps: SyntaxHighlightProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as SyntaxHighlightProps;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles(Theme, {
+    props: Theme,
+  });
   const {
     children,
     language,
