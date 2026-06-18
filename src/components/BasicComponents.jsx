@@ -100,7 +100,7 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
 
       <div style={{ marginBottom: Theme.spacing(4) }}>
-        <Accordion slotProps={{ heading: { component: 'div' } }}>
+        <Accordion slotProps={{ heading: { component: 'h4' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Basic Accordion
           </AccordionSummary>

@@ -268,14 +268,8 @@ const baseTheme = createTheme({
           fontWeight: 500,
         },
         expandIconWrapper: {
-          padding: '12px',
-          borderRadius: '50%',
-          border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
           '&:hover': {
-            padding: '12px',
             backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
-            color: COLORS.LIGHT_BLUE[400],
-            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
           },
         },
       },
