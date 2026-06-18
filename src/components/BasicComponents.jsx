@@ -61,7 +61,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   typographyContainer: {
-    '& > *': {
+    '& > .MuiTypography-root': {
       marginBottom: theme.spacing(3),
     },
   },

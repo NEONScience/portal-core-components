@@ -457,7 +457,7 @@ const baseTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: '6px',
+          padding: '7px 7px',
         },
       },
     },
@@ -553,7 +553,7 @@ const baseTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: '6px',
+          padding: '7px 7px',
         },
       },
     },
@@ -655,6 +655,7 @@ const baseTheme = createTheme({
           },
           [`& .${sliderClasses.rail}`]: {
             borderRadius: 0,
+            width: '2px',
           },
           [`& .${sliderClasses.thumb}`]: {
             height: 12,
