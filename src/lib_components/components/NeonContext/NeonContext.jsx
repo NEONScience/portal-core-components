@@ -353,6 +353,11 @@ const Provider = (props) => {
   useEffect(() => {
     const authBroadcastChannelMessageHandler = (e) => {
       if (stateIsAuthenticated) {
+        if (exists(e) && exists(e.data) && isStringNonEmpty(e.data.event)) {
+          if (e.data.event === 'account-data-changed') {
+            AuthService.handleLoginMessageFromBroadcastChannel(dispatch);
+          }
+        }
         return;
       }
       AuthService.handleLoginMessageFromBroadcastChannel(dispatch);

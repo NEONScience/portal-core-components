@@ -64,7 +64,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
-          <Typography variant="body2">
+          <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Sign In Completed
           </Typography>
         </div>
@@ -86,8 +86,30 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <VerifiedEmailIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
-          <Typography variant="body2">
+          <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Email Verified
+          </Typography>
+        </div>
+      );
+    },
+  },
+  'valid-organization': {
+    displayLabel: 'Add Organization',
+    getContents: (completed: boolean): JSX.Element => {
+      if (!completed) {
+        return (
+          <Typography variant="body2">
+            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+            Navigate to {myAccountLink} to add your organization
+            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+          </Typography>
+        );
+      }
+      return (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
+            Organization added to your account
           </Typography>
         </div>
       );

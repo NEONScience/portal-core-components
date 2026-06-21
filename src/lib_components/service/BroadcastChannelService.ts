@@ -6,7 +6,7 @@ let AUTH_BROADCAST_CHANNEL: Undef<BroadcastChannel>;
 
 export type MessageEventListener = (event: MessageEvent<any>) => void;
 
-export interface LoginMessage {
+export interface BroadcastChannelMessage {
   event: string;
 }
 
@@ -43,6 +43,10 @@ export interface IBroadcastChannelService {
    * Sends a login message to the broadcast channel
    */
   sendLoginMessage: () => void;
+  /**
+   * Sends an account data changed message to the broadcast channel
+   */
+  sendAccountDataChangedMessage: () => void;
 }
 
 const BroadcastChannelService: IBroadcastChannelService = {
@@ -77,8 +81,22 @@ const BroadcastChannelService: IBroadcastChannelService = {
       return;
     }
     const bc = undefBc as BroadcastChannel;
-    const message: LoginMessage = {
+    const message: BroadcastChannelMessage = {
       event: 'login',
+    };
+    bc.postMessage(message);
+  },
+  sendAccountDataChangedMessage: (): void => {
+    if (NeonEnvironment.authDisableBroadcastChannel) {
+      return;
+    }
+    const undefBc: Undef<BroadcastChannel> = getAuthBroadcastChannel();
+    if (!exists(undefBc)) {
+      return;
+    }
+    const bc = undefBc as BroadcastChannel;
+    const message: BroadcastChannelMessage = {
+      event: 'account-data-changed',
     };
     bc.postMessage(message);
   },

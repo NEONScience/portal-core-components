@@ -1,5 +1,5 @@
 export type MessageEventListener = (event: MessageEvent<any>) => void;
-export interface LoginMessage {
+export interface BroadcastChannelMessage {
     event: string;
 }
 /**
@@ -20,6 +20,10 @@ export interface IBroadcastChannelService {
      * Sends a login message to the broadcast channel
      */
     sendLoginMessage: () => void;
+    /**
+     * Sends an account data changed message to the broadcast channel
+     */
+    sendAccountDataChangedMessage: () => void;
 }
 declare const BroadcastChannelService: IBroadcastChannelService;
 export default BroadcastChannelService;
