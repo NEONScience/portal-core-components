@@ -24,6 +24,7 @@ import {
 } from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
+import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import {
   buildManifestConfig,
@@ -102,8 +103,15 @@ const DEFAULT_REQUIRED_STEPS = [
   { key: 'summary', isComplete: null },
 ];
 
+const DOWNLOAD_STATUS = {
+  AWAITING_PRECONDITIONS: 'AWAITING_PRECONDITIONS',
+  ALLOW_DOWNLOAD: 'ALLOW_DOWNLOAD',
+  DISALLOW_DOWNLOAD: 'DISALLOW_DOWNLOAD',
+};
+
 const DEFAULT_STATE = {
   downloadContextIsActive: true,
+  downloadStatus: DOWNLOAD_STATUS.AWAITING_PRECONDITIONS,
   broadcast: false,
   dialogOpen: false,
   awaitingHigherOrderUpdateWhenDialogOpens: false,
@@ -889,6 +897,12 @@ const reducer = (state, action) => {
     }, state);
 
   switch (action.type) {
+    case 'setDownloadStatus':
+      return {
+        ...state,
+        downloadStatus: action.downloadStatus,
+      };
+
     // Action for setting state from higher order state
     case 'setFromHigherOrderState':
       if (!state.dialogOpen) {
@@ -1134,8 +1148,13 @@ const Provider = (props) => {
     stateObservable,
     children,
   } = props;
-
-  // get the initial state from storage if present, else get from props.
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  // Check preconditions for initial status
+  const {
+    ready: preconditionsSatisfied,
+    canAccessData,
+  } = neonContextSessionState;
+  // Get the initial state from storage if present, else get from props.
   let initialState = getInitialStateFromProps(props);
   const { productCode: product } = initialState.productData;
   const stateKey = `downloadDataContextState-${product}-${downloadDataContextUniqueId}`;
@@ -1150,9 +1169,18 @@ const Provider = (props) => {
     stateStorage.removeState();
     initialState = convertAOPInitialState(savedState, initialState);
   }
+  // Apply precondition state regardless of stored state for initial state
+  initialState.downloadStatus = DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
   const [state, dispatch] = useReducer(wrappedReducer, initialState);
+  const { downloadStatus, downloadContextIsActive, dialogOpen } = state;
 
-  const { downloadContextIsActive, dialogOpen } = state;
+  useEffect(() => {
+    if (!preconditionsSatisfied) { return; }
+    const newStatus = canAccessData
+      ? DOWNLOAD_STATUS.ALLOW_DOWNLOAD
+      : DOWNLOAD_STATUS.DISALLOW_DOWNLOAD;
+    dispatch({ type: 'setDownloadStatus', downloadStatus: newStatus });
+  }, [dispatch, preconditionsSatisfied, canAccessData]);
 
   // The current sign in process uses a separate domain. This function
   // persists the current state in storage when the button is clicked
@@ -1194,7 +1222,7 @@ const Provider = (props) => {
       })
   ));
 
-  const handleFetchS3Files = (currentState) => {
+  const handleFetchS3Files = (currentState, headers) => {
     const { productCode } = currentState.productData;
     const keys = Object.keys(currentState.s3FileFetches)
       .filter((key) => currentState.s3FileFetches[key] === 'awaitingFetchCall');
@@ -1208,7 +1236,7 @@ const Provider = (props) => {
           ? currentState.release.value
           : null;
         return NeonApi
-          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth, release))
+          .getJsonObservable(buildS3FilesRequestUrl(productCode, site, yearMonth, release), headers)
           .pipe(
             map((response) => ({
               status: 'fetched',
@@ -1294,10 +1322,17 @@ const Provider = (props) => {
   // If the state has changed such that new fetches for s3 files are expected:
   // generate those fetches.
   useEffect(() => {
-    if (Object.values(state.s3FileFetches).some((status) => status === 'awaitingFetchCall')) {
-      handleFetchS3Files(state);
+    if (downloadStatus !== DOWNLOAD_STATUS.ALLOW_DOWNLOAD) {
+      return;
     }
-  }, [state]);
+    if (Object.values(state.s3FileFetches).some((status) => status === 'awaitingFetchCall')) {
+      const headers = {
+        ...neonContextSessionState.sessionHeaders,
+      };
+      handleFetchS3Files(state, headers);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, downloadStatus, neonContextSessionState.sessionHeaders]);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -1364,6 +1399,7 @@ const DownloadDataContext = {
   reducer,
   DEFAULT_STATE,
   ALL_STEPS,
+  DOWNLOAD_STATUS,
   getStateObservable,
 };
 

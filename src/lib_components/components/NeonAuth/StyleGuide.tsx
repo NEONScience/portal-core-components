@@ -22,7 +22,7 @@ import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from './NeonAuth';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
-import UserCard from './UserCard';
+import UserCard from '../Accounts/UserCard';
 
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;

@@ -19,7 +19,7 @@ RUN rm -rf /app/build-temp
 # Build production container with only necessary artifacts
 
 FROM portal-web-server-builder:current AS server-builder-parent
-FROM alpine:3.20
+FROM alpine:3.23
 
 EXPOSE 3006
 
@@ -46,5 +46,4 @@ ENTRYPOINT exec ./server \
   -app-api-host=$REACT_APP_NEON_API_HOST \
   -app-web-host=$REACT_APP_NEON_WEB_HOST \
   -app-api-token=$REACT_APP_NEON_SERVICE_API_TOKEN \
-  -app-auth-silent-type=$REACT_APP_NEON_AUTH_SILENT_TYPE \
-  -app-cookie-domain=$PORTAL_SERVER_APP_COOKIE_DOMAIN
+  -app-auth-silent-type=$REACT_APP_NEON_AUTH_SILENT_TYPE

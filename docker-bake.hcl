@@ -2,7 +2,7 @@ variable "NODE_VERSION" {
   default = "22.5"
 }
 variable "PORTAL_WEB_SERVER_BUILDER_TAG" {
-  default = "v2.1.0"
+  default = "v2.2.0"
 }
 
 # Populated from GitHub Action

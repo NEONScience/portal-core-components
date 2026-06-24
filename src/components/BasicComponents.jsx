@@ -625,32 +625,34 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Typography</Typography>
 
       <div className={classes.typographyContainer}>
-        <Typography variant="h1" gutterBottom>h1. Heading</Typography>
-        <Typography variant="h2" gutterBottom>h2. Heading</Typography>
-        <Typography variant="h3">h3. Heading</Typography>
-        <Typography variant="h4">h4. Heading</Typography>
-        <Typography variant="h5">h5. Heading</Typography>
-        <Typography variant="h6">h6. Heading</Typography>
+        <Typography variant="h1" gutterBottom>h1. Heading ({Theme.typography.h1.fontSize})</Typography>
+        <Typography variant="h2" gutterBottom>h2. Heading ({Theme.typography.h2.fontSize})</Typography>
+        <Typography variant="h3">h3. Heading ({Theme.typography.h3.fontSize})</Typography>
+        <Typography variant="h4">h4. Heading ({Theme.typography.h4.fontSize})</Typography>
+        <Typography variant="h5">h5. Heading ({Theme.typography.h5.fontSize})</Typography>
+        <Typography variant="h6">h6. Heading ({Theme.typography.h6.fontSize})</Typography>
         <Typography variant="subtitle1">
-          subtitle1. Lorem Ipsum Dolor Sit Amet
+          subtitle1. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle1.fontSize})
         </Typography>
         <Typography variant="subtitle2">
-          subtitle2. Lorem Ipsum Dolor Sit Amet
+          subtitle2. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle2.fontSize})
         </Typography>
         <Typography variant="body1">
           body1. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
+          ({Theme.typography.body1.fontSize})
         </Typography>
         <Typography variant="body2">
           body2. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
+          ({Theme.typography.body2.fontSize})
         </Typography>
         <Typography variant="button" display="block" gutterBottom>
-          button text
+          button text ({Theme.typography.button.fontSize})
         </Typography>
         <Typography variant="caption" display="block" gutterBottom>
-          caption text
+          caption text ({Theme.typography.caption.fontSize})
         </Typography>
         <Typography variant="overline" display="block" gutterBottom>
-          overline text
+          overline text ({Theme.typography.overline.fontSize})
         </Typography>
       </div>
 
