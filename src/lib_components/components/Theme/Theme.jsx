@@ -459,6 +459,14 @@ const baseTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: COLORS.GREY[200],
+          letterSpacing: 'normal',
+        },
+        label: {
+          padding: '0 12px',
+          fontWeight: 400,
+        },
+        labelSmall: {
+          padding: '0 8px',
         },
       },
     },
@@ -696,6 +704,8 @@ const baseTheme = createTheme({
           border: `1.5px solid ${COLORS.GREY[200]}`,
           borderRadius: '0px',
           fontSize: '0.75rem',
+          padding: '12px',
+          lineHeight: 1.75,
           '&.Mui-selected': {
             zIndex: 1,
             backgroundColor: '#fff',
@@ -703,6 +713,9 @@ const baseTheme = createTheme({
           },
           '&:hover, &:active': {
             backgroundColor: '#fff',
+          },
+          '@media (min-width:599.95px)': {
+            minWidth: '160px',
           },
         },
         textColorInherit: {

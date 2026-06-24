@@ -56,7 +56,7 @@ import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles<any>()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -210,7 +210,7 @@ const dataProductCitationReducer = (state: any, action: any) => {
 };
 
 const DataProductCitationDemo = (): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
+  const { classes } = useStyles({
     props: Theme,
   });
   const [state, dispatch] = useReducer(
@@ -412,9 +412,7 @@ const WrappedDataProductCitationDemo = (Theme as any).getWrappedComponent(
 );
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   return (
     <>
       <DocBlock>

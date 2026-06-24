@@ -75,7 +75,7 @@ import FullWidthVisualization from 'portal-core-components/lib/components/FullWi
       <DocBlock>
         A <tt>FullWidthVisualization</tt> instance requires a <tt>vizRef</tt> and
         children. The component acts as the container for the visualization where
-        the visualization itself must be defined as a child node. The <tt>vizRef</tt> must
+        the visualization itself must be defined as a child node. The <tt>vizRef</tt>&nbsp;must
         be created using React&apos;s <tt>useRef</tt> hook, and in addition to being passed
         in as a prop, must be added as the <tt>ref</tt> on the child node that is the
         dynamically sized visualization element (e.g. the svg, canvas, iframe, etc.)

@@ -20,7 +20,7 @@ import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles<any>()((theme) => ({
   container: {
     margin: theme.spacing(3, 3, 3, 3),
   },
@@ -34,9 +34,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [tabDialogOpen, setTabDialogOpen] = useState(false);
   const exampleDoc: NeonDocument = {

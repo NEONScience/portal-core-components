@@ -24,7 +24,6 @@ const NeonThemeProvider = (props: NeonThemeProviderProps): React.JSX.Element => 
   return (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
-      {/* <GlobalCss /> */}
       <GlobalStyles styles={globalCss} />
       {children}
     </ThemeProvider>

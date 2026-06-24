@@ -40,7 +40,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+const useStyles = makeStyles<any>()((theme) => ({
   citationTextOnly: {
     color: theme.palette.grey[400],
   },
@@ -81,9 +81,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     textOnlyProps,
     showManyParents,
   }: DataProductCitationViewProps = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   const state = DataProductCitationContext.useDataProductCitationContextState();
 
   let appliedTextOnly: CitationTextOnlyProps = {

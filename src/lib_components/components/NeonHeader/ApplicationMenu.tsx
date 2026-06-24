@@ -32,14 +32,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
   menuContainer: {
     zIndex: 1000, // be sure to display the menu over other elements
   },
-
   toolbarContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.45)', // match shadow of site header
     position: 'relative',
   },
-
   toolbarButtons: {
     display: 'flex',
     marginLeft: 'auto', // align content right
@@ -47,7 +45,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
   },
-
   paper: {
     padding: theme.spacing(4),
     maxWidth: '500px', // limit width of menu
@@ -68,7 +65,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
       clipPath: 'polygon(-5px -5px, calc(100% + 5px) -5px, calc(100% + 5px) calc(100% + 5px))',
     },
   },
-
   card: {
     transition: '0.4s',
     '&:hover': { // raised hover effect for Cards
@@ -79,14 +75,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
     width: '100%', // ensure Cards are equal width
     border: 0, // remove default Card border
   },
-
   cardContent: {
     textAlign: 'center',
   },
-
   gridItem: {
     display: 'flex', // so grid items stretch to equal height
-  }
+  },
 }));
 
 // define the menu component

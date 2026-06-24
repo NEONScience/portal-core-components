@@ -51,7 +51,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+const useStyles = makeStyles<any>()((theme) => ({
   cardActions: {
     flexWrap: 'wrap',
     marginTop: theme.spacing(-1),
@@ -116,9 +116,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     viewState,
     hasManyParents,
   }: DataProductCitationItemViewProps = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
 
   let appliedTextOnly: CitationTextOnlyProps = {
@@ -409,15 +407,17 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
               placement="bottom-start"
               title="Click to copy the above plain text citation to the clipboard"
             >
-              <Button
-                size="small"
-                color="primary"
-                variant="outlined"
-                startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
-                className={classes.cardButton}
-              >
-                Copy
-              </Button>
+              <span>
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
+                  className={classes.cardButton}
+                >
+                  Copy
+                </Button>
+              </span>
             </Tooltip>
           </CopyToClipboard>
           {DataCiteService.getDataProductFormats()

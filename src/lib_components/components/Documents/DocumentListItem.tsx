@@ -22,6 +22,7 @@ import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
@@ -60,12 +61,11 @@ import {
 const COMPONENT_XS_UPPER = 480;
 const COMPONENT_SM_UPPER = 805;
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles<any>()((muiTheme) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
   },
-
   listItem: {
     display: 'flex',
     wordBreak: 'break-word',
@@ -77,56 +77,49 @@ const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
       },
     },
   },
-
   listItemSecondarySpacer: {
     margin: muiTheme.spacing(0, 2),
     color: muiTheme.palette.grey[200],
   },
-
   listItemIcon: {
     minWidth: muiTheme.spacing(4),
     marginRight: muiTheme.spacing(1),
   },
-
   fileTypeChip: {
     marginRight: '5px',
     backgroundColor: 'transparent',
+    fontWeight: '400',
     '&:last-child': {
       marginRight: '0px',
     },
   },
-
   fileTypeChipSelected: {
     marginRight: '5px',
     fontWeight: 500,
   },
-
   variantFetchingLabel: {
     lineHeight: '24px',
   },
-
   variantFetchingProgress: {
     marginRight: '36px',
     marginLeft: '36px',
   },
-
   downloadErrorContainer: {
     marginTop: muiTheme.spacing(2),
-  }
-})) as StylesHook;
+  },
+}));
 
-const useListItemSecondaryActionStyles = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    root: {
-      display: 'flex',
-      alignItems: 'center',
-      position: 'unset',
-      transform: 'unset',
-      top: 'unset',
-      right: 'unset',
-      whiteSpace: 'nowrap',
-    }
-  })) as StylesHook;
+const useListItemSecondaryActionStyles = makeStyles<any>()(() => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'unset',
+    transform: 'unset',
+    top: 'unset',
+    right: 'unset',
+    whiteSpace: 'nowrap',
+  },
+}));
 
 enum ActionTypes {
   FETCH_VARIANTS_STARTED = 'FETCH_VARIANTS_STARTED',
@@ -302,12 +295,8 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
-  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
+  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles(Theme);
   // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [

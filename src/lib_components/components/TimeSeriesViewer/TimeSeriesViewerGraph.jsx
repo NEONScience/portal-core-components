@@ -263,9 +263,7 @@ const graphReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerGraph() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const downloadRef = useRef(null);
@@ -394,24 +392,25 @@ export default function TimeSeriesViewerGraph() {
       return (
         <Card
           variant="outlined"
-          className={className}
           key={s.label}
           style={seriesStyle}
           data-label={s.label}
           data-kind="series"
           title={`Click to ${isHidden ? 'show' : 'hide'} this series`}
         >
-          <div className={classes.legendSeriesColor} style={colorStyle} />
-          <div className={classes.legendSeriesLabel}>
-            {s.label}
-            <br />
-            {yUnits}
-            {!belowSm || !s.isHighlighted ? null : (
-              <>
-                <br />
-                {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
-              </>
-            )}
+          <div className={className}>
+            <div className={classes.legendSeriesColor} style={colorStyle} />
+            <div className={classes.legendSeriesLabel}>
+              {s.label}
+              <br />
+              {yUnits}
+              {!belowSm || !s.isHighlighted ? null : (
+                <>
+                  <br />
+                  {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+                </>
+              )}
+            </div>
           </div>
         </Card>
       );
