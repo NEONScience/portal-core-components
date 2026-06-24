@@ -198,10 +198,10 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/about/user-accounts`
   ),
   getDataPoliciesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies`
+    `${NeonEnvironment.getWebHost()}/usage-policies`
   ),
   getDataPoliciesCitationPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies/citing`
+    `${NeonEnvironment.getWebHost()}/data/guidelines-policies/citing`
   ),
   getDataQualityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-quality-program`
