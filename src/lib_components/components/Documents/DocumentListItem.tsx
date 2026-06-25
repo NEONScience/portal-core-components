@@ -77,6 +77,12 @@ const useStyles = makeStyles<any>()((muiTheme) => ({
       },
     },
   },
+  listItemWithButton: {
+    padding: muiTheme.spacing(1, 0, 1, 1),
+  },
+  listItemButton: {
+    padding: '0',
+  },
   listItemSecondarySpacer: {
     margin: muiTheme.spacing(0, 2),
     color: muiTheme.palette.grey[200],
@@ -664,6 +670,44 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </div>
     );
   };
+
+  if (makeDownloadableLink) {
+    return (
+      <>
+        <ListItem
+          ref={containerRef as never}
+          key={id}
+          className={`${classes.listItem} ${classes.listItemWithButton}`}
+          component="div"
+          ContainerComponent={containerComponent}
+          ContainerProps={{ className: classes.listItemContainer }}
+        >
+          <ListItemButton
+            className={classes.listItemButton}
+            title={`Click to download ${document.name}`}
+            onClick={(): void => {
+              handleDownloadStarted();
+              DocumentService.downloadDocument(
+                appliedDocument,
+                (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+                (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+              );
+            }}
+          >
+            <ListItemIcon className={classes.listItemIcon}>
+              <TypeIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={primary}
+              secondary={renderSecondaryItem()}
+            />
+          </ListItemButton>
+          {renderAction()}
+        </ListItem>
+        {renderDownloadError()}
+      </>
+    );
+  }
   return (
     <>
       <ListItem
@@ -673,16 +717,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         component="div"
         ContainerComponent={containerComponent}
         ContainerProps={{ className: classes.listItemContainer }}
-        title={makeDownloadableLink ? `Click to download ${document.name}` : undefined}
-        button={makeDownloadableLink as any}
-        onClick={!makeDownloadableLink ? undefined : (): void => {
-          handleDownloadStarted();
-          DocumentService.downloadDocument(
-            appliedDocument,
-            (downloadDoc: NeonDocument): void => handleDownloadIdle(),
-            (downloadDoc: NeonDocument): void => handleDownloadFailed(),
-          );
-        }}
       >
         <ListItemIcon className={classes.listItemIcon}>
           <TypeIcon />
