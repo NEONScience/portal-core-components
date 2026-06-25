@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Button, { ButtonProps } from '@mui/material/Button';
 import ButtonGroup, { ButtonGroupProps } from '@mui/material/ButtonGroup';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -101,8 +101,8 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
   };
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item xs={12}>
+    <Grid container alignItems="center">
+      <Grid size={{ xs: 12 }}>
         <ButtonGroup
           aria-label={`${name}-split-button`}
           {...appliedButtonGroupProps}

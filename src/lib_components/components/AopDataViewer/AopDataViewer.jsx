@@ -15,7 +15,7 @@ import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import MenuItem from '@mui/material/MenuItem';
@@ -504,18 +504,18 @@ const AopDataViewer = (inProps) => {
         ? (
           <>
             <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
-              <Grid item xs={2}>{renderInputLabel('site', tooltips.site)}</Grid>
-              <Grid item xs={10}>
+              <Grid size={{ xs: 2 }}>{renderInputLabel('site', tooltips.site)}</Grid>
+              <Grid size={{ xs: 10 }}>
                 {renderSiteSelect()}
               </Grid>
             </Grid>
             <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
-              <Grid item xs={2}>{renderInputLabel('year', tooltips.year)}</Grid>
-              <Grid item xs={10}>{renderYearSlider()}</Grid>
+              <Grid size={{ xs: 2 }}>{renderInputLabel('year', tooltips.year)}</Grid>
+              <Grid size={{ xs: 10 }}>{renderYearSlider()}</Grid>
             </Grid>
             <Grid container spacing={2} justifyContent="center" style={{ marginBottom: Theme.spacing(1) }}>
-              <Grid item xs={2}>{renderInputLabel('flight', tooltips.flight)}</Grid>
-              <Grid item xs={10}>{renderFlightSelect()}</Grid>
+              <Grid size={{ xs: 2 }}>{renderInputLabel('flight', tooltips.flight)}</Grid>
+              <Grid size={{ xs: 10 }}>{renderFlightSelect()}</Grid>
             </Grid>
           </>
         ) : (

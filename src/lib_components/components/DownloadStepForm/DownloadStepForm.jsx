@@ -14,7 +14,7 @@ import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -318,7 +318,7 @@ const DownloadStepForm = (inProps) => {
         alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.documentation"
       >
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="Documentation"
@@ -358,7 +358,7 @@ const DownloadStepForm = (inProps) => {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card style={{ marginTop: Theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
@@ -393,7 +393,7 @@ const DownloadStepForm = (inProps) => {
         alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="Provisional Data"
@@ -436,7 +436,7 @@ const DownloadStepForm = (inProps) => {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card style={{ marginTop: Theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
@@ -545,7 +545,7 @@ const DownloadStepForm = (inProps) => {
     const noFiltersApplied = Object.keys(filters).every((col) => !filters[col].length);
     /* eslint-disable react/jsx-one-expression-per-line */
     const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
-      <Grid item xs={12}>
+      <Grid size={{ xs: 12 }}>
         <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
@@ -565,7 +565,7 @@ const DownloadStepForm = (inProps) => {
     ) : null;
     /* eslint-disable react/jsx-one-expression-per-line */
     const tooManyFilesWarning = (!allowSelectAll && !allowSelectFiltered) ? (
-      <Grid item xs={12}>
+      <Grid size={{ xs: 12 }}>
         <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
@@ -588,7 +588,7 @@ const DownloadStepForm = (inProps) => {
       Container: Box,
       Toolbar: (toolbarProps) => (
         <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <div style={{ marginBottom: Theme.spacing(1) }}>
               <ToggleButtonGroup
                 size="small"
@@ -673,7 +673,7 @@ const DownloadStepForm = (inProps) => {
               </Button>
             </div>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <MTableToolbar {...toolbarProps} />
           </Grid>
           {postSizeError}
@@ -1046,10 +1046,10 @@ const DownloadStepForm = (inProps) => {
         spacing={2}
         alignItems="flex-start"
       >
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {stepSummary}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {downloadAndExploreCallout}
           {fileNamingCallout}
           {citationCallout}

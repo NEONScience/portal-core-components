@@ -6,7 +6,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
@@ -418,7 +418,7 @@ export default function StyleGuide() {
   const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
 
   const skeletionGrid = (
-    <Grid item xs={4}>
+    <Grid size={{ xs: 4 }}>
       <Skeleton variant="rectangular" width="100%" height={100} />
       <br />
       <Skeleton variant="rectangular" width="100%" height={16} />
@@ -856,7 +856,7 @@ const breadcrumbs = [
 ];
 
 const skeletionGrid = (
-  <Grid item xs={4}>
+  <Grid size={{ xs: 4 }}>
     <Skeleton variant="rect" width="100%" height={100} />
     <br />
     <Skeleton variant="rect" width="100%" height={16} />

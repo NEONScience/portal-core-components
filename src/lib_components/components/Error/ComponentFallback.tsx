@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FallbackProps } from 'react-error-boundary';
 
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 
 import ErrorCard from '../Card/ErrorCard';
 
@@ -14,7 +14,7 @@ const ComponentFallback: React.FC<FallbackProps> = (
   console.error(error);
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid size={{ xs: 12 }}>
         <ErrorCard
           title="Something broke"
           message={error.message}

@@ -9,7 +9,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
@@ -168,7 +168,7 @@ const AopViewerDemo = (): React.JSX.Element => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -192,7 +192,7 @@ const AopViewerDemo = (): React.JSX.Element => {
             )))}
           </Select>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           {state.isProductLoading ? (<Skeleton variant="rectangular" width="100%" height={600} />) : (
             <AopDataViewer productCode={state.selectedProduct} />
           )}

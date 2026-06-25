@@ -7,7 +7,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';
@@ -199,7 +199,7 @@ const AllProductsTimeSeries = () => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h6" id="all-products-time-series-select-label" gutterBottom>
             Select Data Product
           </Typography>
@@ -221,7 +221,7 @@ const AllProductsTimeSeries = () => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ReleaseFilter
             showGenerationDate
             showProductCount
@@ -230,7 +230,7 @@ const AllProductsTimeSeries = () => {
             onChange={handleReleaseChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TimeSeriesViewer
             productCode={state.selectedProduct}
             release={state.selectedRelease}

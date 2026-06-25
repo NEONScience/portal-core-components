@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from 'tss-react/mui';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
@@ -120,11 +120,11 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Skeleton variant="rectangular" width="100%" height={40} />
         </Grid>
         {!showTextOnly ? (
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Skeleton variant="rectangular" width="100%" height={180} />
           </Grid>
         ) : null}
@@ -146,7 +146,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <ErrorCard title={errorTitle} />
         </Grid>
       </Grid>
@@ -171,7 +171,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <WarningCard title={errorTitle} message={errorMessage} />
         </Grid>
       </Grid>

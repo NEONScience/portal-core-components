@@ -19,7 +19,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
@@ -346,7 +346,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -373,7 +373,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ReleaseFilter
             showGenerationDate
             showProductCount
@@ -382,7 +382,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
             onChange={handleReleaseChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="subtitle2" className={classes.title}>
             The citation context will determine the applied release based
             on the available releases for the product, release, and bundle.
@@ -391,7 +391,7 @@ const DataProductCitationDemo = (): React.JSX.Element => {
           </Typography>
           <Divider className={classes.divider} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <DataProductCitationView />
         </Grid>
       </Grid>

@@ -203,7 +203,7 @@ const baseTheme = createTheme({
       fontSize: '0.8rem',
     },
     caption: {
-      fontSize: '0.7rem',
+      fontSize: '0.75rem',
     },
   },
   // We have lots of overrides. Please keep them alphabetized for easier maintenance!

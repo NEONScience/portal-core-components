@@ -12,7 +12,7 @@ import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import LinearProgress from '@mui/material/LinearProgress';
 import Link from '@mui/material/Link';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -129,7 +129,7 @@ export default function DownloadDataDialog() {
   const belowMdStepper = useMediaQuery('(max-width: 800px)');
   const { classes } = useStyles(belowSm, belowSmMd)(Theme);
   const { classes: dialogBaseClasses } = useDialogBaseStyles(belowSm, {
-    props: belowSm
+    props: belowSm,
   })(Theme);
 
   /**
@@ -536,11 +536,11 @@ export default function DownloadDataDialog() {
         <div>
           <Grid container spacing={2}>
             {showDownloadButton ? (
-              <Grid item xs={12} sm={12} md={8}>
+              <Grid size={{ xs: 12, sm: 12, md: 8 }}>
                 {renderDownloadButton()}
               </Grid>
             ) : null}
-            <Grid item xs={12} sm={12} md={showDownloadButton ? 4 : 12}>
+            <Grid size={{ xs: 12, sm: 12, md: showDownloadButton ? 4 : 12 }}>
               <Button
                 fullWidth
                 data-selenium="download-data-dialog.cancel-button"
@@ -836,8 +836,9 @@ export default function DownloadDataDialog() {
       ) : null}
     >
       {renderGtmTags()}
+      { /* eslint-disable object-curly-newline */ }
       <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(3) }}>
-        <Grid item xs={12} sm={6} md={6} lg={8} data-selenium="download-data-dialog.product-info">
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 8 }} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>
@@ -871,7 +872,7 @@ export default function DownloadDataDialog() {
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4 }}>
           {fromManifest || fromAOPManifest ? (
             <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
               <div style={{ marginBottom: Theme.spacing(2) }}>
@@ -892,6 +893,7 @@ export default function DownloadDataDialog() {
           ) : null}
         </Grid>
       </Grid>
+      { /* eslint-enable object-curly-newline */ }
       {renderExternalHostInfo()}
       {renderDownloadSizeWarning()}
       {getSizeEstimateBytes() < DOWNLOAD_SIZE_WARN ? <Divider /> : null}

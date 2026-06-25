@@ -10,7 +10,7 @@ import { makeStyles } from 'tss-react/mui';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
@@ -227,28 +227,28 @@ const LegendDialog = (inProps) => {
       </div>
       <DialogContent dividers>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <StatusLegendElement status={availabilityStatusType} dialog />
           </Grid>
           {!delineateRelease ? null : (
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <StatusLegendElement status="available-provisional" dialog />
             </Grid>
           )}
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <StatusLegendElement status="not available" dialog />
           </Grid>
           {!delineateRelease ? null : (
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <StatusLegendElement status="mixed-available-provisional" dialog />
             </Grid>
           )}
           {!selectionEnabled ? null : (
             <>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <SelectionLegendElement variant="all" dialog />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <SelectionLegendElement variant="some" dialog />
               </Grid>
             </>

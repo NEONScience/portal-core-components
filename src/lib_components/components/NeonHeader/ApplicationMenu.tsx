@@ -12,7 +12,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import NeonContext from '../NeonContext/NeonContext';
 
 // interface for user application data
@@ -164,8 +164,7 @@ const Menu = (props: MenuProps) => {
                   >
                     {apps.map((app: { name: string; description: string; url: string }) => (
                       <Grid
-                        item
-                        xs={(apps.length === 1) ? 12 : 6}
+                        size={{ xs: (apps.length === 1) ? 12 : 6 }}
                         className={classes.gridItem}
                         key={app.name}
                       >

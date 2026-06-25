@@ -3,7 +3,7 @@
 
 import React, { CSSProperties } from 'react';
 
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import FormGroup from '@mui/material/FormGroup';
@@ -119,8 +119,8 @@ const renderUserCard = (isAuthenticated: boolean, userData: any): React.JSX.Elem
   }
   return (
     <>
-      <Grid item xs={12} md={3} />
-      <Grid item xs={12} md={6}>
+      <Grid size={{ xs: 12, md: 3 }} />
+      <Grid size={{ xs: 12, md: 6 }}>
         <Paper style={{ padding: '15px' }}>
           <UserCard
             pictureUrl={user.picture}
@@ -131,7 +131,7 @@ const renderUserCard = (isAuthenticated: boolean, userData: any): React.JSX.Elem
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={3} />
+      <Grid size={{ xs: 12, md: 3 }} />
     </>
   );
 };
@@ -168,7 +168,7 @@ const renderSilentAuthSection = (
     <>
       <ExampleBlock>
         <Grid container spacing={1}>
-          <Grid item xs={12} style={containerStyle}>
+          <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
                 loginPath={NeonEnvironment.getFullAuthPath('login')}
@@ -282,7 +282,7 @@ import NeonAuth from 'portal-core-components/lib/components/NeonAuth';
       </DocBlock>
       <ExampleBlock>
         <Grid container spacing={1}>
-          <Grid item xs={12} style={containerStyle}>
+          <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
                 loginPath={NeonEnvironment.getFullAuthPath('login')}

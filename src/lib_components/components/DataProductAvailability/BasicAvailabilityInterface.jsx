@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
@@ -685,10 +685,10 @@ const BasicAvailabilityInterface = (inProps) => {
   */
   const renderViewControls = () => {
     if (currentView === 'products') {
-      return (<Grid item xs={12} />);
+      return (<Grid size={{ xs: 12 }} />);
     }
     return (
-      <Grid item xs={12} sm={currentView === 'ungrouped' ? 12 : 5} md={6}>
+      <Grid size={{ xs: 12, md: 6, sm: currentView === 'ungrouped' ? 12 : 5 }}>
         {currentView === 'ungrouped' ? renderSortOptions() : renderViewOptions()}
       </Grid>
     );
@@ -706,10 +706,7 @@ const BasicAvailabilityInterface = (inProps) => {
     }
     return (
       <Grid
-        item
-        xs={12}
-        sm={smWidth}
-        md={mdWidth}
+        size={{ xs: 12, sm: smWidth, md: mdWidth }}
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <BasicAvailabilityKey
@@ -750,7 +747,7 @@ const BasicAvailabilityInterface = (inProps) => {
     };
     return (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={5} md={6}>
+        <Grid size={{ xs: 12, sm: 5, md: 6 }}>
           <div className={classes.topFormHeader}>
             <Typography variant="h6" className={classes.h6Small}>Sites</Typography>
           </div>
@@ -775,7 +772,7 @@ const BasicAvailabilityInterface = (inProps) => {
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={7} md={6}>
+        <Grid size={{ xs: 12, sm: 7, md: 6 }}>
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
@@ -838,7 +835,7 @@ const BasicAvailabilityInterface = (inProps) => {
             </Button>
           </div>
         </Grid>
-        <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid size={{ xs: 12 }} style={{ marginBottom: Theme.spacing(1) }}>
           <Card>
             <CardContent className={classes.helpGridContainer}>
               <div className={classes.helpGrid}>
@@ -886,10 +883,10 @@ const BasicAvailabilityInterface = (inProps) => {
         container
         spacing={2}
         direction="row-reverse"
-        style={{ marginBottom: Theme.spacing(1) }}
+        style={{ marginBottom: Theme.spacing(2) }}
       >
         {selectionEnabled ? (
-          <Grid item xs={12} sm={12}>
+          <Grid size={{ xs: 12, sm: 12 }}>
             {renderSelection()}
           </Grid>
         ) : null}

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Skeleton from '@mui/material/Skeleton';
 import HomeIcon from '@mui/icons-material/Home';
 import BasicComponentsIcon from '@mui/icons-material/ViewModule';
@@ -91,12 +91,12 @@ const WindRoseViewerStyleGuide = React.lazy(
 
 const SuspenseFallback = () => (
   <Grid container spacing={3}>
-    <Grid item xs={12}>
+    <Grid size={{ xs: 12 }}>
       <Skeleton variant="text" width="50%" height={32} />
       <br />
       <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
-    <Grid item xs={12}>
+    <Grid size={{ xs: 12 }}>
       <Skeleton variant="text" width="25%" height={48} />
       <br />
       <Skeleton variant="text" width="100%" height={24} />
@@ -105,7 +105,7 @@ const SuspenseFallback = () => (
       <br />
       <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
-    <Grid item xs={12}>
+    <Grid size={{ xs: 12 }}>
       <Skeleton variant="rectangular" width="100%" height={400} />
     </Grid>
   </Grid>

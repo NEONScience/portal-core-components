@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import CustomComponentFallback from '../Error/CustomComponentFallback';
@@ -21,7 +21,7 @@ const SiteMapFallbackComponent = (props) => {
       // eslint-disable-next-line react/no-unstable-nested-components
       FallbackComponent={() => (
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <ErrorCard
               title="Component Error"
               message="Site map encountered a problem"

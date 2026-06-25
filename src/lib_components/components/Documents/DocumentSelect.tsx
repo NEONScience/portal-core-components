@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -94,7 +94,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (
   return (
     <div className={classes.container}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <FormControl variant="outlined" className={classes.selectFormControl}>
             <InputLabel htmlFor="document-select-input">
               Select Document to View
@@ -132,7 +132,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           {renderSelectedDocument()}
         </Grid>
       </Grid>

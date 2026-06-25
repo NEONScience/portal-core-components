@@ -8,7 +8,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import SnackbarContent from '@mui/material/SnackbarContent';
@@ -678,8 +678,7 @@ const SiteMapFeature = (props) => {
     const count = loc.samplingModules.length ? ` (${loc.samplingModules.length})` : '';
     return (
       <Grid
-        item
-        xs={12}
+        size={{ xs: 12 }}
         key="plotSamplingModules"
         data-selenium="sitemap-map-popup-samplingModules"
       >
@@ -704,7 +703,7 @@ const SiteMapFeature = (props) => {
     const { areaKm2 } = bound.properties || {};
     const areaAcres = Number.isFinite(areaKm2) ? KM2_TO_ACRES * areaKm2 : null;
     return (
-      <Grid item xs={12} data-selenium="sitemap-map-popup-area">
+      <Grid size={{ xs: 12 }} data-selenium="sitemap-map-popup-area">
         <Typography variant="subtitle2">Area</Typography>
         <div className={classes.startFlex}>
           {renderNumericalValue(areaKm2, null, 'km\u00b2', 2, 'Area (km\u00b2)')}
@@ -739,8 +738,7 @@ const SiteMapFeature = (props) => {
     return (
       <Grid
         key="childSites"
-        item
-        xs={12}
+        size={{ xs: 12 }}
         data-selenium="sitemap-map-popup-childSites"
         style={{ marginBottom: Theme.spacing(2) }}
       >
@@ -776,10 +774,10 @@ const SiteMapFeature = (props) => {
     );
     return (
       <React.Fragment key="coordsAndElevation">
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           {renderElevation(loc)}
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           {renderLatLon(loc.latitude, loc.longitude, true, renderCoordsSubtitle)}
         </Grid>
       </React.Fragment>
@@ -791,10 +789,10 @@ const SiteMapFeature = (props) => {
   */
   const renderPlotSizeAndSlope = (loc) => (
     <React.Fragment key="plotSizeAndSlope">
-      <Grid item xs={6}>
+      <Grid size={{ xs: 6 }}>
         {renderPlotSize(loc)}
       </Grid>
-      <Grid item xs={6}>
+      <Grid size={{ xs: 6 }}>
         {renderPlotSlope(loc, true)}
       </Grid>
     </React.Fragment>
@@ -804,7 +802,7 @@ const SiteMapFeature = (props) => {
      Render: Popup Row; Tower Details
   */
   const renderTowerDetails = (loc) => (
-    <Grid key="towerDetails" item xs={12} data-selenium="sitemap-map-popup-towerDetails">
+    <Grid key="towerDetails" size={{ xs: 12 }} data-selenium="sitemap-map-popup-towerDetails">
       <Typography variant="subtitle2">Levels</Typography>
       <Typography variant="caption">{(loc.children || []).length}</Typography>
     </Grid>
@@ -843,7 +841,7 @@ const SiteMapFeature = (props) => {
       }
     }
     return (
-      <Grid key="nlcdClass" item xs={12} data-selenium="sitemap-map-popup-nlcdClass">
+      <Grid key="nlcdClass" size={{ xs: 12 }} data-selenium="sitemap-map-popup-nlcdClass">
         <Typography variant="subtitle2" style={titleStyle}>NLCD Class</Typography>
         <Typography variant="caption">{nlcd}</Typography>
       </Grid>
@@ -860,11 +858,11 @@ const SiteMapFeature = (props) => {
     const domainTitle = `${site.domainCode} - ${domainName}`;
     return (
       <React.Fragment key="locationSiteAndDomain">
-        <Grid item xs={7} data-selenium="sitemap-map-popup-site">
+        <Grid size={{ xs: 7 }} data-selenium="sitemap-map-popup-site">
           <Typography variant="subtitle2">NEON Site</Typography>
           {renderSite(siteCode)}
         </Grid>
-        <Grid item xs={5} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
+        <Grid size={{ xs: 5 }} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
           <Typography variant="subtitle2">Domain</Typography>
           <Tooltip title={`Jump to ${site.domainCode} on the map`}>
             <Link
@@ -1135,12 +1133,12 @@ const SiteMapFeature = (props) => {
         )}
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
             <Typography variant="caption"><i>{featureDescription}</i></Typography>
           </Grid>
           {/* State/Territory */}
-          <Grid item xs={4} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 4 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
             {selectionActive ? (
               <Typography variant="caption">{usState.name}</Typography>
@@ -1160,11 +1158,11 @@ const SiteMapFeature = (props) => {
             )}
           </Grid>
           {/* Latitude/Longitude */}
-          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Grid size={{ xs: 5 }} style={{ display: 'flex', alignItems: 'flex-end' }}>
             {renderLatLon(site.latitude, site.longitude)}
           </Grid>
           {/* Domain */}
-          <Grid item xs={7} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 7 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             {selectionActive ? (
               <Typography variant="caption">{`${site.domainCode} - ${domain.name}`}</Typography>
@@ -1214,12 +1212,12 @@ const SiteMapFeature = (props) => {
         </Link>
         <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
           {/* Terrain and Type */}
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
             <Typography variant="caption"><i>{featureDescription}</i></Typography>
           </Grid>
           {/* State/Territory */}
-          <Grid item xs={4} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 4 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
             {selectionActive ? (
               <Typography variant="caption">{usState.name}</Typography>
@@ -1239,11 +1237,11 @@ const SiteMapFeature = (props) => {
             )}
           </Grid>
           {/* Latitude/Longitude */}
-          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Grid size={{ xs: 5 }} style={{ display: 'flex', alignItems: 'flex-end' }}>
             {renderLatLon(site.latitude, site.longitude)}
           </Grid>
           {/* Domain */}
-          <Grid item xs={7} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 7 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             {selectionActive ? (
               <Typography variant="caption">{`${site.domain} - ${domain.name}`}</Typography>
