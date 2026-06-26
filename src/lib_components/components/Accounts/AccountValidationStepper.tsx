@@ -93,14 +93,15 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       );
     },
   },
-  'valid-organization': {
-    displayLabel: 'Add Organization',
+  'validate-account': {
+    displayLabel: 'Validate Account',
     getContents: (completed: boolean): JSX.Element => {
       if (!completed) {
         return (
           <Typography variant="body2">
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            Navigate to {myAccountLink} to add your organization
+            Validate your account by navigating to {myAccountLink} and updating
+            your account information with all required fields.
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           </Typography>
         );
@@ -109,7 +110,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
-            Organization added to your account
+            Account Validated
           </Typography>
         </div>
       );
