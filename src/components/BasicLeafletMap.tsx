@@ -32,7 +32,6 @@ import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
 import { NeonTheme } from '@/components/Theme/types';
 import { AnyAction, Nullable, Undef } from '@/types/core';
-import { StylesHook } from '@/types/muiTypes';
 import { exists } from '@/util/typeUtil';
 
 import 'leaflet/dist/leaflet.css';
@@ -41,43 +40,39 @@ const LEAFLET_ATTR_PREFIX = `
 <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
 `;
 
-const useStyles: StylesHook = makeStyles()((theme: NeonTheme) =>
-  ({
-    mapContainer: {
-      width: '100%',
-      height: '600px',
+const useStyles = makeStyles<NeonTheme>()((theme, neonTheme) => ({
+  mapContainer: {
+    width: '100%',
+    height: '600px',
+  },
+  mapNavButton: {
+    backgroundColor: '#fff !important',
+    width: '32px',
+    height: '32px',
+    padding: 'unset',
+    borderRadius: '2px 0px 2px 0px',
+    border: `1px solid ${neonTheme.colors.LIGHT_BLUE[500]}`,
+    '&:hover, &:active': {
+      color: neonTheme.colors.LIGHT_BLUE[400],
+      borderColor: neonTheme.colors.LIGHT_BLUE[400],
+      backgroundColor: neonTheme.palette.grey[50],
     },
-
-    mapNavButton: {
-      backgroundColor: '#fff !important',
-      width: '32px',
-      height: '32px',
-      padding: 'unset',
-      borderRadius: '2px 0px 2px 0px',
-      border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
-      '&:hover, &:active': {
-        color: theme.colors.LIGHT_BLUE[400],
-        borderColor: theme.colors.LIGHT_BLUE[400],
-        backgroundColor: theme.palette.grey[50],
-      },
-      '& svg': {
-        fontSize: '1.15rem !important',
-        width: '1.2em',
-        height: '1.2em',
-      },
+    '& svg': {
+      fontSize: '1.15rem !important',
+      width: '1.2em',
+      height: '1.2em',
     },
-
-    mapNavButtonContainer: {
-      position: 'absolute',
-      zIndex: 999,
-      margin: '0px',
-      left: '11px',
-    },
-
-    observatoryButton: {
-      top: '82px',
-    },
-  })) as StylesHook;
+  },
+  mapNavButtonContainer: {
+    position: 'absolute',
+    zIndex: 999,
+    margin: '0px',
+    left: '11px',
+  },
+  observatoryButton: {
+    top: '82px',
+  },
+}));
 
 interface BasicLeafletMapState {
   initialZoom: number;
@@ -200,9 +195,7 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const dispatch: Dispatch<AnyAction> = useContextDispatch();
   const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(theme, {
-    props: theme,
-  });
+  const { classes } = useStyles(theme);
   const { center }: BasicLeafletMapState = state;
   const map: L.Map = useMapEvents({
     zoomend: (event: L.LeafletEvent): void => {
@@ -269,9 +262,7 @@ const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const mapInstanceId = useId();
   const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(theme, {
-    props: theme,
-  });
+  const { classes } = useStyles(theme);
   const {
     initialZoom,
     initialCenter,

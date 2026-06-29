@@ -6,21 +6,19 @@ import { Theme as MuiTheme } from '@mui/material';
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
 import { NeonTheme } from '../Theme/types';
-import { StylesHook } from '../../types/muiTypes';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    callout: {
-      margin: muiTheme.spacing(0.5, 0, 3, 0),
-      backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
-      borderColor: (Theme as NeonTheme).colors.BROWN[300],
-    },
+const useStyles = makeStyles<MuiTheme>()((theme, muiTheme) => ({
+  callout: {
+    margin: muiTheme.spacing(0.5, 0, 3, 0),
+    backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
+    borderColor: (Theme as NeonTheme).colors.BROWN[300],
+  },
 
-    calloutIcon: {
-      color: (Theme as NeonTheme).colors.BROWN[300],
-      marginRight: muiTheme.spacing(2),
-    }
-  })) as StylesHook;
+  calloutIcon: {
+    color: (Theme as NeonTheme).colors.BROWN[300],
+    marginRight: muiTheme.spacing(2),
+  },
+}));
 
 interface WarningCardClasses {
   callout?: string;
@@ -33,9 +31,7 @@ type WarningCardProps = BaseWarningCardProps & {
 };
 
 const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles(Theme);
   const { classes: calloutClasses }: WarningCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
     ? calloutClasses.callout
