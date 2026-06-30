@@ -407,15 +407,17 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
               placement="bottom-start"
               title="Click to copy the above plain text citation to the clipboard"
             >
-              <Button
-                size="small"
-                color="primary"
-                variant="outlined"
-                startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
-                className={classes.cardButton}
-              >
-                Copy
-              </Button>
+              <span>
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
+                  className={classes.cardButton}
+                >
+                  Copy
+                </Button>
+              </span>
             </Tooltip>
           </CopyToClipboard>
           {DataCiteService.getDataProductFormats()
@@ -438,26 +440,28 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
                       + `file in ${format.longName} format`
                   )}
                 >
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="outlined"
-                    className={classes.cardButton}
-                    disabled={isDownloading || isSectionDownloading}
-                    startIcon={isDownloading
-                      ? <CircularProgress size={18} className={classes.cardButtonIcon} />
-                      : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
-                    onClick={() => {
-                      handleCitationDownloadCb(
-                        citationProduct,
-                        release,
-                        format.shortName,
-                        provisional,
-                      );
-                    }}
-                  >
-                    {`Download (${format.shortName})`}
-                  </Button>
+                  <span>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="outlined"
+                      className={classes.cardButton}
+                      disabled={isDownloading || isSectionDownloading}
+                      startIcon={isDownloading
+                        ? <CircularProgress size={18} className={classes.cardButtonIcon} />
+                        : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
+                      onClick={() => {
+                        handleCitationDownloadCb(
+                          citationProduct,
+                          release,
+                          format.shortName,
+                          provisional,
+                        );
+                      }}
+                    >
+                      {`Download (${format.shortName})`}
+                    </Button>
+                  </span>
                 </Tooltip>
               );
             })}
