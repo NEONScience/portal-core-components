@@ -1,29 +1,23 @@
 import React from 'react';
 
 import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import BaseMessageCard, { MessageCardType, BaseMessageCardProps } from './BaseMessageCard';
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    card: {
-      margin: muiTheme.spacing(0.5, 0, 3, 0),
-      backgroundColor: 'rgba(230, 241, 251, 0.5)', // theme.colors.LIGHT_BLUE[50] with 'a' value applied
-      borderColor: 'rgba(138, 191, 236, 0.5)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
-    },
-
-    primaryIcon: {
-      marginRight: muiTheme.spacing(2),
-    },
-
-    secondaryIcon: {
-      color: 'rgba(138, 191, 236, 0.9)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
-      marginLeft: muiTheme.spacing(2),
-    }
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme) => ({
+  card: {
+    margin: muiTheme.spacing(0.5, 0, 3, 0),
+    backgroundColor: 'rgba(230, 241, 251, 0.5)', // theme.colors.LIGHT_BLUE[50] with 'a' value applied
+    borderColor: 'rgba(138, 191, 236, 0.5)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+  },
+  primaryIcon: {
+    marginRight: muiTheme.spacing(2),
+  },
+  secondaryIcon: {
+    color: 'rgba(138, 191, 236, 0.9)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+    marginLeft: muiTheme.spacing(2),
+  },
+}));
 
 interface InfoMessageCardClasses {
   card?: string;
@@ -41,9 +35,7 @@ export type InfoMessageCardProps = BaseInfoMessageCardProps & {
 const InfoCard: React.FC<InfoMessageCardProps> = (
   props: InfoMessageCardProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { classes: messageCardClasses }: InfoMessageCardProps = props;
   const injectedCard: string|undefined = messageCardClasses
     ? messageCardClasses.card

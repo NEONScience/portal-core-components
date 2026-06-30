@@ -15,25 +15,21 @@ import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 import { Nullable } from '../../types/core';
-import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    container: {
-      width: '100%',
-    },
-
-    selectContainer: {
-      width: '100%',
-      padding: muiTheme.spacing(3, 0),
-    },
-
-    selectFormControl: {
-      width: '100%',
-    }
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+  container: {
+    width: '100%',
+  },
+  selectContainer: {
+    width: '100%',
+    padding: muiTheme.spacing(3, 0),
+  },
+  selectFormControl: {
+    width: '100%',
+  },
+}));
 
 export interface DocumentSelectProps {
   documents: NeonDocument[];
@@ -42,9 +38,7 @@ export interface DocumentSelectProps {
 const DocumentSelect: React.FC<DocumentSelectProps> = (
   props: DocumentSelectProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { documents }: DocumentSelectProps = props;
 
   const hasDocuments: boolean = existsNonEmpty(documents);

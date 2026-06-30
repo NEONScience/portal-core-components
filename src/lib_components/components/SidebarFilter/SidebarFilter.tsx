@@ -18,64 +18,54 @@ import Theme from '../Theme/Theme';
 import { StylesHook } from '../../types/muiTypes';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    title: {
-      fontWeight: 500,
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+  title: {
+    fontWeight: 500,
+  },
+  titleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: muiTheme.spacing(1),
+  },
+  selectInput: {
+    width: '100%',
+    marginBottom: muiTheme.spacing(0.5),
+    backgroundColor: '#fff',
+  },
+  descriptionContainer: {
+    marginTop: muiTheme.spacing(0.5),
+  },
+  descriptionFlexInnerContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  description: {
+    display: 'block',
+    color: muiTheme.palette.grey[400],
+    overflowWrap: 'break-word',
+  },
+  descriptionLabel: {
+    fontWeight: 700,
+    color: muiTheme.palette.grey[400],
+    marginRight: muiTheme.spacing(1),
+  },
+  menuItemSubtitle: {
+    color: muiTheme.palette.grey[400],
+  },
+  horizontalFlex: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  horizontalDescriptions: {
+    marginLeft: Theme.spacing(3),
+    '& > div:first-child': {
+      marginTop: '-2px !important',
     },
-
-    titleContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      marginBottom: muiTheme.spacing(1),
-    },
-
-    selectInput: {
-      width: '100%',
-      marginBottom: muiTheme.spacing(0.5),
-      backgroundColor: '#fff',
-    },
-
-    descriptionContainer: {
-      marginTop: muiTheme.spacing(0.5),
-    },
-
-    descriptionFlexInnerContainer: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-    },
-
-    description: {
-      display: 'block',
-      color: muiTheme.palette.grey[400],
-      overflowWrap: 'break-word',
-    },
-
-    descriptionLabel: {
-      fontWeight: 700,
-      color: muiTheme.palette.grey[400],
-      marginRight: muiTheme.spacing(1),
-    },
-
-    menuItemSubtitle: {
-      color: muiTheme.palette.grey[400],
-    },
-
-    horizontalFlex: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-    },
-
-    horizontalDescriptions: {
-      marginLeft: Theme.spacing(3),
-      '& > div:first-child': {
-        marginTop: '-2px !important',
-      },
-    }
-  })) as StylesHook;
+  },
+}));
 
 export interface SidebarFilterOption {
   title: string;
@@ -97,9 +87,7 @@ export interface SidebarFilterProps {
 const SidebarFilter: React.FC<SidebarFilterProps> = (
   props: SidebarFilterProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     title,
     skeleton,

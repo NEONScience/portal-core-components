@@ -8,23 +8,20 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import json from 'highlight.js/lib/languages/json';
 import typescript from 'highlight.js/lib/languages/typescript';
 
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
 import { resolveProps } from '../../util/defaultProps';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('typescript', typescript);
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    root: {
-      margin: muiTheme.spacing(2, 0),
-      '& code': {
-        padding: `${muiTheme.spacing(0, 2)} !important`,
-      },
-    }
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+  root: {
+    margin: muiTheme.spacing(2, 0),
+    '& code': {
+      padding: `${muiTheme.spacing(0, 2)} !important`,
+    },
+  },
+}));
 
 export interface SyntaxHighlightProps {
   children: React.ReactNode;
@@ -45,9 +42,7 @@ const SyntaxHighlight: React.FC<SyntaxHighlightProps> = (
   inProps: SyntaxHighlightProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as SyntaxHighlightProps;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     children,
     language,

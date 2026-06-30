@@ -4,36 +4,32 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    startFlex: {
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
+const useStyles = makeStyles()((muiTheme) => ({
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 
-    titleContentContainer: {
-      padding: muiTheme.spacing(2, 2.5, 1.5, 2.5),
-    },
+  titleContentContainer: {
+    padding: muiTheme.spacing(2, 2.5, 1.5, 2.5),
+  },
 
-    textTitleContent: {
-      flexGrow: 1,
-      textTransform: 'uppercase',
-      fontSize: '0.775rem',
-    },
+  textTitleContent: {
+    flexGrow: 1,
+    textTransform: 'uppercase',
+    fontSize: '0.775rem',
+  },
 
-    messageContainer: {
-      padding: muiTheme.spacing(0, 3, 3, 3),
-    },
-  })) as StylesHook;
+  messageContainer: {
+    padding: muiTheme.spacing(0, 3, 3, 3),
+  },
+}));
 
 export enum MessageCardType {
   INFO = 'INFO',
@@ -60,9 +56,7 @@ export interface BaseMessageCardProps {
 const BaseMessageCard: React.FC<BaseMessageCardProps> = (
   props: BaseMessageCardProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     type,
     messageCardClasses,

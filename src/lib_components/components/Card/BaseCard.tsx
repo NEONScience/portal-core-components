@@ -6,33 +6,29 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import InfoIcon from '@mui/icons-material/Info';
 import WarnIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import ResetIcon from '@mui/icons-material/Autorenew';
 
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    startFlex: {
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
+const useStyles = makeStyles()((muiTheme) => ({
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 
-    divider: {
-      margin: muiTheme.spacing(0, 3, 0, 3),
-    },
+  divider: {
+    margin: muiTheme.spacing(0, 3, 0, 3),
+  },
 
-    messageContainer: {
-      padding: muiTheme.spacing(3, 3, 3, 3),
-    },
-  })) as StylesHook;
+  messageContainer: {
+    padding: muiTheme.spacing(3, 3, 3, 3),
+  },
+}));
 
 export enum CardType {
   INFO = 'INFO',
@@ -56,9 +52,7 @@ export interface BaseCardProps {
 }
 
 const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     type,
     title,

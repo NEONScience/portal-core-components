@@ -52,7 +52,7 @@ const DialogBase = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
   const { classes } = useStyles(belowSm, {
-    props: belowSm
+    props: belowSm,
   })(Theme);
 
   const {

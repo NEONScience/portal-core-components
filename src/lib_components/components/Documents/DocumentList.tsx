@@ -8,16 +8,14 @@ import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
-import { StylesHook } from '../../types/muiTypes';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { Nullable } from '../../types/core';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    list: {
-      paddingTop: muiTheme.spacing(0),
-    }
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+  list: {
+    paddingTop: muiTheme.spacing(0),
+  },
+}));
 
 export interface DocumentListProps {
   documents: DocumentListItemModel[];
@@ -28,9 +26,7 @@ export interface DocumentListProps {
 }
 
 const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     documents,
     makeDownloadableLink,
@@ -40,7 +36,7 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): Re
   }: DocumentListProps = props;
   if (!existsNonEmpty(documents)) {
     return (
-      <div className={classes.container}>
+      <div>
         <WarningCard
           title="No Documents"
           message="No documents available to display"

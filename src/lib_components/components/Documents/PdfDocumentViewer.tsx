@@ -20,9 +20,7 @@ import { Theme as MuiTheme } from '@mui/material';
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
@@ -33,31 +31,28 @@ pdfjs.GlobalWorkerOptions.workerPort = new Worker(
   { type: 'module' },
 );
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    parentContainer: {
-      width: '100%',
+const useStyles = makeStyles()(() => ({
+  parentContainer: {
+    width: '100%',
+  },
+  container: {
+    width: '100%',
+    position: 'relative',
+  },
+  pdfViewerContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    overflow: 'auto',
+    backgroundColor: 'rgb(82, 86, 89, 0.9)',
+    '& .pdfViewer > .page': {
+      margin: '20px',
+      boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%),
+        0px 1px 3px 0px rgb(0 0 0 / 12%)`,
     },
-
-    container: {
-      width: '100%',
-      position: 'relative',
-    },
-
-    pdfViewerContainer: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      overflow: 'auto',
-      backgroundColor: 'rgb(82, 86, 89, 0.9)',
-      '& .pdfViewer > .page': {
-        margin: '20px',
-        boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
-          0px 1px 1px 0px rgb(0 0 0 / 14%),
-          0px 1px 3px 0px rgb(0 0 0 / 12%)`,
-      },
-    }
-  })) as StylesHook;
+  },
+}));
 
 export interface PdfDocumentViewerProps {
   document: NeonDocument;
@@ -92,9 +87,7 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
   inProps: PdfDocumentViewerProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as PdfDocumentViewerProps;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     document,
     width,

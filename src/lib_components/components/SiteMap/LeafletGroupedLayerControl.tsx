@@ -25,19 +25,18 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
 import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material/styles';
 
 import { exists } from '../../util/typeUtil';
 import { type NeonTheme } from '../Theme/types';
 
-const useStyles = (open: boolean) => makeStyles<NeonTheme>()((theme, neonTheme) => ({
+const useStyles = makeStyles<boolean>()((theme, open) => ({
   leafletControlContainer: {
     zIndex: 801,
     boxShadow: 'unset',
     margin: '0px !important',
     left: '8px',
     top: '8px',
-    fontFamily: neonTheme.typography.fontFamily,
+    fontFamily: theme.typography.fontFamily,
   },
   controlContainer: {
     backgroundColor: '#ffffff',
@@ -46,8 +45,8 @@ const useStyles = (open: boolean) => makeStyles<NeonTheme>()((theme, neonTheme) 
     display: 'flex',
     zIndex: 802,
     border: open
-      ? `1px solid ${neonTheme.palette.grey[300]}`
-      : `1px solid ${(neonTheme as NeonTheme).colors.LIGHT_BLUE[500]}`,
+      ? `1px solid ${theme.palette.grey[300]}`
+      : `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
   },
   controlIconContainer: {
     width: '36px !important',
@@ -57,7 +56,7 @@ const useStyles = (open: boolean) => makeStyles<NeonTheme>()((theme, neonTheme) 
     verticalAlign: 'center',
   },
   controls: {
-    padding: neonTheme.spacing(2),
+    padding: theme.spacing(2),
     overflowY: 'auto',
   },
   formGroupControl: {
@@ -138,8 +137,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
     onOverlayChange,
   } = props;
   const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
-  const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(open)(theme);
+  const { classes } = useStyles(open);
   const divRef: RefObject<HTMLDivElement|null> = useRef<HTMLDivElement>(null);
   const map: L.Map = useMap();
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);

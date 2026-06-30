@@ -11,65 +11,56 @@ import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { existsNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    container: {
-      width: '100%',
-      display: 'flex',
-      margin: muiTheme.spacing(0, -0.5, -0.5, -0.5),
-      flexDirection: 'column',
+const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+  container: {
+    width: '100%',
+    display: 'flex',
+    margin: muiTheme.spacing(0, -0.5, -0.5, -0.5),
+    flexDirection: 'column',
+  },
+  tabPanels: {
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  tabContentContainer: {
+    width: '100%',
+    padding: muiTheme.spacing(3, 3, 3, 3),
+  },
+}));
+
+const useTabsStyles = makeStyles<MuiTheme>()((muiTheme: MuiTheme) => ({
+  scroller: {
+    backgroundColor: muiTheme.palette.grey[200],
+  },
+  scrollButtons: {
+    '&.Mui-disabled': {
+      opacity: 0.6,
     },
+  },
+}));
 
-    tabPanels: {
-      width: '100%',
-      backgroundColor: '#fff',
+const useTabStyles = makeStyles<MuiTheme>()((muiTheme: MuiTheme) => ({
+  root: {
+    textTransform: 'none',
+    opacity: 1,
+    maxWidth: 464,
+  },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& svg': {
+      margin: `${muiTheme.spacing(0, 1, 0, 0)} !important`,
     },
-
-    tabContentContainer: {
-      width: '100%',
-      padding: muiTheme.spacing(3, 3, 3, 3),
-    }
-  })) as StylesHook;
-
-const useTabsStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    scroller: {
-      backgroundColor: muiTheme.palette.grey[200],
-    },
-
-    scrollButtons: {
-      '&.Mui-disabled': {
-        opacity: 0.6,
-      },
-    }
-  })) as StylesHook;
-
-const useTabStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    root: {
-      textTransform: 'none',
-      opacity: 1,
-      maxWidth: 464,
-    },
-
-    wrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '& svg': {
-        margin: `${muiTheme.spacing(0, 1, 0, 0)} !important`,
-      },
-    },
-
-    selected: {
-      borderBottom: 'none',
-    }
-  })) as StylesHook;
+  },
+  selected: {
+    borderBottom: 'none',
+  },
+}));
 
 interface DocumentTabModel {
   index: number;
@@ -81,15 +72,9 @@ export interface DocumentTabsProps {
 }
 
 const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
-  const { classes: tabClasses } = useTabStyles(Theme, {
-    props: Theme,
-  });
-  const { classes: tabsClasses } = useTabsStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
+  const { classes: tabClasses } = useTabStyles(Theme);
+  const { classes: tabsClasses } = useTabsStyles(Theme);
   const { documents }: DocumentTabsProps = props;
 
   const initialTabIdx = 0;

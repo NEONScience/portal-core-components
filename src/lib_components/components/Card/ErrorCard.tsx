@@ -6,20 +6,18 @@ import { Theme as MuiTheme } from '@mui/material';
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
 import { NeonTheme } from '../Theme/types';
-import { StylesHook } from '../../types/muiTypes';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme) => ({
   callout: {
     margin: muiTheme.spacing(0.5, 0, 3, 0),
     backgroundColor: (Theme as NeonTheme).colors.RED[50],
     borderColor: (Theme as NeonTheme).colors.RED[300],
   },
-
   calloutIcon: {
     color: (Theme as NeonTheme).colors.RED[300],
     marginRight: muiTheme.spacing(2),
   },
-})) as StylesHook;
+}));
 
 interface ErrorCardClasses {
   callout?: string;
@@ -32,9 +30,7 @@ type ErrorCardProps = BaseErrorCardProps & {
 };
 
 const ErrorCard: React.FC<ErrorCardProps> = (props: ErrorCardProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { classes: calloutClasses }: ErrorCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
     ? calloutClasses.callout

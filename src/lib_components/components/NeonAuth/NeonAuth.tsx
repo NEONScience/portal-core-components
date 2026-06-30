@@ -30,7 +30,6 @@ import Theme from '../Theme/Theme';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 
 import { StringPropsObject } from '../../types/objectTypes';
-import { StylesHook } from '../../types/muiTypes';
 import { Undef } from '../../types/core';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
@@ -56,7 +55,7 @@ export interface NeonAuthProps {
 }
 /* eslint-enable react/no-unused-prop-types */
 
-const useStyles: StylesHook = makeStyles()((theme: MuiThemeType) => ({
+const useStyles = makeStyles()((theme: MuiThemeType) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css
@@ -84,7 +83,7 @@ const useStyles: StylesHook = makeStyles()((theme: MuiThemeType) => ({
       outline: 'none !important',
     },
   },
-})) as StylesHook;
+}));
 
 const UX_TIMEOUT_MS: number = 300;
 
@@ -95,9 +94,7 @@ export interface AccountMenuProps {
 
 const AccountMenu = (props: AccountMenuProps) => {
   const { accountPath, handleLogout } = props;
-  const { classes }: StringPropsObject = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [
     {
       auth: {
@@ -382,10 +379,7 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
     dispatch,
   ] = NeonContext.useNeonContextState();
 
-  const { classes }: StringPropsObject = useStyles(Theme, {
-    props: Theme,
-  });
-
+  const { classes } = useStyles();
   const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
   const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
   const showAuthWorking: boolean = (isAuthWorking || isFetchingAuthentication);

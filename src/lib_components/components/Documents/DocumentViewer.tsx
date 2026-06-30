@@ -6,29 +6,25 @@ import React, {
 } from 'react';
 
 import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 import PdfDocumentViewer from './PdfDocumentViewer';
 
-const useStyles: StylesHook = makeStyles()((muiTheme: MuiTheme) =>
-  ({
-    container: {
-      width: '100%',
-    },
-
-    iframe: {
-      border: 'none',
-    }
-  })) as StylesHook;
+const useStyles = makeStyles()(() => ({
+  container: {
+    width: '100%',
+  },
+  iframe: {
+    border: 'none',
+  },
+}));
 
 export interface DocumentViewerProps {
   document: NeonDocument;
@@ -61,9 +57,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (
   inProps: DocumentViewerProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as DocumentViewerProps;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     document,
     width,

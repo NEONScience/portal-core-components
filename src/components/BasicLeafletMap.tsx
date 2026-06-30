@@ -40,7 +40,7 @@ const LEAFLET_ATTR_PREFIX = `
 <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
 `;
 
-const useStyles = makeStyles<NeonTheme>()((theme, neonTheme) => ({
+const useStyles = makeStyles()((theme) => ({
   mapContainer: {
     width: '100%',
     height: '600px',
@@ -51,11 +51,11 @@ const useStyles = makeStyles<NeonTheme>()((theme, neonTheme) => ({
     height: '32px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${neonTheme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
     '&:hover, &:active': {
-      color: neonTheme.colors.LIGHT_BLUE[400],
-      borderColor: neonTheme.colors.LIGHT_BLUE[400],
-      backgroundColor: neonTheme.palette.grey[50],
+      color: (theme as NeonTheme).colors.LIGHT_BLUE[400],
+      borderColor: (theme as NeonTheme).colors.LIGHT_BLUE[400],
+      backgroundColor: (theme as NeonTheme).palette.grey[50],
     },
     '& svg': {
       fontSize: '1.15rem !important',
@@ -194,8 +194,7 @@ const LEAFLET_MAP_STATES: LeafletMapStates = {
 const LeafletMapManager: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const dispatch: Dispatch<AnyAction> = useContextDispatch();
-  const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(theme);
+  const { classes } = useStyles();
   const { center }: BasicLeafletMapState = state;
   const map: L.Map = useMapEvents({
     zoomend: (event: L.LeafletEvent): void => {
@@ -261,8 +260,7 @@ const LeafletMapManager: React.FC = (): React.JSX.Element => {
 const BasicLeafletMap: React.FC = (): React.JSX.Element => {
   const state: BasicLeafletMapState = useContext(StateContext);
   const mapInstanceId = useId();
-  const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(theme);
+  const { classes } = useStyles();
   const {
     initialZoom,
     initialCenter,

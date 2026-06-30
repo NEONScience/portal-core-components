@@ -12,97 +12,90 @@ import { Theme as MuiThemeType } from '@mui/material';
 
 import moment, { Moment } from 'moment';
 
-import Theme from '../Theme/Theme';
-import { StringPropsObject, StylesHook } from '../../types/core';
 import { exists } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles()((theme: MuiThemeType) =>
-  ({
-    cardHeaderContainer: {
+const useStyles = makeStyles()(() => ({
+  cardHeaderContainer: {
+    padding: '10px',
+    '& label.account-title': {
+      marginLeft: '20px',
+      height: '68px',
+      marginTop: '25px',
+      fontWeight: 600,
+      fontSize: '20px',
+    },
+    '& img.profile-image': {
+      width: '120px',
+    },
+  },
+  card: {
+    margin: 'auto',
+    textAlign: 'center',
+  },
+  profileArea: {
+    '& img': {
+      marginBottom: '15px',
+      borderRadius: '50%',
+      marginLeft: '10px',
+      marginRight: '10px',
+    },
+  },
+  profileInfoArea: {
+    width: '100%',
+    textAlign: 'left',
+    display: 'inline-block',
+    marginTop: '20px',
+    '& i.fa': {
+      marginRight: '10px',
+    },
+    '& i.fa-user': {
+      verticalAlign: 'middle',
+    },
+    '& label': {
+      fontSize: '16px',
+      fontWeight: 600,
+    },
+    '& label.label-block': {
+      display: 'block',
+      paddingBottom: '5px',
+    },
+    '& div.label-info-container': {
       padding: '10px',
-      '& label.account-title': {
-        marginLeft: '20px',
-        height: '68px',
-        marginTop: '25px',
-        fontWeight: 600,
-        fontSize: '20px',
-      },
-      '& img.profile-image': {
-        width: '120px',
-      },
+      paddingTop: '20px',
+      paddingLeft: '20px',
+      paddingRight: '20px',
     },
-
-    card: {
-      margin: 'auto',
-      textAlign: 'center',
+    '& div.label-name-container': {
+      padding: '10px',
     },
-
-    profileArea: {
-      '& img': {
-        marginBottom: '15px',
-        borderRadius: '50%',
-        marginLeft: '10px',
-        marginRight: '10px',
-      },
+    '& label.username-label': {
+      verticalAlign: 'middle',
     },
-
-    profileInfoArea: {
-      width: '100%',
-      textAlign: 'left',
-      display: 'inline-block',
-      marginTop: '20px',
-      '& i.fa': {
-        marginRight: '10px',
-      },
-      '& i.fa-user': {
-        verticalAlign: 'middle',
-      },
-      '& label': {
-        fontSize: '16px',
-        fontWeight: 600,
-      },
-      '& label.label-block': {
-        display: 'block',
-        paddingBottom: '5px',
-      },
-      '& div.label-info-container': {
-        padding: '10px',
-        paddingTop: '20px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-      },
-      '& div.label-name-container': {
-        padding: '10px',
-      },
-      '& label.username-label': {
-        verticalAlign: 'middle',
-      },
-      '& label.label-normal': {
-        fontSize: '14px',
-        fontWeight: 'normal',
-        wordBreak: 'break-all',
-      },
+    '& label.label-normal': {
+      fontSize: '14px',
+      fontWeight: 'normal',
+      wordBreak: 'break-all',
     },
-
-    emailChipContainer: {
-      '& .MuiChip-root': {
-        height: '100% !important',
-      },
-      '& .MuiChip-label': {
-        width: '100% !important',
-        wordBreak: 'break-all !important',
-        whiteSpace: 'normal !important',
-        padding: '6px',
-      },
-      '& .chip-email.MuiChip-root': {
-        fontSize: '.90em !important',
-      },
-      '& .chip-email .MuiAvatar-root.MuiChip-avatar.MuiChip-avatarColorPrimary': {
-        width: '32px !important',
-        height: '32px !important',
-      },
-    }
-  })) as StylesHook;
+  },
+  emailChipContainer: {
+    '& .MuiChip-root': {
+      height: '100% !important',
+    },
+    '& .MuiChip-label': {
+      width: '100% !important',
+      wordBreak: 'break-all',
+      whiteSpace: 'normal !important',
+      padding: '6px',
+    },
+    '& .chip-email.MuiChip-root': {
+      fontSize: '.90em !important',
+    },
+    '& .chip-email .MuiAvatar-root.MuiChip-avatar.MuiChip-avatarColorPrimary': {
+      width: '32px !important',
+      height: '32px !important',
+    },
+  },
+}));
 
 export interface UserCardProps {
   pictureUrl: string;
@@ -120,9 +113,7 @@ const UserCard = (props: UserCardProps): React.JSX.Element => {
     providers,
     lastLogin,
   }: UserCardProps = props;
-  const { classes }: StringPropsObject = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   let lastLoginDisplay: string | null = null;
   if (exists(lastLogin)) {

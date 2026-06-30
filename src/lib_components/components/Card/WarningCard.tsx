@@ -7,16 +7,16 @@ import BaseCard, { CardType, BaseCardProps } from './BaseCard';
 import Theme from '../Theme/Theme';
 import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles<MuiTheme>()((theme, muiTheme) => ({
+const useStyles = makeStyles()((theme) => ({
   callout: {
-    margin: muiTheme.spacing(0.5, 0, 3, 0),
+    margin: theme.spacing(0.5, 0, 3, 0),
     backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
     borderColor: (Theme as NeonTheme).colors.BROWN[300],
   },
 
   calloutIcon: {
     color: (Theme as NeonTheme).colors.BROWN[300],
-    marginRight: muiTheme.spacing(2),
+    marginRight: theme.spacing(2),
   },
 }));
 
@@ -31,7 +31,7 @@ type WarningCardProps = BaseWarningCardProps & {
 };
 
 const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): React.JSX.Element => {
-  const { classes } = useStyles(Theme);
+  const { classes } = useStyles();
   const { classes: calloutClasses }: WarningCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
     ? calloutClasses.callout
