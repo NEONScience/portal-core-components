@@ -796,6 +796,15 @@ const baseTheme = createTheme({
             margin: '0px 8px',
           },
         },
+        input: {
+          margin: 0,
+        },
+        selectLabel: {
+          display: 'none',
+        },
+        displayedRows: {
+          display: 'none',
+        },
       },
     },
     MuiToggleButton: {

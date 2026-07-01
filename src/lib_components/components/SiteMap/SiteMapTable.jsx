@@ -7,6 +7,7 @@ import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { ThemeProvider } from '@mui/styles';
 
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
@@ -1064,24 +1065,26 @@ const SiteMapTable = () => {
       style={containerStyle}
       data-selenium="sitemap-content-table"
     >
-      <MaterialTable
-        title={`${ucWord(focus)} in view`}
-        icons={MaterialTableIcons}
-        components={components}
-        columns={columns}
-        data={rows}
-        localization={localization}
-        options={tableOptions}
-        onSelectionChange={!selectionActive ? null : (newRows) => {
-          const action = { type: 'updateSelectionSet', selection: new Set() };
-          newRows.filter((row) => row.tableData.checked).forEach((row) => {
-            if (focus === FEATURE_TYPES.SITES.KEY) {
-              action.selection.add(row.siteCode);
-            }
-          });
-          dispatch(action);
-        }}
-      />
+      <ThemeProvider theme={Theme}>
+        <MaterialTable
+          title={`${ucWord(focus)} in view`}
+          icons={MaterialTableIcons}
+          components={components}
+          columns={columns}
+          data={rows}
+          localization={localization}
+          options={tableOptions}
+          onSelectionChange={!selectionActive ? null : (newRows) => {
+            const action = { type: 'updateSelectionSet', selection: new Set() };
+            newRows.filter((row) => row.tableData.checked).forEach((row) => {
+              if (focus === FEATURE_TYPES.SITES.KEY) {
+                action.selection.add(row.siteCode);
+              }
+            });
+            dispatch(action);
+          }}
+        />
+      </ThemeProvider>
     </div>
   );
 };
