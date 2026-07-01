@@ -463,7 +463,6 @@ const baseTheme = createTheme({
         },
         label: {
           padding: '0 12px',
-          fontWeight: 400,
         },
         labelSmall: {
           padding: '0 8px',
