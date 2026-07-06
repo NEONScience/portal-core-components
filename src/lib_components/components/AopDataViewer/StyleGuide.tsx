@@ -93,9 +93,7 @@ const aopViewerReducer = (state: any, action: any) => {
 };
 
 const AopViewerDemo = (): React.JSX.Element => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = useReducer(
     aopViewerReducer,
     cloneDeep(DEFAULT_STATE),
@@ -203,12 +201,8 @@ const AopViewerDemo = (): React.JSX.Element => {
 };
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
-  const { classes: dialogBaseClasses } = useDialogBaseStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
+  const { classes: dialogBaseClasses } = useDialogBaseStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (

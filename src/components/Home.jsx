@@ -7,7 +7,6 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from './DocBlock';
 
@@ -18,9 +17,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function Home() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (

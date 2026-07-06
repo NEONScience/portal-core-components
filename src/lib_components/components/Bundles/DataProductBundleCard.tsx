@@ -12,7 +12,7 @@ import { resolveProps } from '../../util/defaultProps';
 import { NeonTheme } from '../Theme/types';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme) => ({
   cardIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
     padding: '5px 0px',
@@ -58,9 +58,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
   inProps: DataProductBundleCardProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     titleContent,
     subTitleContent,

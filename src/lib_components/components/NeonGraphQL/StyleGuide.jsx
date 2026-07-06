@@ -21,7 +21,6 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
 import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -65,9 +64,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const rxjsObservableUrl = 'https://rxjs-dev.firebaseapp.com/guide/observable';
   const dataProductAvailabilityLink = (
     <Link href="#DataProductAvailability">Data Product Availability Chart</Link>

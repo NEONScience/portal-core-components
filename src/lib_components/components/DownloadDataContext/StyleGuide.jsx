@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
 import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
 import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -180,9 +179,7 @@ const MyAppComponent = () => {
 };
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const useReducerLink = (
     <Link
       target="_new"

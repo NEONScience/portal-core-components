@@ -55,7 +55,7 @@ export interface NeonAuthProps {
 }
 /* eslint-enable react/no-unused-prop-types */
 
-const useStyles = makeStyles()((theme: MuiThemeType) => ({
+const useStyles = makeStyles()((theme) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css

@@ -759,9 +759,7 @@ const LeafletMapManager = () => {
    Main Component
 */
 const SiteMapLeaflet = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const mapRef = useRef(null);
   const mapInstanceId = useId();
 

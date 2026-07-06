@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 
 import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -31,9 +30,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const downloadDataContextLink = (
     <Link
       href="#DownloadDataContext"

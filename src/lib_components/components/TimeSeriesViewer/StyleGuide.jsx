@@ -18,7 +18,6 @@ import NeonApi from '@/components/NeonApi';
 import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
 import NeonContext from '@/components/NeonContext/NeonContext';
 import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
-import Theme from '@/components/Theme/Theme';
 
 import BundleService from '@/service/BundleService';
 import parseTimeSeriesData from '@/workers/parseTimeSeriesData';
@@ -289,9 +288,7 @@ const StaticTimeSeriesViewer = () => {
 };
 
 const StaticTimeSeriesViewerDialog = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -372,9 +369,7 @@ return (
 };
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   return (
     <>

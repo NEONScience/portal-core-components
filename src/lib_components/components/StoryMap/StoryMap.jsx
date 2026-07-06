@@ -33,9 +33,7 @@ const StoryMap = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { url, title } = props;
 
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const iframeRef = useRef(null);
 
   return (

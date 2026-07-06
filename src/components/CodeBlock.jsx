@@ -23,9 +23,7 @@ const defaultProps = {
 
 export default function CodeBlock(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { language, children, ...other } = props;
   return (
     <SyntaxHighlight language={language} className={classes.root} {...other}>

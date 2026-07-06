@@ -9,7 +9,6 @@ import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
@@ -30,9 +29,7 @@ const defaultProps = {
 const NeonFooter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { drupalCssLoaded, showSkeleton } = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [{
     isActive: neonContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },

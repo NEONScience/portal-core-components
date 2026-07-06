@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 
 import CloseIcon from '@mui/icons-material/Close';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
 const useStyles = makeStyles()((theme) => ({
@@ -37,9 +37,7 @@ const defaultProps = {
 
 const LiferayNotifications = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { notifications, onHideNotifications } = props;
 
   if (!notifications.length || notifications.every((n) => n.dismissed)) { return null; }

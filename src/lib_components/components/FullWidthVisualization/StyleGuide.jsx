@@ -6,7 +6,6 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import FullWidthVisualization from '@/components/FullWidthVisualization/FullWidthVisualization';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -44,9 +43,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const ref1 = useRef(null);
   const ref2 = useRef(null);

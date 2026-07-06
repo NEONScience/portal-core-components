@@ -24,7 +24,7 @@ import PropsTable from '../../../components/PropsTable';
 
 import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -44,38 +44,38 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   customCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: theme.colors.GOLD[50],
-    borderColor: theme.colors.GOLD[200],
+    backgroundColor: (theme as NeonTheme).colors.GOLD[50],
+    borderColor: (theme as NeonTheme).colors.GOLD[200],
   },
   customSecondaryIcon: {
-    color: theme.colors.GOLD[200],
+    color: (theme as NeonTheme).colors.GOLD[200],
     marginRight: theme.spacing(2),
   },
   customBrownCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: theme.colors.BROWN[50],
-    borderColor: theme.colors.BROWN[300],
+    backgroundColor: (theme as NeonTheme).colors.BROWN[50],
+    borderColor: (theme as NeonTheme).colors.BROWN[300],
   },
   customBrownSecondaryIcon: {
-    color: theme.colors.BROWN[300],
+    color: (theme as NeonTheme).colors.BROWN[300],
     marginRight: theme.spacing(2),
   },
   customBlueCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: 'rgba(225, 227, 234, 0.6)', // This is => theme.colors.NEON_BLUE[50]
-    borderColor: theme.colors.NEON_BLUE[200],
+    backgroundColor: 'rgba(225, 227, 234, 0.6)', // This is => (theme as NeonTheme).colors.NEON_BLUE[50]
+    borderColor: (theme as NeonTheme).colors.NEON_BLUE[200],
   },
   customBlueSecondaryIcon: {
-    color: theme.colors.NEON_BLUE[300],
+    color: (theme as NeonTheme).colors.NEON_BLUE[300],
     marginRight: theme.spacing(2),
   },
   customGreenCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: theme.colors.GREEN[50],
-    borderColor: theme.colors.GREEN[400],
+    backgroundColor: (theme as NeonTheme).colors.GREEN[50],
+    borderColor: (theme as NeonTheme).colors.GREEN[400],
   },
   customGreenSecondaryIcon: {
-    color: theme.colors.GREEN[400],
+    color: (theme as NeonTheme).colors.GREEN[400],
     marginRight: theme.spacing(2),
   },
 }));
@@ -104,9 +104,7 @@ const propRows = [
 ];
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   /* eslint-disable jsx-a11y/anchor-is-valid */
   const link = (
     <Link href="#">

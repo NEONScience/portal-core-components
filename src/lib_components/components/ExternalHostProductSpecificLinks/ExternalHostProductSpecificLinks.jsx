@@ -41,9 +41,7 @@ const defaultProps = {
 
 export default function ExternalHostProductSpecificLinks(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const { productCode, siteCodes } = props;
 

@@ -71,9 +71,7 @@ const statusLegendElementDefaultProps = {
 
 const StatusLegendElement = (inProps) => {
   const props = resolveProps(statusLegendElementDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { status, dialog } = props;
   if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
     return null;
@@ -124,9 +122,7 @@ const selectionLegendElementDefaultProps = {
 
 const SelectionLegendElement = (inProps) => {
   const props = resolveProps(selectionLegendElementDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { variant, dialog } = props;
   if (!['all', 'some'].includes(variant)) {
     return null;
@@ -276,9 +272,7 @@ const basicAvailabilityKeyDefaultProps = {
 
 const BasicAvailabilityKey = (inProps) => {
   const props = resolveProps(basicAvailabilityKeyDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     selectionEnabled,
     delineateRelease,

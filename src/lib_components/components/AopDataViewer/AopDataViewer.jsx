@@ -142,9 +142,7 @@ const defaultProps = {
 */
 const AopDataViewer = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     productCode,
     showTitle,

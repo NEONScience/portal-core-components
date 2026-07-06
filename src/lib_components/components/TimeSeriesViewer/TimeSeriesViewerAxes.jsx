@@ -122,9 +122,7 @@ const useStyles = makeStyles()((theme) => ({
    y Axes - Scale Option
 */
 const YAxisScaleOption = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { yAxes, logscale } = state.selection;
   const classNames = {
@@ -183,9 +181,7 @@ const YAxisScaleOption = () => {
 const YAxisRangeOption = (props) => {
   const { axis } = props;
 
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const classNames = {
     selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
     deselected: classes.optionButton,
@@ -400,9 +396,7 @@ const rollPeriodReducer = (state, action) => {
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { selection } = state;
   const {
     rollPeriod: currentRollPeriod,
@@ -485,9 +479,7 @@ const RollPeriodOption = () => {
    x Axis - Time Step Option
 */
 const TimeStepOption = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableTimeSteps } = state.timeStep;
   const { timeStep: selectedTimeStep } = state.selection;
@@ -564,9 +556,7 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerAxes() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { selection } = state;
   const renderOption = (key) => {

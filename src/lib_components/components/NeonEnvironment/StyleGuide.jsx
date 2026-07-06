@@ -6,7 +6,6 @@ import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-import Theme from '@/components/Theme/Theme';
 import NeonEnvironment, {
   requiredEnvironmentVars,
   optionalEnvironmentVars,
@@ -22,9 +21,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const attributes = Object.keys(NeonEnvironment)
     .map((key) => {

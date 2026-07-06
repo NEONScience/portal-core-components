@@ -30,9 +30,7 @@ const useChipStyles = makeStyles()((theme) => ({
 }));
 
 const SiteChip = (props) => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { classes: chipClasses } = useChipStyles(Theme, {
     props: Theme,
   });

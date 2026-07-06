@@ -317,9 +317,7 @@ const positionHistoryButtonDefaultProps = {
 */
 function PositionHistoryButton(inProps) {
   const props = resolveProps(positionHistoryButtonDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     siteCode,
     position,
@@ -476,9 +474,7 @@ const positionDetailDefaultProps = { wide: false };
 function PositionDetail(inProps) {
   const props = resolveProps(positionDetailDefaultProps, inProps);
   const { siteCode, position, wide } = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const containerRef = useRef(undefined);
   const [componentWidth, setComponentWidth] = useState(0);
@@ -728,9 +724,7 @@ const selectedPositionDefaultProps = { disabled: false };
 */
 function SelectedPosition(inProps) {
   const props = resolveProps(selectedPositionDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { siteCode, position, disabled } = props;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   return (
@@ -976,9 +970,7 @@ const siteOptionDefaultProps = OptionDefaultProps;
 */
 function SiteOption(inProps) {
   const props = resolveProps(siteOptionDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -1052,9 +1044,7 @@ const selectedSiteDefaultProps = { disabled: false };
 */
 function SelectedSite(inProps) {
   const props = resolveProps(selectedSiteDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     site,
     disabled,
@@ -1279,9 +1269,7 @@ const SitesSelectComponents = {
   IndicatorsContainer: () => null,
 };
 const SitesSelect = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
@@ -1363,9 +1351,7 @@ const SitesSelect = () => {
    Primary Component
 */
 export default function TimeSeriesViewerSites(props) {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();

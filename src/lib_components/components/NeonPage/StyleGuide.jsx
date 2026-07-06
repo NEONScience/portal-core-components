@@ -12,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 
 import NeonPage from '@/components/NeonPage/NeonPage';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -400,9 +399,7 @@ const sidebarLinks = [
 ];
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);

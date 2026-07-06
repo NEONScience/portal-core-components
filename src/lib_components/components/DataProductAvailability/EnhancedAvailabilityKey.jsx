@@ -57,9 +57,7 @@ const defaultProps = {
 */
 export default function EnhancedAvailabilityKey(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
   const { selectionEnabled, rollUpPresent } = props;
 

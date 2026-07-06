@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 
 import { FEATURE_TYPES } from '@/components/SiteMap/SiteMapUtils';
 import MapSelectionButton from '@/components/MapSelectionButton/MapSelectionButton';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -216,9 +215,7 @@ const MyComponent = () => {
 };
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   return (
     <>

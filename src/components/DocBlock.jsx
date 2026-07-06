@@ -17,9 +17,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function DocBlock(props) {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { children } = props;
   return (
     <Typography className={classes.root} component="div">

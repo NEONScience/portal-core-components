@@ -52,7 +52,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 import './styles.css';
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     width: '100%',
   },
@@ -112,10 +112,7 @@ interface DirectionDefinition {
 type DirectionBinLookupType = Record<number, DirectionDefinition>;
 
 const WindRose: React.FC = (): React.JSX.Element => {
-  const theme: NeonTheme = useTheme();
-  const { classes } = useStyles(theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const state: WindRoseViewerState = useStateContext();
   const dispatch: Dispatch<AnyAction> = useDispatchContext();
   const {

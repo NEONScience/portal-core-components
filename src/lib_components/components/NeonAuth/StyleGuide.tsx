@@ -238,9 +238,7 @@ export default function StyleGuide() {
       },
     },
   ] = NeonContext.useNeonContextState();
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const hasSsoCookie: boolean = (document.cookie.indexOf(NEON_SSO_COOKIE_NAME) >= 0);
   const [ssoCookieEnabled, setSsoCookieEnabled] = React.useState(hasSsoCookie);
   const handleSsoCookieToggle = (enable: boolean): void => {

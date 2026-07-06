@@ -5,7 +5,6 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
-import Theme from '@/components/Theme/Theme';
 import ExternalHostInfo from '@/components/ExternalHostInfo/ExternalHostInfo';
 
 import DocBlock from '../../../components/DocBlock';
@@ -19,9 +18,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const externalHostJsxUrl = 'https://github.com/NEONScience/portal-core-components/blob/master/src/lib_components/components/ExternalHost/ExternalHost.jsx';
   const snackbarUrl = 'https://material-ui.com/components/snackbars/';
 

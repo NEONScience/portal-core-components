@@ -319,9 +319,7 @@ const defaultProps = {
 
 const SiteMapContainer = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();

@@ -88,9 +88,7 @@ const MapSelectionButton = (inProps) => {
     onSave,
   } = props;
 
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogEntered, setDialogEntered] = useState(false);
   const [selection, setSelection] = useState(getDefaultState().selection);

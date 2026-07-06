@@ -25,9 +25,7 @@ const defaultProps = {
 
 export default function ExampleBlock(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { column, children } = props;
   return (
     <Container

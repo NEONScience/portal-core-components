@@ -282,9 +282,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const SiteMapTable = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const tableRef = useRef(null);
 
   // Neon Context State

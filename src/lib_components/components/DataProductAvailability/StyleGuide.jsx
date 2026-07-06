@@ -83,9 +83,7 @@ const sites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 const dateRange = ['2018-01', '2018-12'];
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const DownloadDataContextLink = (
     <Link href="#DownloadDataContext">

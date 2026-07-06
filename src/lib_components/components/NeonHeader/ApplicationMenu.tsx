@@ -28,7 +28,7 @@ interface MenuProps {
 }
 
 // declare styles
-const useStyles = makeStyles()((theme: Theme) => ({
+const useStyles = makeStyles()((theme) => ({
   menuContainer: {
     zIndex: 1000, // be sure to display the menu over other elements
   },

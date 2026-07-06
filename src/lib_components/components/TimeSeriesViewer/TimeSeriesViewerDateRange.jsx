@@ -76,9 +76,7 @@ const dateRangeReducer = (state, action) => {
 };
 
 const TimeSeriesViewerDateRange = (props) => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { dateRangeSliderRef } = props;
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;

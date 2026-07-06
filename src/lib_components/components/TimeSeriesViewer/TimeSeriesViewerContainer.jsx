@@ -220,9 +220,7 @@ const useTabStyles = makeStyles()((theme) => ({
    Summary Component
 */
 export function TimeSeriesViewerSummary() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const {
@@ -518,9 +516,7 @@ const containerReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerContainer() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { classes: tabClasses } = useTabStyles(Theme, {
     props: Theme,
   });

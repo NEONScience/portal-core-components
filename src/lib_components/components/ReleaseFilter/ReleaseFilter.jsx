@@ -129,9 +129,7 @@ const defaultProps = {
 
 const ReleaseFilter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     excludeNullRelease,
     horizontal,

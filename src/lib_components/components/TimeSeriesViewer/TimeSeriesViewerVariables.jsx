@@ -178,9 +178,7 @@ const optionDefaultProps = {
 
 function Option(inProps) {
   const props = resolveProps(optionDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -313,9 +311,7 @@ const selectStyles = {
    Quality Flags
 */
 const QualityFlags = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
@@ -412,9 +408,7 @@ const QualityFlags = () => {
 };
 
 export default function TimeSeriesViewerVariables() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const selectedVariables = state.selection.variables.map((variable) => ({

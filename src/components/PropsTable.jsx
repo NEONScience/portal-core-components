@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-import Theme, { COLORS } from '@/components/Theme/Theme';
+import { COLORS } from '@/components/Theme/Theme';
 import { resolveProps } from '@/util/defaultProps';
 
 const useStyles = makeStyles()((theme) => ({
@@ -32,9 +32,7 @@ const defaultProps = {
 const PropsTable = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { props: propRows, fullHeight } = props;
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   return (
     <TableContainer component={Paper} style={fullHeight ? {} : { maxHeight: '70vh' }}>

@@ -9,8 +9,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import Theme from '../Theme/Theme';
-
 /*
   Browser duck typing and warning
   We know detecting browser on user agent strings for feature gating is bad practice.
@@ -41,9 +39,7 @@ const useStyles = makeStyles()((theme) => ({
 const cookies = new Cookies();
 
 const BrowserWarning = () => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const browserIsIE = isBrowserIE();
   const [browserWarningOpen, setBrowserWarningOpen] = useState(browserIsIE);
 

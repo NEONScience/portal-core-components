@@ -11,7 +11,6 @@ import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 
 import SiteMap from '@/components/SiteMap/SiteMap';
-import Theme from '@/components/Theme/Theme';
 import {
   MAP_ZOOM_RANGE,
   FEATURE_TYPES,
@@ -374,9 +373,7 @@ const manualLocationData = [
 ];
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [tabValue, setTabValue] = useState(0);
 
   return (

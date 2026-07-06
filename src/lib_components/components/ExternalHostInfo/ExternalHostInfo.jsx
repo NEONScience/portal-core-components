@@ -35,9 +35,7 @@ const defaultProps = {
 
 const ExternalHostInfo = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const {
     productCode,
     expandable,

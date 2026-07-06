@@ -6,7 +6,6 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import NeonContext from '@/components/NeonContext/NeonContext';
-import Theme from '@/components/Theme/Theme';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -51,9 +50,7 @@ const NeonContextStateComponent = () => {
 };
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const NeonPageLink = (
     <Link href="#NeonPage">NeonPage</Link>
   );

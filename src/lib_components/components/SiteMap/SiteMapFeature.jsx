@@ -303,9 +303,7 @@ const positionPopup = (
 };
 
 const SiteMapFeature = (props) => {
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const { featureKey } = props;
   const map = useMap();
 

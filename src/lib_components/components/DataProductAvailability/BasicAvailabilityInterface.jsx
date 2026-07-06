@@ -122,9 +122,7 @@ const defaultProps = {
 */
 const BasicAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
   const { classes: siteChipClasses } = useSiteChipStyles(Theme, {

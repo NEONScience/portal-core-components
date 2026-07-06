@@ -236,9 +236,7 @@ const downloadStepFormDefaultProps = {
 
 const DownloadStepForm = (inProps) => {
   const props = resolveProps(downloadStepFormDefaultProps, inProps);
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const {
     stepKey,

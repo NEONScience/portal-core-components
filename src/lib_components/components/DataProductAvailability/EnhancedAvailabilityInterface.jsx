@@ -84,9 +84,7 @@ const EnhancedAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { sites: availabilitySites, ...other } = props;
 
-  const { classes } = useStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useStyles();
 
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },
