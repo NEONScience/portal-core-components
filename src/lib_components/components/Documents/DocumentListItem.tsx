@@ -30,7 +30,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
@@ -38,13 +37,13 @@ import NeonApi from '../NeonApi';
 import SplitButton from '../Button/SplitButton';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { NeonTheme } from '../Theme/types';
 
 import DocumentParser from '../../parser/DocumentParser';
 import DocumentService, {
   DocumentTypeListItemDef,
   ParsedQsgNameResult,
 } from '../../service/DocumentService';
-import { StylesHook } from '../../types/muiTypes';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 import {
   AnyAction,
@@ -102,6 +101,7 @@ const useStyles = makeStyles<any>()((muiTheme) => ({
   fileTypeChipSelected: {
     marginRight: '5px',
     fontWeight: 500,
+    backgroundColor: (muiTheme as NeonTheme).colors.GREY[200],
   },
   variantFetchingLabel: {
     lineHeight: '24px',

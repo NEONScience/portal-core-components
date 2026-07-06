@@ -271,6 +271,7 @@ const useStyles = makeStyles()((theme) => ({
     height: theme.spacing(5),
     borderRadius: theme.spacing(2.5),
     padding: theme.spacing(0, 1),
+    backgroundColor: theme.colors.GREY[200],
     '& .MuiChip-label': {
       padding: theme.spacing(0, 2),
     },

@@ -458,7 +458,6 @@ const baseTheme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          backgroundColor: COLORS.GREY[200],
           letterSpacing: 'normal',
         },
         label: {

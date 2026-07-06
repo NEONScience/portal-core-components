@@ -27,13 +27,14 @@ const useChipStyles = makeStyles()((theme) => ({
   outlinedSecondary: {
     color: theme.palette.secondary.main,
   },
+  label: {
+    fontWeight: 400,
+  },
 }));
 
 const SiteChip = (props) => {
   const { classes } = useStyles();
-  const { classes: chipClasses } = useChipStyles(Theme, {
-    props: Theme,
-  });
+  const { classes: chipClasses } = useChipStyles();
   const { label, ...otherProps } = props;
 
   // Default optional props
