@@ -1,10 +1,10 @@
 import React from 'react';
-import GlobalStyles from '@mui/material/GlobalStyles';
 
+import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import Theme from '../Theme/Theme';
+import Theme from './Theme';
 
 // Global CSS
 const globalCss = {

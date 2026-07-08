@@ -48,6 +48,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
+import LegacyNeonThemeProvider from '../Theme/LegacyNeonThemeProvider';
 import Theme, { COLORS } from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -728,32 +729,34 @@ const DownloadStepForm = (inProps) => {
     };
     return (appliedValidValues.length || isLoading) ? (
       <div className={classes.fileTable} id="s3Files-selection-table-container">
-        <MaterialTable
-          icons={MaterialTableIcons}
-          components={components}
-          columns={columns}
-          data={appliedValidValues}
-          localization={localization}
-          options={{
-            selection: true,
-            showSelectAllCheckbox: false,
-            padding: 'dense',
-            filtering: true,
-            columnsButton: false,
-            pageSize: 10,
-            pageSizeOptions: [5, 10, 50, 100],
-            showTitle: false,
-            search: false,
-            isLoading,
-          }}
-          onSelectionChange={(rows, file) => {
-            dispatch({
-              type: 'setIndividualS3FileSelected',
-              url: file.url,
-              selected: file.tableData.checked,
-            });
-          }}
-        />
+        <LegacyNeonThemeProvider>
+          <MaterialTable
+            icons={MaterialTableIcons}
+            components={components}
+            columns={columns}
+            data={appliedValidValues}
+            localization={localization}
+            options={{
+              selection: true,
+              showSelectAllCheckbox: false,
+              padding: 'dense',
+              filtering: true,
+              columnsButton: false,
+              pageSize: 10,
+              pageSizeOptions: [5, 10, 50, 100],
+              showTitle: false,
+              search: false,
+              isLoading,
+            }}
+            onSelectionChange={(rows, file) => {
+              dispatch({
+                type: 'setIndividualS3FileSelected',
+                url: file.url,
+                selected: file.tableData.checked,
+              });
+            }}
+          />
+        </LegacyNeonThemeProvider>
         <div className={classes.loadingOverlay} style={{ display: isLoading ? 'block' : 'none' }}>
           <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
             {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}

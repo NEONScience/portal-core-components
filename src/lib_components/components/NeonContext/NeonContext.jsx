@@ -13,6 +13,7 @@ import { ajax } from 'rxjs/ajax';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import AuthService from '../NeonAuth/AuthService';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import sitesJSON from '../../staticJSON/sites.json';
@@ -342,6 +343,10 @@ const Provider = (inProps) => {
       ).subscribe();
     },
     auth: () => {
+      if (NeonEnvironment.auth0DisableApi) {
+        dispatch({ type: 'fetchAuthSucceeded', isAuthenticated: false, response: null });
+        return;
+      }
       AuthService.fetchUserInfo(
         (response) => {
           const isAuthenticated = AuthService.isAuthenticated(response);

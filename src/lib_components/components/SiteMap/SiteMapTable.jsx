@@ -7,7 +7,6 @@ import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider } from '@mui/styles';
 
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
@@ -15,6 +14,7 @@ import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
+import LegacyNeonThemeProvider from '../Theme/LegacyNeonThemeProvider';
 import Theme, { COLORS } from '../Theme/Theme';
 
 import SiteMapContext from './SiteMapContext';
@@ -1063,7 +1063,7 @@ const SiteMapTable = () => {
       style={containerStyle}
       data-selenium="sitemap-content-table"
     >
-      <ThemeProvider theme={Theme}>
+      <LegacyNeonThemeProvider>
         <MaterialTable
           title={`${ucWord(focus)} in view`}
           icons={MaterialTableIcons}
@@ -1082,7 +1082,7 @@ const SiteMapTable = () => {
             dispatch(action);
           }}
         />
-      </ThemeProvider>
+      </LegacyNeonThemeProvider>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import BasicComponentsIcon from '@mui/icons-material/ViewModule';
 import NeonPage from '@/components/NeonPage/NeonPage';
 import NeonRouter from '@/components/NeonRouter/NeonRouter';
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
-import NeonThemeProvider from '@/components/NeonPage/NeonThemeProvider';
+import NeonThemeProvider from '@/components/Theme/NeonThemeProvider';
 import { isStringNonEmpty } from '@/util/typeUtil';
 
 import Home from './components/Home';

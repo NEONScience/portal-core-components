@@ -387,7 +387,7 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   const authFetchCb = useCallback(() => {
     AuthService.fetchUserInfoWithDispatch(dispatch);
   }, [dispatch]);
-  if (!isFetchingAuthentication && !isAuthFetched) {
+  if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi) {
     authFetchCb();
   }
   return (

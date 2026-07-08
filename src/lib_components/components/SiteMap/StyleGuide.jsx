@@ -442,7 +442,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 1: Basic */}
+      {/* 1: Preset Zoom */}
       {tabValue !== 1 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Zoom</Typography>

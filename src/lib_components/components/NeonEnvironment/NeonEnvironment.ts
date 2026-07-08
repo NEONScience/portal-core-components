@@ -44,6 +44,7 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_PATH_LD_API',
   'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
   'NEXT_PUBLIC_NEON_USE_GRAPHQL',
   'NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER',
   'NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL',
@@ -77,6 +78,7 @@ export interface INeonEnvironment {
   useGraphql: boolean;
   showAopViewer: boolean;
   authDisableWs: boolean;
+  auth0DisableApi: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
@@ -150,6 +152,7 @@ const NeonEnvironment: INeonEnvironment = {
   useGraphql: process.env.NEXT_PUBLIC_NEON_USE_GRAPHQL === 'true',
   showAopViewer: process.env.NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
+  auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
   enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 

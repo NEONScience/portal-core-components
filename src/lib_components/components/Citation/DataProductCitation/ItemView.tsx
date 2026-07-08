@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { makeStyles } from 'tss-react/mui';
-import Alert from '@mui/lab/Alert';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';

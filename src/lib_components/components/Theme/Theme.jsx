@@ -3,10 +3,10 @@ import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   createTheme,
+  useTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from '@mui/material/styles';
-import { useTheme } from '@mui/styles';
 
 import { iconButtonClasses } from '@mui/material/IconButton';
 import { sliderClasses } from '@mui/material/Slider';
