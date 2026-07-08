@@ -186,7 +186,8 @@ const useStyles = makeStyles()((theme) => ({
     fontWeight: 600,
     padding: theme.spacing(1),
     backgroundColor: '#fff',
-    borderColor: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
   },
   legendSeriesColor: {
     width: theme.spacing(3),
@@ -394,11 +395,13 @@ export default function TimeSeriesViewerGraph() {
           variant="outlined"
           key={s.label}
           style={seriesStyle}
-          data-label={s.label}
-          data-kind="series"
           title={`Click to ${isHidden ? 'show' : 'hide'} this series`}
         >
-          <div className={className}>
+          <div
+            className={className}
+            data-label={s.label}
+            data-kind="series"
+          >
             <div className={classes.legendSeriesColor} style={colorStyle} />
             <div className={classes.legendSeriesLabel}>
               {s.label}
@@ -461,8 +464,10 @@ export default function TimeSeriesViewerGraph() {
     let dateLegend = null;
     if (graphData.x && !belowSm) {
       dateLegend = (
-        <Card variant="outlined" className={classes.legendSeriesX}>
-          {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+        <Card variant="outlined">
+          <div className={classes.legendSeriesX}>
+            {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+          </div>
         </Card>
       );
     }
