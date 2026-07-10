@@ -16,9 +16,6 @@ import Home from './components/Home';
 const BasicComponents = React.lazy(
   () => import('./components/BasicComponents'),
 );
-const AopDataViewerStyleGuide = React.lazy(
-  () => import('./lib_components/components/AopDataViewer/StyleGuide'),
-);
 const CardStyleGuide = React.lazy(
   () => import('./lib_components/components/Card/StyleGuide'),
 );
@@ -127,15 +124,6 @@ const sidebarLinks = [
       </Suspense>
     ),
     icon: BasicComponentsIcon,
-  },
-  {
-    name: 'AOP Data Viewer',
-    hash: '#AopDataViewer',
-    component: () => (
-      <Suspense fallback={<SuspenseFallback />}>
-        <AopDataViewerStyleGuide />
-      </Suspense>
-    ),
   },
   {
     name: 'Cards',
