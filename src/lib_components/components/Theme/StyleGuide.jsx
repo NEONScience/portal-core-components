@@ -66,7 +66,7 @@ import Theme from 'portal-core-components/lib/components/Theme';
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles(theme => ({
@@ -105,7 +105,7 @@ ${JSON.stringify(Theme.palette, null, 2)}
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles(theme => ({

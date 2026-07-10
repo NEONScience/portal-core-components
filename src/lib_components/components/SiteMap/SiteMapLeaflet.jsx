@@ -100,12 +100,16 @@ const useStyles = makeStyles()((theme) => ({
           color: Theme.colors.LIGHT_BLUE[400],
           borderColor: Theme.colors.LIGHT_BLUE[400],
         },
-        '&:first-child': {
+        '&:first-of-type': {
           borderTopLeftRadius: '2px',
           borderTopRightRadius: '2px',
+          borderBottomLeftRadius: '0px',
+          borderBottomRightRadius: '0px',
         },
-        '&:last-child': {
+        '&:last-of-type': {
           borderTop: 'none',
+          borderTopLeftRadius: '0px',
+          borderTopRightRadius: '0px',
           borderBottomLeftRadius: '2px',
           borderBottomRightRadius: '2px',
         },

@@ -1,18 +1,17 @@
 import React from 'react';
 
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
-import Theme from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
     padding: '5px 0px',

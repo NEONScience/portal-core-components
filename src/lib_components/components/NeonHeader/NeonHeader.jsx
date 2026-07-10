@@ -2,7 +2,6 @@ import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
-// import { makeStyles } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Skeleton from '@mui/material/Skeleton';
@@ -29,14 +28,10 @@ const useStyles = (customize) => {
   const viewportStyles = customize
     ? {}
     : {
-      '& :last-child': {
-        borderRight: 'none',
-        borderTopRightRadius: '0px',
-        borderBottomRightRadius: '0px',
-      },
-      '& :first-child': {
+      '& button:first-of-type': {
         borderRight: 'none',
         borderTopLeftRadius: '0px',
+        borderBottomRightRadius: '0px',
       },
     };
   const headerContainer = customize

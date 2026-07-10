@@ -4,7 +4,6 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 
@@ -16,6 +15,7 @@ import WarningCard from '@/components/Card/WarningCard';
 import ErrorCard from '@/components/Card/ErrorCard';
 import InfoMessageCard from '@/components/Card/InfoMessageCard';
 import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
@@ -24,7 +24,7 @@ import PropsTable from '../../../components/PropsTable';
 
 import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -44,38 +44,38 @@ const useStyles = makeStyles()((theme) => ({
   },
   customCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: (theme as NeonTheme).colors.GOLD[50],
-    borderColor: (theme as NeonTheme).colors.GOLD[200],
+    backgroundColor: theme.colors.GOLD[50],
+    borderColor: theme.colors.GOLD[200],
   },
   customSecondaryIcon: {
-    color: (theme as NeonTheme).colors.GOLD[200],
+    color: theme.colors.GOLD[200],
     marginRight: theme.spacing(2),
   },
   customBrownCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: (theme as NeonTheme).colors.BROWN[50],
-    borderColor: (theme as NeonTheme).colors.BROWN[300],
+    backgroundColor: theme.colors.BROWN[50],
+    borderColor: theme.colors.BROWN[300],
   },
   customBrownSecondaryIcon: {
-    color: (theme as NeonTheme).colors.BROWN[300],
+    color: theme.colors.BROWN[300],
     marginRight: theme.spacing(2),
   },
   customBlueCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: 'rgba(225, 227, 234, 0.6)', // This is => (theme as NeonTheme).colors.NEON_BLUE[50]
-    borderColor: (theme as NeonTheme).colors.NEON_BLUE[200],
+    backgroundColor: 'rgba(225, 227, 234, 0.6)', // This is => theme.colors.NEON_BLUE[50]
+    borderColor: theme.colors.NEON_BLUE[200],
   },
   customBlueSecondaryIcon: {
-    color: (theme as NeonTheme).colors.NEON_BLUE[300],
+    color: theme.colors.NEON_BLUE[300],
     marginRight: theme.spacing(2),
   },
   customGreenCard: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: (theme as NeonTheme).colors.GREEN[50],
-    borderColor: (theme as NeonTheme).colors.GREEN[400],
+    backgroundColor: theme.colors.GREEN[50],
+    borderColor: theme.colors.GREEN[400],
   },
   customGreenSecondaryIcon: {
-    color: (theme as NeonTheme).colors.GREEN[400],
+    color: theme.colors.GREEN[400],
     marginRight: theme.spacing(2),
   },
 }));

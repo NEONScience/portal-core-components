@@ -1,16 +1,15 @@
 import React from 'react';
 
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { makeStyles } from 'tss-react/mui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
-import Theme from '../Theme/Theme';
-import { resolveProps } from '../../util/defaultProps';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   bundleIcon: {
     padding: '5px',
     marginRight: theme.spacing(2),

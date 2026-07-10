@@ -226,15 +226,15 @@ const baseTheme = createTheme({
           },
         },
         rounded: {
-          '&:first-child': {
+          '&:is(div:first-of-type)': {
             borderTopLeftRadius: '2px',
             borderTopRightRadius: '2px',
           },
-          '&:last-child': {
+          '&:is(div:last-of-type)': {
             borderBottomLeftRadius: '2px',
             borderBottomRightRadius: '2px',
           },
-          '&:not(:first-child)': {
+          '&:not(div:first-of-type)': {
             borderTopWidth: '0px',
           },
         },
@@ -251,7 +251,7 @@ const baseTheme = createTheme({
       styleOverrides: {
         root: {
           padding: '0px 24px 24px 24px',
-          '&:not(:last-child)': {
+          '&:not(div:last-of-type)': {
             paddingBottom: '0px',
           },
         },
@@ -404,10 +404,10 @@ const baseTheme = createTheme({
             borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
             textDecoration: 'underline',
           },
-          '&:not(:last-child)': {
+          '&:not(div:last-of-type)': {
             borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
           },
-          '&:not(:first-child)': {
+          '&:not(div:first-of-type)': {
             marginLeft: '-1px',
           },
         },
@@ -430,7 +430,7 @@ const baseTheme = createTheme({
           padding: '24px',
           '@media (max-width:959.95px)': {
             padding: '16px',
-            '&:last-child': {
+            '&:is(div:last-of-type)': {
               paddingBottom: '16px',
             },
           },
@@ -742,8 +742,9 @@ const baseTheme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
+          fontFamily: '"Inter", Helvetica, Arial, sans-serif !important',
           fontSize: '0.8rem',
-          '&:not(:last-child)': {
+          '&:not(td:last-of-type)': {
             borderRight: `1px solid ${COLORS.GREY[200]}`,
           },
         },
@@ -751,7 +752,7 @@ const baseTheme = createTheme({
           color: '#fff',
           backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
           borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
-          '&:not(:last-child)': {
+          '&:not(th:last-of-type)': {
             borderRight: `1px solid ${COLORS.NEON_BLUE[700]}`,
           },
         },
@@ -840,11 +841,11 @@ const baseTheme = createTheme({
     MuiToggleButtonGroup: {
       styleOverrides: {
         grouped: {
-          '&:first-child': {
+          '&:is(button:first-of-type)': {
             borderTopLeftRadius: '2px',
             borderBottomLeftRadius: '2px',
           },
-          '&:last-child': {
+          '&:is(button:last-of-type)': {
             borderTopRightRadius: '2px',
             borderBottomRightRadius: '2px',
           },

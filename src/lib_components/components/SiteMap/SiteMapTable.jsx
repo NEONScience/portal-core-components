@@ -140,7 +140,7 @@ const useStyles = makeStyles()((theme) => ({
       },
       '& tr.MuiTableRow-head': {
         backgroundColor: theme.palette.primary.main,
-        '& th:first-child span.MuiCheckbox-root': {
+        '& th:first-of-type span.MuiCheckbox-root': {
           margin: theme.spacing(0, 0.5),
           backgroundColor: '#ffffff88',
           '&:hover': {
@@ -148,7 +148,7 @@ const useStyles = makeStyles()((theme) => ({
           },
         },
       },
-      '& tbody tr:first-child': {
+      '& tbody tr:first-of-type': {
         backgroundColor: theme.palette.grey[50],
       },
       '& tfoot': {
@@ -216,7 +216,7 @@ const useStyles = makeStyles()((theme) => ({
     },
     // This hides all but the search input, show columns, and export buttons.
     // No other way to have material table NOT show a selection title in the toolbar.
-    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+    '& div.MuiToolbar-root > div:not(div:nth-last-of-type(-n+2))': {
       display: 'none',
     },
   },

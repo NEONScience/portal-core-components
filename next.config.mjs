@@ -5,12 +5,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isDevEnv = (process.env.NODE_ENV === 'development');
 const isLibTarget = (process.env.PORTAL_CORE_COMPONENTS_TARGET === 'lib');
 const isBuildContainer = (process.env.PORTAL_CORE_COMPONENTS_BUILD_CONTAINER === 'true');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: isDevEnv ? undefined : 'export',
   distDir: 'build',
   basePath: '/core-components-next',
   reactStrictMode: false,

@@ -697,14 +697,14 @@ const NeonPage = (inProps) => {
   useEffect(() => {
     if (fetchNotificationState.fetchStatus !== null) { return; }
     fetchNotificationDispatch({ type: 'fetchNotifications' });
-    getJson(
-      getLiferayNotificationsApiPath(),
-      handleFetchNotificationsSuccess,
-      handleFetchNotificationsError,
-      cancellationSubject$,
-      undefined,
-      true,
-    );
+    // getJson(
+    //   getLiferayNotificationsApiPath(),
+    //   handleFetchNotificationsSuccess,
+    //   handleFetchNotificationsError,
+    //   cancellationSubject$,
+    //   undefined,
+    //   true,
+    // );
   }, [
     fetchNotificationState,
     handleFetchNotificationsSuccess,

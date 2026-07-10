@@ -9,7 +9,7 @@ import PresentationIcon from '@mui/icons-material/Tv';
 import SpreadsheetIcon from '@mui/icons-material/GridOn';
 import { SvgIconComponent } from '@mui/icons-material';
 
-import UAParser, { IDevice, UAParserInstance } from 'ua-parser-js';
+import { UAParser, IDevice } from 'ua-parser-js';
 
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
@@ -274,7 +274,7 @@ const DocumentService: IDocumentService = {
     && PDF_VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
   isViewerDeviceSupported: (): boolean => {
-    const uaParser: UAParserInstance = new UAParser();
+    const uaParser = new UAParser();
     const device: IDevice = uaParser.getDevice();
     let isSupported = true;
     if (isStringNonEmpty(device.type)

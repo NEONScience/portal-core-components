@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   Navigate,
-} from 'react-router-dom';
+} from 'react-router';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import HistoryService from '../../util/historyUtil';

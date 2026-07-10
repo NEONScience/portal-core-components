@@ -92,7 +92,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   horizontalDescriptions: {
     marginLeft: Theme.spacing(3),
-    '& > div:first-child': {
+    '& > div:first-of-type': {
       marginTop: '-2px !important',
     },
   },

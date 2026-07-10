@@ -94,7 +94,7 @@ const useStyles = makeStyles<any>()((muiTheme) => ({
     marginRight: '5px',
     backgroundColor: 'transparent',
     fontWeight: '400',
-    '&:last-child': {
+    '& span:last-of-type': {
       marginRight: '0px',
     },
   },

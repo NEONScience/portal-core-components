@@ -10,6 +10,7 @@ import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';
+import Grid from '@mui/material/Grid2';
 import Link from '@mui/material/Link';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -151,12 +152,23 @@ const useStyles = makeStyles()((theme) => ({
       verticalAlign: 'bottom',
       marginRight: '4px',
     },
-    '& .warningMessage': {
-      marginLeft: '20px',
-      '& svg': {
-        color: Theme.colors.BROWN[300],
-      },
-    },
+  },
+  statusBarIcon: {
+    marginRight: theme.spacing(3),
+  },
+  statusBarText: {
+    marginLeft: theme.spacing(1),
+    alignSelf: 'center',
+    paddingTop: '1px',
+  },
+  statusBarPointsText: {
+    marginLeft: theme.spacing(1),
+    alignSelf: 'center',
+    paddingTop: '2px',
+  },
+  statusBarWarningIcon: {
+    color: Theme.colors.BROWN[300],
+    marginRight: theme.spacing(3),
   },
 }));
 
@@ -172,16 +184,16 @@ const useTabStyles = makeStyles()((theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       marginLeft: '-1.5px',
-      '&:first-child': {
+      '&:is(button:first-of-type)': {
         marginBottom: '-0.5px',
       },
-      '&:not(:first-child)': {
+      '&:not(button:first-of-type)': {
         marginTop: '-1.5px',
       },
     },
     [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(2.5),
-      '&:not(:first-child)': {
+      '&:not(button:first-of-type)': {
         marginLeft: '-1.5px',
       },
     },
@@ -562,14 +574,20 @@ export default function TimeSeriesViewerContainer() {
   const renderTabs = () => (
     <Tabs
       orientation={belowMd ? 'horizontal' : 'vertical'}
-      scrollButtons={belowMd}
+      scrollButtons={belowMd ? true : 'auto'}
       variant="scrollable"
       value={selectedTab}
       className={belowMd ? classes.tabsHorizontal : classes.tabsVertical}
       classes={tabsClasses}
       aria-label="Time Series Viewer Controls"
       onChange={(event, newTab) => { setSelectedTab(newTab); }}
-      TabIndicatorProps={{ style: { display: 'none' } }}
+      slotProps={{
+        indicator: {
+          style: {
+            display: 'none',
+          },
+        },
+      }}
     >
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
@@ -686,23 +704,39 @@ export default function TimeSeriesViewerContainer() {
       showWarning = true;
     }
 
+    const renderWarning = () => {
+      if (!showWarning) {
+        // eslint-disable-next-line react/jsx-no-useless-fragment
+        return <></>;
+      }
+      return (
+        <Grid>
+          <WarnIcon fontSize="medium" className={classes.statusBarWarningIcon} />
+          <div style={{ display: 'inline-flex', height: '24px' }}>
+            <Typography variant="body2" className={classes.statusBarText}>
+              Data point total approaching limit; some options are disabled.
+            </Typography>
+          </div>
+        </Grid>
+      );
+    };
+
     return (
       <div className={classes.statusBar}>
-        <ComputerIcon fontSize="medium" />
-        <span>
-          <b>Data Points</b>
-          :&nbsp;
-        </span>
-        {pointTotal}
-        <span> of </span>
-        {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
-        <span
-          className="warningMessage"
-          style={{ visibility: showWarning ? 'visible' : 'hidden' }}
-        >
-          <WarnIcon fontSize="medium" />
-          Data point total approaching limit; some options are disabled.
-        </span>
+        <Grid container>
+          <Grid width={260}>
+            <ComputerIcon fontSize="medium" className={classes.statusBarIcon} />
+            <div style={{ display: 'inline-flex', height: '24px' }}>
+              <Typography variant="subtitle2" className={classes.statusBarText}>
+                Data Points
+              </Typography>
+              <Typography variant="body2" className={classes.statusBarPointsText}>
+                {`${pointTotal} of ${addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}`}
+              </Typography>
+            </div>
+          </Grid>
+          {renderWarning()}
+        </Grid>
       </div>
     );
   };

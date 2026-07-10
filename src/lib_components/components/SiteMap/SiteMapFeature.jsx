@@ -125,7 +125,7 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: theme.spacing(2),
-    '& > :not(:last-child)': {
+    '& > :not(a:last-of-type)': {
       marginRight: theme.spacing(1),
     },
   },

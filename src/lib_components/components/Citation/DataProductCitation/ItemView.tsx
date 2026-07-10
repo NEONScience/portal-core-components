@@ -59,7 +59,7 @@ const useStyles = makeStyles<any>()((theme) => ({
       marginLeft: '0px !important',
       marginTop: theme.spacing(1),
     },
-    '&> :not(:last-child)': {
+    '&> :not(span:last-of-type)': {
       marginRight: theme.spacing(1),
     },
   },
