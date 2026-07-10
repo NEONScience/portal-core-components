@@ -6,26 +6,26 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-legendContainer-7"
+        class="css-10m0fzl-legendContainer"
       >
         <div
-          class="makeStyles-legendTitleContainer-10"
+          class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-8 css-134ad2t-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-9 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
               data-testid="HelpOutlineIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -34,14 +34,11 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
         <div>
           <div
-            class="makeStyles-legendElement-11"
+            class="css-1azw17k-legendElement"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -57,7 +54,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0"
               />
               <text
-                class="makeStyles-legendElementText-12"
+                class="css-1obxh3u-legendElementText"
                 x="15"
                 y="10"
               >
@@ -66,7 +63,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
             </svg>
           </div>
           <div
-            class="makeStyles-legendElement-11"
+            class="css-1azw17k-legendElement"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -82,7 +79,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0"
               />
               <text
-                class="makeStyles-legendElementText-12"
+                class="css-1obxh3u-legendElementText"
                 x="15"
                 y="10"
               >
@@ -93,7 +90,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         </div>
         <div>
           <div
-            class="makeStyles-legendElement-11"
+            class="css-1azw17k-legendElement"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
             <svg
@@ -126,7 +123,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0.5"
               />
               <text
-                class="makeStyles-legendElementText-12"
+                class="css-1obxh3u-legendElementText"
                 x="42"
                 y="10"
               >
@@ -135,7 +132,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
             </svg>
           </div>
           <div
-            class="makeStyles-legendElement-11"
+            class="css-1azw17k-legendElement"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
             <svg
@@ -168,7 +165,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0.5"
               />
               <text
-                class="makeStyles-legendElementText-12"
+                class="css-1obxh3u-legendElementText"
                 x="42"
                 y="10"
               >
@@ -182,26 +179,26 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   </body>,
   "container": <div>
     <div
-      class="makeStyles-legendContainer-7"
+      class="css-10m0fzl-legendContainer"
     >
       <div
-        class="makeStyles-legendTitleContainer-10"
+        class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-8 css-134ad2t-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-9 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
             data-testid="HelpOutlineIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -210,14 +207,11 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
             />
           </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </button>
       </div>
       <div>
         <div
-          class="makeStyles-legendElement-11"
+          class="css-1azw17k-legendElement"
           title="Data have been published and released. Data are available for download"
         >
           <svg
@@ -233,7 +227,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0"
             />
             <text
-              class="makeStyles-legendElementText-12"
+              class="css-1obxh3u-legendElementText"
               x="15"
               y="10"
             >
@@ -242,7 +236,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           </svg>
         </div>
         <div
-          class="makeStyles-legendElement-11"
+          class="css-1azw17k-legendElement"
           title="Data was neither expected nor collected"
         >
           <svg
@@ -258,7 +252,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0"
             />
             <text
-              class="makeStyles-legendElementText-12"
+              class="css-1obxh3u-legendElementText"
               x="15"
               y="10"
             >
@@ -269,7 +263,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
       </div>
       <div>
         <div
-          class="makeStyles-legendElement-11"
+          class="css-1azw17k-legendElement"
           title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
         >
           <svg
@@ -302,7 +296,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0.5"
             />
             <text
-              class="makeStyles-legendElementText-12"
+              class="css-1obxh3u-legendElementText"
               x="42"
               y="10"
             >
@@ -311,7 +305,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           </svg>
         </div>
         <div
-          class="makeStyles-legendElement-11"
+          class="css-1azw17k-legendElement"
           title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
         >
           <svg
@@ -344,7 +338,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0.5"
             />
             <text
-              class="makeStyles-legendElementText-12"
+              class="css-1obxh3u-legendElementText"
               x="42"
               y="10"
             >
@@ -415,26 +409,26 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-legendContainer-1"
+        class="css-10m0fzl-legendContainer"
       >
         <div
-          class="makeStyles-legendTitleContainer-4"
+          class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-2 css-134ad2t-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-3 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
               data-testid="HelpOutlineIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -443,14 +437,11 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
         <div>
           <div
-            class="makeStyles-legendElement-5"
+            class="css-1azw17k-legendElement"
             title="Data have been published and released. Data are available for download"
           >
             <svg
@@ -466,7 +457,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0"
               />
               <text
-                class="makeStyles-legendElementText-6"
+                class="css-1obxh3u-legendElementText"
                 x="15"
                 y="10"
               >
@@ -477,7 +468,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         </div>
         <div>
           <div
-            class="makeStyles-legendElement-5"
+            class="css-1azw17k-legendElement"
             title="Data was neither expected nor collected"
           >
             <svg
@@ -493,7 +484,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
                 y="0"
               />
               <text
-                class="makeStyles-legendElementText-6"
+                class="css-1obxh3u-legendElementText"
                 x="15"
                 y="10"
               >
@@ -507,26 +498,26 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   </body>,
   "container": <div>
     <div
-      class="makeStyles-legendContainer-1"
+      class="css-10m0fzl-legendContainer"
     >
       <div
-        class="makeStyles-legendTitleContainer-4"
+        class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 makeStyles-legendTitle-2 css-134ad2t-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall makeStyles-legendTitleIcon-3 css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
             data-testid="HelpOutlineIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -535,14 +526,11 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
             />
           </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </button>
       </div>
       <div>
         <div
-          class="makeStyles-legendElement-5"
+          class="css-1azw17k-legendElement"
           title="Data have been published and released. Data are available for download"
         >
           <svg
@@ -558,7 +546,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0"
             />
             <text
-              class="makeStyles-legendElementText-6"
+              class="css-1obxh3u-legendElementText"
               x="15"
               y="10"
             >
@@ -569,7 +557,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
       </div>
       <div>
         <div
-          class="makeStyles-legendElement-5"
+          class="css-1azw17k-legendElement"
           title="Data was neither expected nor collected"
         >
           <svg
@@ -585,7 +573,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
               y="0"
             />
             <text
-              class="makeStyles-legendElementText-6"
+              class="css-1obxh3u-legendElementText"
               x="15"
               y="10"
             >

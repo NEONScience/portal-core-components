@@ -69,14 +69,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-5 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-8 makeStyles-titleContentContainer-9 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-6 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -86,13 +86,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-10 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-7 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -103,22 +103,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-11"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-4 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-3"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -133,19 +133,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-13"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -155,7 +155,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -172,14 +172,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-5 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-8 makeStyles-titleContentContainer-9 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-6 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -189,13 +189,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-10 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-7 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -206,22 +206,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-11"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-4 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-3"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -236,19 +236,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               style="display: block;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-13"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -258,7 +258,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -332,14 +332,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-5 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-8 makeStyles-titleContentContainer-9 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-6 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -349,13 +349,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-10 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-7 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -366,22 +366,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-11"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-4 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-3"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -396,19 +396,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-13"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -418,7 +418,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -434,14 +434,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-17 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-20 makeStyles-titleContentContainer-21 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-18 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -451,13 +451,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-22 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-19 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -468,22 +468,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-23"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-16 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-15"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -502,7 +502,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -514,7 +514,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -536,14 +536,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-17 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-20 makeStyles-titleContentContainer-21 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-18 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -553,13 +553,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-22 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-19 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -570,22 +570,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-23"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-16 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-15"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -604,7 +604,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -616,7 +616,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -695,14 +695,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-5 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-8 makeStyles-titleContentContainer-9 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-6 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -712,13 +712,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-10 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-7 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -729,22 +729,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-11"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-4 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-3"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -759,19 +759,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-13"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -781,7 +781,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -797,14 +797,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-17 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-20 makeStyles-titleContentContainer-21 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-18 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -814,13 +814,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-22 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-19 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -831,22 +831,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-23"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-16 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-15"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -865,7 +865,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -877,7 +877,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -900,14 +900,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
       >
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-29 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-32 makeStyles-titleContentContainer-33 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-30 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -917,13 +917,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-34 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-31 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -934,22 +934,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-35"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-28 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-27"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -964,19 +964,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-37"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -986,7 +986,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1005,14 +1005,14 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
     >
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-29 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-32 makeStyles-titleContentContainer-33 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-30 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1022,13 +1022,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-34 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-31 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1039,22 +1039,22 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-35"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-28 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-27"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -1069,19 +1069,19 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               style="display: block;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-37"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -1091,7 +1091,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -1165,14 +1165,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-41 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-44 makeStyles-titleContentContainer-45 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-42 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1182,13 +1182,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-46 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-43 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1199,22 +1199,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-47"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-40 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-39"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1229,19 +1229,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-49"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1251,7 +1251,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1268,14 +1268,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-41 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-44 makeStyles-titleContentContainer-45 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-42 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1285,13 +1285,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-46 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-43 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1302,22 +1302,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-47"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-40 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-39"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -1332,19 +1332,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               style="display: block;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-49"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -1354,7 +1354,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -1428,14 +1428,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-41 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-44 makeStyles-titleContentContainer-45 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-42 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1445,13 +1445,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-46 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-43 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1462,22 +1462,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-47"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-40 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-39"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1492,19 +1492,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-49"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1514,7 +1514,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1530,14 +1530,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-53 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-56 makeStyles-titleContentContainer-57 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-54 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1547,13 +1547,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-58 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-55 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1564,22 +1564,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-59"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-52 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-51"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -1598,7 +1598,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -1610,7 +1610,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -1632,14 +1632,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-53 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-56 makeStyles-titleContentContainer-57 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-54 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1649,13 +1649,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-58 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-55 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1666,22 +1666,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-59"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-52 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-51"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -1700,7 +1700,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -1712,7 +1712,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -1791,14 +1791,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-41 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-44 makeStyles-titleContentContainer-45 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-42 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1808,13 +1808,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-46 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-43 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1825,22 +1825,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-47"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-40 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-39"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1855,19 +1855,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-49"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1877,7 +1877,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1893,14 +1893,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-53 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-56 makeStyles-titleContentContainer-57 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-54 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1910,13 +1910,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-58 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-55 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1927,22 +1927,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-59"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-52 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-51"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -1961,7 +1961,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -1973,7 +1973,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -1994,14 +1994,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-65 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-68 makeStyles-titleContentContainer-69 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-66 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2011,13 +2011,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-70 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-67 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2028,22 +2028,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-71"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-64 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-63"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -2058,19 +2058,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 style="display: block;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-73"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2080,7 +2080,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2097,14 +2097,14 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-65 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-68 makeStyles-titleContentContainer-69 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-66 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2114,13 +2114,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-70 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-67 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2131,22 +2131,22 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-71"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-64 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-63"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -2161,19 +2161,19 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               style="display: block;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-73"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -2183,7 +2183,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -2257,14 +2257,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-77 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-80 makeStyles-titleContentContainer-81 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-78 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2274,13 +2274,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-82 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-79 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2291,22 +2291,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-83"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-76 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-75"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -2318,7 +2318,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2326,7 +2326,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -2335,28 +2335,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
                 style="display: none;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-85"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2366,7 +2363,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2383,14 +2380,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-77 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-80 makeStyles-titleContentContainer-81 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-78 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2400,13 +2397,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-82 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-79 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2417,22 +2414,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-83"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-76 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-75"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -2444,7 +2441,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -2452,7 +2449,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                   data-testid="ExpandMoreIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -2461,28 +2458,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                   />
                 </svg>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </button>
             </div>
             <div
               style="display: none;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-85"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -2492,7 +2486,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -2566,14 +2560,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-77 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-80 makeStyles-titleContentContainer-81 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-78 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2583,13 +2577,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-82 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-79 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2600,22 +2594,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-83"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-76 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-75"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -2627,7 +2621,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2635,7 +2629,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -2644,28 +2638,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
                 style="display: none;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-85"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2675,7 +2666,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2691,14 +2682,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-89 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-92 makeStyles-titleContentContainer-93 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-90 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2708,13 +2699,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-94 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-91 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -2725,22 +2716,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-95"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-88 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-87"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -2752,7 +2743,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2760,7 +2751,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -2769,9 +2760,6 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
@@ -2782,7 +2770,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -2794,7 +2782,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -2816,14 +2804,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-89 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-92 makeStyles-titleContentContainer-93 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-90 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2833,13 +2821,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-94 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-91 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2850,22 +2838,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-95"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-88 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-87"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -2877,7 +2865,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -2885,7 +2873,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                   data-testid="ExpandMoreIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -2894,9 +2882,6 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                   />
                 </svg>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </button>
             </div>
             <div
@@ -2907,7 +2892,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -2919,7 +2904,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -2998,14 +2983,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-77 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-80 makeStyles-titleContentContainer-81 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-78 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3015,13 +3000,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-82 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-79 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3032,22 +3017,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-83"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-76 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-75"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -3059,7 +3044,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3067,7 +3052,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -3076,28 +3061,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
                 style="display: none;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-85"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -3107,7 +3089,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -3123,14 +3105,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-89 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-92 makeStyles-titleContentContainer-93 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-90 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3140,13 +3122,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-94 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-91 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3157,22 +3139,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-95"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-88 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-87"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -3184,7 +3166,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3192,7 +3174,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -3201,9 +3183,6 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
@@ -3214,7 +3193,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -3226,7 +3205,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -3247,14 +3226,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
       <div>
         <div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-101 css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-104 makeStyles-titleContentContainer-105 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-102 css-ptiqhd-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3264,13 +3243,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-106 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-103 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
                 data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -3281,22 +3260,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </svg>
             </div>
             <div
-              class="makeStyles-messageContainer-107"
+              class="css-x8fjos-messageContainer"
             >
               <hr
-                class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-100 css-9mgopn-MuiDivider-root"
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
               />
               <div
-                class="makeStyles-startFlex-99"
+                class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -3308,7 +3287,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3316,7 +3295,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="ExpandMoreIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -3325,28 +3304,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </button>
               </div>
               <div
                 style="display: none;"
               >
                 <div
-                  class="makeStyles-siteLinksLoadingContainer-109"
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
                 >
                   <span
-                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                     role="progressbar"
                     style="width: 36px; height: 36px; margin: 32px 0px;"
                   >
                     <svg
-                      class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -3356,7 +3332,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -3373,14 +3349,14 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
     <div>
       <div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root makeStyles-card-101 css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-104 makeStyles-titleContentContainer-105 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall makeStyles-primaryIcon-102 css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -3390,13 +3366,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 makeStyles-textTitleContent-106 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-secondaryIcon-103 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
               data-testid="InfoOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -3407,22 +3383,22 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
             </svg>
           </div>
           <div
-            class="makeStyles-messageContainer-107"
+            class="css-x8fjos-messageContainer"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth makeStyles-cardDivider-100 css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
             />
             <div
-              class="makeStyles-startFlex-99"
+              class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -3434,7 +3410,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1wx42p0-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -3442,7 +3418,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                   data-testid="ExpandMoreIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -3451,28 +3427,25 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
                   />
                 </svg>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </button>
             </div>
             <div
               style="display: none;"
             >
               <div
-                class="makeStyles-siteLinksLoadingContainer-109"
+                class="css-1mzmfm4-siteLinksLoadingContainer"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
                   role="progressbar"
                   style="width: 36px; height: 36px; margin: 32px 0px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -3482,7 +3455,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...

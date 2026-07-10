@@ -6,14 +6,14 @@ exports[`DataThemeIcon renders in avatar mode 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiAvatar-root MuiAvatar-circular css-avgvop-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular css-16frk5r-MuiAvatar-root"
         data-selenium="data-theme-icon.landuse"
         style="width: 40px; height: 40px;"
         title="Land Cover & Processes"
       >
         <img
           alt="Land Cover & Processes"
-          class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+          class="MuiAvatar-img css-1su80sj-MuiAvatar-img"
           src="svg-file.svg"
         />
       </div>
@@ -21,14 +21,14 @@ exports[`DataThemeIcon renders in avatar mode 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiAvatar-root MuiAvatar-circular css-avgvop-MuiAvatar-root"
+      class="MuiAvatar-root MuiAvatar-circular css-16frk5r-MuiAvatar-root"
       data-selenium="data-theme-icon.landuse"
       style="width: 40px; height: 40px;"
       title="Land Cover & Processes"
     >
       <img
         alt="Land Cover & Processes"
-        class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+        class="MuiAvatar-img css-1su80sj-MuiAvatar-img"
         src="svg-file.svg"
       />
     </div>

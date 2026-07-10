@@ -134,14 +134,15 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
         data-prop-open="true"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-browserWarning-7 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-ygcvw7-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
           role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
         >
           <div
-            class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
           >
             <span
-              class="makeStyles-browserWarningMessage-8"
+              class="css-sre3td-browserWarningMessage"
               data-selenium="neon-page.browser-warning"
               id="browser-warning"
             >
@@ -155,68 +156,56 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                 Please use a modern browser for full support.
                 <br />
                 <div
-                  class="makeStyles-buttonRow-9"
+                  class="css-1g9s9al-buttonRow"
                 >
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                     href="https://www.mozilla.org/en-US/firefox/new/"
                     tabindex="0"
                     target="_blank"
                   >
                     Firefox
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                     href="https://www.google.com/chrome/"
                     tabindex="0"
                     target="_blank"
                   >
                     Chrome
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                     href="https://www.apple.com/safari/"
                     tabindex="0"
                     target="_blank"
                   >
                     Safari
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                     href="https://www.microsoft.com/en-us/windows/microsoft-edge"
                     tabindex="0"
                     target="_blank"
                   >
                     Edge
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </a>
                 </div>
               </div>
             </span>
           </div>
           <div
-            class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
+            class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
           >
             <button
               aria-label="close"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeLarge css-nmordm-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeLarge css-x1bjb0-MuiButtonBase-root-MuiIconButton-root"
               tabindex="0"
               type="button"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                 data-testid="CloseIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -225,9 +214,6 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                   d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
             </button>
           </div>
         </div>
@@ -242,14 +228,15 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
       data-prop-open="true"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-browserWarning-7 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-ygcvw7-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
         role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
       >
         <div
-          class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
         >
           <span
-            class="makeStyles-browserWarningMessage-8"
+            class="css-sre3td-browserWarningMessage"
             data-selenium="neon-page.browser-warning"
             id="browser-warning"
           >
@@ -263,68 +250,56 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
               Please use a modern browser for full support.
               <br />
               <div
-                class="makeStyles-buttonRow-9"
+                class="css-1g9s9al-buttonRow"
               >
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                   href="https://www.mozilla.org/en-US/firefox/new/"
                   tabindex="0"
                   target="_blank"
                 >
                   Firefox
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                   href="https://www.google.com/chrome/"
                   tabindex="0"
                   target="_blank"
                 >
                   Chrome
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                   href="https://www.apple.com/safari/"
                   tabindex="0"
                   target="_blank"
                 >
                   Safari
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1jr73wj-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1222qdm-MuiButtonBase-root-MuiButton-root"
                   href="https://www.microsoft.com/en-us/windows/microsoft-edge"
                   tabindex="0"
                   target="_blank"
                 >
                   Edge
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </a>
               </div>
             </div>
           </span>
         </div>
         <div
-          class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
+          class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
         >
           <button
             aria-label="close"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeLarge css-nmordm-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeLarge css-x1bjb0-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
               data-testid="CloseIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -333,9 +308,6 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                 d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
       </div>

@@ -3,7 +3,9 @@ export interface NeonTheme extends Theme {
     isNeonTheme: boolean;
     colors: Record<string, Record<number, string>>;
 }
-declare module '@mui/styles/defaultTheme' {
-    interface DefaultTheme extends Theme {
+declare module '@mui/material/styles' {
+    interface Theme {
+        isNeonTheme: boolean;
+        colors: Record<string, Record<number, string>>;
     }
 }

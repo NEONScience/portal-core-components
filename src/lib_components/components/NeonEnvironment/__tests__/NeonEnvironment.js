@@ -30,8 +30,6 @@ describe('NeonEnvironment', () => {
       'getRootAuthApiPath',
       'getRootAuth0ApiPath',
       'getRootDownloadApiPath',
-      'getVisusProductsBaseUrl',
-      'getVisusIframeBaseUrl',
       'getRouterBasePath',
       'getRouterBaseHomePath',
       'getApiHostOverride',

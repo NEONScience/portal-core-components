@@ -73,11 +73,12 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
         data-prop-open="true"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-3 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
           role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
         >
           <div
-            class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
           >
             <div
               id="neon-data-portal-notifications"
@@ -93,17 +94,17 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
             </div>
           </div>
           <div
-            class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
+            class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
           >
             <button
               aria-label="close"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-wwtaoh-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
               tabindex="0"
               type="button"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                 data-testid="CloseIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -112,9 +113,6 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
                   d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
             </button>
           </div>
         </div>
@@ -129,11 +127,12 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
       data-prop-open="true"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-3 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
         role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
       >
         <div
-          class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
         >
           <div
             id="neon-data-portal-notifications"
@@ -149,17 +148,17 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
           </div>
         </div>
         <div
-          class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
+          class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
         >
           <button
             aria-label="close"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-wwtaoh-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
               data-testid="CloseIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -168,9 +167,6 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
                 d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
       </div>
@@ -242,11 +238,12 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
         data-prop-open="true"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-2 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
           role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
         >
           <div
-            class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
           >
             <div
               id="neon-data-portal-notifications"
@@ -273,11 +270,12 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
       data-prop-open="true"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root makeStyles-notification-2 css-3em1l5-MuiPaper-root-MuiSnackbarContent-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
         role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
       >
         <div
-          class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
         >
           <div
             id="neon-data-portal-notifications"

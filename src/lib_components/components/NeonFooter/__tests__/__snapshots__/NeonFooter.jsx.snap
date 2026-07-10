@@ -6,7 +6,7 @@ exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonCon
   "baseElement": <body>
     <div>
       <footer
-        class="makeStyles-footerContainer-5"
+        class="css-ogaqjo-footerContainer"
         id="footer"
       >
         <div>
@@ -17,7 +17,7 @@ exports[`NeonFooter renders fallback with drupalCSSLoaded prop and error NeonCon
   </body>,
   "container": <div>
     <footer
-      class="makeStyles-footerContainer-5"
+      class="css-ogaqjo-footerContainer"
       id="footer"
     >
       <div>
@@ -162,7 +162,7 @@ exports[`NeonFooter renders with no props and active/fetching NeonContext state 
   "baseElement": <body>
     <div>
       <footer
-        class="makeStyles-footerContainer-2"
+        class="css-ogaqjo-footerContainer"
         id="footer"
       >
         <div>
@@ -173,7 +173,7 @@ exports[`NeonFooter renders with no props and active/fetching NeonContext state 
   </body>,
   "container": <div>
     <footer
-      class="makeStyles-footerContainer-2"
+      class="css-ogaqjo-footerContainer"
       id="footer"
     >
       <div>
@@ -241,7 +241,7 @@ exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <footer
-        class="makeStyles-footerContainer-3"
+        class="css-ogaqjo-footerContainer"
         id="footer"
       >
         <div>
@@ -252,7 +252,7 @@ exports[`NeonFooter renders with no props and error NeonContext state 1`] = `
   </body>,
   "container": <div>
     <footer
-      class="makeStyles-footerContainer-3"
+      class="css-ogaqjo-footerContainer"
       id="footer"
     >
       <div>
@@ -320,7 +320,7 @@ exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <footer
-        class="makeStyles-footerContainer-1"
+        class="css-ogaqjo-footerContainer"
         id="footer"
       >
         <div>
@@ -331,7 +331,7 @@ exports[`NeonFooter renders with no props and inactive NeonContext state 1`] = `
   </body>,
   "container": <div>
     <footer
-      class="makeStyles-footerContainer-1"
+      class="css-ogaqjo-footerContainer"
       id="footer"
     >
       <div>
@@ -399,7 +399,7 @@ exports[`NeonFooter renders with no props and success NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <footer
-        class="makeStyles-footerContainer-4"
+        class="css-ogaqjo-footerContainer"
         id="footer"
       >
         <div>
@@ -410,7 +410,7 @@ exports[`NeonFooter renders with no props and success NeonContext state 1`] = `
   </body>,
   "container": <div>
     <footer
-      class="makeStyles-footerContainer-4"
+      class="css-ogaqjo-footerContainer"
       id="footer"
     >
       <div>

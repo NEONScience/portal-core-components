@@ -48,41 +48,6 @@ const expectedInitialSite = {
 };
 
 describe('TimeSeriesViewerContext', () => {
-  describe('Provider', () => {
-    test.skip('renders with productData prop', (done) => {
-      const productData = {
-        productCode: 'foo',
-        productName: 'bar',
-        siteCodes: [
-          {
-            siteCode: 'A',
-            availableMonths: ['2001-01', '2001-02'],
-          },
-        ],
-      };
-      setTimeout(() => {
-        const tree = render(
-          <Provider productData={productData}>
-            <div>children</div>
-          </Provider>,
-        );
-        expect(tree).toMatchSnapshot();
-        done();
-      });
-    });
-    test('renders with productCode prop', (done) => {
-      setTimeout(() => {
-        const tree = render(
-          <Provider productCode="DP1.23456.789">
-            <div>children</div>
-          </Provider>,
-        );
-        expect(tree).toMatchSnapshot();
-        done();
-      });
-    });
-  });
-
   describe('useTimeSeriesViewerState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', (done) => {
       setTimeout(() => {

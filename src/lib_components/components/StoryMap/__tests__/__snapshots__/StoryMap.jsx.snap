@@ -18,13 +18,13 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
           title="Foo"
         />
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-3 css-zuor1v-MuiTypography-root-MuiLink-root"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
           href="https://foo.bar"
           target="_blank"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-4 css-i4bv87-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-q24y99-MuiSvgIcon-root-openInNewIcon"
             data-testid="OpenInNewIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -52,13 +52,13 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
         title="Foo"
       />
       <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-3 css-zuor1v-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
         href="https://foo.bar"
         target="_blank"
       >
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-4 css-i4bv87-MuiSvgIcon-root"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-q24y99-MuiSvgIcon-root-openInNewIcon"
           data-testid="OpenInNewIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -143,13 +143,13 @@ exports[`StoryMap Renders correctly with no title 1`] = `
           title="Neon Story Map"
         />
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-1 css-zuor1v-MuiTypography-root-MuiLink-root"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
           href="https://foo.bar"
           target="_blank"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-2 css-i4bv87-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-q24y99-MuiSvgIcon-root-openInNewIcon"
             data-testid="OpenInNewIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -177,13 +177,13 @@ exports[`StoryMap Renders correctly with no title 1`] = `
         title="Neon Story Map"
       />
       <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways makeStyles-openInNewLink-1 css-zuor1v-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
         href="https://foo.bar"
         target="_blank"
       >
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-openInNewIcon-2 css-i4bv87-MuiSvgIcon-root"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-q24y99-MuiSvgIcon-root-openInNewIcon"
           data-testid="OpenInNewIcon"
           focusable="false"
           viewBox="0 0 24 24"

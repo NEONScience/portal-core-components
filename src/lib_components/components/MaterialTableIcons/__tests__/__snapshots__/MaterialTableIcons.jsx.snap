@@ -7,7 +7,7 @@ exports[`MaterialTableIcons renders Add icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="AddBoxIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -21,7 +21,7 @@ exports[`MaterialTableIcons renders Add icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="AddBoxIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ exports[`MaterialTableIcons renders Check icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="CheckIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -106,7 +106,7 @@ exports[`MaterialTableIcons renders Check icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="CheckIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ exports[`MaterialTableIcons renders Clear icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ClearIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -191,7 +191,7 @@ exports[`MaterialTableIcons renders Clear icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ClearIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -262,7 +262,7 @@ exports[`MaterialTableIcons renders Delete icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="DeleteOutlineIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -276,7 +276,7 @@ exports[`MaterialTableIcons renders Delete icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="DeleteOutlineIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -347,7 +347,7 @@ exports[`MaterialTableIcons renders DetailPanel icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ChevronRightIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -361,7 +361,7 @@ exports[`MaterialTableIcons renders DetailPanel icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ChevronRightIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -432,13 +432,13 @@ exports[`MaterialTableIcons renders Edit icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="EditIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
         <path
-          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"
+          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"
         />
       </svg>
     </div>
@@ -446,13 +446,13 @@ exports[`MaterialTableIcons renders Edit icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="EditIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"
+        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"
       />
     </svg>
   </div>,
@@ -517,7 +517,7 @@ exports[`MaterialTableIcons renders Export icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="SaveAltIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -531,7 +531,7 @@ exports[`MaterialTableIcons renders Export icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="SaveAltIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -602,7 +602,7 @@ exports[`MaterialTableIcons renders Filter icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="FilterListIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -616,7 +616,7 @@ exports[`MaterialTableIcons renders Filter icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="FilterListIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -687,7 +687,7 @@ exports[`MaterialTableIcons renders FirstPage icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="FirstPageIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -701,7 +701,7 @@ exports[`MaterialTableIcons renders FirstPage icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="FirstPageIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -772,7 +772,7 @@ exports[`MaterialTableIcons renders LastPage icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="LastPageIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -786,7 +786,7 @@ exports[`MaterialTableIcons renders LastPage icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="LastPageIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -857,7 +857,7 @@ exports[`MaterialTableIcons renders NextPage icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ChevronRightIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -871,7 +871,7 @@ exports[`MaterialTableIcons renders NextPage icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ChevronRightIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -942,7 +942,7 @@ exports[`MaterialTableIcons renders PreviousPage icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ChevronLeftIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -956,7 +956,7 @@ exports[`MaterialTableIcons renders PreviousPage icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ChevronLeftIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -1027,7 +1027,7 @@ exports[`MaterialTableIcons renders ResetSearch icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ClearIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -1041,7 +1041,7 @@ exports[`MaterialTableIcons renders ResetSearch icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ClearIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -1112,7 +1112,7 @@ exports[`MaterialTableIcons renders Search icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="SearchIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -1126,7 +1126,7 @@ exports[`MaterialTableIcons renders Search icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="SearchIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -1197,7 +1197,7 @@ exports[`MaterialTableIcons renders SortArrow icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="ArrowUpwardIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -1211,7 +1211,7 @@ exports[`MaterialTableIcons renders SortArrow icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="ArrowUpwardIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -1282,7 +1282,7 @@ exports[`MaterialTableIcons renders ThirdStateCheck icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="RemoveIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -1296,7 +1296,7 @@ exports[`MaterialTableIcons renders ThirdStateCheck icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="RemoveIcon"
       focusable="false"
       viewBox="0 0 24 24"
@@ -1367,7 +1367,7 @@ exports[`MaterialTableIcons renders ViewColumn icon correctly 1`] = `
     <div>
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
         data-testid="TableChartIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -1381,7 +1381,7 @@ exports[`MaterialTableIcons renders ViewColumn icon correctly 1`] = `
   "container": <div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
       data-testid="TableChartIcon"
       focusable="false"
       viewBox="0 0 24 24"

@@ -6,16 +6,16 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
   "baseElement": <body>
     <div>
       <div
-        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
         style="width: 100%;"
       >
         <div
-          class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+          class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
           style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-28yyoa-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-ponwwo-MuiSvgIcon-root"
             data-testid="WarningIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -25,7 +25,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
             />
           </svg>
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
             style="margin-top: 8px;"
           >
             Error - Unable to Load Sites
@@ -36,16 +36,16 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
   </body>,
   "container": <div>
     <div
-      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
       style="width: 100%;"
     >
       <div
-        class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+        class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
         style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
       >
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-28yyoa-MuiSvgIcon-root"
+          class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-ponwwo-MuiSvgIcon-root"
           data-testid="WarningIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
           />
         </svg>
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
           style="margin-top: 8px;"
         >
           Error - Unable to Load Sites
@@ -184,29 +184,29 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
   "baseElement": <body>
     <div>
       <div
-        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
         style="width: 100%;"
       >
         <div
-          class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+          class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
           style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-j14d78-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-p1zp9-MuiTypography-root"
           >
             Loading Sites...
           </h6>
           <span
-            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
             role="progressbar"
             style="width: 40px; height: 40px;"
           >
             <svg
-              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
               viewBox="22 22 44 44"
             >
               <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
                 cx="44"
                 cy="44"
                 fill="none"
@@ -221,29 +221,29 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
   </body>,
   "container": <div>
     <div
-      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
       style="width: 100%;"
     >
       <div
-        class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+        class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
         style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-j14d78-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-p1zp9-MuiTypography-root"
         >
           Loading Sites...
         </h6>
         <span
-          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-w2h3to-MuiCircularProgress-root"
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
           role="progressbar"
           style="width: 40px; height: 40px;"
         >
           <svg
-            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
               cx="44"
               cy="44"
               fill="none"

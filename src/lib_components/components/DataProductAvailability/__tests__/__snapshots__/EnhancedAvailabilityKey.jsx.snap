@@ -6,18 +6,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-keyContainer-5"
+        class="css-qah0mc-keyContainer"
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-8 css-134ad2t-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -25,7 +25,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
               data-testid="HelpOutlineIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -34,14 +34,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
         <div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data have been published and released. Data are available for download"
           >
@@ -58,7 +55,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -67,7 +64,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data have been collected and will be published after processing has completed"
           >
@@ -86,7 +83,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -95,7 +92,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection is scheduled to happen"
           >
@@ -114,7 +111,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -123,7 +120,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="No data collection is scheduled"
           >
@@ -142,7 +139,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -153,7 +150,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         </div>
         <div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data was neither expected nor collected"
           >
@@ -170,7 +167,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -179,7 +176,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection was expected but collection could not take place; no data will be published"
           >
@@ -196,7 +193,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -205,7 +202,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data should be available for download but something has prevented publication"
           >
@@ -224,7 +221,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -233,7 +230,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection is desired but not expected until other conditions are met"
           >
@@ -252,7 +249,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -263,7 +260,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         </div>
         <div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
           >
@@ -297,7 +294,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.5"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="57"
                 y="9"
               >
@@ -306,7 +303,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-6"
+            class="css-11bsayg-keyElement"
             role="button"
             title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
           >
@@ -340,7 +337,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.5"
               />
               <text
-                class="makeStyles-keyElementText-7"
+                class="css-1g8m8ll-keyElementText"
                 x="57"
                 y="9"
               >
@@ -354,18 +351,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   </body>,
   "container": <div>
     <div
-      class="makeStyles-keyContainer-5"
+      class="css-qah0mc-keyContainer"
     >
       <div>
         <h6
-          class="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-8 css-134ad2t-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
           style="margin: -6px 24px 4px 0px;"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
           style="margin-left: -3px;"
           tabindex="0"
           title="Help - Data Availability Chart Key"
@@ -373,7 +370,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
             data-testid="HelpOutlineIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -382,14 +379,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
             />
           </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </button>
       </div>
       <div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data have been published and released. Data are available for download"
         >
@@ -406,7 +400,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -415,7 +409,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data have been collected and will be published after processing has completed"
         >
@@ -434,7 +428,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -443,7 +437,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection is scheduled to happen"
         >
@@ -462,7 +456,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -471,7 +465,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="No data collection is scheduled"
         >
@@ -490,7 +484,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -501,7 +495,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </div>
       <div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data was neither expected nor collected"
         >
@@ -518,7 +512,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -527,7 +521,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection was expected but collection could not take place; no data will be published"
         >
@@ -544,7 +538,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -553,7 +547,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data should be available for download but something has prevented publication"
         >
@@ -572,7 +566,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -581,7 +575,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection is desired but not expected until other conditions are met"
         >
@@ -600,7 +594,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -611,7 +605,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </div>
       <div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected"
         >
@@ -645,7 +639,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.5"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="57"
               y="9"
             >
@@ -654,7 +648,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-6"
+          class="css-11bsayg-keyElement"
           role="button"
           title="If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected"
         >
@@ -688,7 +682,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.5"
             />
             <text
-              class="makeStyles-keyElementText-7"
+              class="css-1g8m8ll-keyElementText"
               x="57"
               y="9"
             >
@@ -759,18 +753,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-keyContainer-1"
+        class="css-qah0mc-keyContainer"
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -778,7 +772,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
               data-testid="HelpOutlineIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -787,14 +781,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </button>
         </div>
         <div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data have been published and released. Data are available for download"
           >
@@ -811,7 +802,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -820,7 +811,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data have been collected and will be published after processing has completed"
           >
@@ -839,7 +830,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -848,7 +839,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection is scheduled to happen"
           >
@@ -867,7 +858,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -876,7 +867,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="No data collection is scheduled"
           >
@@ -895,7 +886,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -906,7 +897,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         </div>
         <div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data was neither expected nor collected"
           >
@@ -923,7 +914,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -932,7 +923,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection was expected but collection could not take place; no data will be published"
           >
@@ -949,7 +940,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -958,7 +949,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data should be available for download but something has prevented publication"
           >
@@ -977,7 +968,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -986,7 +977,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
             </svg>
           </div>
           <div
-            class="makeStyles-keyElement-2"
+            class="css-11bsayg-keyElement"
             role="button"
             title="Data collection is desired but not expected until other conditions are met"
           >
@@ -1005,7 +996,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 y="0.75"
               />
               <text
-                class="makeStyles-keyElementText-3"
+                class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
@@ -1019,18 +1010,18 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
   </body>,
   "container": <div>
     <div
-      class="makeStyles-keyContainer-1"
+      class="css-qah0mc-keyContainer"
     >
       <div>
         <h6
-          class="MuiTypography-root MuiTypography-h6 makeStyles-h6Small-4 css-134ad2t-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
           style="margin: -6px 24px 4px 0px;"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-8spxgg-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
           style="margin-left: -3px;"
           tabindex="0"
           title="Help - Data Availability Chart Key"
@@ -1038,7 +1029,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
             data-testid="HelpOutlineIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -1047,14 +1038,11 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               d="M11 18h2v-2h-2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4"
             />
           </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </button>
       </div>
       <div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data have been published and released. Data are available for download"
         >
@@ -1071,7 +1059,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1080,7 +1068,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data have been collected and will be published after processing has completed"
         >
@@ -1099,7 +1087,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1108,7 +1096,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection is scheduled to happen"
         >
@@ -1127,7 +1115,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1136,7 +1124,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="No data collection is scheduled"
         >
@@ -1155,7 +1143,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1166,7 +1154,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       </div>
       <div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data was neither expected nor collected"
         >
@@ -1183,7 +1171,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1192,7 +1180,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection was expected but collection could not take place; no data will be published"
         >
@@ -1209,7 +1197,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1218,7 +1206,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data should be available for download but something has prevented publication"
         >
@@ -1237,7 +1225,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
@@ -1246,7 +1234,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           </svg>
         </div>
         <div
-          class="makeStyles-keyElement-2"
+          class="css-11bsayg-keyElement"
           role="button"
           title="Data collection is desired but not expected until other conditions are met"
         >
@@ -1265,7 +1253,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               y="0.75"
             />
             <text
-              class="makeStyles-keyElementText-3"
+              class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >

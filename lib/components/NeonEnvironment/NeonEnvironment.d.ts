@@ -26,6 +26,7 @@ export interface INeonEnvironment {
     useGraphql: boolean;
     showAopViewer: boolean;
     authDisableWs: boolean;
+    auth0DisableApi: boolean;
     enableGlobalSignInState: boolean;
     fetchDrupalAssets: boolean;
     getReactAppName: () => string;

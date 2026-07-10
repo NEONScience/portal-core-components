@@ -6,39 +6,39 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
         data-selenium="download-data-dialog.step-form.documentation"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <fieldset
-            class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+            class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
           >
             <div
               aria-label="Documentation"
-              class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+              class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
               role="radiogroup"
             >
               <label
-                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-6 css-lxh3mz-MuiFormControlLabel-root"
+                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     checked=""
-                    class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                    class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                     name="documentation"
                     type="radio"
                     value="include"
                   />
                   <span
-                    class="css-19y5vkv-MuiRadioButtonIcon-root"
+                    class="css-9oxshb-MuiRadioButtonIcon-root"
                   >
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonUncheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                     </svg>
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonCheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -59,23 +59,20 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
-                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
                 >
                   <div
-                    class="makeStyles-radioLabel-7"
+                    class="css-7scxs0-radioLabel"
                   >
                     <h6
-                      class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                     >
                       Include
                     </h6>
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                     >
                       Include relevant documents for this Data Product
                     </p>
@@ -83,23 +80,23 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </span>
               </label>
               <label
-                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-6 css-lxh3mz-MuiFormControlLabel-root"
+                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
-                    class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                    class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                     name="documentation"
                     type="radio"
                     value="exclude"
                   />
                   <span
-                    class="css-19y5vkv-MuiRadioButtonIcon-root"
+                    class="css-9oxshb-MuiRadioButtonIcon-root"
                   >
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonUncheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -110,7 +107,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                     </svg>
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonCheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -120,23 +117,20 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
-                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
                 >
                   <div
-                    class="makeStyles-radioLabel-7"
+                    class="css-7scxs0-radioLabel"
                   >
                     <h6
-                      class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                     >
                       Exclude
                     </h6>
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                     >
                       Data only, no relevant documents for this Data Product
                     </p>
@@ -147,18 +141,18 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
           </fieldset>
         </div>
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
             style="margin-top: 12px;"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-9 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-5 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
                 data-testid="InfoIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -168,11 +162,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 />
               </svg>
               <p
-                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
               >
                 EML files for this Data Product are included in all downloads. Learn more about EML files in the 
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm="download-data-dialog.neon-faq-link"
                   href="https://www.neonscience.org/about/faq"
                   target="_blank"
@@ -181,7 +175,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 </a>
                  and at 
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="KNB"
                   data-gtm-product-code="n/a"
                   href="https://eml.ecoinformatics.org"
@@ -200,39 +194,39 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
       data-selenium="download-data-dialog.step-form.documentation"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <fieldset
-          class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
         >
           <div
             aria-label="Documentation"
-            class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+            class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
             role="radiogroup"
           >
             <label
-              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-6 css-lxh3mz-MuiFormControlLabel-root"
+              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   checked=""
-                  class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                  class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                   name="documentation"
                   type="radio"
                   value="include"
                 />
                 <span
-                  class="css-19y5vkv-MuiRadioButtonIcon-root"
+                  class="css-9oxshb-MuiRadioButtonIcon-root"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonUncheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -243,7 +237,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonCheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -253,23 +247,20 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
-                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
               >
                 <div
-                  class="makeStyles-radioLabel-7"
+                  class="css-7scxs0-radioLabel"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   >
                     Include
                   </h6>
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                   >
                     Include relevant documents for this Data Product
                   </p>
@@ -277,23 +268,23 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
               </span>
             </label>
             <label
-              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-6 css-lxh3mz-MuiFormControlLabel-root"
+              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
-                  class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                  class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                   name="documentation"
                   type="radio"
                   value="exclude"
                 />
                 <span
-                  class="css-19y5vkv-MuiRadioButtonIcon-root"
+                  class="css-9oxshb-MuiRadioButtonIcon-root"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonUncheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -304,7 +295,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonCheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -314,23 +305,20 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
-                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
               >
                 <div
-                  class="makeStyles-radioLabel-7"
+                  class="css-7scxs0-radioLabel"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   >
                     Exclude
                   </h6>
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                   >
                     Data only, no relevant documents for this Data Product
                   </p>
@@ -341,18 +329,18 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         </fieldset>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
           style="margin-top: 12px;"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-9 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-5 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
               data-testid="InfoIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -362,11 +350,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
               />
             </svg>
             <p
-              class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
             >
               EML files for this Data Product are included in all downloads. Learn more about EML files in the 
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                 data-gtm="download-data-dialog.neon-faq-link"
                 href="https://www.neonscience.org/about/faq"
                 target="_blank"
@@ -375,7 +363,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
               </a>
                and at 
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                 data-gtm-external-host="KNB"
                 data-gtm-product-code="n/a"
                 href="https://eml.ecoinformatics.org"
@@ -512,32 +500,32 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <fieldset
-        class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+        class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
         data-selenium="download-data-dialog.step-form.package-type"
       >
         <div
           aria-label="Package Type"
-          class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+          class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
           role="radiogroup"
         >
           <label
-            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-54 css-lxh3mz-MuiFormControlLabel-root"
+            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
           >
             <span
-              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
             >
               <input
-                class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                 name="package-type"
                 type="radio"
                 value="basic"
               />
               <span
-                class="css-19y5vkv-MuiRadioButtonIcon-root"
+                class="css-9oxshb-MuiRadioButtonIcon-root"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                   data-testid="RadioButtonUncheckedIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -548,7 +536,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                   data-testid="RadioButtonCheckedIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -558,23 +546,20 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                   />
                 </svg>
               </span>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
             </span>
             <span
-              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
             >
               <div
-                class="makeStyles-radioLabel-55"
+                class="css-7scxs0-radioLabel"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 >
                   Basic
                 </h6>
                 <div
-                  class="makeStyles-markdownWrapper-64 MuiTypography-root MuiTypography-body2"
+                  class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
                 >
                   <p>
                     Includes the data product, summary statistics, expanded uncertainty, and final quality flag
@@ -584,24 +569,24 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             </span>
           </label>
           <label
-            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-54 css-lxh3mz-MuiFormControlLabel-root"
+            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
           >
             <span
-              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
             >
               <input
                 checked=""
-                class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                 name="package-type"
                 type="radio"
                 value="expanded"
               />
               <span
-                class="css-19y5vkv-MuiRadioButtonIcon-root"
+                class="css-9oxshb-MuiRadioButtonIcon-root"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                   data-testid="RadioButtonUncheckedIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -612,7 +597,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                   data-testid="RadioButtonCheckedIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -622,23 +607,20 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                   />
                 </svg>
               </span>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
             </span>
             <span
-              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
             >
               <div
-                class="makeStyles-radioLabel-55"
+                class="css-7scxs0-radioLabel"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 >
                   Expanded
                 </h6>
                 <div
-                  class="makeStyles-markdownWrapper-64 MuiTypography-root MuiTypography-body2"
+                  class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
                 >
                   <p>
                     Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
@@ -653,32 +635,32 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
   </body>,
   "container": <div>
     <fieldset
-      class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+      class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
       data-selenium="download-data-dialog.step-form.package-type"
     >
       <div
         aria-label="Package Type"
-        class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+        class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
         role="radiogroup"
       >
         <label
-          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-54 css-lxh3mz-MuiFormControlLabel-root"
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
         >
           <span
-            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
           >
             <input
-              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
               name="package-type"
               type="radio"
               value="basic"
             />
             <span
-              class="css-19y5vkv-MuiRadioButtonIcon-root"
+              class="css-9oxshb-MuiRadioButtonIcon-root"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                 data-testid="RadioButtonUncheckedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -689,7 +671,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
               </svg>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                 data-testid="RadioButtonCheckedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -699,23 +681,20 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 />
               </svg>
             </span>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </span>
           <span
-            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
           >
             <div
-              class="makeStyles-radioLabel-55"
+              class="css-7scxs0-radioLabel"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
               >
                 Basic
               </h6>
               <div
-                class="makeStyles-markdownWrapper-64 MuiTypography-root MuiTypography-body2"
+                class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
               >
                 <p>
                   Includes the data product, summary statistics, expanded uncertainty, and final quality flag
@@ -725,24 +704,24 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           </span>
         </label>
         <label
-          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-54 css-lxh3mz-MuiFormControlLabel-root"
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
         >
           <span
-            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
           >
             <input
               checked=""
-              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
               name="package-type"
               type="radio"
               value="expanded"
             />
             <span
-              class="css-19y5vkv-MuiRadioButtonIcon-root"
+              class="css-9oxshb-MuiRadioButtonIcon-root"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                 data-testid="RadioButtonUncheckedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -753,7 +732,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
               </svg>
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                 data-testid="RadioButtonCheckedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -763,23 +742,20 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 />
               </svg>
             </span>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </span>
           <span
-            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
           >
             <div
-              class="makeStyles-radioLabel-55"
+              class="css-7scxs0-radioLabel"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
               >
                 Expanded
               </h6>
               <div
-                class="makeStyles-markdownWrapper-64 MuiTypography-root MuiTypography-body2"
+                class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
               >
                 <p>
                   Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
@@ -854,11 +830,11 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
         data-selenium="download-data-dialog.step-form.policies"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-10z1ikn-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-1orlae8-MuiTypography-root"
         >
           In order to proceed to download NEON data you must agree to the 
           <a
-            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.policies-link"
             href="https://www.neonscience.org/data-samples/guidelines-policies"
             target="_blank"
@@ -868,20 +844,20 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
           .
         </h6>
         <label
-          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-formControlBold-99 css-lxh3mz-MuiFormControlLabel-root"
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1g4zkki-MuiFormControlLabel-root-formControlBold"
         >
           <span
-            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-vfw5nw-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1dcdine-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
           >
             <input
-              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
               data-indeterminate="false"
               type="checkbox"
               value="policies"
             />
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
               data-testid="CheckBoxOutlineBlankIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -890,12 +866,9 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
                 d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
               />
             </svg>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
           </span>
           <span
-            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
           >
             I agree to the NEON Data Usage and Citation Policies.
           </span>
@@ -908,11 +881,11 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
       data-selenium="download-data-dialog.step-form.policies"
     >
       <h6
-        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-10z1ikn-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-1orlae8-MuiTypography-root"
       >
         In order to proceed to download NEON data you must agree to the 
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
           data-gtm="download-data-dialog.policies-link"
           href="https://www.neonscience.org/data-samples/guidelines-policies"
           target="_blank"
@@ -922,20 +895,20 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
         .
       </h6>
       <label
-        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-formControlBold-99 css-lxh3mz-MuiFormControlLabel-root"
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1g4zkki-MuiFormControlLabel-root-formControlBold"
       >
         <span
-          class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-vfw5nw-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+          class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1dcdine-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
         >
           <input
-            class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+            class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
             data-indeterminate="false"
             type="checkbox"
             value="policies"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
             data-testid="CheckBoxOutlineBlankIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -944,12 +917,9 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
               d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
             />
           </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </span>
         <span
-          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
         >
           I agree to the NEON Data Usage and Citation Policies.
         </span>
@@ -1016,38 +986,38 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <fieldset
-            class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+            class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
           >
             <div
               aria-label="Provisional Data"
-              class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+              class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
               role="radiogroup"
             >
               <label
-                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-70 css-lxh3mz-MuiFormControlLabel-root"
+                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
-                    class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                    class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                     name="provisional-data"
                     type="radio"
                     value="include"
                   />
                   <span
-                    class="css-19y5vkv-MuiRadioButtonIcon-root"
+                    class="css-9oxshb-MuiRadioButtonIcon-root"
                   >
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonUncheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -1058,7 +1028,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                     </svg>
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonCheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -1068,23 +1038,20 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
-                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
                 >
                   <div
-                    class="makeStyles-radioLabel-71"
+                    class="css-7scxs0-radioLabel"
                   >
                     <h6
-                      class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                     >
                       Include
                     </h6>
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                     >
                       Include provisional data in this download package (
                       <b>
@@ -1096,24 +1063,24 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                 </span>
               </label>
               <label
-                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-70 css-lxh3mz-MuiFormControlLabel-root"
+                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     checked=""
-                    class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                    class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                     name="provisional-data"
                     type="radio"
                     value="exclude"
                   />
                   <span
-                    class="css-19y5vkv-MuiRadioButtonIcon-root"
+                    class="css-9oxshb-MuiRadioButtonIcon-root"
                   >
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonUncheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -1124,7 +1091,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                     </svg>
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                       data-testid="RadioButtonCheckedIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -1134,23 +1101,20 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
-                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
                 >
                   <div
-                    class="makeStyles-radioLabel-71"
+                    class="css-7scxs0-radioLabel"
                   >
                     <h6
-                      class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                     >
                       Exclude
                     </h6>
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                     >
                       Release data only, no provisional data included in this download package
                     </p>
@@ -1161,18 +1125,18 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
           </fieldset>
         </div>
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
             style="margin-top: 12px;"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-73 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-69 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
                 data-testid="InfoIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1182,11 +1146,11 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                 />
               </svg>
               <p
-                class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
               >
                 Learn more about data product revisions, releases and provisional data at 
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm="download-data-dialog.neon-data-revisions-releases-link"
                   href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
                   target="_blank"
@@ -1203,38 +1167,38 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
       data-selenium="download-data-dialog.step-form.provisional-data"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <fieldset
-          class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
         >
           <div
             aria-label="Provisional Data"
-            class="MuiFormGroup-root MuiRadioGroup-root css-dmmspl-MuiFormGroup-root"
+            class="MuiFormGroup-root MuiRadioGroup-root css-1mac7pt-MuiFormGroup-root"
             role="radiogroup"
           >
             <label
-              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-70 css-lxh3mz-MuiFormControlLabel-root"
+              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
-                  class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                  class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                   name="provisional-data"
                   type="radio"
                   value="include"
                 />
                 <span
-                  class="css-19y5vkv-MuiRadioButtonIcon-root"
+                  class="css-9oxshb-MuiRadioButtonIcon-root"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonUncheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -1245,7 +1209,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-145qo40-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-4reyio-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonCheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -1255,23 +1219,20 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
-                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
               >
                 <div
-                  class="makeStyles-radioLabel-71"
+                  class="css-7scxs0-radioLabel"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   >
                     Include
                   </h6>
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                   >
                     Include provisional data in this download package (
                     <b>
@@ -1283,24 +1244,24 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
               </span>
             </label>
             <label
-              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd makeStyles-radio-70 css-lxh3mz-MuiFormControlLabel-root"
+              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-14hx4lc-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   checked=""
-                  class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+                  class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
                   name="provisional-data"
                   type="radio"
                   value="exclude"
                 />
                 <span
-                  class="css-19y5vkv-MuiRadioButtonIcon-root"
+                  class="css-9oxshb-MuiRadioButtonIcon-root"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-q6smfc-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-10fh2vq-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonUncheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -1311,7 +1272,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-majg0n-MuiSvgIcon-root-MuiRadioButtonIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-oen5zo-MuiSvgIcon-root-MuiRadioButtonIcon-root"
                     data-testid="RadioButtonCheckedIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -1321,23 +1282,20 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
-                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1nggj6-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-sapw7s-MuiTypography-root"
               >
                 <div
-                  class="makeStyles-radioLabel-71"
+                  class="css-7scxs0-radioLabel"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   >
                     Exclude
                   </h6>
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-zrdyvb-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
                   >
                     Release data only, no provisional data included in this download package
                   </p>
@@ -1348,18 +1306,18 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
         </fieldset>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
           style="margin-top: 12px;"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-73 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-69 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
               data-testid="InfoIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1369,11 +1327,11 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
               />
             </svg>
             <p
-              class="MuiTypography-root MuiTypography-body1 css-1nggj6-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
             >
               Learn more about data product revisions, releases and provisional data at 
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                 data-gtm="download-data-dialog.neon-data-revisions-releases-link"
                 href="https://www.neonscience.org/data-samples/data-management/data-revisions-releases"
                 target="_blank"
@@ -1447,7 +1405,7 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-fileTable-34"
+        class="css-sul6xe-fileTable"
         id="s3Files-selection-table-container"
       >
         <div
@@ -1461,27 +1419,27 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
           data-prop-options="{"selection":true,"showSelectAllCheckbox":false,"padding":"dense","filtering":true,"columnsButton":false,"pageSize":10,"pageSizeOptions":[5,10,50,100],"showTitle":false,"search":false,"isLoading":false}"
         />
         <div
-          class="makeStyles-loadingOverlay-36"
+          class="css-7dsiu3-loadingOverlay"
           style="display: none;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
             style="margin-bottom: 32px;"
           >
             Loading files (0%)...
           </h6>
           <span
             aria-valuenow="0"
-            class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-21zp0h-MuiCircularProgress-root"
+            class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
             role="progressbar"
             style="width: 40px; height: 40px; transform: rotate(-90deg);"
           >
             <svg
-              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
               viewBox="22 22 44 44"
             >
               <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-oxts8u-MuiCircularProgress-circle"
+                class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-eorpq6-MuiCircularProgress-circle"
                 cx="44"
                 cy="44"
                 fill="none"
@@ -1497,7 +1455,7 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="makeStyles-fileTable-34"
+      class="css-sul6xe-fileTable"
       id="s3Files-selection-table-container"
     >
       <div
@@ -1511,27 +1469,27 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
         data-prop-options="{"selection":true,"showSelectAllCheckbox":false,"padding":"dense","filtering":true,"columnsButton":false,"pageSize":10,"pageSizeOptions":[5,10,50,100],"showTitle":false,"search":false,"isLoading":false}"
       />
       <div
-        class="makeStyles-loadingOverlay-36"
+        class="css-7dsiu3-loadingOverlay"
         style="display: none;"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
           style="margin-bottom: 32px;"
         >
           Loading files (0%)...
         </h6>
         <span
           aria-valuenow="0"
-          class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-21zp0h-MuiCircularProgress-root"
+          class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
           role="progressbar"
           style="width: 40px; height: 40px; transform: rotate(-90deg);"
         >
           <svg
-            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-oxts8u-MuiCircularProgress-circle"
+              class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-eorpq6-MuiCircularProgress-circle"
               cx="44"
               cy="44"
               fill="none"
@@ -1677,53 +1635,53 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <div
             data-selenium="download-data-dialog.step-form.summary"
           >
             <div
-              class="makeStyles-stepSummary-122"
+              class="css-1pl1ika-stepSummary"
             >
               <div
-                class="makeStyles-stepSummaryHeader-123"
+                class="css-1wvtfwt-stepSummaryHeader"
                 role="button"
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
                 >
                   <span
-                    class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                    class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                   >
                     1
                   </span>
                 </div>
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Sites and Date Range
                 </h6>
               </div>
               <div
-                class="makeStyles-stepSummaryContent-124"
+                class="css-5bycxy-stepSummaryContent"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-y4yqg9-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-14jmn0q-MuiChip-root"
                   data-selenium="site-chip"
                   style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
                 >
                   <div
-                    class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorSecondary makeStyles-avatarLarge-129 css-18uepp3-MuiAvatar-root"
+                    class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorSecondary css-1oah9i9-MuiAvatar-root-avatarLarge"
                     style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 44, 119);"
                   >
                     <svg
                       aria-hidden="true"
-                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                       data-testid="PlaceIcon"
                       focusable="false"
                       viewBox="0 0 24 24"
@@ -1734,7 +1692,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                     </svg>
                   </div>
                   <span
-                    class="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
+                    class="MuiChip-label MuiChip-labelLarge css-11ej5aj-MuiChip-label-label"
                   >
                     3 sites — Jan 2020 - Jan 2020
                   </span>
@@ -1742,140 +1700,140 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               </div>
             </div>
             <div
-              class="makeStyles-stepSummary-122"
+              class="css-1pl1ika-stepSummary"
             >
               <div
-                class="makeStyles-stepSummaryHeader-123"
+                class="css-1wvtfwt-stepSummaryHeader"
                 role="button"
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
                 >
                   <span
-                    class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                    class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                   >
                     2
                   </span>
                 </div>
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Documentation
                 </h6>
               </div>
               <div
-                class="makeStyles-stepSummaryContent-124"
+                class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
                 >
                   Include
                 </p>
               </div>
             </div>
             <div
-              class="makeStyles-stepSummary-122"
+              class="css-1pl1ika-stepSummary"
             >
               <div
-                class="makeStyles-stepSummaryHeader-123"
+                class="css-1wvtfwt-stepSummaryHeader"
                 role="button"
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
                 >
                   <span
-                    class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                    class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                   >
                     3
                   </span>
                 </div>
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Package Type
                 </h6>
               </div>
               <div
-                class="makeStyles-stepSummaryContent-124"
+                class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
                 >
                   Expanded
                 </p>
               </div>
             </div>
             <div
-              class="makeStyles-stepSummary-122"
+              class="css-1pl1ika-stepSummary"
             >
               <div
-                class="makeStyles-stepSummaryHeader-123"
+                class="css-1wvtfwt-stepSummaryHeader"
                 role="button"
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
                 >
                   <span
-                    class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                    class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                   >
                     4
                   </span>
                 </div>
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Files
                 </h6>
               </div>
               <div
-                class="makeStyles-stepSummaryContent-124"
+                class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
                 >
                   3 files (12.1 KB uncompressed)
                 </p>
               </div>
             </div>
             <div
-              class="makeStyles-stepSummary-122"
+              class="css-1pl1ika-stepSummary"
             />
           </div>
         </div>
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
         >
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
             data-selenium="download-data-dialog.step-form.summary.download-and-explore"
             style="margin: 4px 0px 24px 0px;"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-121 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-117 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
                 data-testid="ExploreIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m2.19 12.19L6 18l3.81-8.19L18 6z"
+                  d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1 1.1-.49 1.1-1.1-.49-1.1-1.1-1.1M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m2.19 12.19L6 18l3.81-8.19L18 6z"
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
               >
                 Tip: Check out our 
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm="download-data-dialog.download-and-explore-link"
                   href="https://www.neonscience.org/resources/learning-hub/tutorials/download-explore-neon-data"
                   target="_blank"
@@ -1887,16 +1845,16 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
             data-selenium="download-data-dialog.step-form.summary.file-naming"
             style="margin: 4px 0px 24px 0px;"
           >
             <div
-              class="MuiCardContent-root makeStyles-startFlex-121 css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-117 css-tzssek-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
                 data-testid="DescriptionIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1906,11 +1864,11 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
               >
                 Files in this download will follow 
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                   data-gtm="download-data-dialog.file-naming-conventions-link"
                   href="https://www.neonscience.org/data-samples/data-management/data-formats-conventions"
                   target="_blank"
@@ -1922,12 +1880,12 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
             data-selenium="download-data-dialog.step-form.summary.citation"
             style="margin: 4px 0px 24px 0px;"
           >
             <div
-              class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+              class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
             >
               <div
                 data-component-path="../../Citation/DataProductCitation"
@@ -1942,53 +1900,53 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-lndw90-MuiGrid-root"
+      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <div
           data-selenium="download-data-dialog.step-form.summary"
         >
           <div
-            class="makeStyles-stepSummary-122"
+            class="css-1pl1ika-stepSummary"
           >
             <div
-              class="makeStyles-stepSummaryHeader-123"
+              class="css-1wvtfwt-stepSummaryHeader"
               role="button"
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
               >
                 <span
-                  class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                  class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                 >
                   1
                 </span>
               </div>
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Sites and Date Range
               </h6>
             </div>
             <div
-              class="makeStyles-stepSummaryContent-124"
+              class="css-5bycxy-stepSummaryContent"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-y4yqg9-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-14jmn0q-MuiChip-root"
                 data-selenium="site-chip"
                 style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
               >
                 <div
-                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorSecondary makeStyles-avatarLarge-129 css-18uepp3-MuiAvatar-root"
+                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorSecondary css-1oah9i9-MuiAvatar-root-avatarLarge"
                   style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 44, 119);"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                     data-testid="PlaceIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -1999,7 +1957,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                   </svg>
                 </div>
                 <span
-                  class="MuiChip-label MuiChip-labelLarge css-1dybbl5-MuiChip-label"
+                  class="MuiChip-label MuiChip-labelLarge css-11ej5aj-MuiChip-label-label"
                 >
                   3 sites — Jan 2020 - Jan 2020
                 </span>
@@ -2007,140 +1965,140 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-stepSummary-122"
+            class="css-1pl1ika-stepSummary"
           >
             <div
-              class="makeStyles-stepSummaryHeader-123"
+              class="css-1wvtfwt-stepSummaryHeader"
               role="button"
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
               >
                 <span
-                  class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                  class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                 >
                   2
                 </span>
               </div>
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Documentation
               </h6>
             </div>
             <div
-              class="makeStyles-stepSummaryContent-124"
+              class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
               >
                 Include
               </p>
             </div>
           </div>
           <div
-            class="makeStyles-stepSummary-122"
+            class="css-1pl1ika-stepSummary"
           >
             <div
-              class="makeStyles-stepSummaryHeader-123"
+              class="css-1wvtfwt-stepSummaryHeader"
               role="button"
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
               >
                 <span
-                  class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                  class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                 >
                   3
                 </span>
               </div>
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Package Type
               </h6>
             </div>
             <div
-              class="makeStyles-stepSummaryContent-124"
+              class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
               >
                 Expanded
               </p>
             </div>
           </div>
           <div
-            class="makeStyles-stepSummary-122"
+            class="css-1pl1ika-stepSummary"
           >
             <div
-              class="makeStyles-stepSummaryHeader-123"
+              class="css-1wvtfwt-stepSummaryHeader"
               role="button"
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary makeStyles-summaryChip-125 css-nqomul-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
               >
                 <span
-                  class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                  class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
                 >
                   4
                 </span>
               </div>
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-134ad2t-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Files
               </h6>
             </div>
             <div
-              class="makeStyles-stepSummaryContent-124"
+              class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 makeStyles-summaryText-126 css-zrdyvb-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-1nz2xop-MuiTypography-root-summaryText"
               >
                 3 files (12.1 KB uncompressed)
               </p>
             </div>
           </div>
           <div
-            class="makeStyles-stepSummary-122"
+            class="css-1pl1ika-stepSummary"
           />
         </div>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-1xp0d6e-MuiGrid-root"
+        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
       >
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
           data-selenium="download-data-dialog.step-form.summary.download-and-explore"
           style="margin: 4px 0px 24px 0px;"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-121 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-117 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
               data-testid="ExploreIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
               <path
-                d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m2.19 12.19L6 18l3.81-8.19L18 6z"
+                d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1 1.1-.49 1.1-1.1-.49-1.1-1.1-1.1M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m2.19 12.19L6 18l3.81-8.19L18 6z"
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
             >
               Tip: Check out our 
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                 data-gtm="download-data-dialog.download-and-explore-link"
                 href="https://www.neonscience.org/resources/learning-hub/tutorials/download-explore-neon-data"
                 target="_blank"
@@ -2152,16 +2110,16 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </div>
         </div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
           data-selenium="download-data-dialog.step-form.summary.file-naming"
           style="margin: 4px 0px 24px 0px;"
         >
           <div
-            class="MuiCardContent-root makeStyles-startFlex-121 css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-6lum5o-MuiCardContent-root-startFlex"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge makeStyles-calloutIcon-117 css-tzssek-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-bdzkld-MuiSvgIcon-root-calloutIcon"
               data-testid="DescriptionIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -2171,11 +2129,11 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-g2luyu-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
             >
               Files in this download will follow 
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-zuor1v-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
                 data-gtm="download-data-dialog.file-naming-conventions-link"
                 href="https://www.neonscience.org/data-samples/data-management/data-formats-conventions"
                 target="_blank"
@@ -2187,12 +2145,12 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </div>
         </div>
         <div
-          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-s384l0-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
           data-selenium="download-data-dialog.step-form.summary.citation"
           style="margin: 4px 0px 24px 0px;"
         >
           <div
-            class="MuiCardContent-root css-ojcnvm-MuiCardContent-root"
+            class="MuiCardContent-root css-1npn4kk-MuiCardContent-root"
           >
             <div
               data-component-path="../../Citation/DataProductCitation"

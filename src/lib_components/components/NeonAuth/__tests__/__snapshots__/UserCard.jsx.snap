@@ -6,13 +6,13 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-profileArea-8"
+        class="css-1rete76-profileArea"
       >
         <div
-          class="makeStyles-card-7"
+          class="css-122waat-card"
         >
           <div
-            class="makeStyles-cardHeaderContainer-6"
+            class="css-ozvdbl-cardHeaderContainer"
           >
             <img
               alt="Profile"
@@ -22,25 +22,25 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
           </div>
           <div>
             <h4
-              class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h4 css-1d9u0ts-MuiTypography-root"
               style="margin: 10px;"
             >
               Slappy White
             </h4>
           </div>
           <div
-            class="makeStyles-emailChipContainer-10"
+            class="css-1kouca2-emailChipContainer"
           >
             <div
-              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
             >
               <div
-                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
                 color="primary"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                   data-testid="EmailIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -51,17 +51,17 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
                 </svg>
               </div>
               <span
-                class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
               >
                 separate@knob
               </span>
             </div>
           </div>
           <div
-            class="makeStyles-profileInfoArea-9"
+            class="css-ugzl33-profileInfoArea"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
             />
             <div
               class="label-info-container"
@@ -98,13 +98,13 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
   </body>,
   "container": <div>
     <div
-      class="makeStyles-profileArea-8"
+      class="css-1rete76-profileArea"
     >
       <div
-        class="makeStyles-card-7"
+        class="css-122waat-card"
       >
         <div
-          class="makeStyles-cardHeaderContainer-6"
+          class="css-ozvdbl-cardHeaderContainer"
         >
           <img
             alt="Profile"
@@ -114,25 +114,25 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
         </div>
         <div>
           <h4
-            class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h4 css-1d9u0ts-MuiTypography-root"
             style="margin: 10px;"
           >
             Slappy White
           </h4>
         </div>
         <div
-          class="makeStyles-emailChipContainer-10"
+          class="css-1kouca2-emailChipContainer"
         >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
           >
             <div
-              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
               color="primary"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                 data-testid="EmailIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -143,17 +143,17 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
               </svg>
             </div>
             <span
-              class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
             >
               separate@knob
             </span>
           </div>
         </div>
         <div
-          class="makeStyles-profileInfoArea-9"
+          class="css-ugzl33-profileInfoArea"
         >
           <hr
-            class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+            class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
           />
           <div
             class="label-info-container"
@@ -247,13 +247,13 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="makeStyles-profileArea-3"
+        class="css-1rete76-profileArea"
       >
         <div
-          class="makeStyles-card-2"
+          class="css-122waat-card"
         >
           <div
-            class="makeStyles-cardHeaderContainer-1"
+            class="css-ozvdbl-cardHeaderContainer"
           >
             <img
               alt="Profile"
@@ -263,25 +263,25 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
           </div>
           <div>
             <h4
-              class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h4 css-1d9u0ts-MuiTypography-root"
               style="margin: 10px;"
             >
               Guy Incognito
             </h4>
           </div>
           <div
-            class="makeStyles-emailChipContainer-5"
+            class="css-1kouca2-emailChipContainer"
           >
             <div
-              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
             >
               <div
-                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
                 color="primary"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                   data-testid="EmailIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -292,17 +292,17 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
                 </svg>
               </div>
               <span
-                class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+                class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
               >
                 joeyjojojr@shabadu
               </span>
             </div>
           </div>
           <div
-            class="makeStyles-profileInfoArea-4"
+            class="css-ugzl33-profileInfoArea"
           >
             <hr
-              class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+              class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
             />
             <div
               class="label-info-container"
@@ -337,13 +337,13 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
   </body>,
   "container": <div>
     <div
-      class="makeStyles-profileArea-3"
+      class="css-1rete76-profileArea"
     >
       <div
-        class="makeStyles-card-2"
+        class="css-122waat-card"
       >
         <div
-          class="makeStyles-cardHeaderContainer-1"
+          class="css-ozvdbl-cardHeaderContainer"
         >
           <img
             alt="Profile"
@@ -353,25 +353,25 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
         </div>
         <div>
           <h4
-            class="MuiTypography-root MuiTypography-h4 css-p7yqh7-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h4 css-1d9u0ts-MuiTypography-root"
             style="margin: 10px;"
           >
             Guy Incognito
           </h4>
         </div>
         <div
-          class="makeStyles-emailChipContainer-5"
+          class="css-1kouca2-emailChipContainer"
         >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-nqomul-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
           >
             <div
-              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-18uepp3-MuiAvatar-root"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
               color="primary"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
                 data-testid="EmailIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -382,17 +382,17 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
               </svg>
             </div>
             <span
-              class="MuiChip-label MuiChip-labelMedium css-1dybbl5-MuiChip-label"
+              class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
             >
               joeyjojojr@shabadu
             </span>
           </div>
         </div>
         <div
-          class="makeStyles-profileInfoArea-4"
+          class="css-ugzl33-profileInfoArea"
         >
           <hr
-            class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+            class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
           />
           <div
             class="label-info-container"

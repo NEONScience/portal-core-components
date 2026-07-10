@@ -29,6 +29,9 @@ const modulesToTransform = [
   'markdown-.+',
   'ccount',
   'd3-[a-z]+',
+  'domhandler',
+  'domelementtype',
+  '@mui/material/styles',
 ].join('|');
 
 const fileTypesToMockTransform = [
