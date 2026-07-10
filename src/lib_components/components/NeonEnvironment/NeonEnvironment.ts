@@ -47,8 +47,6 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
   'NEXT_PUBLIC_NEON_USE_GRAPHQL',
   'NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER',
-  'NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL',
-  'NEXT_PUBLIC_NEON_VISUS_IFRAME_BASE_URL',
   'NEXT_PUBLIC_NEON_API_HOST_OVERRIDE',
   'NEXT_PUBLIC_BIOREPO_HOST_OVERRIDE',
   'NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE',
@@ -103,9 +101,6 @@ export interface INeonEnvironment {
   getAuthPath: Record<string, () => string>;
 
   authTopics: Record<string, () => string>;
-
-  getVisusProductsBaseUrl: () => Undef<string>;
-  getVisusIframeBaseUrl: () => Undef<string>;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -212,10 +207,6 @@ const NeonEnvironment: INeonEnvironment = {
 
   getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
   getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
-
-  // eslint-disable-next-line max-len
-  getVisusProductsBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_PRODUCTS_BASE_URL,
-  getVisusIframeBaseUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_VISUS_IFRAME_BASE_URL,
 
   getRouterBasePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE_HOME || '',

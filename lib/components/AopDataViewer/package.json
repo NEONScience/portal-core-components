@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "aop-data-viewer",
-  "main": "./AopDataViewer.jsx",
-  "module": "./AopDataViewer.js"
-}
