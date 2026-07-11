@@ -1,20 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
-
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import json from 'highlight.js/lib/languages/json';
 import typescript from 'highlight.js/lib/languages/typescript';
 
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
+import { NeonTheme } from '../Theme/types';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('typescript', typescript);
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   root: {
     margin: muiTheme.spacing(2, 0),
     '& code': {

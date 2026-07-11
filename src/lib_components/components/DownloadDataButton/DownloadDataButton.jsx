@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 const DownloadDataDialog = React.lazy(() => import('../DownloadDataDialog/DownloadDataDialog'));

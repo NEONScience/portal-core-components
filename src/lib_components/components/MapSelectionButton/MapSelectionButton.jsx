@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -15,6 +14,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import GlobeIcon from '@mui/icons-material/Language';
 
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import {
   FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,

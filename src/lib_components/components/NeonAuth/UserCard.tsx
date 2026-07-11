@@ -7,11 +7,10 @@ import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import EmailIcon from '@mui/icons-material/Email';
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiThemeType } from '@mui/material';
 
 import moment, { Moment } from 'moment';
 
+import { makeStyles } from '../Theme/makeStyles';
 import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles()(() => ({

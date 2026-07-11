@@ -22,7 +22,6 @@ import {
 
 import debounce from 'lodash/debounce';
 
-import { makeStyles } from 'tss-react/mui';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
@@ -38,7 +37,7 @@ import FocusLocationIcon from '@mui/icons-material/Place';
 
 import LeafletGroupedLayerControl from './LeafletGroupedLayerControl';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { exists } from '../../util/typeUtil';
 
 import SiteMapContext from './SiteMapContext';
@@ -90,15 +89,15 @@ const useStyles = makeStyles()((theme) => ({
       borderRadius: '2px',
       boxShadow: 'unset',
       '& a': {
-        color: Theme.colors.LIGHT_BLUE[500],
-        border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+        color: theme.colors.LIGHT_BLUE[500],
+        border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
         width: '26px',
         height: '26px',
         lineHeight: '26px',
         fontSize: '18px',
         '&:hover, &:active': {
-          color: Theme.colors.LIGHT_BLUE[400],
-          borderColor: Theme.colors.LIGHT_BLUE[400],
+          color: theme.colors.LIGHT_BLUE[400],
+          borderColor: theme.colors.LIGHT_BLUE[400],
         },
         '&:first-of-type': {
           borderTopLeftRadius: '2px',
@@ -170,10 +169,10 @@ const useStyles = makeStyles()((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
     '&:hover, &:active': {
-      color: Theme.colors.LIGHT_BLUE[400],
-      borderColor: Theme.colors.LIGHT_BLUE[400],
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '& svg': {
@@ -206,8 +205,8 @@ const useStyles = makeStyles()((theme) => ({
   areaSelection: {
     position: 'absolute',
     pointerEvents: 'none',
-    border: `3px dotted ${Theme.colors.LIGHT_BLUE[500]}`,
-    backgroundColor: Theme.colors.LIGHT_BLUE[100],
+    border: `3px dotted ${theme.colors.LIGHT_BLUE[500]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[100],
     opacity: 0.6,
     zIndex: 999,
   },
@@ -217,8 +216,8 @@ const useAreaSelectionStyles = makeStyles()((theme) => ({
   areaSelection: {
     position: 'absolute',
     pointerEvents: 'none',
-    border: `3px dotted ${Theme.colors.LIGHT_BLUE[500]}`,
-    backgroundColor: Theme.colors.LIGHT_BLUE[100],
+    border: `3px dotted ${theme.colors.LIGHT_BLUE[500]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[100],
     opacity: 0.6,
     zIndex: 999,
   },
@@ -357,9 +356,7 @@ const areaSelectionReducer = (areaSelectionState, action) => {
 };
 
 const LeafletAreaSelectionManager = () => {
-  const { classes } = useAreaSelectionStyles(Theme, {
-    props: Theme,
-  });
+  const { classes } = useAreaSelectionStyles();
   const [state, dispatch] = SiteMapContext.useSiteMapContext();
   const { map: { mouseMode: mapMouseMode } } = state;
   const map = useMap();
@@ -763,7 +760,7 @@ const LeafletMapManager = () => {
    Main Component
 */
 const SiteMapLeaflet = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const mapRef = useRef(null);
   const mapInstanceId = useId();
 
@@ -975,7 +972,7 @@ const SiteMapLeaflet = () => {
       title: BASE_LAYERS[key].title,
     })).concat([{
       name: 'none',
-      title: <span style={{ color: Theme.palette.grey[300], fontStyle: 'italic' }}>none</span>,
+      title: <span style={{ color: theme.palette.grey[300], fontStyle: 'italic' }}>none</span>,
     }]);
     const groupedLayerControlOverlays = Object.keys(OVERLAYS).map((key) => {
       const { KEY: name, title, group } = OVERLAYS[key];

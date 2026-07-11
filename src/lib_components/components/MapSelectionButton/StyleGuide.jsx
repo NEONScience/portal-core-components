@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import { FEATURE_TYPES } from '@/components/SiteMap/SiteMapUtils';
 import MapSelectionButton from '@/components/MapSelectionButton/MapSelectionButton';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

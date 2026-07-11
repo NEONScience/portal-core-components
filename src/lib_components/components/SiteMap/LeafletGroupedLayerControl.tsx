@@ -24,12 +24,11 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
-import { makeStyles } from 'tss-react/mui';
-
-import { exists } from '../../util/typeUtil';
+import { makeStyles } from '../Theme/makeStyles';
 import { type NeonTheme } from '../Theme/types';
+import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles<boolean>()((theme, open) => ({
+const useStyles = makeStyles<{ open: boolean }>()((theme: NeonTheme, { open }) => ({
   leafletControlContainer: {
     zIndex: 801,
     boxShadow: 'unset',
@@ -46,7 +45,7 @@ const useStyles = makeStyles<boolean>()((theme, open) => ({
     zIndex: 802,
     border: open
       ? `1px solid ${theme.palette.grey[300]}`
-      : `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
+      : `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
   },
   controlIconContainer: {
     width: '36px !important',
@@ -137,7 +136,7 @@ const LeafletGroupedLayerControl: React.FC<LeafletGroupedLayerControlProps> = (
     onOverlayChange,
   } = props;
   const [open, setOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
-  const { classes } = useStyles(open);
+  const { classes } = useStyles({ open });
   const divRef: RefObject<HTMLDivElement|null> = useRef<HTMLDivElement>(null);
   const map: L.Map = useMap();
   const isPortalMode: boolean = (renderToLeafletControlContainer === true);

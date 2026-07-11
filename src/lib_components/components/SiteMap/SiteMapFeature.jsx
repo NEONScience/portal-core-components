@@ -6,7 +6,6 @@ import tinycolor from 'tinycolor2';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
@@ -61,7 +60,8 @@ import {
   UNSELECTABLE_MARKER_FILTER,
 } from './SiteMapUtils';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { exists } from '../../util/typeUtil';
 
 const useStyles = makeStyles()((theme) => ({
@@ -303,7 +303,7 @@ const positionPopup = (
 };
 
 const SiteMapFeature = (props) => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { featureKey } = props;
   const map = useMap();
 
@@ -473,7 +473,7 @@ const SiteMapFeature = (props) => {
     );
     return !label ? visibleValue : (
       <div className={classes[right ? 'endFlex' : 'startFlex']}>
-        <Typography variant="caption" style={{ marginRight: Theme.spacing(1) }}>
+        <Typography variant="caption" style={{ marginRight: theme.spacing(1) }}>
           {label}
         </Typography>
         {visibleValue}
@@ -525,7 +525,7 @@ const SiteMapFeature = (props) => {
     );
     const containerProps = {
       className: classes.popupSiteContainer,
-      style: { marginTop: Theme.spacing(0.5) },
+      style: { marginTop: theme.spacing(0.5) },
     };
     return selectionActive ? (
       <div key={siteCode} {...containerProps}>{internal}</div>
@@ -549,7 +549,7 @@ const SiteMapFeature = (props) => {
   const renderLatLon = (latitude, longitude, right = false, renderSubtitle = false) => {
     const iconButtonProps = {
       size: 'small',
-      style: { marginRight: Theme.spacing(0.5) },
+      style: { marginRight: theme.spacing(0.5) },
     };
     const coords = Number.isFinite(latitude) && Number.isFinite(longitude) ? (
       <div
@@ -629,7 +629,7 @@ const SiteMapFeature = (props) => {
           </div>
         ) : (
           <div className={classes[right ? 'endFlex' : 'startFlex']}>
-            <ElevationIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+            <ElevationIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
             {renderNumericalValue(elevation, null, 'm', 2, 'Elevation')}
           </div>
         )}
@@ -706,7 +706,7 @@ const SiteMapFeature = (props) => {
         <div className={classes.startFlex}>
           {renderNumericalValue(areaKm2, null, 'km\u00b2', 2, 'Area (km\u00b2)')}
           {areaAcres === null ? null : (
-            <div style={{ marginLeft: Theme.spacing(1) }}>
+            <div style={{ marginLeft: theme.spacing(1) }}>
               {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}
             </div>
           )}
@@ -738,7 +738,7 @@ const SiteMapFeature = (props) => {
         key="childSites"
         size={{ xs: 12 }}
         data-selenium="sitemap-map-popup-childSites"
-        style={{ marginBottom: Theme.spacing(2) }}
+        style={{ marginBottom: theme.spacing(2) }}
       >
         {!sites.size ? (
           <>
@@ -828,7 +828,7 @@ const SiteMapFeature = (props) => {
             <Tooltip title={tooltip}>
               <IconButton
                 size="small"
-                style={{ marginLeft: Theme.spacing(0.5), marginBottom: '1px' }}
+                style={{ marginLeft: theme.spacing(0.5), marginBottom: '1px' }}
                 aria-label="NLCD Class Description"
               >
                 <HelpIcon style={{ fontSize: '1rem' }} />
@@ -978,7 +978,7 @@ const SiteMapFeature = (props) => {
       );
     }
     return (
-      <div key={boundaryKey} className={classes.centerFlex} style={{ padding: Theme.spacing(0.5) }}>
+      <div key={boundaryKey} className={classes.centerFlex} style={{ padding: theme.spacing(0.5) }}>
         <SnackbarContent
           className={`${classes.selectionSnackbar} ${snackbarClass}`}
           message={(
@@ -1129,7 +1129,7 @@ const SiteMapFeature = (props) => {
             {`Jump to ${site.siteCode} on the map`}
           </Link>
         )}
-        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid container spacing={1} style={{ marginBottom: theme.spacing(1) }}>
           {/* Terrain and Type */}
           <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
@@ -1208,7 +1208,7 @@ const SiteMapFeature = (props) => {
           {markerIcon}
           {`Jump to ${site.siteCode} on the map`}
         </Link>
-        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid container spacing={1} style={{ marginBottom: theme.spacing(1) }}>
           {/* Terrain and Type */}
           <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
@@ -15,7 +14,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import SwapIcon from '@mui/icons-material/SwapHoriz';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import TimeSeriesViewerContext, {
   TIME_STEPS,
   Y_AXIS_RANGE_MODES,
@@ -122,7 +121,7 @@ const useStyles = makeStyles()((theme) => ({
    y Axes - Scale Option
 */
 const YAxisScaleOption = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { yAxes, logscale } = state.selection;
   const classNames = {
@@ -130,7 +129,7 @@ const YAxisScaleOption = () => {
     deselected: classes.optionButton,
   };
   return (
-    <div style={{ minWidth: Theme.spacing(21.5) }}>
+    <div style={{ minWidth: theme.spacing(21.5) }}>
       <ToggleButtonGroup
         exclusive
         color="primary"
@@ -165,7 +164,7 @@ const YAxisScaleOption = () => {
           variant="outlined"
           onClick={() => { dispatch({ type: 'selectSwapYAxes' }); }}
           className={classes.smallButton}
-          style={{ marginTop: Theme.spacing(1) }}
+          style={{ marginTop: theme.spacing(1) }}
         >
           <SwapIcon className={classes.smallButtonIcon} />
           Swap Y Axes
@@ -181,7 +180,7 @@ const YAxisScaleOption = () => {
 const YAxisRangeOption = (props) => {
   const { axis } = props;
 
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const classNames = {
     selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
     deselected: classes.optionButton,
@@ -266,12 +265,12 @@ const YAxisRangeOption = (props) => {
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>
-        <Skeleton variant="rectangular" width={200} height={30} style={{ margin: Theme.spacing(0.5, 0) }} />
+        <Skeleton variant="rectangular" width={200} height={30} style={{ margin: theme.spacing(0.5, 0) }} />
       </div>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
-          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
-          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: theme.spacing(1, 0) }} />
+          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: theme.spacing(1, 0) }} />
         </div>
       </div>
     </div>
@@ -396,7 +395,7 @@ const rollPeriodReducer = (state, action) => {
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { selection } = state;
   const {
     rollPeriod: currentRollPeriod,
@@ -445,7 +444,7 @@ const RollPeriodOption = () => {
   return !currentTimeStep ? (
     <Skeleton variant="rectangular" width="100%" height={56} />
   ) : (
-    <div style={{ width: '100%', minWidth: Theme.spacing(40) }}>
+    <div style={{ width: '100%', minWidth: theme.spacing(40) }}>
       <Slider
         className={classes.horizSlider}
         marks={marks}
@@ -479,7 +478,7 @@ const RollPeriodOption = () => {
    x Axis - Time Step Option
 */
 const TimeStepOption = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableTimeSteps } = state.timeStep;
   const { timeStep: selectedTimeStep } = state.selection;
@@ -495,7 +494,7 @@ const TimeStepOption = () => {
       className={classes.optionButtonGroup}
       value={selectedTimeStep}
       onChange={handleChangeTimeStep}
-      style={{ marginBottom: Theme.spacing(3) }}
+      style={{ marginBottom: theme.spacing(3) }}
     >
       {Array.from(availableTimeSteps).map((timeStep) => {
         const className = timeStep === selectedTimeStep
@@ -556,7 +555,7 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerAxes() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { selection } = state;
   const renderOption = (key) => {
@@ -573,10 +572,10 @@ export default function TimeSeriesViewerAxes() {
     return (
       <div>
         <Typography variant="subtitle2">{title}</Typography>
-        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+        <Typography variant="caption" style={{ color: theme.palette.grey[400] }}>
           {description}
         </Typography>
-        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+        <div style={{ width: '100%', marginTop: theme.spacing(1) }}>
           <Component />
         </div>
       </div>
@@ -585,14 +584,14 @@ export default function TimeSeriesViewerAxes() {
   const hasY2Axis = selection.yAxes.y2.units !== null;
   return (
     <div className={classes.optionsContainer}>
-      <div style={{ marginRight: Theme.spacing(5) }}>
-        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>y Axes</Typography>
+      <div style={{ marginRight: theme.spacing(5) }}>
+        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>y Axes</Typography>
         <div className={classes.optionsContainer}>
-          <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(4) }}>
+          <div style={{ marginBottom: theme.spacing(3), marginRight: theme.spacing(4) }}>
             {renderOption('Y_AXIS_SCALE')}
           </div>
           <div className={classes.yAxesRangesContainer}>
-            <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(4) }}>
+            <div style={!hasY2Axis ? null : { marginRight: theme.spacing(4) }}>
               {renderOption('Y1_AXIS_RANGE')}
             </div>
             {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
@@ -600,10 +599,10 @@ export default function TimeSeriesViewerAxes() {
         </div>
       </div>
       <div>
-        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>x Axis (Time)</Typography>
+        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>x Axis (Time)</Typography>
         <div className={classes.optionsContainer}>
           {state.timeStep.availableTimeSteps.size < 3 ? null : (
-            <div style={{ marginRight: Theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
+            <div style={{ marginRight: theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
           )}
           {renderOption('ROLL_PERIOD')}
         </div>

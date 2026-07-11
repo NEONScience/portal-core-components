@@ -1,17 +1,17 @@
 import React from 'react';
 
 import List from '@mui/material/List';
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { Nullable } from '../../types/core';
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   list: {
     paddingTop: muiTheme.spacing(0),
   },

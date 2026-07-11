@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from 'tss-react/mui';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -50,6 +48,7 @@ import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
 import LegacyNeonThemeProvider from '../Theme/LegacyNeonThemeProvider';
 import Theme, { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 import ReleaseService from '../../service/ReleaseService';

@@ -5,8 +5,6 @@ import Grid from '@mui/material/Grid2';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
@@ -14,11 +12,13 @@ import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { Nullable } from '../../types/core';
 import { NeonDocument } from '../../types/neonApi';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   container: {
     width: '100%',
   },

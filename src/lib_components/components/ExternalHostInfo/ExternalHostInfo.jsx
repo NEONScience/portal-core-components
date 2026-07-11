@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -14,6 +13,7 @@ import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 

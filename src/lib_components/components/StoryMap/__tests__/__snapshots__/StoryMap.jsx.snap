@@ -10,9 +10,6 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
         style="width: 100%; min-width: 240px;"
       >
         <iframe
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
           src="https://foo.bar"
           style="min-width: 240px; min-height: 240px;"
           title="Foo"
@@ -44,9 +41,6 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
       style="width: 100%; min-width: 240px;"
     >
       <iframe
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
         src="https://foo.bar"
         style="min-width: 240px; min-height: 240px;"
         title="Foo"
@@ -135,9 +129,6 @@ exports[`StoryMap Renders correctly with no title 1`] = `
         style="width: 100%; min-width: 240px;"
       >
         <iframe
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
           src="https://foo.bar"
           style="min-width: 240px; min-height: 240px;"
           title="Neon Story Map"
@@ -169,9 +160,6 @@ exports[`StoryMap Renders correctly with no title 1`] = `
       style="width: 100%; min-width: 240px;"
     >
       <iframe
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
         src="https://foo.bar"
         style="min-width: 240px; min-height: 240px;"
         title="Neon Story Map"

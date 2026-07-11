@@ -1,20 +1,17 @@
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
-
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((muiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   callout: {
     margin: muiTheme.spacing(0.5, 0, 3, 0),
-    backgroundColor: (Theme as NeonTheme).colors.RED[50],
-    borderColor: (Theme as NeonTheme).colors.RED[300],
+    backgroundColor: muiTheme.colors.RED[50],
+    borderColor: muiTheme.colors.RED[300],
   },
   calloutIcon: {
-    color: (Theme as NeonTheme).colors.RED[300],
+    color: muiTheme.colors.RED[300],
     marginRight: muiTheme.spacing(2),
   },
 }));

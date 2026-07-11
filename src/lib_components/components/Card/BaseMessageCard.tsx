@@ -3,29 +3,27 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((muiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-
   titleContentContainer: {
     padding: muiTheme.spacing(2, 2.5, 1.5, 2.5),
   },
-
   textTitleContent: {
     flexGrow: 1,
     textTransform: 'uppercase',
     fontSize: '0.775rem',
   },
-
   messageContainer: {
     padding: muiTheme.spacing(0, 3, 3, 3),
   },

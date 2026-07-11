@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Box from '@mui/material/Box';
@@ -41,6 +40,7 @@ import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 import SiteChip from '../SiteChip/SiteChip';
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 import AvailabilityPending from './AvailabilityPending';
@@ -125,9 +125,7 @@ const BasicAvailabilityInterface = (inProps) => {
   const { classes } = useStyles();
   const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
   const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
-  const { classes: siteChipClasses } = useSiteChipStyles(Theme, {
-    props: Theme,
-  });
+  const { classes: siteChipClasses } = useSiteChipStyles();
   const { dataProducts, ...other } = props;
 
   const [

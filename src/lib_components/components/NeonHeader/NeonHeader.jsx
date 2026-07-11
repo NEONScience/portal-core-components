@@ -2,7 +2,6 @@ import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
-import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -15,6 +14,7 @@ import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAut
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import ApplicationMenu from './ApplicationMenu';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 import HeaderSearchSvg from '../../images/svg/header-search.svg';
@@ -342,7 +342,7 @@ const NeonHeader = forwardRef((inProps, headerRef) => {
     showSkeleton,
     customizeAuthContainer,
   } = props;
-  const { classes } = useStyles(customizeAuthContainer)(Theme);
+  const { classes } = useStyles(customizeAuthContainer)();
   const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
 
   const [{

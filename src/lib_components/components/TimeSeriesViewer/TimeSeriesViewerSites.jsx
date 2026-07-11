@@ -12,7 +12,6 @@ import Select from 'react-select';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -24,7 +23,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
@@ -51,9 +50,9 @@ import NoneIcon from '@mui/icons-material/NotInterested';
 import SearchIcon from '@mui/icons-material/Search';
 import SelectIcon from '@mui/icons-material/TouchApp';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
+import { makeStyles } from '../Theme/makeStyles';
 
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
@@ -123,7 +122,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   optionSubtitle: {
     fontSize: '0.75rem',
-    color: Theme.palette.grey[500],
+    color: theme.palette.grey[500],
   },
   sitesContainer: {
     display: 'flex',
@@ -140,7 +139,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: Theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
   },
   siteDetailsRow: {
     display: 'flex',
@@ -152,11 +151,11 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
-    marginBottom: Theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
   siteDetail: {
-    marginBottom: Theme.spacing(1),
-    marginRight: Theme.spacing(4),
+    marginBottom: theme.spacing(1),
+    marginRight: theme.spacing(4),
   },
   noneIcon: {
     color: theme.palette.grey[400],
@@ -196,10 +195,10 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const selectStyles = {
+const buildSelectStyles = (theme) => ({
   input: (base) => ({
     ...base,
-    color: Theme.palette.text.primary,
+    color: theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
@@ -211,9 +210,9 @@ const selectStyles = {
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
-    color: Theme.palette.primary.main,
+    color: theme.palette.primary.main,
   }),
-};
+});
 
 /**
    Common React-Select Components - used by both site-specific and position-specific react-selects
@@ -317,7 +316,7 @@ const positionHistoryButtonDefaultProps = {
 */
 function PositionHistoryButton(inProps) {
   const props = resolveProps(positionHistoryButtonDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     siteCode,
     position,
@@ -360,7 +359,7 @@ function PositionHistoryButton(inProps) {
         aria-describedby="position-history-dialog-description"
       >
         <DialogTitle id="position-history-dialog-title">
-          <Typography variant="h6" id="position-history-dialog-title">
+          <Typography variant="h6" component="p" id="position-history-dialog-title">
             {`Position History: ${siteCode} - ${position}`}
           </Typography>
         </DialogTitle>
@@ -371,7 +370,7 @@ function PositionHistoryButton(inProps) {
           <TableContainer>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
-                <TableRow style={{ backgroundColor: Theme.palette.grey[50] }}>
+                <TableRow style={{ backgroundColor: theme.palette.grey[50] }}>
                   <TableCell>Start Date</TableCell>
                   <TableCell>End Date</TableCell>
                   <TableCell align="right">x</TableCell>
@@ -474,7 +473,7 @@ const positionDetailDefaultProps = { wide: false };
 function PositionDetail(inProps) {
   const props = resolveProps(positionDetailDefaultProps, inProps);
   const { siteCode, position, wide } = props;
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const containerRef = useRef(undefined);
   const [componentWidth, setComponentWidth] = useState(0);
@@ -543,8 +542,8 @@ function PositionDetail(inProps) {
       elevation = `${parsedReferenceElevation}m`;
     }
   }
-  const fadeStyle = { color: Theme.palette.grey[500] };
-  const axisStyle = { marginRight: Theme.spacing(1), fontWeight: 600 };
+  const fadeStyle = { color: theme.palette.grey[500] };
+  const axisStyle = { marginRight: theme.spacing(1), fontWeight: 600 };
   const renderDescription = () => {
     const hasName = isStringNonEmpty(sensorName);
     const hasDescription = isStringNonEmpty(sensorDescription);
@@ -561,7 +560,7 @@ function PositionDetail(inProps) {
       <>
         <div
           className={classes.startFlex}
-          style={{ ...fadeStyle, marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}
+          style={{ ...fadeStyle, marginRight: theme.spacing(3), marginTop: theme.spacing(0.5) }}
         >
           <Typography variant="caption">
             <span style={{ fontWeight: 600 }}>Location: </span>
@@ -571,7 +570,7 @@ function PositionDetail(inProps) {
         {!includeReference ? null : (
           <div
             className={classes.startFlex}
-            style={{ ...fadeStyle, marginRight: Theme.spacing(3) }}
+            style={{ ...fadeStyle, marginRight: theme.spacing(3) }}
           >
             <Typography variant="caption">
               <span style={{ fontWeight: 600 }}>Reference Location: </span>
@@ -581,7 +580,7 @@ function PositionDetail(inProps) {
         )}
       </>
     ) : (
-      <div style={{ marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}>
+      <div style={{ marginRight: theme.spacing(3), marginTop: theme.spacing(0.5) }}>
         <div>
           <Typography variant="body2" style={{ fontWeight: 600 }}>
             Location:
@@ -629,7 +628,7 @@ function PositionDetail(inProps) {
     historyButtonContainerStyle = {
       ...historyButtonContainerStyle,
       textAlign: 'unset',
-      marginTop: Theme.spacing(1),
+      marginTop: theme.spacing(1),
       width: '100%',
     };
   }
@@ -642,12 +641,12 @@ function PositionDetail(inProps) {
   return wide ? (
     <div ref={containerRef}>
       <div className={classes.startFlex} style={{ alignItems: 'flex-end' }}>
-        <Typography variant="body1" style={{ fontWeight: 600, marginRight: Theme.spacing(3) }}>
+        <Typography variant="body1" style={{ fontWeight: 600, marginRight: theme.spacing(3) }}>
           {position}
         </Typography>
         <div className={classes.startFlex} style={{ alignItems: 'center', ...fadeStyle }}>
           <Typography variant="body2">Elevation:</Typography>
-          <ElevationIcon fontSize="small" style={{ margin: Theme.spacing(0, 0.5, 0, 1) }} />
+          <ElevationIcon fontSize="small" style={{ margin: theme.spacing(0, 0.5, 0, 1) }} />
           <Typography variant="body2">{elevation}</Typography>
         </div>
       </div>
@@ -667,7 +666,7 @@ function PositionDetail(inProps) {
     >
       <div style={positionSectionsContainerStyle}>
         <div className={classes.startFlex} style={{ alignItems: 'center' }}>
-          <div style={{ marginRight: Theme.spacing(3) }}>
+          <div style={{ marginRight: theme.spacing(3) }}>
             <Typography variant="body1" style={{ fontWeight: 600 }}>
               {position}
             </Typography>
@@ -677,14 +676,14 @@ function PositionDetail(inProps) {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <ElevationIcon
                 fontSize="small"
-                style={{ marginRight: Theme.spacing(0.5), ...fadeStyle }}
+                style={{ marginRight: theme.spacing(0.5), ...fadeStyle }}
               />
               <Typography variant="body2" style={{ ...fadeStyle }}>
                 {elevation}
               </Typography>
             </div>
           </div>
-          <div style={{ marginRight: Theme.spacing(3) }}>
+          <div style={{ marginRight: theme.spacing(3) }}>
             <Typography variant="body2">
               <span style={{ ...axisStyle }}>x:</span>
               {`${displayXOffset}`}
@@ -724,7 +723,7 @@ const selectedPositionDefaultProps = { disabled: false };
 */
 function SelectedPosition(inProps) {
   const props = resolveProps(selectedPositionDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { siteCode, position, disabled } = props;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   return (
@@ -732,7 +731,7 @@ function SelectedPosition(inProps) {
       <IconButton
         aria-label={`remove position ${position} from ${siteCode}`}
         disabled={disabled}
-        style={{ marginLeft: Theme.spacing(1), marginRight: Theme.spacing(1) }}
+        style={{ marginLeft: theme.spacing(1), marginRight: theme.spacing(1) }}
         onClick={() => {
           if (disabled) { return; }
           const selectedSiteIdx = state.selection.sites
@@ -762,7 +761,7 @@ SelectedPosition.propTypes = {
    SelectPositionsButton - button that opens a dialog for position selection
 */
 function SelectPositionsButton(props) {
-  const { selectedSite } = props;
+  const { selectedSite, theme } = props;
   const { siteCode, positions: selectedPositions } = selectedSite;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const availablePositions = state.product.sites[siteCode]
@@ -816,7 +815,7 @@ function SelectPositionsButton(props) {
         size="small"
         variant="outlined"
         startIcon={<SelectIcon />}
-        style={{ marginLeft: Theme.spacing(4) }}
+        style={{ marginLeft: theme.spacing(4) }}
         disabled={isDisabled}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
@@ -843,7 +842,7 @@ function SelectPositionsButton(props) {
               {`${localSelectedPositions.length} of ${availablePositions.length} selected`}
               <br />
               <span
-                style={{ fontWeight: 300, color: Theme.palette.grey[500], fontStyle: 'italic' }}
+                style={{ fontWeight: 300, color: theme.palette.grey[500], fontStyle: 'italic' }}
               >
                 at least one is required
               </span>
@@ -874,11 +873,10 @@ function SelectPositionsButton(props) {
             {availablePositions.map((position) => {
               const labelId = `position-list-label-${position}`;
               return (
-                <ListItem
+                <ListItemButton
                   key={position}
                   role={undefined}
                   dense
-                  button
                   onClick={() => { togglePosition(position); }}
                 >
                   <ListItemIcon>
@@ -887,14 +885,18 @@ function SelectPositionsButton(props) {
                       checked={localSelectedPositions.includes(position)}
                       tabIndex={-1}
                       disableRipple
-                      inputProps={{ 'aria-labelledby': labelId }}
+                      slotProps={{
+                        input: {
+                          'aria-labelledby': labelId,
+                        },
+                      }}
                     />
                   </ListItemIcon>
                   <ListItemText
                     id={labelId}
                     primary={<PositionDetail siteCode={siteCode} position={position} wide />}
                   />
-                </ListItem>
+                </ListItemButton>
               );
             })}
           </List>
@@ -921,6 +923,7 @@ SelectPositionsButton.propTypes = {
     siteCode: PropTypes.string.isRequired,
     positions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+  theme: PropTypes.any.isRequired,
 };
 
 /**
@@ -943,18 +946,20 @@ function SitesControl(props) {
       fullWidth
       label={labelText}
       variant="outlined"
-      InputProps={{
-        inputComponent,
-        inputProps: {
-          ref: innerRef,
-          children,
-          ...innerProps,
+      slotProps={{
+        input: {
+          inputComponent,
+          inputProps: {
+            ref: innerRef,
+            children,
+            ...innerProps,
+          },
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon color="disabled" />
+            </InputAdornment>
+          ),
         },
-        endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon color="disabled" />
-          </InputAdornment>
-        ),
       }}
       {...TextFieldProps}
     />
@@ -970,7 +975,7 @@ const siteOptionDefaultProps = OptionDefaultProps;
 */
 function SiteOption(inProps) {
   const props = resolveProps(siteOptionDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -1000,9 +1005,9 @@ function SiteOption(inProps) {
             src={iconSvg.src}
             alt={terrainTypeTitle}
             title={terrainTypeTitle}
-            width={Theme.spacing(3)}
-            height={Theme.spacing(3)}
-            style={{ marginRight: Theme.spacing(1.5), marginTop: Theme.spacing(0.5), flexGrow: 0 }}
+            width={theme.spacing(3)}
+            height={theme.spacing(3)}
+            style={{ marginRight: theme.spacing(1.5), marginTop: theme.spacing(0.5), flexGrow: 0 }}
           />
         ) : null}
         <div style={{ flexGrow: 1 }}>
@@ -1044,7 +1049,7 @@ const selectedSiteDefaultProps = { disabled: false };
 */
 function SelectedSite(inProps) {
   const props = resolveProps(selectedSiteDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     site,
     disabled,
@@ -1074,7 +1079,7 @@ function SelectedSite(inProps) {
         if (disabled) { return; }
         dispatch({ type: 'selectRemoveSite', siteCode });
       }}
-      style={{ minWidth: Theme.spacing(13), whiteSpace: 'nowrap' }}
+      style={{ minWidth: theme.spacing(13), whiteSpace: 'nowrap' }}
       disabled={disabled}
       startIcon={<ClearIcon />}
     >
@@ -1122,9 +1127,9 @@ function SelectedSite(inProps) {
         src={iconSvg.src}
         alt={terrainTypeTitle}
         title={terrainTypeTitle}
-        width={Theme.spacing(4)}
-        height={Theme.spacing(4)}
-        style={{ marginRight: Theme.spacing(1), flexGrow: 0 }}
+        width={theme.spacing(4)}
+        height={theme.spacing(4)}
+        style={{ marginRight: theme.spacing(1), flexGrow: 0 }}
       />
     ) : null;
     selectedSiteContent = (
@@ -1152,7 +1157,7 @@ function SelectedSite(inProps) {
                   <Tooltip title="Latitude / Longitude (click to copy)">
                     <IconButton
                       size="small"
-                      style={{ marginRight: Theme.spacing(0.5) }}
+                      style={{ marginRight: theme.spacing(0.5) }}
                       aria-label="Latitude / Longitude (click to copy)"
                     >
                       <LocationIcon />
@@ -1208,11 +1213,11 @@ function SelectedSite(inProps) {
                 </>
               )}
             >
-              <IconButton size="small" style={{ marginLeft: Theme.spacing(1) }}>
+              <IconButton size="small" style={{ marginLeft: theme.spacing(1) }}>
                 <InfoIcon fontSize="small" />
               </IconButton>
             </Tooltip>
-            <SelectPositionsButton selectedSite={site} />
+            <SelectPositionsButton selectedSite={site} theme={theme} />
           </div>
           <div className={classes.positionsCardContainer}>
             {positions.map((position) => (
@@ -1269,7 +1274,7 @@ const SitesSelectComponents = {
   IndicatorsContainer: () => null,
 };
 const SitesSelect = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
@@ -1327,7 +1332,7 @@ const SitesSelect = () => {
           isDisabled={isDisabled}
           clearable={false}
           classes={classes}
-          styles={selectStyles}
+          styles={buildSelectStyles(theme)}
           aria-label="Add Sites"
           data-gtm="time-series-viewer.add-sites"
           options={selectableSites}
@@ -1351,7 +1356,7 @@ const SitesSelect = () => {
    Primary Component
 */
 export default function TimeSeriesViewerSites(props) {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
@@ -1394,7 +1399,7 @@ export default function TimeSeriesViewerSites(props) {
           selectionLimit={[1, upperLimit]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
-          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) }, disabled: isDisabled }}
+          buttonProps={{ style: { size: 'large', marginLeft: theme.spacing(1.5) }, disabled: isDisabled }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />
       </div>

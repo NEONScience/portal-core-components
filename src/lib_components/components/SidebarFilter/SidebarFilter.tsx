@@ -7,18 +7,16 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
 
 import Skeleton from '@mui/material/Skeleton';
 
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   title: {
     fontWeight: 500,
   },
@@ -60,7 +58,7 @@ const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
     justifyContent: 'flex-start',
   },
   horizontalDescriptions: {
-    marginLeft: Theme.spacing(3),
+    marginLeft: muiTheme.spacing(3),
     '& > div:first-of-type': {
       marginTop: '-2px !important',
     },
@@ -87,7 +85,7 @@ export interface SidebarFilterProps {
 const SidebarFilter: React.FC<SidebarFilterProps> = (
   props: SidebarFilterProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     title,
     skeleton,
@@ -137,7 +135,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (
         {title}
       </Typography>
       <Tooltip placement="right" title={tooltip}>
-        <IconButton size="small" style={{ marginLeft: Theme.spacing(0.5) }}>
+        <IconButton size="small" style={{ marginLeft: theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>
       </Tooltip>
@@ -146,7 +144,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (
 
   // Render skeleton
   if (skeleton) {
-    const skeletonStyle = { marginBottom: Theme.spacing(1) };
+    const skeletonStyle = { marginBottom: theme.spacing(1) };
     return (
       <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
         {titleNode}

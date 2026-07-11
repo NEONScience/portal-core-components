@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from 'tss-react/mui';
 
 import Container from '@mui/material/Container';
 
-import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 import { resolveProps } from '@/util/defaultProps';
 
 const useStyles = makeStyles()((theme) => ({

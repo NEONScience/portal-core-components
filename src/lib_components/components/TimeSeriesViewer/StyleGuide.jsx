@@ -4,7 +4,6 @@ import { of, map, catchError } from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid2';
@@ -26,6 +25,8 @@ import timeSeriesDataProductsJSON from '@/staticJSON/timeSeriesDataProducts.json
 import TimeSeriesViewerContext from '@/components/TimeSeriesViewer/TimeSeriesViewerContext';
 import TimeSeriesViewer from '@/components/TimeSeriesViewer/TimeSeriesViewer';
 import TimeSeriesViewerContainer from '@/components/TimeSeriesViewer/TimeSeriesViewerContainer';
+
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

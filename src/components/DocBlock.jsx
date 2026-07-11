@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from 'tss-react/mui';
 
 import Typography from '@mui/material/Typography';
-
-import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 const useStyles = makeStyles()((theme) => ({
   root: {

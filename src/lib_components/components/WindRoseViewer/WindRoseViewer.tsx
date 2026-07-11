@@ -9,7 +9,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import { useTheme } from '@mui/material/styles';
-import { makeStyles } from 'tss-react/mui';
 
 import { select } from 'd3-selection';
 import {
@@ -39,6 +38,7 @@ import {
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import NeonContext from '../NeonContext/NeonContext';
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import {
   AnyAction,
@@ -52,7 +52,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 import './styles.css';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   container: {
     width: '100%',
   },

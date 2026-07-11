@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
-import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
@@ -48,7 +47,7 @@ import NoneSelectedIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 import SiteMapContext from './SiteMapContext';
@@ -79,7 +78,7 @@ const useStyles = makeStyles()((theme) => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: Theme.colors.NEON_BLUE[200],
+    backgroundColor: theme.colors.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
@@ -167,11 +166,11 @@ const useStyles = makeStyles()((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
     cursor: 'grab',
     '&:hover, &:active': {
-      color: Theme.colors.LIGHT_BLUE[400],
-      borderColor: Theme.colors.LIGHT_BLUE[400],
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '&:active': {
@@ -183,7 +182,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   resizeBorder: {
     position: 'absolute',
-    border: `3px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+    border: `3px solid ${theme.colors.LIGHT_BLUE[500]}`,
     top: '0px',
     left: '0px',
     width: '100%',
@@ -214,18 +213,18 @@ const useStyles = makeStyles()((theme) => ({
     backgroundColor: 'white',
   },
   legendButton: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: '0px 0px 0px 2px',
   },
   legendButtonFullscreen: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
   },
   unselectablesButton: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: '0px 0px 2px 2px',
   },
   unselectablesButtonFullscreen: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
   },
   selectionSummaryContainer: {
     position: 'absolute',
@@ -320,7 +319,7 @@ const defaultProps = {
 
 const SiteMapContainer = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
@@ -363,7 +362,7 @@ const SiteMapContainer = (inProps) => {
   const resizeBorderRef = useRef(null);
   const resizeButtonRef = useRef(null);
 
-  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
 
   /**
      Vertical Resize Hooks
@@ -537,7 +536,7 @@ const SiteMapContainer = (inProps) => {
         <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <WarningIcon fontSize="large" color="error" />
-            <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
+            <Typography variant="h6" component="h3" style={{ marginTop: theme.spacing(1) }}>
               {`Unable to load sites: ${neonContextState.fetches.sites.error}`}
             </Typography>
           </Paper>
@@ -595,7 +594,7 @@ const SiteMapContainer = (inProps) => {
   const renderLegendButton = () => {
     const buttonStyle = filters.legendOpen ? {} : { backgroundColor: 'white' };
     return (
-      <div style={{ borderRadius: '2px', marginLeft: Theme.spacing(1) }}>
+      <div style={{ borderRadius: '2px', marginLeft: theme.spacing(1) }}>
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
@@ -629,7 +628,7 @@ const SiteMapContainer = (inProps) => {
     const items = selectionActive.toLowerCase().replace('_', '');
     const title = `Click to ${hideUnselectable ? 'show' : 'hide'} ${items} that are not selectable`;
     return (
-      <div style={{ borderRadius: '2px', marginRight: Theme.spacing(1) }}>
+      <div style={{ borderRadius: '2px', marginRight: theme.spacing(1) }}>
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
@@ -708,7 +707,7 @@ const SiteMapContainer = (inProps) => {
       if (selectionValid) {
         icon = <DoneIcon />;
         color = 'secondary';
-        backgroundColor = Theme.palette.secondary.main;
+        backgroundColor = theme.palette.secondary.main;
       } else {
         icon = <ErrorIcon />;
       }
@@ -961,7 +960,7 @@ const SiteMapContainer = (inProps) => {
             <IconButton
               size="small"
               aria-label={collapseTitle}
-              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
+              style={{ margin: theme.spacing(0, -2, 0, 1) }}
               onClick={(event) => {
                 event.preventDefault();
                 // We use setTimeout here so the icon doesn't change before the click event bubbles.
@@ -1024,7 +1023,7 @@ const SiteMapContainer = (inProps) => {
           </Tooltip>
         ) : formControl}
         {!allChildren.length ? null : (
-          <div style={{ marginLeft: Theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
+          <div style={{ marginLeft: theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
             {allChildren
               .filter((f) => state.filters.features.available[f])
               .map(renderFeatureOption)}
@@ -1132,7 +1131,7 @@ const SiteMapContainer = (inProps) => {
             <IconButton
               size="small"
               aria-label={collapseTitle}
-              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
+              style={{ margin: theme.spacing(0, -2, 0, 1) }}
               onClick={(event) => {
                 event.preventDefault();
                 // We use setTimeout here so the icon doesn't change before the click event bubbles.
@@ -1230,7 +1229,7 @@ const SiteMapContainer = (inProps) => {
                 <Tooltip title={description}>
                   <IconButton
                     size="small"
-                    style={{ margin: Theme.spacing(0, -0.75, 0, 1) }}
+                    style={{ margin: theme.spacing(0, -0.75, 0, 1) }}
                     aria-label={`${title} layer group description`}
                   >
                     <HelpIcon style={{ fontSize: '1rem' }} />

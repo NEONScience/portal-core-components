@@ -25,7 +25,6 @@ import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import ActionCreator from '@/components/Citation/DataProductCitation/Actions';
 import ComponentErrorBoundary from '@/components/Error/ComponentErrorBoundary';
@@ -50,19 +49,21 @@ import {
 } from '@/components/Citation/DataProductCitation/ViewState';
 import { Nullable } from '@/types/core';
 import { CitationRelease } from '@/components/Citation/DataProductCitation/State';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-const useStyles = makeStyles<any>()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
   title: {
     fontWeight: 500,
@@ -210,9 +211,7 @@ const dataProductCitationReducer = (state: any, action: any) => {
 };
 
 const DataProductCitationDemo = (): React.JSX.Element => {
-  const { classes } = useStyles({
-    props: Theme,
-  });
+  const { classes } = useStyles();
   const [state, dispatch] = useReducer(
     dataProductCitationReducer,
     cloneDeep(DATA_PRODUCT_CITATION_DEFAULT_STATE),
@@ -412,7 +411,7 @@ const WrappedDataProductCitationDemo = (Theme as any).getWrappedComponent(
 );
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme);
+  const { classes } = useStyles();
   return (
     <>
       <DocBlock>

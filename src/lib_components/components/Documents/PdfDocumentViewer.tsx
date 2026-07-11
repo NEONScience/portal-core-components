@@ -14,14 +14,12 @@ import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { PDFViewerOptions } from 'pdfjs-dist/types/web/pdf_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
 
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiTheme } from '@mui/material';
-
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
 import WarningCard from '../Card/WarningCard';
 import { NeonDocument } from '../../types/neonApi';
+import { makeStyles } from '../Theme/makeStyles';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 

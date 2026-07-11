@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 
 import Cookies from 'universal-cookie';
 
-import { makeStyles } from 'tss-react/mui';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+
+import { makeStyles } from '../Theme/makeStyles';
 
 /*
   Browser duck typing and warning

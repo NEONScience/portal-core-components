@@ -29,14 +29,13 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { makeStyles } from 'tss-react/mui';
-
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import NeonApi from '../NeonApi';
 import SplitButton from '../Button/SplitButton';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 
 import DocumentParser from '../../parser/DocumentParser';
@@ -60,7 +59,7 @@ import {
 const COMPONENT_XS_UPPER = 480;
 const COMPONENT_SM_UPPER = 805;
 
-const useStyles = makeStyles<any>()((muiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
@@ -101,7 +100,7 @@ const useStyles = makeStyles<any>()((muiTheme) => ({
   fileTypeChipSelected: {
     marginRight: '5px',
     fontWeight: 500,
-    backgroundColor: (muiTheme as NeonTheme).colors.GREY[200],
+    backgroundColor: muiTheme.colors.GREY[200],
   },
   variantFetchingLabel: {
     lineHeight: '24px',
@@ -115,7 +114,7 @@ const useStyles = makeStyles<any>()((muiTheme) => ({
   },
 }));
 
-const useListItemSecondaryActionStyles = makeStyles<any>()(() => ({
+const useListItemSecondaryActionStyles = makeStyles()(() => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -301,8 +300,8 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  const { classes } = useStyles(Theme);
-  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles(Theme);
+  const { classes } = useStyles();
+  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles();
   // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

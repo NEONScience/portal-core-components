@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -34,6 +33,7 @@ import RightIcon from '@mui/icons-material/ChevronRight';
 
 import SplitButton from '@/components/Button/SplitButton';
 import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from './DocBlock';
 
@@ -47,7 +47,7 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
     marginBottom: theme.spacing(4),
-    '& > :not(:last-child)': {
+    '& > :not(div:last-of-type)': {
       marginRight: theme.spacing(4),
     },
   },
@@ -55,7 +55,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    '& > :not(:last-child)': {
+    '& > :not(div:last-of-type)': {
       marginRight: theme.spacing(4),
       marginBottom: theme.spacing(2),
     },
@@ -98,7 +98,7 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
 
       <div style={{ marginBottom: Theme.spacing(4) }}>
-        <Accordion slotProps={{ heading: { component: 'h4' } }}>
+        <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Basic Accordion
           </AccordionSummary>

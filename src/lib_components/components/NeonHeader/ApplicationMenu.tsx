@@ -1,6 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { makeStyles } from 'tss-react/mui';
-import { Theme } from '@mui/material';
+
 import IconButton from '@mui/material/IconButton';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Paper from '@mui/material/Paper';
@@ -13,7 +12,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid2';
+
 import NeonContext from '../NeonContext/NeonContext';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
 // interface for user application data
 interface UserApp {
@@ -28,7 +30,7 @@ interface MenuProps {
 }
 
 // declare styles
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   menuContainer: {
     zIndex: 1000, // be sure to display the menu over other elements
   },

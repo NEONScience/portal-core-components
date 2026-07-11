@@ -18,8 +18,6 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from 'tss-react/mui';
-import { Theme as MuiThemeType } from '@mui/material';
 
 import Logout from '@mui/icons-material/Logout';
 
@@ -28,6 +26,8 @@ import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import Theme from '../Theme/Theme';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
 import { StringPropsObject } from '../../types/objectTypes';
 import { Undef } from '../../types/core';
@@ -55,7 +55,7 @@ export interface NeonAuthProps {
 }
 /* eslint-enable react/no-unused-prop-types */
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css

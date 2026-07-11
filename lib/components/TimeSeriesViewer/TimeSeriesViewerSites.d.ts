@@ -92,6 +92,7 @@ declare namespace SelectPositionsButton {
             siteCode: PropTypes.Validator<string>;
             positions: PropTypes.Validator<(string | null | undefined)[]>;
         }>>>;
+        let theme: PropTypes.Validator<any>;
     }
     export { propTypes_3 as propTypes };
 }

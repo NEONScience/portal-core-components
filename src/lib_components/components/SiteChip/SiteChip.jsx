@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import PlaceIcon from '@mui/icons-material/Place';
 import DeleteIcon from '@mui/icons-material/Cancel';
 
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 const useStyles = makeStyles()((theme) => ({
   avatarLarge: {
@@ -33,7 +33,7 @@ const useChipStyles = makeStyles()((theme) => ({
 }));
 
 const SiteChip = (props) => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { classes: chipClasses } = useChipStyles();
   const { label, ...otherProps } = props;
 
@@ -63,7 +63,7 @@ const SiteChip = (props) => {
     marginLeft: '0px',
   };
   if (['primary', 'secondary'].includes(otherProps.color)) {
-    avatarStyle.backgroundColor = Theme.palette[otherProps.color].main;
+    avatarStyle.backgroundColor = theme.palette[otherProps.color].main;
   }
   if (otherProps.size === 'small') {
     avatarStyle.width = '24px';
@@ -79,9 +79,9 @@ const SiteChip = (props) => {
   if (otherProps.variant === 'outlined') {
     chipStyle.backgroundColor = 'transparent';
   } else if ((otherProps.variant === 'filled') && (otherProps.color === 'secondary')) {
-    chipStyle.backgroundColor = Theme.palette.secondary.main;
+    chipStyle.backgroundColor = theme.palette.secondary.main;
   } else if ((otherProps.variant === 'filled') && (otherProps.color === 'primary')) {
-    chipStyle.backgroundColor = Theme.palette.primary.main;
+    chipStyle.backgroundColor = theme.palette.primary.main;
   }
   const deleteIconStyle = {};
   let avatarClass = null;

@@ -2,7 +2,6 @@ import React, { useReducer, useEffect, useMemo } from 'react';
 
 import { ReplaySubject } from 'rxjs';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -10,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
 import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
 import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

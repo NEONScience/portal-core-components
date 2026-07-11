@@ -1,18 +1,17 @@
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
-
 import InfoMessageCard, { InfoMessageCardProps } from './InfoMessageCard';
+import { makeStyles } from '../Theme/makeStyles';
 import { type NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   card: {
     margin: theme.spacing(0.5, 0, 3, 0),
-    backgroundColor: (theme as NeonTheme).colors.GOLD[50],
-    borderColor: (theme as NeonTheme).colors.GOLD[300],
+    backgroundColor: theme.colors.GOLD[50],
+    borderColor: theme.colors.GOLD[300],
   },
   cardSecondaryIcon: {
-    color: (theme as NeonTheme).colors.GOLD[300],
+    color: theme.colors.GOLD[300],
     marginLeft: theme.spacing(2),
   },
 }));

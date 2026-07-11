@@ -5,13 +5,11 @@ import React, {
   useState,
 } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
-
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
@@ -15,7 +14,8 @@ import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
 import LegacyNeonThemeProvider from '../Theme/LegacyNeonThemeProvider';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import SiteMapContext from './SiteMapContext';
 import {
@@ -282,7 +282,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const SiteMapTable = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const tableRef = useRef(null);
 
   // Neon Context State
@@ -346,6 +346,7 @@ const SiteMapTable = () => {
   /**
     Layout Effect - Inject a second horizontal scrollbar above the table linked to the main
   */
+  const scrollbarBackgroundColor = theme.palette.grey[50];
   useLayoutEffect(() => {
     const noop = () => {};
     // This all only applies to full height table and/or split view (which behaves as full height)
@@ -367,8 +368,7 @@ const SiteMapTable = () => {
       scrollbar.appendChild(document.createElement('div'));
       scrollbar.style.overflow = 'auto';
       scrollbar.style.overflowY = 'hidden';
-      // eslint-disable-next-line prefer-destructuring
-      scrollbar.style.backgroundColor = Theme.palette.grey[50];
+      scrollbar.style.backgroundColor = scrollbarBackgroundColor;
       scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
       scrollbar.firstChild.style.paddingTop = '1px';
       scrollbar.onscroll = () => {
@@ -401,6 +401,7 @@ const SiteMapTable = () => {
     tableRef,
     fullHeight,
     view,
+    scrollbarBackgroundColor,
   ]);
 
   if (!canRender) { return null; }
@@ -949,7 +950,7 @@ const SiteMapTable = () => {
               placement="left"
               title={
                 samplingModules.length ? (
-                  <ul style={{ marginLeft: Theme.spacing(-1) }}>
+                  <ul style={{ marginLeft: theme.spacing(-1) }}>
                     {samplingModules.map((m) => (
                       <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
                     ))}
@@ -996,7 +997,7 @@ const SiteMapTable = () => {
     FilterRow: (filterRowProps) => (
       <MTableFilterRow
         {...filterRowProps}
-        filterCellStyle={{ padding: '8px', backgroundColor: Theme.palette.grey[50] }}
+        filterCellStyle={{ padding: '8px', backgroundColor: theme.palette.grey[50] }}
       />
     ),
   };
@@ -1019,7 +1020,7 @@ const SiteMapTable = () => {
     headerStyle: {
       position: 'sticky',
       top: 0,
-      backgroundColor: Theme.palette.grey[50],
+      backgroundColor: theme.palette.grey[50],
     },
     pageSize: 100,
     pageSizeOptions: [100, 200, 500],
@@ -1041,7 +1042,7 @@ const SiteMapTable = () => {
     },
     selection: selectionActive,
     selectionProps: !selectionActive ? null : (row) => ({
-      style: { margin: Theme.spacing(0, 0.5) },
+      style: { margin: theme.spacing(0, 0.5) },
       disabled: !rowIsSelectable(row),
     }),
   };

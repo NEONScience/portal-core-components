@@ -1,12 +1,12 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -66,15 +66,15 @@ import Theme from 'portal-core-components/lib/components/Theme';
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
 import Theme from 'portal-core-components/lib/components/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()((theme) => ({
   myCssClass: {
     padding: theme.spacing(3, 4),
     marginBottom: theme.spacing(2),
   },
-};
+}));
 
 const myComponent = () => {
   const classes = useStyles(Theme);
@@ -105,15 +105,15 @@ ${JSON.stringify(Theme.palette, null, 2)}
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
 import Theme from 'portal-core-components/lib/components/Theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()((theme) => ({
   myCssClass: {
     backgroundColor: theme.palette.grey[50],
     border: \`1px solid $\{theme.palette.primary.main}\`,
   },
-};
+}));
 
 const myComponent = () => {
   const classes = useStyles(Theme);

@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import DialogBase from '@/components/DialogBase/DialogBase';
 import DocumentList from '@/components/Documents/DocumentList';
@@ -13,14 +12,15 @@ import DocumentSelect from '@/components/Documents/DocumentSelect';
 import DocumentTabs from '@/components/Documents/DocumentTabs';
 import DocumentViewer from '@/components/Documents/DocumentViewer';
 import PdfDocumentViewer from '@/components/Documents/PdfDocumentViewer';
-import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
 import { NeonDocument } from '@/types/neonApi';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-const useStyles = makeStyles<any>()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   container: {
     margin: theme.spacing(3, 3, 3, 3),
   },
@@ -29,12 +29,12 @@ const useStyles = makeStyles<any>()((theme) => ({
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles(Theme);
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [tabDialogOpen, setTabDialogOpen] = useState(false);
   const exampleDoc: NeonDocument = {

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import NeonContext from '@/components/NeonContext/NeonContext';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

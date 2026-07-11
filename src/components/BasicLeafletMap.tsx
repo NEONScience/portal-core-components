@@ -21,9 +21,6 @@ import debounce from 'lodash/debounce';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import { useTheme } from '@mui/material/styles';
-import { makeStyles } from 'tss-react/mui';
-
 import ObservatoryIcon from '@mui/icons-material/Public';
 
 import MarkerIcon2xPng from 'leaflet/dist/images/marker-icon-2x.png';
@@ -31,6 +28,7 @@ import MarkerIconPng from 'leaflet/dist/images/marker-icon.png';
 import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
 import { NeonTheme } from '@/components/Theme/types';
+import { makeStyles } from '@/components/Theme/makeStyles';
 import { AnyAction, Nullable, Undef } from '@/types/core';
 import { exists } from '@/util/typeUtil';
 
@@ -40,7 +38,7 @@ const LEAFLET_ATTR_PREFIX = `
 <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
 `;
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   mapContainer: {
     width: '100%',
     height: '600px',
@@ -51,11 +49,11 @@ const useStyles = makeStyles()((theme) => ({
     height: '32px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
     '&:hover, &:active': {
-      color: (theme as NeonTheme).colors.LIGHT_BLUE[400],
-      borderColor: (theme as NeonTheme).colors.LIGHT_BLUE[400],
-      backgroundColor: (theme as NeonTheme).palette.grey[50],
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
+      backgroundColor: theme.palette.grey[50],
     },
     '& svg': {
       fontSize: '1.15rem !important',

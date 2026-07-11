@@ -3,7 +3,6 @@ import React, { useCallback } from 'react';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from 'tss-react/mui';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -26,13 +25,13 @@ import DataCiteService, {
   CitationDownloadType, CitationFormat,
 } from '../../../service/DataCiteService';
 import RouteService from '../../../service/RouteService';
-import Theme from '../../Theme/Theme';
 import { withDefaultProps } from '../../../util/defaultProps';
 import { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 import { Nullable, Undef, UnknownRecord } from '../../../types/core';
 import { DataProductRelease } from '../../../types/neonApi';
 import { IDataProductLike } from '../../../types/internal';
+import { makeStyles } from '../../Theme/makeStyles';
 import { NeonTheme } from '../../Theme/types';
 
 import ActionCreator from './Actions';
@@ -51,7 +50,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles<any>()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardActions: {
     flexWrap: 'wrap',
     marginTop: theme.spacing(-1),
@@ -116,7 +115,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     viewState,
     hasManyParents,
   }: DataProductCitationItemViewProps = props;
-  const { classes } = useStyles(Theme);
+  const { classes } = useStyles();
   const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
 
   let appliedTextOnly: CitationTextOnlyProps = {

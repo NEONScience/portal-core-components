@@ -5,26 +5,25 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
 
 import InfoIcon from '@mui/icons-material/Info';
 import WarnIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import ResetIcon from '@mui/icons-material/Autorenew';
 
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((muiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-
   divider: {
     margin: muiTheme.spacing(0, 3, 0, 3),
   },
-
   messageContainer: {
     padding: muiTheme.spacing(3, 3, 3, 3),
   },

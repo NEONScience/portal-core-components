@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 
+import Theme from '../../Theme/Theme';
 import TimeSeriesViewerContext, { DEFAULT_STATE } from '../TimeSeriesViewerContext';
 
 import { getTestableItems } from '../TimeSeriesViewerSites';
@@ -198,6 +199,7 @@ describe('TimeSeriesViewerSites', () => {
         <MockTheme>
           <SelectPositionsButton
             selectedSite={{ siteCode: 'ABBY', positions: ['000.020', '000.010'] }}
+            theme={Theme}
           />
         </MockTheme>
       );

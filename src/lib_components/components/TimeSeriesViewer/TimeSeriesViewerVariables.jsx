@@ -4,7 +4,6 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -25,7 +24,7 @@ import NoneIcon from '@mui/icons-material/NotInterested';
 import SearchIcon from '@mui/icons-material/Search';
 import SelectAllIcon from '@mui/icons-material/DoneAll';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
@@ -68,7 +67,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   optionSubtitle: {
     fontSize: '0.75rem',
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   variableCard: {
     display: 'inline-flex',
@@ -101,7 +100,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   qualityFlagsHeading: {
     fontWeight: 600,
-    marginBottom: Theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
   qualityFlagsButtons: {
     marginBottom: theme.spacing(2),
@@ -178,7 +177,7 @@ const optionDefaultProps = {
 
 function Option(inProps) {
   const props = resolveProps(optionDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -192,7 +191,7 @@ function Option(inProps) {
     description,
   } = data;
   const textStyle = isDisabled ? {
-    color: Theme.palette.grey[200],
+    color: theme.palette.grey[200],
   } : {};
   return (
     <MenuItem
@@ -288,10 +287,10 @@ const components = {
   IndicatorsContainer: () => null,
 };
 
-const selectStyles = {
+const builbSelectStyles = (theme) => ({
   input: (base) => ({
     ...base,
-    color: Theme.palette.text.primary,
+    color: theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
@@ -303,15 +302,15 @@ const selectStyles = {
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
-    color: Theme.palette.primary.main,
+    color: theme.palette.primary.main,
   }),
-};
+});
 
 /**
    Quality Flags
 */
 const QualityFlags = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
@@ -346,7 +345,7 @@ const QualityFlags = () => {
             variant="outlined"
             onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
             startIcon={<ClearIcon />}
-            style={{ marginRight: Theme.spacing(2) }}
+            style={{ marginRight: theme.spacing(2) }}
           >
             Select None
           </Button>
@@ -372,11 +371,11 @@ const QualityFlags = () => {
               <>
                 {organizedQualityFlags[downloadPkg].map((qf) => {
                   const checked = selectedQualityFlags.includes(qf);
-                  const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
+                  const captionStyle = { display: 'block', color: theme.palette.grey[400] };
                   return (
                     <FormControlLabel
                       key={qf}
-                      style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
+                      style={{ alignItems: 'flex-start', marginBottom: theme.spacing(1) }}
                       control={(
                         <Checkbox
                           value={qf}
@@ -386,7 +385,7 @@ const QualityFlags = () => {
                         />
                       )}
                       label={(
-                        <div style={{ paddingTop: Theme.spacing(0.5) }}>
+                        <div style={{ paddingTop: theme.spacing(0.5) }}>
                           <Typography variant="body2">
                             {qf}
                             <Typography variant="caption" style={captionStyle}>
@@ -408,7 +407,7 @@ const QualityFlags = () => {
 };
 
 export default function TimeSeriesViewerVariables() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const selectedVariables = state.selection.variables.map((variable) => ({
@@ -457,7 +456,7 @@ export default function TimeSeriesViewerVariables() {
           isDisabled={isDisabled}
           clearable={false}
           classes={classes}
-          styles={selectStyles}
+          styles={builbSelectStyles(theme)}
           aria-label="Add Variables"
           data-gtm="time-series-viewer.add-variables"
           options={selectableVariables}
@@ -483,7 +482,7 @@ export default function TimeSeriesViewerVariables() {
               <IconButton
                 aria-label={`remove variable ${variable}`}
                 disabled={state.selection.variables.length < 2}
-                style={{ marginRight: Theme.spacing(1) }}
+                style={{ marginRight: theme.spacing(1) }}
                 onClick={() => {
                   dispatch({
                     type: 'selectVariables',
@@ -513,11 +512,11 @@ export default function TimeSeriesViewerVariables() {
         <Typography variant="subtitle1" className={classes.qualityFlagsHeading}>
           Quality Flags
         </Typography>
-        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+        <Typography variant="caption" style={{ color: theme.palette.grey[400] }}>
           Enabling one or more quality flags will highlight regions on the chart
           to illustrate the results of data quality tests.
         </Typography>
-        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+        <div style={{ width: '100%', marginTop: theme.spacing(1) }}>
           <QualityFlags />
         </div>
       </div>

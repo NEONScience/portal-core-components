@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import { COLORS } from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 import { resolveProps } from '@/util/defaultProps';
 
 const useStyles = makeStyles()((theme) => ({

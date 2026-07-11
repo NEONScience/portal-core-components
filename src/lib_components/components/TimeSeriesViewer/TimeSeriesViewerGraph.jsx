@@ -18,7 +18,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
-import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -33,6 +32,7 @@ import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphDa
 import DataProductCitation from '../Citation/DataProductCitation';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 import Theme, { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
@@ -73,14 +73,14 @@ const QUALITY_COLORS = [
   '#ffed6f',
 ];
 
-const getBaseGraphOptions = () => ({
+const getBaseGraphOptions = (theme) => ({
   includeZero: true,
   labelsUTC: true,
   labelsKMB: false,
   showRangeSelector: true,
   interactionModel: Dygraph.defaultInteractionModel,
   connectSeparatedPoints: false,
-  rangeSelectorPlotFillColor: Theme.palette.secondary.light,
+  rangeSelectorPlotFillColor: theme.palette.secondary.light,
   animatedZooms: false,
   colors: SERIES_COLORS,
   highlightCircleSize: 3,
@@ -134,13 +134,13 @@ const useStyles = makeStyles()((theme) => ({
     flexWrap: 'wrap',
   },
   citationContainer: {
-    marginTop: Theme.spacing(2),
+    marginTop: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   citation: {
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   title: {
     textAlign: 'center',
@@ -264,7 +264,7 @@ const graphReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerGraph() {
-  const { classes } = useStyles(Theme);
+  const { classes, theme } = useStyles(Theme);
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const downloadRef = useRef(null);
@@ -274,7 +274,7 @@ export default function TimeSeriesViewerGraph() {
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
-  const belowSm = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowSm = useMediaQuery(theme.breakpoints.down('md'));
   const {
     selectionDigest,
     logscale,
@@ -283,8 +283,7 @@ export default function TimeSeriesViewerGraph() {
     yAxes,
   } = state.selection;
 
-  // let data = cloneDeep(NULL_DATA);
-  let graphOptions = cloneDeep(getBaseGraphOptions());
+  let graphOptions = cloneDeep(getBaseGraphOptions(theme));
 
   // Build the axes option
   const buildAxesOption = (axes = []) => {
@@ -388,7 +387,7 @@ export default function TimeSeriesViewerGraph() {
         : classes.legendSeries;
       const seriesStyle = {};
       if (isHidden) { seriesStyle.opacity = 0.5; }
-      const colorStyle = { backgroundColor: s.color || Theme.palette.grey[200] };
+      const colorStyle = { backgroundColor: s.color || theme.palette.grey[200] };
       if (s.isHighlighted) { colorStyle.height = '6px'; }
       return (
         <Card
@@ -428,7 +427,7 @@ export default function TimeSeriesViewerGraph() {
         const isHighlighted = graphData.series.some((s) => (
           s.isHighlighted && s.label.includes(qualityLabel)
         ));
-        const qualityStyle = isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+        const qualityStyle = isHighlighted ? { backgroundColor: theme.palette.grey[100] } : {};
         if (isHidden) { qualityStyle.opacity = 0.5; }
         const colorStyle = { backgroundColor: QUALITY_COLORS[qlIdx % 12] };
         return (
@@ -544,7 +543,7 @@ export default function TimeSeriesViewerGraph() {
     // Build graphOptions
     const { series, labels } = state.graphData;
     graphOptions = {
-      ...cloneDeep(getBaseGraphOptions()),
+      ...cloneDeep(getBaseGraphOptions(theme)),
       labels,
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),
@@ -740,7 +739,7 @@ export default function TimeSeriesViewerGraph() {
       onClick={exportGraphImage}
       disabled={downloadRef.current === null}
       title={`Download current graph as a PNG (${getPngDimensions()})`}
-      style={{ whiteSpace: 'nowrap', marginRight: Theme.spacing(1.5) }}
+      style={{ whiteSpace: 'nowrap', marginRight: theme.spacing(1.5) }}
       startIcon={<ImageIcon />}
     >
       Download Image (png)
@@ -762,7 +761,7 @@ export default function TimeSeriesViewerGraph() {
       title="Toggle Visibility for All Series"
       onClick={toggleSeriesVisibility}
       disabled={series.length === 0}
-      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1.5) }}
+      style={{ whiteSpace: 'nowrap', marginLeft: theme.spacing(1.5) }}
       startIcon={graphState.hiddenSeries.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenSeries.size ? (
@@ -826,10 +825,10 @@ export default function TimeSeriesViewerGraph() {
       </div>
       <div className={classes.buttonsOuterContainer}>
         <div className={classes.buttonsInnerContainer}>
-          <div style={{ marginTop: Theme.spacing(1.5) }}>
+          <div style={{ marginTop: theme.spacing(1.5) }}>
             {downloadImageButton}
           </div>
-          <div style={{ marginTop: Theme.spacing(1.5), textAlign: 'right' }}>
+          <div style={{ marginTop: theme.spacing(1.5), textAlign: 'right' }}>
             {toggleQualityFlagsVisibilityButton}
             {toggleSeriesVisibilityButton}
           </div>

@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -28,6 +27,7 @@ import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualiza
 import NeonContext from '../NeonContext/NeonContext';
 import ReleaseService from '../../service/ReleaseService';
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
@@ -40,7 +40,7 @@ const getYearMonthMoment = (yearMonth, day = 15) => (
 const svgMinWidth = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
 const svgMinHeight = (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (SVG.MIN_ROWS + 1);
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
   svg: {
     minWidth: `${svgMinWidth}px`,
     minHeight: `${svgMinHeight}px`,
@@ -52,15 +52,15 @@ const useStyles = makeStyles()(() => ({
     flexWrap: 'wrap',
   },
   optionContainer: {
-    marginRight: Theme.spacing(5),
+    marginRight: theme.spacing(5),
     flexGrow: 1,
     flexBasis: 0.5,
   },
   slider: {
-    minWidth: Theme.spacing(40),
-    width: `calc(100% - ${Theme.spacing(6)})`,
-    marginLeft: Theme.spacing(3),
-    marginBottom: Theme.spacing(4),
+    minWidth: theme.spacing(40),
+    width: `calc(100% - ${theme.spacing(6)})`,
+    marginLeft: theme.spacing(3),
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -76,7 +76,7 @@ const dateRangeReducer = (state, action) => {
 };
 
 const TimeSeriesViewerDateRange = (props) => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { dateRangeSliderRef } = props;
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;
@@ -227,7 +227,7 @@ const TimeSeriesViewerDateRange = (props) => {
       <div>
         <Skeleton variant="rectangular" width="100%" height={56} />
         <br />
-        <div style={{ display: 'flex', marginBottom: Theme.spacing(3) }}>
+        <div style={{ display: 'flex', marginBottom: theme.spacing(3) }}>
           <Skeleton variant="rectangular" width="100%" height={40} />
           <div style={{ width: '40px' }} />
           <Skeleton variant="rectangular" width="100%" height={40} />
@@ -319,10 +319,10 @@ const TimeSeriesViewerDateRange = (props) => {
     <div className={classes.optionsContainer}>
       <div className={classes.optionContainer}>
         <Typography variant="h6" gutterBottom>Select by Date</Typography>
-        <div style={{ marginBottom: Theme.spacing(2) }}>
+        <div style={{ marginBottom: theme.spacing(2) }}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <div className={classes.optionsContainer} style={{ marginBottom: Theme.spacing(3) }}>
-              <div style={{ ...datePickerContainerStyleProps, marginRight: Theme.spacing(3) }}>
+            <div className={classes.optionsContainer} style={{ marginBottom: theme.spacing(3) }}>
+              <div style={{ ...datePickerContainerStyleProps, marginRight: theme.spacing(3) }}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.start-input"
                   inputVariant="outlined"
@@ -367,7 +367,7 @@ const TimeSeriesViewerDateRange = (props) => {
           {renderedSlider}
         </div>
       </div>
-      <div className={classes.optionContainer} style={{ minWidth: Theme.spacing(50) }}>
+      <div className={classes.optionContainer} style={{ minWidth: theme.spacing(50) }}>
         <SvgDefs />
         <Typography variant="h6" gutterBottom>Select by Data Product Availability</Typography>
         <FullWidthVisualization

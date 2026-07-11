@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
 import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';

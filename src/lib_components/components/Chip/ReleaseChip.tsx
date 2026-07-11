@@ -2,23 +2,23 @@ import React from 'react';
 
 import Chip from '@mui/material/Chip';
 import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
-import { makeStyles } from 'tss-react/mui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
 
+import { makeStyles } from '../Theme/makeStyles';
 import { type NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   releaseIcon: {
-    color: (theme as NeonTheme).colors.LIGHT_BLUE[600],
+    color: theme.colors.LIGHT_BLUE[600],
     fontSize: '1em',
     marginRight: theme.spacing(0.75),
   },
   releaseChip: {
-    color: (theme as NeonTheme).colors.LIGHT_BLUE[600],
-    border: `1px solid ${(theme as NeonTheme).colors.LIGHT_BLUE[600]}`,
-    backgroundColor: (theme as NeonTheme).colors.LIGHT_BLUE[50],
+    color: theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
     cursor: 'help',
   },

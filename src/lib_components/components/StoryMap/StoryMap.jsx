@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from 'tss-react/mui';
 import Link from '@mui/material/Link';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import Theme from '../Theme/Theme';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
+import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
 const MIN_IFRAME_WIDTH = 240;
@@ -47,9 +47,6 @@ const StoryMap = (inProps) => {
         src={url}
         title={title || 'Neon Story Map'}
         ref={iframeRef}
-        frameBorder="0"
-        marginHeight="0"
-        marginWidth="0"
         style={{ minWidth: `${MIN_IFRAME_WIDTH}px`, minHeight: `${MIN_IFRAME_WIDTH}px` }}
       />
       <Link href={url} target="_blank" className={classes.openInNewLink}>

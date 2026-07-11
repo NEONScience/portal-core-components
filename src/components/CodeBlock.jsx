@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from 'tss-react/mui';
 
 import SyntaxHighlight from '@/components/SyntaxHighlight';
-import Theme from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
 import { resolveProps } from '@/util/defaultProps';
 
 import 'highlight.js/styles/github-dark-dimmed.css';

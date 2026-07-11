@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { Theme as MuiTheme } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
@@ -11,10 +9,12 @@ import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
 import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { NeonDocument } from '../../types/neonApi';
 import { existsNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   container: {
     width: '100%',
     display: 'flex',
@@ -31,7 +31,7 @@ const useStyles = makeStyles()((muiTheme: MuiTheme) => ({
   },
 }));
 
-const useTabsStyles = makeStyles<MuiTheme>()((muiTheme: MuiTheme) => ({
+const useTabsStyles = makeStyles()((muiTheme: NeonTheme) => ({
   scroller: {
     backgroundColor: muiTheme.palette.grey[200],
   },
@@ -42,7 +42,7 @@ const useTabsStyles = makeStyles<MuiTheme>()((muiTheme: MuiTheme) => ({
   },
 }));
 
-const useTabStyles = makeStyles<MuiTheme>()((muiTheme: MuiTheme) => ({
+const useTabStyles = makeStyles()((muiTheme: NeonTheme) => ({
   root: {
     textTransform: 'none',
     opacity: 1,
@@ -73,8 +73,8 @@ export interface DocumentTabsProps {
 
 const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): React.JSX.Element => {
   const { classes } = useStyles();
-  const { classes: tabClasses } = useTabStyles(Theme);
-  const { classes: tabsClasses } = useTabsStyles(Theme);
+  const { classes: tabClasses } = useTabStyles();
+  const { classes: tabsClasses } = useTabsStyles();
   const { documents }: DocumentTabsProps = props;
 
   const initialTabIdx = 0;
@@ -110,7 +110,13 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): Re
       aria-label="Document Tabs"
       classes={tabsClasses}
       onChange={(event, newTab) => { setSelectedTab(newTab); }}
-      TabIndicatorProps={{ style: { display: 'none' } }}
+      slotProps={{
+        indicator: {
+          style: {
+            display: 'none',
+          },
+        },
+      }}
       allowScrollButtonsMobile
     >
       {docTabs.map((docTab: DocumentTabModel): React.JSX.Element => ((

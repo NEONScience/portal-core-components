@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 
 import AuthService from '../NeonAuth/AuthService';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from './NeonSignInButtonState';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   signInButton: {
     margin: theme.spacing(2),
   },
@@ -24,7 +25,12 @@ const handleButtonClick = () => {
 export default function NeonSignInButton() {
   const { classes } = useStyles();
   return (
-    <Button variant="contained" className={classes.signInButton} color="primary" onClick={handleButtonClick}>
+    <Button
+      variant="contained"
+      className={classes.signInButton}
+      color="primary"
+      onClick={handleButtonClick}
+    >
       Sign In
     </Button>
   );

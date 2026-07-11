@@ -1,12 +1,10 @@
 import React, {
   useRef,
-  useState,
   useEffect,
   useReducer,
 } from 'react';
 import moment from 'moment';
 
-import { makeStyles } from 'tss-react/mui';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -32,7 +30,8 @@ import WarnIcon from '@mui/icons-material/Warning';
 import ComputerIcon from '@mui/icons-material/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import RouteService from '../../service/RouteService';
 
@@ -122,21 +121,21 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.grey[300],
     fontWeight: 700,
     fontSize: '85%',
-    marginRight: Theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   errorIcon: {
-    color: Theme.colors.RED[400],
+    color: theme.colors.RED[400],
   },
   warningIcon: {
-    color: Theme.colors.GOLD[500],
+    color: theme.colors.GOLD[500],
   },
   releaseChip: {
-    color: Theme.colors.LIGHT_BLUE[600],
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[600]}`,
-    backgroundColor: Theme.colors.LIGHT_BLUE[50],
+    color: theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
     cursor: 'help',
-    marginTop: Theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
   },
   startFlex: {
     display: 'flex',
@@ -146,7 +145,10 @@ const useStyles = makeStyles()((theme) => ({
   statusBar: {
     marginLeft: '-4px',
     marginRight: '-4px',
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: theme.palette.grey[100],
+    borderTop: '1px solid rgb(215, 217, 217)',
+    borderLeft: '1px solid rgb(215, 217, 217)',
+    borderRight: '1px solid rgb(215, 217, 217)',
     padding: '4px 4px 4px 12px',
     '& svg': {
       verticalAlign: 'bottom',
@@ -164,10 +166,10 @@ const useStyles = makeStyles()((theme) => ({
   statusBarPointsText: {
     marginLeft: theme.spacing(1),
     alignSelf: 'center',
-    paddingTop: '2px',
+    paddingTop: '2.5px',
   },
   statusBarWarningIcon: {
-    color: Theme.colors.BROWN[300],
+    color: theme.colors.BROWN[300],
     marginRight: theme.spacing(3),
   },
 }));
@@ -232,7 +234,7 @@ const useTabStyles = makeStyles()((theme) => ({
    Summary Component
 */
 export function TimeSeriesViewerSummary() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const {
@@ -271,7 +273,7 @@ export function TimeSeriesViewerSummary() {
   );
   if (state.product.productName) {
     productSummaryTitle = (
-      <div style={{ marginRight: Theme.spacing(1) }}>
+      <div style={{ marginRight: theme.spacing(1) }}>
         <Typography variant="subtitle2">Data Product</Typography>
         <Typography variant="body2">
           <Link href={productHref} target="_blank" style={{ fontWeight: 600 }}>
@@ -288,7 +290,7 @@ export function TimeSeriesViewerSummary() {
         {state.product.productSensor ? (
           <Typography variant="body2">
             <b>Sensor:</b>
-            <span style={{ marginLeft: Theme.spacing(0.5) }}>
+            <span style={{ marginLeft: theme.spacing(0.5) }}>
               {state.product.productSensor}
             </span>
           </Typography>
@@ -406,7 +408,7 @@ export function TimeSeriesViewerSummary() {
     }
   });
   const renderAxisSetting = (setting) => (
-    <div key={setting.title} style={{ marginRight: Theme.spacing(2), whiteSpace: 'nowrap' }}>
+    <div key={setting.title} style={{ marginRight: theme.spacing(2), whiteSpace: 'nowrap' }}>
       <span className={classes.axisSettingTitle}>
         {`${setting.title}:`}
       </span>
@@ -528,15 +530,11 @@ const containerReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerContainer() {
-  const { classes } = useStyles();
-  const { classes: tabClasses } = useTabStyles(Theme, {
-    props: Theme,
-  });
-  const { classes: tabsClasses } = useTabsStyles(Theme, {
-    props: Theme,
-  });
+  const { classes, theme } = useStyles();
+  const { classes: tabClasses } = useTabStyles();
+  const { classes: tabsClasses } = useTabsStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
 
   // console.log('TIME SERIES VIEWER STATE:', state);
 
@@ -636,7 +634,7 @@ export default function TimeSeriesViewerContainer() {
     if (isError || isWarning) {
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
           <ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />
@@ -655,7 +653,7 @@ export default function TimeSeriesViewerContainer() {
       }
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>
             {title}
           </Typography>
           <CircularProgress {...progressProps} />

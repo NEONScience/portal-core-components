@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
@@ -21,6 +20,7 @@ import CopyIcon from '@mui/icons-material/Assignment';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import RouteService from '../../service/RouteService';
 import ReleaseService from '../../service/ReleaseService';
@@ -74,9 +74,9 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   copyButtonAdornment: {
-    padding: Theme.spacing(1.25, 1),
+    padding: theme.spacing(1.25, 1),
     backgroundColor: '#fff',
-    marginRight: Theme.spacing(-1.75),
+    marginRight: theme.spacing(-1.75),
     '& svg': {
       width: '0.9rem',
       height: '0.9rem',
@@ -91,7 +91,7 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'flex-start',
   },
   horizontalDescriptions: {
-    marginLeft: Theme.spacing(3),
+    marginLeft: theme.spacing(3),
     '& > div:first-of-type': {
       marginTop: '-2px !important',
     },
@@ -129,7 +129,7 @@ const defaultProps = {
 
 const ReleaseFilter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     excludeNullRelease,
     horizontal,
@@ -213,7 +213,7 @@ const ReleaseFilter = (inProps) => {
         {title}
       </Typography>
       <Tooltip placement="right" title={tooltip}>
-        <IconButton size="small" aria-label={tooltip} style={{ marginLeft: Theme.spacing(0.5) }}>
+        <IconButton size="small" aria-label={tooltip} style={{ marginLeft: theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>
       </Tooltip>
@@ -222,7 +222,7 @@ const ReleaseFilter = (inProps) => {
 
   // Render skeleton
   if (skeleton) {
-    const skeletonStyle = { marginBottom: Theme.spacing(1) };
+    const skeletonStyle = { marginBottom: theme.spacing(1) };
     return (
       <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
@@ -358,7 +358,7 @@ const ReleaseFilter = (inProps) => {
               className={classes.copyButton}
               title={`Copy DOI: ${doiUrl}`}
             >
-              <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+              <CopyIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
               Copy DOI
             </Button>
           </CopyToClipboard>

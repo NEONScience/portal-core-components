@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 
-import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import FullWidthVisualization from '@/components/FullWidthVisualization/FullWidthVisualization';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -29,7 +29,6 @@ const makeVizClass = (base, dark, light) => ({
   backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px',
 });
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
 const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
