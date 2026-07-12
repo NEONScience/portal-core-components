@@ -84,7 +84,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
         )}
         {!exists(detailContent) ? null : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
-          (<>{detailContent}</>)
+          <>{detailContent}</>
         )}
         {!exists(subTitleContent) ? null : (
           <Typography variant="body2">

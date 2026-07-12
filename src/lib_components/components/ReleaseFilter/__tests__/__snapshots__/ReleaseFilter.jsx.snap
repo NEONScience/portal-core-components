@@ -594,7 +594,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
             </span>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-p4qnra-MuiButtonBase-root-MuiButton-root-copyButton"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-3rl0gk-MuiButtonBase-root-MuiButton-root-copyButton"
             tabindex="0"
             title="Copy DOI: http://data.cite/bar"
             type="button"
@@ -744,7 +744,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           </span>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-p4qnra-MuiButtonBase-root-MuiButton-root-copyButton"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-3rl0gk-MuiButtonBase-root-MuiButton-root-copyButton"
           tabindex="0"
           title="Copy DOI: http://data.cite/bar"
           type="button"

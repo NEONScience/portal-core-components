@@ -8,6 +8,8 @@ import {
   ThemeProvider,
 } from '@mui/material/styles';
 
+import { buttonClasses } from '@mui/material/Button';
+import { buttonGroupClasses } from '@mui/material/ButtonGroup';
 import { iconButtonClasses } from '@mui/material/IconButton';
 import { sliderClasses } from '@mui/material/Slider';
 import { typographyClasses } from '@mui/material/Typography';
@@ -268,8 +270,14 @@ const baseTheme = createTheme({
           fontWeight: 500,
         },
         expandIconWrapper: {
+          padding: '12px',
+          borderRadius: '50%',
+          border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
           '&:hover': {
+            padding: '12px',
             backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+            color: COLORS.LIGHT_BLUE[400],
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
           },
         },
       },
@@ -315,47 +323,44 @@ const baseTheme = createTheme({
           padding: '8px 16px',
         },
         contained: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            '&:hover, &:active': {
+              backgroundColor: COLORS.LIGHT_BLUE[400],
+            },
+          },
           '&.Mui-disabled': {
             color: COLORS.GREY[300],
             backgroundColor: COLORS.GREY[100],
           },
         },
-        containedPrimary: {
-          padding: '8px 16px',
-          '&:hover, &:active': {
-            backgroundColor: COLORS.LIGHT_BLUE[400],
-          },
-        },
         outlined: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            border: `1px solid ${COLORS.LIGHT_BLUE[500]}`,
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+            },
+          },
           '&.Mui-disabled': {
             color: COLORS.GREY[300],
             borderColor: COLORS.GREY[300],
           },
         },
-        outlinedPrimary: {
-          padding: '8px 16px',
-          border: `1px solid ${COLORS.LIGHT_BLUE[500]}`,
-          '&:hover, &:active': {
-            color: COLORS.LIGHT_BLUE[400],
-            borderColor: COLORS.LIGHT_BLUE[400],
-            textDecoration: 'underline',
-          },
-        },
         text: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            border: '1px solid transparent',
+            '&:focus': {
+              border: `1px dashed ${COLORS.GOLD[500]}ff`,
+            },
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+              border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+            },
+          },
           '&.Mui-disabled': {
             color: COLORS.GREY[300],
-          },
-        },
-        textPrimary: {
-          padding: '8px 16px',
-          border: '1px solid transparent',
-          '&:focus': {
-            border: `1px dashed ${COLORS.GOLD[500]}ff`,
-          },
-          '&:hover, &:active': {
-            color: COLORS.LIGHT_BLUE[400],
-            textDecoration: 'underline',
-            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
           },
         },
         sizeSmall: {
@@ -390,25 +395,27 @@ const baseTheme = createTheme({
         color: 'primary',
       },
       styleOverrides: {
-        groupedOutlinedPrimary: {
-          '&:hover, &:active': {
-            color: COLORS.LIGHT_BLUE[400],
-            borderColor: COLORS.LIGHT_BLUE[400],
-            textDecoration: 'underline',
+        root: {
+          [`&.${buttonGroupClasses.outlined}.${buttonGroupClasses.colorPrimary} > .${buttonGroupClasses.grouped}`]: {
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+            },
           },
-        },
-        groupedTextPrimary: {
-          border: '1px solid transparent !important',
-          '&:hover, &:active': {
-            color: COLORS.LIGHT_BLUE[400],
-            borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
-            textDecoration: 'underline',
-          },
-          '&:not(div:last-of-type)': {
-            borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
-          },
-          '&:not(div:first-of-type)': {
-            marginLeft: '-1px',
+          [`&.${buttonGroupClasses.text}.${buttonGroupClasses.colorPrimary} > .${buttonGroupClasses.grouped}`]: {
+            border: '1px solid transparent !important',
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
+              textDecoration: 'underline',
+            },
+            '&:not(div:last-of-type)': {
+              borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
+            },
+            '&:not(div:first-of-type)': {
+              marginLeft: '-1px',
+            },
           },
         },
       },
@@ -451,13 +458,14 @@ const baseTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: '7px 7px',
+          padding: '6px',
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
+          backgroundColor: COLORS.GREY[200],
           letterSpacing: 'normal',
         },
         label: {
@@ -553,7 +561,7 @@ const baseTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: '7px 7px',
+          padding: '6px',
         },
       },
     },
@@ -655,7 +663,6 @@ const baseTheme = createTheme({
           },
           [`& .${sliderClasses.rail}`]: {
             borderRadius: 0,
-            width: '2px',
           },
           [`& .${sliderClasses.thumb}`]: {
             height: 12,

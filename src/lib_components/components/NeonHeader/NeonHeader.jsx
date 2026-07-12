@@ -334,9 +334,10 @@ const defaultProps = {
   customizeAuthContainer: false,
 };
 
-const NeonHeader = forwardRef((inProps, headerRef) => {
+const NeonHeader = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const {
+    ref: headerRef,
     drupalCssLoaded,
     unstickyDrupalHeader,
     showSkeleton,
@@ -500,9 +501,10 @@ const NeonHeader = forwardRef((inProps, headerRef) => {
       <ApplicationMenu />
     </>
   );
-});
+};
 
 NeonHeader.propTypes = {
+  ref: PropTypes.element,
   drupalCssLoaded: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
   showSkeleton: PropTypes.bool,

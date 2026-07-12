@@ -77,7 +77,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const myComponent = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );
@@ -116,7 +116,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const myComponent = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );

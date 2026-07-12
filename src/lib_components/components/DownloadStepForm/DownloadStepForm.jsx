@@ -942,7 +942,7 @@ const DownloadStepForm = (inProps) => {
                 tabIndex={0}
                 className={classes.stepSummaryHeader}
                 onClick={() => changeToStep(index)}
-                onKeyPress={() => changeToStep(index)}
+                onKeyUp={() => changeToStep(index)}
               >
                 <Chip
                   color={isComplete ? 'primary' : 'default'}

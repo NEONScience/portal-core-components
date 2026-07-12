@@ -4,7 +4,19 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { TssCacheProvider } from 'tss-react';
+
 import Theme from './Theme';
+
+const muiCache = createCache({
+  key: 'mui',
+  prepend: true,
+});
+const tssCache = createCache({
+  key: 'tss',
+});
 
 // Global CSS
 const globalCss = {
@@ -22,11 +34,15 @@ interface NeonThemeProviderProps {
 const NeonThemeProvider = (props: NeonThemeProviderProps): React.JSX.Element => {
   const { children }: NeonThemeProviderProps = props;
   return (
-    <ThemeProvider theme={Theme}>
-      <CssBaseline />
-      <GlobalStyles styles={globalCss} />
-      {children}
-    </ThemeProvider>
+    <CacheProvider value={muiCache}>
+      <TssCacheProvider value={tssCache}>
+        <ThemeProvider theme={Theme}>
+          <CssBaseline />
+          <GlobalStyles styles={globalCss} />
+          {children}
+        </ThemeProvider>
+      </TssCacheProvider>
+    </CacheProvider>
   );
 };
 

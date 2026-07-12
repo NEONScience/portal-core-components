@@ -310,8 +310,10 @@ const YAxisRangeOption = (props) => {
             label="Max"
             type="number"
             size="small"
-            inputProps={{ step }}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{
+              input: { step },
+              inputLabel: { shrink: true },
+            }}
             variant="outlined"
             disabled={!isCustom}
             value={activeRange[1]}
@@ -330,8 +332,10 @@ const YAxisRangeOption = (props) => {
             label="Min"
             type="number"
             size="small"
-            inputProps={{ step }}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{
+              input: { step },
+              inputLabel: { shrink: true },
+            }}
             variant="outlined"
             disabled={!isCustom}
             value={activeRange[0]}

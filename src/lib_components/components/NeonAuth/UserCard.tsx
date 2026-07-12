@@ -89,7 +89,7 @@ const useStyles = makeStyles()(() => ({
     '& .chip-email.MuiChip-root': {
       fontSize: '.90em !important',
     },
-    '& .chip-email .MuiAvatar-root.MuiChip-avatar.MuiChip-avatarColorPrimary': {
+    '& .chip-email.MuiChip-root.MuiChip-colorPrimary > .MuiChip-avatar': {
       width: '32px !important',
       height: '32px !important',
     },

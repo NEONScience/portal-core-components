@@ -74,10 +74,14 @@ const DialogBase = (inProps) => {
     <Dialog
       open={open}
       onClose={onClose}
-      TransitionComponent={Transition}
       fullScreen
-      PaperProps={{
-        className: classes.dialogPaper,
+      slots={{
+        transition: Transition,
+      }}
+      slotProps={{
+        paper: {
+          className: classes.dialogPaper,
+        },
       }}
       style={{ ...style, zIndex: Theme.zIndex.fullScreenBackdrop }}
       {...other}

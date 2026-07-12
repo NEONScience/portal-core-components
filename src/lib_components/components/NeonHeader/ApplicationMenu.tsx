@@ -127,8 +127,14 @@ const Menu = (props: MenuProps) => {
           title="Neon Applications"
           aria-label="Neon Applications"
           placement="left"
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 200 }}
+          slots={{
+            transition: Fade,
+          }}
+          slotProps={{
+            transition: {
+              timeout: 200,
+            },
+          }}
           arrow
         >
           <IconButton

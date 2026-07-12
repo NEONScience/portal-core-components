@@ -31,7 +31,7 @@ import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphDa
 
 import DataProductCitation from '../Citation/DataProductCitation';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import { isStringNonEmpty } from '../../util/typeUtil';
@@ -264,7 +264,7 @@ const graphReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerGraph() {
-  const { classes, theme } = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const downloadRef = useRef(null);

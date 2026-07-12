@@ -24,7 +24,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     checked=""
@@ -83,7 +83,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -212,7 +212,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
               class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   checked=""
@@ -271,7 +271,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
               class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -512,7 +512,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
           >
             <span
-              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
             >
               <input
                 class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -572,7 +572,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
             class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
           >
             <span
-              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+              class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
             >
               <input
                 checked=""
@@ -647,7 +647,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
         >
           <span
-            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
           >
             <input
               class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -707,7 +707,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
           class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
         >
           <span
-            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+            class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
           >
             <input
               checked=""
@@ -847,7 +847,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
           class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1g4zkki-MuiFormControlLabel-root-formControlBold"
         >
           <span
-            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1dcdine-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1lt0kkb-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
           >
             <input
               class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -898,7 +898,7 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
         class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1g4zkki-MuiFormControlLabel-root-formControlBold"
       >
         <span
-          class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1dcdine-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+          class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall css-1lt0kkb-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
         >
           <input
             class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -1004,7 +1004,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -1066,7 +1066,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
               >
                 <span
-                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                  class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
                 >
                   <input
                     checked=""
@@ -1185,7 +1185,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
               class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
@@ -1247,7 +1247,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
               class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-wksiz6-MuiFormControlLabel-root-radio"
             >
               <span
-                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-a1ybxs-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+                class="MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall PrivateSwitchBase-root MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall Mui-checked MuiRadio-root MuiRadio-colorPrimary MuiRadio-sizeSmall css-ti89l1-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
               >
                 <input
                   checked=""
@@ -1652,7 +1652,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1671,7 +1671,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-14jmn0q-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ye5034-MuiChip-root"
                   data-selenium="site-chip"
                   style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
                 >
@@ -1708,7 +1708,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1742,7 +1742,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1776,7 +1776,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1917,7 +1917,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1936,7 +1936,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-14jmn0q-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ye5034-MuiChip-root"
                 data-selenium="site-chip"
                 style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
               >
@@ -1973,7 +1973,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -2007,7 +2007,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -2041,7 +2041,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1ybz7x5-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"

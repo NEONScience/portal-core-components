@@ -25,7 +25,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
@@ -63,11 +62,12 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
+    position: 'relative',
+    paddingTop: muiTheme.spacing(1),
+    paddingBottom: muiTheme.spacing(1),
   },
   listItem: {
     display: 'flex',
-    wordBreak: 'break-word',
-    paddingLeft: muiTheme.spacing(1),
     '& p': {
       marginTop: muiTheme.spacing(0.5),
       '& > span > span': {
@@ -75,8 +75,17 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
       },
     },
   },
-  listItemWithButton: {
-    padding: muiTheme.spacing(1, 0, 1, 1),
+  listItemText: {
+    wordBreak: 'break-word',
+    paddingLeft: muiTheme.spacing(1),
+    // paddingRight: muiTheme.spacing(4),
+  },
+  listItemButtonContainer: {
+    display: 'flex',
+    overflow: 'auto',
+    position: 'relative',
+    paddingTop: muiTheme.spacing(1),
+    paddingBottom: muiTheme.spacing(1),
   },
   listItemButton: {
     padding: '0',
@@ -88,6 +97,7 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   listItemIcon: {
     minWidth: muiTheme.spacing(4),
     marginRight: muiTheme.spacing(1),
+    alignSelf: 'center',
   },
   fileTypeChip: {
     marginRight: '5px',
@@ -100,7 +110,6 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   fileTypeChipSelected: {
     marginRight: '5px',
     fontWeight: 500,
-    backgroundColor: muiTheme.colors.GREY[200],
   },
   variantFetchingLabel: {
     lineHeight: '24px',
@@ -116,13 +125,13 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
 
 const useListItemSecondaryActionStyles = makeStyles()(() => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    position: 'unset',
-    transform: 'unset',
-    top: 'unset',
-    right: 'unset',
-    whiteSpace: 'nowrap',
+    // display: 'flex',
+    // alignItems: 'center',
+    // position: 'unset',
+    // transform: 'unset',
+    // top: 'unset',
+    // right: 'unset',
+    // whiteSpace: 'nowrap',
   },
 }));
 
@@ -548,14 +557,14 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     if (!(enableDownloadButton === true)) return null;
     if (isFetchingVariants) {
       return (
-        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+        <div className={listItemSecondaryActionClasses.root}>
           <CircularProgress size={36} className={classes.variantFetchingProgress} />
-        </ListItemSecondaryAction>
+        </div>
       );
     }
     if (atComponentXs) {
       return (
-        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+        <div className={listItemSecondaryActionClasses.root}>
           <Tooltip
             placement="top"
             title={`Download ${appliedDocument.name}`}
@@ -580,7 +589,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               </IconButton>
             </div>
           </Tooltip>
-        </ListItemSecondaryAction>
+        </div>
       );
     }
     const button = !hasAppliedVariants
@@ -653,9 +662,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         />
       );
     return (
-      <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+      <div className={listItemSecondaryActionClasses.root}>
         {button}
-      </ListItemSecondaryAction>
+      </div>
     );
   };
   const renderDownloadError = (): React.JSX.Element|null => {
@@ -676,10 +685,17 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         <ListItem
           ref={containerRef as never}
           key={id}
-          className={`${classes.listItem} ${classes.listItemWithButton}`}
+          className={classes.listItemButtonContainer}
           component="div"
-          ContainerComponent={containerComponent}
-          ContainerProps={{ className: classes.listItemContainer }}
+          slots={{
+            root: containerComponent,
+          }}
+          slotProps={{
+            root: {
+              className: classes.listItemContainer,
+            },
+          }}
+          secondaryAction={renderAction()}
         >
           <ListItemButton
             className={classes.listItemButton}
@@ -699,9 +715,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
             <ListItemText
               primary={primary}
               secondary={renderSecondaryItem()}
+              className={classes.listItemText}
             />
           </ListItemButton>
-          {renderAction()}
         </ListItem>
         {renderDownloadError()}
       </>
@@ -714,8 +730,15 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         key={id}
         className={classes.listItem}
         component="div"
-        ContainerComponent={containerComponent}
-        ContainerProps={{ className: classes.listItemContainer }}
+        slots={{
+          root: containerComponent,
+        }}
+        slotProps={{
+          root: {
+            className: classes.listItemContainer,
+          },
+        }}
+        secondaryAction={renderAction()}
       >
         <ListItemIcon className={classes.listItemIcon}>
           <TypeIcon />
@@ -723,8 +746,8 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         <ListItemText
           primary={primary}
           secondary={renderSecondaryItem()}
+          className={classes.listItemText}
         />
-        {renderAction()}
       </ListItem>
       {renderDownloadError()}
     </>

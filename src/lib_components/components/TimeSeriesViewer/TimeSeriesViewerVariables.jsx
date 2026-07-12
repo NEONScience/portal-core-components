@@ -135,18 +135,20 @@ function Control(props) {
       fullWidth
       label={labelText}
       variant="outlined"
-      InputProps={{
-        inputComponent,
-        inputProps: {
-          ref: innerRef,
-          children,
-          ...innerProps,
+      slotProps={{
+        input: {
+          inputComponent,
+          inputProps: {
+            ref: innerRef,
+            children,
+            ...innerProps,
+          },
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon color="disabled" />
+            </InputAdornment>
+          ),
         },
-        endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon color="disabled" />
-          </InputAdornment>
-        ),
       }}
       {...TextFieldProps}
     />

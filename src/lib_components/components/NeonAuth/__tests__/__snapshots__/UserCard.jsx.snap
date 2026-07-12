@@ -29,10 +29,10 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
             </h4>
           </div>
           <div
-            class="css-1kouca2-emailChipContainer"
+            class="css-kvn77j-emailChipContainer"
           >
             <div
-              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-14c8dyd-MuiChip-root"
             >
               <div
                 class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
@@ -121,10 +121,10 @@ exports[`NeonAuth - UserCard Renders with a lastLogin prop 1`] = `
           </h4>
         </div>
         <div
-          class="css-1kouca2-emailChipContainer"
+          class="css-kvn77j-emailChipContainer"
         >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-14c8dyd-MuiChip-root"
           >
             <div
               class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
@@ -270,10 +270,10 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
             </h4>
           </div>
           <div
-            class="css-1kouca2-emailChipContainer"
+            class="css-kvn77j-emailChipContainer"
           >
             <div
-              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
+              class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-14c8dyd-MuiChip-root"
             >
               <div
                 class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"
@@ -360,10 +360,10 @@ exports[`NeonAuth - UserCard Renders without a lastLogin prop 1`] = `
           </h4>
         </div>
         <div
-          class="css-1kouca2-emailChipContainer"
+          class="css-kvn77j-emailChipContainer"
         >
           <div
-            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-1j3wbz4-MuiChip-root"
+            class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary chip-email css-14c8dyd-MuiChip-root"
           >
             <div
               class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorPrimary css-1p6pcjj-MuiAvatar-root"

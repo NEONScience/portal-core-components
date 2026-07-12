@@ -215,7 +215,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -260,7 +260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -270,7 +270,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -441,7 +441,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -449,7 +449,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -1042,7 +1042,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -1087,7 +1087,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -1097,7 +1097,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -1268,7 +1268,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -1276,7 +1276,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -1926,7 +1926,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -1971,7 +1971,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -1981,7 +1981,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -2152,7 +2152,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -2160,7 +2160,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -2753,7 +2753,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -2798,7 +2798,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -2808,7 +2808,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -2979,7 +2979,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -2987,7 +2987,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -4490,7 +4490,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -4535,7 +4535,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -4545,7 +4545,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -4716,7 +4716,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -4724,7 +4724,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -5317,7 +5317,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -5362,7 +5362,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -5372,7 +5372,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -5543,7 +5543,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -5551,7 +5551,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -6201,7 +6201,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -6246,7 +6246,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -6256,7 +6256,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -6427,7 +6427,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -6435,7 +6435,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -7023,7 +7023,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-k0vzre-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -7068,7 +7068,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -7078,7 +7078,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -7249,7 +7249,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -7257,7 +7257,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"

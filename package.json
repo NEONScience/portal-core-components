@@ -5,6 +5,7 @@
   "private": true,
   "homepage": "http://localhost:3010/core-components-next",
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fortawesome/fontawesome-svg-core": "^7.3.0",

@@ -343,13 +343,13 @@ const drupalAssetsReducer = (state, action) => {
   const newState = { ...state };
   switch (action.type) {
     case 'fetchDrupalCss':
-      newState.fetchStatus = 'fetching';
+      newState.fetchStatus = FETCH_STATUS.FETCHING;
       return newState;
     case 'fetchDrupalCssSuccess':
-      newState.fetchStatus = 'success';
+      newState.fetchStatus = FETCH_STATUS.SUCCESS;
       return newState;
     case 'fetchDrupalCssError':
-      newState.fetchStatus = 'error';
+      newState.fetchStatus = FETCH_STATUS.ERROR;
       return newState;
     default:
       return state;
@@ -360,13 +360,13 @@ const notificationsReducer = (state, action) => {
   const newState = { ...state };
   switch (action.type) {
     case 'fetchNotifications':
-      newState.fetchStatus = 'fetching';
+      newState.fetchStatus = FETCH_STATUS.FETCHING;
       return newState;
     case 'fetchNotificationsSuccess':
-      newState.fetchStatus = 'success';
+      newState.fetchStatus = FETCH_STATUS.SUCCESS;
       return newState;
     case 'fetchNotificationsError':
-      newState.fetchStatus = 'error';
+      newState.fetchStatus = FETCH_STATUS.ERROR;
       return newState;
     default:
       return state;
@@ -464,9 +464,9 @@ const NeonPage = (inProps) => {
     ? sidebarLinks.every((link) => link.component)
     : false;
   const sidebarHashMap = useMemo(() => ((
-    (!hasSidebarLinks ? {} : Object.fromEntries(
+    !hasSidebarLinks ? {} : Object.fromEntries(
       sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
-    ))
+    )
   // Note that the compiler is not aware that this value is not being modified
   // eslint-disable-next-line react-hooks/preserve-manual-memoization
   )), [hasSidebarLinks, sidebarLinks]);
@@ -1004,11 +1004,7 @@ const NeonPage = (inProps) => {
             showSkeleton={showHeaderSkeleton}
           />
         )}
-        <Container
-          disableGutters
-          className={classes.outerPageContainer}
-          style={outerPageContainerStyles}
-        >
+        <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
           {renderSidebar()}
           <div
             className={classes.pageContent}

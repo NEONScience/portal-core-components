@@ -20,7 +20,6 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -246,9 +245,9 @@ const useStyles = makeStyles()((theme) => ({
     '& .MuiListItemIcon-root': {
       minWidth: 'unset',
     },
-    '& .MuiListItemSecondaryAction-root': {
-      right: theme.spacing(3),
-    },
+  },
+  selectionSummarySecondaryAction: {
+    right: theme.spacing(3),
   },
   selectionSummaryValid: {
     border: `1px solid ${theme.palette.secondary.main}`,
@@ -270,9 +269,14 @@ const useStyles = makeStyles()((theme) => ({
     height: theme.spacing(5),
     borderRadius: theme.spacing(2.5),
     padding: theme.spacing(0, 1),
-    backgroundColor: theme.colors.GREY[200],
     '& .MuiChip-label': {
       padding: theme.spacing(0, 2),
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.grey[300],
+    },
+    '&:active': {
+      backgroundColor: theme.palette.grey[400],
     },
   },
   selectionChipError: {
@@ -752,7 +756,28 @@ const SiteMapContainer = (inProps) => {
                 const src = getSelectedItemIcon(selectedItem);
                 const remove = `Remove ${selectedItem} from selection`;
                 return (
-                  <ListItem key={selectedItem}>
+                  <ListItem
+                    key={selectedItem}
+                    secondaryAction={(
+                      <div className={classes.selectionSummarySecondaryAction}>
+                        <Tooltip
+                          title={remove}
+                          enterDelay={500}
+                          enterNextDelay={200}
+                          placement="right"
+                        >
+                          <IconButton
+                            edge="end"
+                            aria-label={remove}
+                            onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
+                            size="large"
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
+                    )}
+                  >
                     {!src ? null : (
                       <ListItemIcon>
                         <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
@@ -762,23 +787,6 @@ const SiteMapContainer = (inProps) => {
                       primary={selectedItem}
                       secondary={getSelectedItemDescription(selectedItem)}
                     />
-                    <ListItemSecondaryAction>
-                      <Tooltip
-                        title={remove}
-                        enterDelay={500}
-                        enterNextDelay={200}
-                        placement="right"
-                      >
-                        <IconButton
-                          edge="end"
-                          aria-label={remove}
-                          onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
-                          size="large"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
                   </ListItem>
                 );
               })}

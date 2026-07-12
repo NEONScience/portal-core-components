@@ -163,8 +163,10 @@ const MapSelectionButton = (inProps) => {
         fullScreen
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        TransitionProps={{
-          onEntered: () => setDialogEntered(true),
+        slowProps={{
+          transition: {
+            onEntered: () => setDialogEntered(true),
+          },
         }}
       >
         <AppBar color="secondary" className={classes.appBar}>

@@ -44,7 +44,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
             style="display: flex;"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1ncpbf1-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-gy4oou-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -66,7 +66,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
               Reset and Try Again
             </button>
             <a
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-19v259z-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-r0nuua-MuiButtonBase-root-MuiButton-root"
               href="/"
               style="margin-left: 32px;"
               tabindex="0"
@@ -138,7 +138,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
           style="display: flex;"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1ncpbf1-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-gy4oou-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
@@ -160,7 +160,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
             Reset and Try Again
           </button>
           <a
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-19v259z-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-r0nuua-MuiButtonBase-root-MuiButton-root"
             href="/"
             style="margin-left: 32px;"
             tabindex="0"
@@ -260,7 +260,7 @@ exports[`NeonPage renders a basic functional page with no props 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -295,7 +295,7 @@ exports[`NeonPage renders a basic functional page with no props 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -387,7 +387,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: calc(2000px - 348px);"
       >
         <div
@@ -457,7 +457,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -494,7 +494,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: calc(2000px - 348px);"
     >
       <div
@@ -564,7 +564,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
@@ -654,7 +654,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -682,7 +682,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -771,7 +771,7 @@ exports[`NeonPage renders with a notification 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -852,7 +852,7 @@ exports[`NeonPage renders with a notification 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -990,7 +990,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -1037,7 +1037,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -1141,7 +1141,7 @@ exports[`NeonPage renders with an error 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -1196,7 +1196,7 @@ exports[`NeonPage renders with an error 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -1233,7 +1233,7 @@ exports[`NeonPage renders with an error 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -1288,7 +1288,7 @@ exports[`NeonPage renders with an error 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
@@ -1382,7 +1382,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: calc(2000px - 348px);"
       >
         <div
@@ -1425,7 +1425,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: calc(2000px - 348px);"
     >
       <div
@@ -1525,7 +1525,7 @@ exports[`NeonPage renders with loading message 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 3333px;"
       >
         <div
@@ -1587,7 +1587,7 @@ exports[`NeonPage renders with loading message 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -1624,7 +1624,7 @@ exports[`NeonPage renders with loading message 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 3333px;"
     >
       <div
@@ -1686,7 +1686,7 @@ exports[`NeonPage renders with loading message 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
@@ -1780,7 +1780,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: 2000px;"
       >
         <div
@@ -1844,7 +1844,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -1881,7 +1881,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: 2000px;"
     >
       <div
@@ -1945,7 +1945,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-nzcrt-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
@@ -2039,7 +2039,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: calc(2000px - 348px);"
       >
         <div
@@ -2148,7 +2148,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: calc(2000px - 348px);"
     >
       <div
@@ -2314,7 +2314,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
         style="max-width: calc(2000px - 470px);"
       >
         <div
@@ -2389,7 +2389,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-disableGutters css-1yydozg-MuiContainer-root-outerPageContainer"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       style="max-width: calc(2000px - 470px);"
     >
       <div
