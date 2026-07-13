@@ -3,7 +3,7 @@
 
 import React, { CSSProperties } from 'react';
 
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import FormGroup from '@mui/material/FormGroup';

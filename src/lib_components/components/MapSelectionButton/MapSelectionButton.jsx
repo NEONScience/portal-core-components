@@ -163,7 +163,7 @@ const MapSelectionButton = (inProps) => {
         fullScreen
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        slowProps={{
+        slotProps={{
           transition: {
             onEntered: () => setDialogEntered(true),
           },

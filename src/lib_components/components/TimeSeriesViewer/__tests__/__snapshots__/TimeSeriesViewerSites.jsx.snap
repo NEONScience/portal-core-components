@@ -109,7 +109,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
           style="text-align: right;"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             title="Click to show all changes to physical locations for this position over time"
             type="button"
@@ -240,7 +240,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
         style="text-align: right;"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           title="Click to show all changes to physical locations for this position over time"
           type="button"
@@ -599,7 +599,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when histo
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
         disabled=""
         tabindex="-1"
         title="This position has had no changes to physical locations since its creation"
@@ -626,7 +626,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when histo
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
       disabled=""
       tabindex="-1"
       title="This position has had no changes to physical locations since its creation"
@@ -710,7 +710,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when histor
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         title="Click to show all changes to physical locations for this position over time"
         type="button"
@@ -736,7 +736,7 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when histor
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       title="Click to show all changes to physical locations for this position over time"
       type="button"
@@ -819,7 +819,7 @@ exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 32px;"
         tabindex="0"
         type="button"
@@ -845,7 +845,7 @@ exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
       style="margin-left: 32px;"
       tabindex="0"
       type="button"
@@ -1076,7 +1076,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               Rio Cupeyes (CUPE)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
@@ -1224,7 +1224,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
@@ -1311,7 +1311,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             Rio Cupeyes (CUPE)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
@@ -1459,7 +1459,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
@@ -1603,7 +1603,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               Upper Big Creek (BIGC)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
@@ -1751,7 +1751,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
@@ -1869,7 +1869,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             Upper Big Creek (BIGC)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
@@ -2017,7 +2017,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
@@ -2192,7 +2192,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               Central Plains Experimental Range (CPER)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
@@ -2340,7 +2340,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
@@ -2458,7 +2458,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             Central Plains Experimental Range (CPER)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
@@ -2606,7 +2606,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
@@ -2781,7 +2781,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               Abby Road (ABBY)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
@@ -2929,7 +2929,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
@@ -3047,7 +3047,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             Abby Road (ABBY)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
@@ -3195,7 +3195,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
@@ -3349,7 +3349,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
   "baseElement": <body>
     <div>
       <div
-        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
         id="bar"
         role="menuitem"
         style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3386,7 +3386,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
   </body>,
   "container": <div>
     <div
-      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
+      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
       id="bar"
       role="menuitem"
       style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3484,7 +3484,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         data-textfield="bar"
       >
         <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
           for="_r_g_"
           id="_r_g_-label"
@@ -3542,7 +3542,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
       data-textfield="bar"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="false"
         for="_r_g_"
         id="_r_g_-label"

@@ -1,4 +1,5 @@
-import { Variant } from '@mui/material/styles/createTypography';
+import type { TypographyVariant } from '@mui/material/styles';
+
 import { Nullable } from '../../../types/core';
 import {
   CitationRelease,
@@ -8,7 +9,7 @@ import {
 } from './State';
 
 export interface CitationTextOnlyProps {
-  variant?: Variant | undefined;
+  variant?: TypographyVariant | undefined;
   cssClass?: string;
 }
 

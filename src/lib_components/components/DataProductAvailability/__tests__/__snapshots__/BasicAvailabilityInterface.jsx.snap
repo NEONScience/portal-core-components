@@ -190,17 +190,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
           </defs>
         </svg>
         <div
-          class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
           style="margin-bottom: 16px;"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
             >
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
               >
                 <div
                   class="css-vi766x-topFormHeader"
@@ -215,7 +215,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -260,7 +260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -270,7 +270,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -298,7 +298,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
                   class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -441,7 +441,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -449,7 +449,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -460,7 +460,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
                 style="margin-bottom: 8px;"
               >
                 <div
@@ -539,7 +539,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
           >
             <div
               data-selenium="data-product-availability.view-options"
@@ -610,45 +610,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     data-prop-value="sites"
                     data-prop-variant="filled"
                   >
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="summary"
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="summary"
                     >
                       Summary
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="sites"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="sites"
                     >
                       Site
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="states"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="states"
                     >
                       State
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="domains"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="domains"
                     >
                       Domain
-                    </li>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             style="display: flex; align-items: center;"
           >
             <div
@@ -1017,17 +1009,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         </defs>
       </svg>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
         style="margin-bottom: 16px;"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
             >
               <div
                 class="css-vi766x-topFormHeader"
@@ -1042,7 +1034,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -1087,7 +1079,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -1097,7 +1089,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -1125,7 +1117,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
                 class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -1268,7 +1260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -1276,7 +1268,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -1287,7 +1279,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
               style="margin-bottom: 8px;"
             >
               <div
@@ -1366,7 +1358,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
         >
           <div
             data-selenium="data-product-availability.view-options"
@@ -1437,45 +1429,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   data-prop-value="sites"
                   data-prop-variant="filled"
                 >
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="summary"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="summary"
                   >
                     Summary
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Site
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     State
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domain
-                  </li>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
           style="display: flex; align-items: center;"
         >
           <div
@@ -1901,17 +1885,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
           </defs>
         </svg>
         <div
-          class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
           style="margin-bottom: 16px;"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
             >
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
               >
                 <div
                   class="css-vi766x-topFormHeader"
@@ -1926,7 +1910,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -1971,7 +1955,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -1981,7 +1965,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -2009,7 +1993,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
                   class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -2152,7 +2136,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -2160,7 +2144,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -2171,7 +2155,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
                 style="margin-bottom: 8px;"
               >
                 <div
@@ -2250,7 +2234,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
           >
             <div
               data-selenium="data-product-availability.view-options"
@@ -2321,45 +2305,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     data-prop-value="sites"
                     data-prop-variant="filled"
                   >
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="summary"
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="summary"
                     >
                       Summary
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="sites"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="sites"
                     >
                       Site
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="states"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="states"
                     >
                       State
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="domains"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="domains"
                     >
                       Domain
-                    </li>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             style="display: flex; align-items: center;"
           >
             <div
@@ -2728,17 +2704,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         </defs>
       </svg>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
         style="margin-bottom: 16px;"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
             >
               <div
                 class="css-vi766x-topFormHeader"
@@ -2753,7 +2729,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -2798,7 +2774,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -2808,7 +2784,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -2836,7 +2812,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
                 class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -2979,7 +2955,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -2987,7 +2963,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -2998,7 +2974,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
               style="margin-bottom: 8px;"
             >
               <div
@@ -3077,7 +3053,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
         >
           <div
             data-selenium="data-product-availability.view-options"
@@ -3148,45 +3124,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   data-prop-value="sites"
                   data-prop-variant="filled"
                 >
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="summary"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="summary"
                   >
                     Summary
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Site
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     State
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domain
-                  </li>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
           style="display: flex; align-items: center;"
         >
           <div
@@ -3612,11 +3580,11 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
           </defs>
         </svg>
         <div
-          class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
           style="margin-bottom: 16px;"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
           >
             <div
               data-selenium="data-product-availability.view-options"
@@ -3687,45 +3655,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                     data-prop-value="sites"
                     data-prop-variant="filled"
                   >
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="summary"
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="summary"
                     >
                       Summary
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="sites"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="sites"
                     >
                       Site
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="states"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="states"
                     >
                       State
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="domains"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="domains"
                     >
                       Domain
-                    </li>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             style="display: flex; align-items: center;"
           >
             <div
@@ -4010,11 +3970,11 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         </defs>
       </svg>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
         style="margin-bottom: 16px;"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
         >
           <div
             data-selenium="data-product-availability.view-options"
@@ -4085,45 +4045,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   data-prop-value="sites"
                   data-prop-variant="filled"
                 >
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="summary"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="summary"
                   >
                     Summary
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Site
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     State
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domain
-                  </li>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
           style="display: flex; align-items: center;"
         >
           <div
@@ -4465,17 +4417,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
           </defs>
         </svg>
         <div
-          class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
           style="margin-bottom: 16px;"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
             >
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
               >
                 <div
                   class="css-vi766x-topFormHeader"
@@ -4490,7 +4442,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -4535,7 +4487,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -4545,7 +4497,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -4573,7 +4525,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
                   class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -4716,7 +4668,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -4724,7 +4676,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -4735,7 +4687,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
                 style="margin-bottom: 8px;"
               >
                 <div
@@ -4814,7 +4766,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
           >
             <div
               data-selenium="data-product-availability.view-options"
@@ -4885,45 +4837,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     data-prop-value="sites"
                     data-prop-variant="filled"
                   >
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="summary"
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="summary"
                     >
                       Summary
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="sites"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="sites"
                     >
                       Site
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="states"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="states"
                     >
                       State
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="domains"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="domains"
                     >
                       Domain
-                    </li>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             style="display: flex; align-items: center;"
           >
             <div
@@ -5292,17 +5236,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         </defs>
       </svg>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
         style="margin-bottom: 16px;"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
             >
               <div
                 class="css-vi766x-topFormHeader"
@@ -5317,7 +5261,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -5362,7 +5306,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -5372,7 +5316,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -5400,7 +5344,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
                 class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -5543,7 +5487,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -5551,7 +5495,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -5562,7 +5506,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
               style="margin-bottom: 8px;"
             >
               <div
@@ -5641,7 +5585,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-5 css-6sx22u-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-5 css-jgw1b6-MuiGrid-root"
         >
           <div
             data-selenium="data-product-availability.view-options"
@@ -5712,45 +5656,37 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   data-prop-value="sites"
                   data-prop-variant="filled"
                 >
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="summary"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="summary"
                   >
                     Summary
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Site
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     State
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domain
-                  </li>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
           style="display: flex; align-items: center;"
         >
           <div
@@ -6176,17 +6112,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           </defs>
         </svg>
         <div
-          class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
           style="margin-bottom: 16px;"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
             >
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
               >
                 <div
                   class="css-vi766x-topFormHeader"
@@ -6201,7 +6137,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                     data-selenium="site-chip"
                     role="button"
                     style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -6246,7 +6182,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -6256,7 +6192,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   <div>
                     <button
                       aria-label="Select sites using the observatory map"
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                       data-mui-internal-clone-element="true"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
@@ -6284,7 +6220,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
                   class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -6427,7 +6363,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -6435,7 +6371,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -6446,7 +6382,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 </div>
               </div>
               <div
-                class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+                class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
                 style="margin-bottom: 8px;"
               >
                 <div
@@ -6525,7 +6461,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-12 css-m8sbh4-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-12 css-7130fd-MuiGrid-root"
           >
             <div
               data-selenium="data-product-availability.sort-options"
@@ -6551,30 +6487,24 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     data-prop-onchange="[Function]"
                     data-prop-value="states"
                   >
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="states"
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="states"
                     >
                       by State
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="domains"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="domains"
                     >
                       by Domain
-                    </li>
-                    <li
-                      class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                      role="menuitem"
-                      tabindex="-1"
-                      value="sites"
+                    </div>
+                    <div
+                      data-component-path="@mui/material/MenuItem"
+                      data-prop-value="sites"
                     >
                       by Site
-                    </li>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -6629,7 +6559,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             </div>
           </div>
           <div
-            class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 MuiGrid2-grid-md-6 css-m8sbh4-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-7130fd-MuiGrid-root"
             style="display: flex; align-items: center;"
           >
             <div
@@ -6998,17 +6928,17 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         </defs>
       </svg>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row-reverse MuiGrid2-spacing-xs-2 css-1o9agrl-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row-reverse MuiGrid-spacing-xs-2 css-yuqqtb-MuiGrid-root"
         style="margin-bottom: 16px;"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 css-n22ary-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-xvszvy-MuiGrid-root"
         >
           <div
-            class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-3 css-ipzchf-MuiGrid2-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1u8xl8z-MuiGrid-root"
           >
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-5 MuiGrid2-grid-md-6 css-6sx22u-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-5 MuiGrid-grid-md-6 css-jgw1b6-MuiGrid-root"
             >
               <div
                 class="css-vi766x-topFormHeader"
@@ -7023,7 +6953,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-16jim64-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable MuiChip-deletableColorPrimary MuiChip-filledPrimary css-8atbzm-MuiButtonBase-root-MuiChip-root"
                   data-selenium="site-chip"
                   role="button"
                   style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
@@ -7068,7 +6998,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -7078,7 +7008,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 <div>
                   <button
                     aria-label="Select sites using the observatory map"
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-qoehlf-MuiButtonBase-root-MuiButton-root"
                     data-mui-internal-clone-element="true"
                     data-selenium="map-selection-button"
                     style="margin-left: 8px;"
@@ -7106,7 +7036,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-7 MuiGrid2-grid-md-6 css-1bq4jnc-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
                 class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
@@ -7249,7 +7179,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -7257,7 +7187,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-1f4p0jd-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -7268,7 +7198,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               </div>
             </div>
             <div
-              class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 css-1j0u08r-MuiGrid2-root"
+              class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 css-yqiqnf-MuiGrid-root"
               style="margin-bottom: 8px;"
             >
               <div
@@ -7347,7 +7277,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 MuiGrid2-grid-sm-12 css-m8sbh4-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 MuiGrid-grid-sm-12 css-7130fd-MuiGrid-root"
         >
           <div
             data-selenium="data-product-availability.sort-options"
@@ -7373,30 +7303,24 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   data-prop-onchange="[Function]"
                   data-prop-value="states"
                 >
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     by State
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     by Domain
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     by Site
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -7451,7 +7375,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-sm-12 MuiGrid2-grid-md-6 css-m8sbh4-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-7130fd-MuiGrid-root"
           style="display: flex; align-items: center;"
         >
           <div

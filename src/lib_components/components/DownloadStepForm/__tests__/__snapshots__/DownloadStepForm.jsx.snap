@@ -6,11 +6,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
         data-selenium="download-data-dialog.step-form.documentation"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <fieldset
             class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
@@ -141,7 +141,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
           </fieldset>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <div
             class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
@@ -194,11 +194,11 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       data-selenium="download-data-dialog.step-form.documentation"
     >
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <fieldset
           class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
@@ -329,7 +329,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
         </fieldset>
       </div>
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <div
           class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
@@ -1004,11 +1004,11 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <fieldset
             class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
@@ -1143,7 +1143,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
           </fieldset>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <div
             class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
@@ -1185,11 +1185,11 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       data-selenium="download-data-dialog.step-form.provisional-data"
     >
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <fieldset
           class="MuiFormControl-root css-1iw3t7y-MuiFormControl-root"
@@ -1324,7 +1324,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
         </fieldset>
       </div>
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <div
           class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
@@ -1571,10 +1571,10 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       >
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <div
             data-selenium="download-data-dialog.step-form.summary"
@@ -1588,7 +1588,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1607,7 +1607,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ye5034-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ulvsl-MuiChip-root"
                   data-selenium="site-chip"
                   style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
                 >
@@ -1644,7 +1644,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1678,7 +1678,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1712,7 +1712,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1743,7 +1743,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
           </div>
         </div>
         <div
-          class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+          class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
         >
           <div
             class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"
@@ -1836,10 +1836,10 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid2-root MuiGrid2-container MuiGrid2-direction-xs-row MuiGrid2-spacing-xs-2 css-1yhiug-MuiGrid2-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
     >
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <div
           data-selenium="download-data-dialog.step-form.summary"
@@ -1853,7 +1853,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1872,7 +1872,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ye5034-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary MuiChip-filledSecondary css-1ulvsl-MuiChip-root"
                 data-selenium="site-chip"
                 style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
               >
@@ -1909,7 +1909,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1943,7 +1943,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -1977,7 +1977,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-l696qz-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-filledPrimary css-1xd1vc-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label MuiChip-labelMedium css-2mfimi-MuiChip-label"
@@ -2008,7 +2008,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="MuiGrid2-root MuiGrid2-direction-xs-row MuiGrid2-grid-xs-12 MuiGrid2-grid-md-6 css-1odx5a8-MuiGrid2-root"
+        class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
       >
         <div
           class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1sykd66-MuiPaper-root-MuiCard-root"

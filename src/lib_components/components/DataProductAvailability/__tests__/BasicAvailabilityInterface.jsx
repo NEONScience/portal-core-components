@@ -11,6 +11,7 @@ import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import BasicAvailabilityInterface from '../BasicAvailabilityInterface';
 
 jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
+jest.mock('@mui/material/MenuItem', () => mockReactComponent('@mui/material/MenuItem'));
 
 // Mock the DownloadDataContext state
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({

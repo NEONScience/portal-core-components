@@ -6,7 +6,7 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-14c8dyd-MuiChip-root"
+        class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-10uvx6-MuiChip-root"
         data-selenium="chip"
         style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
       >
@@ -36,7 +36,7 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-14c8dyd-MuiChip-root"
+      class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-10uvx6-MuiChip-root"
       data-selenium="chip"
       style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
     >
@@ -123,7 +123,7 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-iqc8kz-MuiChip-root-outlined-outlinedSecondary"
+        class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-1exqdnx-MuiChip-root-outlined-outlinedSecondary"
         data-selenium="site-chip"
         style="background-color: transparent;"
       >
@@ -153,7 +153,7 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-iqc8kz-MuiChip-root-outlined-outlinedSecondary"
+      class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-1exqdnx-MuiChip-root-outlined-outlinedSecondary"
       data-selenium="site-chip"
       style="background-color: transparent;"
     >

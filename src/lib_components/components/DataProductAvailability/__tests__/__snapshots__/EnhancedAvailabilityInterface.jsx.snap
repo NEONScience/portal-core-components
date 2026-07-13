@@ -269,47 +269,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
                   data-prop-onchange="[Function]"
                   data-prop-value="n/a"
                 >
-                  <li
-                    aria-disabled="true"
-                    class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="n/a"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-disabled="true"
+                    data-prop-value="n/a"
                   >
                     --
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     States
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domains
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Sites
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="tables"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="tables"
                   >
                     Tables
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -1047,47 +1037,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
                 data-prop-onchange="[Function]"
                 data-prop-value="n/a"
               >
-                <li
-                  aria-disabled="true"
-                  class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="n/a"
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-disabled="true"
+                  data-prop-value="n/a"
                 >
                   --
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="states"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="states"
                 >
                   States
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="domains"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="domains"
                 >
                   Domains
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="sites"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="sites"
                 >
                   Sites
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="tables"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="tables"
                 >
                   Tables
-                </li>
+                </div>
               </div>
             </div>
             <div
@@ -1882,47 +1862,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
                   data-prop-onchange="[Function]"
                   data-prop-value="n/a"
                 >
-                  <li
-                    aria-disabled="true"
-                    class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="n/a"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-disabled="true"
+                    data-prop-value="n/a"
                   >
                     --
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     States
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domains
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Sites
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="tables"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="tables"
                   >
                     Tables
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -2660,47 +2630,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
                 data-prop-onchange="[Function]"
                 data-prop-value="n/a"
               >
-                <li
-                  aria-disabled="true"
-                  class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="n/a"
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-disabled="true"
+                  data-prop-value="n/a"
                 >
                   --
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="states"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="states"
                 >
                   States
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="domains"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="domains"
                 >
                   Domains
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="sites"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="sites"
                 >
                   Sites
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="tables"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="tables"
                 >
                   Tables
-                </li>
+                </div>
               </div>
             </div>
             <div
@@ -3495,47 +3455,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
                   data-prop-onchange="[Function]"
                   data-prop-value="n/a"
                 >
-                  <li
-                    aria-disabled="true"
-                    class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="n/a"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-disabled="true"
+                    data-prop-value="n/a"
                   >
                     --
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     States
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domains
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Sites
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="tables"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="tables"
                   >
                     Tables
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -4273,47 +4223,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
                 data-prop-onchange="[Function]"
                 data-prop-value="n/a"
               >
-                <li
-                  aria-disabled="true"
-                  class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="n/a"
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-disabled="true"
+                  data-prop-value="n/a"
                 >
                   --
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="states"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="states"
                 >
                   States
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="domains"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="domains"
                 >
                   Domains
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="sites"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="sites"
                 >
                   Sites
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="tables"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="tables"
                 >
                   Tables
-                </li>
+                </div>
               </div>
             </div>
             <div
@@ -5108,47 +5048,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
                   data-prop-onchange="[Function]"
                   data-prop-value="n/a"
                 >
-                  <li
-                    aria-disabled="true"
-                    class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="n/a"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-disabled="true"
+                    data-prop-value="n/a"
                   >
                     --
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     States
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domains
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Sites
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="tables"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="tables"
                   >
                     Tables
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -5886,47 +5816,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
                 data-prop-onchange="[Function]"
                 data-prop-value="n/a"
               >
-                <li
-                  aria-disabled="true"
-                  class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="n/a"
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-disabled="true"
+                  data-prop-value="n/a"
                 >
                   --
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="states"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="states"
                 >
                   States
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="domains"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="domains"
                 >
                   Domains
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="sites"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="sites"
                 >
                   Sites
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="tables"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="tables"
                 >
                   Tables
-                </li>
+                </div>
               </div>
             </div>
             <div
@@ -6721,47 +6641,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
                   data-prop-onchange="[Function]"
                   data-prop-value="n/a"
                 >
-                  <li
-                    aria-disabled="true"
-                    class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="n/a"
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-disabled="true"
+                    data-prop-value="n/a"
                   >
                     --
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="states"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="states"
                   >
                     States
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="domains"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="domains"
                   >
                     Domains
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="sites"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="sites"
                   >
                     Sites
-                  </li>
-                  <li
-                    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                    role="menuitem"
-                    tabindex="-1"
-                    value="tables"
+                  </div>
+                  <div
+                    data-component-path="@mui/material/MenuItem"
+                    data-prop-value="tables"
                   >
                     Tables
-                  </li>
+                  </div>
                 </div>
               </div>
               <div
@@ -7499,47 +7409,37 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
                 data-prop-onchange="[Function]"
                 data-prop-value="n/a"
               >
-                <li
-                  aria-disabled="true"
-                  class="MuiButtonBase-root MuiMenuItem-root Mui-disabled MuiMenuItem-gutters Mui-disabled MuiMenuItem-root Mui-disabled MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="n/a"
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-disabled="true"
+                  data-prop-value="n/a"
                 >
                   --
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="states"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="states"
                 >
                   States
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="domains"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="domains"
                 >
                   Domains
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="sites"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="sites"
                 >
                   Sites
-                </li>
-                <li
-                  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
-                  role="menuitem"
-                  tabindex="-1"
-                  value="tables"
+                </div>
+                <div
+                  data-component-path="@mui/material/MenuItem"
+                  data-prop-value="tables"
                 >
                   Tables
-                </li>
+                </div>
               </div>
             </div>
             <div

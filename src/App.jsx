@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import HomeIcon from '@mui/icons-material/Home';
 import BasicComponentsIcon from '@mui/icons-material/ViewModule';

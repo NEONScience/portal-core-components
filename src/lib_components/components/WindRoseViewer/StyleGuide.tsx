@@ -10,7 +10,7 @@ import { type AjaxResponse } from 'rxjs/ajax';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';

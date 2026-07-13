@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Button, { ButtonProps } from '@mui/material/Button';
 import ButtonGroup, { ButtonGroupProps } from '@mui/material/ButtonGroup';
 import ClickAwayListener from '@mui/material/ClickAwayListener';

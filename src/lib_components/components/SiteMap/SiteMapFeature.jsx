@@ -7,7 +7,7 @@ import tinycolor from 'tinycolor2';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import SnackbarContent from '@mui/material/SnackbarContent';
