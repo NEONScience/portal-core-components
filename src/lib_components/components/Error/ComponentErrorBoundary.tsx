@@ -9,13 +9,13 @@ import { resolveProps } from '../../util/defaultProps';
 interface ComponentErrorBoundaryProps {
   children: React.ReactNode | React.ReactNode[];
   onReset?: (...args: Array<unknown>) => void;
-  onError?: (error: Error, info: ErrorInfo) => void;
+  onError?: (error: Error, info: React.ErrorInfo) => void;
   fallbackComponent?: React.ComponentType<FallbackProps>;
 }
 
 const defaultProps = {
   onReset: (...args: Array<unknown>): void => {},
-  onError: (error: Error, info: ErrorInfo): void => {},
+  onError: (error: Error, info: React.ErrorInfo): void => {},
   fallbackComponent: undefined,
 };
 
@@ -33,7 +33,7 @@ const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
     <ErrorBoundary
       FallbackComponent={fallbackComponent || ComponentFallback}
       onReset={onReset}
-      onError={onError}
+      onError={onError as (error: unknown, info: React.ErrorInfo) => void}
     >
       {children}
     </ErrorBoundary>

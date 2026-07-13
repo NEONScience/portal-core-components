@@ -17,7 +17,7 @@ const ComponentFallback: React.FC<FallbackProps> = (
       <Grid size={{ xs: 12 }}>
         <ErrorCard
           title="Something broke"
-          message={error.message}
+          message={(error as any)?.message}
           actionLabel="Reset"
           onActionClick={resetErrorBoundary}
         />

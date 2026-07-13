@@ -141,6 +141,7 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.error.main,
   },
   markdownWrapper: {
+    fontSize: theme.typography.body2.fontSize,
     '& p': {
       margin: 0,
     },
@@ -824,12 +825,11 @@ const DownloadStepForm = (inProps) => {
                   ))}
                   onReset={() => { /* noop for boundary reset */ }}
                 >
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
-                  >
-                    {productBasicDescription}
-                  </Markdown>
+                  <div className={`${classes.markdownWrapper} MuiTypography-root`}>
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {productBasicDescription}
+                    </Markdown>
+                  </div>
                 </ComponentErrorBoundary>
               </div>
             )}
@@ -847,12 +847,11 @@ const DownloadStepForm = (inProps) => {
                   ))}
                   onReset={() => { /* noop for boundary reset */ }}
                 >
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
-                  >
-                    {productExpandedDescription}
-                  </Markdown>
+                  <div className={`${classes.markdownWrapper} MuiTypography-root`}>
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {productExpandedDescription}
+                    </Markdown>
+                  </div>
                 </ComponentErrorBoundary>
               </div>
             )}

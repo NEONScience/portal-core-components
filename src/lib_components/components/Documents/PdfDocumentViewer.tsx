@@ -95,6 +95,7 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     ? fullUrlPath
     : NeonEnvironment.getFullApiPath('documents');
   const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
+  const isViewerDeviceSupported: boolean = DocumentService.isViewerDeviceSupported();
 
   const containerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
   const pdfContainerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
@@ -122,9 +123,19 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     pdfContainerElement.style.width = `${newWidth}px`;
     pdfContainerElement.style.height = `${calcAutoHeight(newWidth)}px`;
     if (pdfViewerRef.current && (newWidth >= MIN_PDF_VIEWER_WIDTH)) {
-      pdfViewerRef.current.currentScaleValue = 'page-width';
+      if (isViewerDeviceSupported) {
+        pdfViewerRef.current.currentScaleValue = 'page-width';
+      } else {
+        pdfViewerRef.current.currentScaleValue = 'page-fit';
+      }
     }
-  }, [containerRef, pdfContainerRef, viewerWidth, setViewerWidth]);
+  }, [
+    containerRef,
+    pdfContainerRef,
+    isViewerDeviceSupported,
+    viewerWidth,
+    setViewerWidth,
+  ]);
 
   const handleSetErrorStateCb = useCallback((isErrorStateCb: boolean): void => {
     setIsErrorState(isErrorStateCb);
@@ -171,7 +182,11 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     pdfLinkService.setViewer(pdfViewerRef.current);
     eventBus.on('pagesinit', () => {
       if (pdfViewerRef.current) {
-        pdfViewerRef.current.currentScaleValue = 'page-width';
+        if (isViewerDeviceSupported) {
+          pdfViewerRef.current.currentScaleValue = 'page-width';
+        } else {
+          pdfViewerRef.current.currentScaleValue = 'page-fit';
+        }
       }
     });
     const loadingTask = pdfjs.getDocument(config);
@@ -186,7 +201,13 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       console.error(`Error during ${dataUrl} loading: ${reason}`);
       handleSetErrorStateCb(true);
     });
-  }, [dataUrl, pdfContainerRef, isErrorState, handleSetErrorStateCb]);
+  }, [
+    dataUrl,
+    pdfContainerRef,
+    isViewerDeviceSupported,
+    isErrorState,
+    handleSetErrorStateCb,
+  ]);
 
   if (isErrorState) {
     return (
@@ -209,11 +230,11 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
   return (
     <div className={classes.parentContainer}>
       <div
-        ref={containerRef as React.MutableRefObject<HTMLDivElement>}
+        ref={containerRef as React.RefObject<HTMLDivElement>}
         className={classes.container}
       >
         <div
-          ref={pdfContainerRef as React.MutableRefObject<HTMLDivElement>}
+          ref={pdfContainerRef as React.RefObject<HTMLDivElement>}
           className={`${classes.pdfViewerContainer}`}
         >
           <div className="pdfViewer" />

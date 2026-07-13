@@ -559,7 +559,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                   Basic
                 </h6>
                 <div
-                  class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
+                  class="css-1k927g7-markdownWrapper MuiTypography-root"
                 >
                   <p>
                     Includes the data product, summary statistics, expanded uncertainty, and final quality flag
@@ -620,7 +620,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                   Expanded
                 </h6>
                 <div
-                  class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
+                  class="css-1k927g7-markdownWrapper MuiTypography-root"
                 >
                   <p>
                     Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
@@ -694,7 +694,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 Basic
               </h6>
               <div
-                class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
+                class="css-1k927g7-markdownWrapper MuiTypography-root"
               >
                 <p>
                   Includes the data product, summary statistics, expanded uncertainty, and final quality flag
@@ -755,7 +755,7 @@ exports[`DownloadStepForm Step packageType renders correctly 1`] = `
                 Expanded
               </h6>
               <div
-                class="css-19rdwzm-markdownWrapper MuiTypography-root MuiTypography-body2"
+                class="css-1k927g7-markdownWrapper MuiTypography-root"
               >
                 <p>
                   Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis
