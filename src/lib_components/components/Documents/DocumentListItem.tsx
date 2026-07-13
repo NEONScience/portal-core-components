@@ -62,30 +62,28 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
-    position: 'relative',
     paddingTop: muiTheme.spacing(1),
     paddingBottom: muiTheme.spacing(1),
+    paddingRight: '0',
+    '& .MuiListItemSecondaryAction-root': {
+      display: 'flex',
+      alignItems: 'center',
+      position: 'unset',
+      transform: 'unset',
+      top: 'unset',
+      right: 'unset',
+      whiteSpace: 'nowrap',
+    },
   },
-  listItem: {
-    display: 'flex',
+  listItemText: {
+    wordBreak: 'break-word',
+    paddingLeft: muiTheme.spacing(1),
     '& p': {
       marginTop: muiTheme.spacing(0.5),
       '& > span > span': {
         whiteSpace: 'nowrap',
       },
     },
-  },
-  listItemText: {
-    wordBreak: 'break-word',
-    paddingLeft: muiTheme.spacing(1),
-    // paddingRight: muiTheme.spacing(4),
-  },
-  listItemButtonContainer: {
-    display: 'flex',
-    overflow: 'auto',
-    position: 'relative',
-    paddingTop: muiTheme.spacing(1),
-    paddingBottom: muiTheme.spacing(1),
   },
   listItemButton: {
     padding: '0',
@@ -98,6 +96,11 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
     minWidth: muiTheme.spacing(4),
     marginRight: muiTheme.spacing(1),
     alignSelf: 'center',
+  },
+  listItemSecondaryActionContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
   },
   fileTypeChip: {
     marginRight: '5px',
@@ -120,18 +123,6 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   },
   downloadErrorContainer: {
     marginTop: muiTheme.spacing(2),
-  },
-}));
-
-const useListItemSecondaryActionStyles = makeStyles()(() => ({
-  root: {
-    // display: 'flex',
-    // alignItems: 'center',
-    // position: 'unset',
-    // transform: 'unset',
-    // top: 'unset',
-    // right: 'unset',
-    // whiteSpace: 'nowrap',
   },
 }));
 
@@ -310,7 +301,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     containerComponent,
   }: DocumentListItemProps = props;
   const { classes } = useStyles();
-  const { classes: listItemSecondaryActionClasses } = useListItemSecondaryActionStyles();
   // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [
@@ -557,14 +547,14 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     if (!(enableDownloadButton === true)) return null;
     if (isFetchingVariants) {
       return (
-        <div className={listItemSecondaryActionClasses.root}>
+        <div className={classes.listItemSecondaryActionContainer}>
           <CircularProgress size={36} className={classes.variantFetchingProgress} />
         </div>
       );
     }
     if (atComponentXs) {
       return (
-        <div className={listItemSecondaryActionClasses.root}>
+        <div className={classes.listItemSecondaryActionContainer}>
           <Tooltip
             placement="top"
             title={`Download ${appliedDocument.name}`}
@@ -662,7 +652,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         />
       );
     return (
-      <div className={listItemSecondaryActionClasses.root}>
+      <div className={classes.listItemSecondaryActionContainer}>
         {button}
       </div>
     );
@@ -685,7 +675,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         <ListItem
           ref={containerRef as never}
           key={id}
-          className={classes.listItemButtonContainer}
           component="div"
           slots={{
             root: containerComponent,
@@ -728,7 +717,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       <ListItem
         ref={containerRef as never}
         key={id}
-        className={classes.listItem}
         component="div"
         slots={{
           root: containerComponent,
