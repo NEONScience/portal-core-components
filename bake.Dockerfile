@@ -43,5 +43,4 @@ ENTRYPOINT exec ./server \
   -app-api-host=$REACT_APP_NEON_API_HOST \
   -app-web-host=$REACT_APP_NEON_WEB_HOST \
   -app-api-token=$REACT_APP_NEON_SERVICE_API_TOKEN \
-  -app-auth-silent-type=$REACT_APP_NEON_AUTH_SILENT_TYPE \
-  -app-cookie-domain=$PORTAL_SERVER_APP_COOKIE_DOMAIN
+  -app-auth-silent-type=$REACT_APP_NEON_AUTH_SILENT_TYPE

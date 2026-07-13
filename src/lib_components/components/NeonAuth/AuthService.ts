@@ -139,6 +139,11 @@ export interface IAuthService {
     refreshSubscription?: boolean,
   ) => Subscription;
   /**
+   * Handles actions needed from a login message from the auth broadcast channel
+   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   */
+  handleLoginMessageFromBroadcastChannel: (dispatch: Dispatch<any>) => void;
+  /**
    * Parses the user info API response and determines the authenticated state
    * @param {any} response - The API response
    * @return {boolean} True if the user is authenticated
@@ -450,6 +455,11 @@ const AuthService: IAuthService = {
       },
     )
   ),
+  handleLoginMessageFromBroadcastChannel: (dispatch: Dispatch<any>): void => {
+    AuthService.fetchUserInfoWithDispatch(dispatch, true);
+    dispatch({ type: 'setAuthWorking', isAuthWorking: false });
+    AuthService.cancelWorkingResolver();
+  },
   isAuthenticated: (response: any): boolean => (
     exists(response)
       && exists(response.data)
@@ -489,8 +499,8 @@ const AuthService: IAuthService = {
       dispatch,
       onConnectCbs,
     );
-    const watchSubscription$: Subscription = client
-      .watch(NeonEnvironment.authTopics.getAuth0() as string)
+    const topicEndpoint = NeonEnvironment.authTopics.getAuth0() as string;
+    const watchSubscription$: Subscription = client.watch(topicEndpoint)
       .pipe(
         map((message: Message) => {
           try {

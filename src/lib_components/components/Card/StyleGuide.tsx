@@ -10,19 +10,21 @@ import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked, faTag } from '@fortawesome/free-solid-svg-icons';
 
+import NeonContext from '@/components/NeonContext/NeonContext';
 import InfoCard from '@/components/Card/InfoCard';
 import WarningCard from '@/components/Card/WarningCard';
 import ErrorCard from '@/components/Card/ErrorCard';
 import InfoMessageCard from '@/components/Card/InfoMessageCard';
+import LoginRequiredCard from '@/components/Card/LoginRequiredCard';
 import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
+import { exists } from '@/util/typeUtil';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
-
-import { NeonTheme } from '../Theme/types';
 
 const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
@@ -105,8 +107,20 @@ const propRows = [
 
 export default function StyleGuide() {
   const { classes } = useStyles();
-  /* eslint-disable jsx-a11y/anchor-is-valid */
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const [
+    {
+      auth: {
+        userData,
+      },
+    },
+  ] = NeonContext.useNeonContextState();
+  const hasUserData = (exists(userData) && exists(userData.data) && exists(userData.data.user));
+  const appliedEmailVerified = hasUserData
+    ? userData.data.user.emailVerified === true
+    : false;
   const link = (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link href="#">
       Insert Link Here
     </Link>
@@ -123,7 +137,6 @@ Lorem in proin in nunc in cras et gravida. Urna congue neque risus risus a
 lectus veneatis sed gravida volutpat viverra. Aenean sem tellus at proin dictum
 scelerisque metus. Sit sit tellus risus diam ultrices amet tortor molestie scelerisque.
   `;
-  /* eslint-enable jsx-a11y/anchor-is-valid */
   return (
     <>
       <DocBlock>
@@ -262,6 +275,111 @@ scelerisque metus. Sit sit tellus risus diam ultrices amet tortor molestie scele
           <ErrorCard
             title="Custom Heading Content"
             message={messageText}
+          />
+        </Paper>
+      </ExampleBlock>
+
+      <Divider className={classes.divider} />
+
+      <Typography variant="h4" component="h2" gutterBottom>
+        Example Login Required Cards
+      </Typography>
+      <DocBlock>
+        Displays login required cards.
+      </DocBlock>
+      <CodeBlock>
+        {`
+import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginRequiredCard';
+
+<LoginRequiredCard />
+        `}
+      </CodeBlock>
+      <DocBlock>
+        Live demo.
+      </DocBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <LoginRequiredCard
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={neonContextSessionState.accountValidationSteps}
+          />
+        </Paper>
+      </ExampleBlock>
+      <DocBlock>
+        Various test cases.
+      </DocBlock>
+      <ExampleBlock>
+        <Paper className={classes.paper}>
+          <LoginRequiredCard />
+          <LoginRequiredCard
+            customContent={(
+              <Typography variant="body2">
+                Custom contents
+              </Typography>
+            )}
+          />
+          <LoginRequiredCard
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={[
+              { step: 'verify-email', completed: appliedEmailVerified },
+              { step: 'another-step', completed: false },
+            ]}
+          />
+          <LoginRequiredCard
+            customTitle="Custom Title for Card"
+            showValidation
+            isAuthenticated={neonContextSessionState.authenticated}
+            accountValidated={neonContextSessionState.accountValidated}
+            accountValidationSteps={[
+              { step: 'verify-email', completed: appliedEmailVerified },
+              { step: 'another-step', completed: false },
+            ]}
+            accountValidationStepDisplay={{
+              'verify-email': {
+                displayLabel: 'Custom verify email display label',
+                // eslint-disable-next-line react/no-unstable-nested-components
+                getContents: (completed: boolean): React.JSX.Element => {
+                  if (!completed) {
+                    return (
+                      <div>
+                        <Typography variant="body2">
+                          Custom verify email incomplete contents
+                        </Typography>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Typography variant="body2">
+                      Custom verify email completed contents
+                    </Typography>
+                  );
+                },
+              },
+              'another-step': {
+                displayLabel: 'Custom another-step display label',
+                // eslint-disable-next-line react/no-unstable-nested-components
+                getContents: (completed: boolean): React.JSX.Element => {
+                  if (!completed) {
+                    return (
+                      <div>
+                        <Typography variant="body2">
+                          Custom another-step incomplete contents
+                        </Typography>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Typography variant="body2">
+                      Custom another-step completed contents
+                    </Typography>
+                  );
+                },
+              },
+            }}
           />
         </Paper>
       </ExampleBlock>

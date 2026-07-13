@@ -1,3 +1,4 @@
+export { default as AopGEEDataViewer } from './components/AopGEEDataViewer';
 export { default as DataThemeIcon } from './components/DataThemeIcon';
 export { default as DataProductAvailability } from './components/DataProductAvailability';
 export { default as DownloadDataButton } from './components/DownloadDataButton';
@@ -8,8 +9,10 @@ export { default as NeonEnvironment } from './components/NeonEnvironment';
 export { default as NeonGraphQL } from './components/NeonGraphQL';
 export { default as NeonPage } from './components/NeonPage';
 export { default as NeonRouter } from './components/NeonRouter';
+export { default as SaeDataViewerButton } from './components/SaeDataViewerButton';
 export { default as SiteChip } from './components/SiteChip';
 export { default as SiteMap } from './components/SiteMap';
+export { default as SplitButton } from './components/Button';
 export { default as Theme } from './components/Theme';
 export { default as DownloadStepForm } from './components/DownloadStepForm';
 export { default as ExternalHost } from './components/ExternalHost';

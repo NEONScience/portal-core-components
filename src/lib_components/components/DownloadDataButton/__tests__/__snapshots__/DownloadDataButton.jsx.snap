@@ -538,36 +538,6 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                       Done
                     </button>
                   </div>
-                  <div
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
-                      style="color: rgb(155, 110, 0); text-align: right; margin-top: 8px; font-weight: 600;"
-                    >
-                      Consider signing in or creating an account before proceeding.
-                    </p>
-                    <p
-                      class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
-                      style="color: rgb(155, 110, 0); text-align: right; font-style: italic; font-size: 0.8rem;"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
-                        href="https://www.neonscience.org/about/user-accounts"
-                        target="_new"
-                      >
-                        Learn
-                      </a>
-                       the benefits of having an account.
-                    </p>
-                    <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1gqeim2-MuiButtonBase-root-MuiButton-root-signInButton"
-                      tabindex="0"
-                      type="button"
-                    >
-                      Sign In
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>

@@ -21,6 +21,7 @@ export function getTestableItems(): {
 declare namespace NeonContext {
     export { Provider };
     export { useNeonContextState };
+    export { useNeonContextSessionState };
     export { DEFAULT_STATE };
     export { getWrappedComponent };
     export { ProviderPropTypes };
@@ -431,6 +432,12 @@ declare function useNeonContextState(): ({
             };
         };
         timeSeriesDataProducts: {
+            productCodes: string[];
+        };
+        aopDataProducts: {
+            productCodes: string[];
+        };
+        saeDataProducts: {
             productCodes: string[];
         };
         stateSites: {};
@@ -871,6 +878,12 @@ declare function useNeonContextState(): ({
         timeSeriesDataProducts: {
             productCodes: string[];
         };
+        aopDataProducts: {
+            productCodes: string[];
+        };
+        saeDataProducts: {
+            productCodes: string[];
+        };
         stateSites: {};
         domainSites: {};
     };
@@ -912,6 +925,17 @@ declare function useNeonContextState(): ({
     hasError: boolean;
     whenFinalCalled: boolean;
 })[];
+declare function useNeonContextSessionState(): {
+    enabled: boolean;
+    ready: boolean;
+    authenticated: boolean;
+    accountValidated: boolean;
+    accountValidationSteps: any;
+    canAccessData: boolean;
+    sessionHeaders: {
+        [x: string]: any;
+    };
+};
 declare namespace DEFAULT_STATE {
     namespace data {
         export let sites: {};
@@ -926,6 +950,8 @@ declare namespace DEFAULT_STATE {
         export { statesJSON as states };
         export { domainsJSON as domains };
         export { timeSeriesDataProductsJSON as timeSeriesDataProducts };
+        export { aopDataProductsJSON as aopDataProducts };
+        export { saeDataProductsJSON as saeDataProducts };
         export let stateSites: {};
         export let domainSites: {};
     }
@@ -983,4 +1009,6 @@ declare const DRUPAL_FOOTER_HTML: any;
 import statesJSON from '../../staticJSON/states.json';
 import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
+import aopDataProductsJSON from '../../staticJSON/aopDataProducts.json';
+import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
 import PropTypes from 'prop-types';

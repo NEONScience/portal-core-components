@@ -53,6 +53,7 @@ import { resolveProps } from '../../util/defaultProps';
 
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
+import DataLicenseService from '../../service/DataLicenseService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
@@ -170,6 +171,16 @@ const MarkdownFallbackComponent = (props) => ((
   />
 ));
 
+const dataLicenseLink = (
+  <Link
+    target="_blank"
+    href={DataLicenseService.getDataLicensePath()}
+    data-gtm="download-data-dialog.data-license-link"
+  >
+    {DataLicenseService.getDataLicenseDisplayName()}
+  </Link>
+);
+
 const dataUsageAndCitationPoliciesLink = (
   <Link
     target="_blank"
@@ -245,7 +256,7 @@ const DownloadStepForm = (inProps) => {
     renderDownloadButton,
   } = props;
   const [state, dispatch] = DownloadDataContext.useDownloadDataState();
-  const { release } = state;
+  const { downloadStatus, release } = state;
   const delineateAvaRelease = ReleaseService.determineDelineateAvaRelease(release.value);
 
   // Effect to keep focus on the file name search field if it was the last filter updated
@@ -264,33 +275,12 @@ const DownloadStepForm = (inProps) => {
     value: newValue,
   });
 
-  const renderSitesAndDateRangeStep = () => {
-    const { requiredSteps, provisionalData } = state;
-    const hasProvisionalDataStep = requiredSteps.some((step) => (
-      (step.key === 'provisionalData')
-    ));
-    const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
-    return (
-      <>
-        {!excludeProvisionalData ? null : (
-          <InfoMessageCard
-            title="Provisional Data"
-            messageContent={(
-              <Typography variant="body1">
-                Provisional data are currently being excluded from the download package.
-                To make those data available, include those data from within the
-                Provisional Data step.
-              </Typography>
-            )}
-          />
-        )}
-        <DataProductAvailability
-          data-selenium="download-data-dialog.step-form.sites-and-date-range"
-          delineateRelease={delineateAvaRelease}
-        />
-      </>
-    );
-  };
+  const renderSitesAndDateRangeStep = () => ((
+    <DataProductAvailability
+      data-selenium="download-data-dialog.step-form.sites-and-date-range"
+      delineateRelease={delineateAvaRelease}
+    />
+  ));
 
   const renderDocumentationStep = () => {
     const neonFaqLink = (
@@ -383,6 +373,11 @@ const DownloadStepForm = (inProps) => {
         NEON Data Revisions and Releases
       </Link>
     );
+    const { requiredSteps, provisionalData } = state;
+    const hasProvisionalDataStep = requiredSteps.some((step) => (
+      (step.key === 'provisionalData')
+    ));
+    const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
     const { value, validValues } = state.provisionalData;
     return (
       <Grid
@@ -391,6 +386,22 @@ const DownloadStepForm = (inProps) => {
         alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
+        {!excludeProvisionalData ? null : (
+          <Grid size={{ xs: 12 }}>
+            <InfoMessageCard
+              title="Provisional Data"
+              messageContent={(
+                <Typography variant="body1">
+                  {/* eslint-disable react/jsx-one-expression-per-line */}
+                  Provisional data are currently being excluded from the download package.
+                  To make those data available, include those data by selecting
+                  the <i>Include</i> option.
+                  {/* eslint-enable react/jsx-one-expression-per-line */}
+                </Typography>
+              )}
+            />
+          </Grid>
+        )}
         <Grid size={{ xs: 12, md: 6 }}>
           <FormControl component="fieldset">
             <RadioGroup
@@ -452,6 +463,13 @@ const DownloadStepForm = (inProps) => {
   };
 
   const renderS3FilesStep = () => {
+    if (downloadStatus !== DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD) {
+      return (
+        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+          You must sign in or create and validate an account before proceeding.
+        </Typography>
+      );
+    }
     const {
       s3FileFetches,
       s3FileFetchProgress,
@@ -916,8 +934,9 @@ const DownloadStepForm = (inProps) => {
     return (
       <div data-selenium="download-data-dialog.step-form.policies">
         <Typography variant="subtitle1" gutterBottom>
-          In order to proceed to download NEON data you must agree to
-          the {dataUsageAndCitationPoliciesLink}.
+          These data are licensed under {dataLicenseLink}.
+          Before downloading NEON data you must agree to the
+          NEON {dataUsageAndCitationPoliciesLink}.
         </Typography>
         <FormControlLabel
           control={checkbox}

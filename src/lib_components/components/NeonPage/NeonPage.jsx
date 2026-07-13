@@ -9,11 +9,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import Cookies from 'universal-cookie';
-
 import uniqueId from 'lodash/uniqueId';
-
-import { Subject } from 'rxjs';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -27,6 +23,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
 import ClearIcon from '@mui/icons-material/Clear';
@@ -36,8 +33,6 @@ import ExpandIcon from '@mui/icons-material/ExpandMore';
 import HomeIcon from '@mui/icons-material/Home';
 import ResetIcon from '@mui/icons-material/Autorenew';
 
-import Skeleton from '@mui/material/Skeleton';
-
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import { COLORS, getThemeSpacingNumber } from '../Theme/Theme';
 import NeonHeader from '../NeonHeader/NeonHeader';
@@ -45,24 +40,17 @@ import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import BrowserWarning from './BrowserWarning';
-import LiferayNotifications from './LiferayNotifications';
+import NotificationsManager from './NotificationsManager';
 import DrupalAssetService from '../../service/DrupalAssetService';
 
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
-import { getJson } from '../../util/rxUtil';
-import {
-  generateNotificationId,
-  getLiferayNotificationsApiPath,
-} from '../../util/liferayNotificationsUtil';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 import './styles.css';
 
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
-
-const cookies = new Cookies();
 
 // Function to determine if we're effectively scrolled to the bottom of the page. Used to set
 // current sidebar link to the last one automatically when the associated content for the last link
@@ -356,23 +344,6 @@ const drupalAssetsReducer = (state, action) => {
   }
 };
 
-const notificationsReducer = (state, action) => {
-  const newState = { ...state };
-  switch (action.type) {
-    case 'fetchNotifications':
-      newState.fetchStatus = FETCH_STATUS.FETCHING;
-      return newState;
-    case 'fetchNotificationsSuccess':
-      newState.fetchStatus = FETCH_STATUS.SUCCESS;
-      return newState;
-    case 'fetchNotificationsError':
-      newState.fetchStatus = FETCH_STATUS.ERROR;
-      return newState;
-    default:
-      return state;
-  }
-};
-
 const defaultProps = {
   breadcrumbHomeHref: '/',
   breadcrumbs: [],
@@ -628,89 +599,6 @@ const NeonPage = (inProps) => {
         fetchDrupalCssDispatch({ type: 'fetchDrupalCssSuccess' });
       });
   }, [useSomeDrupalAssets, fetchDrupalCssState, fetchDrupalCssDispatch]);
-
-  /**
-     Liferay Notifications
-   */
-  const cancellationSubject$ = useMemo(() => new Subject(), []);
-  const dismissedNotificationsCookie = cookies.get('dismissed-notifications');
-  const notificationDismissals = useMemo(() => {
-    if (dismissedNotificationsCookie) {
-      return dismissedNotificationsCookie;
-    }
-    return [];
-  }, [dismissedNotificationsCookie]);
-
-  const initialFetchStatusState = {
-    fetchStatus: null,
-  };
-  let initialNotifications = [];
-  if (notification !== null && notification.length) {
-    const notificationPropId = generateNotificationId(notification);
-    initialFetchStatusState.fetchStatus = 'success';
-    initialNotifications = [{
-      id: notificationPropId,
-      message: notification,
-      dismissed: notificationDismissals.includes(notificationPropId),
-    }];
-  }
-  const [fetchNotificationState, fetchNotificationDispatch] = useReducer(
-    notificationsReducer,
-    initialFetchStatusState,
-  );
-  const [notifications, setNotifications] = useState(initialNotifications);
-
-  // Handle a successful response from the notifications endpoint
-  const handleFetchNotificationsSuccess = useCallback((response) => {
-    fetchNotificationDispatch({ type: 'fetchNotificationsSuccess' });
-    if (!Array.isArray(response.notifications)) { return; }
-    setNotifications(
-      response.notifications.map((message) => {
-        const id = generateNotificationId(message);
-        const dismissed = notificationDismissals.includes(id);
-        return { id, message, dismissed };
-      }),
-    );
-  }, [fetchNotificationDispatch, setNotifications, notificationDismissals]);
-
-  // If the endpoint fails don't bother with any visible error. Just let it go.
-  const handleFetchNotificationsError = useCallback(() => {
-    fetchNotificationDispatch({ type: 'fetchNotificationsError' });
-    setNotifications([]);
-  }, [fetchNotificationDispatch, setNotifications]);
-
-  const handleHideNotifications = () => {
-    const updatedDismissals = notifications.map((n) => n.id);
-    cookies.set('dismissed-notifications', updatedDismissals, { path: '/', maxAge: 86400 });
-    setNotifications(notifications.map((n) => ({ ...n, dismissed: true })));
-  };
-
-  const handleShowNotifications = () => {
-    cookies.remove('dismissed-notifications');
-    setNotifications(notifications.map((n) => ({ ...n, dismissed: false })));
-  };
-
-  /**
-     Effect - Fetch notifications
-  */
-  useEffect(() => {
-    if (fetchNotificationState.fetchStatus !== null) { return; }
-    fetchNotificationDispatch({ type: 'fetchNotifications' });
-    getJson(
-      getLiferayNotificationsApiPath(),
-      handleFetchNotificationsSuccess,
-      handleFetchNotificationsError,
-      cancellationSubject$,
-      undefined,
-      true,
-    );
-  }, [
-    fetchNotificationState,
-    handleFetchNotificationsSuccess,
-    handleFetchNotificationsError,
-    cancellationSubject$,
-    notificationDismissals,
-  ]);
 
   /**
      Render functions
@@ -998,8 +886,6 @@ const NeonPage = (inProps) => {
             customizeAuthContainer={customizeAuthContainer}
             ref={headerRef}
             unstickyDrupalHeader={unstickyDrupalHeader}
-            notifications={notifications}
-            onShowNotifications={handleShowNotifications}
             drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showHeaderSkeleton}
           />
@@ -1017,9 +903,8 @@ const NeonPage = (inProps) => {
             {content}
           </div>
         </Container>
-        <LiferayNotifications
-          notifications={notifications}
-          onHideNotifications={handleHideNotifications}
+        <NotificationsManager
+          initialNotification={notification}
         />
         <BrowserWarning />
         {customFooter ? (

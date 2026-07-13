@@ -7,8 +7,8 @@ export interface ManifestRequest {
     release: Nullable<string>;
     includeDocs: boolean;
     pkgType: Nullable<string>;
-    includeProvisional: boolean;
     presign: boolean;
+    includeProvisional: Nullable<boolean>;
     manifestFiles?: ManifestFile[];
 }
 export declare enum ChecksumAlgorithmType {

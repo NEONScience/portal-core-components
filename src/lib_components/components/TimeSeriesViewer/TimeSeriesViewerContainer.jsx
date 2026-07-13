@@ -27,6 +27,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import VariablesIcon from '@mui/icons-material/Timeline';
 import AxesIcon from '@mui/icons-material/BorderInner';
 import WarnIcon from '@mui/icons-material/Warning';
+import InfoIcon from '@mui/icons-material/Info';
 import ComputerIcon from '@mui/icons-material/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
@@ -47,6 +48,7 @@ import TimeSeriesViewerDateRange from './TimeSeriesViewerDateRange';
 import TimeSeriesViewerVariables from './TimeSeriesViewerVariables';
 import TimeSeriesViewerAxes from './TimeSeriesViewerAxes';
 import TimeSeriesViewerGraph from './TimeSeriesViewerGraph';
+import TimeSeriesViewerLimitedCard from './TimeSeriesViewerLimitedCard';
 
 // We can't rely on flex-sizing to work during resize events as some components within tabs
 // won't be able to shrink correctly on resize (notably: Data Product Availability charts).
@@ -127,6 +129,9 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.colors.RED[400],
   },
   warningIcon: {
+    color: theme.colors.GOLD[500],
+  },
+  infoIcon: {
     color: theme.colors.GOLD[500],
   },
   releaseChip: {
@@ -619,6 +624,7 @@ export default function TimeSeriesViewerContainer() {
             style={{ display: selectedTab === tabId ? 'block' : 'none' }}
             className={classes.tabPanelContainer}
           >
+            <TimeSeriesViewerLimitedCard showInfoOnly />
             <TabComponent {...tabComponentProps} />
           </div>
         );
@@ -627,16 +633,20 @@ export default function TimeSeriesViewerContainer() {
   );
 
   const renderGraphOverlay = () => {
+    const isLoginRequired = state.status === TIME_SERIES_VIEWER_STATUS.LOGIN_REQUIRED;
     const isError = state.status === TIME_SERIES_VIEWER_STATUS.ERROR;
     const isWarning = state.status === TIME_SERIES_VIEWER_STATUS.WARNING;
     const isLoading = !isError && state.status !== TIME_SERIES_VIEWER_STATUS.READY;
-    if (isError || isWarning) {
+    if (isError || isWarning || isLoginRequired) {
+      const icon = isLoginRequired
+        ? (<InfoIcon fontSize="large" className={classes.infoIcon} />)
+        : (<ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />);
       return (
         <div className={classes.graphOverlay}>
           <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
-          <ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />
+          {icon}
         </div>
       );
     }
@@ -662,11 +672,6 @@ export default function TimeSeriesViewerContainer() {
     return null;
   };
 
-  /**
-   * Function complements of Battelle ANNI
-   * @param {*} numStr
-   * @returns
-   */
   const addThousandsSeparator = (numStr) => {
     if (!numStr) {
       return '0';
@@ -740,6 +745,7 @@ export default function TimeSeriesViewerContainer() {
 
   return (
     <div style={{ width: '100%' }}>
+      <TimeSeriesViewerLimitedCard />
       <Card className={classes.graphContainer}>
         <div style={{ position: 'relative' }}>
           {state.product.productCode === loadedProductCode ? (

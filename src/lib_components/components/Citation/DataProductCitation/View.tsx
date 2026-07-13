@@ -196,7 +196,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     const dataPolicyLink: React.JSX.Element = (
       <Link href={RouteService.getDataPoliciesCitationPath()}>
-        Data Policies &amp; Citation Guidelines
+        Acknowledging and Citing NEON Data
       </Link>
     );
     return (

@@ -1,4 +1,5 @@
 export namespace TIME_SERIES_VIEWER_STATUS_TITLES {
+    let AWAITING_PRECONDITIONS: string;
     let INIT_PRODUCT: string;
     let LOADING_META: string;
     let READY_FOR_DATA: string;
@@ -44,6 +45,7 @@ export namespace TabComponentPropTypes {
 export namespace DEFAULT_STATE {
     import mode = VIEWER_MODE.DEFAULT;
     export { mode };
+    export let isViewerLimitedMode: boolean;
     export let status: string;
     export let displayError: null;
     export namespace fetchProduct {
@@ -207,6 +209,7 @@ export function getTestableItems(): {
 } | {
     DEFAULT_STATE: {
         mode: string;
+        isViewerLimitedMode: boolean;
         status: string;
         displayError: null;
         fetchProduct: {
@@ -365,6 +368,7 @@ declare namespace Provider {
 }
 declare function useTimeSeriesViewerState(): {
     mode: string;
+    isViewerLimitedMode: boolean;
     status: string;
     displayError: null;
     fetchProduct: {
@@ -441,6 +445,7 @@ declare function useTimeSeriesViewerState(): {
     };
 } | ({
     mode: string;
+    isViewerLimitedMode: boolean;
     status: string;
     displayError: null;
     fetchProduct: {

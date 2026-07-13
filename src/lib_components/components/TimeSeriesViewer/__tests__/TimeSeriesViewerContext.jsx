@@ -933,9 +933,13 @@ HOR.VER,name,description,start,end,xOffset,yOffset,zOffset
     describe('reinitialize', () => {
       test('resets to default state and applies productCode', () => {
         const modifiedState = { ...state, otherStuff: 'bar' };
-        const newState = reducer(modifiedState, { type: 'reinitialize', productCode: 'foo', release: 'bar' });
+        const newState = reducer(
+          modifiedState,
+          { type: 'reinitialize', productCode: 'foo', release: 'bar', isViewerLimited: true },
+        );
         expect(newState).toStrictEqual({
           ...DEFAULT_STATE,
+          status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
           release: 'bar',
           product: {
             ...DEFAULT_STATE.product,

@@ -69,8 +69,8 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
       <div
         data-component-path="@mui/material/Snackbar"
         data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-        data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
         data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -84,12 +84,26 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
               id="neon-data-portal-notifications"
             >
               <div>
-                bar
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  bar
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
               </div>
               <div>
-                <b>
-                  HTML
-                </b>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  <b>
+                    HTML
+                  </b>
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
               </div>
             </div>
           </div>
@@ -123,8 +137,8 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
     <div
       data-component-path="@mui/material/Snackbar"
       data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-      data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
       data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
     >
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -138,12 +152,26 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
             id="neon-data-portal-notifications"
           >
             <div>
-              bar
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                bar
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
             </div>
             <div>
-              <b>
-                HTML
-              </b>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                <b>
+                  HTML
+                </b>
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
             </div>
           </div>
         </div>
@@ -234,8 +262,8 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
       <div
         data-component-path="@mui/material/Snackbar"
         data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-        data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
         data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -249,12 +277,26 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
               id="neon-data-portal-notifications"
             >
               <div>
-                bar
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  bar
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
               </div>
               <div>
-                <b>
-                  HTML
-                </b>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  <b>
+                    HTML
+                  </b>
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
               </div>
             </div>
           </div>
@@ -266,8 +308,8 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
     <div
       data-component-path="@mui/material/Snackbar"
       data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-      data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
       data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
     >
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -281,12 +323,26 @@ exports[`NeonPage - LiferayNotifications renders notifications with no actions i
             id="neon-data-portal-notifications"
           >
             <div>
-              bar
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                bar
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
             </div>
             <div>
-              <b>
-                HTML
-              </b>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                <b>
+                  HTML
+                </b>
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
             </div>
           </div>
         </div>

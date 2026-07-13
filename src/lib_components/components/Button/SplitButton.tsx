@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 import Grid from '@mui/material/Grid2';
 import Button, { ButtonProps } from '@mui/material/Button';
@@ -13,8 +13,21 @@ import MenuList from '@mui/material/MenuList';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { Nullable } from '../../types/core';
 import { exists } from '../../util/typeUtil';
+
+const useStyles = makeStyles()((theme: NeonTheme) => ({
+  fullWidth: {
+    width: '100%',
+  },
+  fitContent: {
+    width: 'fit-content',
+  },
+  noChange: {
+  },
+}));
 
 interface SplitButtonProps {
   name: string;
@@ -26,6 +39,8 @@ interface SplitButtonProps {
   buttonMenuProps: Nullable<ButtonProps>;
   buttonProps: Nullable<ButtonProps>;
   selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
+  isFullWidth: Nullable<boolean>;
+  styleOverrides: Nullable<React.CSSProperties>;
 }
 
 const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React.JSX.Element => {
@@ -39,7 +54,11 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
     buttonGroupProps,
     buttonMenuProps,
     buttonProps,
+    isFullWidth,
+    styleOverrides,
   }: SplitButtonProps = props;
+
+  const { classes } = useStyles();
   const [open, setOpen] = useState(false);
   const [stateSelectedOption, setStateSelectedOption] = useState(selectedOption);
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -100,17 +119,23 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
     return stateSelectedOption;
   };
 
+  const widthStyle = exists(isFullWidth) ? classes.fullWidth : classes.noChange;
+  const iconWidthStyle = exists(isFullWidth) ? classes.fitContent : classes.noChange;
+  const customStyles = exists(styleOverrides) ? styleOverrides : {};
+
   return (
-    <Grid container alignItems="center">
-      <Grid size={{ xs: 12 }}>
+    <Grid container direction="column" alignItems="center" className={widthStyle}>
+      <Grid size={{ xs: 12 }} className={widthStyle}>
         <ButtonGroup
           aria-label={`${name}-split-button`}
           {...appliedButtonGroupProps}
           ref={anchorRef}
+          className={widthStyle}
         >
           <Button
             {...appliedButtonProps}
             onClick={handleClick}
+            className={widthStyle}
           >
             {renderSelectedOption()}
           </Button>
@@ -121,6 +146,8 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
             aria-haspopup="menu"
             {...appliedButtonMenuProps}
             onClick={handleToggle}
+            className={iconWidthStyle}
+            style={{ ...customStyles }}
           >
             <ArrowDropDownIcon />
           </Button>

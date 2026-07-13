@@ -164,6 +164,20 @@ export interface IRouteService {
      * @returns The path
      */
     getTaxonomicListsPath: () => string;
+    /**
+     * Gets the SAE Data Visuialization page path
+     * @returns The path
+     */
+    getSaeViewerUrl: () => string;
+    /**
+     * Gets the SAE Data Visuialization page path with the following paramaters
+     * @param product The dataproduct 13 or 9 characters e.g. (DP1.00099.001 or DP1.00099)
+     * @param site Site Code
+     * @param startDate Data start date (YYYY-MM-DD)
+     * @param endDate Data end date (YYYY-MM-DD)
+     * @returns The path
+     */
+    getSaeViewerUrlPath: (product: string, site?: string, startDate?: string, endDate?: string) => string;
 }
 declare const RouteService: IRouteService;
 export default RouteService;

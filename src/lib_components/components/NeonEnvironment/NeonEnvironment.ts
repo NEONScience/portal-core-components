@@ -44,9 +44,13 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_PATH_LD_API',
   'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
   'NEXT_PUBLIC_NEON_USE_GRAPHQL',
   'NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO',
   'NEXT_PUBLIC_NEON_API_HOST_OVERRIDE',
   'NEXT_PUBLIC_BIOREPO_HOST_OVERRIDE',
   'NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE',
@@ -66,6 +70,7 @@ export interface NeonServerData {
   NeonBioRepoHost: Undef<string>;
   NeonPublicAPITokenHeader: Undef<string>;
   NeonPublicAPIToken: Undef<string>;
+  NeonAPISessionTokenHeader: Undef<string>;
   NeonAuthSilentType: Undef<string>;
 }
 
@@ -77,6 +82,8 @@ export interface INeonEnvironment {
   showAopViewer: boolean;
   authDisableWs: boolean;
   auth0DisableApi: boolean;
+  authDisableBroadcastChannel: boolean;
+  sessionDisable: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
@@ -101,6 +108,10 @@ export interface INeonEnvironment {
   getAuthPath: Record<string, () => string>;
 
   authTopics: Record<string, () => string>;
+
+  getAopGEEDesktopUrl: () => Undef<string>;
+  getAopGEEMobileUrl: () => Undef<string>;
+  getAopGEEVideoUrl: () => Undef<string>;
 
   getRouterBasePath: () => string;
   getRouterBaseHomePath: () => string;
@@ -127,6 +138,7 @@ export interface INeonEnvironment {
 
   getApiTokenHeader: () => string;
   getApiToken: () => string;
+  getApiSessionTokenHeader: () => string;
   getAuthSilentType: () => AuthSilentType;
 
   getFullApiPath: (path: string) => string;
@@ -148,6 +160,8 @@ const NeonEnvironment: INeonEnvironment = {
   showAopViewer: process.env.NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
   auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
+  authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
+  sessionDisable: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true',
   enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
@@ -163,6 +177,7 @@ const NeonEnvironment: INeonEnvironment = {
 
   getApiPath: {
     data: (): string => '/data',
+    demoData: (): string => '/demo/data',
     prototype: (): string => '/prototype',
     documents: (): string => '/documents',
     quickStartGuides: (): string => '/documents/quick-start-guides',
@@ -211,6 +226,12 @@ const NeonEnvironment: INeonEnvironment = {
   getRouterBasePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE_HOME || '',
 
+  getAopGEEDesktopUrl: (): Undef<string> => (
+    process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP
+  ),
+  getAopGEEMobileUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
+  getAopGEEVideoUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO,
+
   getApiHostOverride: (): string => (
     process.env.NEXT_PUBLIC_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
   ),
@@ -235,7 +256,6 @@ const NeonEnvironment: INeonEnvironment = {
       `${NeonEnvironment.getWebHost()}${NeonEnvironment.route.home()}`
     ),
     buildAccountRoute: () => (
-      // TODO: replace with web host once switch over happens
       `${NeonEnvironment.getApiHost()}${NeonEnvironment.route.account()}`
     ),
   },
@@ -468,6 +488,18 @@ const NeonEnvironment: INeonEnvironment = {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData && (typeof serverData.NeonPublicAPIToken === 'string')) {
       return serverData.NeonPublicAPIToken;
+    }
+    return '';
+  },
+
+  /**
+   * Gets the session token header name
+   * @return {string} The session token header name
+   */
+  getApiSessionTokenHeader: (): string => {
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData && (typeof serverData.NeonAPISessionTokenHeader === 'string')) {
+      return serverData.NeonAPISessionTokenHeader;
     }
     return '';
   },

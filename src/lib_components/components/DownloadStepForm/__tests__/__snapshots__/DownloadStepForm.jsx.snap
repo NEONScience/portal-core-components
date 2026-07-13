@@ -832,11 +832,20 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
         <h6
           class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-1orlae8-MuiTypography-root"
         >
-          In order to proceed to download NEON data you must agree to the 
+          These data are licensed under 
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+            data-gtm="download-data-dialog.data-license-link"
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+          >
+            Creative Commons Attribution 4.0 International (CC BY 4.0)
+          </a>
+          . Before downloading NEON data you must agree to the NEON 
           <a
             class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
             data-gtm="download-data-dialog.policies-link"
-            href="https://www.neonscience.org/data-samples/guidelines-policies"
+            href="https://www.neonscience.org/usage-policies"
             target="_blank"
           >
             Data Usage and Citation Policies
@@ -883,11 +892,20 @@ exports[`DownloadStepForm Step policies renders correctly 1`] = `
       <h6
         class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-gutterBottom css-1orlae8-MuiTypography-root"
       >
-        In order to proceed to download NEON data you must agree to the 
+        These data are licensed under 
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+          data-gtm="download-data-dialog.data-license-link"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          target="_blank"
+        >
+          Creative Commons Attribution 4.0 International (CC BY 4.0)
+        </a>
+        . Before downloading NEON data you must agree to the NEON 
         <a
           class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
           data-gtm="download-data-dialog.policies-link"
-          href="https://www.neonscience.org/data-samples/guidelines-policies"
+          href="https://www.neonscience.org/usage-policies"
           target="_blank"
         >
           Data Usage and Citation Policies
@@ -1404,103 +1422,21 @@ exports[`DownloadStepForm Step s3Files renders correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="css-sul6xe-fileTable"
-        id="s3Files-selection-table-container"
+      <h6
+        class="MuiTypography-root MuiTypography-subtitle1 css-wlz7i9-MuiTypography-root"
+        style="margin-top: 24px;"
       >
-        <div
-          data-component-path="material-table"
-          data-prop-columns="[{"title":"Site","field":"site","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Date","field":"yearMonth","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Visit","field":"visit","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Name","field":"name","defaultFilter":"","hidden":false},{"title":"Type","field":"type","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Size","field":"size","filtering":false,"removable":false}]"
-          data-prop-components="{"Container":{"propTypes":{}}}"
-          data-prop-data="[{"url":"f1","tableData":"f1"},{"url":"f2","tableData":"f2"},{"url":"f3","tableData":"f3"}]"
-          data-prop-icons="{"Add":{},"Check":{},"Clear":{},"Delete":{},"DetailPanel":{},"Edit":{},"Export":{},"Filter":{},"FirstPage":{},"LastPage":{},"NextPage":{},"PreviousPage":{},"ResetSearch":{},"Search":{},"SortArrow":{},"ThirdStateCheck":{},"ViewColumn":{}}"
-          data-prop-localization="{"pagination":{"labelRowsSelect":"files"},"toolbar":{"nRowsSelected":"{0} files selected (12.1 KB uncompressed)"},"body":{"emptyDataSourceMessage":"No files to display. Select more sites, broaden date range, or broaden search / filters."}}"
-          data-prop-onselectionchange="[Function]"
-          data-prop-options="{"selection":true,"showSelectAllCheckbox":false,"padding":"dense","filtering":true,"columnsButton":false,"pageSize":10,"pageSizeOptions":[5,10,50,100],"showTitle":false,"search":false,"isLoading":false}"
-        />
-        <div
-          class="css-7dsiu3-loadingOverlay"
-          style="display: none;"
-        >
-          <h6
-            class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
-            style="margin-bottom: 32px;"
-          >
-            Loading files (0%)...
-          </h6>
-          <span
-            aria-valuenow="0"
-            class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
-            role="progressbar"
-            style="width: 40px; height: 40px; transform: rotate(-90deg);"
-          >
-            <svg
-              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
-              viewBox="22 22 44 44"
-            >
-              <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-eorpq6-MuiCircularProgress-circle"
-                cx="44"
-                cy="44"
-                fill="none"
-                r="20.2"
-                stroke-width="3.6"
-                style="stroke-dasharray: 126.920; stroke-dashoffset: 126.920px;"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
+        You must sign in or create and validate an account before proceeding.
+      </h6>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="css-sul6xe-fileTable"
-      id="s3Files-selection-table-container"
+    <h6
+      class="MuiTypography-root MuiTypography-subtitle1 css-wlz7i9-MuiTypography-root"
+      style="margin-top: 24px;"
     >
-      <div
-        data-component-path="material-table"
-        data-prop-columns="[{"title":"Site","field":"site","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Date","field":"yearMonth","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Visit","field":"visit","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Name","field":"name","defaultFilter":"","hidden":false},{"title":"Type","field":"type","lookup":{},"defaultFilter":[],"hidden":false},{"title":"Size","field":"size","filtering":false,"removable":false}]"
-        data-prop-components="{"Container":{"propTypes":{}}}"
-        data-prop-data="[{"url":"f1","tableData":"f1"},{"url":"f2","tableData":"f2"},{"url":"f3","tableData":"f3"}]"
-        data-prop-icons="{"Add":{},"Check":{},"Clear":{},"Delete":{},"DetailPanel":{},"Edit":{},"Export":{},"Filter":{},"FirstPage":{},"LastPage":{},"NextPage":{},"PreviousPage":{},"ResetSearch":{},"Search":{},"SortArrow":{},"ThirdStateCheck":{},"ViewColumn":{}}"
-        data-prop-localization="{"pagination":{"labelRowsSelect":"files"},"toolbar":{"nRowsSelected":"{0} files selected (12.1 KB uncompressed)"},"body":{"emptyDataSourceMessage":"No files to display. Select more sites, broaden date range, or broaden search / filters."}}"
-        data-prop-onselectionchange="[Function]"
-        data-prop-options="{"selection":true,"showSelectAllCheckbox":false,"padding":"dense","filtering":true,"columnsButton":false,"pageSize":10,"pageSizeOptions":[5,10,50,100],"showTitle":false,"search":false,"isLoading":false}"
-      />
-      <div
-        class="css-7dsiu3-loadingOverlay"
-        style="display: none;"
-      >
-        <h6
-          class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
-          style="margin-bottom: 32px;"
-        >
-          Loading files (0%)...
-        </h6>
-        <span
-          aria-valuenow="0"
-          class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
-          role="progressbar"
-          style="width: 40px; height: 40px; transform: rotate(-90deg);"
-        >
-          <svg
-            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
-            viewBox="22 22 44 44"
-          >
-            <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-eorpq6-MuiCircularProgress-circle"
-              cx="44"
-              cy="44"
-              fill="none"
-              r="20.2"
-              stroke-width="3.6"
-              style="stroke-dasharray: 126.920; stroke-dashoffset: 126.920px;"
-            />
-          </svg>
-        </span>
-      </div>
-    </div>
+      You must sign in or create and validate an account before proceeding.
+    </h6>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

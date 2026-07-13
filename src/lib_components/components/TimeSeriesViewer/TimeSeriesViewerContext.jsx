@@ -28,18 +28,16 @@ import {
 import { ajax } from 'rxjs/ajax';
 
 import NeonApi from '../NeonApi/NeonApi';
+import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
-import { exists, existsNonEmpty } from '../../util/typeUtil';
+import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
 import DataPackageParser from '../../parser/DataPackageParser';
-import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
-import makeStateStorage from '../../service/StateStorageService';
-import { convertStateForStorage, convertStateFromStorage } from './StateStorageConverter';
 import { getUserAgentHeader } from '../../util/requestUtil';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 
@@ -57,6 +55,7 @@ const FETCH_STATUS = {
 };
 
 export const TIME_SERIES_VIEWER_STATUS_TITLES = {
+  AWAITING_PRECONDITIONS: 'Initializing…',
   INIT_PRODUCT: 'Loading data product…',
   LOADING_META: 'Loading site positions, variables, and data paths…',
   READY_FOR_DATA: 'Loading series data…',
@@ -156,7 +155,8 @@ const DEFAULT_AXIS_STATE = {
 };
 export const DEFAULT_STATE = {
   mode: VIEWER_MODE.DEFAULT,
-  status: TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT,
+  isViewerLimitedMode: true,
+  status: TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS,
   displayError: null,
   fetchProduct: { status: FETCH_STATUS.AWAITING_CALL, error: null },
   metaFetches: {},
@@ -1115,11 +1115,60 @@ const reducer = (state, action) => {
   let parsedContent = null;
   let selectedSiteIdx = null;
   switch (action.type) {
+    case 'initialize':
+      newState.isViewerLimitedMode = action.isViewerLimited;
+      if ((newState.mode !== VIEWER_MODE.STATIC) && action.isViewerLimited) {
+        newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+        newState.product.productCode = action.productDataProp
+          ? action.productDataProp.productCode
+          : action.productCodeProp;
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (action.productDataProp) {
+          newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+          newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
+          newState.product = parseProductData(action.productDataProp);
+        } else {
+          newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+          newState.product.productCode = action.productCodeProp;
+        }
+      }
+      newState.release = action.releaseProp;
+      calcSelection();
+      return newState;
     // Reinitialize
     case 'reinitialize':
       newState = cloneDeep(DEFAULT_STATE);
+      newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
       newState.product.productCode = action.productCode;
       newState.release = action.release;
+      newState.isViewerLimitedMode = action.isViewerLimited;
+      return newState;
+    case 'reinitializeFromLimited':
+      newState = cloneDeep(DEFAULT_STATE);
+      newState.mode = action.mode;
+      newState.isViewerLimitedMode = action.isViewerLimited;
+      if (action.mode === VIEWER_MODE.STATIC) {
+        if (action.productDataProp) {
+          newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
+          newState.fetchProduct.status = FETCH_STATUS.SUCCESS;
+          newState.product = parseProductData(action.productDataProp);
+        } else {
+          newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+          newState.product.productCode = action.productCode;
+        }
+        calcSelection();
+      } else {
+        newState.status = TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
+        newState.product.productCode = action.productCode;
+        newState.release = action.release;
+      }
+      return newState;
+    case 'setInvalidState':
+      return softFail(action.message);
+    case 'setLimitedReleaseState':
+      newState.status = TIME_SERIES_VIEWER_STATUS.LOGIN_REQUIRED;
+      newState.displayError = action.message;
       return newState;
     // Fetch Product Actions
     case 'initFetchProductCalled':
@@ -1533,7 +1582,6 @@ export const defaultProps = {
 const Provider = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const {
-    timeSeriesUniqueId,
     mode: modeProp,
     productCode: productCodeProp,
     productData: productDataProp,
@@ -1544,87 +1592,107 @@ const Provider = (inProps) => {
   /**
      Initial State and Reducer Setup
   */
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
   const initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
-  initialState.status = productDataProp
-    ? TIME_SERIES_VIEWER_STATUS.LOADING_META
-    : TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT;
-  if (productDataProp) {
-    initialState.fetchProduct.status = FETCH_STATUS.SUCCESS;
-    initialState.product = parseProductData(productDataProp);
-  } else {
-    initialState.product.productCode = productCodeProp;
-  }
-  initialState.release = releaseProp;
-  initialState.selection = applyDefaultsToSelection(initialState);
+  // Check preconditions for initial status
+  const preconditionsSatisfied = neonContextSessionState.ready;
+  const isViewerLimited = !neonContextSessionState.canAccessData;
 
-  // Get the state from storage if present
-  const { productCode } = initialState.product;
-  // Initialize the storage state and restore state
-  const stateKey = `timeSeriesContextState-${productCode}-${timeSeriesUniqueId}`;
-  const stateStorage = useMemo(() => makeStateStorage(stateKey), [stateKey]);
-  // Determine initial state from session storage once
-  const [initState] = useState(() => {
-    const savedState = stateStorage.readState();
-    const hasSavedState = exists(savedState);
-    let sessionInitialState;
-    let restoredStateFromStorage = false;
-    if (hasSavedState) {
-      sessionInitialState = convertStateFromStorage(savedState);
-      restoredStateFromStorage = true;
-    } else {
-      sessionInitialState = initialState;
-    }
-    return {
-      restoredStateFromStorage,
-      initialState: sessionInitialState,
-    };
-  });
-  // Determine initialized state from stored state once
-  const appliedInitialState = initState.restoredStateFromStorage
-    ? initState.initialState
-    : initialState;
-  const [state, dispatch] = useReducer(reducer, appliedInitialState);
-  // Clean up session state
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    status: viewerStatus,
+    isViewerLimitedMode: stateIsViewerLimitedMode,
+  } = state;
+
+  // Initialize the viewer once when the preconditions are satisfied
   useEffect(() => {
-    if (initState.restoredStateFromStorage) {
-      stateStorage.removeState();
-    }
-  }, [stateStorage, initState]);
-
-  const { viewerStatus } = state;
-
-  // The current sign in process uses a separate domain. This function
-  // persists the current state in storage when the button is clicked
-  // so the state may be reloaded when the page is reloaded after sign
-  // in.
-  useEffect(() => {
-    const subscription = NeonSignInButtonState.getObservable().subscribe({
-      next: () => {
-        if (!NeonEnvironment.enableGlobalSignInState) return;
-        if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.READY) return;
-        const convertedState = convertStateForStorage(state);
-        stateStorage.saveState(convertedState);
-      },
+    if (!preconditionsSatisfied) { return; }
+    if (viewerStatus !== TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
+    dispatch({
+      type: 'initialize',
+      isViewerLimited,
+      productCodeProp,
+      productDataProp,
+      releaseProp,
     });
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [viewerStatus, state, stateStorage, stateKey]);
-
-  /**
-     Effect - Reinitialize state if the product code prop changed
-  */
+  }, [
+    dispatch,
+    preconditionsSatisfied,
+    viewerStatus,
+    isViewerLimited,
+    productCodeProp,
+    productDataProp,
+    releaseProp,
+  ]);
+  // Reinitialize the viewer when the limited mode changes after initialization
   useEffect(() => {
+    if (!preconditionsSatisfied) { return; }
+    if (viewerStatus === TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
+    if (isViewerLimited === stateIsViewerLimitedMode) { return; }
+    let reinitProductCode = null;
+    if (isStringNonEmpty(state.product?.productCode)) {
+      reinitProductCode = state.product.productCode;
+    } else if (isStringNonEmpty(productCodeProp)) {
+      reinitProductCode = productCodeProp;
+    }
+    let reinitRelease = null;
+    if (isStringNonEmpty(state.release)) {
+      reinitRelease = state.release;
+    } else if (isStringNonEmpty(releaseProp)) {
+      reinitRelease = releaseProp;
+    }
+    if (modeProp === VIEWER_MODE.STATIC) {
+      dispatch({
+        type: 'reinitializeFromLimited',
+        productCode: reinitProductCode,
+        productDataProp,
+        release: reinitRelease,
+        mode: modeProp,
+        isViewerLimited,
+      });
+      return;
+    }
+    if (isStringNonEmpty(reinitProductCode)) {
+      dispatch({
+        type: 'reinitializeFromLimited',
+        productCode: reinitProductCode,
+        productDataProp: null,
+        release: reinitRelease,
+        mode: modeProp,
+        isViewerLimited,
+      });
+    }
+  }, [
+    dispatch,
+    preconditionsSatisfied,
+    viewerStatus,
+    isViewerLimited,
+    stateIsViewerLimitedMode,
+    modeProp,
+    productCodeProp,
+    productDataProp,
+    releaseProp,
+    state.product.productCode,
+    state.release,
+  ]);
+  // Reinitialize state if the product code prop, release prop changed
+  // and ignore any changes to limited mode. Ignored when in static mode.
+  // Limited mode will be handled by another effect specifically for that change.
+  useEffect(() => {
+    if (!preconditionsSatisfied) { return; }
+    if (viewerStatus === TIME_SERIES_VIEWER_STATUS.AWAITING_PRECONDITIONS) { return; }
     // Ignore initialization when in static mode
     if (state.mode === VIEWER_MODE.STATIC) { return; }
+    if (isViewerLimited !== stateIsViewerLimitedMode) { return; }
     if (productCodeProp !== state.product.productCode) {
       dispatch({
         type: 'reinitialize',
         productCode: productCodeProp,
         release: state.release,
+        isViewerLimited,
       });
     }
     if (releaseProp !== state.release) {
@@ -1632,6 +1700,7 @@ const Provider = (inProps) => {
         type: 'reinitialize',
         productCode: state.product.productCode,
         release: releaseProp,
+        isViewerLimited,
       });
     }
   }, [
@@ -1640,6 +1709,10 @@ const Provider = (inProps) => {
     releaseProp,
     state.product.productCode,
     state.release,
+    viewerStatus,
+    preconditionsSatisfied,
+    isViewerLimited,
+    stateIsViewerLimitedMode,
     dispatch,
   ]);
 
@@ -1651,8 +1724,26 @@ const Provider = (inProps) => {
     if (state.mode === VIEWER_MODE.STATIC) { return; }
     if (state.status !== TIME_SERIES_VIEWER_STATUS.INIT_PRODUCT) { return; }
     if (state.fetchProduct.status !== FETCH_STATUS.AWAITING_CALL) { return; }
+    if (isViewerLimited && isStringNonEmpty(state.release)) {
+      // Viewing release data requires authentication
+      dispatch({ type: 'setLimitedReleaseState', message: 'Login required to view release data' });
+      return;
+    }
+    let graphQLObservable;
+    if (isViewerLimited) {
+      graphQLObservable = NeonGraphQL.getDemoDataProductByCode(
+        state.product.productCode,
+        true,
+      );
+    } else {
+      graphQLObservable = NeonGraphQL.getDataProductByCode(
+        state.product.productCode,
+        state.release,
+        true,
+      );
+    }
     dispatch({ type: 'initFetchProductCalled' });
-    NeonGraphQL.getDataProductByCode(state.product.productCode, state.release, true).pipe(
+    graphQLObservable.pipe(
       map((response) => {
         if (response?.response?.data?.product) {
           dispatch({
@@ -1675,6 +1766,7 @@ const Provider = (inProps) => {
     state.fetchProduct.status,
     state.product.productCode,
     state.release,
+    isViewerLimited,
   ]);
 
   /**
@@ -1714,12 +1806,24 @@ const Provider = (inProps) => {
      Triggers all necessary fetches for meta data and series data
   */
   useEffect(() => {
+    if (!preconditionsSatisfied) {
+      return;
+    }
+    if (isViewerLimited && (state.mode === VIEWER_MODE.STATIC)) {
+      return;
+    }
+    if (isViewerLimited && isStringNonEmpty(state.release)) {
+      // Viewing release data requires authentication
+      return;
+    }
     const getSiteMonthDataURL = (siteCode, month) => {
-      const root = NeonEnvironment.getFullApiPath('data');
+      const root = isViewerLimited
+        ? NeonEnvironment.getFullApiPath('demoData')
+        : NeonEnvironment.getFullApiPath('data');
       const hasRelease = state.release
         && (typeof state.release === 'string')
         && (state.release.length > 0);
-      const releaseParam = hasRelease
+      const releaseParam = (!isViewerLimited && hasRelease)
         ? `?release=${state.release}`
         : '';
       return `${root}/${state.product.productCode}/${siteCode}/${month}${releaseParam}`;
@@ -1778,7 +1882,10 @@ const Provider = (inProps) => {
         if (!state.product.sites[siteCode].availableMonths.includes(month)) { return; }
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
-        NeonApi.getJsonObservable(getSiteMonthDataURL(siteCode, month), NeonApi.getApiTokenHeader())
+        const headers = {
+          ...neonContextSessionState.sessionHeaders,
+        };
+        NeonApi.getJsonObservable(getSiteMonthDataURL(siteCode, month), headers)
           .pipe(
             map((response) => {
               if (response && response.data && response.data.files) {
@@ -1939,6 +2046,9 @@ const Provider = (inProps) => {
     state.variables,
     state.product,
     state.release,
+    preconditionsSatisfied,
+    isViewerLimited,
+    neonContextSessionState,
   ]);
 
   /**
@@ -1989,6 +2099,7 @@ const TimeSeriesViewerPropTypes = {
 };
 
 Provider.propTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
   timeSeriesUniqueId: number,
   mode: PropTypes.string,
   productCode: TimeSeriesViewerPropTypes.productCode,

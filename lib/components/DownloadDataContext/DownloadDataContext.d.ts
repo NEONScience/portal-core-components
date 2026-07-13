@@ -28,6 +28,7 @@ export function getTestableItems(): {
         availabilityView: any;
         productData: any;
         downloadContextIsActive: boolean;
+        downloadStatus: string;
         broadcast: boolean;
         dialogOpen: boolean;
         awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -122,6 +123,7 @@ declare namespace DownloadDataContext {
     export { reducer };
     export { DEFAULT_STATE };
     export { ALL_STEPS };
+    export { DOWNLOAD_STATUS };
     export { getStateObservable };
 }
 declare function Provider(inProps: any): React.JSX.Element;
@@ -153,6 +155,7 @@ declare namespace Provider {
 }
 declare function useDownloadDataState(): {
     downloadContextIsActive: boolean;
+    downloadStatus: string;
     broadcast: boolean;
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -236,6 +239,7 @@ declare function useDownloadDataState(): {
 } | ((() => void) | {
     requiredSteps: never[];
     downloadContextIsActive: boolean;
+    downloadStatus: string;
     broadcast: boolean;
     dialogOpen: boolean;
     awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -319,6 +323,8 @@ declare function useDownloadDataState(): {
 declare function reducer(state: any, action: any): any;
 declare namespace DEFAULT_STATE {
     export let downloadContextIsActive: boolean;
+    import downloadStatus = DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
+    export { downloadStatus };
     export let broadcast: boolean;
     export let dialogOpen: boolean;
     export let awaitingHigherOrderUpdateWhenDialogOpens: boolean;
@@ -499,6 +505,11 @@ declare namespace ALL_STEPS {
         let title_6: string;
         export { title_6 as title };
     }
+}
+declare namespace DOWNLOAD_STATUS {
+    let AWAITING_PRECONDITIONS: string;
+    let ALLOW_DOWNLOAD: string;
+    let DISALLOW_DOWNLOAD: string;
 }
 declare function getStateObservable(): import("rxjs").Observable<any>;
 import React from 'react';

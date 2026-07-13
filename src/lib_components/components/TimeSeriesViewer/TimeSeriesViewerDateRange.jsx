@@ -26,7 +26,6 @@ import BasicAvailabilityKey from '../DataProductAvailability/BasicAvailabilityKe
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
 import ReleaseService from '../../service/ReleaseService';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 
 import TimeSeriesViewerContext, {
@@ -58,7 +57,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   slider: {
     minWidth: theme.spacing(40),
-    width: `calc(100% - ${theme.spacing(6)})`,
+    width: `calc(100% - ${theme.spacing(6)}px)`,
     marginLeft: theme.spacing(3),
     marginBottom: theme.spacing(4),
   },

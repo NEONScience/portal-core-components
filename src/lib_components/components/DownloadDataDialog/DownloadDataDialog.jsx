@@ -13,7 +13,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid2';
 import LinearProgress from '@mui/material/LinearProgress';
-import Link from '@mui/material/Link';
 import MobileStepper from '@mui/material/MobileStepper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -34,13 +33,12 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
+import LoginRequiredCard from '../Card/LoginRequiredCard';
 import NeonContext from '../NeonContext/NeonContext';
 import ReleaseChip from '../Chip/ReleaseChip';
 import Theme, { COLORS } from '../Theme/Theme';
-import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 import { makeStyles } from '../Theme/makeStyles';
 
-import RouteService from '../../service/RouteService';
 import {
   buildManifestConfig,
   buildManifestRequestBody,
@@ -135,6 +133,7 @@ export default function DownloadDataDialog() {
   */
   const [
     {
+      downloadStatus,
       dialogOpen,
       productData,
       manifest,
@@ -154,14 +153,7 @@ export default function DownloadDataDialog() {
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
 
-  /**
-     State (from NeonContext)
-  */
-  const [{
-    auth: {
-      isAuthenticated,
-    },
-  }] = NeonContext.useNeonContextState();
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
 
   /**
      State (local)
@@ -182,6 +174,9 @@ export default function DownloadDataDialog() {
   const externalHost = ExternalHost.getByProductCode(productData.productCode);
   const renderExternalHostInfo = () => {
     if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
+      return null;
+    }
+    if (activeStepIndex !== 0) {
       return null;
     }
     const availableSiteCodes = (productData.siteCodes || []).map((site) => site.siteCode);
@@ -252,14 +247,17 @@ export default function DownloadDataDialog() {
       packageType,
       provisionalData,
     };
+    const headers = {
+      ...neonContextSessionState.sessionHeaders,
+    };
     if (fromAOPManifest) {
       const config = buildManifestConfig(manifestSelection, null, true);
-      return downloadAopManifest(config, s3Files, documentation.value);
+      return downloadAopManifest(config, s3Files, headers, documentation.value);
     }
     if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
     const config = buildManifestConfig(manifestSelection);
     const manifestBody = buildManifestRequestBody(config);
-    return downloadManifest(manifestBody);
+    return downloadManifest(manifestBody, headers);
   };
 
   /**
@@ -414,7 +412,14 @@ export default function DownloadDataDialog() {
       style: { marginLeft: Theme.spacing(1) },
     };
     let icon = <DownloadIcon {...iconProps} />;
-    if (allStepsComplete) {
+    if (downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.AWAITING_PRECONDITIONS) {
+      disabled = true;
+      buttonText = 'Initializing...';
+      icon = <CircularProgress size={16} color="inherit" {...iconProps} />;
+    } else if (downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.DISALLOW_DOWNLOAD) {
+      disabled = true;
+      buttonText = 'Login Required';
+    } else if (allStepsComplete) {
       if (fromAOPManifest) {
         disabled = false;
       }
@@ -469,36 +474,21 @@ export default function DownloadDataDialog() {
     );
   };
 
-  const renderAuthSuggestion = () => {
-    if (isAuthenticated) { return null; }
-    /* eslint-disable react/jsx-one-expression-per-line */
-    const authStyles = { color: COLORS.GOLD[800], textAlign: 'right' };
+  const renderLoginRequired = () => {
+    const init = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
+    const allowDownload = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD;
+    const showDownloadButton = fromManifest || fromAOPManifest;
+    if (init || allowDownload || !showDownloadButton) {
+      return null;
+    }
     return (
-      <div style={{ textAlign: 'right' }}>
-        <Typography
-          variant="body2"
-          style={{
-            ...authStyles,
-            marginTop: Theme.spacing(1),
-            fontWeight: 600,
-          }}
-        >
-          Consider signing in or creating an account before proceeding.
-        </Typography>
-        <Typography
-          variant="body2"
-          style={{
-            ...authStyles,
-            fontStyle: 'italic',
-            fontSize: '0.8rem',
-          }}
-        >
-          <Link target="_new" href={RouteService.getUserAccountsPath()}>Learn</Link> the benefits of having an account.
-        </Typography>
-        <NeonSignInButton />
-      </div>
+      <LoginRequiredCard
+        showValidation
+        isAuthenticated={neonContextSessionState.authenticated}
+        accountValidated={neonContextSessionState.accountValidated}
+        accountValidationSteps={neonContextSessionState.accountValidationSteps}
+      />
     );
-    /* eslint-enable react/jsx-one-expression-per-line */
   };
 
   const renderDownloadButtonStepNote = () => {
@@ -556,7 +546,6 @@ export default function DownloadDataDialog() {
           </Grid>
           <div className={divClass} style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
             {renderDownloadButtonStepNote()}
-            {renderAuthSuggestion()}
           </div>
         </div>
       );
@@ -594,7 +583,6 @@ export default function DownloadDataDialog() {
           {showDownloadButton ? renderDownloadButton() : null}
         </div>
         {renderDownloadButtonStepNote()}
-        {renderAuthSuggestion()}
       </div>
     );
   };
@@ -891,7 +879,7 @@ export default function DownloadDataDialog() {
           ) : null}
         </Grid>
       </Grid>
-      { /* eslint-enable object-curly-newline */ }
+      {renderLoginRequired()}
       {renderExternalHostInfo()}
       {renderDownloadSizeWarning()}
       {getSizeEstimateBytes() < DOWNLOAD_SIZE_WARN ? <Divider /> : null}

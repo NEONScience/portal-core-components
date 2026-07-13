@@ -14,6 +14,23 @@ import { ajax } from 'rxjs/ajax';
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists } from './typeUtil';
 
+const getRequest = (url, headers, cors) => {
+  const request = {
+    method: 'GET',
+    url,
+    responseType: 'json',
+    headers: {
+      Accept: 'application/json',
+      ...headers,
+    },
+  };
+  if (cors && NeonEnvironment.requireCors()) {
+    request.crossDomain = true;
+    request.withCredentials = true;
+  }
+  return request;
+};
+
 /**
  * Convenience method for utiliizing RxJS ajax.getJSON
  * @param {string} url
@@ -32,19 +49,7 @@ export const getJson = (
   headers = undefined,
   cors = false,
 ) => {
-  const request = {
-    method: 'GET',
-    url,
-    responseType: 'json',
-    headers: {
-      Accept: 'application/json',
-      ...headers,
-    },
-  };
-  if (cors && NeonEnvironment.requireCors()) {
-    request.crossDomain = true;
-    request.withCredentials = true;
-  }
+  const request = getRequest(url, headers, cors);
   const rxObs$ = ajax(request).pipe(
     map((response) => {
       const appliedResponse = (exists(response) && exists(response.response))
@@ -99,3 +104,25 @@ export const forkJoinWithProgress = (arrayOfObservables) => defer(() => {
   );
   return of([finalResult$, percent$.asObservable()]);
 });
+
+/**
+ * Convenience method for setting up an RxJS ajax observable
+ * @param {string} url
+ * @param {Object|undefined} headers
+ * @param {boolean} cors
+ * @return RxJS observable
+ */
+export const getJsonObservable = (
+  url,
+  headers = undefined,
+  cors = false,
+) => {
+  const request = getRequest(url, headers, cors);
+  const rxObs$ = ajax(request).pipe(
+    catchError((error) => {
+      console.error(error); // eslint-disable-line no-console
+      return of(error);
+    }),
+  );
+  return rxObs$;
+};

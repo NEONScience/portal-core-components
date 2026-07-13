@@ -1,5 +1,6 @@
 export namespace TYPES {
     let DATA_PRODUCTS: string;
+    let DEMO_DATA_PRODUCTS: string;
     let SITES: string;
     let LOCATIONS: string;
 }
@@ -10,6 +11,7 @@ export namespace DIMENSIONALITIES {
 export default NeonGraphQL;
 declare namespace NeonGraphQL {
     function getDataProductByCode(productCode: any, release: any, includeAvailableReleases?: boolean): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse<any>> | import("rxjs").Observable<null>;
+    function getDemoDataProductByCode(productCode: any, includeAvailableReleases?: boolean): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse<any>> | import("rxjs").Observable<null>;
     function getAllDataProducts(release: any, includeAvailableReleases?: boolean): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse<any>> | import("rxjs").Observable<null>;
     function getSiteByCode(siteCode: any): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse<any>> | import("rxjs").Observable<null>;
     function getAllSites(): import("rxjs").Observable<import("rxjs/ajax").AjaxResponse<any>> | import("rxjs").Observable<null>;

@@ -108,7 +108,7 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: '0.75rem',
   },
   horizSlider: {
-    width: `calc(100% - ${theme.spacing(6)})`,
+    width: `calc(100% - ${theme.spacing(6)}px)`,
     marginLeft: theme.spacing(3),
     marginBottom: '24px !important',
   },

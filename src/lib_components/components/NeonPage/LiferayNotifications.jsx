@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
 
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -28,6 +29,10 @@ const useStyles = makeStyles()((theme) => ({
       maxWidth: '33%',
     },
   },
+  notificationDiv: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
 }));
 
 const defaultProps = {
@@ -44,13 +49,28 @@ const LiferayNotifications = (inProps) => {
 
   const renderNotificationContent = () => (
     <div id="neon-data-portal-notifications">
-      {notifications.map((notification) => (
-        <div
-          key={notification.id}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: notification.message }}
-        />
-      ))}
+      {notifications.map((notification) => {
+        if (notification.isReactNode === true) {
+          return (
+            <div key={notification.id}>
+              <div className={classes.notificationDiv}>
+                {notification.message}
+              </div>
+              <Divider />
+            </div>
+          );
+        }
+        return (
+          <div key={notification.id}>
+            <div
+              className={classes.notificationDiv}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: notification.message }}
+            />
+            <Divider />
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -58,7 +78,11 @@ const LiferayNotifications = (inProps) => {
     <Snackbar
       open
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      ContentProps={{ 'aria-describedby': 'neon-data-portal-notifications' }}
+      slotProps={{
+        content: {
+          'aria-describedby': 'neon-data-portal-notifications',
+        },
+      }}
     >
       <SnackbarContent
         className={classes.notification}
@@ -83,7 +107,10 @@ LiferayNotifications.propTypes = {
   notifications: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
+      message: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string,
+      ]).isRequired,
       dismissed: PropTypes.bool.isRequired,
     }),
   ),

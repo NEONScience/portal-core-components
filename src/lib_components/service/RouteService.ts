@@ -170,6 +170,26 @@ export interface IRouteService {
    * @returns The path
    */
   getTaxonomicListsPath: () => string;
+
+  /**
+   * Gets the SAE Data Visuialization page path
+   * @returns The path
+   */
+  getSaeViewerUrl: () => string;
+  /**
+   * Gets the SAE Data Visuialization page path with the following paramaters
+   * @param product The dataproduct 13 or 9 characters e.g. (DP1.00099.001 or DP1.00099)
+   * @param site Site Code
+   * @param startDate Data start date (YYYY-MM-DD)
+   * @param endDate Data end date (YYYY-MM-DD)
+   * @returns The path
+   */
+  getSaeViewerUrlPath: (
+    product: string,
+    site?: string,
+    startDate?: string,
+    endDate?: string,
+  ) => string;
 }
 
 const RouteService: IRouteService = {
@@ -178,10 +198,10 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/about/user-accounts`
   ),
   getDataPoliciesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies`
+    `${NeonEnvironment.getWebHost()}/usage-policies`
   ),
   getDataPoliciesCitationPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/guidelines-policies/citing`
+    `${NeonEnvironment.getWebHost()}/data/guidelines-policies/citing`
   ),
   getDataQualityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-quality-program`
@@ -208,13 +228,13 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases`
   ),
   getDataSamplesPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples`
+    `${NeonEnvironment.getWebHost()}/data`
   ),
   getSamplesPath: (): string => (
     `${NeonEnvironment.getWebHost()}/samples`
   ),
   getDataSamplesDataPath: (): string => (
-    `${NeonEnvironment.getWebHost()}/data-samples/data`
+    `${NeonEnvironment.getWebHost()}/data`
   ),
   getDataAvailabilityPath: (): string => (
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-availability`
@@ -246,33 +266,51 @@ const RouteService: IRouteService = {
   ),
 
   getTaxonomicListsPath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/taxonomic-lists`
   ),
   getDataProductCitationDownloadUrl: (): string => (
-    // TODO: replace with web host once switch over happens
     NeonEnvironment.getApiHost()
   ),
   getDataProductExploreSearchPath: (query: string): string => (
     `${RouteService.getDataProductExplorePath()}?search=${encodeURIComponent(query)}`
   ),
   getDataProductExplorePath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/data-products/explore`
   ),
   getProductDetailPath: (productCode: string, release?: string): string => {
     const releasePath = isStringNonEmpty(release) ? `/${release}` : '';
-    // TODO: replace with web host once switch over happens
     return `${NeonEnvironment.getApiHost()}/data-products/${productCode}${releasePath}`;
   },
   getPrototypeDatasetsPath: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/prototype-datasets`
   ),
   getPrototypeDatasetDetailPath: (uuid: string): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/prototype-datasets/${uuid}`
   ),
+  getSaeViewerUrl: (): string => (
+    `${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`
+  ),
+  getSaeViewerUrlPath: (
+    product: string,
+    site?: string,
+    startDate?: string,
+    endDate?: string,
+  ): string => {
+    const url = new URL(`${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`);
+    if (product) {
+      url.searchParams.set('product', product);
+    }
+    if (site) {
+      url.searchParams.set('site', site);
+    }
+    if (startDate) {
+      url.searchParams.set('start_date', startDate);
+    }
+    if (endDate) {
+      url.searchParams.set('end_date', endDate);
+    }
+    return url.href;
+  },
 };
 
 Object.freeze(RouteService);

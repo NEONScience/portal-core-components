@@ -88,6 +88,11 @@ export interface IAuthService {
      */
     fetchUserInfoWithDispatch: (dispatch: Dispatch<any>, refreshSubscription?: boolean) => Subscription;
     /**
+     * Handles actions needed from a login message from the auth broadcast channel
+     * @param {Dispatch} dispatch - The NeonContext dispatch function
+     */
+    handleLoginMessageFromBroadcastChannel: (dispatch: Dispatch<any>) => void;
+    /**
      * Parses the user info API response and determines the authenticated state
      * @param {any} response - The API response
      * @return {boolean} True if the user is authenticated

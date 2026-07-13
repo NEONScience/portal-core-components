@@ -787,8 +787,8 @@ exports[`NeonPage renders with a notification 1`] = `
       <div
         data-component-path="@mui/material/Snackbar"
         data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-        data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
         data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -802,7 +802,14 @@ exports[`NeonPage renders with a notification 1`] = `
               id="neon-data-portal-notifications"
             >
               <div>
-                Notification
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  Notification
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
               </div>
             </div>
           </div>
@@ -868,8 +875,8 @@ exports[`NeonPage renders with a notification 1`] = `
     <div
       data-component-path="@mui/material/Snackbar"
       data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
-      data-prop-contentprops="{"aria-describedby":"neon-data-portal-notifications"}"
       data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
     >
       <div
         class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-b5lv4o-MuiPaper-root-MuiSnackbarContent-root-notification"
@@ -883,7 +890,14 @@ exports[`NeonPage renders with a notification 1`] = `
             id="neon-data-portal-notifications"
           >
             <div>
-              Notification
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                Notification
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
             </div>
           </div>
         </div>
