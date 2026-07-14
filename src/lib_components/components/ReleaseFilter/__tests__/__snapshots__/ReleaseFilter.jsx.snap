@@ -12,14 +12,14 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_k_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_n_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -39,7 +39,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_k_"
+          aria-labelledby="release-filter-label-_r_n_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -47,9 +47,8 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_k_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_k_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_n_"
             role="combobox"
             tabindex="0"
           >
@@ -59,14 +58,14 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_k_"
-            name="release-filter-input-_r_k_"
+            id="release-filter-input-_r_n_"
+            name="release-filter-input-_r_n_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -95,7 +94,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -111,14 +110,14 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_k_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_n_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -138,7 +137,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_k_"
+        aria-labelledby="release-filter-label-_r_n_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -146,9 +145,8 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_k_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_k_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_n_"
           role="combobox"
           tabindex="0"
         >
@@ -158,14 +156,14 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_k_"
-          name="release-filter-input-_r_k_"
+          id="release-filter-input-_r_n_"
+          name="release-filter-input-_r_n_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -194,7 +192,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -267,14 +265,14 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_6_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_7_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -312,14 +310,14 @@ exports[`ReleaseFilter Renders in skeleton mode 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_6_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_7_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -475,14 +473,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_1l_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_1v_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -502,7 +500,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_1l_"
+          aria-labelledby="release-filter-label-_r_1v_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -510,9 +508,8 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_1l_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_1l_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1v_"
             role="combobox"
             tabindex="0"
           >
@@ -522,14 +519,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_1l_"
-            name="release-filter-input-_r_1l_"
+            id="release-filter-input-_r_1v_"
+            name="release-filter-input-_r_1v_"
             tabindex="-1"
             value="TEST-TAG-2"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -558,7 +555,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Generated: January 15, 2021
           </span>
@@ -567,7 +564,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             2 data products
           </span>
@@ -579,7 +576,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
             class="css-1154ajz-descriptionFlexInnerContainer"
           >
             <span
-              class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+              class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
               style="margin-right: 4px;"
               title="Digital Object Identifier (DOI) - A citable permanent link to this this data product release"
             >
@@ -587,14 +584,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
             </span>
             <span
               aria-label="doi"
-              class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+              class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
               style="overflow-wrap: anywhere;"
             >
               http://data.cite/bar
             </span>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-3rl0gk-MuiButtonBase-root-MuiButton-root-copyButton"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-yaa0kc-MuiButtonBase-root-MuiButton-root-copyButton"
             tabindex="0"
             title="Copy DOI: http://data.cite/bar"
             type="button"
@@ -625,14 +622,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_1l_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_1v_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -652,7 +649,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_1l_"
+        aria-labelledby="release-filter-label-_r_1v_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -660,9 +657,8 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_1l_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_1l_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1v_"
           role="combobox"
           tabindex="0"
         >
@@ -672,14 +668,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_1l_"
-          name="release-filter-input-_r_1l_"
+          id="release-filter-input-_r_1v_"
+          name="release-filter-input-_r_1v_"
           tabindex="-1"
           value="TEST-TAG-2"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -708,7 +704,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Generated: January 15, 2021
         </span>
@@ -717,7 +713,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           2 data products
         </span>
@@ -729,7 +725,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           class="css-1154ajz-descriptionFlexInnerContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
             style="margin-right: 4px;"
             title="Digital Object Identifier (DOI) - A citable permanent link to this this data product release"
           >
@@ -737,14 +733,14 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           </span>
           <span
             aria-label="doi"
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
             style="overflow-wrap: anywhere;"
           >
             http://data.cite/bar
           </span>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-colorPrimary css-3rl0gk-MuiButtonBase-root-MuiButton-root-copyButton"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-yaa0kc-MuiButtonBase-root-MuiButton-root-copyButton"
           tabindex="0"
           title="Copy DOI: http://data.cite/bar"
           type="button"
@@ -832,14 +828,14 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_13_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_19_"
           >
             Foo
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -859,7 +855,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_13_"
+          aria-labelledby="release-filter-label-_r_19_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -868,9 +864,8 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_13_"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_13_"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_19_"
             role="combobox"
           >
             Latest and Provisional
@@ -880,14 +875,14 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
             disabled=""
-            id="release-filter-input-_r_13_"
-            name="release-filter-input-_r_13_"
+            id="release-filter-input-_r_19_"
+            name="release-filter-input-_r_19_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -916,7 +911,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -932,14 +927,14 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_13_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_19_"
         >
           Foo
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -959,7 +954,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_13_"
+        aria-labelledby="release-filter-label-_r_19_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -968,9 +963,8 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_13_"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_13_"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_19_"
           role="combobox"
         >
           Latest and Provisional
@@ -980,14 +974,14 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
           disabled=""
-          id="release-filter-input-_r_13_"
-          name="release-filter-input-_r_13_"
+          id="release-filter-input-_r_19_"
+          name="release-filter-input-_r_19_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -1016,7 +1010,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -1089,14 +1083,14 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_f_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_h_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -1116,7 +1110,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_f_"
+          aria-labelledby="release-filter-label-_r_h_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -1124,9 +1118,8 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_f_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_f_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_h_"
             role="combobox"
             tabindex="0"
           >
@@ -1136,14 +1129,14 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_f_"
-            name="release-filter-input-_r_f_"
+            id="release-filter-input-_r_h_"
+            name="release-filter-input-_r_h_"
             tabindex="-1"
             value="TEST-TAG-2"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -1179,14 +1172,14 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_f_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_h_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -1206,7 +1199,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_f_"
+        aria-labelledby="release-filter-label-_r_h_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -1214,9 +1207,8 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_f_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_f_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_h_"
           role="combobox"
           tabindex="0"
         >
@@ -1226,14 +1218,14 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_f_"
-          name="release-filter-input-_r_f_"
+          id="release-filter-input-_r_h_"
+          name="release-filter-input-_r_h_"
           tabindex="-1"
           value="TEST-TAG-2"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -1323,7 +1315,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
         style="width: 100%;"
       >
         <div
-          aria-labelledby="release-filter-label-_r_18_"
+          aria-labelledby="release-filter-label-_r_1f_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -1332,9 +1324,8 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_18_"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_18_"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1f_"
             role="combobox"
           >
             Latest and Provisional
@@ -1344,14 +1335,14 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
             disabled=""
-            id="release-filter-input-_r_18_"
-            name="release-filter-input-_r_18_"
+            id="release-filter-input-_r_1f_"
+            name="release-filter-input-_r_1f_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -1380,7 +1371,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -1393,7 +1384,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
       style="width: 100%;"
     >
       <div
-        aria-labelledby="release-filter-label-_r_18_"
+        aria-labelledby="release-filter-label-_r_1f_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -1402,9 +1393,8 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_18_"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_18_"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1f_"
           role="combobox"
         >
           Latest and Provisional
@@ -1414,14 +1404,14 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
           disabled=""
-          id="release-filter-input-_r_18_"
-          name="release-filter-input-_r_18_"
+          id="release-filter-input-_r_1f_"
+          name="release-filter-input-_r_1f_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -1450,7 +1440,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -1522,14 +1512,14 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
             class="css-2l1v95-titleContainer"
           >
             <h3
-              class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-              id="release-filter-label-_r_u_"
+              class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+              id="release-filter-label-_r_13_"
             >
               Release
             </h3>
             <button
               aria-label="[object Object]"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               data-mui-internal-clone-element="true"
               style="margin-left: 4px;"
               tabindex="0"
@@ -1556,7 +1546,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
             style="width: 300px;"
           >
             <div
-              aria-labelledby="release-filter-label-_r_u_"
+              aria-labelledby="release-filter-label-_r_13_"
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
               data-selenium="release-filter"
               style="max-width: 300px;"
@@ -1565,9 +1555,8 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-haspopup="listbox"
-                aria-labelledby="mui-component-select-release-filter-input-_r_u_"
-                class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-                id="mui-component-select-release-filter-input-_r_u_"
+                class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                id="mui-component-select-release-filter-input-_r_13_"
                 role="combobox"
               >
                 Latest and Provisional
@@ -1577,14 +1566,14 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
                 aria-invalid="false"
                 class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
                 disabled=""
-                id="release-filter-input-_r_u_"
-                name="release-filter-input-_r_u_"
+                id="release-filter-input-_r_13_"
+                name="release-filter-input-_r_13_"
                 tabindex="-1"
                 value="Latest and Provisional"
               />
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
                 data-testid="ArrowDropDownIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -1617,7 +1606,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
               class="css-162nru2-descriptionContainer"
             >
               <span
-                class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+                class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
               >
                 Data in the latest release in addition to provisional data (not yet in any release)
               </span>
@@ -1634,14 +1623,14 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_u_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_13_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -1668,7 +1657,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
           style="width: 300px;"
         >
           <div
-            aria-labelledby="release-filter-label-_r_u_"
+            aria-labelledby="release-filter-label-_r_13_"
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
             data-selenium="release-filter"
             style="max-width: 300px;"
@@ -1677,9 +1666,8 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
               aria-disabled="true"
               aria-expanded="false"
               aria-haspopup="listbox"
-              aria-labelledby="mui-component-select-release-filter-input-_r_u_"
-              class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-component-select-release-filter-input-_r_u_"
+              class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              id="mui-component-select-release-filter-input-_r_13_"
               role="combobox"
             >
               Latest and Provisional
@@ -1689,14 +1677,14 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
               aria-invalid="false"
               class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
               disabled=""
-              id="release-filter-input-_r_u_"
-              name="release-filter-input-_r_u_"
+              id="release-filter-input-_r_13_"
+              name="release-filter-input-_r_13_"
               tabindex="-1"
               value="Latest and Provisional"
             />
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
               data-testid="ArrowDropDownIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -1729,7 +1717,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
             class="css-162nru2-descriptionContainer"
           >
             <span
-              class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+              class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
             >
               Data in the latest release in addition to provisional data (not yet in any release)
             </span>
@@ -1804,14 +1792,14 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_p_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_t_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -1831,7 +1819,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_p_"
+          aria-labelledby="release-filter-label-_r_t_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -1839,9 +1827,8 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_p_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_p_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_t_"
             role="combobox"
             tabindex="0"
           >
@@ -1851,14 +1838,14 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_p_"
-            name="release-filter-input-_r_p_"
+            id="release-filter-input-_r_t_"
+            name="release-filter-input-_r_t_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -1887,7 +1874,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -1903,14 +1890,14 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_p_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_t_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -1930,7 +1917,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_p_"
+        aria-labelledby="release-filter-label-_r_t_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -1938,9 +1925,8 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_p_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_p_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_t_"
           role="combobox"
           tabindex="0"
         >
@@ -1950,14 +1936,14 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_p_"
-          name="release-filter-input-_r_p_"
+          id="release-filter-input-_r_t_"
+          name="release-filter-input-_r_t_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -1986,7 +1972,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -2059,14 +2045,14 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_a_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_b_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -2086,7 +2072,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_a_"
+          aria-labelledby="release-filter-label-_r_b_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -2094,9 +2080,8 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_a_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_a_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_b_"
             role="combobox"
             tabindex="0"
           >
@@ -2106,14 +2091,14 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_a_"
-            name="release-filter-input-_r_a_"
+            id="release-filter-input-_r_b_"
+            name="release-filter-input-_r_b_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2142,7 +2127,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -2158,14 +2143,14 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_a_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_b_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -2185,7 +2170,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_a_"
+        aria-labelledby="release-filter-label-_r_b_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -2193,9 +2178,8 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_a_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_a_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_b_"
           role="combobox"
           tabindex="0"
         >
@@ -2205,14 +2189,14 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_a_"
-          name="release-filter-input-_r_a_"
+          id="release-filter-input-_r_b_"
+          name="release-filter-input-_r_b_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -2241,7 +2225,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -2314,14 +2298,14 @@ exports[`ReleaseFilter Renders with no props 1`] = `
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
             id="release-filter-label-_r_1_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -2350,8 +2334,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_1_"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1_"
             role="combobox"
           >
@@ -2369,7 +2352,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2398,7 +2381,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -2414,14 +2397,14 @@ exports[`ReleaseFilter Renders with no props 1`] = `
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
           id="release-filter-label-_r_1_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -2450,8 +2433,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_1_"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1_"
           role="combobox"
         >
@@ -2469,7 +2451,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon Mui-disabled css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -2498,7 +2480,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -2571,14 +2553,14 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_1g_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_1p_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -2598,7 +2580,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_1g_"
+          aria-labelledby="release-filter-label-_r_1p_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -2606,9 +2588,8 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_1g_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_1g_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1p_"
             role="combobox"
             tabindex="0"
           >
@@ -2618,14 +2599,14 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_1g_"
-            name="release-filter-input-_r_1g_"
+            id="release-filter-input-_r_1p_"
+            name="release-filter-input-_r_1p_"
             tabindex="-1"
             value="TEST-TAG-1"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2654,7 +2635,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             3 data products
           </span>
@@ -2670,14 +2651,14 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_1g_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_1p_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -2697,7 +2678,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_1g_"
+        aria-labelledby="release-filter-label-_r_1p_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -2705,9 +2686,8 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_1g_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_1g_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1p_"
           role="combobox"
           tabindex="0"
         >
@@ -2717,14 +2697,14 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_1g_"
-          name="release-filter-input-_r_1g_"
+          id="release-filter-input-_r_1p_"
+          name="release-filter-input-_r_1p_"
           tabindex="-1"
           value="TEST-TAG-1"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -2753,7 +2733,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           3 data products
         </span>
@@ -2826,14 +2806,14 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           class="css-2l1v95-titleContainer"
         >
           <h3
-            class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-            id="release-filter-label-_r_1b_"
+            class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+            id="release-filter-label-_r_1j_"
           >
             Release
           </h3>
           <button
             aria-label="[object Object]"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             data-mui-internal-clone-element="true"
             style="margin-left: 4px;"
             tabindex="0"
@@ -2853,7 +2833,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           </button>
         </div>
         <div
-          aria-labelledby="release-filter-label-_r_1b_"
+          aria-labelledby="release-filter-label-_r_1j_"
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
@@ -2861,9 +2841,8 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby="mui-component-select-release-filter-input-_r_1b_"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id="mui-component-select-release-filter-input-_r_1b_"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="mui-component-select-release-filter-input-_r_1j_"
             role="combobox"
             tabindex="0"
           >
@@ -2873,14 +2852,14 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
             aria-hidden="true"
             aria-invalid="false"
             class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-            id="release-filter-input-_r_1b_"
-            name="release-filter-input-_r_1b_"
+            id="release-filter-input-_r_1j_"
+            name="release-filter-input-_r_1j_"
             tabindex="-1"
             value="Latest and Provisional"
           />
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
             data-testid="ArrowDropDownIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -2909,7 +2888,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             Data in the latest release in addition to provisional data (not yet in any release)
           </span>
@@ -2918,7 +2897,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           class="css-162nru2-descriptionContainer"
         >
           <span
-            class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+            class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
           >
             5 data products
           </span>
@@ -2934,14 +2913,14 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         class="css-2l1v95-titleContainer"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h5 css-1wqwwuq-MuiTypography-root-title"
-          id="release-filter-label-_r_1b_"
+          class="MuiTypography-root MuiTypography-h5 css-1ki5vnj-MuiTypography-root-title"
+          id="release-filter-label-_r_1j_"
         >
           Release
         </h3>
         <button
           aria-label="[object Object]"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
           data-mui-internal-clone-element="true"
           style="margin-left: 4px;"
           tabindex="0"
@@ -2961,7 +2940,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         </button>
       </div>
       <div
-        aria-labelledby="release-filter-label-_r_1b_"
+        aria-labelledby="release-filter-label-_r_1j_"
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-1f8mf7y-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
@@ -2969,9 +2948,8 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-labelledby="mui-component-select-release-filter-input-_r_1b_"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-t9sxll-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="mui-component-select-release-filter-input-_r_1b_"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ynfddh-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          id="mui-component-select-release-filter-input-_r_1j_"
           role="combobox"
           tabindex="0"
         >
@@ -2981,14 +2959,14 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           aria-hidden="true"
           aria-invalid="false"
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
-          id="release-filter-input-_r_1b_"
-          name="release-filter-input-_r_1b_"
+          id="release-filter-input-_r_1j_"
+          name="release-filter-input-_r_1j_"
           tabindex="-1"
           value="Latest and Provisional"
         />
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
           data-testid="ArrowDropDownIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -3017,7 +2995,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           Data in the latest release in addition to provisional data (not yet in any release)
         </span>
@@ -3026,7 +3004,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         class="css-162nru2-descriptionContainer"
       >
         <span
-          class="MuiTypography-root MuiTypography-caption css-12rynga-MuiTypography-root-description"
+          class="MuiTypography-root MuiTypography-caption css-2sfroj-MuiTypography-root-description"
         >
           5 data products
         </span>

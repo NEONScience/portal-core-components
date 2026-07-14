@@ -86,7 +86,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -112,13 +112,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -145,7 +145,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -155,7 +155,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -189,7 +189,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -215,13 +215,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -248,7 +248,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -258,7 +258,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -349,7 +349,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -375,13 +375,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -408,7 +408,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -418,7 +418,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -451,7 +451,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -477,13 +477,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -502,7 +502,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -514,7 +514,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -553,7 +553,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -579,13 +579,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -604,7 +604,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -616,7 +616,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -712,7 +712,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -738,13 +738,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -771,7 +771,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -781,7 +781,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -814,7 +814,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -840,13 +840,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -865,7 +865,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -877,7 +877,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -917,7 +917,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -943,13 +943,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -976,7 +976,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -986,7 +986,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1022,7 +1022,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1048,13 +1048,13 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -1081,7 +1081,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -1091,7 +1091,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -1182,7 +1182,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1208,13 +1208,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1241,7 +1241,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1251,7 +1251,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1285,7 +1285,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1311,13 +1311,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -1344,7 +1344,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -1354,7 +1354,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -1445,7 +1445,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1471,13 +1471,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1504,7 +1504,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1514,7 +1514,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1547,7 +1547,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1573,13 +1573,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -1598,7 +1598,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -1610,7 +1610,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -1649,7 +1649,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1675,13 +1675,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -1700,7 +1700,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -1712,7 +1712,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -1808,7 +1808,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1834,13 +1834,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -1867,7 +1867,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -1877,7 +1877,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -1910,7 +1910,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1936,13 +1936,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -1961,7 +1961,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -1973,7 +1973,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -2011,7 +2011,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2037,13 +2037,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -2070,7 +2070,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2080,7 +2080,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2114,7 +2114,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2140,13 +2140,13 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -2173,7 +2173,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -2183,7 +2183,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -2274,7 +2274,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2300,13 +2300,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -2318,7 +2318,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2353,7 +2353,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2363,7 +2363,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2397,7 +2397,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2423,13 +2423,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are available in other formats from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="AMERIFLUX"
                   data-gtm-product-code="DP1.00001.001"
                   href="https://ameriflux.lbl.gov"
@@ -2441,7 +2441,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -2476,7 +2476,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -2486,7 +2486,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...
@@ -2577,7 +2577,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2603,13 +2603,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -2621,7 +2621,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2656,7 +2656,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -2666,7 +2666,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -2699,7 +2699,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2725,13 +2725,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -2743,7 +2743,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2770,7 +2770,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -2782,7 +2782,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -2821,7 +2821,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2847,13 +2847,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Raw sequence data associated with this product are available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="BOLD"
                   data-gtm-product-code="DP1.10020.001"
                   href="https://boldsystems.org/"
@@ -2865,7 +2865,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -2892,7 +2892,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               >
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETN"
@@ -2904,7 +2904,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </li>
                 <li>
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://portal.boldsystems.org/recordset/BETP"
@@ -3000,7 +3000,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3026,13 +3026,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are available in other formats from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="AMERIFLUX"
                     data-gtm-product-code="DP1.00001.001"
                     href="https://ameriflux.lbl.gov"
@@ -3044,7 +3044,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3079,7 +3079,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -3089,7 +3089,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -3122,7 +3122,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3148,13 +3148,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Raw sequence data associated with this product are available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
                     data-gtm-product-code="DP1.10020.001"
                     href="https://boldsystems.org/"
@@ -3166,7 +3166,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3193,7 +3193,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 >
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETN"
@@ -3205,7 +3205,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </li>
                   <li>
                     <a
-                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
                       data-gtm-product-code="DP1.10020.001"
                       href="https://portal.boldsystems.org/recordset/BETP"
@@ -3243,7 +3243,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3269,13 +3269,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 class="css-koi2n8-startFlex"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                   style="flex-grow: 1;"
                 >
                   Data for this product are only available from
                    
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="PHENOCAM"
                     data-gtm-product-code="DP1.00033.001"
                     href="https://phenocam.nau.edu/webcam/about/"
@@ -3287,7 +3287,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3322,7 +3322,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       viewBox="22 22 44 44"
                     >
                       <circle
-                        class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                         cx="44"
                         cy="44"
                         fill="none"
@@ -3332,7 +3332,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     </svg>
                   </span>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                     style="margin-bottom: 32px;"
                   >
                     Loading sites...
@@ -3366,7 +3366,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-kt5gem-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1bg2lda-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -3392,13 +3392,13 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               class="css-koi2n8-startFlex"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
                 style="flex-grow: 1;"
               >
                 Data for this product are only available from
                  
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                   data-gtm-external-host="PHENOCAM"
                   data-gtm-product-code="DP1.00033.001"
                   href="https://phenocam.nau.edu/webcam/about/"
@@ -3410,7 +3410,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1l0e8np-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -3445,7 +3445,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -3455,7 +3455,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                   </svg>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-sapw7s-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
                   style="margin-bottom: 32px;"
                 >
                   Loading sites...

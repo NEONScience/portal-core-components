@@ -15,11 +15,11 @@ import Typography from '@mui/material/Typography';
 import NoSsr from '@mui/material/NoSsr';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
-
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import Skeleton from '@mui/material/Skeleton';
 
 import ClearIcon from '@mui/icons-material/Clear';
-import MenuItem from '@mui/material/MenuItem';
 import NoneIcon from '@mui/icons-material/NotInterested';
 import SearchIcon from '@mui/icons-material/Search';
 import SelectAllIcon from '@mui/icons-material/DoneAll';
@@ -195,37 +195,47 @@ function Option(inProps) {
   const textStyle = isDisabled ? {
     color: theme.palette.grey[200],
   } : {};
+  // Note: wrapping each of these MenuItem elements in a MenuList
+  // is a workaround for no longer being able to utilize the MenuItem
+  // component as a standalone component outside of a Menu or MenuList.
+  // The MenuItem brings along desired characteristics for selection
+  // interactions.
   return (
-    <MenuItem
-      key={value}
-      ref={innerRef}
-      selected={isFocused && !isDisabled}
-      component="div"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }}
-      {...innerProps}
-    >
-      <Typography variant="body1" style={{ ...textStyle }}>
-        {value}
-        <span
-          className={classes.optionSubtitle}
-          style={{ ...textStyle, marginLeft: '8px' }}
-        >
-          {`(${units})`}
-        </span>
-      </Typography>
-      <Typography
-        variant="body2"
-        className={classes.optionSubtitle}
-        style={{ ...textStyle }}
+    <MenuList style={{ padding: 0, margin: 0 }}>
+      <MenuItem
+        key={value}
+        ref={innerRef}
+        selected={isFocused && !isDisabled}
+        component="div"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          cursor: isDisabled ? 'not-allowed' : 'pointer',
+        }}
+        {...innerProps}
       >
-        {description}
-      </Typography>
-    </MenuItem>
+        <Typography variant="body1" style={{ ...textStyle }}>
+          {value}
+          <span
+            className={classes.optionSubtitle}
+            style={{ ...textStyle, marginLeft: '8px' }}
+          >
+            {`(${units})`}
+          </span>
+        </Typography>
+        <Typography
+          variant="body2"
+          className={classes.optionSubtitle}
+          style={{
+            ...textStyle,
+            wordBreak: 'break-word',
+          }}
+        >
+          {description}
+        </Typography>
+      </MenuItem>
+    </MenuList>
   );
 }
 

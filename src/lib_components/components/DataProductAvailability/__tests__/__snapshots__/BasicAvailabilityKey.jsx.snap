@@ -12,13 +12,13 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
+            class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -26,7 +26,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -185,13 +185,13 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
+          class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
@@ -199,7 +199,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           <svg
             aria-hidden="true"
             class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
-            data-testid="HelpOutlineIcon"
+            data-testid="HelpOutlineOutlinedIcon"
             focusable="false"
             viewBox="0 0 24 24"
           >
@@ -415,13 +415,13 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
+            class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -429,7 +429,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -504,13 +504,13 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-1inbzq9-MuiTypography-root-legendTitle"
+          class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-1ovex2p-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
@@ -518,7 +518,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           <svg
             aria-hidden="true"
             class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
-            data-testid="HelpOutlineIcon"
+            data-testid="HelpOutlineOutlinedIcon"
             focusable="false"
             viewBox="0 0 24 24"
           >

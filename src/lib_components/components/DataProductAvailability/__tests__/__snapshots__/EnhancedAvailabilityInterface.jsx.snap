@@ -197,19 +197,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
             </h6>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               role="group"
               variant="outlined"
             >
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="states"
@@ -218,7 +218,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="domains"
@@ -227,7 +227,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="sites"
@@ -236,7 +236,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="tables"
@@ -250,7 +250,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             style="display: flex; align-items: center; justify-content: flex-start;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -303,14 +303,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
                 </div>
               </div>
               <div
-                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
                 data-selenium="data-product-availability.sort-options.direction"
                 role="group"
               >
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -333,7 +333,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -362,14 +362,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin: -6px 24px 4px 0px;"
             >
               Key:
             </h6>
             <button
               aria-label="Help - Data Availability Chart Key"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               style="margin-left: -3px;"
               tabindex="0"
               title="Help - Data Availability Chart Key"
@@ -378,7 +378,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-                data-testid="HelpOutlineIcon"
+                data-testid="HelpOutlineOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -965,19 +965,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             View By:
           </h6>
           <div
-            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
             role="group"
             variant="outlined"
           >
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="states"
@@ -986,7 +986,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="domains"
@@ -995,7 +995,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="sites"
@@ -1004,7 +1004,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="tables"
@@ -1018,7 +1018,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
           style="display: flex; align-items: center; justify-content: flex-start;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             Sort By:
@@ -1071,14 +1071,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               </div>
             </div>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               data-selenium="data-product-availability.sort-options.direction"
               role="group"
             >
               <button
                 aria-label="Sort Ascending (A-Z)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -1101,7 +1101,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
               <button
                 aria-label="Sort Descending (Z-A)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -1130,14 +1130,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -1146,7 +1146,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with ex
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -1790,19 +1790,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
             </h6>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               role="group"
               variant="outlined"
             >
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="states"
@@ -1811,7 +1811,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="domains"
@@ -1820,7 +1820,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="sites"
@@ -1829,7 +1829,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="tables"
@@ -1843,7 +1843,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             style="display: flex; align-items: center; justify-content: flex-start;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -1896,14 +1896,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
                 </div>
               </div>
               <div
-                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
                 data-selenium="data-product-availability.sort-options.direction"
                 role="group"
               >
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -1926,7 +1926,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -1955,14 +1955,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin: -6px 24px 4px 0px;"
             >
               Key:
             </h6>
             <button
               aria-label="Help - Data Availability Chart Key"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               style="margin-left: -3px;"
               tabindex="0"
               title="Help - Data Availability Chart Key"
@@ -1971,7 +1971,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-                data-testid="HelpOutlineIcon"
+                data-testid="HelpOutlineOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -2558,19 +2558,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             View By:
           </h6>
           <div
-            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
             role="group"
             variant="outlined"
           >
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="states"
@@ -2579,7 +2579,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="domains"
@@ -2588,7 +2588,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="sites"
@@ -2597,7 +2597,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="tables"
@@ -2611,7 +2611,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
           style="display: flex; align-items: center; justify-content: flex-start;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             Sort By:
@@ -2664,14 +2664,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               </div>
             </div>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               data-selenium="data-product-availability.sort-options.direction"
               role="group"
             >
               <button
                 aria-label="Sort Ascending (A-Z)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -2694,7 +2694,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
               <button
                 aria-label="Sort Descending (Z-A)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -2723,14 +2723,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -2739,7 +2739,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with no
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -3383,19 +3383,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
             </h6>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               role="group"
               variant="outlined"
             >
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="states"
@@ -3404,7 +3404,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="domains"
@@ -3413,7 +3413,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="sites"
@@ -3422,7 +3422,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="tables"
@@ -3436,7 +3436,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             style="display: flex; align-items: center; justify-content: flex-start;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -3489,14 +3489,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
                 </div>
               </div>
               <div
-                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
                 data-selenium="data-product-availability.sort-options.direction"
                 role="group"
               >
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -3519,7 +3519,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -3548,14 +3548,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin: -6px 24px 4px 0px;"
             >
               Key:
             </h6>
             <button
               aria-label="Help - Data Availability Chart Key"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               style="margin-left: -3px;"
               tabindex="0"
               title="Help - Data Availability Chart Key"
@@ -3564,7 +3564,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-                data-testid="HelpOutlineIcon"
+                data-testid="HelpOutlineOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -4151,19 +4151,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             View By:
           </h6>
           <div
-            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
             role="group"
             variant="outlined"
           >
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="states"
@@ -4172,7 +4172,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="domains"
@@ -4181,7 +4181,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="sites"
@@ -4190,7 +4190,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="tables"
@@ -4204,7 +4204,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
           style="display: flex; align-items: center; justify-content: flex-start;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             Sort By:
@@ -4257,14 +4257,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               </div>
             </div>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               data-selenium="data-product-availability.sort-options.direction"
               role="group"
             >
               <button
                 aria-label="Sort Ascending (A-Z)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -4287,7 +4287,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
               <button
                 aria-label="Sort Descending (Z-A)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -4316,14 +4316,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -4332,7 +4332,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with se
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -4976,19 +4976,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
             </h6>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               role="group"
               variant="outlined"
             >
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="states"
@@ -4997,7 +4997,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="domains"
@@ -5006,7 +5006,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="sites"
@@ -5015,7 +5015,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="tables"
@@ -5029,7 +5029,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             style="display: flex; align-items: center; justify-content: flex-start;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -5082,14 +5082,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
                 </div>
               </div>
               <div
-                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
                 data-selenium="data-product-availability.sort-options.direction"
                 role="group"
               >
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -5112,7 +5112,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -5141,14 +5141,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin: -6px 24px 4px 0px;"
             >
               Key:
             </h6>
             <button
               aria-label="Help - Data Availability Chart Key"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               style="margin-left: -3px;"
               tabindex="0"
               title="Help - Data Availability Chart Key"
@@ -5157,7 +5157,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-                data-testid="HelpOutlineIcon"
+                data-testid="HelpOutlineOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -5744,19 +5744,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             View By:
           </h6>
           <div
-            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
             role="group"
             variant="outlined"
           >
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="states"
@@ -5765,7 +5765,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="domains"
@@ -5774,7 +5774,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="sites"
@@ -5783,7 +5783,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="tables"
@@ -5797,7 +5797,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
           style="display: flex; align-items: center; justify-content: flex-start;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             Sort By:
@@ -5850,14 +5850,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               </div>
             </div>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               data-selenium="data-product-availability.sort-options.direction"
               role="group"
             >
               <button
                 aria-label="Sort Ascending (A-Z)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -5880,7 +5880,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
               <button
                 aria-label="Sort Descending (Z-A)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -5909,14 +5909,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -5925,7 +5925,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with si
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -6569,19 +6569,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
             </h6>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               role="group"
               variant="outlined"
             >
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="states"
@@ -6590,7 +6590,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="domains"
@@ -6599,7 +6599,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="sites"
@@ -6608,7 +6608,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               </button>
               <button
                 aria-pressed="false"
-                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
                 tabindex="0"
                 type="button"
                 value="tables"
@@ -6622,7 +6622,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             style="display: flex; align-items: center; justify-content: flex-start;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -6675,14 +6675,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
                 </div>
               </div>
               <div
-                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+                class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
                 data-selenium="data-product-availability.sort-options.direction"
                 role="group"
               >
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -6705,7 +6705,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                   disabled=""
                   style="border-color: unset;"
                   tabindex="-1"
@@ -6734,14 +6734,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
               style="margin: -6px 24px 4px 0px;"
             >
               Key:
             </h6>
             <button
               aria-label="Help - Data Availability Chart Key"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
               style="margin-left: -3px;"
               tabindex="0"
               title="Help - Data Availability Chart Key"
@@ -6750,7 +6750,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-                data-testid="HelpOutlineIcon"
+                data-testid="HelpOutlineOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -7337,19 +7337,19 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           style="display: flex; align-items: center; justify-content: flex-start; margin-right: 24px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             View By:
           </h6>
           <div
-            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+            class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
             role="group"
             variant="outlined"
           >
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="states"
@@ -7358,7 +7358,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="domains"
@@ -7367,7 +7367,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="sites"
@@ -7376,7 +7376,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             </button>
             <button
               aria-pressed="false"
-              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+              class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
               tabindex="0"
               type="button"
               value="tables"
@@ -7390,7 +7390,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
           style="display: flex; align-items: center; justify-content: flex-start;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin-right: 12px; white-space: nowrap;"
           >
             Sort By:
@@ -7443,14 +7443,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               </div>
             </div>
             <div
-              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-1gughuz-MuiToggleButtonGroup-root"
+              class="MuiToggleButtonGroup-root MuiToggleButtonGroup-horizontal css-x72bk0-MuiToggleButtonGroup-root"
               data-selenium="data-product-availability.sort-options.direction"
               role="group"
             >
               <button
                 aria-label="Sort Ascending (A-Z)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -7473,7 +7473,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
               <button
                 aria-label="Sort Descending (Z-A)"
                 aria-pressed="false"
-                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                class="MuiButtonBase-root Mui-disabled MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-disabled MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
                 disabled=""
                 style="border-color: unset;"
                 tabindex="-1"
@@ -7502,14 +7502,14 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-17wy3vk-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-b43m6y-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-ds72ul-MuiButtonBase-root-MuiIconButton-root"
             style="margin-left: -3px;"
             tabindex="0"
             title="Help - Data Availability Chart Key"
@@ -7518,7 +7518,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityInterface renders with un
             <svg
               aria-hidden="true"
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
-              data-testid="HelpOutlineIcon"
+              data-testid="HelpOutlineOutlinedIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >

@@ -28,7 +28,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Zoom from '@mui/material/Zoom';
 
-import HelpIcon from '@mui/icons-material/HelpOutline';
+import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 import WarningIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import ExpandUpIcon from '@mui/icons-material/ExpandLess';

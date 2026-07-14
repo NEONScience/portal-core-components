@@ -15,7 +15,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
           title="Foo"
         />
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-9jmtjq-MuiTypography-root-MuiLink-root-openInNewLink"
           href="https://foo.bar"
           target="_blank"
         >
@@ -46,7 +46,7 @@ exports[`StoryMap Renders correctly with a custom title 1`] = `
         title="Foo"
       />
       <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-9jmtjq-MuiTypography-root-MuiLink-root-openInNewLink"
         href="https://foo.bar"
         target="_blank"
       >
@@ -134,7 +134,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
           title="Neon Story Map"
         />
         <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-9jmtjq-MuiTypography-root-MuiLink-root-openInNewLink"
           href="https://foo.bar"
           target="_blank"
         >
@@ -165,7 +165,7 @@ exports[`StoryMap Renders correctly with no title 1`] = `
         title="Neon Story Map"
       />
       <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1i6c4np-MuiTypography-root-MuiLink-root-openInNewLink"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-9jmtjq-MuiTypography-root-MuiLink-root-openInNewLink"
         href="https://foo.bar"
         target="_blank"
       >

@@ -304,7 +304,6 @@ const DownloadStepForm = (inProps) => {
       <Grid
         container
         spacing={2}
-        alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.documentation"
       >
         <Grid size={{ xs: 12, md: 6 }}>
@@ -384,7 +383,6 @@ const DownloadStepForm = (inProps) => {
       <Grid
         container
         spacing={2}
-        alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
         {!excludeProvisionalData ? null : (
@@ -604,7 +602,7 @@ const DownloadStepForm = (inProps) => {
     const components = {
       Container: Box,
       Toolbar: (toolbarProps) => (
-        <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
+        <Grid container spacing={2} style={{ marginBottom: '24px' }}>
           <Grid size={{ xs: 12, md: 6 }}>
             <div style={{ marginBottom: Theme.spacing(1) }}>
               <ToggleButtonGroup
@@ -1059,11 +1057,7 @@ const DownloadStepForm = (inProps) => {
       </Card>
     );
     return (
-      <Grid
-        container
-        spacing={2}
-        alignItems="flex-start"
-      >
+      <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           {stepSummary}
         </Grid>

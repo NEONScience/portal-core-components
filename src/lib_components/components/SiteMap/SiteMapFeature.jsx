@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import tinycolor from 'tinycolor2';
-
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import Button from '@mui/material/Button';
@@ -14,7 +12,7 @@ import SnackbarContent from '@mui/material/SnackbarContent';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import HelpIcon from '@mui/icons-material/HelpOutline';
+import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 import ClickIcon from '@mui/icons-material/TouchApp';
 import ElevationIcon from '@mui/icons-material/Terrain';
 import ExploreDataProductsIcon from '@mui/icons-material/InsertChartOutlined';
@@ -23,7 +21,7 @@ import MarkerIcon from '@mui/icons-material/Place';
 import SiteDetailsIcon from '@mui/icons-material/InfoOutlined';
 import UnselectableIcon from '@mui/icons-material/NotInterested';
 
-import SelectedIcon from '@mui/icons-material/DoneOutline';
+import SelectedIcon from '@mui/icons-material/DoneOutlined';
 import UnselectedIcon from '@mui/icons-material/Remove';
 
 import 'leaflet/dist/leaflet.css';
@@ -61,6 +59,7 @@ import {
 } from './SiteMapUtils';
 
 import { COLORS } from '../Theme/Theme';
+import { desaturate } from '../Theme/color';
 import { makeStyles } from '../Theme/makeStyles';
 import { exists } from '../../util/typeUtil';
 
@@ -1398,11 +1397,11 @@ const SiteMapFeature = (props) => {
      Render a single shape (marker, rectangle, or polygon)
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
-  const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
-  const ghostedBaseColor = `#${tinycolor(baseColor).lighten(10).desaturate(60).toHex()}`;
-  const ghostedHoverColor = `#${tinycolor(hoverColor).lighten(10).desaturate(60).toHex()}`;
-  const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
-  const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
+  const hoverColor = theme.lighten(baseColor, 0.18);
+  const ghostedBaseColor = desaturate(theme.lighten(baseColor, 0.3), 0.2);
+  const ghostedHoverColor = desaturate(theme.lighten(hoverColor, 0.3), 0.2);
+  const darkenedBaseColor = theme.darken(baseColor, 0.4);
+  const darkenedMoreBaseColor = theme.darken(darkenedBaseColor, 0.6);
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (

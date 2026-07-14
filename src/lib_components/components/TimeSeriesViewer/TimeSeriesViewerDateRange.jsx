@@ -283,7 +283,7 @@ const TimeSeriesViewerDateRange = (props) => {
       max={displayMax}
       marks={marks}
       valueLabelFormat={(x) => displayRange[x]}
-      onMouseDown={() => { setActivelySelecting(true); }}
+      onPointerDown={() => { setActivelySelecting(true); }}
       onChange={(event, values) => {
         const sliderRange = [
           Math.max(values[0], sliderMin),

@@ -130,7 +130,8 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [FEATURES.STATES.KEY]: {};
+            [FEATURES.STATES
+                .KEY]: {};
             [FEATURES.DOMAINS.KEY]: {};
         };
     };
@@ -225,7 +226,8 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [FEATURES.STATES.KEY]: {};
+            [FEATURES.STATES
+                .KEY]: {};
             [FEATURES.DOMAINS.KEY]: {};
         };
     };

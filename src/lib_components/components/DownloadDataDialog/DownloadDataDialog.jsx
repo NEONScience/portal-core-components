@@ -22,7 +22,7 @@ import Typography from '@mui/material/Typography';
 
 import CircleStarIcon from '@mui/icons-material/Stars';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
-import ErrorIcon from '@mui/icons-material/ErrorOutline';
+import ErrorIcon from '@mui/icons-material/ErrorOutlined';
 import LeftIcon from '@mui/icons-material/ChevronLeft';
 import RightIcon from '@mui/icons-material/ChevronRight';
 import WarningIcon from '@mui/icons-material/Warning';
@@ -823,7 +823,7 @@ export default function DownloadDataDialog() {
     >
       {renderGtmTags()}
       { /* eslint-disable object-curly-newline */ }
-      <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(3) }}>
+      <Grid container spacing={2} style={{ marginBottom: Theme.spacing(3) }}>
         <Grid size={{ xs: 12, sm: 6, md: 6, lg: 8 }} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
@@ -879,6 +879,7 @@ export default function DownloadDataDialog() {
           ) : null}
         </Grid>
       </Grid>
+      { /* eslint-enable object-curly-newline */ }
       {renderLoginRequired()}
       {renderExternalHostInfo()}
       {renderDownloadSizeWarning()}

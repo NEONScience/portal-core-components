@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
 import CloseIcon from '@mui/icons-material/Close';
-import HelpIcon from '@mui/icons-material/HelpOutline';
+import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';

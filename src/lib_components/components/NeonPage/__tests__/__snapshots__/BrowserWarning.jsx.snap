@@ -159,7 +159,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                   class="css-1g9s9al-buttonRow"
                 >
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                     href="https://www.mozilla.org/en-US/firefox/new/"
                     tabindex="0"
                     target="_blank"
@@ -167,7 +167,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                     Firefox
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                     href="https://www.google.com/chrome/"
                     tabindex="0"
                     target="_blank"
@@ -175,7 +175,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                     Chrome
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                     href="https://www.apple.com/safari/"
                     tabindex="0"
                     target="_blank"
@@ -183,7 +183,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                     Safari
                   </a>
                   <a
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                     href="https://www.microsoft.com/en-us/windows/microsoft-edge"
                     tabindex="0"
                     target="_blank"
@@ -253,7 +253,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                 class="css-1g9s9al-buttonRow"
               >
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                   href="https://www.mozilla.org/en-US/firefox/new/"
                   tabindex="0"
                   target="_blank"
@@ -261,7 +261,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                   Firefox
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                   href="https://www.google.com/chrome/"
                   tabindex="0"
                   target="_blank"
@@ -269,7 +269,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                   Chrome
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                   href="https://www.apple.com/safari/"
                   tabindex="0"
                   target="_blank"
@@ -277,7 +277,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
                   Safari
                 </a>
                 <a
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1lyo0an-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit css-56qfk4-MuiButtonBase-root-MuiButton-root"
                   href="https://www.microsoft.com/en-us/windows/microsoft-edge"
                   tabindex="0"
                   target="_blank"

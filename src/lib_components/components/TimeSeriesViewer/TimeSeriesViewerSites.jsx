@@ -27,6 +27,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 import NoSsr from '@mui/material/NoSsr';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -1021,22 +1022,29 @@ function SiteOption(inProps) {
       </div>
     );
   }
+  // Note: wrapping each of these MenuItem elements in a MenuList
+  // is a workaround for no longer being able to utilize the MenuItem
+  // component as a standalone component outside of a Menu or MenuList.
+  // The MenuItem brings along desired characteristics for selection
+  // interactions.
   return (
-    <MenuItem
-      key={siteCode}
-      ref={innerRef}
-      selected={isFocused && !isDisabled}
-      component="div"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }}
-      {...innerProps}
-    >
-      {optionContent}
-    </MenuItem>
+    <MenuList style={{ padding: 0, margin: 0 }}>
+      <MenuItem
+        key={siteCode}
+        ref={innerRef}
+        selected={isFocused && !isDisabled}
+        component="div"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          cursor: isDisabled ? 'not-allowed' : 'pointer',
+        }}
+        {...innerProps}
+      >
+        {optionContent}
+      </MenuItem>
+    </MenuList>
   );
 }
 

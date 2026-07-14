@@ -581,7 +581,7 @@ const BasicAvailabilityInterface = (inProps) => {
       >
         View By:
       </Typography>
-      <Box key="viewMdUp" sx={{ display: { sm: 'none', md: 'block' } }}>
+      <Box key="viewMdUp" sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <ToggleButtonGroup
           exclusive
           color="primary"
@@ -597,7 +597,7 @@ const BasicAvailabilityInterface = (inProps) => {
           ))}
         </ToggleButtonGroup>
       </Box>
-      <Box sx={{ display: { sn: 'block', md: 'none' } }}>
+      <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
         <FormControl variant="filled">
           <Select
             value={currentView}
@@ -740,6 +740,9 @@ const BasicAvailabilityInterface = (inProps) => {
       margin: 'dense',
       views: ['month', 'year'],
       openTo: 'month',
+      style: {
+        width: '200px',
+      },
     };
     return (
       <Grid container spacing={3}>
@@ -771,7 +774,7 @@ const BasicAvailabilityInterface = (inProps) => {
         <Grid size={{ xs: 12, sm: 7, md: 6 }}>
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               <div
                 style={{
                   ...datePickerContainerStyleProps,

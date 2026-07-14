@@ -458,7 +458,7 @@ const RollPeriodOption = () => {
         valueLabelFormat={(x) => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
-        onMouseDown={() => { setIsActivelySetting(true); }}
+        onPointerDown={() => { setIsActivelySetting(true); }}
         onChange={(event, value) => {
           const newActiveRollPeriod = Math.min(Math.max(value, rollMin), rollMax);
           rollPeriodDispatch({

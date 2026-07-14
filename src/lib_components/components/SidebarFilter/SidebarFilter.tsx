@@ -166,7 +166,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (
       {values.map((option: SidebarFilterOption): React.JSX.Element => ((
         <MenuItem key={option.value} value={option.value}>
           <div>
-            <Typography display="block">
+            <Typography style={{ display: 'block' }}>
               {option.title}
             </Typography>
           </div>

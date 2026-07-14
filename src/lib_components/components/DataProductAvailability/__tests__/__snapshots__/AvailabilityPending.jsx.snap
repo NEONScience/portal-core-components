@@ -25,7 +25,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
             />
           </svg>
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             style="margin-top: 8px;"
           >
             Error - Unable to Load Sites
@@ -55,7 +55,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
           />
         </svg>
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           style="margin-top: 8px;"
         >
           Error - Unable to Load Sites
@@ -192,7 +192,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
           style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-p1zp9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-10gcojh-MuiTypography-root"
           >
             Loading Sites...
           </h6>
@@ -206,7 +206,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
               viewBox="22 22 44 44"
             >
               <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+                class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
                 cx="44"
                 cy="44"
                 fill="none"
@@ -229,7 +229,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
         style="display: flex; align-items: center; justify-content: center; padding: 24px; flex-direction: column;"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-p1zp9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-gutterBottom css-10gcojh-MuiTypography-root"
         >
           Loading Sites...
         </h6>
@@ -243,7 +243,7 @@ exports[`DataProductAvailability - AvailabilityPending renders correctly for Neo
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-19t5dcl-MuiCircularProgress-circle"
+              class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
               cx="44"
               cy="44"
               fill="none"

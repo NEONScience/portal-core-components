@@ -1,5 +1,5 @@
 variable "NODE_VERSION" {
-  default = "24.14"
+  default = "24.18"
 }
 variable "PORTAL_WEB_SERVER_BUILDER_TAG" {
   default = "v2.2.0"

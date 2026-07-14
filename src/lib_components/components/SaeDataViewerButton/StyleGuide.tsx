@@ -92,7 +92,7 @@ const SaeViewerDemo = (): React.JSX.Element => {
             onChange={handleChangeSite}
             style={{ width: 'fit-content', marginBottom: '32px' }}
           >
-            { renderSiteList() }
+            {renderSiteList()}
           </Select>
           <Typography
             variant="h5"
@@ -111,7 +111,7 @@ const SaeViewerDemo = (): React.JSX.Element => {
             onChange={handleChangeProduct}
             style={{ width: 'fit-content', marginBottom: '32px' }}
           >
-            { saeDataProducts.map((val: any) => ((
+            {saeDataProducts.map((val: any) => ((
               <MenuItem key={val} value={val}>
                 {`${val}`}
               </MenuItem>

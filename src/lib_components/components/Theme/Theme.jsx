@@ -540,6 +540,13 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiPickersInputBase: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.85rem',
+        },
+      },
+    },
     MuiLink: {
       defaultProps: {
         color: 'primary',

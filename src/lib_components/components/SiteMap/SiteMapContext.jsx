@@ -129,7 +129,9 @@ const validateSelection = (state) => {
     if (
       (Number.isFinite(limit) && set.size !== limit)
       || (Array.isArray(limit) && (set.size < limit[0] || set.size > limit[1]))
-    ) { valid = false; }
+    ) {
+      valid = false;
+    }
   }
   return {
     ...state,

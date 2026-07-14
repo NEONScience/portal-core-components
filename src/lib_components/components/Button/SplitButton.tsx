@@ -124,7 +124,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
   const customStyles = exists(styleOverrides) ? styleOverrides : {};
 
   return (
-    <Grid container direction="column" alignItems="center" className={widthStyle}>
+    <Grid container className={widthStyle}>
       <Grid size={{ xs: 12 }} className={widthStyle}>
         <ButtonGroup
           aria-label={`${name}-split-button`}

@@ -11,12 +11,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         >
           <div>
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             />
           </div>
           <div>
@@ -42,12 +42,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -56,7 +56,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -69,7 +69,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -82,7 +82,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -95,7 +95,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -141,12 +141,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-7s4vvs-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           />
         </div>
         <div>
@@ -172,12 +172,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -186,7 +186,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -199,7 +199,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -212,7 +212,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -225,7 +225,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -330,15 +330,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -349,12 +349,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <b>
                 Sensor:
@@ -371,12 +371,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -385,7 +385,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -398,7 +398,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -411,7 +411,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -424,7 +424,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -472,15 +472,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -491,12 +491,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <b>
               Sensor:
@@ -513,12 +513,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -527,7 +527,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -540,7 +540,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -553,7 +553,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -566,7 +566,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -671,15 +671,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -690,7 +690,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -700,12 +700,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -714,7 +714,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -727,7 +727,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -740,7 +740,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -753,7 +753,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -801,15 +801,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -820,7 +820,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -830,12 +830,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -844,7 +844,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -857,7 +857,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -870,7 +870,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -883,7 +883,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -988,15 +988,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -1007,7 +1007,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -1017,12 +1017,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -1031,7 +1031,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -1044,7 +1044,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -1057,7 +1057,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -1070,7 +1070,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -1214,15 +1214,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -1233,7 +1233,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -1243,12 +1243,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -1257,7 +1257,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -1270,7 +1270,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -1283,7 +1283,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -1296,7 +1296,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -1497,15 +1497,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -1516,7 +1516,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -1526,12 +1526,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -1540,7 +1540,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -1553,12 +1553,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Apr 2018 - Jan 2020 (1 year, 10 months)
           </p>
@@ -1567,7 +1567,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -1580,7 +1580,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -1628,15 +1628,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -1647,7 +1647,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -1657,12 +1657,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -1671,7 +1671,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -1684,12 +1684,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Apr 2018 - Jan 2020 (1 year, 10 months)
         </p>
@@ -1698,7 +1698,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -1711,7 +1711,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -1816,15 +1816,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -1835,7 +1835,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -1845,12 +1845,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -1859,17 +1859,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             ABBY - 000.010, 000.020
           </p>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             BARR - 000.030
           </p>
@@ -1878,7 +1878,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -1891,7 +1891,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
@@ -1904,7 +1904,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -1952,15 +1952,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -1971,7 +1971,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -1981,12 +1981,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -1995,17 +1995,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           ABBY - 000.010, 000.020
         </p>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           BARR - 000.030
         </p>
@@ -2014,7 +2014,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -2027,7 +2027,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
@@ -2040,7 +2040,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -2145,15 +2145,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -2164,7 +2164,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -2174,12 +2174,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -2188,7 +2188,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -2201,7 +2201,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -2214,12 +2214,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             var1, var2
           </p>
@@ -2228,7 +2228,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -2276,15 +2276,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -2295,7 +2295,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -2305,12 +2305,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -2319,7 +2319,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -2332,7 +2332,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -2345,12 +2345,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           var1, var2
         </p>
@@ -2359,7 +2359,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>
@@ -2464,15 +2464,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             style="margin-right: 8px;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
             >
               Data Product
             </h6>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                 href="https://data.neonscience.org/data-products/DP0.00000.000"
                 style="font-weight: 600;"
                 target="_blank"
@@ -2483,7 +2483,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           </div>
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
             >
               This is a product that products
             </p>
@@ -2493,12 +2493,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Release
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Latest released and provisional data (release: unknown)
           </p>
@@ -2507,7 +2507,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Sites & Positions
           </h6>
@@ -2520,7 +2520,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Date Range
           </h6>
@@ -2533,17 +2533,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Variables
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             var1, var2
           </p>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             Quality flags: qfA, qfB, qfC
           </p>
@@ -2552,7 +2552,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           class="css-yy92n4-summaryDiv"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             x/y Axes
           </h6>
@@ -2600,15 +2600,15 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           style="margin-right: 8px;"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
           >
             Data Product
           </h6>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-pkumts-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
               href="https://data.neonscience.org/data-products/DP0.00000.000"
               style="font-weight: 600;"
               target="_blank"
@@ -2619,7 +2619,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         </div>
         <div>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
           >
             This is a product that products
           </p>
@@ -2629,12 +2629,12 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Release
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Latest released and provisional data (release: unknown)
         </p>
@@ -2643,7 +2643,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Sites & Positions
         </h6>
@@ -2656,7 +2656,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Date Range
         </h6>
@@ -2669,17 +2669,17 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           Variables
         </h6>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           var1, var2
         </p>
         <p
-          class="MuiTypography-root MuiTypography-body2 css-1t0tnib-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
         >
           Quality flags: qfA, qfB, qfC
         </p>
@@ -2688,7 +2688,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
         class="css-yy92n4-summaryDiv"
       >
         <h6
-          class="MuiTypography-root MuiTypography-subtitle2 css-ysyssv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
         >
           x/y Axes
         </h6>

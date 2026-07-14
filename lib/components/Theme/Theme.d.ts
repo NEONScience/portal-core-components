@@ -90,4 +90,4 @@ export namespace COLORS {
 }
 export function getThemeSpacingNumber(spacing: any): number;
 export default theme;
-declare const theme: import("@mui/material").Theme;
+declare const theme: import("@mui/material/styles").Theme;

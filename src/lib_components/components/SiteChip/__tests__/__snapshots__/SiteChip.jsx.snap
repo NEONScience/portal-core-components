@@ -6,12 +6,12 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-10uvx6-MuiChip-root"
+        class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary css-1t1fw14-MuiChip-root"
         data-selenium="chip"
         style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary css-1oah9i9-MuiAvatar-root-avatarLarge"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
           style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 115, 207);"
         >
           <svg
@@ -27,7 +27,7 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
           </svg>
         </div>
         <span
-          class="MuiChip-label MuiChip-labelLarge css-11ej5aj-MuiChip-label-label"
+          class="MuiChip-label css-6e6m0k-MuiChip-label-label"
         >
           foo
         </span>
@@ -36,12 +36,12 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-filledPrimary css-10uvx6-MuiChip-root"
+      class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary css-1t1fw14-MuiChip-root"
       data-selenium="chip"
       style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarLarge MuiChip-avatarColorPrimary css-1oah9i9-MuiAvatar-root-avatarLarge"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
         style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 115, 207);"
       >
         <svg
@@ -57,7 +57,7 @@ exports[`SiteChip Preserves MUI chip props 1`] = `
         </svg>
       </div>
       <span
-        class="MuiChip-label MuiChip-labelLarge css-11ej5aj-MuiChip-label-label"
+        class="MuiChip-label css-6e6m0k-MuiChip-label-label"
       >
         foo
       </span>
@@ -123,12 +123,12 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-1exqdnx-MuiChip-root-outlined-outlinedSecondary"
+        class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary css-14s7ul3-MuiChip-root-outlined"
         data-selenium="site-chip"
         style="background-color: transparent;"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary css-1p6pcjj-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-f25j1d-MuiAvatar-root"
           style="width: 24px; height: 24px; margin-left: 0px; background-color: rgb(0, 44, 119);"
         >
           <svg
@@ -144,7 +144,7 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
           </svg>
         </div>
         <span
-          class="MuiChip-label MuiChip-labelSmall css-zf6g1h-MuiChip-label-label"
+          class="MuiChip-label css-1fqagtr-MuiChip-label-label"
         >
           foo
         </span>
@@ -153,12 +153,12 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary MuiChip-outlinedSecondary css-1exqdnx-MuiChip-root-outlined-outlinedSecondary"
+      class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary css-14s7ul3-MuiChip-root-outlined"
       data-selenium="site-chip"
       style="background-color: transparent;"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary css-1p6pcjj-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-f25j1d-MuiAvatar-root"
         style="width: 24px; height: 24px; margin-left: 0px; background-color: rgb(0, 44, 119);"
       >
         <svg
@@ -174,7 +174,7 @@ exports[`SiteChip Renders correctly with only a label 1`] = `
         </svg>
       </div>
       <span
-        class="MuiChip-label MuiChip-labelSmall css-zf6g1h-MuiChip-label-label"
+        class="MuiChip-label css-1fqagtr-MuiChip-label-label"
       >
         foo
       </span>
