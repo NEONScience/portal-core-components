@@ -165,7 +165,13 @@ const Menu = (props: MenuProps) => {
             >
               <Paper elevation={3} className={classes.paper}>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <Grid container spacing={4}>
+                  <Grid
+                    container
+                    spacing={4}
+                    sx={{
+                      alignItems: 'stretch',
+                    }}
+                  >
                     {apps.map((app: { name: string; description: string; url: string }) => (
                       <Grid
                         size={{ xs: (apps.length === 1) ? 12 : 6 }}

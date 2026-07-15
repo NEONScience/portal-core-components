@@ -1027,14 +1027,16 @@ const SiteMapLeaflet = () => {
       <Box className={classes.progress} style={style}>
         <CircularProgress {...progressProps} />
         <Box
-          top={0}
-          left={0}
-          bottom={8}
-          right={0}
-          position="absolute"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 8,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           <Typography variant="caption" component="div">
             {`${Math.round(progress)}%`}

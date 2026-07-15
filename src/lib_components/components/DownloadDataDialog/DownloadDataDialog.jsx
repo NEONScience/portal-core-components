@@ -823,7 +823,14 @@ export default function DownloadDataDialog() {
     >
       {renderGtmTags()}
       { /* eslint-disable object-curly-newline */ }
-      <Grid container spacing={2} style={{ marginBottom: Theme.spacing(3) }}>
+      <Grid
+        container
+        spacing={2}
+        style={{
+          alignItems: 'flex-start',
+          marginBottom: Theme.spacing(3),
+        }}
+      >
         <Grid size={{ xs: 12, sm: 6, md: 6, lg: 8 }} data-selenium="download-data-dialog.product-info">
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}

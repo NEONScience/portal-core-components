@@ -148,16 +148,18 @@ const MapSelectionButton = (inProps) => {
         aria-label={`${dialogTitle} using the observatory map`}
         {...tooltipProps}
       >
-        <Button
-          color="primary"
-          variant="contained"
-          data-selenium="map-selection-button"
-          startIcon={icon ? <GlobeIcon /> : null}
-          {...buttonProps}
-          onClick={() => setDialogOpen(true)}
-        >
-          {label}
-        </Button>
+        <span>
+          <Button
+            color="primary"
+            variant="contained"
+            data-selenium="map-selection-button"
+            startIcon={icon ? <GlobeIcon /> : null}
+            {...buttonProps}
+            onClick={() => setDialogOpen(true)}
+          >
+            {label}
+          </Button>
+        </span>
       </Tooltip>
       <Dialog
         fullScreen

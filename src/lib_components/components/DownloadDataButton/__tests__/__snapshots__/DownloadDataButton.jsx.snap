@@ -467,7 +467,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
             />
             <div
               class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
-              style="margin-bottom: 24px;"
+              style="align-items: flex-start; margin-bottom: 24px;"
             >
               <div
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-8 css-42mm2a-MuiGrid-root"

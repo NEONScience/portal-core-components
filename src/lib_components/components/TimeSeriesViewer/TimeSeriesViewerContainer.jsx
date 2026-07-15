@@ -726,7 +726,7 @@ export default function TimeSeriesViewerContainer() {
     return (
       <div className={classes.statusBar}>
         <Grid container>
-          <Grid width={260}>
+          <Grid sx={{ width: '260px' }}>
             <ComputerIcon fontSize="medium" className={classes.statusBarIcon} />
             <div style={{ display: 'inline-flex', height: '24px' }}>
               <Typography variant="subtitle2" className={classes.statusBarText}>

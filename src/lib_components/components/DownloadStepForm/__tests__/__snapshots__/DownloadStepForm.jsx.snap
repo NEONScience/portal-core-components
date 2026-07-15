@@ -6,7 +6,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
         data-selenium="download-data-dialog.step-form.documentation"
       >
         <div
@@ -194,7 +194,7 @@ exports[`DownloadStepForm Step documentation renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       data-selenium="download-data-dialog.step-form.documentation"
     >
       <div
@@ -1004,7 +1004,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
         data-selenium="download-data-dialog.step-form.provisional-data"
       >
         <div
@@ -1185,7 +1185,7 @@ exports[`DownloadStepForm Step provisionalData renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       data-selenium="download-data-dialog.step-form.provisional-data"
     >
       <div
@@ -1571,7 +1571,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
       >
         <div
           class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
@@ -1836,7 +1836,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-zjhuaj-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-2 css-x40ulv-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-md-6 css-204a8q-MuiGrid-root"
