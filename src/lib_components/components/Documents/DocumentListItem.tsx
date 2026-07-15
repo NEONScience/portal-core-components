@@ -57,8 +57,13 @@ import {
 
 const COMPONENT_XS_UPPER = 480;
 const COMPONENT_SM_UPPER = 805;
+const COMPONENT_SECONDARY_ACTION_BREAKPOINT = 600;
 
-const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+type MakeStylesProps = {
+  fullSecondaryAction: boolean;
+};
+
+const useStyles = makeStyles<MakeStylesProps>()((muiTheme: NeonTheme, { fullSecondaryAction }) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
@@ -101,6 +106,7 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
     display: 'flex',
     alignItems: 'center',
     height: '100%',
+    width: fullSecondaryAction ? '200px' : '60px',
   },
   fileTypeChip: {
     marginRight: '5px',
@@ -300,7 +306,6 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  const { classes } = useStyles();
   // eslint-disable-next-line max-len
   const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
   const [
@@ -309,10 +314,13 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   ]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(0);
   let atComponentXs = false;
   let atComponentSm = false;
+  let fullSecondaryAction = true;
   if (componentWidth > 0) {
     atComponentXs = (componentWidth <= COMPONENT_XS_UPPER);
     atComponentSm = (componentWidth >= COMPONENT_XS_UPPER) && (componentWidth < COMPONENT_SM_UPPER);
+    fullSecondaryAction = (componentWidth >= COMPONENT_SECONDARY_ACTION_BREAKPOINT);
   }
+  const { classes } = useStyles({ fullSecondaryAction });
   const [
     state,
     dispatch,
@@ -552,7 +560,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         </div>
       );
     }
-    if (atComponentXs) {
+    if (!fullSecondaryAction) {
       return (
         <div className={classes.listItemSecondaryActionContainer}>
           <Tooltip
@@ -585,6 +593,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     const button = !hasAppliedVariants
       ? (
         <Button
+          fullWidth
           variant="outlined"
           disabled={isDownloading || isDownloadError}
           startIcon={isDownloading
@@ -603,6 +612,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         </Button>
       ) : (
         <SplitButton
+          isFullWidth
           name={`${appliedDocument.name}-document-list-item-download-split-button`}
           selectedOption={`${typeTitleString}`}
           selectedOptionDisplayCallback={(selectedOption: string): string => (
@@ -630,6 +640,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
             if (exists(nextSelectedVariant)) {
               handleSelectedVariantChanged(nextSelectedVariant as NeonDocument);
             }
+          }}
+          styleOverrides={{
+            padding: '6px 10px',
           }}
           buttonGroupProps={{
             size: 'small',
