@@ -17,4 +17,4 @@ app.get('/core-components-next{*splat}', (req, res) => {
 app.get('/{*splat}', (req, res) => {
   res.status(404).send();
 });
-app.listen(3000);
+app.listen(3010);

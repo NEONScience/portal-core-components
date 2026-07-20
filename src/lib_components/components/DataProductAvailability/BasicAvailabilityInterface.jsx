@@ -736,8 +736,6 @@ const BasicAvailabilityInterface = (inProps) => {
       marginBottom: '4px',
     };
     const datePickerProps = {
-      inputVariant: 'outlined',
-      margin: 'dense',
       views: ['month', 'year'],
       openTo: 'month',
       style: {
@@ -792,6 +790,9 @@ const BasicAvailabilityInterface = (inProps) => {
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.value[1])}
                   slotProps={{
                     textField: {
+                      variant: 'outlined',
+                      readOnly: true,
+                      margin: 'dense',
                       size: 'small',
                     },
                   }}
@@ -809,6 +810,9 @@ const BasicAvailabilityInterface = (inProps) => {
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.validValues[1])}
                   slotProps={{
                     textField: {
+                      variant: 'outlined',
+                      readOnly: true,
+                      margin: 'dense',
                       size: 'small',
                     },
                   }}

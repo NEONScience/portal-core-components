@@ -168,7 +168,7 @@ const renderSilentAuthSection = (
   let silentAuthExampleContent: React.JSX.Element = (
     <>
       <ExampleBlock>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ width: '100%' }}>
           <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
@@ -280,7 +280,7 @@ import NeonAuth from 'portal-core-components/lib/components/NeonAuth';
         flow for each action respectively.
       </DocBlock>
       <ExampleBlock>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ width: '100%' }}>
           <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
