@@ -33,13 +33,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="theme-color" content="#000000" />
-        <link rel="manifest" href="/core-components-next/manifest.json" />
-        <link rel="shortcut icon" href="/core-components-next/favicon.ico?v=201912" />
+        <link rel="manifest" href="/core-components/manifest.json" />
+        <link rel="shortcut icon" href="/core-components/favicon.ico?v=201912" />
         <link rel="preconnect" href="https://www.neonscience.org" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           data-meta="drupal-theme"
-          href={`/core-components-next/assets/css/drupal-theme.${DRUPAL_THEME_CSS_ASSET_HASH}.min.css`}
+          href={`/core-components/assets/css/drupal-theme.${DRUPAL_THEME_CSS_ASSET_HASH}.min.css`}
         />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <script

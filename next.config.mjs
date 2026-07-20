@@ -18,7 +18,7 @@ if (process.env.NEXT_PUBLIC_NEON_ALLOWED_DEV_ORIGIN) {
 const nextConfig = {
   output: isDevEnv ? undefined : 'export',
   distDir: 'build',
-  basePath: '/core-components-next',
+  basePath: '/core-components',
   reactStrictMode: false,
   trailingSlash: false,
   compiler: {

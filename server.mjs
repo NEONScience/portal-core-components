@@ -10,8 +10,8 @@ const serveApp = express.static(
   },
 );
 
-app.use('/core-components-next', serveApp);
-app.get('/core-components-next{*splat}', (req, res) => {
+app.use('/core-components', serveApp);
+app.get('/core-components{*splat}', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 app.get('/{*splat}', (req, res) => {

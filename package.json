@@ -3,7 +3,7 @@
   "version": "3.0.0-next",
   "main": "./lib/index.js",
   "private": true,
-  "homepage": "http://localhost:3010/core-components-next",
+  "homepage": "http://localhost:3010/core-components",
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
