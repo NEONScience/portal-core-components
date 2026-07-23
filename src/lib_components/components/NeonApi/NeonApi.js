@@ -76,6 +76,26 @@ const getJsonAjaxRequest = (
 };
 
 /**
+ * Gets the RxJS Ajax observable for making an API request to the specified URL
+ * with optional headers.
+ * @param {string} url The URL to make the API request to
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @param {boolean} withCredentials Option to include credentials with a CORS request
+ * @return The RxJS Ajax Observable
+ */
+const getJsonAjaxObservable = (
+  url,
+  headers = undefined,
+  includeToken = true,
+  withCredentials = undefined,
+) => {
+  if (typeof url !== 'string' || !url.length) { return of(null); }
+  const request = getJsonAjaxRequest(url, headers, includeToken, withCredentials);
+  return ajax(request);
+};
+
+/**
  * Gets the RxJS observable for making an API request to the specified URL
  * with optional headers.
  * @param {string} url The URL to make the API request to
@@ -89,11 +109,9 @@ const getJsonObservable = (
   headers = undefined,
   includeToken = true,
   withCredentials = undefined,
-) => {
-  if (typeof url !== 'string' || !url.length) { return of(null); }
-  const request = getJsonAjaxRequest(url, headers, includeToken, withCredentials);
-  return mapResponse(ajax(request));
-};
+) => (
+  mapResponse(getJsonAjaxObservable(url, headers, includeToken, withCredentials))
+);
 
 /**
  * Gets the RxJS HEAD AjaxRequest
@@ -193,6 +211,17 @@ const NeonApi = {
    * @return {Object} The resulting header object with API token set.
    */
   getApiTokenHeader: (headers = undefined) => getApiTokenHeader(headers),
+  /**
+   * Gets the RxJS observable Ajax request for making an API request to the
+   * specified URL with optional headers.
+   * @param {string} url The URL to make the API request to
+   * @param {Object|undefined} headers The headers to add to the request
+   * @param {boolean} includeToken Option to include the API token in the request
+   * @return The RxJS Ajax Observable
+   */
+  getJsonAjaxObservable: (url, headers = undefined, includeToken = true) => (
+    getJsonAjaxObservable(url, headers, includeToken)
+  ),
   /**
    * Gets the RxJS observable for making an API request to the specified URL
    * with optional headers.

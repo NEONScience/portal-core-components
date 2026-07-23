@@ -40,10 +40,12 @@ export interface INeonEnvironment {
     getRootAuthApiPath: () => string;
     getRootAuth0ApiPath: () => string;
     getRootDownloadApiPath: () => string;
+    getRootVizApiPath: () => string;
     getApiPath: Record<string, () => string>;
     getApiLdPath: Record<string, () => string>;
     getAuthApiPath: Record<string, () => string>;
     getDownloadApiPath: Record<string, () => string>;
+    getVizApiPath: Record<string, () => string>;
     getDataProductTaxonTypesPath: () => string;
     getTaxonTypeDataProductsPath: () => string;
     getAuthPath: Record<string, () => string>;
@@ -78,6 +80,7 @@ export interface INeonEnvironment {
     getFullAuthApiPath: (path: string, useWs: boolean) => string;
     getFullGraphqlPath: () => string;
     getFullDownloadApiPath: (path: string) => string;
+    getFullVizApiPath: (path: string) => string;
     getFullAuthPath: (path: string) => string;
     requireCors: () => boolean;
 }

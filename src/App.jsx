@@ -74,6 +74,9 @@ const ReleaseFilterStyleGuide = React.lazy(
   () => import('./lib_components/components/ReleaseFilter/StyleGuide'),
 );
 const SaeDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/SaeDataViewer/StyleGuide'),
+);
+const SaeDataViewerButtonStyleGuide = React.lazy(
   () => import('./lib_components/components/SaeDataViewerButton/StyleGuide'),
 );
 const SiteChipStyleGuide = React.lazy(
@@ -308,6 +311,15 @@ const sidebarLinks = [
   {
     name: 'SAE Data Viewer Button',
     hash: '#SaeDataViewerButton',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <SaeDataViewerButtonStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'SAE Data Viewer',
+    hash: '#SaeDataViewer',
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <SaeDataViewerStyleGuide />

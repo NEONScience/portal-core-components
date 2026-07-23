@@ -1338,7 +1338,7 @@ const SitesSelect = () => {
           isMulti
           isSearchable
           isDisabled={isDisabled}
-          clearable={false}
+          isClearable={false}
           classes={classes}
           styles={buildSelectStyles(theme)}
           aria-label="Add Sites"

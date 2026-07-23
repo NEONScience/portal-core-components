@@ -254,7 +254,7 @@ export function TimeSeriesViewerSummary() {
   } = state.selection;
 
   const skeletonProps = {
-    variant: 'rect',
+    variant: 'rectangular',
     height: 10,
     style: { marginTop: '4px', marginBottom: '12px' },
   };
@@ -539,8 +539,6 @@ export default function TimeSeriesViewerContainer() {
   const { classes: tabsClasses } = useTabsStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const belowMd = useMediaQuery(theme.breakpoints.down('md'));
-
-  // console.log('TIME SERIES VIEWER STATE:', state);
 
   const initialTab = DEFAULT_TAB;
   const initialContainerState = {

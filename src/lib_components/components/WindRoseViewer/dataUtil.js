@@ -57,9 +57,12 @@ export const getLikeMatchers = (matchers, activeMatcher) => {
  * @param {*} release
  * @param {*} site
  * @param {*} month
+ * @param {*} isViewerLimited
  */
-export const getDataApiRequest = (productCode, release, site, month) => {
-  const root = NeonEnvironment.getFullApiPath('data');
+export const getDataApiRequest = (productCode, release, site, month, isViewerLimited) => {
+  const root = isViewerLimited
+    ? NeonEnvironment.getFullApiPath('demoData')
+    : NeonEnvironment.getFullApiPath('data');
   const hasRelease = isStringNonEmpty(release);
   const releaseParam = hasRelease
     ? `?release=${release}`

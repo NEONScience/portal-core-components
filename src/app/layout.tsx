@@ -76,6 +76,10 @@ export default function RootLayout({
             __html: `window.NEON_SERVER_DATA = "__NEON_SERVER_DATA__";`,
           }}
         ></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.7.3.min.js"></script>
       </head>
       <body>
         <noscript> You need to enable JavaScript to run this app. </noscript>

@@ -7,7 +7,7 @@ export namespace PACKAGE_TYPE {
  */
 export const SPATIAL_INDEX_DEFAULT: "000";
 export function getLikeMatchers(matchers: any, activeMatcher: any): any;
-export function getDataApiRequest(productCode: any, release: any, site: any, month: any): string;
+export function getDataApiRequest(productCode: any, release: any, site: any, month: any, isViewerLimited: any): string;
 export function getApiDataQueryParams(action: any): {
     productCode: any;
     release: any;

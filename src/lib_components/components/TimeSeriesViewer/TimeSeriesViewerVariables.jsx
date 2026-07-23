@@ -466,7 +466,7 @@ export default function TimeSeriesViewerVariables() {
           isSearchable
           blurInputOnSelect="true"
           isDisabled={isDisabled}
-          clearable={false}
+          isClearable={false}
           classes={classes}
           styles={builbSelectStyles(theme)}
           aria-label="Add Variables"

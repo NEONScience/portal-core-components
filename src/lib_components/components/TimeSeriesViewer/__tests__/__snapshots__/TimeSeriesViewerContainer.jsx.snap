@@ -21,19 +21,19 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           </div>
           <div>
             <span
-              class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
               style="width: 200px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
             />
             <span
-              class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
               style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
             />
             <span
-              class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
               style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
             />
             <span
-              class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
               style="width: 125px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
             />
           </div>
@@ -61,7 +61,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -74,7 +74,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -87,7 +87,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -151,19 +151,19 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
         </div>
         <div>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 200px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 125px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -191,7 +191,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -204,7 +204,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -217,7 +217,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -390,7 +390,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -403,7 +403,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -416,7 +416,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -532,7 +532,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -545,7 +545,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -558,7 +558,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -719,7 +719,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -732,7 +732,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -745,7 +745,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -849,7 +849,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -862,7 +862,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -875,7 +875,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1036,7 +1036,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1049,7 +1049,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1062,7 +1062,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1262,7 +1262,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1275,7 +1275,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1288,7 +1288,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1545,7 +1545,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1572,7 +1572,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1676,7 +1676,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1703,7 +1703,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -1883,7 +1883,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -1896,7 +1896,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Variables
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -2019,7 +2019,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -2032,7 +2032,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Variables
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -2193,7 +2193,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -2206,7 +2206,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -2324,7 +2324,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -2337,7 +2337,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -2512,7 +2512,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Sites & Positions
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -2525,7 +2525,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
             Date Range
           </h6>
           <span
-            class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
             style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
           />
         </div>
@@ -2648,7 +2648,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Sites & Positions
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>
@@ -2661,7 +2661,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
           Date Range
         </h6>
         <span
-          class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
           style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
         />
       </div>

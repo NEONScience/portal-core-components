@@ -43,6 +43,7 @@ export const requiredEnvironmentVars = [
 export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_PATH_LD_API',
   'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
+  'NEXT_PUBLIC_NEON_PATH_VIZ_API',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
@@ -96,11 +97,13 @@ export interface INeonEnvironment {
   getRootAuthApiPath: () => string;
   getRootAuth0ApiPath: () => string;
   getRootDownloadApiPath: () => string;
+  getRootVizApiPath: () => string;
 
   getApiPath: Record<string, () => string>;
   getApiLdPath: Record<string, () => string>;
   getAuthApiPath: Record<string, () => string>;
   getDownloadApiPath: Record<string, () => string>;
+  getVizApiPath: Record<string, () => string>;
 
   getDataProductTaxonTypesPath: () => string;
   getTaxonTypeDataProductsPath: () => string;
@@ -146,6 +149,7 @@ export interface INeonEnvironment {
   getFullAuthApiPath: (path: string, useWs: boolean) => string;
   getFullGraphqlPath: () => string;
   getFullDownloadApiPath: (path: string) => string;
+  getFullVizApiPath: (path: string) => string;
 
   getFullAuthPath: (path: string) => string;
 
@@ -174,6 +178,7 @@ const NeonEnvironment: INeonEnvironment = {
   getRootAuthApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH_API || '/api/auth/v0',
   getRootAuth0ApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH0_API || '/auth0',
   getRootDownloadApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
+  getRootVizApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_VIZ_API || '/api/visualizations/v0',
 
   getApiPath: {
     data: (): string => '/data',
@@ -198,6 +203,11 @@ const NeonEnvironment: INeonEnvironment = {
     manifestRollup: (): string => '/manifest/rollup',
     prototypeDownloadStream: (): string => '/prototype/stream',
     prototypeManifestRollup: (): string => '/prototype/manifest/rollup',
+  },
+
+  getVizApiPath: {
+    saeBokehPlot: (): string => '/sae/bokeh-plot',
+    saeDemoBokehPlot: (): string => '/sae/demo/bokeh-plot',
   },
 
   getApiLdPath: {
@@ -534,6 +544,14 @@ const NeonEnvironment: INeonEnvironment = {
     const root = NeonEnvironment.getRootDownloadApiPath();
     return NeonEnvironment.getDownloadApiPath[path]
       ? `${host}${root}${NeonEnvironment.getDownloadApiPath[path]()}`
+      : `${host}${root}`;
+  },
+
+  getFullVizApiPath: (path: string = ''): string => {
+    const host = NeonEnvironment.getApiHost();
+    const root = NeonEnvironment.getRootVizApiPath();
+    return NeonEnvironment.getVizApiPath[path]
+      ? `${host}${root}${NeonEnvironment.getVizApiPath[path]()}`
       : `${host}${root}`;
   },
 

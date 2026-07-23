@@ -30,6 +30,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { parse } from 'papaparse';
 
+import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
@@ -49,7 +50,8 @@ import {
 } from './dataUtil';
 import { resolveProps } from '../../util/defaultProps';
 import { NeonApiResponse } from '../../types/neonApi';
-import { isStringNonEmpty, exists } from '../../util/typeUtil';
+import { exists } from '../../util/typeUtil';
+import { getUserAgentHeader } from '../../util/requestUtil';
 
 interface Position {
   horizontal: string;
@@ -146,26 +148,6 @@ export const useDispatchContext = (): Dispatch<AnyAction> => {
     throw new Error('Failed to initialize dispatch context');
   }
   return dispatchContext;
-};
-
-const buildProductQuery = (productCode: string, release?: string): string => {
-  const hasRelease = isStringNonEmpty(release);
-  const releaseArgument = !hasRelease ? '' : `, release: "${release as string}"`;
-  return `query Product {
-    product(productCode: "${productCode}"${releaseArgument}) {
-      productCode
-      productName
-      productDescription
-      siteCodes {
-        siteCode
-        availableMonths
-        availableReleases {
-          release
-          availableMonths
-        }
-      }
-    }
-  }`;
 };
 
 type DataProductResponse = { 'product': Record<string, unknown> };
@@ -452,15 +434,27 @@ const cancelWindRose$ = new Subject<void>();
  * Gets the data endpoint AJAX observable to subscribe to
  * @param {*} action
  * @param {*} takeUntilOperator
+ * @param {*} limited
  */
 const buildFetchProductObservable = (
   action: AnyAction,
   takeUntilOperator: MonoTypeOperatorFunction<unknown>,
+  limited: boolean,
 ): Observable<unknown> => {
   const fetchProductAction: FetchProductAction = action as FetchProductAction;
-  const productObs = NeonGraphQL.getGraphqlQuery(
-    buildProductQuery(fetchProductAction.productCode, fetchProductAction.release),
-  ) as Observable<AjaxResponse<NeonApiResponse<DataProductResponse>>>;
+  let productObs;
+  if (limited) {
+    productObs = NeonGraphQL.getDemoDataProductByCode(
+      fetchProductAction.productCode,
+      true,
+    ) as Observable<AjaxResponse<NeonApiResponse<DataProductResponse>>>;
+  } else {
+    productObs = NeonGraphQL.getDataProductByCode(
+      fetchProductAction.productCode,
+      fetchProductAction.release,
+      true,
+    ) as Observable<AjaxResponse<NeonApiResponse<DataProductResponse>>>;
+  }
   return productObs.pipe(
     // eslint-disable-next-line max-len
     mergeMap((response: AjaxResponse<NeonApiResponse<DataProductResponse>>): Observable<unknown> => {
@@ -502,6 +496,9 @@ const buildFilesAjaxObservable = (
       crossDomain: true,
       url: dataFileUrl,
       responseType: 'text',
+      headers: {
+        'User-Agent': getUserAgentHeader('Wind Rose Viewer'),
+      },
     })
   ));
   ajaxObservables.push(
@@ -517,6 +514,9 @@ const buildFilesAjaxObservable = (
         crossDomain: true,
         url: dataFilesInfo.variablesFileUrl,
         responseType: 'text',
+        headers: {
+          'User-Agent': getUserAgentHeader('Wind Rose Viewer'),
+        },
       }),
     );
   }
@@ -554,64 +554,82 @@ const buildFilesAjaxObservable = (
  * Gets the data endpoint AJAX observable to subscribe to
  * @param {*} action
  * @param {*} takeUntilOperator
+ * @param {*} sessionHeaders
  */
 const buildDataApiObservable = (
   action: AnyAction,
   takeUntilOperator: MonoTypeOperatorFunction<unknown>,
+  limited: boolean,
+  sessionHeaders: Record<string, string>,
 ): Observable<unknown> => {
   // Get query params to send with request
   const queryParams = getApiDataQueryParams(action);
+  const url = getDataApiRequest(
+    queryParams.productCode,
+    queryParams.release,
+    queryParams.site,
+    queryParams.month,
+    limited,
+  );
   // XHR for API data endpoint to retrieve available files
-  return ajax({
-    method: 'GET',
-    crossDomain: true,
-    responseType: 'json',
-    url: getDataApiRequest(
-      queryParams.productCode,
-      queryParams.release,
-      queryParams.site,
-      queryParams.month,
-    ),
-  }).pipe(
+  const headers = {
+    ...sessionHeaders,
+  };
+  return (NeonApi.getJsonAjaxObservable(url, headers) as Observable<AjaxResponse<unknown>>).pipe(
     mergeMap((response: AjaxResponse<unknown>): Observable<unknown> => (
       buildFilesAjaxObservable(action, response, takeUntilOperator)
     )),
     catchError((error: Record<string, unknown>): ObservableInput<any> => {
       const response = error && error.xhr ? (error.xhr as XMLHttpRequest).response : null;
-      // eslint-disable-next-line max-len
-      return of(ActionCreator.fetchWindRoseFailed(error, response, (action as FetchWindRoseAction)));
+      return of(ActionCreator.fetchWindRoseFailed(
+        error,
+        response,
+        (action as FetchWindRoseAction),
+      ));
     }),
     takeUntilOperator,
   );
 };
 
-/**
- * Epic for fetching wind rose data
- * @param {*} action$ Action stream
- */
-const fetchProductEpic: Epic = (action$: Observable<AnyAction>): Observable<unknown> => ((
-  action$.pipe(
-    filter((action: AnyAction) => action.type === ActionTypes.FETCH_PRODUCT),
-    switchMap((action: AnyAction) => concat(
-      of(ActionCreator.fetchProductStarted()),
-      buildFetchProductObservable(action, takeUntil(cancelProduct$)),
-    )),
-  )
-));
+type LimitedEpicCreator = (limited: boolean) => Epic;
+type SessionHeadersEpicCreator = (limited: boolean, sessionHeaders: Record<string, string>) => Epic;
 
 /**
  * Epic for fetching wind rose data
- * @param {*} action$ Action stream
+ * @param {*} limited Viewer limited setting
  */
-const fetchWindRoseDataEpic: Epic = (action$: Observable<AnyAction>): Observable<unknown> => ((
-  action$.pipe(
-    filter((action: AnyAction) => action.type === ActionTypes.FETCH_WIND_ROSE),
-    switchMap((action: AnyAction) => concat(
-      of(ActionCreator.fetchWindRoseWorking()),
-      buildDataApiObservable(action, takeUntil(cancelWindRose$)),
-    )),
-  )
-));
+const createFetchProductEpic: LimitedEpicCreator = (
+  limited: boolean,
+): Epic => (
+  (action$: Observable<AnyAction>): Observable<unknown> => ((
+    action$.pipe(
+      filter((action: AnyAction) => action.type === ActionTypes.FETCH_PRODUCT),
+      switchMap((action: AnyAction) => concat(
+        of(ActionCreator.fetchProductStarted()),
+        buildFetchProductObservable(action, takeUntil(cancelProduct$), limited),
+      )),
+    )
+  ))
+);
+
+/**
+ * Epic for fetching wind rose data
+ * @param {*} sessionHeaders Action stream
+ */
+const createFetchWindRoseDataEpic: SessionHeadersEpicCreator = (
+  limited: boolean,
+  sessionHeaders: Record<string, string>,
+): Epic => (
+  (action$: Observable<AnyAction>): Observable<unknown> => ((
+    action$.pipe(
+      filter((action: AnyAction) => action.type === ActionTypes.FETCH_WIND_ROSE),
+      switchMap((action: AnyAction) => concat(
+        of(ActionCreator.fetchWindRoseWorking()),
+        buildDataApiObservable(action, takeUntil(cancelWindRose$), limited, sessionHeaders),
+      )),
+    )
+  ))
+);
 
 interface ProviderProps {
   productCode: Nullable<string>;
@@ -632,10 +650,15 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     children,
   } = props;
   const [neonContextState] = NeonContext.useNeonContextState();
+  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const { sessionHeaders } = neonContextSessionState;
   const {
     isFinal: neonContextIsFinal,
     hasError: neonContextHasError,
   } = neonContextState;
+  // Check preconditions for initial status
+  const preconditionsSatisfied = neonContextSessionState.ready;
+  const isViewerLimited = !neonContextSessionState.canAccessData;
   const initialState = {
     ...getDefaultState(),
     productCode: propsProductCode,
@@ -676,10 +699,15 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
         break;
     }
   }, []);
+  const sessionHeadersStringified: string = JSON.stringify(sessionHeaders);
   useEffect(() => {
+    if (!preconditionsSatisfied) { return () => {}; }
+    const appliedSessionHeaders = JSON.parse(sessionHeadersStringified);
     const subscriptions: Subscription[] = [
-      fetchProductEpic(actionStream$).subscribe(enhancedDispatch as EpicSubscribeFunc),
-      fetchWindRoseDataEpic(actionStream$).subscribe(enhancedDispatch as EpicSubscribeFunc),
+      createFetchProductEpic(isViewerLimited)(actionStream$)
+        .subscribe(enhancedDispatch as EpicSubscribeFunc),
+      createFetchWindRoseDataEpic(isViewerLimited, appliedSessionHeaders)(actionStream$)
+        .subscribe(enhancedDispatch as EpicSubscribeFunc),
     ];
     // Cleanup subscription when component unmounts
     return () => {
@@ -688,7 +716,12 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       cancelProduct$.next();
       cancelWindRose$.next();
     };
-  }, [enhancedDispatch]);
+  }, [
+    enhancedDispatch,
+    preconditionsSatisfied,
+    isViewerLimited,
+    sessionHeadersStringified,
+  ]);
   useEffect(() => {
     if (neonContextIsFinal || neonContextHasError) {
       enhancedDispatch(ActionCreator.storeFinalizedNeonContextState(neonContextState));
@@ -702,6 +735,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
   const productStringified: string = JSON.stringify(product);
   useEffect(() => {
     if (!neonContextIsFinal) { return; }
+    if (!preconditionsSatisfied) { return; }
     if (exists(product)) { return; }
     if ((productFetchState as FetchStatusState).status !== AsyncStateType.IDLE) {
       return;
@@ -716,9 +750,11 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     propsRelease,
     product,
     productStringified,
+    preconditionsSatisfied,
   ]);
   useEffect(() => {
     if (!neonContextIsFinal) { return; }
+    if (!preconditionsSatisfied) { return; }
     if (!exists(product)) { return; }
     if (!exists(dataFetchState)
         || ((dataFetchState as FetchStatusState).status === AsyncStateType.IDLE)) {
@@ -732,6 +768,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     release,
     query,
     dataFetchState,
+    preconditionsSatisfied,
   ]);
   useEffect(() => {
     if (!neonContextIsFinal) { return; }
