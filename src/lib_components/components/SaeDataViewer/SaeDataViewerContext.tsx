@@ -337,6 +337,12 @@ const reducer = (
   action: AnyAction,
 ): SaeDataViewerContextState => {
   const newState = { ...state };
+  const getDefaultProduct = (inState: SaeDataViewerContextState): SaeDataProduct => (
+    inState.controlsState.saeDataProducts
+      .find((checkSaeDataProduct: SaeDataProduct): boolean => (
+        checkSaeDataProduct.name.localeCompare(DEFAULT_SAE_PRODUCT.name) === 0
+      )) as SaeDataProduct
+  );
   const applyControlStatus = (inState: SaeDataViewerContextState): void => {
     if (inState.controlsState.status === ControlStatus.VALID) {
       // eslint-disable-next-line no-param-reassign
@@ -376,18 +382,17 @@ const reducer = (
     case 'fetchSaeProductsSucceeded':
       newState.productsFetch.fetchStatus = FetchStatus.SUCCESS;
       (action.products as SaeDataProductData[]).forEach((productData: SaeDataProductData): void => {
-        newState.controlsState.saeDataProducts.forEach(
-          (saeDataProduct: SaeDataProduct): void => {
-            if (saeDataProduct.productCodes.includes(productData.productCode)) {
-              if (!saeDataProduct.productData) {
-                // eslint-disable-next-line no-param-reassign
-                saeDataProduct.productData = {};
+        newState.controlsState.saeDataProducts = newState.controlsState.saeDataProducts
+          .map((saeDataProduct: SaeDataProduct): SaeDataProduct => {
+            const mergedDataProduct = { ...saeDataProduct };
+            if (mergedDataProduct.productCodes.includes(productData.productCode)) {
+              if (!mergedDataProduct.productData) {
+                mergedDataProduct.productData = {};
               }
-              // eslint-disable-next-line no-param-reassign
-              saeDataProduct.productData[productData.productCode] = productData;
+              mergedDataProduct.productData[productData.productCode] = productData;
             }
-          },
-        );
+            return mergedDataProduct;
+          });
         if (newState.saeProduct.productCodes.includes(productData.productCode)) {
           if (!newState.saeProduct.productData) {
             newState.saeProduct.productData = {};
@@ -436,22 +441,14 @@ const reducer = (
       // eslint-disable-next-line no-case-declarations
       let saeDataProduct: SaeDataProduct;
       if (!exists(SAE_DATA_PRODUCT_MAP[coercedProductName])) {
-        const defaultProduct: SaeDataProduct = newState.controlsState.saeDataProducts
-          .find((checkSaeDataProduct: SaeDataProduct): boolean => (
-            checkSaeDataProduct.name.localeCompare(DEFAULT_SAE_PRODUCT.name) === 0
-          )) as SaeDataProduct;
-        saeDataProduct = defaultProduct;
+        saeDataProduct = getDefaultProduct(newState);
       } else {
         const findSaeDataProduct = newState.controlsState.saeDataProducts
           .find((checkSaeDataProduct: SaeDataProduct): boolean => (
             checkSaeDataProduct.name.localeCompare(coercedProductName) === 0
           ));
         if (!findSaeDataProduct) {
-          const defaultProduct: SaeDataProduct = newState.controlsState.saeDataProducts
-            .find((checkSaeDataProduct: SaeDataProduct): boolean => (
-              checkSaeDataProduct.name.localeCompare(DEFAULT_SAE_PRODUCT.name) === 0
-            )) as SaeDataProduct;
-          saeDataProduct = defaultProduct;
+          saeDataProduct = getDefaultProduct(newState);
         } else {
           saeDataProduct = findSaeDataProduct;
         }

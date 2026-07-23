@@ -158,7 +158,7 @@ const defaultProps: SaeDataViewerDatePickerProps = {
   sidebarMode: false,
 };
 
-const SaeDataViewerDatePicker: React.FC = (
+const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
   inProps: SaeDataViewerDatePickerProps,
 ): React.JSX.Element => {
   const props = resolveProps(defaultProps, inProps) as SaeDataViewerDatePickerProps;

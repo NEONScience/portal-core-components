@@ -3,5 +3,8 @@ export declare enum DateSelectionType {
     RANGE = "RANGE",
     SINGLE = "SINGLE"
 }
-declare const SaeDataViewerDatePicker: React.FC;
+interface SaeDataViewerDatePickerProps {
+    sidebarMode?: boolean;
+}
+declare const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps>;
 export default SaeDataViewerDatePicker;
