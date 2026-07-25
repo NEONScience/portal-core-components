@@ -12,8 +12,6 @@ describe('NeonEnvironment', () => {
       'isValid',
       'isDevEnv',
       'isProdEnv',
-      'useGraphql',
-      'showAopViewer',
       'authDisableWs',
     ].forEach((prop) => {
       test(`${prop}`, () => {

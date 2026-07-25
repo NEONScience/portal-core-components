@@ -747,9 +747,10 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
       && updated.dateRange.value[0] <= file.yearMonth
       && file.yearMonth <= updated.dateRange.value[1]
     ))
-    .map((file) => ({
+    .map((file, index) => ({
       ...file,
       tableData: { checked: updated.s3Files.valueMap[file.url] || false },
+      id: `${file.name}-${index}`,
     }));
   const filterKeys = Object.keys(updated.s3Files.valueLookups || {});
   filterKeys.forEach((key) => {
@@ -864,8 +865,8 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
     Object.keys(previousState.s3FileFetches)
       .filter((key) => ['notRequested', 'error'].includes(previousState.s3FileFetches[key]))
       .filter((key) => {
-        const site = key.substr(0, 4);
-        const yearMonth = key.substr(5, 7);
+        const site = key.slice(0, 4);
+        const yearMonth = key.slice(5, 12);
         return (
           newState.sites.value.includes(site)
           && newState.dateRange.value[0] <= yearMonth
@@ -1253,8 +1254,8 @@ const Provider = (inProps) => {
     dispatch({ type: 'setS3FileFetchesCalled', keys });
     const observable = forkJoinWithProgress(
       keys.map((key) => {
-        const site = key.substr(0, 4);
-        const yearMonth = key.substr(5, 7);
+        const site = key.slice(0, 4);
+        const yearMonth = key.slice(5, 12);
         const release = currentState.release && currentState.release.value
           ? currentState.release.value
           : null;

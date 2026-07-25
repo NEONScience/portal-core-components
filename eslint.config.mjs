@@ -101,6 +101,7 @@ const rules = {
 
   '@next/next/no-img-element': 'off',
 
+  '@typescript-eslint/no-deprecated': 'error',
   '@typescript-eslint/no-shadow': 'error',
   '@typescript-eslint/no-use-before-define': 'warn',
   '@typescript-eslint/no-unused-vars': 'off',

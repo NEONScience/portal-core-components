@@ -581,7 +581,7 @@ const BasicAvailabilityInterface = (inProps) => {
       >
         View By:
       </Typography>
-      <Box key="viewMdUp" sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <ToggleButtonGroup
           exclusive
           color="primary"

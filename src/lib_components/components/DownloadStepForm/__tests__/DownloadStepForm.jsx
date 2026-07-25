@@ -10,7 +10,7 @@ import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import DownloadStepForm from '../DownloadStepForm';
 
-jest.mock('material-table', () => mockReactComponent('material-table'));
+jest.mock('@material-table/core', () => mockReactComponent('@material-table/core'));
 jest.mock('../../DataProductAvailability/DataProductAvailability', () =>
   mockReactComponent('../../DataProductAvailability/DataProductAvailability')
 );

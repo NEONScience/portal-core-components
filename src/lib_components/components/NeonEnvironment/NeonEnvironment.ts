@@ -47,8 +47,6 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
-  'NEXT_PUBLIC_NEON_USE_GRAPHQL',
-  'NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO',
@@ -79,8 +77,6 @@ export interface INeonEnvironment {
   isValid: boolean;
   isDevEnv: boolean;
   isProdEnv: boolean;
-  useGraphql: boolean;
-  showAopViewer: boolean;
   authDisableWs: boolean;
   auth0DisableApi: boolean;
   authDisableBroadcastChannel: boolean;
@@ -160,8 +156,6 @@ const NeonEnvironment: INeonEnvironment = {
   isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
-  useGraphql: process.env.NEXT_PUBLIC_NEON_USE_GRAPHQL === 'true',
-  showAopViewer: process.env.NEXT_PUBLIC_NEON_SHOW_AOP_VIEWER === 'true',
   authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
   auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
   authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',

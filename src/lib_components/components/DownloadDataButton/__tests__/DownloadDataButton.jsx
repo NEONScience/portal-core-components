@@ -3,8 +3,10 @@ import { render } from '@testing-library/react';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import DownloadDataButton from '../DownloadDataButton';
 
+jest.mock('@material-table/core', () => mockReactComponent('@material-table/core'));
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
   ...(jest.requireActual('../../DownloadDataContext/DownloadDataContext').default),
   useDownloadDataState: jest.fn(),

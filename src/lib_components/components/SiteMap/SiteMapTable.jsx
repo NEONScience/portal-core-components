@@ -9,11 +9,10 @@ import Typography from '@mui/material/Typography';
 
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
+import MaterialTable, { MTableToolbar, MTableFilterRow } from '@material-table/core';
 
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
-import LegacyNeonThemeProvider from '../Theme/LegacyNeonThemeProvider';
 import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 
@@ -506,7 +505,7 @@ const SiteMapTable = () => {
     const visibleSites = manualLocationData.map((ml) => ml.siteCode);
     initialRows = initialRows.filter((item) => visibleSites.includes(item));
   }
-  const rows = initialRows.map((key) => locations[key]);
+  const rows = initialRows.map((key, index) => ({ ...locations[key], id: `${key}-${index}` }));
   if (selectionActive) {
     rows.forEach((row, idx) => {
       let selected = false;
@@ -1024,9 +1023,11 @@ const SiteMapTable = () => {
     },
     pageSize: 100,
     pageSizeOptions: [100, 200, 500],
-    exportButton: { csv: true },
-    exportCsv,
-    exportFileName: EXPORT_FILENAME,
+    exportAllData: true,
+    exportMenu: [{
+      label: 'Export CSV',
+      exportFunc: (cols, datas) => exportCsv(cols, datas, EXPORT_FILENAME),
+    }],
     emptyRowsWhenPaging: false,
     thirdSortClick: false,
     rowStyle: (row) => {
@@ -1064,26 +1065,24 @@ const SiteMapTable = () => {
       style={containerStyle}
       data-selenium="sitemap-content-table"
     >
-      <LegacyNeonThemeProvider>
-        <MaterialTable
-          title={`${ucWord(focus)} in view`}
-          icons={MaterialTableIcons}
-          components={components}
-          columns={columns}
-          data={rows}
-          localization={localization}
-          options={tableOptions}
-          onSelectionChange={!selectionActive ? null : (newRows) => {
-            const action = { type: 'updateSelectionSet', selection: new Set() };
-            newRows.filter((row) => row.tableData.checked).forEach((row) => {
-              if (focus === FEATURE_TYPES.SITES.KEY) {
-                action.selection.add(row.siteCode);
-              }
-            });
-            dispatch(action);
-          }}
-        />
-      </LegacyNeonThemeProvider>
+      <MaterialTable
+        title={`${ucWord(focus)} in view`}
+        icons={MaterialTableIcons}
+        components={components}
+        columns={columns}
+        data={rows}
+        localization={localization}
+        options={tableOptions}
+        onSelectionChange={!selectionActive ? null : (newRows) => {
+          const action = { type: 'updateSelectionSet', selection: new Set() };
+          newRows.filter((row) => row.tableData.checked).forEach((row) => {
+            if (focus === FEATURE_TYPES.SITES.KEY) {
+              action.selection.add(row.siteCode);
+            }
+          });
+          dispatch(action);
+        }}
+      />
     </div>
   );
 };

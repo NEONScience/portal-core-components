@@ -1,5 +1,5 @@
 // This exists so that Material Table doesn't have to rely on loading the Material Icon font in
-// the HTML <HEAD>. See https://github.com/mbrn/material-table/issues/51#issuecomment-508384214
+// the HTML <HEAD>.
 import React, { forwardRef } from 'react';
 import AddBox from '@mui/icons-material/AddBox';
 import ArrowUpward from '@mui/icons-material/ArrowUpward';

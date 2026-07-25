@@ -1,3 +1,7 @@
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
+
+jest.mock('@material-table/core', () => mockReactComponent('@material-table/core'));
+
 import { getTestableItems } from '../SiteMapTable';
 
 import { MIN_TABLE_MAX_BODY_HEIGHT } from '../SiteMapUtils';

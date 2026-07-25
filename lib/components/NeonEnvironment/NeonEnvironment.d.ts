@@ -24,8 +24,6 @@ export interface INeonEnvironment {
     isValid: boolean;
     isDevEnv: boolean;
     isProdEnv: boolean;
-    useGraphql: boolean;
-    showAopViewer: boolean;
     authDisableWs: boolean;
     auth0DisableApi: boolean;
     authDisableBroadcastChannel: boolean;
