@@ -5,6 +5,7 @@
   "private": true,
   "homepage": "http://localhost:3010/core-components",
   "dependencies": {
+    "@bokeh/bokehjs": "^3.9.2",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -62,7 +63,7 @@
     "cssnano": "^8.0.2",
     "jsdom": "^30.0.0",
     "node-fetch": "^3.3.2",
-    "postcss": "^8.5.23",
+    "postcss": "^8.5.24",
     "prettier": "^3.9.6"
   },
   "peerDependenciesMeta": {
@@ -144,7 +145,7 @@
     "jsdom": "^30.0.0",
     "next": "^16.2.12",
     "node-fetch": "^3.3.2",
-    "postcss": "^8.5.23",
+    "postcss": "^8.5.24",
     "prettier": "^3.9.6",
     "sharp": "^0.35.3",
     "typescript": "~6.0.3"

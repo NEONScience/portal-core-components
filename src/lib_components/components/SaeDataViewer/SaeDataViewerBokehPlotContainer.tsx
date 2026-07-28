@@ -1,5 +1,7 @@
 import React, { useLayoutEffect, useRef, useId } from 'react';
 
+import { embed } from '@bokeh/bokehjs';
+
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Skeleton from '@mui/material/Skeleton';
@@ -110,15 +112,11 @@ const SaeDataViewerBokehPlotContainer: React.FC = (): React.JSX.Element => {
     if (dispatch) {
       dispatch({ type: 'setBokehPlotStatusRendering' });
     }
-    // Intentionally disabling type checking here for the window.Bokeh property
-    // as we would prefer to not have to leak the "Bokeh" property into
-    // the portal-core-components library (and elsewhere) as a whole
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.Bokeh.embed.embed_item(data, bokehPlotContainer.id);
+    embed.embed_item(data as embed.JsonItem, bokehPlotContainer.id);
   }, [dispatch, bokehPlotContainerRef, data, hasData]);
   const bokehPlotStyle = {
     display: displayBokehPlot ? 'block' : 'none',
+    width: '100%',
   };
   const renderErrorState = (): React.JSX.Element => {
     if (!hasErrorState) {
