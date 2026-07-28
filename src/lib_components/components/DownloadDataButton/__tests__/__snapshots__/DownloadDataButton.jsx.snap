@@ -483,7 +483,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                 >
                   <div
                     aria-label="The unique identifier for this data product independent of release"
-                    class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault css-u2rcfp-MuiChip-root-productCodeChip"
+                    class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault css-ccz347-MuiChip-root-productCodeChip"
                     data-mui-internal-clone-element="true"
                   >
                     <span
@@ -493,7 +493,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                 </div>
                 <div>
                   <div
-                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-hivhgp-MuiChip-root-releaseChip"
+                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-1q178wt-MuiChip-root-releaseChip"
                     data-mui-internal-clone-element="true"
                   >
                     <span

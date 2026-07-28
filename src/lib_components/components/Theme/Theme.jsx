@@ -10,6 +10,7 @@ import {
 
 import { buttonClasses } from '@mui/material/Button';
 import { buttonGroupClasses } from '@mui/material/ButtonGroup';
+import { chipClasses } from '@mui/material/Chip';
 import { iconButtonClasses } from '@mui/material/IconButton';
 import { sliderClasses } from '@mui/material/Slider';
 import { typographyClasses } from '@mui/material/Typography';
@@ -467,12 +468,12 @@ const baseTheme = createTheme({
         root: {
           backgroundColor: COLORS.GREY[200],
           letterSpacing: 'normal',
+          [`&.${chipClasses.sizeSmall} > .${chipClasses.label}`]: {
+            padding: '0 8px',
+          },
         },
         label: {
           padding: '0 12px',
-        },
-        labelSmall: {
-          padding: '0 8px',
         },
       },
     },

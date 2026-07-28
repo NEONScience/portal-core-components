@@ -21,10 +21,10 @@ const useChipStyles = makeStyles()((theme) => ({
   outlined: {
     color: theme.palette.grey.A200,
   },
-  outlinedPrimary: {
+  colorPrimary: {
     color: theme.palette.primary.main,
   },
-  outlinedSecondary: {
+  colorSecondary: {
     color: theme.palette.secondary.main,
   },
   label: {
@@ -44,8 +44,10 @@ const SiteChip = (props) => {
   if (!otherProps['data-selenium']) { otherProps['data-selenium'] = 'site-chip'; }
 
   // Backwards compatible with MUI v4
+  const chipStyle = {};
   if (otherProps.variant === 'default') {
     otherProps.variant = 'filled';
+    chipStyle.color = '#fff';
   }
 
   /*
@@ -75,7 +77,6 @@ const SiteChip = (props) => {
     There is also 'large' size despite having a small and medium, and we have
     use cases for large (see DataProductAvailability).
   */
-  const chipStyle = {};
   if (otherProps.variant === 'outlined') {
     chipStyle.backgroundColor = 'transparent';
   } else if ((otherProps.variant === 'filled') && (otherProps.color === 'secondary')) {

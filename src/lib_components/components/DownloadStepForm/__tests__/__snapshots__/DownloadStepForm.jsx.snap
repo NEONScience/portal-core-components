@@ -1588,7 +1588,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1607,9 +1607,9 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary css-14za0na-MuiChip-root"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary css-7w1y7y-MuiChip-root-colorSecondary"
                   data-selenium="site-chip"
-                  style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
+                  style="color: rgb(255, 255, 255); background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
                 >
                   <div
                     class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
@@ -1644,7 +1644,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1678,7 +1678,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1712,7 +1712,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                  class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
                 >
                   <span
                     class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1853,7 +1853,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1872,9 +1872,9 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary css-14za0na-MuiChip-root"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorSecondary css-7w1y7y-MuiChip-root-colorSecondary"
                 data-selenium="site-chip"
-                style="background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
+                style="color: rgb(255, 255, 255); background-color: rgb(0, 44, 119); font-size: 1rem; border-radius: 20px; height: 40px;"
               >
                 <div
                   class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
@@ -1909,7 +1909,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1943,7 +1943,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label css-5wbqe3-MuiChip-label"
@@ -1977,7 +1977,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               tabindex="0"
             >
               <div
-                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1rrzdgd-MuiChip-root-summaryChip"
+                class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary css-1g8t5gd-MuiChip-root-summaryChip"
               >
                 <span
                   class="MuiChip-label css-5wbqe3-MuiChip-label"

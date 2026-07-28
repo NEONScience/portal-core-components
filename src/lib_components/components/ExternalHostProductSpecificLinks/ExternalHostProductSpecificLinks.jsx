@@ -52,7 +52,7 @@ export default function ExternalHostProductSpecificLinks(inProps) {
   const { sites: allSites, states: allStates } = neonContextData;
 
   const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const belowMd = useMediaQuery(Theme.breakpoints.down('ms'));
+  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
   const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
 
   const externalHost = ExternalHost.getByProductCode(productCode);

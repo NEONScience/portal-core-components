@@ -215,10 +215,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                     data-selenium="site-chip"
                     role="button"
-                    style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                    style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                     tabindex="0"
                   >
                     <div
@@ -1170,10 +1170,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                   data-selenium="site-chip"
                   role="button"
-                  style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                  style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                   tabindex="0"
                 >
                   <div
@@ -2182,10 +2182,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                     data-selenium="site-chip"
                     role="button"
-                    style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                    style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                     tabindex="0"
                   >
                     <div
@@ -3137,10 +3137,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                   data-selenium="site-chip"
                   role="button"
-                  style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                  style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                   tabindex="0"
                 >
                   <div
@@ -4986,10 +4986,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                     data-selenium="site-chip"
                     role="button"
-                    style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                    style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                     tabindex="0"
                   >
                     <div
@@ -5941,10 +5941,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                   data-selenium="site-chip"
                   role="button"
-                  style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                  style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                   tabindex="0"
                 >
                   <div
@@ -6953,10 +6953,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="margin-top: 8px; margin-bottom: 12px;"
                 >
                   <div
-                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                    class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                     data-selenium="site-chip"
                     role="button"
-                    style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                    style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                     tabindex="0"
                   >
                     <div
@@ -7905,10 +7905,10 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="margin-top: 8px; margin-bottom: 12px;"
               >
                 <div
-                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1bj142d-MuiButtonBase-root-MuiChip-root"
+                  class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary MuiChip-deletable css-1gez9f-MuiButtonBase-root-MuiChip-root-colorPrimary"
                   data-selenium="site-chip"
                   role="button"
-                  style="background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+                  style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
                   tabindex="0"
                 >
                   <div

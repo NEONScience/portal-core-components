@@ -344,7 +344,7 @@ const NeonHeader = (inProps) => {
     customizeAuthContainer,
   } = props;
   const { classes } = useStyles(customizeAuthContainer)();
-  const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
 
   const [{
     isActive: neonContextIsActive,
