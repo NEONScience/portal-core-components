@@ -66,6 +66,9 @@ const useStyles = makeStyles()((theme) => ({
   },
   tabsHorizontal: {
     flexShrink: 0,
+    '& .MuiTabs-scrollButtons.Mui-disabled': {
+      opacity: 0.4,
+    },
   },
   tabPanels: {
     width: '100%',
@@ -573,6 +576,7 @@ export default function TimeSeriesViewerContainer() {
 
   const renderTabs = () => (
     <Tabs
+      allowScrollButtonsMobile
       orientation={belowMd ? 'horizontal' : 'vertical'}
       scrollButtons={belowMd ? true : 'auto'}
       variant="scrollable"

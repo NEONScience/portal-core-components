@@ -63,6 +63,9 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   tabsHorizontal: {
     flexShrink: 0,
+    '& .MuiTabs-scrollButtons.Mui-disabled': {
+      opacity: 0.4,
+    },
   },
   tabPanels: {
     width: '100%',
@@ -394,6 +397,7 @@ const SaeDataViewerContainer: React.FC = (): React.JSX.Element => {
 
   const renderTabs = () => (
     <Tabs
+      allowScrollButtonsMobile
       orientation={belowMd ? 'horizontal' : 'vertical'}
       scrollButtons={belowMd ? true : 'auto'}
       variant="scrollable"
