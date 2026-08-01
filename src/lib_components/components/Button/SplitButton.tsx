@@ -29,6 +29,8 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
 }));
 
+type SelectedOptionRenderType = (selectedOption: string) => string;
+
 interface SplitButtonProps {
   name: string;
   options: string[];
@@ -38,7 +40,7 @@ interface SplitButtonProps {
   buttonGroupProps: Nullable<ButtonGroupProps>;
   buttonMenuProps: Nullable<ButtonProps>;
   buttonProps: Nullable<ButtonProps>;
-  selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
+  selectedOptionDisplayCallback: Nullable<SelectedOptionRenderType>;
   isFullWidth: Nullable<boolean>;
   styleOverrides: Nullable<React.CSSProperties>;
 }
@@ -113,8 +115,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
 
   const renderSelectedOption = (): string => {
     if (exists(selectedOptionDisplayCallback)) {
-      // eslint-disable-next-line max-len
-      return (selectedOptionDisplayCallback as (selectedOption: string) => string)(stateSelectedOption);
+      return (selectedOptionDisplayCallback as SelectedOptionRenderType)(stateSelectedOption);
     }
     return stateSelectedOption;
   };

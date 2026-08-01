@@ -219,6 +219,8 @@ export const PLOT_SAMPLING_MODULES = {
   vst: 'Vegetation Structure',
 };
 
+/* eslint-disable max-len, @stylistic/max-len */
+
 // Source: https://www.mrlc.gov/data/legends/national-land-cover-database-2001-nlcd2001-legend
 export const NLCD_CLASSES = {
   openWater: {
@@ -363,6 +365,8 @@ export const NLCD_CLASSES = {
   },
 };
 
+/* eslint-enable max-len, @stylistic/max-len */
+
 /**
    Icon SVGs
    An importable data structure containing all imported SVGs for map and legend icons
@@ -461,6 +465,8 @@ export const LOCATION_ICON_SVG_SHAPES = {
     },
   },
 };
+
+/* eslint-disable max-len, @stylistic/max-len */
 
 /**
    FEATURES
@@ -1114,6 +1120,8 @@ export const FEATURES = {
 // Replicate keys as attributes to completely eliminate the need to write a feature key string
 Object.keys(FEATURES).forEach((key) => { FEATURES[key].KEY = key; });
 
+/* eslint-enable max-len, @stylistic/max-len */
+
 /**
    GRAPHQL_LOCATIONS_API Constants
    The Locations API groups fetchable assets by minZoom (i.e. all assets for all locations features
@@ -1229,6 +1237,8 @@ export const getHref = (key, arg = null) => {
       return '#';
   }
 };
+
+/* eslint-disable max-len, @stylistic/max-len */
 
 /**
  Map Base Layers
@@ -1439,6 +1449,8 @@ export const OVERLAYS = {
 };
 Object.keys(OVERLAYS).forEach((key) => { OVERLAYS[key].KEY = key; });
 
+/* eslint-enable max-len, @stylistic/max-len */
+
 /**
    Default State
 */
@@ -1525,8 +1537,10 @@ const DEFAULT_STATE = {
   featureDataFetches: Object.fromEntries(
     Object.keys(FEATURE_DATA_SOURCES)
       .filter((dataSource) => (
-        // eslint-disable-next-line max-len
-        ![FEATURE_DATA_SOURCES.MANUAL_LOCATIONS, FEATURE_DATA_SOURCES.NEON_CONTEXT].includes(dataSource)
+        ![
+          FEATURE_DATA_SOURCES.MANUAL_LOCATIONS,
+          FEATURE_DATA_SOURCES.NEON_CONTEXT,
+        ].includes(dataSource)
       ))
       .map((dataSource) => [dataSource, {}]),
   ),
@@ -1581,7 +1595,7 @@ Object.keys(FEATURES)
     }
   });
 // Location Hierarchies (REST_LOCATIONS_API, not in the FEATURES structure since it doesn't render)
-// eslint-disable-next-line max-len
+// eslint-disable-next-line max-len, @stylistic/max-len
 DEFAULT_STATE.featureDataFetches[FEATURE_DATA_SOURCES.REST_LOCATIONS_API][FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY] = {};
 
 // Initialize feature availability
@@ -1640,13 +1654,15 @@ const SelectionLimitPropType = (props, propName) => {
       prop.length !== 2 || !prop.every((x) => Number.isInteger(x) && x > 0) || prop[0] >= prop[1]
     ) {
       return new Error(
-        `When setting ${propName} as an array it must contain exactly two distinct non-zero positive integers in ascending order (e.g. [2, 5])`,
+        `When setting ${propName} as an array it must contain exactly two `
+          + 'distinct non-zero positive integers in ascending order (e.g. [2, 5])',
       );
     }
     return null;
   }
   return new Error(
-    `${propName} must be null, a positive non-zero integer, or an array of two ascending non-zero positive integers.`,
+    `${propName} must be null, a positive non-zero integer, `
+      + 'or an array of two ascending non-zero positive integers.',
   );
 };
 
@@ -2041,8 +2057,9 @@ export const hydrateNeonContextData = (state, neonContextData) => {
           && FEATURES[key].attributes.terrain === neonContextData.sites[siteCode].terrain
       )) || null;
     if (featureKey !== null) {
-      // eslint-disable-next-line max-len
-      newState.featureData[FEATURE_TYPES.SITES.KEY][featureKey][siteCode] = newState.sites[siteCode];
+      newState.featureData[FEATURE_TYPES.SITES.KEY][featureKey][siteCode] = newState.sites[
+        siteCode
+      ];
     }
   });
   // States

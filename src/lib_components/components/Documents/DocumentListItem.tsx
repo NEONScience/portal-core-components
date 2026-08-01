@@ -306,8 +306,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  // eslint-disable-next-line max-len
-  const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(undefined);
+  const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(
+    undefined,
+  );
   const [
     componentWidth,
     setComponentWidth,

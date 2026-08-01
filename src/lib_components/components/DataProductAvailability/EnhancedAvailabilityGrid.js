@@ -772,7 +772,10 @@ export default function EnhancedAvailabilityGrid(config) {
       // Perform a select action if selection is enabled to keep the end user happy. =)
       cellDragTime = (new Date()).getTime() - cellDragTime;
       if (selectionEnabled && setSitesValue && cellDragTime < 100) {
-        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter((filterD) => filterD === rowHoverKey), 15);
+        SVG_STYLES.touchRipple(
+          dataMasksG.selectAll('rect').filter((filterD) => filterD === rowHoverKey),
+          15,
+        );
         setTimeout(() => toggleSelection(rowHoverKey), 15);
       }
     });
@@ -834,8 +837,14 @@ export default function EnhancedAvailabilityGrid(config) {
       })
       .on('drag', (event, d) => {
         draggingDateRange[0].centerDragX += event.dx;
-        dragDateRangeStartMask.attr('x', draggingDateRange[0].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
-        const adjacentYearMonth = getAdjacentYearMonth(dateRange.value[0], event.dx > 0 ? 'right' : 'left');
+        dragDateRangeStartMask.attr(
+          'x',
+          draggingDateRange[0].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2),
+        );
+        const adjacentYearMonth = getAdjacentYearMonth(
+          dateRange.value[0],
+          event.dx > 0 ? 'right' : 'left',
+        );
         const adjacentYearMonthStartX = getYearMonthGutterX(adjacentYearMonth, 'left');
         const currentYearMonthStartX = getYearMonthGutterX(dateRange.value[0], 'left');
         const insideClipCenterDragX = draggingDateRange[0].centerDragX - getTimeOffset();
@@ -875,8 +884,14 @@ export default function EnhancedAvailabilityGrid(config) {
       })
       .on('drag', (event, d) => {
         draggingDateRange[1].centerDragX += event.dx;
-        dragDateRangeEndMask.attr('x', draggingDateRange[1].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2));
-        const adjacentYearMonth = getAdjacentYearMonth(dateRange.value[1], event.dx > 0 ? 'right' : 'left');
+        dragDateRangeEndMask.attr(
+          'x',
+          draggingDateRange[1].centerDragX - (SVG.DATE_RANGE_MASK_WIDTH / 2),
+        );
+        const adjacentYearMonth = getAdjacentYearMonth(
+          dateRange.value[1],
+          event.dx > 0 ? 'right' : 'left',
+        );
         const adjacentYearMonthEndX = getYearMonthGutterX(adjacentYearMonth, 'right');
         const currentYearMonthEndX = getYearMonthGutterX(dateRange.value[1], 'right');
         const insideClipCenterDragX = draggingDateRange[1].centerDragX - getTimeOffset();

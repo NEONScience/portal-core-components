@@ -602,7 +602,12 @@ const BasicAvailabilityInterface = (inProps) => {
           <Select
             value={currentView}
             onChange={(event) => handleChangeView(event, event.target.value)}
-            input={<OutlinedInput size="small" className={selectionEnabled ? null : classes.xsSelect} />}
+            input={(
+              <OutlinedInput
+                size="small"
+                className={selectionEnabled ? null : classes.xsSelect}
+              />
+            )}
             variant="filled"
           >
             {selectableViewKeys.map((key) => (

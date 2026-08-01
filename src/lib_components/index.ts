@@ -21,7 +21,9 @@ export { default as Theme } from './components/Theme';
 export { default as DownloadStepForm } from './components/DownloadStepForm';
 export { default as ExternalHost } from './components/ExternalHost';
 export { default as ExternalHostInfo } from './components/ExternalHostInfo';
-export { default as ExternalHostProductSpecificLinks } from './components/ExternalHostProductSpecificLinks';
+export {
+  default as ExternalHostProductSpecificLinks,
+} from './components/ExternalHostProductSpecificLinks';
 export { default as FullWidthVisualization } from './components/FullWidthVisualization';
 export { default as NeonFooter } from './components/NeonFooter';
 export { default as NeonHeader } from './components/NeonHeader';

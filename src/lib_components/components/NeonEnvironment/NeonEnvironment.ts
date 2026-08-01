@@ -16,6 +16,7 @@ export const HostRegexService: IHostRegexService = {
     new RegExp(/^(data|cert-data|int-data|local-data)[.]neonscience[.]org$/)
   ),
   getWebHostRegex: (): RegExp => (
+    // eslint-disable-next-line max-len, @stylistic/max-len
     new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/)
   ),
   getBioRepoHostRegex: (): RegExp => (
@@ -158,6 +159,7 @@ const NeonEnvironment: INeonEnvironment = {
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
   authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
   auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
+  // eslint-disable-next-line max-len, @stylistic/max-len
   authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
   sessionDisable: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true',
   enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
@@ -168,10 +170,14 @@ const NeonEnvironment: INeonEnvironment = {
 
   getRootApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_API || '/api/v0',
   getRootGraphqlPath: () => process.env.NEXT_PUBLIC_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
-  getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.NEXT_PUBLIC_NEON_PATH_LD_API}`,
+  getRootJsonLdPath: () => (
+    `${NeonEnvironment.getRootApiPath()}${process.env.NEXT_PUBLIC_NEON_PATH_LD_API}`
+  ),
   getRootAuthApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH_API || '/api/auth/v0',
   getRootAuth0ApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH0_API || '/auth0',
-  getRootDownloadApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
+  getRootDownloadApiPath: () => (
+    process.env.NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API || '/api/download/v0'
+  ),
   getRootVizApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_VIZ_API || '/api/visualizations/v0',
 
   getApiPath: {
@@ -225,7 +231,9 @@ const NeonEnvironment: INeonEnvironment = {
   },
 
   getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
-  getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
+  getTaxonTypeDataProductsPath: (): string => (
+    `${NeonEnvironment.getFullApiPath('taxonomy')}/products`
+  ),
 
   getRouterBasePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE || '',
   getRouterBaseHomePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE_HOME || '',

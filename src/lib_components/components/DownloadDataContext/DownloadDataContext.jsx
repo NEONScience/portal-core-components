@@ -25,7 +25,7 @@ import {
 
 import NeonApi from '../NeonApi/NeonApi';
 import NeonContext from '../NeonContext/NeonContext';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import {
   buildManifestConfig,
   buildS3FilesRequestUrl,
@@ -464,8 +464,7 @@ const getInitialStateFromProps = (props) => {
   if (externalHost) {
     fromExternalHost = true;
     const allowNoAvailability = (externalHostProduct.allowNoAvailability === true);
-    // eslint-disable-next-line max-len
-    const useExternalExclusiveData = (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+    const useExternalExclusiveData = (externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA)
       || (allowNoAvailability && !existsNonEmpty(productData.siteCodes));
     if (useExternalExclusiveData) {
       fromManifest = false;
@@ -486,7 +485,9 @@ const getInitialStateFromProps = (props) => {
     ];
   }
   // Remove package type step if product does not offer expanded data
-  if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
+  const packageTypeStepNotRequired = (productData.productHasExpanded === false)
+    && requiredSteps.some((step) => step.key === 'packageType');
+  if (packageTypeStepNotRequired) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
   }
   // Remove provisional data step if release specified and is not a non-release
@@ -642,8 +643,10 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         });
       }
       newState.s3Files.validValues.forEach((file, idx) => {
-        // eslint-disable-next-line max-len
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false;
+        newState.s3Files
+          .validValues[idx]
+          .tableData
+          .checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
 
@@ -679,7 +682,10 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         });
       }
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false; // eslint-disable-line max-len
+        newState.s3Files
+          .validValues[idx]
+          .tableData
+          .checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
 

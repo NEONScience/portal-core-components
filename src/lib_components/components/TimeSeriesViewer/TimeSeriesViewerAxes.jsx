@@ -265,12 +265,27 @@ const YAxisRangeOption = (props) => {
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>
-        <Skeleton variant="rectangular" width={200} height={30} style={{ margin: theme.spacing(0.5, 0) }} />
+        <Skeleton
+          variant="rectangular"
+          width={200}
+          height={30}
+          style={{ margin: theme.spacing(0.5, 0) }}
+        />
       </div>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
-          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: theme.spacing(1, 0) }} />
-          <Skeleton variant="rectangular" width={96} height={36} style={{ margin: theme.spacing(1, 0) }} />
+          <Skeleton
+            variant="rectangular"
+            width={96}
+            height={36}
+            style={{ margin: theme.spacing(1, 0) }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={96}
+            height={36}
+            style={{ margin: theme.spacing(1, 0) }}
+          />
         </div>
       </div>
     </div>
@@ -603,7 +618,9 @@ export default function TimeSeriesViewerAxes() {
         </div>
       </div>
       <div>
-        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>x Axis (Time)</Typography>
+        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>
+          x Axis (Time)
+        </Typography>
         <div className={classes.optionsContainer}>
           {state.timeStep.availableTimeSteps.size < 3 ? null : (
             <div style={{ marginRight: theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>

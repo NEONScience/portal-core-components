@@ -10,7 +10,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
@@ -70,7 +70,7 @@ const ExternalHostInfo = (inProps) => {
 
   let blurb = null;
   let dataVariety = externalHost.hostDataVariety || 'Data';
-  if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
+  if (externalHost.hostType === HOST_TYPES.REFORMATTED_DATA) {
     blurb = (
       <>
         {`${dataVariety} for this product are available in other formats from`}
@@ -79,7 +79,7 @@ const ExternalHostInfo = (inProps) => {
       </>
     );
   }
-  if ((externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+  if ((externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA)
       || allowNoLinks) {
     blurb = (
       <>

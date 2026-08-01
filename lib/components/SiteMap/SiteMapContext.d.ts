@@ -99,7 +99,8 @@ declare function useSiteMapContext(): {
         focus: any;
         availableFeatureTypes: {
             [FEATURE_TYPES.SITES.KEY]: boolean;
-            [FEATURE_TYPES.LOCATIONS.KEY]: boolean;
+            [FEATURE_TYPES
+                .LOCATIONS.KEY]: boolean;
         };
         fullHeight: boolean;
         maxBodyHeight: null;
@@ -130,8 +131,7 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [FEATURES.STATES
-                .KEY]: {};
+            [FEATURES.STATES.KEY]: {};
             [FEATURES.DOMAINS.KEY]: {};
         };
     };
@@ -195,7 +195,8 @@ declare function useSiteMapContext(): {
         focus: any;
         availableFeatureTypes: {
             [FEATURE_TYPES.SITES.KEY]: boolean;
-            [FEATURE_TYPES.LOCATIONS.KEY]: boolean;
+            [FEATURE_TYPES
+                .LOCATIONS.KEY]: boolean;
         };
         fullHeight: boolean;
         maxBodyHeight: null;
@@ -226,8 +227,7 @@ declare function useSiteMapContext(): {
         changed: boolean;
         onChange: () => void;
         derived: {
-            [FEATURES.STATES
-                .KEY]: {};
+            [FEATURES.STATES.KEY]: {};
             [FEATURES.DOMAINS.KEY]: {};
         };
     };

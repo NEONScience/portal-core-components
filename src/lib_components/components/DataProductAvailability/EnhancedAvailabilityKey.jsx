@@ -44,8 +44,10 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const ALL_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then all sites rolled into a given row are selected';
-const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) then one or more but not all of the sites rolled into a given row are selected';
+const ALL_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) '
+  + 'then all sites rolled into a given row are selected';
+const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by state) '
+  + 'then one or more but not all of the sites rolled into a given row are selected';
 
 const defaultProps = {
   selectionEnabled: false,

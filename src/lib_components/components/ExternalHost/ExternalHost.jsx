@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from '@mui/material/Link';
 
-const HOST_TYPES = {
+export const HOST_TYPES = {
   ADDITIONAL_DATA: 'ADDITIONAL_DATA', // NEON and host offer different / complementary data
   REFORMATTED_DATA: 'REFORMATTED_DATA', // NEON and host offer same data in different formats
   EXCLUSIVE_DATA: 'EXCLUSIVE_DATA', // NEON does not offer any data, only host has it accessible
@@ -297,7 +297,8 @@ const externalHosts = {
     getSiteLink: (allSites = {}, siteCode = '', productCode = '') => {
       if (!allSites[siteCode]) { return null; }
       const hrefBase = 'https://phenocam.nau.edu/webcam/sites';
-      const hrefSite = `${allSites[siteCode].domainCode}.${siteCode}.${productCode.split('.').slice(0, 2).join('.')}`;
+      const hrefSite = `${allSites[siteCode].domainCode}.${siteCode}`
+        + `.${productCode.split('.').slice(0, 2).join('.')}`;
       const text = `${siteCode} - ${allSites[siteCode].description}`;
       return renderExternalHostLink(`${hrefBase}/NEON.${hrefSite}/`, text, 'PHENOCAM', productCode);
     },

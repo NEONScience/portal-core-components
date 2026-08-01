@@ -63,7 +63,9 @@ import {
   getDynamicAspectRatio,
 } from './SiteMapUtils';
 
-const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
+const boxShadow = `0px 2px 1px -1px rgba(0,0,0,0.2),
+0px 1px 1px 0px rgba(0,0,0,0.14),
+0px 1px 3px 0px rgba(0,0,0,0.12)`;
 const useStyles = makeStyles()((theme) => ({
   ':root': {
     fontSize: '24px',
@@ -702,7 +704,8 @@ const SiteMapContainer = (inProps) => {
     const unit = FEATURE_TYPES[selectionActive].unit || '';
     const units = FEATURE_TYPES[selectionActive].units || '';
     const plural = selection.size !== 1;
-    const title = `${selection.size ? selection.size.toString() : 'No'} ${plural ? units : unit} selected`;
+    const title = `${selection.size ? selection.size.toString() : 'No'} `
+      + `${plural ? units : unit} selected`;
     let icon = <NoneSelectedIcon />;
     let color = 'default';
     // eslint-disable-next-line no-undef-init
@@ -769,7 +772,9 @@ const SiteMapContainer = (inProps) => {
                           <IconButton
                             edge="end"
                             aria-label={remove}
-                            onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
+                            onClick={
+                              () => dispatch({ type: 'toggleItemSelected', item: selectedItem })
+                            }
                             size="large"
                           >
                             <DeleteIcon />
@@ -1279,7 +1284,8 @@ const SiteMapContainer = (inProps) => {
   let viewLegendButtonsContainerClassName = classes.viewLegendButtonsContainer;
   if (fullscreen) {
     legendContainerClassName = `${classes.legendContainer} ${classes.legendContainerFullscreen}`;
-    viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
+    viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} `
+      + `${classes.viewLegendButtonsContainerFullscreen}`;
   }
   return (
     <div {...containerProps} aria-describedby={progressId}>

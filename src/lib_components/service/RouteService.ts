@@ -258,6 +258,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/domains/${domainCode}`
   ),
   getReleaseDetailPath: (release: string): string => (
+    // eslint-disable-next-line max-len, @stylistic/max-len
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases/${release}`
   ),
 

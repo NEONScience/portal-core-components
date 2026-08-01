@@ -102,8 +102,10 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const UNSPECIFIED_NAME = 'Latest and Provisional';
-const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provisional data (not yet in any release)';
-const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
+const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to '
+  + 'provisional data (not yet in any release)';
+const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link '
+  + 'to this this data product release';
 
 const formatGenerationDate = (generationDate) => {
   const generationMoment = moment.utc(generationDate);
@@ -226,7 +228,12 @@ const ReleaseFilter = (inProps) => {
     return (
       <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rectangular" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
+        <Skeleton
+          variant="rectangular"
+          width={maxWidth || '100%'}
+          height={36}
+          style={skeletonStyle}
+        />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );

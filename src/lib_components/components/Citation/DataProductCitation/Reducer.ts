@@ -152,6 +152,7 @@ const Reducer = (
   }
   let product: ContextDataProduct;
   let productReleaseDoiStatus: DataProductDoiStatus|DataProductDoiStatus[];
+  let productReleaseDoiStatusArray: DataProductDoiStatus[];
   let release: string;
   let bundleParent: string;
   let fetchStatusState: FetchStatusState;
@@ -287,8 +288,8 @@ const Reducer = (
         newState.data.productReleaseDois[release] = null;
       } else if (Array.isArray(productReleaseDoiStatus)) {
         if (existsNonEmpty(productReleaseDoiStatus)) {
-          // eslint-disable-next-line max-len
-          newState.data.productReleaseDois[release] = (productReleaseDoiStatus as DataProductDoiStatus[])
+          productReleaseDoiStatusArray = (productReleaseDoiStatus as DataProductDoiStatus[]);
+          newState.data.productReleaseDois[release] = productReleaseDoiStatusArray
             .filter((dpds: DataProductDoiStatus): boolean => (
               exists(dpds) && exists(dpds.status)
             ));

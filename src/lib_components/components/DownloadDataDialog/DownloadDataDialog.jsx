@@ -31,7 +31,7 @@ import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import LoginRequiredCard from '../Card/LoginRequiredCard';
 import NeonContext from '../NeonContext/NeonContext';
@@ -173,7 +173,7 @@ export default function DownloadDataDialog() {
   */
   const externalHost = ExternalHost.getByProductCode(productData.productCode);
   const renderExternalHostInfo = () => {
-    if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
+    if (!externalHost || externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
     if (activeStepIndex !== 0) {
@@ -310,7 +310,9 @@ export default function DownloadDataDialog() {
       }
       return (
         <div {...alignRight}>
-          <Typography variant="subtitle1" {...subtitleStyle}>Estimated size{uncompressed}</Typography>
+          <Typography variant="subtitle1" {...subtitleStyle}>
+            Estimated size{uncompressed}
+          </Typography>
           <Typography variant="h5" style={{ color: estimateColor }}>
             {estimateIcon}
             {formatBytes(bytes)}
@@ -327,7 +329,8 @@ export default function DownloadDataDialog() {
       const hasProvisionalDataStep = requiredSteps.some((step) => (
         (step.key === 'provisionalData')
       ));
-      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      const excludeProvisionalData = hasProvisionalDataStep
+        && (provisionalData.value === 'exclude');
       const showNoReleaseData = hasProvisionalDataStep && excludeProvisionalData;
       return (
         <Typography variant="body2" color="error">
@@ -503,9 +506,11 @@ export default function DownloadDataDialog() {
         && !(manifest.sizeEstimate > 0))
       || (fromAOPManifest && !(s3Files.totalSize > 0));
     if (!allStepsComplete) {
+      const completeStepsMessage = 'Complete all steps to enable download. '
+        + `${completedSteps.length} of ${completableSteps.length} completed.`;
       return (
         <Typography variant="body2" style={{ marginTop: Theme.spacing(2), textAlign: 'right' }}>
-          {`Complete all steps to enable download. ${completedSteps.length} of ${completableSteps.length} completed.`}
+          {completeStepsMessage}
         </Typography>
       );
     }
@@ -784,20 +789,52 @@ export default function DownloadDataDialog() {
   const renderGtmTags = () => (
     <>
       {/* Google Tag Manager elements to track download progress */}
-      <input type="hidden" data-gtm="download-data-dialog.product-code" value={productData.productCode} />
-      <input type="hidden" data-gtm="download-data-dialog.size-estimate-bytes" value={getSizeEstimateBytes()} />
-      <input type="hidden" data-gtm="download-data-dialog.steps-completed" value={getStepsCompleted().join(', ')} />
-      <input type="hidden" data-gtm="download-data-dialog.steps-not-completed" value={getStepsNotCompleted().join(', ')} />
-      <input type="hidden" data-gtm="download-data-dialog.step-completion-percentage" value={getStepCompletionPercentage()} />
-      <input type="hidden" data-gtm="download-data-dialog.download-executed" value={downloadExecuted ? 1 : 0} />
-      <input type="hidden" data-gtm="download-data-dialog.lzw-compressed-config" value={getLZWCompressedConfig()} />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.product-code"
+        value={productData.productCode}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.size-estimate-bytes"
+        value={getSizeEstimateBytes()}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.steps-completed"
+        value={getStepsCompleted().join(', ')}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.steps-not-completed"
+        value={getStepsNotCompleted().join(', ')}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.step-completion-percentage"
+        value={getStepCompletionPercentage()}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.download-executed"
+        value={downloadExecuted ? 1 : 0}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.lzw-compressed-config"
+        value={getLZWCompressedConfig()}
+      />
       {/* end Google Tag Manager elements */}
     </>
   );
-
-  const releaseTooltip = release.value === null
-    ? `You are downloading only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
-    : `You are downloading product data only from the ${release.value} release (no provisional data will be included).`;
+  let releaseTooltip;
+  if (release.value === null) {
+    releaseTooltip = 'You are downloading only the latest released and provisional data '
+      + `(release: ${latestRelease || 'unknown'}).`;
+  } else {
+    releaseTooltip = 'You are downloading product data only from the '
+      + `${release.value} release (no provisional data will be included).`;
+  }
   const releaseChipLabel = release.value === null
     ? 'Latest released and provisional data'
     : `Release: ${release.value}`;
@@ -808,7 +845,11 @@ export default function DownloadDataDialog() {
       open={dialogOpen}
       onClose={handleCancel}
       customClasses={dialogBaseClasses}
-      title={fromManifest || fromAOPManifest ? 'Configure Data for Download' : 'Download Data from External Host'}
+      title={
+        fromManifest || fromAOPManifest
+          ? 'Configure Data for Download'
+          : 'Download Data from External Host'
+      }
       closeButtonProps={{
         'data-gtm': 'download-data-dialog.cancel-button',
         className: classes.gtmCaptureButton,
@@ -831,7 +872,10 @@ export default function DownloadDataDialog() {
           marginBottom: Theme.spacing(3),
         }}
       >
-        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 8 }} data-selenium="download-data-dialog.product-info">
+        <Grid
+          size={{ xs: 12, sm: 6, md: 6, lg: 8 }}
+          data-selenium="download-data-dialog.product-info"
+        >
           <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>

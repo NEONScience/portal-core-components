@@ -321,6 +321,9 @@ const SiteOption: React.FC<SiteOptionPropsType> = (
   let optionContent = <Typography variant="body1" gutterBottom>{siteCode}</Typography>;
   if (stateCode) {
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
+    const optionSubtitle = `${terrainTypeTitle} `
+      + `- Domain ${domainCode} (${domainName}) `
+      + `- Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
     optionContent = (
       <div className={classes.startFlex}>
         {iconSvg ? (
@@ -338,7 +341,7 @@ const SiteOption: React.FC<SiteOptionPropsType> = (
             {`${siteCode} - ${description}, ${stateCode}`}
           </Typography>
           <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
-            {`${terrainTypeTitle} - Domain ${domainCode} (${domainName}) - Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`}
+            {optionSubtitle}
           </Typography>
         </div>
       </div>

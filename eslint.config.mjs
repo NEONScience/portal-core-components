@@ -53,6 +53,21 @@ const jsRules = {
   ...eslint.configs.recommended.rules,
   ...stylisticPluginJs.configs.recommended.rules,
 
+  'max-len': [
+    'error',
+    {
+      code: 100,
+      ignorePattern: '^import\\s.+\\sfrom\\s.+;$|^\\s*?\\(\\)\\s=>\\simport\\(.+\\).*$',
+    },
+  ],
+
+  '@stylistic/max-len': [
+    'error',
+    {
+      code: 100,
+      ignorePattern: '^import\\s.+\\sfrom\\s.+;$|^\\s*?\\(\\)\\s=>\\simport\\(.+\\).*$',
+    },
+  ],
   '@stylistic/semi': ['error', 'always'],
   '@stylistic/quote-props': 'off',
   '@stylistic/space-infix-ops': 'off',

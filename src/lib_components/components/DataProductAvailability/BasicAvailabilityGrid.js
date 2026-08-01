@@ -807,7 +807,10 @@ export default function BasicAvailabilityGrid(config) {
       // Perform a select action if selection is enabled to keep the end user happy. =)
       cellDragTime = (new Date()).getTime() - cellDragTime;
       if (selectionEnabled && setSitesValue && cellDragTime < 100) {
-        SVG_STYLES.touchRipple(dataMasksG.selectAll('rect').filter((filterD) => filterD === rowHoverKey), 15);
+        SVG_STYLES.touchRipple(
+          dataMasksG.selectAll('rect').filter((filterD) => filterD === rowHoverKey),
+          15,
+        );
         setTimeout(() => toggleSelection(rowHoverKey), 15);
       }
     });

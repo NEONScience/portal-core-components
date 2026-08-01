@@ -3,8 +3,6 @@ import React, {
   useContext,
   useEffect,
   useReducer,
-  useMemo,
-  useState,
 } from 'react';
 import PropTypes, { number } from 'prop-types';
 
@@ -528,7 +526,9 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
 const checkDateTimeVariable = (dateTimeVariable) => {
   if (!PREFERRED_DATETIME_VARIABLES.includes(dateTimeVariable)) {
     // eslint-disable-next-line no-console
-    console.debug(`Determined datetime variable does not match known preferred: ${dateTimeVariable}`);
+    console.debug(
+      `Determined datetime variable does not match known preferred: ${dateTimeVariable}`,
+    );
   }
 };
 
@@ -704,7 +704,8 @@ const parseSiteMonthData = (site, files) => {
       return !isValid(parts[offset]);
     })) { return; }
     // Extract parts
-    const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
+    const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}`
+      + `.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
     const month = parts[DATA_FILE_PARTS.MONTH.offset];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE.offset];
     const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP.offset]);
@@ -1072,7 +1073,7 @@ const setDataFileFetchStatuses = (state, fetches) => {
         || !newState.product.sites[siteCode].positions[position].data[month]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
-        // eslint-disable-next-line max-len
+        // eslint-disable-next-line max-len, @stylistic/max-len
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep][table]
     ) { return; }
     newState.product
@@ -1241,15 +1242,20 @@ const reducer = (state, action) => {
         ...parsedContent.availableTimeSteps,
       ]);
       if (newState.timeStep.availableTimeSteps.size === 1) { // Need more than just 'auto'
-        return fail('This data product is not compatible with the Time Series Viewer (no valid time step found)');
+        return fail(
+          'This data product is not compatible with the Time Series Viewer '
+            + '(no valid time step found)',
+        );
       }
       calcSelection();
       if (
         newState.product.sites[action.siteCode].fetches.variables.status !== FETCH_STATUS.SUCCESS
-          || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS // eslint-disable-line max-len
+        || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS
       ) {
         newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
-      } else { calcStatus(); }
+      } else {
+        calcStatus();
+      }
       return newState;
 
     // Fetch Site Variables Actions
@@ -1292,7 +1298,10 @@ const reducer = (state, action) => {
       ]);
       // A valid dateTime variable must be present otherwise we have no x-axis
       if (Object.keys(newState.variables).every((v) => !newState.variables[v].isDateTime)) {
-        return fail('This data product is not compatible with the Time Series Viewer (no dateTime data found)');
+        return fail(
+          'This data product is not compatible with the Time Series Viewer '
+            + '(no dateTime data found)',
+        );
       }
       calcSelection();
       calcStatus();
@@ -1306,7 +1315,10 @@ const reducer = (state, action) => {
             state.selection.yAxes[y].dataRange.every((x) => x === null)
           ))
       ) {
-        return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
+        return softFail(
+          'Current selection of dates/sites/positions/variables does not have '
+            + 'any valid numeric data.',
+        );
       }
       newState.graphData = action.graphData;
       newState.pointTotal = calcPointTotal(action.graphData.data);
@@ -1355,7 +1367,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
       if (!newState.selection.variables.length) {
-        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+        return softFail(
+          'None of the variables for this product\'s default site/month/position have data. '
+            + 'Please select a different site, month, or position.',
+        );
       }
       return newState;
     case 'noDataFilesFetchNecessary':
@@ -1367,7 +1382,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
       if (!newState.selection.variables.length) {
-        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+        return softFail(
+          'None of the variables for this product\'s default site/month/position have data. '
+            + 'Please select a different site, month, or position.',
+        );
       }
       return newState;
 
@@ -1925,7 +1943,9 @@ const Provider = (inProps) => {
         const { downloadPkg } = state.variables[variable];
         positions.forEach((position) => {
           continuousDateRange.forEach((month) => {
-            const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
+            const path = `sites['${siteCode}']`
+              + `.positions['${position}']`
+              + `.data['${month}']['${downloadPkg}']['${timeStep}']`;
             const timeStepTables = lodashGet(state.product, path, {});
             Object.keys(timeStepTables).forEach((tableName) => {
               const timeStepTable = timeStepTables[tableName];
@@ -1934,7 +1954,12 @@ const Provider = (inProps) => {
               if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
               // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
               const previousSize = dataFetchTokens.size;
-              const token = `${siteCode};${position};${month};${downloadPkg};${timeStep};${tableName}`;
+              const token = `${siteCode};`
+                + `${position};`
+                + `${month};`
+                + `${downloadPkg};`
+                + `${timeStep};`
+                + `${tableName}`;
               dataFetchTokens.add(token);
               if (dataFetchTokens.size === previousSize) { return; }
               // Save the action props to pass to the fetchDataFiles
@@ -2069,7 +2094,9 @@ const TimeSeriesViewerPropTypes = {
   productCode: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
-      return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
+      return new Error(
+        `One of props 'productCode' or 'productData' was not specified in '${componentName}'.`,
+      );
     }
     if (productData && !productCode) { return null; }
     if (productCode && typeof productCode === 'string' && productCode.length > 0) {
@@ -2080,7 +2107,9 @@ const TimeSeriesViewerPropTypes = {
   productData: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
-      return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
+      return new Error(
+        `One of props 'productCode' or 'productData' was not specified in '${componentName}'.`,
+      );
     }
     if (productCode && !productData) { return null; }
     if (

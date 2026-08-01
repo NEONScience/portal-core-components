@@ -1005,7 +1005,8 @@ const SiteMapTable = () => {
       searchPlaceholder: `Search ${focus.toLowerCase()} in view`,
     },
     body: {
-      emptyDataSourceMessage: `No ${focus.toLowerCase()} in current map view match the current filters.`,
+      emptyDataSourceMessage: `No ${focus.toLowerCase()} `
+        + 'in current map view match the current filters.',
     },
   };
 

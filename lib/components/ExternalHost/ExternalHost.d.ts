@@ -1,3 +1,8 @@
+export namespace HOST_TYPES {
+    let ADDITIONAL_DATA: string;
+    let REFORMATTED_DATA: string;
+    let EXCLUSIVE_DATA: string;
+}
 export default ExternalHost;
 declare namespace ExternalHost {
     export { HOST_TYPES };
@@ -6,11 +11,6 @@ declare namespace ExternalHost {
     export { getByProductCode };
     export { getProductSpecificInfo };
     export { renderExternalHostLink };
-}
-declare namespace HOST_TYPES {
-    let ADDITIONAL_DATA: string;
-    let REFORMATTED_DATA: string;
-    let EXCLUSIVE_DATA: string;
 }
 declare namespace LINK_TYPES {
     let BY_SITE: string;

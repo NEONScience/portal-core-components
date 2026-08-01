@@ -815,7 +815,8 @@ const SiteMapFeature = (props) => {
       nlcd = loc.nlcdClass;
       if (NLCD_CLASSES[loc.nlcdClass]) {
         titleStyle.marginBottom = '-4px';
-        const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} - ${NLCD_CLASSES[loc.nlcdClass].description}`;
+        const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} `
+          + `- ${NLCD_CLASSES[loc.nlcdClass].description}`;
         nlcd = (
           <>
             {NLCD_CLASSES[loc.nlcdClass].name}
@@ -859,7 +860,11 @@ const SiteMapFeature = (props) => {
           <Typography variant="subtitle2">NEON Site</Typography>
           {renderSite(siteCode)}
         </Grid>
-        <Grid size={{ xs: 5 }} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
+        <Grid
+          size={{ xs: 5 }}
+          style={{ textAlign: 'right' }}
+          data-selenium="sitemap-map-popup-domain"
+        >
           <Typography variant="subtitle2">Domain</Typography>
           <Tooltip title={`Jump to ${site.domainCode} on the map`}>
             <Link
@@ -879,7 +884,9 @@ const SiteMapFeature = (props) => {
   };
 
   const popupProps = {
-    className: !selectionActive ? classes.popup : `${classes.popup} leaflet-popup-selection-visually-hidden`,
+    className: !selectionActive
+      ? classes.popup
+      : `${classes.popup} leaflet-popup-selection-visually-hidden`,
     autoPan: !selectionActive,
     id: 'sitemap-map-popup',
   };
@@ -951,8 +958,12 @@ const SiteMapFeature = (props) => {
       ? `add ${thisOne}${selectable} site`
       : `add all ${selectableCount}${selectable} sites`;
     let preposition = 'to';
-    let snackbarClass = classes[selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar'];
-    let snackbarIconClass = classes[selectableCount ? 'addToSelectionSnackbarIcon' : 'unselectableSnackbarIcon'];
+    const snackbarClassName = selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar';
+    const snackbarIconClassName = selectableCount
+      ? 'addToSelectionSnackbarIcon'
+      : 'unselectableSnackbarIcon';
+    let snackbarClass = classes[snackbarClassName];
+    let snackbarIconClass = classes[snackbarIconClassName];
     let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
     if (selectableCount) {
       if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
@@ -1539,8 +1550,8 @@ const SiteMapFeature = (props) => {
               state.selection.derived[featureKey]
                 && state.selection.derived[featureKey][primaryId]
             ) {
-              // eslint-disable-next-line max-len
-              returnColor = baseColors[state.selection.derived[featureKey][primaryId]] || featureStyle.color;
+              returnColor = baseColors[state.selection.derived[featureKey][primaryId]]
+                || featureStyle.color;
             }
           }
           shapeProps.color = returnColor;

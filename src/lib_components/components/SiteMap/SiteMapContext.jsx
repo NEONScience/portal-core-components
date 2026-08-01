@@ -185,6 +185,8 @@ const calculateSitesInBounds = (state) => {
   return sites;
 };
 
+/* eslint-disable max-len, @stylistic/max-len */
+
 // Creates fetch objects with an AWAITING_CALL status based on current state.
 // New fetches are created for all fetchable feature data found to be active (the feature is
 // available and visible), within the current bounds of the map, and not already fetched.
@@ -236,8 +238,10 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
     const hierarchiesSource = FEATURE_DATA_SOURCES.REST_LOCATIONS_API;
     const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
     Array.from(domainsInMap).forEach((domainCode) => {
-      if (newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode]) { return; }
-      newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+      if (newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode]) {
+        return;
+      }
+      newState.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] = FETCH_STATUS.AWAITING_CALL;
       newState.overallFetch.expected += 1;
       newState.overallFetch.pendingHierarchy += 1;
       newState.featureDataFetchesHasAwaiting = true;
@@ -292,7 +296,7 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
               if (newState.featureDataFetches[dataSource][featureKey][siteCode][locationKey]) {
                 return;
               }
-              newState.featureDataFetches[dataSource][featureKey][siteCode][locationKey] = FETCH_STATUS.AWAITING_CALL; // eslint-disable-line max-len
+              newState.featureDataFetches[dataSource][featureKey][siteCode][locationKey] = FETCH_STATUS.AWAITING_CALL;
               newState.overallFetch.expected += 1;
               newState.featureDataFetchesHasAwaiting = true;
             });
@@ -300,7 +304,6 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
     });
 
   // Feature fetches - GRAPHQL_LOCATIONS_API
-  /* eslint-disable max-len */
   // Start by looping through all minZoom levels associated with any GraphQL Locations API features
   // Our goal is to build a single fetch containing a flat list of all locations for this site
   // that are now visible, clustered by minZoom level.
@@ -309,7 +312,12 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
     .forEach((minZoom) => {
       // Loop through all available and visible features at this minZoom level
       GRAPHQL_LOCATIONS_API_CONSTANTS.MINZOOM_TO_FEATURES_MAP[minZoom].forEach((featureKey) => {
-        if (!state.filters.features.available[featureKey] || !state.filters.features.visible[featureKey]) { return; }
+        if (
+          !state.filters.features.available[featureKey]
+          || !state.filters.features.visible[featureKey]
+        ) {
+          return;
+        }
         const { dataSource, matchLocationType, matchLocationName } = FEATURES[featureKey];
         const companionFeatureKey = (
           !isBasePlot(featureKey) ? null : basePlots.find((key) => key !== featureKey)
@@ -393,9 +401,10 @@ const calculateFeatureDataFetches = (state, requiredSites = []) => {
           });
       });
     });
-  /* eslint-enable max-len */
   return newState;
 };
+
+/* eslint-enable max-len, @stylistic/max-len */
 
 // NATGEO_WORLD_MAP has no data at zoom 17 or higher so go to WORLD_IMAGERY (satellite)
 const updateMapTileWithZoom = (state) => {
@@ -597,7 +606,8 @@ const setFetchStatusFromAction = (state, action, status) => {
           }
           const { parent: parentLocName, latitude, longitude } = data[locName];
           if (!parentLocName) { return; }
-          const parentSiteData = newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode]; // eslint-disable-line max-len
+          // eslint-disable-next-line max-len, @stylistic/max-len
+          const parentSiteData = newState.featureData[parentDataFeatureType][parentDataFeatureKey][siteCode];
           if (!parentSiteData[parentLocName]) {
             parentSiteData[parentLocName] = {};
           }
@@ -613,7 +623,8 @@ const setFetchStatusFromAction = (state, action, status) => {
             }
           }
           parentSiteData[parentLocName].geometry.coordinates[coordIdx] = [latitude, longitude];
-          const k = `${parentDataFeatureType}::${parentDataFeatureKey}::${siteCode}::${parentLocName}`;
+          const k = `${parentDataFeatureType}::${parentDataFeatureKey}`
+            + `::${siteCode}::${parentLocName}`;
           checkSamplingPointGeo[k] = {
             parentDataFeatureType,
             parentDataFeatureKey,
@@ -628,10 +639,17 @@ const setFetchStatusFromAction = (state, action, status) => {
           newState.featureData[featureType][featureKey][siteCode] = {};
         }
         // Geometry may be loaded by another sub-location so look for that and don't blow it away!
-        const geometry = (
+        let geometry;
+        if (
           !newState.featureData[featureType][featureKey][siteCode][locName]
           || !newState.featureData[featureType][featureKey][siteCode][locName].geometry
-        ) ? null : { ...newState.featureData[featureType][featureKey][siteCode][locName].geometry }; // eslint-disable-line max-len
+        ) {
+          geometry = null;
+        } else {
+          geometry = {
+            ...newState.featureData[featureType][featureKey][siteCode][locName].geometry,
+          };
+        }
         newState.featureData[featureType][featureKey][siteCode][locName] = {
           ...data[locName],
           featureKey,
@@ -643,7 +661,8 @@ const setFetchStatusFromAction = (state, action, status) => {
         }
         // Base plot features: also pull sampling module data from the hierarchy
         if (isBasePlot(featureKey)) {
-          const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY][siteCode]; // eslint-disable-line max-len
+          // eslint-disable-next-line max-len, @stylistic/max-len
+          const hierarchy = newState.featureData[FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY][siteCode];
           const basePlot = locName.replace('all', '').replace('.', '\\.');
           const basePlotRegex = new RegExp(`^${basePlot}([a-z]{3})$`);
           newState.featureData[featureType][featureKey][siteCode][locName].samplingModules = (
@@ -674,7 +693,7 @@ const setFetchStatusFromAction = (state, action, status) => {
           hasIncompleteValidSamplingPoints = resetCoords;
         }
         if (resetCoords) {
-          // eslint-disable-next-line max-len
+          // eslint-disable-next-line max-len, @stylistic/max-len
           const v = newState.featureData[s.parentDataFeatureType][s.parentDataFeatureKey][s.siteCode][s.parentLocName];
           v.geometry = { coordinates: [] };
           if (hasIncompleteValidSamplingPoints) {
@@ -946,23 +965,25 @@ const reducer = (state, action) => {
       return newState;
 
     case 'setDomainLocationHierarchyFetchStarted':
-      /* eslint-disable max-len */
-      if (!newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]) { return state; }
+      if (!newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]) {
+        return state;
+      }
+      // eslint-disable-next-line max-len, @stylistic/max-len
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.FETCHING;
-      /* eslint-enable max-len */
       return newState;
 
     case 'setDomainLocationHierarchyFetchSucceeded':
       if (
         !newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]
         || !action.data
-      ) { return state; }
-      /* eslint-disable max-len */
+      ) {
+        return state;
+      }
+      // eslint-disable-next-line max-len, @stylistic/max-len
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.SUCCESS;
       Object.keys(action.data).forEach((siteCode) => {
         newState.featureData.SITE_LOCATION_HIERARCHIES[siteCode] = action.data[siteCode];
       });
-      /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
       newState = completeOverallFetch(newState);
       newState = calculateFeatureDataFetches(
@@ -976,10 +997,11 @@ const reducer = (state, action) => {
       return newState;
 
     case 'setDomainLocationHierarchyFetchFailed':
-      /* eslint-disable max-len */
-      if (!newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]) { return state; }
+      if (!newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode]) {
+        return state;
+      }
+      // eslint-disable-next-line max-len, @stylistic/max-len
       newState.featureDataFetches[hierarchiesSource][hierarchiesType][action.domainCode] = FETCH_STATUS.ERROR;
-      /* eslint-enable max-len */
       newState.overallFetch.pendingHierarchy -= 1;
       newState = completeOverallFetch(newState);
       return newState;
@@ -1052,7 +1074,7 @@ const reducer = (state, action) => {
 
     case 'toggleSitesSelectedForDomain':
       if (!action.domainCode) { return state; }
-      /* eslint-disable max-len */
+      /* eslint-disable max-len, @stylistic/max-len */
       setMethod = (
         state.selection.derived[FEATURES.DOMAINS.KEY][action.domainCode] === SELECTION_PORTIONS.TOTAL
           ? 'delete' : 'add'
@@ -1063,7 +1085,7 @@ const reducer = (state, action) => {
       ).forEach((siteCode) => {
         newState.selection.set[setMethod](siteCode);
       });
-      /* eslint-enable max-len */
+      /* eslint-enable max-len, @stylistic/max-len */
       newState.selection.changed = true;
       newState = validateSelection(newState);
       newState = deriveRegionSelections(newState);
@@ -1315,7 +1337,10 @@ const Provider = (inProps) => {
     const hierarchiesType = FEATURE_TYPES.SITE_LOCATION_HIERARCHIES.KEY;
     Object.keys(state.featureDataFetches[hierarchiesSource][hierarchiesType])
       .forEach((domainCode) => {
-        if (state.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] !== FETCH_STATUS.AWAITING_CALL) { return; } // eslint-disable-line max-len
+        // eslint-disable-next-line max-len, @stylistic/max-len
+        if (state.featureDataFetches[hierarchiesSource][hierarchiesType][domainCode] !== FETCH_STATUS.AWAITING_CALL) {
+          return;
+        }
         dispatch({ type: 'setDomainLocationHierarchyFetchStarted', domainCode });
         fetchDomainHierarchy(domainCode)
           .then((response) => {

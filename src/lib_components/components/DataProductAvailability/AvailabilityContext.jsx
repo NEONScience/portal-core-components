@@ -124,6 +124,7 @@ const calculateRows = (state) => {
               title = `${title}${title.length ? ' - ' : ''}${reference.domains[domainCode].name}`;
               return `${acc}${acc.length ? '-' : ''}${domainCode}`;
             case 'sites':
+              // eslint-disable-next-line max-len, @stylistic/max-len
               title = `${title}${title.length ? ' - ' : ''}${reference.sites[siteCode].description}`;
               return `${acc}${acc.length ? '-' : ''}${siteCode}`;
             case 'tables':

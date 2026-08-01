@@ -1,3 +1,6 @@
+/* eslint-disable @stylistic/max-len */
+/* eslint-disable max-len */
+
 /**
  * Determines if the base string starts with the search string
  * @param {*} baseString

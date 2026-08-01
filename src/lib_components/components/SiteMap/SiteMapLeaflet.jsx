@@ -870,9 +870,13 @@ const SiteMapLeaflet = () => {
   const renderMouseModeToggleButtonGroup = () => {
     if (!state.selection.active) { return null; }
     const units = FEATURE_TYPES[state.selection.active].units || '';
+    const panTooltip = 'Click and drag on map to move the map center; '
+      + 'shift+drag to zoom to an area';
+    const areaSelectTooltip = `Click and drag on map to select ${units} `
+      + 'in an area; shift+drag to add onto selection';
     const mouseModeTooltips = {
-      [MAP_MOUSE_MODES.PAN]: 'Click and drag on map to move the map center; shift+drag to zoom to an area',
-      [MAP_MOUSE_MODES.AREA_SELECT]: `Click and drag on map to select ${units} in an area; shift+drag to add onto selection`,
+      [MAP_MOUSE_MODES.PAN]: panTooltip,
+      [MAP_MOUSE_MODES.AREA_SELECT]: areaSelectTooltip,
     };
     const mouseModeIcons = {
       [MAP_MOUSE_MODES.PAN]: MapPanIcon,

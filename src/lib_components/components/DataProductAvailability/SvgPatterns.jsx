@@ -42,7 +42,13 @@ export default function SvgPatterns() {
         const { dim, node } = svgPatternsSrc[pattern];
         const base64 = btoa(ReactDOMServer.renderToStaticMarkup(node));
         return (
-          <pattern id={pattern} key={pattern} patternUnits="userSpaceOnUse" width={dim} height={dim}>
+          <pattern
+            id={pattern}
+            key={pattern}
+            patternUnits="userSpaceOnUse"
+            width={dim}
+            height={dim}
+          >
             <image
               xlinkHref={`data:image/svg+xml;base64,${base64}`}
               x="0"

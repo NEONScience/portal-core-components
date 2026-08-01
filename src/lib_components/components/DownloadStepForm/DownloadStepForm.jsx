@@ -231,9 +231,11 @@ const renderStepSummary = {
   },
   s3Files: (classes, state) => {
     const { value: files, totalSize } = state.s3Files;
+    const summary = `${files.length} file${files.length === 1 ? '' : 's'} `
+      + `(${formatBytes(totalSize)} uncompressed)`;
     return (
       <Typography variant="body2" className={classes.summaryText}>
-        {`${files.length} file${files.length === 1 ? '' : 's'} (${formatBytes(totalSize)} uncompressed)`}
+        {summary}
       </Typography>
     );
   },
@@ -742,10 +744,12 @@ const DownloadStepForm = (inProps) => {
         labelRows: 'files',
       },
       toolbar: {
-        nRowsSelected: `{0} file${selection.length === 1 ? '' : 's'} selected (${formatBytes(totalSize)} uncompressed)`,
+        nRowsSelected: `{0} file${selection.length === 1 ? '' : 's'} `
+          + `selected (${formatBytes(totalSize)} uncompressed)`,
       },
       body: {
-        emptyDataSourceMessage: 'No files to display. Select more sites, broaden date range, or broaden search / filters.',
+        emptyDataSourceMessage: 'No files to display. Select more sites, '
+          + 'broaden date range, or broaden search / filters.',
       },
     };
     return (appliedValidValues.length || isLoading) ? (
@@ -794,10 +798,12 @@ const DownloadStepForm = (inProps) => {
     const { value, validValues } = state.packageType;
     let { productBasicDescription, productExpandedDescription } = state.productData;
     if (!productBasicDescription) {
-      productBasicDescription = 'Includes the data product, summary statistics, expanded uncertainty, and final quality flag';
+      productBasicDescription = 'Includes the data product, summary statistics, '
+        + 'expanded uncertainty, and final quality flag';
     }
     if (!productExpandedDescription) {
-      productExpandedDescription = 'Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis';
+      productExpandedDescription = 'Includes the basic package information plus '
+        + 'quality metrics for all of the quality assessment and quality control analysis';
     }
     return (
       <FormControl
@@ -897,7 +903,11 @@ const DownloadStepForm = (inProps) => {
       );
     }
     return (
-      <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
+      <div
+        data-selenium={
+          `download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`
+        }
+      >
         <InfoMessageCard
           title="External Host"
           messageContent={(

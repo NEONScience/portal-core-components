@@ -7,8 +7,10 @@ import { NeonTheme } from '../Theme/types';
 const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   card: {
     margin: muiTheme.spacing(0.5, 0, 3, 0),
-    backgroundColor: 'rgba(230, 241, 251, 0.5)', // theme.colors.LIGHT_BLUE[50] with 'a' value applied
-    borderColor: 'rgba(138, 191, 236, 0.5)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+    // theme.colors.LIGHT_BLUE[50] with 'a' value applied
+    backgroundColor: 'rgba(230, 241, 251, 0.5)',
+    // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+    borderColor: 'rgba(138, 191, 236, 0.5)',
   },
   primaryIcon: {
     marginRight: muiTheme.spacing(2),

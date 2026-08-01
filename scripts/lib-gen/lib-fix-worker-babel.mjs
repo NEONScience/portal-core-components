@@ -43,6 +43,7 @@ workers.forEach((worker) => {
   // Go through the file one line at a time
   inSource.split('\n').forEach((line) => {
     // Store babel polyfills OTHER THAN _interopRequireDefault
+    // eslint-disable-next-line max-len, @stylistic/max-len
     if (/^function _[a-zA-Z0-9]+\(.*\) \{.*\}$/.test(line) && !line.includes('interopRequireDefault')) {
       polyfillLines.push(`    ${line}`);
       return;
@@ -50,7 +51,9 @@ workers.forEach((worker) => {
     // Store lines before entering the worker and note when we do enter it
     if (!workerEntered) {
       preLines.push(line);
+      // eslint-disable-next-line max-len, @stylistic/max-len
       const spawnTestBabel = /^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+ =>) \{$/.test(line);
+      // eslint-disable-next-line max-len, @stylistic/max-len
       const spawnTestSwc = /^\s*return [_a-zA-Z0-9]+\.spawn\((?<funcDef>function \(.*\)|.+=>)\{$/.test(line);
       if (spawnTestBabel || spawnTestSwc) {
         workerEntered = true;
@@ -70,7 +73,11 @@ workers.forEach((worker) => {
     return;
   }
   // Write the updated file back out to lib
-  const outSource = [...preLines, ...polyfillLines, ...postLines].join('\n').replace(/[\n]{2,}/g, '\n\n');
+  const outSource = [
+    ...preLines,
+    ...polyfillLines,
+    ...postLines,
+  ].join('\n').replace(/[\n]{2,}/g, '\n\n');
   fs.writeFileSync(uri, outSource);
   console.log(`* ${worker} - UPDATED - ${polyfillLines.length - 2} polyfill(s) moved`);
 });

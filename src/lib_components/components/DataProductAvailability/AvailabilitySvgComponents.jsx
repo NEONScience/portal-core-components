@@ -195,7 +195,11 @@ DiagHalfAndHalfPattern.propTypes = {
 export const SvgDefs = () => (
   <svg width="0px" height="0px">
     <defs>
-      <DiagLinesPattern id="availableProvisionalPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.NEON_BLUE[50]} />
+      <DiagLinesPattern
+        id="availableProvisionalPattern"
+        color={COLORS.NEON_BLUE[700]}
+        secondaryColor={COLORS.NEON_BLUE[50]}
+      />
       <DiagHalfAndHalfPattern
         id="mixedAvailableProvisionalPattern"
         color={COLORS.NEON_BLUE[700]}
@@ -205,9 +209,21 @@ export const SvgDefs = () => (
       />
       <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
       <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />
-      <DiagLinesPattern id="partialSelectionPattern" color={COLORS.LIGHT_BLUE[300]} secondaryColor={COLORS.LIGHT_BLUE[100]} />
-      <HalfAndHalfPattern id="mixedSomeAvailabilityPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.GOLD[400]} />
-      <HalfAndHalfPattern id="mixedNoAvailabilityPattern" color={Theme.palette.grey[200]} secondaryColor={COLORS.GOLD[400]} />
+      <DiagLinesPattern
+        id="partialSelectionPattern"
+        color={COLORS.LIGHT_BLUE[300]}
+        secondaryColor={COLORS.LIGHT_BLUE[100]}
+      />
+      <HalfAndHalfPattern
+        id="mixedSomeAvailabilityPattern"
+        color={COLORS.NEON_BLUE[700]}
+        secondaryColor={COLORS.GOLD[400]}
+      />
+      <HalfAndHalfPattern
+        id="mixedNoAvailabilityPattern"
+        color={Theme.palette.grey[200]}
+        secondaryColor={COLORS.GOLD[400]}
+      />
     </defs>
   </svg>
 );

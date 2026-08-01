@@ -123,11 +123,13 @@ const SaeDataViewerBokehPlotContainer: React.FC = (): React.JSX.Element => {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
+    const errorMessage = 'An error occurred while generating the SAE Data Viewer. '
+      + 'Please try again momentarily.';
     return (
       <div className={classes.stateContainer}>
         <ErrorCard
           title="SAE Data Viewer Error"
-          message="An error occurred while generating the SAE Data Viewer. Please try again momentarily."
+          message={errorMessage}
         />
       </div>
     );
@@ -184,11 +186,21 @@ const SaeDataViewerBokehPlotContainer: React.FC = (): React.JSX.Element => {
           </Typography>
         </div>
         <div className={classes.skeletonContainer}>
-          <Skeleton variant="rectangular" height={20} width={200} className={classes.skeletonTitle} />
+          <Skeleton
+            variant="rectangular"
+            height={20}
+            width={200}
+            className={classes.skeletonTitle}
+          />
           <Skeleton variant="rectangular" height={370} width="100%" className={classes.skeleton} />
         </div>
         <div className={classes.skeletonContainer}>
-          <Skeleton variant="rectangular" height={20} width={200} className={classes.skeletonTitle} />
+          <Skeleton
+            variant="rectangular"
+            height={20}
+            width={200}
+            className={classes.skeletonTitle}
+          />
           <Skeleton variant="rectangular" height={370} width="100%" className={classes.skeleton} />
         </div>
       </div>

@@ -143,6 +143,8 @@ export const getThemeSpacingNumber = (spacing) => Number(spacing.slice(0, -2));
 // See all customizable Material UI theme keys here:
 // https://material-ui.com/customization/default-theme/#explore
 
+/* eslint-disable max-len, @stylistic/max-len */
+
 const baseTheme = createTheme({
   breakpoints: {
     values: {
@@ -904,6 +906,8 @@ const baseTheme = createTheme({
     },
   },
 });
+
+/* eslint-enable max-len, @stylistic/max-len */
 
 const theme = responsiveFontSizes(baseTheme);
 theme.isNeonTheme = true;

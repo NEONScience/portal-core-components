@@ -236,7 +236,10 @@ const SaeDataViewerSummary: React.FC = (): React.JSX.Element => {
   let dateRangeSummary = <Skeleton {...skeletonProps} width={300} />;
   const dateRange = [startDate, endDate];
   if (dateRange[0] && dateRange[1]) {
-    const pluralize = (val: number, unit: string) => (val === 1 ? `${val} ${unit}` : `${val} ${unit}s`);
+    const pluralize = (
+      val: number,
+      unit: string,
+    ) => (val === 1 ? `${val} ${unit}` : `${val} ${unit}s`);
     const startMoment = moment(dateRange[0]);
     const endMoment = moment(dateRange[1]);
     const days = Math.ceil(endMoment.diff(startMoment, 'days', true)) + 1;

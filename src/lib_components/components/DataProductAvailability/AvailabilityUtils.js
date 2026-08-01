@@ -9,6 +9,7 @@ import Theme, { COLORS } from '../Theme/Theme';
 /**
   All possible valid statuses (enhanced availability only)
 */
+/* eslint-disable max-len, @stylistic/max-len */
 export const VALID_ENHANCED_STATUSES = {
   expected: {
     title: 'Expected',
@@ -63,6 +64,7 @@ export const VALID_ENHANCED_STATUSES = {
     description: 'More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)',
   },
 };
+/* eslint-enable max-len, @stylistic/max-len */
 
 export const calcBasicRollupStatus = (statuses) => {
   if (!statuses) {

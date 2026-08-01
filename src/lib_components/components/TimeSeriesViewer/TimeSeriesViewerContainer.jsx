@@ -318,9 +318,14 @@ export function TimeSeriesViewerSummary() {
   const latestReleaseClause = useReleaseChip
     ? ''
     : ` (release: ${latestRelease || 'unknown'})`;
-  const releaseTooltip = state.release === null
-    ? `You are viewing only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
-    : `You are viewing product data only from the ${state.release} release (no provisional data will be included).`;
+  let releaseTooltip;
+  if (state.release === null) {
+    releaseTooltip = 'You are viewing only the latest released and provisional data '
+      + `(release: ${latestRelease || 'unknown'}).`;
+  } else {
+    releaseTooltip = `You are viewing product data only from the ${state.release} `
+      + 'release (no provisional data will be included).';
+  }
   const releaseChipLabel = state.release === null
     ? `Latest released and provisional data${latestReleaseClause}`
     : `${state.release}`;
@@ -410,7 +415,8 @@ export function TimeSeriesViewerSummary() {
       axes[yAxis].push({ title: 'Scale', value: logscale ? 'Logarithmic' : 'Linear' });
       axes[yAxis].push({ title: 'Units', value: yAxes[yAxis].units });
       const rangeMode = Y_AXIS_RANGE_MODE_DETAILS[yAxes[yAxis].rangeMode].name;
-      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} - ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
+      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} `
+        + `- ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
       axes[yAxis].push({ title: 'Range', value: range });
     }
   });
@@ -642,7 +648,12 @@ export default function TimeSeriesViewerContainer() {
     if (isError || isWarning || isLoginRequired) {
       const icon = isLoginRequired
         ? (<InfoIcon fontSize="large" className={classes.infoIcon} />)
-        : (<ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />);
+        : (
+          <ErrorIcon
+            fontSize="large"
+            className={classes[isError ? 'errorIcon' : 'warningIcon']}
+          />
+        );
       return (
         <div className={classes.graphOverlay}>
           <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>

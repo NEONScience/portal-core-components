@@ -288,13 +288,15 @@ export const tryFindActiveFiles = (files, query, fileResolutionMatchers) => {
       if (fileNameInfo !== null) {
         // Identify the first csv, basic package, based on order of resolution to identify
         // that matches the requested spatial index
-        if ((fileNameInfo.fileExtension === FILE_TYPES.CSV)
-            && (fileNameInfo.packageType === PACKAGE_TYPE.BASIC)
-            && ((fileNameInfo.temporalIndex === matcher.tmi)
-              || (fileNameInfo.tableName.indexOf(matcher.fileName) > -1))
-            && (((query.positions === null) || (query.positions.length <= 0))
-                // eslint-disable-next-line max-len
-                || containsPosition(query.positions, fileNameInfo.horizontalSI, fileNameInfo.verticalSI))) {
+        if (
+          (fileNameInfo.fileExtension === FILE_TYPES.CSV)
+          && (fileNameInfo.packageType === PACKAGE_TYPE.BASIC)
+          && ((fileNameInfo.temporalIndex === matcher.tmi)
+            || (fileNameInfo.tableName.indexOf(matcher.fileName) > -1))
+          && (((query.positions === null) || (query.positions.length <= 0))
+            // eslint-disable-next-line max-len, @stylistic/max-len
+            || containsPosition(query.positions, fileNameInfo.horizontalSI, fileNameInfo.verticalSI))
+        ) {
           // If no SI were specified, only work from first identified
           if ((query.positions === null) || (query.positions.length <= 0)) {
             if (infoAcc.dataFileUrls.length <= 0) {

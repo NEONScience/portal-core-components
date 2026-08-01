@@ -340,6 +340,8 @@ function PositionHistoryButton(inProps) {
       </Button>
     );
   }
+  const dialogDescription = `${positionsDescription} The table below shows changes to the physical `
+    + 'location of this position since its creation.';
   return (
     <>
       <Button
@@ -366,7 +368,7 @@ function PositionHistoryButton(inProps) {
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText id="position-history-dialog-description" tabIndex={-1} variant="body2">
-            {`${positionsDescription} The table below shows changes to the physical location of this position since its creation.`}
+            {dialogDescription}
           </DialogContentText>
           <TableContainer>
             <Table className={classes.table} aria-label="simple table">
@@ -404,7 +406,10 @@ function PositionHistoryButton(inProps) {
                   let elevation = 'unknown';
                   if (!Number.isNaN(parsedReferenceElevation)) {
                     if (!Number.isNaN(parsedZOffset)) {
-                      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
+                      const calcOffsetElevation = (parsedReferenceElevation + parsedZOffset)
+                        .toFixed(2)
+                        .toString();
+                      elevation = `${calcOffsetElevation}m`;
                     } else {
                       elevation = `${parsedReferenceElevation}m`;
                     }
@@ -415,10 +420,16 @@ function PositionHistoryButton(inProps) {
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
-                  const key = `${sensorStartDateTime}${end}${parsedXOffset}${parsedYOffset}${parsedZOffset}`;
+                  const key = `${sensorStartDateTime}`
+                    + `${end}`
+                    + `${parsedXOffset}`
+                    + `${parsedYOffset}`
+                    + `${parsedZOffset}`;
                   return (
                     <TableRow key={key}>
-                      <TableCell component="th" scope="row" style={cellStyle}>{sensorStartDateTime}</TableCell>
+                      <TableCell component="th" scope="row" style={cellStyle}>
+                        {sensorStartDateTime}
+                      </TableCell>
                       <TableCell component="th" scope="row" style={cellStyle}>{end}</TableCell>
                       <TableCell align="right" style={cellStyle}>{displayXOffset}</TableCell>
                       <TableCell align="right" style={cellStyle}>{displayYOffset}</TableCell>
@@ -432,7 +443,11 @@ function PositionHistoryButton(inProps) {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => { setHistoryDialogOpen(false); }} color="primary" variant="outlined">
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { setHistoryDialogOpen(false); }}
+          >
             Return
           </Button>
         </DialogActions>
@@ -999,6 +1014,9 @@ function SiteOption(inProps) {
   let optionContent = <Typography variant="body1" gutterBottom>{siteCode}</Typography>;
   if (stateCode) {
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
+    const optionSubtitle = `${terrainTypeTitle} `
+      + `- Domain ${domainCode} (${domainName}) `
+      + `- Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
     optionContent = (
       <div className={classes.startFlex}>
         {iconSvg ? (
@@ -1016,7 +1034,7 @@ function SiteOption(inProps) {
             {`${siteCode} - ${description}, ${stateCode}`}
           </Typography>
           <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
-            {`${terrainTypeTitle} - Domain ${domainCode} (${domainName}) - Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`}
+            {optionSubtitle}
           </Typography>
         </div>
       </div>
@@ -1407,7 +1425,13 @@ export default function TimeSeriesViewerSites(props) {
           selectionLimit={[1, upperLimit]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
-          buttonProps={{ style: { size: 'large', marginLeft: theme.spacing(1.5) }, disabled: isDisabled }}
+          buttonProps={{
+            style: {
+              size: 'large',
+              marginLeft: theme.spacing(1.5),
+            },
+            disabled: isDisabled,
+          }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />
       </div>

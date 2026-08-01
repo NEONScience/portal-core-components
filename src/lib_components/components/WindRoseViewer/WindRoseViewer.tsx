@@ -88,7 +88,8 @@ const FREQUENCY_LABEL_MODE: FrequencyLabelMode = FrequencyLabelMode.PERCENTAGE;
 const getDirectionLabel = (mode: DirectionLabelMode, d: any): string => {
   switch (mode) {
     case DirectionLabelMode.ANGLE:
-      return `${(DIRECTION_BIN_LOOKUP as DirectionBinLookupType)[d.angle].angle}${DEGREE_SYMBOL_UNICODE}`;
+      return `${(DIRECTION_BIN_LOOKUP as DirectionBinLookupType)[d.angle].angle}`
+        + `${DEGREE_SYMBOL_UNICODE}`;
     case DirectionLabelMode.DIRECTION:
     default:
       return `${(DIRECTION_BIN_LOOKUP as DirectionBinLookupType)[d.angle].direction}`;
@@ -231,10 +232,12 @@ const WindRose: React.FC = (): React.JSX.Element => {
       .enter()
       .append('g')
       .attr('text-anchor', 'middle')
-      .attr('transform', (d: any): string => (
-        `rotate(${(((x(d.angle) as number + x.bandwidth() / 2) * 180) / Math.PI - (90 - angleOffset))})`
-        + `translate(${(outerRadius + 30)}, 0)`
-      ));
+      .attr('transform', (d: any): string => {
+        const dAngle = x(d.angle) as number;
+        const rotate = (((dAngle + x.bandwidth() / 2) * 180) / Math.PI - (90 - angleOffset));
+        return `rotate(${rotate})`
+          + `translate(${(outerRadius + 30)}, 0)`;
+      });
 
     label.append('text')
       .attr('transform', (d: any) => (
@@ -310,7 +313,10 @@ const WindRose: React.FC = (): React.JSX.Element => {
       //   return 'translate(-40,' + (i - (dataColumns.length - 1) / 2) * 20 + ')';
       // });
       .attr('transform', (d, i) => (
-        `translate(${outerRadius}, ${((-1) * outerRadius + 60 + (i - (dataColumns.length - 1) / 2) * 20)})`
+        'translate('
+          + `${outerRadius}, `
+          + `${((-1) * outerRadius + 60 + (i - (dataColumns.length - 1) / 2) * 20)}`
+          + ')'
       ));
 
     legend.append('rect')

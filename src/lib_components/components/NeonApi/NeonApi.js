@@ -338,7 +338,9 @@ const NeonApi = {
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets/${uuid}`)
   ),
   getPrototypeManifestRollupObservable: (uuid) => (
-    getJsonObservable(`${NeonEnvironment.getFullDownloadApiPath('prototypeManifestRollup')}?uuid=${uuid}`)
+    getJsonObservable(
+      `${NeonEnvironment.getFullDownloadApiPath('prototypeManifestRollup')}?uuid=${uuid}`,
+    )
   ),
   getPrototypeDataFileObservable: (uuid, fileName) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/data/${uuid}/${fileName}`)
@@ -421,7 +423,9 @@ const NeonApi = {
    * @return The RxJS Ajax Observable
    */
   getQuickStartGuideDetailObservable: (name, version) => (
-    getJsonObservable(`${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`)
+    getJsonObservable(
+      `${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`,
+    )
   ),
   /**
    * Gets the RxJS Observable for the quick start guides HEAD endpoint for a given name

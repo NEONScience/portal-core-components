@@ -76,7 +76,9 @@ if (config.useCurrentWorkingDir) {
     if ((config.cwdRelativeRemoteAssetsPath === null)
         || (config.cwdRelativeRemoteAssetsPath === undefined)
         || (config.cwdRelativeRemoteAssetsPath.length <= 0)) {
-      console.error('Invalid command arguments. --cwd-relative-remote-assets-path must be specified');
+      console.error(
+        'Invalid command arguments. --cwd-relative-remote-assets-path must be specified',
+      );
       process.exit(9);
     }
     CACHED_REMOTE_ASSETS_PATH = path.join(process.cwd(), config.cwdRelativeRemoteAssetsPath);
@@ -156,6 +158,7 @@ const sanitizeContent = (key, content) => {
       (workingContent.match(/^(.*url\(["']((?!data|https)).*)$/mg) || []).forEach((match) => {
         let shouldCommentMatch = true;
         if (config.cssReplaceRelativeUrls) {
+          // eslint-disable-next-line max-len, @stylistic/max-len
           const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;
           const matchesRelative = relativeUrlRegex.exec(match);
           if (matchesRelative

@@ -24,6 +24,7 @@ const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
+/* eslint-disable max-len, @stylistic/max-len */
 const useStyles = (customize) => {
   const viewportStyles = customize
     ? {}
@@ -299,6 +300,7 @@ const useStyles = (customize) => {
     },
   }));
 };
+/* eslint-enable max-len, @stylistic/max-len */
 
 const buildSearchAction = (action) => {
   const root = NeonEnvironment.getWebHost();

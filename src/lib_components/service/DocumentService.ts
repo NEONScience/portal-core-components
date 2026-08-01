@@ -97,7 +97,9 @@ const documentTypes: Record<string, DocumentTypeListItemDef> = {
     Icon: SpreadsheetIcon,
   },
   presentation: {
-    match: (type: string): boolean => (type.includes('presentation') || type.includes('powerpoint')),
+    match: (type: string): boolean => (
+      (type.includes('presentation') || type.includes('powerpoint'))
+    ),
     title: (type?: string): string => 'Presentation',
     Icon: PresentationIcon,
   },
@@ -244,7 +246,7 @@ const DocumentService: IDocumentService = {
     isStringNonEmpty(name) && (name as string).startsWith('NEON.QSG.')
   ),
   getQuickStartGuideNameRegex: (): RegExp => (
-    // eslint-disable-next-line prefer-regex-literals
+    // eslint-disable-next-line prefer-regex-literals, max-len, @stylistic/max-len
     new RegExp(/^(?<name>NEON[.]QSG[.]DP[0-9]{1}[.][0-9]{5}[.][0-9]{3})(?<version>v(?<versionNumber>[0-9]+))*(?<extension>[.](?<extensionName>[a-z]+))*$/)
   ),
   parseQuickStartGuideName: (name: string): Nullable<ParsedQsgNameResult> => {

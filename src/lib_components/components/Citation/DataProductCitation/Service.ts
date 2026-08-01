@@ -181,8 +181,7 @@ const applyDoiStatusReleaseGlobally = (
     return state;
   }
   const updatedState: DataProductCitationState = { ...state };
-  // eslint-disable-next-line max-len
-  const appliedDoiStatus: Nullable<DataProductDoiStatus> = BundleService.determineAppliedBundleRelease(
+  const appliedDoiStatus = BundleService.determineAppliedBundleRelease(
     ((updatedState.neonContextState?.data as UnknownRecord || {})).bundles as BundleContext,
     release,
     productCode,
@@ -426,8 +425,8 @@ const useViewState = (
   ): boolean => {
     let tsResult = false;
     if (!Array.isArray(dpds)) {
-      // eslint-disable-next-line max-len
-      const doiStatusType: Nullable<DoiStatusType> = (dpds as Nullable<DataProductDoiStatus>)?.status;
+      const coercedDpds = dpds as Nullable<DataProductDoiStatus>;
+      const doiStatusType: Nullable<DoiStatusType> = coercedDpds?.status;
       tsResult = (exists(doiStatusType) && (doiStatusType === DoiStatusType.TOMBSTONED));
     } else {
       tsResult = dpds.every((ds: DataProductDoiStatus): boolean => {
@@ -490,8 +489,7 @@ const useViewState = (
     let itemIsTombstoned: boolean = false;
     // Determine if the citable product should be the bundle container product
     // or the currently specified product.
-    // eslint-disable-next-line max-len
-    const citableBaseProduct: Nullable<ContextDataProduct> = hasBundleProduct && isBundleProductInRelease
+    const citableBaseProduct = hasBundleProduct && isBundleProductInRelease
       ? bundleProduct
       : baseProduct;
     // Determine the product to use for citing within the applicable release

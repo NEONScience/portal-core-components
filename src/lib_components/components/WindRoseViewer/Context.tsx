@@ -331,7 +331,7 @@ const reducer = (
       return newState;
     case ActionTypes.FETCH_PRODUCT_FAILED:
       (newState.fetchState.product as FetchStatusState).status = AsyncStateType.FAILED;
-      // eslint-disable-next-line max-len
+      // eslint-disable-next-line max-len, @stylistic/max-len
       (newState.fetchState.product as FetchStatusState).error = (action as FetchProductFailedAction).error as any;
       return newState;
     case ActionTypes.FETCH_PRODUCT_SUCCEEDED:
@@ -369,11 +369,11 @@ const reducer = (
         (newState.neonContextState?.data as any).sites,
       );
       newState.monthOptions = getMonthOptions(newState.product, wrfAction.query.sites);
-      // eslint-disable-next-line max-len
+      // eslint-disable-next-line max-len, @stylistic/max-len
       newState.positionOptions = (wrfAction.response as UnknownRecord).positionOptions as PositionDisplayOption[];
       newState.data = {
         ...newState.data,
-        // eslint-disable-next-line max-len
+        // eslint-disable-next-line max-len, @stylistic/max-len
         dailyBins: (wrfAction.response as UnknownRecord).windRoseDailyBins as Record<number, unknown>,
         current: (wrfAction.response as UnknownRecord).currentWindRose as [],
       };
@@ -393,10 +393,14 @@ const reducer = (
         error: wrFailedAction.error as Nullable<string | UnknownRecord>,
       };
       newState.dataStateMessage = null;
-      // eslint-disable-next-line max-len
-      newState.siteOptions = getSiteOptions(newState.product, (newState.neonContextState?.data as any).sites);
-      // eslint-disable-next-line max-len
-      newState.monthOptions = getMonthOptions(newState.product, wrFailedAction.initAction.query.sites);
+      newState.siteOptions = getSiteOptions(
+        newState.product,
+        (newState.neonContextState?.data as any).sites,
+      );
+      newState.monthOptions = getMonthOptions(
+        newState.product,
+        wrFailedAction.initAction.query.sites,
+      );
       newState.data = {
         ...newState.data,
         dailyBins: {},
@@ -456,13 +460,14 @@ const buildFetchProductObservable = (
     ) as Observable<AjaxResponse<NeonApiResponse<DataProductResponse>>>;
   }
   return productObs.pipe(
-    // eslint-disable-next-line max-len
-    mergeMap((response: AjaxResponse<NeonApiResponse<DataProductResponse>>): Observable<unknown> => {
-      if (!verifyProductResponse(response)) {
-        return of(ActionCreator.fetchProductFailed('Failed to fetch product'));
-      }
-      return of(ActionCreator.fetchProductSucceeded(response.response.data.product));
-    }),
+    mergeMap(
+      (response: AjaxResponse<NeonApiResponse<DataProductResponse>>): Observable<unknown> => {
+        if (!verifyProductResponse(response)) {
+          return of(ActionCreator.fetchProductFailed('Failed to fetch product'));
+        }
+        return of(ActionCreator.fetchProductSucceeded(response.response.data.product));
+      },
+    ),
     catchError((error: AjaxResponse<unknown>): ObservableInput<any> => (
       of(ActionCreator.fetchProductFailed(error))
     )),
@@ -539,8 +544,10 @@ const buildFilesAjaxObservable = (
         dataFilesResponseData,
         dataFilesInfo,
       );
-      // eslint-disable-next-line max-len
-      return of(ActionCreator.fetchWindRoseFullfilled(windRoseData, (action as FetchWindRoseAction).query));
+      return of(ActionCreator.fetchWindRoseFullfilled(
+        windRoseData,
+        (action as FetchWindRoseAction).query,
+      ));
     }),
     catchError((error) => {
       const message = error.xhr ? error.xhr.response : null;
