@@ -12,7 +12,6 @@ import MenuList from '@mui/material/MenuList';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { Nullable } from '../../types/core';
@@ -37,12 +36,12 @@ interface SplitButtonProps {
   selectedOption: string;
   onClick: (selectedOption: string) => void;
   onChange: (selectedOption: string) => void;
-  buttonGroupProps: Nullable<ButtonGroupProps>;
-  buttonMenuProps: Nullable<ButtonProps>;
-  buttonProps: Nullable<ButtonProps>;
-  selectedOptionDisplayCallback: Nullable<SelectedOptionRenderType>;
-  isFullWidth: Nullable<boolean>;
-  styleOverrides: Nullable<React.CSSProperties>;
+  buttonGroupProps?: Nullable<ButtonGroupProps>;
+  buttonMenuProps?: Nullable<ButtonProps>;
+  buttonProps?: Nullable<ButtonProps>;
+  selectedOptionDisplayCallback?: Nullable<SelectedOptionRenderType>;
+  isFullWidth?: Nullable<boolean>;
+  styleOverrides?: Nullable<React.CSSProperties>;
 }
 
 const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React.JSX.Element => {
@@ -197,6 +196,4 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React
   );
 };
 
-const WrappedSplitButton = (Theme as any).getWrappedComponent(SplitButton);
-
-export default WrappedSplitButton;
+export default SplitButton;

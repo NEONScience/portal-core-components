@@ -21,7 +21,6 @@ import AvailabilityContext from './AvailabilityContext';
 import AvailabilityPending from './AvailabilityPending';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -52,13 +51,13 @@ const useStyles = makeStyles()((theme) => ({
   xsSelect: {
     height: theme.spacing(4),
     '& div': {
-      padding: Theme.spacing(1, 3, 1, 1.5),
+      padding: theme.spacing(1, 3, 1, 1.5),
     },
   },
   sortSelect: {
     height: theme.spacing(4),
     '& div': {
-      paddingRight: Theme.spacing(4.5),
+      paddingRight: theme.spacing(4.5),
     },
     marginRight: theme.spacing(2),
   },
@@ -83,7 +82,7 @@ const EnhancedAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { sites: availabilitySites, ...other } = props;
 
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
 
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },
@@ -112,6 +111,7 @@ const EnhancedAvailabilityInterface = (inProps) => {
   const handleSvgRedraw = useCallback(() => {
     if (!rowLabels.length) { return; }
     EnhancedAvailabilityGrid({
+      theme,
       rows,
       rowLabels,
       rowTitles,
@@ -119,6 +119,7 @@ const EnhancedAvailabilityInterface = (inProps) => {
       selectionEnabled,
     });
   }, [
+    theme,
     svgRef,
     rows,
     rowLabels,
@@ -157,13 +158,13 @@ const EnhancedAvailabilityInterface = (inProps) => {
     };
     return (
       <div
-        style={{ ...optionDivStyle, marginRight: Theme.spacing(3) }}
+        style={{ ...optionDivStyle, marginRight: theme.spacing(3) }}
         data-selenium="data-product-availability.breakout-options"
       >
         <Typography
           variant="h6"
           className={classes.h6Small}
-          style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+          style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
         >
           View By:
         </Typography>
@@ -195,7 +196,7 @@ const EnhancedAvailabilityInterface = (inProps) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         Sort By:
       </Typography>

@@ -68,8 +68,8 @@ window.NEON_SERVER_DATA = {
 All components rely on a customized Material UI Theme for styles and many components make use of
 custom React contexts to pre-load commonly used data asychronously. By design, all Portal Core
 Components are built to be as atomic as possible. As such, any components that require being wrapped
-in the NEON Theme or in one or more Portal Core Components Contexts will automatically detect if
-those resourcesare present and, if not, self-wrap.
+in one or more Portal Core Components Contexts will automatically detect if
+those resources are present and, if not, self-wrap.
 
 Put another way, Portal Core Components *are* atomic and can be used without having to worry about
 wrapping them in additional resources unless the documentation specifically states otherwise.
@@ -144,8 +144,7 @@ Critical rules for this worker pattern:
 And most important: **Always test the lib export!**
 
 How a worker runs when developing core-components locally and how it runs when pulled in through the
-lib export in another app are *very* different. The former uses run-time webpack and the latter uses
-babel only, along with whatever bundling toolchain is in use by the other app.
+lib export in another app are *very* different.
 
 If you have developed a worker but find it is not working when pulled in as a lib export, run a clean
 lib build and then inspect the transpiled worker file in `lib/workers`. Look for any babel polyfill

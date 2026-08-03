@@ -32,7 +32,6 @@ import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import NeonApi from '../NeonApi';
 import SplitButton from '../Button/SplitButton';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -288,10 +287,10 @@ export interface DocumentListItemProps {
   id: number;
   document: DocumentListItemModel;
   makeDownloadableLink: boolean;
-  enableDownloadButton: Nullable<boolean>;
-  fetchVariants: Nullable<boolean>;
-  enableVariantChips: Nullable<boolean>;
-  containerComponent: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
+  enableDownloadButton?: Nullable<boolean>;
+  fetchVariants?: Nullable<boolean>;
+  enableVariantChips?: Nullable<boolean>;
+  containerComponent?: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
 }
 
 const DocumentListItem: React.FC<DocumentListItemProps> = (
@@ -756,6 +755,4 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
   );
 };
 
-const WrappedDocumentListItem = (Theme as any).getWrappedComponent(DocumentListItem);
-
-export default WrappedDocumentListItem;
+export default DocumentListItem;

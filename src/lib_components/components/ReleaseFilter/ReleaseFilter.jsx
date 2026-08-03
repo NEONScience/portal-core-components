@@ -19,7 +19,6 @@ import Skeleton from '@mui/material/Skeleton';
 import CopyIcon from '@mui/icons-material/Assignment';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 
 import RouteService from '../../service/RouteService';
@@ -495,6 +494,4 @@ ReleaseFilter.propTypes = {
   title: PropTypes.string,
 };
 
-const WrappedReleaseFilter = Theme.getWrappedComponent(ReleaseFilter);
-
-export default WrappedReleaseFilter;
+export default ReleaseFilter;

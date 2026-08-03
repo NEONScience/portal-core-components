@@ -39,7 +39,6 @@ import NeonContext from '@/components/NeonContext/NeonContext';
 import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
 import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
 import ReleaseService from '@/service/ReleaseService';
-import Theme from '@/components/Theme/Theme';
 import { Release } from '@/types/internal';
 import { exists, existsNonEmpty, isStringNonEmpty } from '@/util/typeUtil';
 import {
@@ -406,9 +405,7 @@ const DataProductCitationDemoContainer = (): React.JSX.Element => ((
   </ComponentErrorBoundary>
 ));
 
-const WrappedDataProductCitationDemo = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(DataProductCitationDemoContainer),
-);
+const WrappedDataProductCitationDemo = NeonContext.getWrappedComponent(DataProductCitationDemoContainer);
 
 export default function StyleGuide() {
   const { classes } = useStyles();

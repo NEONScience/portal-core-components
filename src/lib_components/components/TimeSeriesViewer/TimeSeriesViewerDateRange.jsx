@@ -201,6 +201,7 @@ const TimeSeriesViewerDateRange = (props) => {
     BasicAvailabilityGrid({
       view: availabilityView,
       data: availabilityData,
+      theme,
       svgRef,
       allSites,
       sites: availabilitySites,
@@ -208,6 +209,7 @@ const TimeSeriesViewerDateRange = (props) => {
       setDateRangeValue,
     });
   }, [
+    theme,
     svgRef,
     allSites,
     availabilityView,

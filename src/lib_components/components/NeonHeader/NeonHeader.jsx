@@ -9,7 +9,6 @@ import camelCase from 'lodash/camelCase';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_HEADER_HTML_FALLBACK from '../../remoteAssets/drupal-header.html';
-import Theme from '../Theme/Theme';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
@@ -345,8 +344,8 @@ const NeonHeader = (inProps) => {
     showSkeleton,
     customizeAuthContainer,
   } = props;
-  const { classes } = useStyles(customizeAuthContainer)();
-  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
+  const { classes, theme } = useStyles(customizeAuthContainer)();
+  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [{
     isActive: neonContextIsActive,

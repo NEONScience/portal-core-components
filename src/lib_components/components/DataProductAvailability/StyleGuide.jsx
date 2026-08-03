@@ -6,10 +6,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
 import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
 import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
-import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
@@ -29,6 +29,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const EnhancedAvailability = () => {
+  const theme = useTheme();
   const initializedRef = useRef(false);
   const [loading, setLoading] = useState(true);
   const [availability, setAvailability] = useState({});
@@ -49,7 +50,7 @@ const EnhancedAvailability = () => {
     : availability.products.findIndex((p) => p.productCode === selectedProductCode);
   const sites = productIdx === -1 ? [] : availability.products[productIdx].sites;
 
-  const paperStyles = { width: '100%', padding: Theme.spacing(3) };
+  const paperStyles = { width: '100%', padding: theme.spacing(3) };
   return loading ? (
     <Paper style={paperStyles}>loading...</Paper>
   ) : (

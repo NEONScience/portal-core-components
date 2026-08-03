@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from '@mui/material/Avatar';
+import { useTheme } from '@mui/material/styles';
 
-import Theme from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
 import AtmosphereSVG from './svg_optimized/atmosphere.svg';
@@ -47,6 +47,7 @@ const defaultProps = {
 };
 
 const DataThemeIcon = (inProps) => {
+  const muiTheme = useTheme();
   const props = resolveProps(defaultProps, inProps);
   const {
     theme,
@@ -72,15 +73,15 @@ const DataThemeIcon = (inProps) => {
   if (avatar) {
     return (
       <Avatar
-        style={{ width: Theme.spacing(size), height: Theme.spacing(size) }}
+        style={{ width: muiTheme.spacing(size), height: muiTheme.spacing(size) }}
         {...elementProps}
       />
     );
   }
   return (
     <img // eslint-disable-line jsx-a11y/alt-text
-      width={Theme.spacing(size)}
-      height={Theme.spacing(size)}
+      width={muiTheme.spacing(size)}
+      height={muiTheme.spacing(size)}
       {...elementProps}
       {...other}
     />
@@ -102,6 +103,4 @@ DataThemeIcon.propTypes = {
   className: PropTypes.string,
 };
 
-const WrappedDataThemeIcon = Theme.getWrappedComponent(DataThemeIcon);
-
-export default WrappedDataThemeIcon;
+export default DataThemeIcon;

@@ -48,18 +48,21 @@ export default function StyleGuide() {
     type: 'application/pdf',
     size: 170516,
     description: 'Quick Start Guide for 2D wind speed and direction (DP1.00001.001)',
+    variants: [],
   };
   const neonDoc = {
     name: 'NEON.DOC.000230vA.pdf',
     type: 'application/pdf',
     size: 599913,
     description: 'NEON sensor command, control and configuration – Barometric pressure',
+    variants: [],
   };
   const invalidDoc = {
     name: 'invalid.pdf',
     type: 'invalid',
     size: 0,
     description: 'Invalid document',
+    variants: [],
   };
   const docs: NeonDocument[] = [qsgDoc, neonDoc, invalidDoc];
   const docsList: DocumentListItemModel[] = [
@@ -132,6 +135,8 @@ import DocumentListItem from 'portal-core-components/lib/components/Documents/Do
         <div style={{ width: '100%' }}>
           <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
             <DocumentListItem
+              id={1}
+              makeDownloadableLink={false}
               document={qsgDoc}
               containerComponent="div"
               enableDownloadButton
@@ -141,6 +146,7 @@ import DocumentListItem from 'portal-core-components/lib/components/Documents/Do
           </Paper>
           <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
             <DocumentListItem
+              id={2}
               document={neonDoc}
               containerComponent="div"
               makeDownloadableLink
@@ -150,6 +156,8 @@ import DocumentListItem from 'portal-core-components/lib/components/Documents/Do
           </Paper>
           <Paper className={classes.paper} style={{ marginBottom: '10px' }}>
             <DocumentListItem
+              id={3}
+              makeDownloadableLink={false}
               document={invalidDoc}
               containerComponent="div"
               enableDownloadButton
@@ -175,6 +183,7 @@ const docs: NeonDocument[] = [...];
       <ExampleBlock>
         <Paper className={classes.paper}>
           <DocumentList
+            makeDownloadableLink={false}
             documents={docsList}
             enableDownloadButton
             enableVariantChips

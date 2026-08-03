@@ -2101,19 +2101,19 @@ exports[`NeonPage renders with sidebar links 1`] = `
               style="max-height: 664px;"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
                 href="#"
               >
                 Section A
               </a>
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
                 href="#sectionB"
               >
                 Section B
               </a>
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
                 href="#sectionC"
               >
                 <div>
@@ -2122,7 +2122,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
                 Section C
               </a>
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
                 href="#sectionD"
               >
                 Section D
@@ -2210,19 +2210,19 @@ exports[`NeonPage renders with sidebar links 1`] = `
             style="max-height: 664px;"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
               href="#"
             >
               Section A
             </a>
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
               href="#sectionB"
             >
               Section B
             </a>
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
               href="#sectionC"
             >
               <div>
@@ -2231,7 +2231,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
               Section C
             </a>
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qretoj-MuiTypography-root-MuiLink-root-sidebarLink"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
               href="#sectionD"
             >
               Section D
@@ -2351,13 +2351,13 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
               class="css-138p0hz-sidebarLinksContainer"
             >
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
                 href="#sectionA"
               >
                 Section A
               </a>
               <a
-                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
                 href="#sectionA"
               >
                 Section B
@@ -2426,13 +2426,13 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
             class="css-138p0hz-sidebarLinksContainer"
           >
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
               href="#sectionA"
             >
               Section A
             </a>
             <a
-              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-me7a5h-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
               href="#sectionA"
             >
               Section B

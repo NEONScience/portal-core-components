@@ -13,7 +13,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import GlobeIcon from '@mui/icons-material/Language';
 
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import {
   FEATURE_TYPES,
@@ -235,6 +234,4 @@ MapSelectionButton.propTypes = {
   onSave: PropTypes.func,
 };
 
-const WrappedMapSelectionButton = Theme.getWrappedComponent(MapSelectionButton);
-
-export default WrappedMapSelectionButton;
+export default MapSelectionButton;

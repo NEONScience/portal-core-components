@@ -1,3 +1,4 @@
+import React from 'react';
 export declare enum NeonAuthType {
     REDIRECT = "REDIRECT",
     SILENT = "SILENT"
@@ -18,5 +19,5 @@ export interface AccountMenuProps {
     accountPath: string;
     handleLogout: () => void;
 }
-declare const WrappedNeonAuth: any;
+declare const WrappedNeonAuth: (props: any) => React.JSX.Element;
 export default WrappedNeonAuth;

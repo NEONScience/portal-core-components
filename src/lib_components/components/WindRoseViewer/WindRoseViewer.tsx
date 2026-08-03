@@ -37,7 +37,6 @@ import {
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import {
@@ -158,16 +157,28 @@ const WindRose: React.FC = (): React.JSX.Element => {
     const g = svg.append('g')
       .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
+    // const defaultRange = [
+    //   '#4242f4',
+    //   '#42c5f4',
+    //   '#42f4ce',
+    //   '#42f456',
+    //   '#adf442',
+    //   '#f4e242',
+    //   '#f4a142',
+    //   '#f44242',
+    //   '#ff00ff',
+    // ];
     const defaultRange = [
-      '#4242f4',
-      '#42c5f4',
-      '#42f4ce',
-      '#42f456',
-      '#adf442',
-      '#f4e242',
-      '#f4a142',
-      '#f44242',
-      '#ff00ff',
+      '#002c77',
+      '#1f5fae',
+      '#168aad',
+      '#1ca58f',
+      '#58a65c',
+      '#a1b84f',
+      '#d5ad47',
+      '#d46957',
+      '#a04fa3',
+      '#d65a9e',
     ];
     // const defaultRange = [
     //   '#1A237E',
@@ -679,8 +690,6 @@ const WindRoseViewerContainer: React.FC<WindRoseViewerProps> = (
   );
 };
 
-const WrappedWindRoseViewerContainer = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(WindRoseViewerContainer),
-);
+const WrappedWindRoseViewerContainer = NeonContext.getWrappedComponent(WindRoseViewerContainer);
 
 export default WrappedWindRoseViewerContainer;

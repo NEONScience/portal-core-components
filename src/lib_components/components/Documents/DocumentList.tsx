@@ -3,7 +3,6 @@ import React from 'react';
 import List from '@mui/material/List';
 
 import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
 import { makeStyles } from '../Theme/makeStyles';
@@ -66,6 +65,4 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): Re
   );
 };
 
-const WrappedDocumentList = (Theme as any).getWrappedComponent(DocumentList);
-
-export default WrappedDocumentList;
+export default DocumentList;

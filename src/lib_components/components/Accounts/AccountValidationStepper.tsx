@@ -13,7 +13,6 @@ import CompletedIcon from '@mui/icons-material/CheckCircle';
 import VerifiedEmailIcon from '@mui/icons-material/VerifiedUser';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 import RouteService from '../../service/RouteService';
 import { makeStyles } from '../Theme/makeStyles';
@@ -41,17 +40,17 @@ const accountInfoLink = (
 
 export type ValidationStepDisplay = {
   displayLabel: string;
-  getContents: (completed: boolean) => React.JSX.Element;
+  getContents: (theme: NeonTheme, completed: boolean) => React.JSX.Element;
 };
 
 const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   login: {
     displayLabel: 'Sign In',
-    getContents: (completed: boolean): React.JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <div>
-            <Typography variant="body2" style={{ marginBottom: Theme.spacing(2) }}>
+            <Typography variant="body2" style={{ marginBottom: theme.spacing(2) }}>
               Sign in or create an account before proceeding
             </Typography>
             <NeonSignInButton disableMargin />
@@ -60,7 +59,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <CompletedIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Sign In Completed
           </Typography>
@@ -70,7 +69,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   },
   'verify-email': {
     displayLabel: 'Verify Email',
-    getContents: (completed: boolean): React.JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <Typography variant="body2">
@@ -81,7 +80,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <VerifiedEmailIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <VerifiedEmailIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Email Verified
           </Typography>
@@ -91,7 +90,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   },
   'validate-account': {
     displayLabel: 'Validate Account',
-    getContents: (completed: boolean): React.JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <Typography variant="body2">
@@ -103,7 +102,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <CompletedIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Account Validated
           </Typography>
@@ -188,6 +187,7 @@ const getStepDisplayLabel = (
 };
 
 const getStepContents = (
+  theme: NeonTheme,
   activeStep: string,
   stepCompleted: boolean,
   customSteps?: Record<string, ValidationStepDisplay>,
@@ -196,10 +196,10 @@ const getStepContents = (
     && exists((customSteps as Record<string, ValidationStepDisplay>)[activeStep]));
   if (hasCustomStep) {
     const coercedStep = (customSteps as Record<string, ValidationStepDisplay>)[activeStep];
-    return coercedStep.getContents(stepCompleted);
+    return coercedStep.getContents(theme, stepCompleted);
   }
   if (exists(VALIDATION_STEPS[activeStep])) {
-    return VALIDATION_STEPS[activeStep].getContents(stepCompleted);
+    return VALIDATION_STEPS[activeStep].getContents(theme, stepCompleted);
   }
   return <div>{activeStep}</div>;
 };
@@ -277,7 +277,7 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
     const stepContents = hasStep(activeStep, accountValidationStepDisplay)
-      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
+      ? getStepContents(theme, activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <StepContent>
@@ -291,7 +291,7 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
     const stepContents = hasStep(activeStep, accountValidationStepDisplay)
-      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
+      ? getStepContents(theme, activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <div className={classes.horizontalContentsContainer}>

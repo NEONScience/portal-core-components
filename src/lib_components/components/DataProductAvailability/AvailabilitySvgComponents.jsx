@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
 const diagLinesPatternDefaultProps = {
@@ -221,7 +221,7 @@ export const SvgDefs = () => (
       />
       <HalfAndHalfPattern
         id="mixedNoAvailabilityPattern"
-        color={Theme.palette.grey[200]}
+        color={COLORS.GREY[200]}
         secondaryColor={COLORS.GOLD[400]}
       />
     </defs>
@@ -276,7 +276,7 @@ export const CELL_ATTRS = {
     ...thinStrokeAttrs,
   },
   'not available': {
-    fill: Theme.palette.grey[200],
+    fill: COLORS.GREY[200],
     ...noStrokeAttrs,
   },
   tombstoned: {
@@ -284,7 +284,7 @@ export const CELL_ATTRS = {
     // #5A6673 darker slate gray
     // #727C8C more modified hue towards gray
     // #272727 greyscale of available blue color (rgba(39, 39, 39, 0.9))
-    // Theme.palette.grey[500]
+    // COLORS.GREY[500]
     fill: 'rgba(39, 39, 39, 0.9)',
     ...noStrokeAttrs,
   },
@@ -304,7 +304,7 @@ export const CELL_ATTRS = {
   },
   'not expected': {
     fill: '#ffffff',
-    stroke: Theme.palette.grey[200],
+    stroke: COLORS.GREY[200],
     ...fatStrokeAttrs,
   },
   'being processed': {

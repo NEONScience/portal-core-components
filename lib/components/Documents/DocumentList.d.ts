@@ -1,3 +1,4 @@
+import React from 'react';
 import { DocumentListItemModel } from './DocumentListItem';
 import { Nullable } from '../../types/core';
 export interface DocumentListProps {
@@ -7,5 +8,5 @@ export interface DocumentListProps {
     fetchVariants: Nullable<boolean>;
     enableVariantChips: Nullable<boolean>;
 }
-declare const WrappedDocumentList: any;
-export default WrappedDocumentList;
+declare const DocumentList: React.FC<DocumentListProps>;
+export default DocumentList;

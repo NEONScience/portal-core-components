@@ -5,7 +5,6 @@ import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
@@ -18,7 +17,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 export default function StyleGuide() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
@@ -29,7 +28,11 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import Theme from 'portal-core-components/lib/components/Theme';
+import { useTheme } from '@mui/material/styles';
+
+const SomeComponent = () => {
+  const theme = useTheme();
+};
         `}
       </CodeBlock>
 
@@ -67,7 +70,6 @@ import Theme from 'portal-core-components/lib/components/Theme';
       <CodeBlock>
         {`
 import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
-import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles()((theme) => ({
   myCssClass: {
@@ -77,7 +79,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const myComponent = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );
@@ -95,7 +97,7 @@ const myComponent = () => {
       </DocBlock>
       <CodeBlock language="json">
         {`
-${JSON.stringify(Theme.palette, null, 2)}
+${JSON.stringify(theme.palette, null, 2)}
 
 `}
       </CodeBlock>
@@ -106,7 +108,6 @@ ${JSON.stringify(Theme.palette, null, 2)}
       <CodeBlock>
         {`
 import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
-import Theme from 'portal-core-components/lib/components/Theme';
 
 const useStyles = makeStyles()((theme) => ({
   myCssClass: {
@@ -116,7 +117,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const myComponent = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );

@@ -5,7 +5,6 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 import ReleaseChip from '@/components/Chip/ReleaseChip';
-import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
 import { NeonTheme } from '@/components/Theme/types';
 
@@ -20,7 +19,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
   releaseChip: {
     color: theme.colors.BROWN[600],
@@ -242,7 +241,7 @@ const propRows = [
 ];
 
 export default function StyleGuide() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <>
       <DocBlock>
@@ -266,8 +265,8 @@ import ReleaseChip from 'portal-core-components/lib/components/Chip/ReleaseChip'
           <ReleaseChip
             chipLabel="RELEASE-2023"
             chipStyle={{
-              marginLeft: Theme.spacing(1.5),
-              marginBottom: Theme.spacing(2),
+              marginLeft: theme.spacing(1.5),
+              marginBottom: theme.spacing(2),
             }}
             tooltipTitle={(
               <span>

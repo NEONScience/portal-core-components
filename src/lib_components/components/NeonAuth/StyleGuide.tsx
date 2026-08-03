@@ -15,7 +15,6 @@ import AuthService from '@/components/NeonAuth/AuthService';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '@/components/NeonAuth/NeonAuth';
 import NeonContext from '@/components/NeonContext/NeonContext';
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
-import Theme from '@/components/Theme/Theme';
 import UserCard from '@/components/Accounts/UserCard';
 import { makeStyles } from '@/components/Theme/makeStyles';
 import { NeonTheme } from '@/components/Theme/types';

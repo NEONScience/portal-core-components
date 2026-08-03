@@ -183,7 +183,7 @@ const useStyles = makeStyles()((theme, { sidebarWidth }) => ({
   sidebarLink: {
     cursor: 'pointer',
     display: 'block',
-    fontSize: '0.9rem',
+    fontSize: '0.875rem',
     marginBottom: '12px',
   },
   sidebarLinkCurrent: {

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
 import { resolveProps } from '../../util/defaultProps';
 
 import AvailabilityContext from './AvailabilityContext';
@@ -52,8 +51,6 @@ DataProductAvailability.propTypes = {
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
 };
 
-const WrappedDataProductAvailability = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(DataProductAvailability),
-);
+const WrappedDataProductAvailability = NeonContext.getWrappedComponent(DataProductAvailability);
 
 export default WrappedDataProductAvailability;

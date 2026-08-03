@@ -620,7 +620,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -641,7 +641,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -663,7 +663,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -1575,7 +1575,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -1596,7 +1596,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -1618,7 +1618,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -2587,7 +2587,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -2608,7 +2608,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -2630,7 +2630,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -3542,7 +3542,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -3563,7 +3563,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -3585,7 +3585,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -5391,7 +5391,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -5412,7 +5412,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -5434,7 +5434,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -6346,7 +6346,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -6367,7 +6367,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -6389,7 +6389,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -7358,7 +7358,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -7379,7 +7379,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -7401,7 +7401,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -8310,7 +8310,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -8331,7 +8331,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -8353,7 +8353,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-16jqbfw-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates

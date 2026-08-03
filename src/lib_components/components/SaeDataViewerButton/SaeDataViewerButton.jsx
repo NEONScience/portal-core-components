@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import SaeDataViewerIcon from '@mui/icons-material/TimelineOutlined';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import RouteService from '../../service/RouteService';
 import { makeStyles } from '../Theme/makeStyles';
@@ -46,7 +45,7 @@ const SaeDataViewerButton = (inProps) => {
     startDate,
     endDate,
   } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const saeButtonName = 'SAE Data Viewer';
   const tooltip = 'Launch the SAE data visuialization tool.';
 
@@ -78,8 +77,6 @@ SaeDataViewerButton.propTypes = {
   endDate: PropTypes.string,
 };
 
-const WrappedSaeDataViewer = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(SaeDataViewerButton),
-);
+const WrappedSaeDataViewer = NeonContext.getWrappedComponent(SaeDataViewerButton);
 
 export default WrappedSaeDataViewer;

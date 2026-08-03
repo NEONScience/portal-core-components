@@ -10,7 +10,6 @@ import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
 import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -118,7 +117,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (
                 <MenuItem key={doc.name} value={doc.name}>
                   <DocumentListItem
                     id={index}
-                    document={doc}
+                    document={{ ...doc, variants: [] }}
                     makeDownloadableLink={false}
                   />
                 </MenuItem>
@@ -134,6 +133,4 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (
   );
 };
 
-const WrappedDocumentSelect = (Theme as any).getWrappedComponent(DocumentSelect);
-
-export default WrappedDocumentSelect;
+export default DocumentSelect;

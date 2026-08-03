@@ -7,7 +7,6 @@ import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
 import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -126,7 +125,7 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): Re
           label={(
             <DocumentListItem
               id={docTab.index}
-              document={docTab.document}
+              document={{ ...docTab.document, variants: [] }}
               makeDownloadableLink={false}
             />
           )}
@@ -174,6 +173,4 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): Re
   );
 };
 
-const WrappedDocumentTabs = (Theme as any).getWrappedComponent(DocumentTabs);
-
-export default WrappedDocumentTabs;
+export default DocumentTabs;

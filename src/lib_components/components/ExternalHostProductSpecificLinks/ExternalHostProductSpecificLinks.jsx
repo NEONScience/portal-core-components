@@ -6,7 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import WarningIcon from '@mui/icons-material/Warning';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
 import { makeStyles } from '../Theme/makeStyles';
@@ -41,7 +40,7 @@ const defaultProps = {
 
 export default function ExternalHostProductSpecificLinks(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
 
   const { productCode, siteCodes } = props;
 
@@ -51,9 +50,9 @@ export default function ExternalHostProductSpecificLinks(inProps) {
   }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates } = neonContextData;
 
-  const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
-  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
+  const belowSm = useMediaQuery(theme.breakpoints.only('xs'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
+  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost || !Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType)) {
@@ -64,12 +63,12 @@ export default function ExternalHostProductSpecificLinks(inProps) {
   if (belowLg) { columnBasis = '33.33%'; }
   if (belowMd) { columnBasis = '50%'; }
   if (belowSm) { columnBasis = '100%'; }
-  const listDivStyle = { flex: `1 0 ${columnBasis}`, padding: Theme.spacing(0, 2, 2, 0) };
+  const listDivStyle = { flex: `1 0 ${columnBasis}`, padding: theme.spacing(0, 2, 2, 0) };
 
   const renderLinksByProduct = () => {
     if (typeof externalHost.getProductLinks !== 'function') { return null; }
     return (
-      <ul style={{ marginTop: Theme.spacing(3), marginBottom: Theme.spacing(0.75) }}>
+      <ul style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(0.75) }}>
         {(externalHost.getProductLinks(productCode) || []).map((link) => (
           <li key={link.key}>
             {link.node}
@@ -93,8 +92,8 @@ export default function ExternalHostProductSpecificLinks(inProps) {
     if (!neonContextIsFinal) {
       return (
         <div className={classes.siteLinksLoadingContainer}>
-          <CircularProgress size={36} style={{ margin: Theme.spacing(4, 0) }} />
-          <Typography variant="body1" style={{ marginBottom: Theme.spacing(4) }}>
+          <CircularProgress size={36} style={{ margin: theme.spacing(4, 0) }} />
+          <Typography variant="body1" style={{ marginBottom: theme.spacing(4) }}>
             Loading sites...
           </Typography>
         </div>
@@ -106,9 +105,9 @@ export default function ExternalHostProductSpecificLinks(inProps) {
         <div className={classes.siteLinksLoadingContainer}>
           <WarningIcon
             fontSize="large"
-            style={{ margin: Theme.spacing(4, 0), color: Theme.palette.error.main }}
+            style={{ margin: theme.spacing(4, 0), color: theme.palette.error.main }}
           />
-          <Typography variant="body1" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="body1" style={{ marginBottom: theme.spacing(4) }}>
             Sites failed to load.
           </Typography>
         </div>

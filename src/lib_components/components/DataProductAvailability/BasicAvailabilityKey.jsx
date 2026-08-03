@@ -19,7 +19,7 @@ import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 import { exists } from '../../util/typeUtil';
@@ -52,7 +52,7 @@ const useStyles = makeStyles()((theme) => ({
     fontFamily: '"Cutive Mono","Lucida Console",Monaco,monospace',
     fontWeight: 400,
     fontSize: `${SVG.LABEL_FONT_SIZE}px`,
-    fill: Theme.palette.grey[700],
+    fill: theme.palette.grey[700],
   },
 }));
 
@@ -73,7 +73,7 @@ const statusLegendElementDefaultProps = {
 
 const StatusLegendElement = (inProps) => {
   const props = resolveProps(statusLegendElementDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { status, dialog } = props;
   if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
     return null;
@@ -85,13 +85,13 @@ const StatusLegendElement = (inProps) => {
   const { title, description } = VALID_ENHANCED_STATUSES[status];
   const statusSvgWidth = (title.length * labelLetterWidth) + statusLabelX;
   return dialog ? (
-    <div style={{ marginBottom: Theme.spacing(2.5) }}>
+    <div style={{ marginBottom: theme.spacing(2.5) }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <svg
           width={Math.ceil(SVG.CELL_WIDTH * 1.25)}
           height={Math.ceil(SVG.CELL_HEIGHT * 1.25)}
           viewBox={`0 0 ${SVG.CELL_WIDTH} ${SVG.CELL_HEIGHT}`}
-          style={{ marginRight: Theme.spacing(1) }}
+          style={{ marginRight: theme.spacing(1) }}
         >
           <JsxCell status={status} />
         </svg>
@@ -124,7 +124,7 @@ const selectionLegendElementDefaultProps = {
 
 const SelectionLegendElement = (inProps) => {
   const props = resolveProps(selectionLegendElementDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { variant, dialog } = props;
   if (!['all', 'some'].includes(variant)) {
     return null;
@@ -134,7 +134,7 @@ const SelectionLegendElement = (inProps) => {
   const labelY = SVG.LABEL_FONT_SIZE - SVG.CELL_PADDING + 2;
   const selectionSvgHeight = SVG.CELL_HEIGHT + 2;
   const label = variant === 'all' ? 'All sites selected' : 'Some sites selected';
-  const fill = variant === 'all' ? Theme.palette.primary.main : COLORS.LIGHT_BLUE[200];
+  const fill = variant === 'all' ? theme.palette.primary.main : COLORS.LIGHT_BLUE[200];
   const description = variant === 'all' ? ALL_SELECTED_TITLE : SOME_SELECTED_TITLE;
   const selectionWidth = 30;
   const selectionLabelX = selectionWidth + (3 * SVG.CELL_PADDING);
@@ -143,7 +143,7 @@ const SelectionLegendElement = (inProps) => {
     width: SVG.DATE_RANGE_HANDLE_WIDTH,
     height: SVG.CELL_HEIGHT,
     fill: COLORS.LIGHT_BLUE[300],
-    stroke: Theme.palette.primary.main,
+    stroke: theme.palette.primary.main,
     strokeWidth: 1.5,
   };
   const graphic = (
@@ -154,13 +154,13 @@ const SelectionLegendElement = (inProps) => {
     </>
   );
   return dialog ? (
-    <div style={{ marginBottom: Theme.spacing(2) }}>
+    <div style={{ marginBottom: theme.spacing(2) }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <svg
           width={Math.ceil(selectionWidth * 1.25)}
           height={Math.ceil(selectionSvgHeight * 1.25)}
           viewBox={`0 0 ${selectionWidth} ${selectionSvgHeight}`}
-          style={{ marginRight: Theme.spacing(1) }}
+          style={{ marginRight: theme.spacing(1) }}
         >
           {graphic}
         </svg>
@@ -193,6 +193,7 @@ const legendDialogDefaultProps = {
 
 const LegendDialog = (inProps) => {
   const props = resolveProps(legendDialogDefaultProps, inProps);
+  const { theme } = useStyles();
   const {
     dialogOpen,
     setDialogOpen,
@@ -217,7 +218,7 @@ const LegendDialog = (inProps) => {
           title="Close"
           aria-label="Close"
           onClick={() => setDialogOpen(false)}
-          style={{ marginRight: Theme.spacing(1) }}
+          style={{ marginRight: theme.spacing(1) }}
           size="large"
         >
           <CloseIcon fontSize="inherit" />

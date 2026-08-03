@@ -16,7 +16,6 @@ import WarningCard from '@/components/Card/WarningCard';
 import ErrorCard from '@/components/Card/ErrorCard';
 import InfoMessageCard from '@/components/Card/InfoMessageCard';
 import LoginRequiredCard from '@/components/Card/LoginRequiredCard';
-import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
 import { NeonTheme } from '@/components/Theme/types';
 import { exists } from '@/util/typeUtil';
@@ -32,7 +31,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
   customReleaseIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
@@ -342,7 +341,7 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
               'verify-email': {
                 displayLabel: 'Custom verify email display label',
                 // eslint-disable-next-line react/no-unstable-nested-components
-                getContents: (completed: boolean): React.JSX.Element => {
+                getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
                   if (!completed) {
                     return (
                       <div>
@@ -362,7 +361,7 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
               'another-step': {
                 displayLabel: 'Custom another-step display label',
                 // eslint-disable-next-line react/no-unstable-nested-components
-                getContents: (completed: boolean): React.JSX.Element => {
+                getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
                   if (!completed) {
                     return (
                       <div>

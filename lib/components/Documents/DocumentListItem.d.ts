@@ -8,10 +8,10 @@ export interface DocumentListItemProps {
     id: number;
     document: DocumentListItemModel;
     makeDownloadableLink: boolean;
-    enableDownloadButton: Nullable<boolean>;
-    fetchVariants: Nullable<boolean>;
-    enableVariantChips: Nullable<boolean>;
-    containerComponent: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
+    enableDownloadButton?: Nullable<boolean>;
+    fetchVariants?: Nullable<boolean>;
+    enableVariantChips?: Nullable<boolean>;
+    containerComponent?: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
 }
-declare const WrappedDocumentListItem: any;
-export default WrappedDocumentListItem;
+declare const DocumentListItem: React.FC<DocumentListItemProps>;
+export default DocumentListItem;

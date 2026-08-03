@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -71,6 +70,4 @@ DownloadDataButton.propTypes = {
   label: PropTypes.string,
 };
 
-const WrappedDownloadDataButton = Theme.getWrappedComponent(DownloadDataButton);
-
-export default WrappedDownloadDataButton;
+export default DownloadDataButton;

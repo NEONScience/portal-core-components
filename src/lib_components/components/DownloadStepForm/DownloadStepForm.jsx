@@ -46,7 +46,7 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -249,7 +249,7 @@ const downloadStepFormDefaultProps = {
 
 const DownloadStepForm = (inProps) => {
   const props = resolveProps(downloadStepFormDefaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
 
   const {
     stepKey,
@@ -351,7 +351,7 @@ const DownloadStepForm = (inProps) => {
           </FormControl>
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Card style={{ marginTop: Theme.spacing(1.5) }}>
+          <Card style={{ marginTop: theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
               <Typography variant="body1">
@@ -452,7 +452,7 @@ const DownloadStepForm = (inProps) => {
           </FormControl>
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Card style={{ marginTop: Theme.spacing(1.5) }}>
+          <Card style={{ marginTop: theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
               <Typography variant="body1">
@@ -471,7 +471,7 @@ const DownloadStepForm = (inProps) => {
   const renderS3FilesStep = () => {
     if (downloadStatus !== DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD) {
       return (
-        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+        <Typography variant="subtitle1" style={{ marginTop: theme.spacing(3) }}>
           You must sign in or create and validate an account before proceeding.
         </Typography>
       );
@@ -568,7 +568,7 @@ const DownloadStepForm = (inProps) => {
     /* eslint-disable react/jsx-one-expression-per-line */
     const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
       <Grid size={{ xs: 12 }}>
-        <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+        <Card style={{ marginBottom: theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
               fontSize="large"
@@ -588,7 +588,7 @@ const DownloadStepForm = (inProps) => {
     /* eslint-disable react/jsx-one-expression-per-line */
     const tooManyFilesWarning = (!allowSelectAll && !allowSelectFiltered) ? (
       <Grid size={{ xs: 12 }}>
-        <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+        <Card style={{ marginBottom: theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
               fontSize="large"
@@ -611,7 +611,7 @@ const DownloadStepForm = (inProps) => {
       Toolbar: (toolbarProps) => (
         <Grid container spacing={2} style={{ alignItems: 'flex-start', marginBottom: '24px' }}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <div style={{ marginBottom: theme.spacing(1) }}>
               <ToggleButtonGroup
                 size="small"
                 value={visibleColumns}
@@ -642,7 +642,7 @@ const DownloadStepForm = (inProps) => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <div style={{ marginBottom: theme.spacing(1) }}>
               <Button
                 data-selenium="download-data-dialog.s3-files.select-all-button"
                 size="small"
@@ -652,7 +652,7 @@ const DownloadStepForm = (inProps) => {
                 disabled={isLoading || !appliedValidValues.length || !allowSelectAll}
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <SelectAllIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectAllIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select All ({isLoading ? '…' : appliedValidValues.length})
               </Button>
               <Button
@@ -662,9 +662,9 @@ const DownloadStepForm = (inProps) => {
                 variant="outlined"
                 onClick={() => { dispatch({ type: 'setS3FilesValueSelectNone' }); }}
                 disabled={isLoading || !appliedValidValues.length}
-                style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
+                style={{ marginLeft: theme.spacing(1), whiteSpace: 'nowrap' }}
               >
-                <SelectNoneIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectNoneIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select None
               </Button>
             </div>
@@ -678,7 +678,7 @@ const DownloadStepForm = (inProps) => {
                 disabled={noFiltersApplied || isLoading || !allowSelectFiltered}
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <SelectFilteredIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectFilteredIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select Filtered{filterButtonLabel}
               </Button>
               <Button
@@ -688,9 +688,9 @@ const DownloadStepForm = (inProps) => {
                 variant="outlined"
                 disabled={noFiltersApplied || isLoading}
                 onClick={() => { dispatch({ type: 'clearS3FilesFilterValues' }); }}
-                style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
+                style={{ marginLeft: theme.spacing(1), whiteSpace: 'nowrap' }}
               >
-                <ClearFiltersIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <ClearFiltersIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Clear Filters
               </Button>
             </div>
@@ -781,14 +781,14 @@ const DownloadStepForm = (inProps) => {
           }}
         />
         <div className={classes.loadingOverlay} style={{ display: isLoading ? 'block' : 'none' }}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="h6" style={{ marginBottom: theme.spacing(4) }}>
             {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}
           </Typography>
           <CircularProgress variant="determinate" value={s3FileFetchProgress} />
         </div>
       </div>
     ) : (
-      <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+      <Typography variant="subtitle1" style={{ marginTop: theme.spacing(3) }}>
         Select sites and date range in order to generate a list of files to choose from.
       </Typography>
     );
@@ -1008,7 +1008,7 @@ const DownloadStepForm = (inProps) => {
     );
     const downloadAndExploreCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.download-and-explore"
       >
         <CardContent className={classes.startFlex}>
@@ -1034,7 +1034,7 @@ const DownloadStepForm = (inProps) => {
     );
     const fileNamingCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.file-naming"
       >
         <CardContent className={classes.startFlex}>
@@ -1057,7 +1057,7 @@ const DownloadStepForm = (inProps) => {
     }
     const citationCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.citation"
       >
         <CardContent>

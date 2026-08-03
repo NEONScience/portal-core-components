@@ -47,7 +47,8 @@ export const VELOCITY_BINS = [
   '1.5-2',
   '2-3',
   '3-5',
-  '>5',
+  '5-8',
+  '>8',
 ];
 
 const VELOCITY_BIN_VALUES = [
@@ -59,6 +60,7 @@ const VELOCITY_BIN_VALUES = [
   { value: 2.0, label: '1.5-2' },
   { value: 3.0, label: '2-3' },
   { value: 5.0, label: '3-5' },
+  { value: 8.0, label: '5-8' },
 ];
 
 export const DIRECTION_BIN_LOOKUP = {

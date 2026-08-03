@@ -12,7 +12,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InfoMessageCard from '../Card/InfoMessageCard';
 import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
@@ -35,7 +34,7 @@ const defaultProps = {
 
 const ExternalHostInfo = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const {
     productCode,
     expandable,
@@ -118,7 +117,7 @@ const ExternalHostInfo = (inProps) => {
                   <IconButton
                     aria-label={expandTitle}
                     onClick={() => setExpanded(!expanded)}
-                    style={{ marginLeft: Theme.spacing(2) }}
+                    style={{ marginLeft: theme.spacing(2) }}
                     size="large"
                   >
                     {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
@@ -144,6 +143,4 @@ ExternalHostInfo.propTypes = {
   siteCodes: PropTypes.arrayOf(PropTypes.string),
 };
 
-const WrappedExternalHostInfo = Theme.getWrappedComponent(ExternalHostInfo);
-
-export default WrappedExternalHostInfo;
+export default ExternalHostInfo;

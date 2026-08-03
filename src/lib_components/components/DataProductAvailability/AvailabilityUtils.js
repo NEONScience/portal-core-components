@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { transition } from 'd3-transition';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 
 /**
   All possible valid statuses (enhanced availability only)
@@ -225,16 +225,16 @@ export const SVG_STYLES = {
       outline: 'none',
     },
     timeDivider: {
-      stroke: Theme.palette.grey[400],
+      stroke: COLORS.GREY[400],
       strokeDasharray: 3,
       strokeWidth: '1.2px',
     },
     timeBound: {
-      stroke: Theme.palette.grey[700],
+      stroke: COLORS.GREY[700],
       strokeWidth: '2px',
     },
     timeLabel: {
-      fill: Theme.palette.grey[700],
+      fill: COLORS.GREY[700],
       textAnchor: 'middle',
       fontFamily: '"Cutive Mono","Lucida Console",Monaco,monospace',
       fontWeight: 400,

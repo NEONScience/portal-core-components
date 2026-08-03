@@ -4,7 +4,6 @@ import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitationContext from './DataProductCitation/Context';
 import DataProductCitationView from './DataProductCitation/View';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
 
 import { CitationTextOnlyProps } from './DataProductCitation/ViewState';
 import { Nullable } from '../../types/core';
@@ -60,8 +59,6 @@ const DataProductCitation: React.FC<DataProductCitationProps> = (
   );
 };
 
-const WrappedDataProductCitation = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(DataProductCitation),
-);
+const WrappedDataProductCitation = NeonContext.getWrappedComponent(DataProductCitation);
 
 export default WrappedDataProductCitation;

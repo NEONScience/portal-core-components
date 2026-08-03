@@ -12,7 +12,6 @@ import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
 import SplitButton from './SplitButton';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 
@@ -150,10 +149,11 @@ import SplitButton from 'portal-core-components/lib/components/Button/SplitButto
         The split button presents multiple options where each one is a clickable button.
         The button can be set to take up full width. Also since the other buttons have
         icons with a hight of 20px and the split button icon is 24x24 its style can be
-        overriden to provide a consistent hieght or any other desired changes.
+        overridden to provide a consistent height or any other desired changes.
       </DocBlock>
       <ExampleBlock>
         <SplitButton
+          name="split-button-demo-2"
           isFullWidth={false}
           styleOverrides={{ padding: '6px 0px' }}
           options={['Option 1', 'Option 2', 'Yet another option!']}

@@ -32,7 +32,6 @@ import LeftIcon from '@mui/icons-material/ChevronLeft';
 import RightIcon from '@mui/icons-material/ChevronRight';
 
 import SplitButton from '@/components/Button/SplitButton';
-import Theme from '@/components/Theme/Theme';
 import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from './DocBlock';
@@ -82,7 +81,7 @@ const marks = [
 ];
 
 export default function BasicComponents() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const styleGuideUrl = 'https://www.figma.com/proto/Oppe8meMyYmzaSeEpXeSfZ/NEON---Styleguide?node-id=736%3A3056&scaling=scale-down-width';
 
   return (
@@ -97,7 +96,7 @@ export default function BasicComponents() {
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
 
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Basic Accordion
@@ -119,7 +118,7 @@ export default function BasicComponents() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Stacked Accordions (1)
@@ -131,7 +130,7 @@ export default function BasicComponents() {
               rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
               molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
             </Typography>
-            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+            <Typography variant="body1" style={{ marginLeft: theme.spacing(3) }}>
               Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
               diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
               interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
@@ -168,7 +167,7 @@ export default function BasicComponents() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Accordion with Actions
@@ -180,7 +179,7 @@ export default function BasicComponents() {
               rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
               molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
             </Typography>
-            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+            <Typography variant="body1" style={{ marginLeft: theme.spacing(3) }}>
               Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
               diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
               interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
@@ -415,7 +414,7 @@ export default function BasicComponents() {
           <CardContent style={{ display: 'flex', alignItems: 'center' }}>
             <InfoIcon
               fontSize="large"
-              style={{ color: Theme.palette.grey[300], marginRight: Theme.spacing(2) }}
+              style={{ color: theme.palette.grey[300], marginRight: theme.spacing(2) }}
             />
             <Typography variant="body2" component="p">
               Some info that is important to know about
@@ -453,7 +452,7 @@ export default function BasicComponents() {
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>IconButton</Typography>
       <div className={classes.row} style={{ marginBottom: 'unset' }}>
-        <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>
+        <div className={classes.row} style={{ marginRight: theme.spacing(8) }}>
           <IconButton size="small">
             <DownloadIcon />
           </IconButton>
@@ -626,34 +625,34 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Typography</Typography>
 
       <div className={classes.typographyContainer}>
-        <Typography variant="h1" gutterBottom>h1. Heading ({Theme.typography.h1.fontSize})</Typography>
-        <Typography variant="h2" gutterBottom>h2. Heading ({Theme.typography.h2.fontSize})</Typography>
-        <Typography variant="h3">h3. Heading ({Theme.typography.h3.fontSize})</Typography>
-        <Typography variant="h4">h4. Heading ({Theme.typography.h4.fontSize})</Typography>
-        <Typography variant="h5">h5. Heading ({Theme.typography.h5.fontSize})</Typography>
-        <Typography variant="h6">h6. Heading ({Theme.typography.h6.fontSize})</Typography>
+        <Typography variant="h1" gutterBottom>h1. Heading ({theme.typography.h1.fontSize})</Typography>
+        <Typography variant="h2" gutterBottom>h2. Heading ({theme.typography.h2.fontSize})</Typography>
+        <Typography variant="h3">h3. Heading ({theme.typography.h3.fontSize})</Typography>
+        <Typography variant="h4">h4. Heading ({theme.typography.h4.fontSize})</Typography>
+        <Typography variant="h5">h5. Heading ({theme.typography.h5.fontSize})</Typography>
+        <Typography variant="h6">h6. Heading ({theme.typography.h6.fontSize})</Typography>
         <Typography variant="subtitle1">
-          subtitle1. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle1.fontSize})
+          subtitle1. Lorem Ipsum Dolor Sit Amet ({theme.typography.subtitle1.fontSize})
         </Typography>
         <Typography variant="subtitle2">
-          subtitle2. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle2.fontSize})
+          subtitle2. Lorem Ipsum Dolor Sit Amet ({theme.typography.subtitle2.fontSize})
         </Typography>
         <Typography variant="body1">
           body1. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
-          ({Theme.typography.body1.fontSize})
+          ({theme.typography.body1.fontSize})
         </Typography>
         <Typography variant="body2">
           body2. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
-          ({Theme.typography.body2.fontSize})
+          ({theme.typography.body2.fontSize})
         </Typography>
         <Typography variant="button" display="block" gutterBottom>
-          button text ({Theme.typography.button.fontSize})
+          button text ({theme.typography.button.fontSize})
         </Typography>
         <Typography variant="caption" display="block" gutterBottom>
-          caption text ({Theme.typography.caption.fontSize})
+          caption text ({theme.typography.caption.fontSize})
         </Typography>
         <Typography variant="overline" display="block" gutterBottom>
-          overline text ({Theme.typography.overline.fontSize})
+          overline text ({theme.typography.overline.fontSize})
         </Typography>
       </div>
 

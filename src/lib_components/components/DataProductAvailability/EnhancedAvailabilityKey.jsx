@@ -13,7 +13,7 @@ import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles()((theme) => ({
     fontFamily: '"Cutive Mono","Lucida Console",Monaco,monospace',
     fontWeight: 400,
     fontSize: `${SVG.LABEL_FONT_SIZE}px`,
-    fill: Theme.palette.grey[700],
+    fill: theme.palette.grey[700],
   },
   h6Small: {
     fontSize: '0.95rem',
@@ -59,7 +59,7 @@ const defaultProps = {
 */
 export default function EnhancedAvailabilityKey(inProps) {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
   const { selectionEnabled, rollUpPresent } = props;
 
@@ -95,7 +95,7 @@ export default function EnhancedAvailabilityKey(inProps) {
     if (!['all', 'some'].includes(variant)) { return null; }
     const selectionSvgHeight = SVG.CELL_HEIGHT + 2;
     const label = variant === 'all' ? 'All sites selected' : 'Some sites selected';
-    const fill = variant === 'all' ? Theme.palette.primary.main : 'url(#partialSelectionPattern)';
+    const fill = variant === 'all' ? theme.palette.primary.main : 'url(#partialSelectionPattern)';
     const description = variant === 'all' ? ALL_SELECTED_TITLE : SOME_SELECTED_TITLE;
     const selectionWidth = 45;
     const selectionLabelX = selectionWidth + (3 * SVG.CELL_PADDING);
@@ -104,7 +104,7 @@ export default function EnhancedAvailabilityKey(inProps) {
       width: SVG.DATE_RANGE_HANDLE_WIDTH,
       height: SVG.CELL_HEIGHT,
       fill: COLORS.LIGHT_BLUE[300],
-      stroke: Theme.palette.primary.main,
+      stroke: theme.palette.primary.main,
       strokeWidth: 1.5,
     };
     const graphic = (
@@ -115,13 +115,13 @@ export default function EnhancedAvailabilityKey(inProps) {
       </>
     );
     return inDialog ? (
-      <div style={{ marginBottom: Theme.spacing(2) }}>
+      <div style={{ marginBottom: theme.spacing(2) }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <svg
             width={Math.ceil(selectionWidth * 1.25)}
             height={Math.ceil(selectionSvgHeight * 1.25)}
             viewBox={`0 0 ${selectionWidth} ${selectionSvgHeight}`}
-            style={{ marginRight: Theme.spacing(1) }}
+            style={{ marginRight: theme.spacing(1) }}
           >
             {graphic}
           </svg>
@@ -145,13 +145,13 @@ export default function EnhancedAvailabilityKey(inProps) {
     const renderStatus = (status) => {
       const { title, description } = VALID_ENHANCED_STATUSES[status];
       return (
-        <div style={{ marginBottom: Theme.spacing(2.5) }}>
+        <div style={{ marginBottom: theme.spacing(2.5) }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <svg
               width={Math.ceil(SVG.CELL_WIDTH * 1.25)}
               height={Math.ceil(SVG.CELL_HEIGHT * 1.25)}
               viewBox={`0 0 ${SVG.CELL_WIDTH} ${SVG.CELL_HEIGHT}`}
-              style={{ marginRight: Theme.spacing(1) }}
+              style={{ marginRight: theme.spacing(1) }}
             >
               <JsxCell status={status} />
             </svg>
@@ -180,15 +180,15 @@ export default function EnhancedAvailabilityKey(inProps) {
             title="Close"
             aria-label="Close"
             onClick={() => setDialogOpen(false)}
-            style={{ marginRight: Theme.spacing(1) }}
+            style={{ marginRight: theme.spacing(1) }}
             size="large"
           >
             <CloseIcon fontSize="inherit" />
           </IconButton>
         </div>
-        <DialogContent style={{ marginBottom: Theme.spacing(2) }}>
+        <DialogContent style={{ marginBottom: theme.spacing(2) }}>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-            <div style={{ flex: '50%', marginRight: Theme.spacing(2) }}>
+            <div style={{ flex: '50%', marginRight: theme.spacing(2) }}>
               {renderStatus('available')}
               {renderStatus('being processed')}
               {renderStatus('expected')}
@@ -202,7 +202,7 @@ export default function EnhancedAvailabilityKey(inProps) {
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-            <div style={{ flex: '50%', marginRight: Theme.spacing(2) }}>
+            <div style={{ flex: '50%', marginRight: theme.spacing(2) }}>
               {renderStatus('mixed some availability')}
             </div>
             <div style={{ flex: '50%' }}>
@@ -210,7 +210,7 @@ export default function EnhancedAvailabilityKey(inProps) {
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-            <div style={{ flex: '50%', marginRight: Theme.spacing(2) }}>
+            <div style={{ flex: '50%', marginRight: theme.spacing(2) }}>
               {renderSelectionElement('all', true)}
             </div>
             <div style={{ flex: '50%' }}>
@@ -229,7 +229,7 @@ export default function EnhancedAvailabilityKey(inProps) {
           <Typography
             variant="h6"
             className={classes.h6Small}
-            style={{ margin: Theme.spacing(-0.75, 3, 0.5, 0) }}
+            style={{ margin: theme.spacing(-0.75, 3, 0.5, 0) }}
           >
             Key:
           </Typography>

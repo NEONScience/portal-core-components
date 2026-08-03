@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Link from '@mui/material/Link';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-import Theme from '../Theme/Theme';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
@@ -62,6 +61,4 @@ StoryMap.propTypes = {
   title: PropTypes.string,
 };
 
-const WrappedStoryMap = Theme.getWrappedComponent(StoryMap);
-
-export default WrappedStoryMap;
+export default StoryMap;

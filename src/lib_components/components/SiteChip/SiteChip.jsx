@@ -6,7 +6,6 @@ import Avatar from '@mui/material/Avatar';
 import PlaceIcon from '@mui/icons-material/Place';
 import DeleteIcon from '@mui/icons-material/Cancel';
 
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 
 const useStyles = makeStyles()((theme) => ({
@@ -114,6 +113,4 @@ SiteChip.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const WrappedSiteChip = Theme.getWrappedComponent(SiteChip);
-
-export default WrappedSiteChip;
+export default SiteChip;

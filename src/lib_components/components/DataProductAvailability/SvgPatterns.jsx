@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 
 /**
    SVG Patterns
@@ -27,7 +27,7 @@ const svgPatternsSrc = {
         <rect x="0" y="0" width="10" height="10" fill={COLORS.LIGHT_BLUE[100]} />
         <path
           d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2"
-          stroke={Theme.palette.secondary.main}
+          stroke={COLORS.NEON_BLUE[700]}
           strokeWidth="2"
         />
       </svg>

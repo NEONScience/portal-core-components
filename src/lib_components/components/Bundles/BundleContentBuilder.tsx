@@ -3,7 +3,7 @@ import React from 'react';
 import Link from '@mui/material/Link';
 
 import RouteService from '../../service/RouteService';
-import Theme from '../Theme/Theme';
+import { NeonTheme } from '../Theme/types';
 import { IDataProductLike } from '../../types/internal';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { LATEST_AND_PROVISIONAL } from '../../service/ReleaseService';
@@ -14,6 +14,7 @@ export interface IBundleContentBuilder {
   getBundledLink: () => React.JSX.Element;
 
   buildManyParentsMainContent: (
+    theme: NeonTheme,
     dataProducts: IDataProductLike[],
     release?: string,
   ) => React.JSX.Element;
@@ -58,10 +59,11 @@ const BundleContentBuilder: IBundleContentBuilder = {
   },
 
   buildManyParentsMainContent: (
+    theme: NeonTheme,
     dataProducts: IDataProductLike[],
     release?: string,
   ): React.JSX.Element => ((
-    <ul style={{ margin: Theme.spacing(1, 0) }}>
+    <ul style={{ margin: theme.spacing(1, 0) }}>
       {dataProducts.map((dataProduct: IDataProductLike) => (
         <li key={dataProduct.productCode}>
           {BundleContentBuilder.getParentProductLink(dataProduct, release)}

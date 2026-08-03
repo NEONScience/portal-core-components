@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import AppBar from '@mui/material/AppBar';
 import Dialog from '@mui/material/Dialog';
@@ -13,7 +14,6 @@ import Typography from '@mui/material/Typography';
 
 import CloseIcon from '@mui/icons-material/Close';
 
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -50,7 +50,8 @@ const defaultProps = {
 
 const DialogBase = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+  const theme = useTheme();
+  const belowSm = useMediaQuery(theme.breakpoints.only('xs'));
   const { classes } = useStyles({ belowSm });
 
   const {
@@ -83,7 +84,7 @@ const DialogBase = (inProps) => {
           className: classes.dialogPaper,
         },
       }}
-      style={{ ...style, zIndex: Theme.zIndex.fullScreenBackdrop }}
+      style={{ ...style, zIndex: theme.zIndex.fullScreenBackdrop }}
       {...other}
     >
       <AppBar color="secondary">

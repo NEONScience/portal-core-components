@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 import { UAParser } from 'ua-parser-js';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { makeStyles } from '../Theme/makeStyles';
@@ -84,8 +83,6 @@ AopGEEDataViewer.propTypes = {
   isFullWidth: PropTypes.bool,
 };
 
-const WrappedAopGEEDataViewer = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(AopGEEDataViewer),
-);
+const WrappedAopGEEDataViewer = NeonContext.getWrappedComponent(AopGEEDataViewer);
 
 export default WrappedAopGEEDataViewer;

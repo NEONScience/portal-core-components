@@ -11,7 +11,6 @@ import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
 import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
 import ErrorCard from '../../Card/ErrorCard';
 import WarningCard from '../../Card/WarningCard';
-import Theme from '../../Theme/Theme';
 
 import RouteService from '../../../service/RouteService';
 import { withDefaultProps } from '../../../util/defaultProps';
@@ -81,7 +80,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     textOnlyProps,
     showManyParents,
   }: DataProductCitationViewProps = props;
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const state = DataProductCitationContext.useDataProductCitationContextState();
 
   let appliedTextOnly: CitationTextOnlyProps = {
@@ -233,7 +232,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       bundleNoteTerminalChar,
     );
     const detailContent = !showManyParents ? undefined : (
-      <ul style={{ margin: Theme.spacing(1, 0) }}>
+      <ul style={{ margin: theme.spacing(1, 0) }}>
         {filteredCitationItems.map((item: DataProductCitationItem): React.JSX.Element => {
           const bundleParentName: string = isReleaseDisplay
             ? (item.citableReleaseProduct as ContextDataProduct).productName

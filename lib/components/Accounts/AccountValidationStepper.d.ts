@@ -1,8 +1,9 @@
 import React from 'react';
+import { NeonTheme } from '../Theme/types';
 import { AccountValidationStep } from '../../types/account';
 export type ValidationStepDisplay = {
     displayLabel: string;
-    getContents: (completed: boolean) => React.JSX.Element;
+    getContents: (theme: NeonTheme, completed: boolean) => React.JSX.Element;
 };
 export type AccountValidationStepperProps = {
     isAuthenticated: boolean;

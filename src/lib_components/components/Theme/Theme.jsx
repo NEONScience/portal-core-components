@@ -200,12 +200,15 @@ const baseTheme = createTheme({
     h6: {
       fontWeight: 400,
       fontSize: '1rem',
+      // fontSize: '1.125rem',
     },
     body1: {
       fontSize: '0.9rem',
+      // fontSize: '1rem',
     },
     body2: {
       fontSize: '0.8rem',
+      // fontSize: '0.875rem',
     },
     caption: {
       fontSize: '0.75rem',
@@ -896,9 +899,6 @@ const baseTheme = createTheme({
     },
     MuiTypography: {
       styleOverrides: {
-        body1: {
-          fontSize: '0.95rem',
-        },
         gutterBottom: {
           marginBottom: '1em',
         },

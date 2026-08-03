@@ -39,7 +39,6 @@ import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 import SiteChip from '../SiteChip/SiteChip';
-import Theme from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -70,13 +69,13 @@ const useStyles = makeStyles()((theme) => ({
   xsSelect: {
     height: theme.spacing(4),
     '& div': {
-      padding: Theme.spacing(1, 3, 1, 1.5),
+      padding: theme.spacing(1, 3, 1, 1.5),
     },
   },
   sortSelect: {
     height: theme.spacing(4),
     '& div': {
-      paddingRight: Theme.spacing(4.5),
+      paddingRight: theme.spacing(4.5),
     },
     marginRight: theme.spacing(2),
   },
@@ -122,9 +121,9 @@ const defaultProps = {
 */
 const BasicAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { classes } = useStyles();
-  const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
-  const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
+  const { classes, theme } = useStyles();
+  const atXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const atSm = useMediaQuery(theme.breakpoints.only('sm'));
   const { classes: siteChipClasses } = useSiteChipStyles();
   const { dataProducts, ...other } = props;
 
@@ -519,6 +518,7 @@ const BasicAvailabilityInterface = (inProps) => {
     BasicAvailabilityGrid({
       view: views[currentView],
       data: viewData[currentView],
+      theme,
       svgRef,
       allSites,
       sites,
@@ -529,6 +529,7 @@ const BasicAvailabilityInterface = (inProps) => {
       selectionEnabled,
     });
   }, [
+    theme,
     svgRef,
     views,
     viewData,
@@ -577,7 +578,7 @@ const BasicAvailabilityInterface = (inProps) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         View By:
       </Typography>
@@ -630,7 +631,7 @@ const BasicAvailabilityInterface = (inProps) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         Sort By:
       </Typography>
@@ -753,7 +754,7 @@ const BasicAvailabilityInterface = (inProps) => {
           <div className={classes.topFormHeader}>
             <Typography variant="h6" className={classes.h6Small}>Sites</Typography>
           </div>
-          <div style={{ marginTop: Theme.spacing(1), marginBottom: Theme.spacing(1.5) }}>
+          <div style={{ marginTop: theme.spacing(1), marginBottom: theme.spacing(1.5) }}>
             <SiteChip {...siteChipProps} />
           </div>
           <div style={{ display: 'flex' }}>
@@ -768,7 +769,7 @@ const BasicAvailabilityInterface = (inProps) => {
               selection="SITES"
               selectedItems={sites.value}
               validItems={sites.validValues}
-              buttonProps={{ ...selectionButtonProps, style: { marginLeft: Theme.spacing(1) } }}
+              buttonProps={{ ...selectionButtonProps, style: { marginLeft: theme.spacing(1) } }}
               data-selenium="data-product-availability.map-button"
               onSave={(newSites) => { setSitesValue(Array.from(newSites)); }}
             />
@@ -781,7 +782,7 @@ const BasicAvailabilityInterface = (inProps) => {
               <div
                 style={{
                   ...datePickerContainerStyleProps,
-                  marginRight: Theme.spacing(1.5),
+                  marginRight: theme.spacing(1.5),
                 }}
               >
                 <DatePicker
@@ -825,7 +826,7 @@ const BasicAvailabilityInterface = (inProps) => {
               </div>
             </div>
           </LocalizationProvider>
-          <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
+          <div style={{ display: 'flex', marginTop: theme.spacing(1) }}>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.all-years-button"
@@ -837,13 +838,13 @@ const BasicAvailabilityInterface = (inProps) => {
               {...selectionButtonProps}
               data-selenium="data-product-availability.latest-year-button"
               onClick={() => handleSelectLatestYearDateRange(appliedDateRange)}
-              style={{ marginLeft: Theme.spacing(1) }}
+              style={{ marginLeft: theme.spacing(1) }}
             >
               Select Latest Year
             </Button>
           </div>
         </Grid>
-        <Grid size={{ xs: 12 }} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid size={{ xs: 12 }} style={{ marginBottom: theme.spacing(1) }}>
           <Card>
             <CardContent className={classes.helpGridContainer}>
               <div className={classes.helpGrid}>
@@ -891,7 +892,7 @@ const BasicAvailabilityInterface = (inProps) => {
         container
         spacing={2}
         direction="row-reverse"
-        style={{ marginBottom: Theme.spacing(2) }}
+        style={{ marginBottom: theme.spacing(2) }}
       >
         {selectionEnabled ? (
           <Grid size={{ xs: 12, sm: 12 }}>

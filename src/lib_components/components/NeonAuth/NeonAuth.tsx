@@ -24,7 +24,6 @@ import Logout from '@mui/icons-material/Logout';
 import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -94,7 +93,7 @@ export interface AccountMenuProps {
 
 const AccountMenu = (props: AccountMenuProps) => {
   const { accountPath, handleLogout } = props;
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [
     {
       auth: {
@@ -105,7 +104,7 @@ const AccountMenu = (props: AccountMenuProps) => {
   const user = userData?.data?.user;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerRefEl, setContainerRefEl] = useState<HTMLElement | null>(null);
-  const belowLg = useMediaQuery(Theme.breakpoints.down('lg'));
+  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -397,8 +396,6 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   );
 };
 
-const WrappedNeonAuth = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(NeonAuth),
-);
+const WrappedNeonAuth = NeonContext.getWrappedComponent(NeonAuth);
 
 export default WrappedNeonAuth;
