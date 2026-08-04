@@ -31,10 +31,10 @@ import CollapseIcon from '@mui/icons-material/ExpandLess';
 import ErrorIcon from '@mui/icons-material/Warning';
 import ExpandIcon from '@mui/icons-material/ExpandMore';
 import HomeIcon from '@mui/icons-material/Home';
-import ResetIcon from '@mui/icons-material/Autorenew';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import { COLORS, getThemeSpacingNumber } from '../Theme/Theme';
+import NeonErrorPage from './NeonErrorPage';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
@@ -45,8 +45,6 @@ import DrupalAssetService from '../../service/DrupalAssetService';
 
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
-
-import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 import './styles.css';
 
@@ -247,85 +245,12 @@ const useStyles = makeStyles()((theme, { sidebarWidth }) => ({
     marginTop: theme.spacing(-1),
     marginBottom: theme.spacing(4),
   },
-  errorPageTitleIcon: {
-    marginRight: theme.spacing(1.5),
-    color: theme.palette.error.dark,
-    fontSize: '2.3rem',
-    marginBottom: '-3px',
-  },
-  errorPageCaption: {
-    display: 'block',
-    fontSize: '1rem',
-    fontFamily: 'monospace, monospace',
-    marginBottom: theme.spacing(4),
-  },
-  errorPageLogo: {
-    height: '6em',
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(4),
-  },
   dismissOverlay: {
     width: '100%',
     textAlign: 'right',
     marginTop: theme.spacing(2),
   },
 }));
-
-/**
-  NEON Error Page
-  Shown as the fallback for a general error boundary around all NEON page instances
- */
-export const NeonErrorPage = (props) => {
-  const {
-    error: { message, stack },
-    resetErrorBoundary,
-  } = props;
-  const { classes, theme } = useStyles({ sidebarWidth: 0 });
-  // eslint-disable-next-line no-console
-  console.error(stack);
-  return (
-    <Container className={classes.outerPageContainer}>
-      <div className={classes.pageContent} data-selenium="neon-page.content">
-        <img
-          title="NEON Data Portal"
-          alt="NEON Data Portal"
-          className={classes.errorPageLogo}
-          src={NeonLogo.src}
-        />
-        <Typography variant="h3" component="h1" className={classes.pageTitle}>
-          <ErrorIcon className={classes.errorPageTitleIcon} />
-          Something broke.
-        </Typography>
-        <div>
-          <Typography variant="caption" className={classes.errorPageCaption}>
-            {message}
-          </Typography>
-        </div>
-        <div style={{ display: 'flex' }}>
-          <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
-            Reset and Try Again
-          </Button>
-          <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: theme.spacing(4) }}>
-            Return Home
-          </Button>
-        </div>
-      </div>
-      <input
-        type="hidden"
-        data-gtm="react-page-run-time-error.stack"
-        value={`${stack}`}
-      />
-    </Container>
-  );
-};
-
-NeonErrorPage.propTypes = {
-  error: PropTypes.shape({
-    message: PropTypes.string.isRequired,
-    stack: PropTypes.string,
-  }).isRequired,
-  resetErrorBoundary: PropTypes.func.isRequired,
-};
 
 const drupalAssetsReducer = (state, action) => {
   const newState = { ...state };

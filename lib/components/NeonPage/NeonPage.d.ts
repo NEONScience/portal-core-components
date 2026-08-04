@@ -1,19 +1,7 @@
-export function NeonErrorPage(props: any): React.JSX.Element;
-export namespace NeonErrorPage {
-    namespace propTypes {
-        let error: PropTypes.Validator<NonNullable<PropTypes.InferProps<{
-            message: PropTypes.Validator<string>;
-            stack: PropTypes.Requireable<string>;
-        }>>>;
-        let resetErrorBoundary: PropTypes.Validator<(...args: any[]) => any>;
-    }
-}
 export default NeonPage;
-import React from 'react';
-import PropTypes from 'prop-types';
 declare function NeonPage(inProps: any): React.JSX.Element;
 declare namespace NeonPage {
-    export namespace propTypes_1 {
+    namespace propTypes {
         export let breadcrumbHomeHref: PropTypes.Requireable<string>;
         export let breadcrumbs: PropTypes.Requireable<(PropTypes.InferProps<{
             name: PropTypes.Validator<string>;
@@ -24,8 +12,7 @@ declare namespace NeonPage {
         export let customizeAuthContainer: PropTypes.Requireable<boolean>;
         export let showHeaderSkeleton: PropTypes.Requireable<boolean>;
         export let showFooterSkeleton: PropTypes.Requireable<boolean>;
-        let error_1: PropTypes.Requireable<string>;
-        export { error_1 as error };
+        export let error: PropTypes.Requireable<string>;
         export let loading: PropTypes.Requireable<string>;
         export let notification: PropTypes.Requireable<string>;
         export let outerPageContainerMaxWidth: PropTypes.Requireable<string>;
@@ -59,6 +46,7 @@ declare namespace NeonPage {
         let children_1: PropTypes.Validator<NonNullable<NonNullable<PropTypes.ReactNodeLike>>>;
         export { children_1 as children };
     }
-    export { propTypes_1 as propTypes };
 }
+import React from 'react';
+import PropTypes from 'prop-types';
 declare const children: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;

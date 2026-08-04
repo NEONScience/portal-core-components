@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-location-assign-relative-destination */
 import { Dispatch } from 'react';
 
 import {

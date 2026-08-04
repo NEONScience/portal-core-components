@@ -9,7 +9,8 @@ jest.mock('@mui/material/Backdrop', () => mockReactComponent('@mui/material/Back
 jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
 
 // eslint-disable-next-line import/first
-import NeonPage, { NeonErrorPage } from '../NeonPage';
+import NeonPage from '../NeonPage';
+import NeonErrorPage from '../NeonErrorPage';
 
 const customStyles = {
   width: '100%',
