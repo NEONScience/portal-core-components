@@ -20,7 +20,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
               style="margin-right: 24px;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 style="font-weight: 600;"
               >
                 000.010
@@ -151,7 +151,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
             style="margin-right: 24px;"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               style="font-weight: 600;"
             >
               000.010
@@ -330,7 +330,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
           style="align-items: flex-end;"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
             style="font-weight: 600; margin-right: 24px;"
           >
             000.010
@@ -402,7 +402,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
         style="align-items: flex-end;"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
           style="font-weight: 600; margin-right: 24px;"
         >
           000.010
@@ -526,7 +526,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when p
   "baseElement": <body>
     <div>
       <p
-        class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
       >
         000.010
       </p>
@@ -534,7 +534,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when p
   </body>,
   "container": <div>
     <p
-      class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
     >
       000.010
     </p>
@@ -953,7 +953,7 @@ exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
           style="flex-grow: 1;"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
           >
             000.010
           </p>
@@ -988,7 +988,7 @@ exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
         style="flex-grow: 1;"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
         >
           000.010
         </p>
@@ -1277,7 +1277,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -1512,7 +1512,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.010
               </p>
@@ -1803,7 +1803,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.030
                 </p>
@@ -1835,7 +1835,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -2069,7 +2069,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.030
               </p>
@@ -2101,7 +2101,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.010
               </p>
@@ -2392,7 +2392,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.050
                 </p>
@@ -2424,7 +2424,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.040
                 </p>
@@ -2658,7 +2658,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.050
               </p>
@@ -2690,7 +2690,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.040
               </p>
@@ -2981,7 +2981,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.020
                 </p>
@@ -3013,7 +3013,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -3247,7 +3247,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.020
               </p>
@@ -3279,7 +3279,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 000.010
               </p>
@@ -3355,7 +3355,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
         tabindex="-1"
       >
         <div
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
+          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-a1scrw-MuiButtonBase-root-MuiMenuItem-root"
           id="bar"
           role="menuitem"
           style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3376,7 +3376,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
               >
                 ABBY - Abby Road, WA
               </p>
@@ -3399,7 +3399,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
       tabindex="-1"
     >
       <div
-        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-raxdzc-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-a1scrw-MuiButtonBase-root-MuiMenuItem-root"
         id="bar"
         role="menuitem"
         style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3420,7 +3420,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
             style="flex-grow: 1;"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 css-o7kdrv-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
             >
               ABBY - Abby Road, WA
             </p>
@@ -3498,7 +3498,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         data-textfield="bar"
       >
         <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1nmjh1g-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
           for="_r_g_"
           id="_r_g_-label"
@@ -3506,7 +3506,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
           Add Sites
         </label>
         <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-2gwmkp-MuiInputBase-root-MuiOutlinedInput-root"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-je5u6u-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <div
             aria-invalid="false"
@@ -3556,7 +3556,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
       data-textfield="bar"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-ggmibg-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1nmjh1g-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="false"
         for="_r_g_"
         id="_r_g_-label"
@@ -3564,7 +3564,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         Add Sites
       </label>
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-2gwmkp-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-je5u6u-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-invalid="false"

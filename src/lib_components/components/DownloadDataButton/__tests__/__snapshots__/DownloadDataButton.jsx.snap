@@ -483,25 +483,25 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                 >
                   <div
                     aria-label="The unique identifier for this data product independent of release"
-                    class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault css-ccz347-MuiChip-root-productCodeChip"
+                    class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault css-1sk5jqe-MuiChip-root-productCodeChip"
                     data-mui-internal-clone-element="true"
                   >
                     <span
-                      class="MuiChip-label css-5wbqe3-MuiChip-label"
+                      class="MuiChip-label css-1dybbl5-MuiChip-label"
                     />
                   </div>
                 </div>
                 <div>
                   <div
-                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-1q178wt-MuiChip-root-releaseChip"
+                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-1ursy74-MuiChip-root-releaseChip"
                     data-mui-internal-clone-element="true"
                   >
                     <span
-                      class="MuiChip-label css-1jihrdv-MuiChip-label"
+                      class="MuiChip-label css-eccknh-MuiChip-label"
                     >
                       <svg
                         aria-hidden="true"
-                        class="svg-inline--fa fa-tag css-z0cl93-releaseIcon fa-1x"
+                        class="svg-inline--fa fa-tag css-48jw8m-releaseIcon fa-1x"
                         data-icon="tag"
                         data-prefix="fas"
                         role="img"

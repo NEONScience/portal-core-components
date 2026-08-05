@@ -97,6 +97,9 @@ const useStyles = makeStyles()((theme) => ({
     marginBottom: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  datePickerInput: {
+    width: '100%',
+  },
 }));
 
 const useSiteChipStyles = makeStyles()((theme) => ({
@@ -740,13 +743,11 @@ const BasicAvailabilityInterface = (inProps) => {
     const datePickerContainerStyleProps = {
       marginTop: '8px',
       marginBottom: '4px',
+      width: '100%',
     };
     const datePickerProps = {
       views: ['month', 'year'],
       openTo: 'month',
-      style: {
-        width: '200px',
-      },
     };
     return (
       <Grid container spacing={3}>
@@ -778,13 +779,8 @@ const BasicAvailabilityInterface = (inProps) => {
         <Grid size={{ xs: 12, sm: 7, md: 6 }}>
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <div
-                style={{
-                  ...datePickerContainerStyleProps,
-                  marginRight: theme.spacing(1.5),
-                }}
-              >
+            <Grid container spacing={1}>
+              <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                 <DatePicker
                   {...datePickerProps}
                   label="Start"
@@ -796,6 +792,7 @@ const BasicAvailabilityInterface = (inProps) => {
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.value[1])}
                   slotProps={{
                     textField: {
+                      className: classes.datePickerInput,
                       variant: 'outlined',
                       readOnly: true,
                       margin: 'dense',
@@ -803,8 +800,8 @@ const BasicAvailabilityInterface = (inProps) => {
                     },
                   }}
                 />
-              </div>
-              <div style={datePickerContainerStyleProps}>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                 <DatePicker
                   {...datePickerProps}
                   label="End"
@@ -816,6 +813,7 @@ const BasicAvailabilityInterface = (inProps) => {
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.validValues[1])}
                   slotProps={{
                     textField: {
+                      className: classes.datePickerInput,
                       variant: 'outlined',
                       readOnly: true,
                       margin: 'dense',
@@ -823,8 +821,8 @@ const BasicAvailabilityInterface = (inProps) => {
                     },
                   }}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </LocalizationProvider>
           <div style={{ display: 'flex', marginTop: theme.spacing(1) }}>
             <Button

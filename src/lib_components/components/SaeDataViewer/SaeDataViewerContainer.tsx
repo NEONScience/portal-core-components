@@ -143,6 +143,7 @@ const useTabStyles = makeStyles()((theme: NeonTheme) => ({
   selected: {
     [theme.breakpoints.down('md')]: {
       borderBottom: 'none',
+      marginLeft: '0px',
     },
     [theme.breakpoints.up('md')]: {
       borderRight: 'none',

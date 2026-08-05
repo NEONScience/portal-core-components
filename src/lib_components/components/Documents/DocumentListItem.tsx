@@ -82,6 +82,7 @@ const useStyles = makeStyles<MakeStylesProps>()((muiTheme: NeonTheme, { fullSeco
   listItemText: {
     wordBreak: 'break-word',
     paddingLeft: muiTheme.spacing(1),
+    paddingRight: muiTheme.spacing(1),
     '& p': {
       marginTop: muiTheme.spacing(0.5),
       '& > span > span': {

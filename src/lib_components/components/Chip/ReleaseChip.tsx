@@ -13,7 +13,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   releaseIcon: {
     color: theme.colors.LIGHT_BLUE[600],
     fontSize: '1em',
-    marginRight: theme.spacing(0.75),
+    marginRight: theme.spacing(0.5),
   },
   releaseChip: {
     color: theme.colors.LIGHT_BLUE[600],

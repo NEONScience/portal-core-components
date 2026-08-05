@@ -203,7 +203,7 @@ const baseTheme = createTheme({
       // fontSize: '1.125rem',
     },
     body1: {
-      fontSize: '0.9rem',
+      fontSize: '0.95rem',
       // fontSize: '1rem',
     },
     body2: {
@@ -473,12 +473,12 @@ const baseTheme = createTheme({
         root: {
           backgroundColor: COLORS.GREY[200],
           letterSpacing: 'normal',
+          [`&.${chipClasses.colorPrimary}`]: {
+            backgroundColor: PALETTES.PRIMARY.main,
+          },
           [`&.${chipClasses.sizeSmall} > .${chipClasses.label}`]: {
             padding: '0 8px',
           },
-        },
-        label: {
-          padding: '0 12px',
         },
       },
     },

@@ -57,7 +57,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   slider: {
     minWidth: theme.spacing(40),
-    width: `calc(100% - ${theme.spacing(6)}px)`,
+    width: `calc(100% - ${theme.spacing(6)})`,
     marginLeft: theme.spacing(3),
     marginBottom: theme.spacing(4),
   },

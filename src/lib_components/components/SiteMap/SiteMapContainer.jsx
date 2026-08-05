@@ -237,12 +237,11 @@ const useStyles = makeStyles()((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(6),
     overflowY: 'auto',
+    width: '300px',
+    left: '-40px',
     borderRadius: theme.spacing(2.5),
     '& .MuiListItemText-primary': {
       fontWeight: 600,
-    },
-    '& .MuiListItem-secondaryAction': {
-      paddingRight: theme.spacing(9),
     },
     '& .MuiListItemIcon-root': {
       minWidth: 'unset',
@@ -743,15 +742,21 @@ const SiteMapContainer = (inProps) => {
       ? classes.selectionSummaryValid
       : classes.selectionSummaryInvalid;
     const summaryClass = `${classes.selectionSummary} ${summaryValidClass}`;
-    let maxHeight = 72 * 3;
+    const listItemHeight = 80;
+    let maxHeight = listItemHeight * 3;
     if (contentDivRef && contentDivRef.current) {
-      maxHeight = Math.max((contentDivRef.current.clientHeight || 0) - 72 * 2, 72 * 3);
-      maxHeight -= (maxHeight % 72);
+      maxHeight = Math.max(
+        (contentDivRef.current.clientHeight || 0) - listItemHeight * 2,
+        listItemHeight * 3,
+      );
+      maxHeight -= (maxHeight % listItemHeight);
     }
-    maxHeight = Math.min(maxHeight, selection.size * 72);
+    maxHeight = Math.min(maxHeight, selection.size * listItemHeight);
     const summaryStyle = { maxHeight: `${maxHeight + 1}px` };
-    return (
-      <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
+    const renderSelectionSummaryList = () => {
+      if (!showSummary) { return null; }
+      if (selection.size <= 0) { return null; }
+      return (
         <Zoom in={showSummary} mountOnEnter unmountOnExit>
           <div className={summaryClass} style={summaryStyle}>
             <List dense>
@@ -798,6 +803,11 @@ const SiteMapContainer = (inProps) => {
             </List>
           </div>
         </Zoom>
+      );
+    };
+    return (
+      <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
+        {renderSelectionSummaryList()}
         <Chip
           icon={icon}
           color={color}
