@@ -20,13 +20,13 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
               style="margin-right: 24px;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 style="font-weight: 600;"
               >
                 000.010
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="color: rgb(86, 90, 92);"
               >
                 Elevation:
@@ -47,7 +47,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
                   />
                 </svg>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                   style="color: rgb(86, 90, 92);"
                 >
                   991.00m
@@ -58,7 +58,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
               style="margin-right: 24px;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 <span
                   style="margin-right: 8px; font-weight: 600;"
@@ -88,7 +88,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
           >
             <div>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="font-weight: 600;"
               >
                 Location:
@@ -98,7 +98,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
               style="color: rgb(86, 90, 92);"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 N/A (N/A)
               </p>
@@ -151,13 +151,13 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
             style="margin-right: 24px;"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               style="font-weight: 600;"
             >
               000.010
             </p>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               style="color: rgb(86, 90, 92);"
             >
               Elevation:
@@ -178,7 +178,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
                 />
               </svg>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="color: rgb(86, 90, 92);"
               >
                 991.00m
@@ -189,7 +189,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
             style="margin-right: 24px;"
           >
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
             >
               <span
                 style="margin-right: 8px; font-weight: 600;"
@@ -219,7 +219,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
         >
           <div>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               style="font-weight: 600;"
             >
               Location:
@@ -229,7 +229,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
             style="color: rgb(86, 90, 92);"
           >
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
             >
               N/A (N/A)
             </p>
@@ -330,7 +330,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
           style="align-items: flex-end;"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
             style="font-weight: 600; margin-right: 24px;"
           >
             000.010
@@ -340,7 +340,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
             style="align-items: center; color: rgb(86, 90, 92);"
           >
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
             >
               Elevation:
             </p>
@@ -357,7 +357,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
               />
             </svg>
             <p
-              class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
             >
               991.00m
             </p>
@@ -367,7 +367,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
           class="css-lpjquc-startFlex"
         >
           <p
-            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
           >
             <span
               style="margin-right: 8px; font-weight: 600;"
@@ -402,7 +402,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
         style="align-items: flex-end;"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
           style="font-weight: 600; margin-right: 24px;"
         >
           000.010
@@ -412,7 +412,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
           style="align-items: center; color: rgb(86, 90, 92);"
         >
           <p
-            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
           >
             Elevation:
           </p>
@@ -429,7 +429,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
             />
           </svg>
           <p
-            class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
           >
             991.00m
           </p>
@@ -439,7 +439,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full wide detail when posi
         class="css-lpjquc-startFlex"
       >
         <p
-          class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
         >
           <span
             style="margin-right: 8px; font-weight: 600;"
@@ -526,7 +526,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when p
   "baseElement": <body>
     <div>
       <p
-        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
       >
         000.010
       </p>
@@ -534,7 +534,7 @@ exports[`TimeSeriesViewerSites PositionDetail Renders trimmed down detail when p
   </body>,
   "container": <div>
     <p
-      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
     >
       000.010
     </p>
@@ -953,7 +953,7 @@ exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
           style="flex-grow: 1;"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
           >
             000.010
           </p>
@@ -988,7 +988,7 @@ exports[`TimeSeriesViewerSites SelectedPosition Renders as expected 1`] = `
         style="flex-grow: 1;"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
         >
           000.010
         </p>
@@ -1070,7 +1070,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               width="32px"
             />
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
               style="line-height: 1.4rem; flex-grow: 1;"
             >
               Rio Cupeyes (CUPE)
@@ -1109,12 +1109,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Aquatic Core
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                   style="font-size: 0.8rem;"
                 >
                   <i>
@@ -1168,12 +1168,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Territory
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   Puerto Rico
                 </p>
@@ -1182,12 +1182,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Domain
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   D04 - Atlantic Neotropical
                 </p>
@@ -1200,7 +1200,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             class="css-mqtjl7-positionsTitleContainer"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
               Position(s)
             </h6>
@@ -1277,7 +1277,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -1305,7 +1305,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             width="32px"
           />
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
             style="line-height: 1.4rem; flex-grow: 1;"
           >
             Rio Cupeyes (CUPE)
@@ -1344,12 +1344,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Aquatic Core
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="font-size: 0.8rem;"
               >
                 <i>
@@ -1403,12 +1403,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Territory
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 Puerto Rico
               </p>
@@ -1417,12 +1417,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Domain
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 D04 - Atlantic Neotropical
               </p>
@@ -1435,7 +1435,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
           class="css-mqtjl7-positionsTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
           >
             Position(s)
           </h6>
@@ -1512,7 +1512,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.010
               </p>
@@ -1597,7 +1597,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               width="32px"
             />
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
               style="line-height: 1.4rem; flex-grow: 1;"
             >
               Upper Big Creek (BIGC)
@@ -1636,12 +1636,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Aquatic Gradient
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                   style="font-size: 0.8rem;"
                 >
                   <i>
@@ -1695,12 +1695,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   State
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   California
                 </p>
@@ -1709,12 +1709,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Domain
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   D17 - Pacific Southwest
                 </p>
@@ -1727,7 +1727,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             class="css-mqtjl7-positionsTitleContainer"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
               Position(s)
             </h6>
@@ -1803,7 +1803,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.030
                 </p>
@@ -1835,7 +1835,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -1863,7 +1863,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             width="32px"
           />
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
             style="line-height: 1.4rem; flex-grow: 1;"
           >
             Upper Big Creek (BIGC)
@@ -1902,12 +1902,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Aquatic Gradient
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="font-size: 0.8rem;"
               >
                 <i>
@@ -1961,12 +1961,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 State
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 California
               </p>
@@ -1975,12 +1975,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Domain
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 D17 - Pacific Southwest
               </p>
@@ -1993,7 +1993,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
           class="css-mqtjl7-positionsTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
           >
             Position(s)
           </h6>
@@ -2069,7 +2069,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.030
               </p>
@@ -2101,7 +2101,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.010
               </p>
@@ -2186,7 +2186,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               width="32px"
             />
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
               style="line-height: 1.4rem; flex-grow: 1;"
             >
               Central Plains Experimental Range (CPER)
@@ -2225,12 +2225,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Terrestrial Core
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                   style="font-size: 0.8rem;"
                 >
                   <i>
@@ -2284,12 +2284,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   State
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   Colorado
                 </p>
@@ -2298,12 +2298,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Domain
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   D10 - Central Plains
                 </p>
@@ -2316,7 +2316,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             class="css-mqtjl7-positionsTitleContainer"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
               Position(s)
             </h6>
@@ -2392,7 +2392,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.050
                 </p>
@@ -2424,7 +2424,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.040
                 </p>
@@ -2452,7 +2452,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             width="32px"
           />
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
             style="line-height: 1.4rem; flex-grow: 1;"
           >
             Central Plains Experimental Range (CPER)
@@ -2491,12 +2491,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Terrestrial Core
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="font-size: 0.8rem;"
               >
                 <i>
@@ -2550,12 +2550,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 State
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 Colorado
               </p>
@@ -2564,12 +2564,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Domain
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 D10 - Central Plains
               </p>
@@ -2582,7 +2582,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
           class="css-mqtjl7-positionsTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
           >
             Position(s)
           </h6>
@@ -2658,7 +2658,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.050
               </p>
@@ -2690,7 +2690,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.040
               </p>
@@ -2775,7 +2775,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               width="32px"
             />
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
               style="line-height: 1.4rem; flex-grow: 1;"
             >
               Abby Road (ABBY)
@@ -2814,12 +2814,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Terrestrial Gradient
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                   style="font-size: 0.8rem;"
                 >
                   <i>
@@ -2873,12 +2873,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   State
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   Washington
                 </p>
@@ -2887,12 +2887,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 class="css-h82c8g-siteDetail"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
                 >
                   Domain
                 </h6>
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 >
                   D16 - Pacific Northwest
                 </p>
@@ -2905,7 +2905,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             class="css-mqtjl7-positionsTitleContainer"
           >
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
               Position(s)
             </h6>
@@ -2981,7 +2981,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.020
                 </p>
@@ -3013,7 +3013,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 style="flex-grow: 1;"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                 >
                   000.010
                 </p>
@@ -3041,7 +3041,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             width="32px"
           />
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1pfwkay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
             style="line-height: 1.4rem; flex-grow: 1;"
           >
             Abby Road (ABBY)
@@ -3080,12 +3080,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Terrestrial Gradient
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
                 style="font-size: 0.8rem;"
               >
                 <i>
@@ -3139,12 +3139,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 State
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 Washington
               </p>
@@ -3153,12 +3153,12 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               class="css-h82c8g-siteDetail"
             >
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
               >
                 Domain
               </h6>
               <p
-                class="MuiTypography-root MuiTypography-body2 css-iljq3p-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
               >
                 D16 - Pacific Northwest
               </p>
@@ -3171,7 +3171,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
           class="css-mqtjl7-positionsTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-subtitle2 css-ggriy1-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
           >
             Position(s)
           </h6>
@@ -3247,7 +3247,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.020
               </p>
@@ -3279,7 +3279,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 000.010
               </p>
@@ -3355,7 +3355,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
         tabindex="-1"
       >
         <div
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-a1scrw-MuiButtonBase-root-MuiMenuItem-root"
+          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-1lqy9xj-MuiButtonBase-root-MuiMenuItem-root"
           id="bar"
           role="menuitem"
           style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3376,12 +3376,12 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
               style="flex-grow: 1;"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
               >
                 ABBY - Abby Road, WA
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-157qfbg-MuiTypography-root-optionSubtitle"
+                class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-r56k86-MuiTypography-root-optionSubtitle"
               >
                 Terrestrial Gradient - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
               </p>
@@ -3399,7 +3399,7 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
       tabindex="-1"
     >
       <div
-        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-a1scrw-MuiButtonBase-root-MuiMenuItem-root"
+        class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-1lqy9xj-MuiButtonBase-root-MuiMenuItem-root"
         id="bar"
         role="menuitem"
         style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;"
@@ -3420,12 +3420,12 @@ exports[`TimeSeriesViewerSites SiteOption Renders as expected without stateCode 
             style="flex-grow: 1;"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
             >
               ABBY - Abby Road, WA
             </p>
             <p
-              class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-157qfbg-MuiTypography-root-optionSubtitle"
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-r56k86-MuiTypography-root-optionSubtitle"
             >
               Terrestrial Gradient - Domain D16 (D16 Name) - Lat/Lon: 45.762439, -122.330317
             </p>
@@ -3498,7 +3498,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         data-textfield="bar"
       >
         <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1nmjh1g-MuiFormLabel-root-MuiInputLabel-root"
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1tssoa6-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
           for="_r_g_"
           id="_r_g_-label"
@@ -3506,11 +3506,11 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
           Add Sites
         </label>
         <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-je5u6u-MuiInputBase-root-MuiOutlinedInput-root"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1hlglus-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <div
             aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input css-1vut0gd-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1yc0kbw-MuiInputBase-input-MuiOutlinedInput-input"
             data-inner="foo"
             id="_r_g_"
             type="text"
@@ -3556,7 +3556,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
       data-textfield="bar"
     >
       <label
-        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1nmjh1g-MuiFormLabel-root-MuiInputLabel-root"
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-1tssoa6-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="false"
         for="_r_g_"
         id="_r_g_-label"
@@ -3564,11 +3564,11 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         Add Sites
       </label>
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-je5u6u-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1hlglus-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-invalid="false"
-          class="MuiInputBase-input MuiOutlinedInput-input css-1vut0gd-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiInputBase-input MuiOutlinedInput-input css-1yc0kbw-MuiInputBase-input-MuiOutlinedInput-input"
           data-inner="foo"
           id="_r_g_"
           type="text"

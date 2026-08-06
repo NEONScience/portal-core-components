@@ -19,13 +19,8 @@ const tssCache = createCache({
 });
 
 // Global CSS
-const globalCss = {
-  code: {
-    fontSize: '115%',
-    padding: Theme.spacing(0.25, 0.5),
-    backgroundColor: 'rgba(0, 0, 0, 0.11)',
-  },
-};
+const globalCss = {};
+const inputGlobalStyles = <GlobalStyles styles={globalCss} />;
 
 interface NeonThemeProviderProps {
   children: React.ReactNode;
@@ -38,7 +33,7 @@ const NeonThemeProvider = (props: NeonThemeProviderProps): React.JSX.Element => 
       <TssCacheProvider value={tssCache}>
         <ThemeProvider theme={Theme}>
           <CssBaseline />
-          <GlobalStyles styles={globalCss} />
+          {inputGlobalStyles}
           {children}
         </ThemeProvider>
       </TssCacheProvider>

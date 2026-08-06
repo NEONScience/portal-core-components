@@ -206,7 +206,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -305,7 +305,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -320,7 +320,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       data-selenium="data-product-availability.date-range-start"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_13_"
                         id="_r_13_-label"
@@ -330,7 +330,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_13_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -450,7 +450,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       data-selenium="data-product-availability.date-range-end"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_16_"
                         id="_r_16_-label"
@@ -460,7 +460,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_16_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -620,7 +620,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -641,7 +641,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -663,7 +663,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -682,7 +682,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -780,19 +780,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             style="display: flex; align-items: center;"
           >
             <div
-              class="css-10m0fzl-legendContainer"
+              class="css-1y01q2p-legendContainer"
             >
               <div
                 class="css-11we17h-legendTitleContainer"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                  class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
                 >
                   Key:
                 </h6>
                 <button
                   aria-label="Help - Data Availability Chart Key"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                   tabindex="0"
                   title="Help - Data Availability Chart Key"
                   type="button"
@@ -1161,7 +1161,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -1260,7 +1260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -1275,7 +1275,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     data-selenium="data-product-availability.date-range-start"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_13_"
                       id="_r_13_-label"
@@ -1285,7 +1285,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_13_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -1405,7 +1405,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     data-selenium="data-product-availability.date-range-end"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_16_"
                       id="_r_16_-label"
@@ -1415,7 +1415,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_16_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -1575,7 +1575,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -1596,7 +1596,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -1618,7 +1618,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -1637,7 +1637,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -1735,19 +1735,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
           style="display: flex; align-items: center;"
         >
           <div
-            class="css-10m0fzl-legendContainer"
+            class="css-1y01q2p-legendContainer"
           >
             <div
               class="css-11we17h-legendTitleContainer"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
               >
                 Key:
               </h6>
               <button
                 aria-label="Help - Data Availability Chart Key"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                 tabindex="0"
                 title="Help - Data Availability Chart Key"
                 type="button"
@@ -2173,7 +2173,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -2272,7 +2272,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -2287,7 +2287,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       data-selenium="data-product-availability.date-range-start"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_5_"
                         id="_r_5_-label"
@@ -2297,7 +2297,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_5_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -2417,7 +2417,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       data-selenium="data-product-availability.date-range-end"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_8_"
                         id="_r_8_-label"
@@ -2427,7 +2427,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_8_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -2587,7 +2587,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -2608,7 +2608,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -2630,7 +2630,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -2649,7 +2649,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -2747,19 +2747,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             style="display: flex; align-items: center;"
           >
             <div
-              class="css-10m0fzl-legendContainer"
+              class="css-1y01q2p-legendContainer"
             >
               <div
                 class="css-11we17h-legendTitleContainer"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                  class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
                 >
                   Key:
                 </h6>
                 <button
                   aria-label="Help - Data Availability Chart Key"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                   tabindex="0"
                   title="Help - Data Availability Chart Key"
                   type="button"
@@ -3128,7 +3128,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -3227,7 +3227,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -3242,7 +3242,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     data-selenium="data-product-availability.date-range-start"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_5_"
                       id="_r_5_-label"
@@ -3252,7 +3252,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_5_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -3372,7 +3372,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     data-selenium="data-product-availability.date-range-end"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_8_"
                       id="_r_8_-label"
@@ -3382,7 +3382,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_8_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -3542,7 +3542,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -3563,7 +3563,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -3585,7 +3585,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -3604,7 +3604,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -3702,19 +3702,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
           style="display: flex; align-items: center;"
         >
           <div
-            class="css-10m0fzl-legendContainer"
+            class="css-1y01q2p-legendContainer"
           >
             <div
               class="css-11we17h-legendTitleContainer"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
               >
                 Key:
               </h6>
               <button
                 aria-label="Help - Data Availability Chart Key"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                 tabindex="0"
                 title="Help - Data Availability Chart Key"
                 type="button"
@@ -4135,7 +4135,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -4233,19 +4233,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             style="display: flex; align-items: center;"
           >
             <div
-              class="css-10m0fzl-legendContainer"
+              class="css-1y01q2p-legendContainer"
             >
               <div
                 class="css-11we17h-legendTitleContainer"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                  class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
                 >
                   Key:
                 </h6>
                 <button
                   aria-label="Help - Data Availability Chart Key"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                   tabindex="0"
                   title="Help - Data Availability Chart Key"
                   type="button"
@@ -4525,7 +4525,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -4623,19 +4623,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
           style="display: flex; align-items: center;"
         >
           <div
-            class="css-10m0fzl-legendContainer"
+            class="css-1y01q2p-legendContainer"
           >
             <div
               class="css-11we17h-legendTitleContainer"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
               >
                 Key:
               </h6>
               <button
                 aria-label="Help - Data Availability Chart Key"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                 tabindex="0"
                 title="Help - Data Availability Chart Key"
                 type="button"
@@ -4977,7 +4977,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -5076,7 +5076,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -5091,7 +5091,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       data-selenium="data-product-availability.date-range-start"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_k_"
                         id="_r_k_-label"
@@ -5101,7 +5101,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_k_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -5221,7 +5221,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       data-selenium="data-product-availability.date-range-end"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_n_"
                         id="_r_n_-label"
@@ -5231,7 +5231,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_n_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -5391,7 +5391,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -5412,7 +5412,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -5434,7 +5434,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -5453,7 +5453,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -5551,19 +5551,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             style="display: flex; align-items: center;"
           >
             <div
-              class="css-10m0fzl-legendContainer"
+              class="css-1y01q2p-legendContainer"
             >
               <div
                 class="css-11we17h-legendTitleContainer"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                  class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
                 >
                   Key:
                 </h6>
                 <button
                   aria-label="Help - Data Availability Chart Key"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                   tabindex="0"
                   title="Help - Data Availability Chart Key"
                   type="button"
@@ -5932,7 +5932,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -6031,7 +6031,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -6046,7 +6046,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     data-selenium="data-product-availability.date-range-start"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_k_"
                       id="_r_k_-label"
@@ -6056,7 +6056,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_k_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -6176,7 +6176,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     data-selenium="data-product-availability.date-range-end"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_n_"
                       id="_r_n_-label"
@@ -6186,7 +6186,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_n_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -6346,7 +6346,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -6367,7 +6367,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -6389,7 +6389,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -6408,7 +6408,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -6506,19 +6506,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
           style="display: flex; align-items: center;"
         >
           <div
-            class="css-10m0fzl-legendContainer"
+            class="css-1y01q2p-legendContainer"
           >
             <div
               class="css-11we17h-legendTitleContainer"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
               >
                 Key:
               </h6>
               <button
                 aria-label="Help - Data Availability Chart Key"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                 tabindex="0"
                 title="Help - Data Availability Chart Key"
                 type="button"
@@ -6944,7 +6944,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -7043,7 +7043,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -7058,7 +7058,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       data-selenium="data-product-availability.date-range-start"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_1i_"
                         id="_r_1i_-label"
@@ -7068,7 +7068,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_1i_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -7188,7 +7188,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       data-selenium="data-product-availability.date-range-end"
                     >
                       <label
-                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                         data-shrink="true"
                         for="_r_1l_"
                         id="_r_1l_-label"
@@ -7198,7 +7198,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_1l_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -7358,7 +7358,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag the grid to pan across time
@@ -7379,7 +7379,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Click rows to select sites
@@ -7401,7 +7401,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                         />
                       </svg>
                       <div
-                        class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                         style="flex-grow: 1;"
                       >
                         Drag selection edges to adjust dates
@@ -7420,7 +7420,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 Sort By:
@@ -7515,19 +7515,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             style="display: flex; align-items: center;"
           >
             <div
-              class="css-10m0fzl-legendContainer"
+              class="css-1y01q2p-legendContainer"
             >
               <div
                 class="css-11we17h-legendTitleContainer"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                  class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
                 >
                   Key:
                 </h6>
                 <button
                   aria-label="Help - Data Availability Chart Key"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                   tabindex="0"
                   title="Help - Data Availability Chart Key"
                   type="button"
@@ -7896,7 +7896,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -7995,7 +7995,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -8010,7 +8010,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     data-selenium="data-product-availability.date-range-start"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_1i_"
                       id="_r_1i_-label"
@@ -8020,7 +8020,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_1i_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -8140,7 +8140,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     data-selenium="data-product-availability.date-range-end"
                   >
                     <label
-                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-av97xw-MuiFormLabel-root-MuiInputLabel-root"
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1yuekfl-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
                       for="_r_1l_"
                       id="_r_1l_-label"
@@ -8150,7 +8150,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_1l_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-14q8p2c-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -8310,7 +8310,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag the grid to pan across time
@@ -8331,7 +8331,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Click rows to select sites
@@ -8353,7 +8353,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       />
                     </svg>
                     <div
-                      class="MuiTypography-root MuiTypography-body1 css-w0s105-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
                       style="flex-grow: 1;"
                     >
                       Drag selection edges to adjust dates
@@ -8372,7 +8372,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -8467,19 +8467,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
           style="display: flex; align-items: center;"
         >
           <div
-            class="css-10m0fzl-legendContainer"
+            class="css-1y01q2p-legendContainer"
           >
             <div
               class="css-11we17h-legendTitleContainer"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+                class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
               >
                 Key:
               </h6>
               <button
                 aria-label="Help - Data Availability Chart Key"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
                 tabindex="0"
                 title="Help - Data Availability Chart Key"
                 type="button"

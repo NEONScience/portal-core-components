@@ -89,7 +89,7 @@ const DocumentSelect: React.FC<DocumentSelectProps> = (
       <Grid container spacing={3}>
         <Grid size={{ xs: 12 }}>
           <FormControl variant="outlined" className={classes.selectFormControl}>
-            <InputLabel htmlFor="document-select-input">
+            <InputLabel id="document-select-label" htmlFor="document-select-input">
               Select Document to View
             </InputLabel>
             <Select

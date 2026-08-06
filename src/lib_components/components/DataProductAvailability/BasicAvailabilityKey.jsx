@@ -32,13 +32,14 @@ const useStyles = makeStyles()((theme) => ({
     flexWrap: 'wrap',
     marginTop: theme.spacing(1),
     width: '100%',
+    fontSize: '0.8rem',
+    lineHeight: 1.43,
   },
   legendTitle: {
-    fontSize: '0.95rem',
     display: 'inline-flex',
   },
   legendTitleIcon: {
-    marginTop: theme.spacing(-0.25),
+    marginTop: theme.spacing(-0.5),
   },
   legendTitleContainer: {
     margin: theme.spacing(-1, 1, 0.5, 0),
@@ -95,7 +96,7 @@ const StatusLegendElement = (inProps) => {
         >
           <JsxCell status={status} />
         </svg>
-        <Typography variant="subtitle2" style={{ fontSize: '0.95rem', marginTop: '2px' }}>
+        <Typography variant="subtitle2" style={{ marginTop: '2px' }}>
           {title}
         </Typography>
       </div>
@@ -164,7 +165,7 @@ const SelectionLegendElement = (inProps) => {
         >
           {graphic}
         </svg>
-        <Typography variant="subtitle2" style={{ fontSize: '1.05rem' }}>{label}</Typography>
+        <Typography variant="subtitle2">{label}</Typography>
       </div>
       <Typography variant="body2">{description}</Typography>
     </div>

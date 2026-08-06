@@ -19,6 +19,7 @@ const useStyles = makeStyles()((theme) => ({
 const useChipStyles = makeStyles()((theme) => ({
   outlined: {
     color: theme.palette.grey.A200,
+    borderColor: 'unset',
   },
   colorPrimary: {
     color: theme.palette.primary.main,

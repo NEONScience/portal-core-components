@@ -645,13 +645,13 @@ export default function BasicComponents() {
           body2. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
           ({theme.typography.body2.fontSize})
         </Typography>
-        <Typography variant="button" display="block" gutterBottom>
+        <Typography variant="button" style={{ display: 'block' }} gutterBottom>
           button text ({theme.typography.button.fontSize})
         </Typography>
-        <Typography variant="caption" display="block" gutterBottom>
+        <Typography variant="caption" style={{ display: 'block' }} gutterBottom>
           caption text ({theme.typography.caption.fontSize})
         </Typography>
-        <Typography variant="overline" display="block" gutterBottom>
+        <Typography variant="overline" style={{ display: 'block' }} gutterBottom>
           overline text ({theme.typography.overline.fontSize})
         </Typography>
       </div>

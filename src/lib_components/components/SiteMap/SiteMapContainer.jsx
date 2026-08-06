@@ -238,7 +238,6 @@ const useStyles = makeStyles()((theme) => ({
     bottom: theme.spacing(6),
     overflowY: 'auto',
     width: '300px',
-    left: '-40px',
     borderRadius: theme.spacing(2.5),
     '& .MuiListItemText-primary': {
       fontWeight: 600,

@@ -61,6 +61,7 @@ const useStyles = makeStyles()((theme) => ({
     marginLeft: theme.spacing(2),
   },
   fileTable: {
+    fontSize: '0.875rem',
     position: 'relative',
     '& td': {
       whiteSpace: 'nowrap',

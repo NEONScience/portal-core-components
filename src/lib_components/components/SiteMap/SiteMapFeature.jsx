@@ -561,7 +561,7 @@ const SiteMapFeature = (props) => {
               {...iconButtonProps}
               aria-label="Latitude / Longitude"
               disabled={selectionActive}
-              size="large"
+              size="small"
             >
               <LocationIcon />
             </IconButton>
@@ -571,7 +571,7 @@ const SiteMapFeature = (props) => {
                 {...iconButtonProps}
                 aria-label="Latitude / Longitude (click to copy)"
                 disabled={selectionActive}
-                size="large"
+                size="small"
               >
                 <LocationIcon />
               </IconButton>

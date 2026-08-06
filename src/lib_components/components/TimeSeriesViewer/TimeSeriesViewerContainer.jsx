@@ -15,6 +15,7 @@ import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
@@ -110,6 +111,9 @@ const useStyles = makeStyles()((theme) => ({
   },
   summaryDiv: {
     marginBottom: theme.spacing(1),
+  },
+  axisTableRoot: {
+    borderCollapse: 'separate',
   },
   axisTitle: {
     fontWeight: 600,
@@ -429,26 +433,34 @@ export function TimeSeriesViewerSummary() {
     </div>
   );
   const axesSummary = (
-    <Table size="small">
-      <TableBody>
-        <TableRow>
-          <TableCell className={classes.axisTitle}>x</TableCell>
-          <TableCell className={classes.axisSettings}>{axes.x.map(renderAxisSetting)}</TableCell>
-        </TableRow>
-        {!axes.y1.length ? null : (
+    <TableContainer>
+      <Table size="small" className={classes.axisTableRoot}>
+        <TableBody>
           <TableRow>
-            <TableCell className={classes.axisTitle}>y1</TableCell>
-            <TableCell className={classes.axisSettings}>{axes.y1.map(renderAxisSetting)}</TableCell>
+            <TableCell className={classes.axisTitle}>x</TableCell>
+            <TableCell className={classes.axisSettings}>
+              {axes.x.map(renderAxisSetting)}
+            </TableCell>
           </TableRow>
-        )}
-        {!axes.y2.length ? null : (
-          <TableRow>
-            <TableCell className={classes.axisTitle}>y2</TableCell>
-            <TableCell className={classes.axisSettings}>{axes.y2.map(renderAxisSetting)}</TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+          {!axes.y1.length ? null : (
+            <TableRow>
+              <TableCell className={classes.axisTitle}>y1</TableCell>
+              <TableCell className={classes.axisSettings}>
+                {axes.y1.map(renderAxisSetting)}
+              </TableCell>
+            </TableRow>
+          )}
+          {!axes.y2.length ? null : (
+            <TableRow>
+              <TableCell className={classes.axisTitle}>y2</TableCell>
+              <TableCell className={classes.axisSettings}>
+                {axes.y2.map(renderAxisSetting)}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 
   return (

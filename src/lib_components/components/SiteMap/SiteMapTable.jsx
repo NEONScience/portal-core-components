@@ -129,6 +129,7 @@ const exportCsv = (columns = [], rows = []) => {
 
 const useStyles = makeStyles()((theme) => ({
   tableContainer: {
+    fontSize: '0.875rem',
     backgroundColor: 'white',
     overflowWrap: 'normal',
     '& table': {
@@ -255,7 +256,7 @@ const useStyles = makeStyles()((theme) => ({
     margin: theme.spacing(0, 1, 0, 1),
   },
   siteDetailsLink: {
-    fontSize: '80%',
+    fontSize: '0.60rem',
     fontStyle: 'italic',
     textAlign: 'center',
   },
@@ -1021,6 +1022,7 @@ const SiteMapTable = () => {
       position: 'sticky',
       top: 0,
       backgroundColor: theme.palette.grey[50],
+      zIndex: 10,
     },
     pageSize: 100,
     pageSizeOptions: [100, 200, 500],

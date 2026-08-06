@@ -12,6 +12,7 @@ import { buttonClasses } from '@mui/material/Button';
 import { buttonGroupClasses } from '@mui/material/ButtonGroup';
 import { chipClasses } from '@mui/material/Chip';
 import { iconButtonClasses } from '@mui/material/IconButton';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { sliderClasses } from '@mui/material/Slider';
 import { typographyClasses } from '@mui/material/Typography';
 
@@ -141,7 +142,7 @@ const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 export const getThemeSpacingNumber = (spacing) => Number(spacing.slice(0, -2));
 
 // See all customizable Material UI theme keys here:
-// https://material-ui.com/customization/default-theme/#explore
+// https://mui.com/material-ui/customization/default-theme/
 
 /* eslint-disable max-len, @stylistic/max-len */
 
@@ -199,16 +200,19 @@ const baseTheme = createTheme({
     },
     h6: {
       fontWeight: 400,
+      fontSize: '1.125rem',
+    },
+    subtitle1: {
       fontSize: '1rem',
-      // fontSize: '1.125rem',
+    },
+    subtitle2: {
+      fontSize: '0.875rem',
     },
     body1: {
-      fontSize: '0.95rem',
-      // fontSize: '1rem',
+      fontSize: '1rem',
     },
     body2: {
-      fontSize: '0.8rem',
-      // fontSize: '0.875rem',
+      fontSize: '0.875rem',
     },
     caption: {
       fontSize: '0.75rem',
@@ -480,13 +484,21 @@ const baseTheme = createTheme({
             padding: '0 8px',
           },
         },
+        outlined: {
+          borderColor: 'rgba(0, 0, 0, 0.23)',
+        },
       },
     },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontSize: '0.8rem',
-          lineHeight: 1.43,
+          fontSize: '1rem',
+          lineHeight: 1.5,
+        },
+        code: {
+          fontSize: '0.875rem',
+          padding: '1px 2px',
+          backgroundColor: 'rgba(0, 0, 0, 0.11)',
         },
       },
     },
@@ -507,7 +519,7 @@ const baseTheme = createTheme({
         },
         label: {
           marginLeft: '4px',
-          marginBottom: '-1px',
+          marginBottom: '1.5px',
         },
       },
     },
@@ -546,13 +558,6 @@ const baseTheme = createTheme({
         },
       },
     },
-    MuiPickersInputBase: {
-      styleOverrides: {
-        root: {
-          fontSize: '0.85rem',
-        },
-      },
-    },
     MuiLink: {
       defaultProps: {
         color: 'primary',
@@ -564,6 +569,24 @@ const baseTheme = createTheme({
           '&:hover, &:active': {
             color: COLORS.LIGHT_BLUE[400],
           },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          [`& .${outlinedInputClasses.notchedOutline}`]: {
+            '& legend': {
+              fontSize: '0.75rem',
+            },
+          },
+        },
+      },
+    },
+    MuiPickersInputBase: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.85rem',
         },
       },
     },
@@ -763,7 +786,6 @@ const baseTheme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: '"Inter", Helvetica, Arial, sans-serif !important',
-          fontSize: '0.8rem',
           '&:not(td:last-of-type)': {
             borderRight: `1px solid ${COLORS.GREY[200]}`,
           },

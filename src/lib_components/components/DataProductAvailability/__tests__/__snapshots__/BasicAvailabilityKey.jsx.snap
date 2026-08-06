@@ -6,19 +6,19 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   "baseElement": <body>
     <div>
       <div
-        class="css-10m0fzl-legendContainer"
+        class="css-1y01q2p-legendContainer"
       >
         <div
           class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+            class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -179,19 +179,19 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   </body>,
   "container": <div>
     <div
-      class="css-10m0fzl-legendContainer"
+      class="css-1y01q2p-legendContainer"
     >
       <div
         class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+          class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
@@ -409,19 +409,19 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   "baseElement": <body>
     <div>
       <div
-        class="css-10m0fzl-legendContainer"
+        class="css-1y01q2p-legendContainer"
       >
         <div
           class="css-11we17h-legendTitleContainer"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+            class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
           >
             Key:
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -498,19 +498,19 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
   </body>,
   "container": <div>
     <div
-      class="css-10m0fzl-legendContainer"
+      class="css-1y01q2p-legendContainer"
     >
       <div
         class="css-11we17h-legendTitleContainer"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-asxkz7-MuiTypography-root-legendTitle"
+          class="MuiTypography-root MuiTypography-h6 css-8vceva-MuiTypography-root-legendTitle"
         >
           Key:
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-14jmu2t-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"

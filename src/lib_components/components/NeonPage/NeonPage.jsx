@@ -77,7 +77,7 @@ if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
 
-const useStyles = makeStyles()((theme, { sidebarWidth }) => ({
+const useStyles = makeStyles()((theme, { sidebarWidth, sidebarDisableMaxHeight }) => ({
   outerPageContainer: {
     display: 'flex',
     position: 'relative',
@@ -123,10 +123,11 @@ const useStyles = makeStyles()((theme, { sidebarWidth }) => ({
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
     padding: theme.spacing(5, 4),
+    lineHeight: 1.43,
     [theme.breakpoints.down('md')]: {
       display: 'inline-block',
       width: '100%',
-      maxHeight: 'calc(100vh - 84px)',
+      maxHeight: sidebarDisableMaxHeight ? 'unset' : 'calc(100vh - 84px)',
       padding: theme.spacing(2.5, 2),
       position: 'sticky',
       top: '-2px',
@@ -293,6 +294,7 @@ const defaultProps = {
   sidebarTitle: null,
   sidebarWidth: 300,
   sidebarUnsticky: false,
+  sidebarDisableMaxHeight: false,
   subtitle: null,
   title: null,
   unstickyDrupalHeader: true,
@@ -325,6 +327,7 @@ const NeonPage = (inProps) => {
     sidebarTitle,
     sidebarWidth,
     sidebarUnsticky,
+    sidebarDisableMaxHeight,
     subtitle,
     title,
     unstickyDrupalHeader,
@@ -340,7 +343,11 @@ const NeonPage = (inProps) => {
   const hasSidebarLinks = !sidebarContent && Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
   const hasSidebar = hasSidebarContent || hasSidebarLinks;
 
-  const { classes, theme } = useStyles({ sidebarWidth: hasSidebar ? sidebarWidth : 0 });
+  const stylesParams = {
+    sidebarWidth: hasSidebar ? sidebarWidth : 0,
+    sidebarDisableMaxHeight,
+  };
+  const { classes, theme } = useStyles(stylesParams);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -424,7 +431,12 @@ const NeonPage = (inProps) => {
     }
     // Set max-height on sidebar links container when the sidebar is sticky so the links get
     // a dedicated scrollbar instead of clipping
-    if (!sidebarUnsticky && hasSidebarLinks && sidebarLinksContainerRef.current) {
+    if (
+      !sidebarUnsticky
+      && hasSidebarLinks
+      && sidebarLinksContainerRef.current
+      && !sidebarDisableMaxHeight
+    ) {
       const maxHeight = window.innerHeight - sidebarLinksContainerRef.current.offsetTop - 104;
       sidebarLinksContainerRef.current.style.maxHeight = `${maxHeight}px`;
     }
@@ -463,6 +475,7 @@ const NeonPage = (inProps) => {
     sidebarLinks,
     sidebarHashMap,
     sidebarUnsticky,
+    sidebarDisableMaxHeight,
     hasSidebarLinks,
     hashInitializedRef,
     currentSidebarHash,
@@ -920,6 +933,7 @@ NeonPage.propTypes = {
   sidebarTitle: PropTypes.string,
   sidebarWidth: PropTypes.number,
   sidebarUnsticky: PropTypes.bool,
+  sidebarDisableMaxHeight: PropTypes.bool,
   subtitle: PropTypes.oneOfType([
     PropTypes.string,
     children,

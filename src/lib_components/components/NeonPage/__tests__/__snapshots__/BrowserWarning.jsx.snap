@@ -134,7 +134,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
         data-prop-open="true"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-gevhnd-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-1j3cwyw-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
           role="alert"
           style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
         >
@@ -228,7 +228,7 @@ exports[`NeonPage - BrowserWarning renders warning if browser is found to be IE 
       data-prop-open="true"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-gevhnd-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-1j3cwyw-MuiPaper-root-MuiSnackbarContent-root-browserWarning"
         role="alert"
         style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
       >

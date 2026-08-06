@@ -34,6 +34,7 @@ declare namespace NeonPage {
         export let sidebarTitle: PropTypes.Requireable<string>;
         export let sidebarWidth: PropTypes.Requireable<number>;
         export let sidebarUnsticky: PropTypes.Requireable<boolean>;
+        export let sidebarDisableMaxHeight: PropTypes.Requireable<boolean>;
         export let subtitle: PropTypes.Requireable<NonNullable<NonNullable<PropTypes.ReactNodeLike> | null | undefined>>;
         export let title: PropTypes.Requireable<NonNullable<NonNullable<PropTypes.ReactNodeLike> | null | undefined>>;
         export let unstickyDrupalHeader: PropTypes.Requireable<boolean>;

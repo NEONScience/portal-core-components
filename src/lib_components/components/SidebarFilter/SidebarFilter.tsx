@@ -107,6 +107,10 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (
   // SANITY CHECK: Render nothing if there are no releases and null release is excluded
   const optionCount = values.length + (values ? 0 : 1);
   if (!optionCount) { return (<></>); }
+  const valuesMap: Record<string, SidebarFilterOption> = {};
+  values.forEach((option: SidebarFilterOption) => {
+    valuesMap[option.value] = option;
+  });
 
   const handleChange = (nextValue: string): void => onChange(nextValue);
 
@@ -161,6 +165,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (
       onChange={(event) => handleChange(event.target.value as string)}
       input={input}
       aria-labelledby={labelId}
+      renderValue={(value) => valuesMap[value].title}
       disabled={optionCount < 2}
     >
       {values.map((option: SidebarFilterOption): React.JSX.Element => ((

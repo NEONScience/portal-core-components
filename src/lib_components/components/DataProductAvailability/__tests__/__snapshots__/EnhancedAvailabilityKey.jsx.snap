@@ -10,7 +10,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
@@ -355,7 +355,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
     >
       <div>
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+          class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
           style="margin: -6px 24px 4px 0px;"
         >
           Key:
@@ -757,7 +757,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
       >
         <div>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+            class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
             style="margin: -6px 24px 4px 0px;"
           >
             Key:
@@ -1014,7 +1014,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
     >
       <div>
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-rn2cd5-MuiTypography-root-h6Small"
+          class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
           style="margin: -6px 24px 4px 0px;"
         >
           Key:
