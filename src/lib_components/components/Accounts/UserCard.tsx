@@ -21,7 +21,7 @@ const useStyles = makeStyles()(() => ({
       height: '68px',
       marginTop: '25px',
       fontWeight: 600,
-      fontSize: '20px',
+      fontSize: '1.25rem',
     },
     '& img.profile-image': {
       width: '120px',
@@ -51,7 +51,7 @@ const useStyles = makeStyles()(() => ({
       verticalAlign: 'middle',
     },
     '& label': {
-      fontSize: '16px',
+      fontSize: '1rem',
       fontWeight: 600,
     },
     '& label.label-block': {
@@ -71,7 +71,7 @@ const useStyles = makeStyles()(() => ({
       verticalAlign: 'middle',
     },
     '& label.label-normal': {
-      fontSize: '14px',
+      fontSize: '0.875rem',
       fontWeight: 'normal',
       wordBreak: 'break-all',
     },

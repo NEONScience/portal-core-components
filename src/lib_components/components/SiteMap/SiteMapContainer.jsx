@@ -68,7 +68,7 @@ const boxShadow = `0px 2px 1px -1px rgba(0,0,0,0.2),
 0px 1px 3px 0px rgba(0,0,0,0.12)`;
 const useStyles = makeStyles()((theme) => ({
   ':root': {
-    fontSize: '24px',
+    fontSize: '1.5rem',
   },
   outerContainer: {
     zIndex: 0,
@@ -178,7 +178,7 @@ const useStyles = makeStyles()((theme) => ({
       cursor: 'row-resize !important',
     },
     '& svg': {
-      fontSize: '17px !important',
+      fontSize: '1.0625rem !important',
     },
   },
   resizeBorder: {

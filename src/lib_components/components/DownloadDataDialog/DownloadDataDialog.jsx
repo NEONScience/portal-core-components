@@ -90,11 +90,11 @@ const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
     },
   },
   summaryIcon: {
-    fontSize: '30px',
+    fontSize: '1.875rem',
     color: theme.palette.primary.main,
   },
   summaryIconTitleMarker: {
-    fontSize: '38px',
+    fontSize: '2.375rem',
     color: theme.palette.primary.main,
     margin: '-2px 6px -2px -4px',
   },

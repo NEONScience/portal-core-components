@@ -212,7 +212,7 @@ const useStyles = (customize) => {
       },
       '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item > label': {
         fontWeight: 600,
-        fontSize: '20px',
+        fontSize: '1.25rem',
         margin: 'auto 2.6rem',
       },
       '& .header__search--inner > .header__search-close': {

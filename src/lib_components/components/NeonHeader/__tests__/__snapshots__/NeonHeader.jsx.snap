@@ -6,7 +6,7 @@ exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonCon
   "baseElement": <body>
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
         id="header"
       >
         <div>
@@ -20,7 +20,7 @@ exports[`NeonHeader renders fallback with drupalCSSLoaded prop and error NeonCon
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
       id="header"
     >
       <div>
@@ -91,7 +91,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext st
     />
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer"
         id="header"
       >
         <div>
@@ -105,7 +105,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop and success NeonContext st
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer"
       id="header"
     >
       <div>
@@ -179,7 +179,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state
     />
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer"
         id="header"
       >
         <div>
@@ -193,7 +193,7 @@ exports[`NeonHeader renders with drupalCssLoaded prop, success NeonContext state
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer"
       id="header"
     >
       <div>
@@ -261,7 +261,7 @@ exports[`NeonHeader renders with no props and active/fetching NeonContext state 
   "baseElement": <body>
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
         id="header"
       >
         <div>
@@ -272,7 +272,7 @@ exports[`NeonHeader renders with no props and active/fetching NeonContext state 
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
       id="header"
     >
       <div>
@@ -340,7 +340,7 @@ exports[`NeonHeader renders with no props and error NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
         id="header"
       >
         <div>
@@ -351,7 +351,7 @@ exports[`NeonHeader renders with no props and error NeonContext state 1`] = `
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
       id="header"
     >
       <div>
@@ -419,7 +419,7 @@ exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
         id="header"
       >
         <div>
@@ -430,7 +430,7 @@ exports[`NeonHeader renders with no props and inactive NeonContext state 1`] = `
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
       id="header"
     >
       <div>
@@ -498,7 +498,7 @@ exports[`NeonHeader renders with no props and success NeonContext state 1`] = `
   "baseElement": <body>
     <div>
       <header
-        class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+        class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
         id="header"
       >
         <div>
@@ -509,7 +509,7 @@ exports[`NeonHeader renders with no props and success NeonContext state 1`] = `
   </body>,
   "container": <div>
     <header
-      class="css-85zbwb-unstickyHeader css-17ftdaa-headerContainer css-imuf61-headerContainerFallback"
+      class="css-85zbwb-unstickyHeader css-166qf42-headerContainer css-imuf61-headerContainerFallback"
       id="header"
     >
       <div>
