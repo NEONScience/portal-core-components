@@ -100,7 +100,7 @@ const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
   },
   callout: {
     backgroundColor: COLORS.GOLD[300],
-    margin: theme.spacing(0.5, 0, 2, 0),
+    margin: theme.spacing(0.5, 0, 3, 0),
   },
   calloutIcon: {
     color: COLORS.GOLD[800],
@@ -936,7 +936,7 @@ export default function DownloadDataDialog() {
       {renderLoginRequired()}
       {renderExternalHostInfo()}
       {renderDownloadSizeWarning()}
-      {getSizeEstimateBytes() < DOWNLOAD_SIZE_WARN ? <Divider /> : null}
+      <Divider />
       {renderStepper()}
       {renderActiveStep()}
     </DialogBase>

@@ -69,6 +69,9 @@ const useStyles = makeStyles()((theme) => ({
     '& label + .MuiInput-formControl': {
       marginTop: '0px',
     },
+    '& .MuiFormControl-root': {
+      width: '100%',
+    },
   },
   formControlBold: {
     '& span': {
@@ -98,9 +101,8 @@ const useStyles = makeStyles()((theme) => ({
   },
   showColumnsLabel: {
     backgroundColor: theme.palette.grey[50],
-    '& span': {
-      color: '#000',
-    },
+    border: `1px solid ${theme.palette.primary.main} !important`,
+    color: '#000 !important',
   },
   startFlex: {
     display: 'flex',

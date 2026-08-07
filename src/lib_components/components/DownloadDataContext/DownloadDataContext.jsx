@@ -1063,7 +1063,7 @@ const reducer = (state, action) => {
           });
           // Cache file attributes by url:
           // file size fast summing, url for building final download request
-          newState.s3Files.bytesByUrl[file.url] = file.size;
+          newState.s3Files.bytesByUrl[file.url] = file.size || 0;
           // If new unique values are present add them to the s3File value lookups
           Object.keys(newState.s3Files.valueLookups).forEach((lookup) => {
             if (typeof file[lookup] === 'undefined') { return; }
