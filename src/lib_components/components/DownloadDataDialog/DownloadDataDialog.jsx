@@ -69,7 +69,7 @@ const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
     border: `1px solid ${theme.colors.LIGHT_BLUE[600]}`,
     backgroundColor: theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
-    fontSize: '0.9rem',
+    fontSize: '0.875rem',
     cursor: 'help',
     height: belowSmMd && !belowSm ? 'auto' : undefined,
     padding: theme.spacing(2, 1, 2, 1),
@@ -268,7 +268,7 @@ export default function DownloadDataDialog() {
   const renderSizeEstimate = () => {
     const alignRight = { style: { textAlign: 'right' } };
     const subtitleStyle = {
-      style: { lineHeight: '1rem', fontSize: '0.9rem', marginBottom: '4px' },
+      style: { lineHeight: '1rem', fontSize: '0.875rem', marginBottom: '4px' },
     };
     if (
       (fromManifest && manifest.status === 'awaitingFetchCall')

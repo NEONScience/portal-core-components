@@ -87,7 +87,6 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     marginBottom: theme.spacing(2),
   },
   tombstoneBlurb: {
-    fontSize: '0.8rem',
   },
   noticeCardDivider: {
     margin: theme.spacing(0, 0, 2, 0),
@@ -323,7 +322,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
         );
       } else {
         conditionalText = (
-          <Typography variant="body1" component="h6">
+          <Typography variant="body2" component="h6">
             {provReleaseText}
           </Typography>
         );
@@ -396,7 +395,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       <Card className={classes.citationCard}>
         <CardContent>
           {conditionalText}
-          <Typography variant="body1" className={citationClassName}>
+          <Typography variant="body2" className={citationClassName}>
             {citationText}
           </Typography>
         </CardContent>

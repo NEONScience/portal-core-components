@@ -1663,7 +1663,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                  class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
                 >
                   Include
                 </p>
@@ -1697,7 +1697,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                  class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
                 >
                   Expanded
                 </p>
@@ -1731,7 +1731,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 class="css-5bycxy-stepSummaryContent"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                  class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
                 >
                   3 files (12.1 KB uncompressed)
                 </p>
@@ -1928,7 +1928,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
               >
                 Include
               </p>
@@ -1962,7 +1962,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
               >
                 Expanded
               </p>
@@ -1996,7 +1996,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               class="css-5bycxy-stepSummaryContent"
             >
               <p
-                class="MuiTypography-root MuiTypography-body2 css-ojpim4-MuiTypography-root-summaryText"
+                class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
               >
                 3 files (12.1 KB uncompressed)
               </p>

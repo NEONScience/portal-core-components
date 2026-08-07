@@ -1086,7 +1086,6 @@ function SelectedSite(inProps) {
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
   const [, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  // style={{ fontSize: '0.8rem', fontWeight: 600 }}
   const dateRangeTabButton = (
     <Button
       size="small"
@@ -1172,7 +1171,7 @@ function SelectedSite(inProps) {
             {/* Terrain and Type */}
             <div className={classes.siteDetail}>
               <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-              <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
+              <Typography variant="body2" style={{ fontSize: '0.8125rem' }}>
                 <i>{terrainTypeSubtitle}</i>
               </Typography>
             </div>
@@ -1193,7 +1192,7 @@ function SelectedSite(inProps) {
                 <Typography
                   variant="caption"
                   aria-label="Latitude / Longitude"
-                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.85rem' }}
+                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.875rem' }}
                 >
                   {latitude}
                   <br />
@@ -1264,7 +1263,11 @@ function SelectedSite(inProps) {
               No Positions Available.
             </Typography>
           </div>
-          <Typography variant="body2" className={classes.noneLabel} style={{ fontSize: '0.8rem' }}>
+          <Typography
+            variant="body2"
+            className={classes.noneLabel}
+            style={{ fontSize: '0.8125rem' }}
+          >
             <i>
               {/* eslint-disable react/jsx-one-expression-per-line */}
               This site has no available data for the current selected date range, and thus

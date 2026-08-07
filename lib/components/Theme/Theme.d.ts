@@ -89,5 +89,46 @@ export namespace COLORS {
     };
 }
 export function getThemeSpacingNumber(spacing: any): number;
+/**
+ * Font size definitions from point/px to rem, dependent on body/root rem definition
+ */
+export const FONT_SIZES: {
+    9: {
+        rem: number;
+    };
+    10: {
+        rem: number;
+    };
+    11: {
+        rem: number;
+    };
+    12: {
+        rem: number;
+    };
+    13: {
+        rem: number;
+    };
+    14: {
+        rem: number;
+    };
+    15: {
+        rem: number;
+    };
+    16: {
+        rem: number;
+    };
+    17: {
+        rem: number;
+    };
+    18: {
+        rem: number;
+    };
+    19: {
+        rem: number;
+    };
+    20: {
+        rem: number;
+    };
+};
 export default theme;
 declare const theme: import("@mui/material").Theme;

@@ -89,7 +89,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     position: 'absolute',
     left: 2,
     bottom: 6,
-    fontSize: 16,
+    fontSize: '1rem',
   },
   paper: {
     position: 'absolute',
@@ -444,7 +444,7 @@ const SelectedSite: React.FC<SelectedSiteProps> = (
             {/* Terrain and Type */}
             <div className={classes.siteDetail}>
               <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-              <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
+              <Typography variant="body2" style={{ fontSize: '0.8125rem' }}>
                 <i>{terrainTypeSubtitle}</i>
               </Typography>
             </div>
@@ -465,7 +465,7 @@ const SelectedSite: React.FC<SelectedSiteProps> = (
                 <Typography
                   variant="caption"
                   aria-label="Latitude / Longitude"
-                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.85rem' }}
+                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.875rem' }}
                 >
                   {latitude}
                   <br />

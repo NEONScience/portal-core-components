@@ -60,11 +60,8 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-  h5Small: {
-    fontSize: '1.075rem',
-  },
   h6Small: {
-    fontSize: '0.95rem',
+    fontSize: '0.9375rem',
   },
   xsSelect: {
     height: theme.spacing(4),

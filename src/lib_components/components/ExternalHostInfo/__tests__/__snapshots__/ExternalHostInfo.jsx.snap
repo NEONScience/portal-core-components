@@ -86,7 +86,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -189,7 +189,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -349,7 +349,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -451,7 +451,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -500,7 +500,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -512,7 +514,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -553,7 +557,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -602,7 +606,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
               <ul
                 style="margin-top: 24px; margin-bottom: 6px;"
               >
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -614,7 +620,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
                     Ground beetle sequences DNA barcode
                   </a>
                 </li>
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -712,7 +720,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -814,7 +822,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -863,7 +871,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -875,7 +885,9 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -917,7 +929,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1022,7 +1034,7 @@ exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1182,7 +1194,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1285,7 +1297,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1445,7 +1457,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1547,7 +1559,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1596,7 +1608,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -1608,7 +1622,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -1649,7 +1665,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -1698,7 +1714,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
               <ul
                 style="margin-top: 24px; margin-bottom: 6px;"
               >
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -1710,7 +1728,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
                     Ground beetle sequences DNA barcode
                   </a>
                 </li>
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -1808,7 +1828,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1910,7 +1930,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -1959,7 +1979,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -1971,7 +1993,9 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -2011,7 +2035,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2114,7 +2138,7 @@ exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2274,7 +2298,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2397,7 +2421,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2577,7 +2601,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2699,7 +2723,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -2768,7 +2792,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -2780,7 +2806,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -2821,7 +2849,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>
@@ -2890,7 +2918,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               <ul
                 style="margin-top: 24px; margin-bottom: 6px;"
               >
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -2902,7 +2932,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                     Ground beetle sequences DNA barcode
                   </a>
                 </li>
-                <li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                     data-gtm-external-host="BOLD"
@@ -3000,7 +3032,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3122,7 +3154,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3191,7 +3223,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 <ul
                   style="margin-top: 24px; margin-bottom: 6px;"
                 >
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -3203,7 +3237,9 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                       Ground beetle sequences DNA barcode
                     </a>
                   </li>
-                  <li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
                     <a
                       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
                       data-gtm-external-host="BOLD"
@@ -3243,7 +3279,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 />
               </svg>
               <h6
-                class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
                 External Host
               </h6>
@@ -3366,7 +3402,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               />
             </svg>
             <h6
-              class="MuiTypography-root MuiTypography-subtitle2 css-1dl8m20-MuiTypography-root-textTitleContent"
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
             >
               External Host
             </h6>

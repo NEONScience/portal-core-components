@@ -206,7 +206,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -260,7 +260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -274,14 +274,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
                         type="button"
                       >
                         <span
-                          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                         >
                           <svg
                             aria-hidden="true"
@@ -305,7 +305,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -330,7 +330,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_13_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -460,7 +460,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_16_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -577,7 +577,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -585,7 +585,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -682,7 +682,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -697,7 +697,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 >
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="summary"
@@ -706,7 +706,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </button>
                   <button
                     aria-pressed="true"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="sites"
@@ -715,7 +715,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="states"
@@ -724,7 +724,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="domains"
@@ -1161,7 +1161,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -1215,7 +1215,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -1229,14 +1229,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
                       type="button"
                     >
                       <span
-                        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                       >
                         <svg
                           aria-hidden="true"
@@ -1260,7 +1260,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -1285,7 +1285,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_13_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -1415,7 +1415,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_16_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -1532,7 +1532,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -1540,7 +1540,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -1637,7 +1637,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -1652,7 +1652,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               >
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="summary"
@@ -1661,7 +1661,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </button>
                 <button
                   aria-pressed="true"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="sites"
@@ -1670,7 +1670,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="states"
@@ -1679,7 +1679,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="domains"
@@ -2173,7 +2173,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -2227,7 +2227,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -2241,14 +2241,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
                         type="button"
                       >
                         <span
-                          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                         >
                           <svg
                             aria-hidden="true"
@@ -2272,7 +2272,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -2297,7 +2297,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_5_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -2427,7 +2427,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_8_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -2544,7 +2544,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -2552,7 +2552,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -2649,7 +2649,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -2664,7 +2664,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 >
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="summary"
@@ -2673,7 +2673,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </button>
                   <button
                     aria-pressed="true"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="sites"
@@ -2682,7 +2682,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="states"
@@ -2691,7 +2691,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="domains"
@@ -3128,7 +3128,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -3182,7 +3182,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -3196,14 +3196,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
                       type="button"
                     >
                       <span
-                        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                       >
                         <svg
                           aria-hidden="true"
@@ -3227,7 +3227,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -3252,7 +3252,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_5_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -3382,7 +3382,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_8_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -3499,7 +3499,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -3507,7 +3507,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -3604,7 +3604,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -3619,7 +3619,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               >
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="summary"
@@ -3628,7 +3628,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 </button>
                 <button
                   aria-pressed="true"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="sites"
@@ -3637,7 +3637,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="states"
@@ -3646,7 +3646,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="domains"
@@ -4135,7 +4135,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -4150,7 +4150,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 >
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="summary"
@@ -4159,7 +4159,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   </button>
                   <button
                     aria-pressed="true"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="sites"
@@ -4168,7 +4168,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="states"
@@ -4177,7 +4177,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="domains"
@@ -4525,7 +4525,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -4540,7 +4540,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
               >
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="summary"
@@ -4549,7 +4549,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 </button>
                 <button
                   aria-pressed="true"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="sites"
@@ -4558,7 +4558,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="states"
@@ -4567,7 +4567,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="domains"
@@ -4977,7 +4977,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -5031,7 +5031,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -5045,14 +5045,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
                         type="button"
                       >
                         <span
-                          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                         >
                           <svg
                             aria-hidden="true"
@@ -5076,7 +5076,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -5101,7 +5101,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_k_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -5231,7 +5231,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_n_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -5348,7 +5348,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -5356,7 +5356,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -5453,7 +5453,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 View By:
@@ -5468,7 +5468,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 >
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="summary"
@@ -5477,7 +5477,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </button>
                   <button
                     aria-pressed="true"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="sites"
@@ -5486,7 +5486,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="states"
@@ -5495,7 +5495,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   </button>
                   <button
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     type="button"
                     value="domains"
@@ -5932,7 +5932,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -5986,7 +5986,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -6000,14 +6000,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
                       type="button"
                     >
                       <span
-                        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                       >
                         <svg
                           aria-hidden="true"
@@ -6031,7 +6031,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -6056,7 +6056,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_k_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -6186,7 +6186,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_n_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -6303,7 +6303,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -6311,7 +6311,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -6408,7 +6408,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               View By:
@@ -6423,7 +6423,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               >
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="summary"
@@ -6432,7 +6432,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </button>
                 <button
                   aria-pressed="true"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="sites"
@@ -6441,7 +6441,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="states"
@@ -6450,7 +6450,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 </button>
                 <button
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1j2419e-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   type="button"
                   value="domains"
@@ -6944,7 +6944,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   class="css-vi766x-topFormHeader"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                    class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                   >
                     Sites
                   </h6>
@@ -6998,7 +6998,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -7012,14 +7012,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
                         type="button"
                       >
                         <span
-                          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                         >
                           <svg
                             aria-hidden="true"
@@ -7043,7 +7043,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Date Range
                 </h6>
@@ -7068,7 +7068,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_1i_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -7198,7 +7198,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       <div
                         aria-invalid="false"
                         aria-labelledby="_r_1l_-label"
-                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                        class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                         role="group"
                       >
                         <div
@@ -7315,7 +7315,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -7323,7 +7323,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -7420,7 +7420,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               style="display: flex; align-items: center; justify-content: flex-end;"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 style="margin-right: 12px; white-space: nowrap;"
               >
                 Sort By:
@@ -7467,7 +7467,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   <button
                     aria-label="Sort Ascending (A-Z)"
                     aria-pressed="true"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     title="Sort Ascending (A-Z)"
                     type="button"
@@ -7488,7 +7488,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   <button
                     aria-label="Sort Descending (Z-A)"
                     aria-pressed="false"
-                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                    class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
                     tabindex="0"
                     title="Sort Descending (Z-A)"
                     type="button"
@@ -7896,7 +7896,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 class="css-vi766x-topFormHeader"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                  class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
                 >
                   Sites
                 </h6>
@@ -7950,7 +7950,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -7964,14 +7964,14 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
                       type="button"
                     >
                       <span
-                        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
                       >
                         <svg
                           aria-hidden="true"
@@ -7995,7 +7995,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               class="MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-6 css-14eyfgi-MuiGrid-root"
             >
               <h6
-                class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+                class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               >
                 Date Range
               </h6>
@@ -8020,7 +8020,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_1i_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -8150,7 +8150,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     <div
                       aria-invalid="false"
                       aria-labelledby="_r_1l_-label"
-                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-zsf8it-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
+                      class="MuiPickersInputBase-root MuiPickersOutlinedInput-root Mui-readOnly MuiPickersInputBase-colorPrimary MuiPickersInputBase-inputSizeSmall MuiPickersInputBase-adornedEnd css-pu0s8z-MuiPickersInputBase-root-MuiPickersOutlinedInput-root"
                       role="group"
                     >
                       <div
@@ -8267,7 +8267,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -8275,7 +8275,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -8372,7 +8372,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             style="display: flex; align-items: center; justify-content: flex-end;"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-f3790b-MuiTypography-root-h6Small"
+              class="MuiTypography-root MuiTypography-h6 css-3qh2w2-MuiTypography-root-h6Small"
               style="margin-right: 12px; white-space: nowrap;"
             >
               Sort By:
@@ -8419,7 +8419,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 <button
                   aria-label="Sort Ascending (A-Z)"
                   aria-pressed="true"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-firstButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   title="Sort Ascending (A-Z)"
                   type="button"
@@ -8440,7 +8440,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 <button
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
-                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-jv82uc-MuiButtonBase-root-MuiToggleButton-root"
+                  class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
                   tabindex="0"
                   title="Sort Descending (Z-A)"
                   type="button"

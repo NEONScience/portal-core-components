@@ -22,7 +22,7 @@ const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
   textTitleContent: {
     flexGrow: 1,
     textTransform: 'uppercase',
-    fontSize: '0.775rem',
+    fontSize: '0.8125rem',
   },
   messageContainer: {
     padding: muiTheme.spacing(0, 3, 3, 3),

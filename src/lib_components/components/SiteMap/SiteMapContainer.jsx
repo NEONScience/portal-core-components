@@ -265,7 +265,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   selectionChip: {
     opacity: 1,
-    fontSize: theme.spacing(2),
+    fontSize: '1rem',
     height: theme.spacing(5),
     borderRadius: theme.spacing(2.5),
     padding: theme.spacing(0, 1),

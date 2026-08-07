@@ -48,7 +48,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     margin: theme.spacing(2, 0, 3, 0),
   },
   dateRangeSubtitle: {
-    fontSize: '0.725rem',
+    fontSize: '0.75rem',
     color: theme.palette.grey[400],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),

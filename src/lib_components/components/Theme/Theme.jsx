@@ -141,6 +141,48 @@ const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 // so we need to remove it to get the raw number for calculations
 export const getThemeSpacingNumber = (spacing) => Number(spacing.slice(0, -2));
 
+/**
+ * Font size definitions from point/px to rem, dependent on body/root rem definition
+ */
+export const FONT_SIZES = {
+  9: {
+    rem: 0.5625,
+  },
+  10: {
+    rem: 0.625,
+  },
+  11: {
+    rem: 0.6875,
+  },
+  12: {
+    rem: 0.75,
+  },
+  13: {
+    rem: 0.8125,
+  },
+  14: {
+    rem: 0.875,
+  },
+  15: {
+    rem: 0.9375,
+  },
+  16: {
+    rem: 1,
+  },
+  17: {
+    rem: 1.0625,
+  },
+  18: {
+    rem: 1.125,
+  },
+  19: {
+    rem: 1.1875,
+  },
+  20: {
+    rem: 1.25,
+  },
+};
+
 // See all customizable Material UI theme keys here:
 // https://mui.com/material-ui/customization/default-theme/
 
@@ -374,18 +416,20 @@ const baseTheme = createTheme({
           },
         },
         sizeSmall: {
-          fontSize: '0.55rem',
+          fontSize: `${FONT_SIZES[9].rem}rem`,
           padding: '5px 10px',
         },
         sizeLarge: {
-          fontSize: '0.9rem',
+          fontSize: `${FONT_SIZES[15].rem}rem`,
           padding: '12px 24px',
         },
         startIcon: {
           marginRight: '4px',
+          marginTop: '-2px',
         },
         endIcon: {
           marginLeft: '4px',
+          marginTop: '-2px',
         },
       },
     },
@@ -496,7 +540,7 @@ const baseTheme = createTheme({
           lineHeight: 1.5,
         },
         code: {
-          fontSize: '0.875rem',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
           padding: '1px 2px',
           backgroundColor: 'rgba(0, 0, 0, 0.11)',
         },
@@ -554,7 +598,7 @@ const baseTheme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          fontSize: '0.85rem',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
         },
       },
     },
@@ -577,7 +621,7 @@ const baseTheme = createTheme({
         root: {
           [`& .${outlinedInputClasses.notchedOutline}`]: {
             '& legend': {
-              fontSize: '0.75rem',
+              fontSize: `${FONT_SIZES[12].rem}rem`,
             },
           },
         },
@@ -586,7 +630,7 @@ const baseTheme = createTheme({
     MuiPickersInputBase: {
       styleOverrides: {
         root: {
-          fontSize: '0.85rem',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
         },
       },
     },
@@ -744,7 +788,7 @@ const baseTheme = createTheme({
           backgroundColor: COLORS.GREY[50],
           border: `1.5px solid ${COLORS.GREY[200]}`,
           borderRadius: '0px',
-          fontSize: '0.75rem',
+          fontSize: `${FONT_SIZES[12].rem}rem`,
           padding: '12px',
           lineHeight: 1.75,
           '&.Mui-selected': {
@@ -854,7 +898,7 @@ const baseTheme = createTheme({
           height: 'unset',
           color: COLORS.LIGHT_BLUE[500],
           borderColor: COLORS.LIGHT_BLUE[500],
-          fontSize: '0.7rem',
+          fontSize: `${FONT_SIZES[12].rem}rem`,
           padding: '8px 16px !important',
           whiteSpace: 'nowrap',
           '&.Mui-selected': {
@@ -870,12 +914,12 @@ const baseTheme = createTheme({
         },
         sizeSmall: {
           height: 'unset',
-          fontSize: '0.55rem',
+          fontSize: `${FONT_SIZES[9].rem}rem`,
           padding: '5px 10px !important',
         },
         sizeLarge: {
           height: 'unset',
-          fontSize: '0.9rem',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
           padding: '12px 24px !important',
         },
       },
@@ -905,7 +949,7 @@ const baseTheme = createTheme({
           color: COLOR_TEXT_PRIMARY,
           borderRadius: '2px',
           padding: '12px 16px',
-          fontSize: '0.9rem',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
           fontWeight: 400,
           boxShadow: 'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px',
           '& a': {

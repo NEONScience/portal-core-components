@@ -123,7 +123,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -257,7 +257,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default s
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -460,7 +460,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -606,7 +606,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -797,7 +797,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -931,7 +931,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined p
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -1122,7 +1122,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -1132,7 +1132,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Roll period:
                       </span>
@@ -1155,7 +1155,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Scale:
                       </span>
@@ -1165,7 +1165,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Units:
                       </span>
@@ -1175,7 +1175,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Range:
                       </span>
@@ -1198,7 +1198,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Scale:
                       </span>
@@ -1208,7 +1208,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Units:
                       </span>
@@ -1218,7 +1218,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Range:
                       </span>
@@ -1352,7 +1352,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -1362,7 +1362,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Roll period:
                     </span>
@@ -1385,7 +1385,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Scale:
                     </span>
@@ -1395,7 +1395,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Units:
                     </span>
@@ -1405,7 +1405,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Range:
                     </span>
@@ -1428,7 +1428,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Scale:
                     </span>
@@ -1438,7 +1438,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Units:
                     </span>
@@ -1448,7 +1448,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Range:
                     </span>
@@ -1640,7 +1640,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -1775,7 +1775,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -1972,7 +1972,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -2112,7 +2112,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -2304,7 +2304,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -2439,7 +2439,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>
@@ -2636,7 +2636,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                       style="margin-right: 16px; white-space: nowrap;"
                     >
                       <span
-                        class="css-9xfsnc-axisSettingTitle"
+                        class="css-lie7ob-axisSettingTitle"
                       >
                         Time step:
                       </span>
@@ -2776,7 +2776,7 @@ exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection
                     style="margin-right: 16px; white-space: nowrap;"
                   >
                     <span
-                      class="css-9xfsnc-axisSettingTitle"
+                      class="css-lie7ob-axisSettingTitle"
                     >
                       Time step:
                     </span>

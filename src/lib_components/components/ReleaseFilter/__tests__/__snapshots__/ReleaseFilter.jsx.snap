@@ -40,7 +40,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_n_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -138,7 +138,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_n_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -501,7 +501,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         </div>
         <div
           aria-labelledby="release-filter-label-_r_1v_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -591,7 +591,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
             </span>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-yaa0kc-MuiButtonBase-root-MuiButton-root-copyButton"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-bionk5-MuiButtonBase-root-MuiButton-root-copyButton"
             tabindex="0"
             title="Copy DOI: http://data.cite/bar"
             type="button"
@@ -650,7 +650,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
       </div>
       <div
         aria-labelledby="release-filter-label-_r_1v_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -740,7 +740,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           </span>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-yaa0kc-MuiButtonBase-root-MuiButton-root-copyButton"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-bionk5-MuiButtonBase-root-MuiButton-root-copyButton"
           tabindex="0"
           title="Copy DOI: http://data.cite/bar"
           type="button"
@@ -856,7 +856,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_19_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -955,7 +955,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_19_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -1111,7 +1111,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_h_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -1200,7 +1200,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_h_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -1316,7 +1316,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
       >
         <div
           aria-labelledby="release-filter-label-_r_1f_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -1385,7 +1385,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
     >
       <div
         aria-labelledby="release-filter-label-_r_1f_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -1547,7 +1547,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
           >
             <div
               aria-labelledby="release-filter-label-_r_13_"
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
               data-selenium="release-filter"
               style="max-width: 300px;"
             >
@@ -1658,7 +1658,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
         >
           <div
             aria-labelledby="release-filter-label-_r_13_"
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
             data-selenium="release-filter"
             style="max-width: 300px;"
           >
@@ -1820,7 +1820,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_t_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -1918,7 +1918,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_t_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -2073,7 +2073,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_b_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -2171,7 +2171,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_b_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -2326,7 +2326,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
         </div>
         <div
           aria-labelledby="release-filter-label-_r_1_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -2425,7 +2425,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
       </div>
       <div
         aria-labelledby="release-filter-label-_r_1_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -2581,7 +2581,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         </div>
         <div
           aria-labelledby="release-filter-label-_r_1p_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -2679,7 +2679,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
       </div>
       <div
         aria-labelledby="release-filter-label-_r_1p_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >
@@ -2834,7 +2834,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         </div>
         <div
           aria-labelledby="release-filter-label-_r_1j_"
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
           data-selenium="release-filter"
           style="width: 100%;"
         >
@@ -2941,7 +2941,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
       </div>
       <div
         aria-labelledby="release-filter-label-_r_1j_"
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-ee47m6-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall MuiSelect-root css-9phvb8-MuiInputBase-root-MuiOutlinedInput-root-selectInput"
         data-selenium="release-filter"
         style="width: 100%;"
       >

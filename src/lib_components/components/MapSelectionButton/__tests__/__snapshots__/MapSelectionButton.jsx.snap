@@ -113,7 +113,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min 1)
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -147,7 +147,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min 1)
           type="button"
         >
           <span
-            class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+            class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
           >
             <svg
               aria-hidden="true"
@@ -238,7 +238,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (>1
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -272,7 +272,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (>1
           type="button"
         >
           <span
-            class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+            class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
           >
             <svg
               aria-hidden="true"
@@ -363,7 +363,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (1)
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -397,7 +397,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (1)
           type="button"
         >
           <span
-            class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+            class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
           >
             <svg
               aria-hidden="true"
@@ -488,7 +488,7 @@ exports[`MapSelectionButton Renders correctly with only a selection 1`] = `
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -522,7 +522,7 @@ exports[`MapSelectionButton Renders correctly with only a selection 1`] = `
           type="button"
         >
           <span
-            class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+            class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
           >
             <svg
               aria-hidden="true"

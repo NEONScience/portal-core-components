@@ -109,13 +109,13 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
           style="text-align: right;"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             title="Click to show all changes to physical locations for this position over time"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -240,13 +240,13 @@ exports[`TimeSeriesViewerSites PositionDetail Renders full detail when position 
         style="text-align: right;"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           title="Click to show all changes to physical locations for this position over time"
           type="button"
         >
           <span
-            class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+            class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
           >
             <svg
               aria-hidden="true"
@@ -599,14 +599,14 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when histo
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
         disabled=""
         tabindex="-1"
         title="This position has had no changes to physical locations since its creation"
         type="button"
       >
         <span
-          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
         >
           <svg
             aria-hidden="true"
@@ -626,14 +626,14 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders disabled when histo
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
       disabled=""
       tabindex="-1"
       title="This position has had no changes to physical locations since its creation"
       type="button"
     >
       <span
-        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
       >
         <svg
           aria-hidden="true"
@@ -710,13 +710,13 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when histor
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         title="Click to show all changes to physical locations for this position over time"
         type="button"
       >
         <span
-          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
         >
           <svg
             aria-hidden="true"
@@ -736,13 +736,13 @@ exports[`TimeSeriesViewerSites PositionHistoryButton Renders enabled when histor
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       title="Click to show all changes to physical locations for this position over time"
       type="button"
     >
       <span
-        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
       >
         <svg
           aria-hidden="true"
@@ -819,13 +819,13 @@ exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
         style="margin-left: 32px;"
         tabindex="0"
         type="button"
       >
         <span
-          class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+          class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
         >
           <svg
             aria-hidden="true"
@@ -845,13 +845,13 @@ exports[`TimeSeriesViewerSites SelectPositionsButton Renders as expected 1`] = `
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
       style="margin-left: 32px;"
       tabindex="0"
       type="button"
     >
       <span
-        class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+        class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
       >
         <svg
           aria-hidden="true"
@@ -1076,13 +1076,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               Rio Cupeyes (CUPE)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1115,7 +1115,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 </h6>
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                  style="font-size: 0.8rem;"
+                  style="font-size: 0.8125rem;"
                 >
                   <i>
                     water-based; fixed location
@@ -1152,7 +1152,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                   <span
                     aria-label="Latitude / Longitude"
                     class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                    style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                   >
                     18.11352
                     <br />
@@ -1224,13 +1224,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1311,13 +1311,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             Rio Cupeyes (CUPE)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1350,7 +1350,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
               </h6>
               <p
                 class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                style="font-size: 0.8rem;"
+                style="font-size: 0.8125rem;"
               >
                 <i>
                   water-based; fixed location
@@ -1387,7 +1387,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
                 <span
                   aria-label="Latitude / Longitude"
                   class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                 >
                   18.11352
                   <br />
@@ -1459,13 +1459,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / core)
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1603,13 +1603,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               Upper Big Creek (BIGC)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1642,7 +1642,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 </h6>
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                  style="font-size: 0.8rem;"
+                  style="font-size: 0.8125rem;"
                 >
                   <i>
                     water-based; gradient location
@@ -1679,7 +1679,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                   <span
                     aria-label="Latitude / Longitude"
                     class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                    style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                   >
                     37.059719
                     <br />
@@ -1751,13 +1751,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1869,13 +1869,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             Upper Big Creek (BIGC)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1908,7 +1908,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
               </h6>
               <p
                 class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                style="font-size: 0.8rem;"
+                style="font-size: 0.8125rem;"
               >
                 <i>
                   water-based; gradient location
@@ -1945,7 +1945,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
                 <span
                   aria-label="Latitude / Longitude"
                   class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                 >
                   37.059719
                   <br />
@@ -2017,13 +2017,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (aquatic / gradi
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -2192,13 +2192,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               Central Plains Experimental Range (CPER)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -2231,7 +2231,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 </h6>
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                  style="font-size: 0.8rem;"
+                  style="font-size: 0.8125rem;"
                 >
                   <i>
                     land-based; fixed location
@@ -2268,7 +2268,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                   <span
                     aria-label="Latitude / Longitude"
                     class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                    style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                   >
                     40.815536
                     <br />
@@ -2340,13 +2340,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -2458,13 +2458,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             Central Plains Experimental Range (CPER)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -2497,7 +2497,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
               </h6>
               <p
                 class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                style="font-size: 0.8rem;"
+                style="font-size: 0.8125rem;"
               >
                 <i>
                   land-based; fixed location
@@ -2534,7 +2534,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
                 <span
                   aria-label="Latitude / Longitude"
                   class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                 >
                   40.815536
                   <br />
@@ -2606,13 +2606,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / c
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -2781,13 +2781,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               Abby Road (ABBY)
             </h6>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="min-width: 104px; white-space: nowrap;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -2820,7 +2820,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 </h6>
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                  style="font-size: 0.8rem;"
+                  style="font-size: 0.8125rem;"
                 >
                   <i>
                     land-based; gradient location
@@ -2857,7 +2857,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                   <span
                     aria-label="Latitude / Longitude"
                     class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                    style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                    style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                   >
                     45.762439
                     <br />
@@ -2929,13 +2929,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               style="margin-left: 32px;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -3047,13 +3047,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             Abby Road (ABBY)
           </h6>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="min-width: 104px; white-space: nowrap;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -3086,7 +3086,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
               </h6>
               <p
                 class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
-                style="font-size: 0.8rem;"
+                style="font-size: 0.8125rem;"
               >
                 <i>
                   land-based; gradient location
@@ -3123,7 +3123,7 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
                 <span
                   aria-label="Latitude / Longitude"
                   class="MuiTypography-root MuiTypography-caption css-1k42j7t-MuiTypography-root"
-                  style="font-family: monospace; text-align: right; font-size: 0.85rem;"
+                  style="font-family: monospace; text-align: right; font-size: 0.875rem;"
                 >
                   45.762439
                   <br />
@@ -3195,13 +3195,13 @@ exports[`TimeSeriesViewerSites SelectedSite Renders as expected (terrestrial / g
             </svg>
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             style="margin-left: 32px;"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -3506,7 +3506,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
           Add Sites
         </label>
         <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1hlglus-MuiInputBase-root-MuiOutlinedInput-root"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1bg02g1-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <div
             aria-invalid="false"
@@ -3564,7 +3564,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         Add Sites
       </label>
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1hlglus-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1bg02g1-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-invalid="false"

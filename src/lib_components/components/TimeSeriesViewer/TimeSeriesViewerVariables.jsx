@@ -53,7 +53,7 @@ const useStyles = makeStyles()((theme) => ({
     position: 'absolute',
     left: 2,
     bottom: 6,
-    fontSize: 16,
+    fontSize: '1rem',
   },
   paper: {
     position: 'absolute',
@@ -90,10 +90,10 @@ const useStyles = makeStyles()((theme) => ({
   noneIcon: {
     color: theme.palette.grey[400],
     margin: theme.spacing(0.375, 0.5, 0, 0),
-    fontSize: '1rem',
+    fontSize: '1.2rem',
   },
   noneLabel: {
-    fontSize: '0.95rem',
+    fontSize: '1rem',
   },
   qualityFlagsContainer: {
     marginTop: theme.spacing(2),
@@ -329,7 +329,7 @@ const QualityFlags = () => {
   const toggleFlag = (qualityFlag) => (event) => {
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
-  if (!availableQualityFlags.size) {
+  if (availableQualityFlags.size) {
     return (
       <div className={classes.noneContainer}>
         <NoneIcon className={classes.noneIcon} />

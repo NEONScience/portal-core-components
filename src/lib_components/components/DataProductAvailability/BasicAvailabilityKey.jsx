@@ -211,7 +211,7 @@ const LegendDialog = (inProps) => {
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <DialogTitle id="availability-key-dialog-title">
-          <span style={{ fontSize: '1.4rem', fontWeight: '600' }}>
+          <span style={{ fontSize: '1.25rem', fontWeight: '600' }}>
             Data Availability Chart Key
           </span>
         </DialogTitle>

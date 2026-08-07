@@ -129,7 +129,7 @@ const useStyles = makeStyles()((theme) => ({
     textTransform: 'uppercase',
     color: theme.palette.grey[300],
     fontWeight: 700,
-    fontSize: '85%',
+    fontSize: '0.75rem',
     marginRight: theme.spacing(1),
   },
   errorIcon: {
@@ -148,6 +148,7 @@ const useStyles = makeStyles()((theme) => ({
     fontWeight: 600,
     cursor: 'help',
     marginTop: theme.spacing(0.5),
+    paddingTop: '1px',
   },
   startFlex: {
     display: 'flex',

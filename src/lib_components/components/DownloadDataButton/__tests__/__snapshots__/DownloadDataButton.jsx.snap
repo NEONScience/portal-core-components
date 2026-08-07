@@ -16,7 +16,7 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
       >
         foo
         <span
-          class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+          class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
         >
           <svg
             aria-hidden="true"
@@ -43,7 +43,7 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
     >
       foo
       <span
-        class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+        class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
       >
         <svg
           aria-hidden="true"
@@ -119,14 +119,14 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1lz1q03-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1nygqfe-MuiButtonBase-root-MuiButton-root"
         data-selenium="download"
         tabindex="0"
         type="button"
       >
         foo
         <span
-          class="MuiButton-icon MuiButton-endIcon css-3li78h-MuiButton-endIcon"
+          class="MuiButton-icon MuiButton-endIcon css-d9ccvc-MuiButton-endIcon"
         >
           <svg
             aria-hidden="true"
@@ -145,14 +145,14 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1lz1q03-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1nygqfe-MuiButtonBase-root-MuiButton-root"
       data-selenium="download"
       tabindex="0"
       type="button"
     >
       foo
       <span
-        class="MuiButton-icon MuiButton-endIcon css-3li78h-MuiButton-endIcon"
+        class="MuiButton-icon MuiButton-endIcon css-d9ccvc-MuiButton-endIcon"
       >
         <svg
           aria-hidden="true"
@@ -235,7 +235,7 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
       >
         foo
         <span
-          class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+          class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
         >
           <svg
             aria-hidden="true"
@@ -261,7 +261,7 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
     >
       foo
       <span
-        class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+        class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
       >
         <svg
           aria-hidden="true"
@@ -348,7 +348,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
       >
         foo
         <span
-          class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+          class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
         >
           <svg
             aria-hidden="true"
@@ -493,7 +493,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                 </div>
                 <div>
                   <div
-                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-1ursy74-MuiChip-root-releaseChip"
+                    class="MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault css-u3m0ja-MuiChip-root-releaseChip"
                     data-mui-internal-clone-element="true"
                   >
                     <span
@@ -530,7 +530,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                     class="css-10jfmcl-endFlex"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-j5pzu5-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1ybx3kt-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
                       data-gtm="download-data-dialog.cancel-button"
                       data-selenium="download-data-dialog.cancel-button"
                       style="margin-right: 0px;"
@@ -566,7 +566,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
     >
       foo
       <span
-        class="MuiButton-icon MuiButton-endIcon css-z2zkjt-MuiButton-endIcon"
+        class="MuiButton-icon MuiButton-endIcon css-1d5m6cy-MuiButton-endIcon"
       >
         <svg
           aria-hidden="true"

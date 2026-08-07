@@ -49,7 +49,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -72,7 +72,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
               tabindex="0"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -143,7 +143,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -166,7 +166,7 @@ exports[`NeonPage NeonErrorPage 1`] = `
             tabindex="0"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bnaaak-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -457,12 +457,12 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -564,12 +564,12 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1019,7 +1019,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
             Title
           </h1>
           <p
-            class="MuiTypography-root MuiTypography-subtitle1 css-1nhs6kg-MuiTypography-root-pageSubtitle"
+            class="MuiTypography-root MuiTypography-subtitle1 css-agnnxc-MuiTypography-root-pageSubtitle"
             data-selenium="neon-page.subtitle"
           >
             Subtitle
@@ -1066,7 +1066,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
           Title
         </h1>
         <p
-          class="MuiTypography-root MuiTypography-subtitle1 css-1nhs6kg-MuiTypography-root-pageSubtitle"
+          class="MuiTypography-root MuiTypography-subtitle1 css-agnnxc-MuiTypography-root-pageSubtitle"
           data-selenium="neon-page.subtitle"
         >
           Subtitle
@@ -1210,12 +1210,12 @@ exports[`NeonPage renders with an error 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1302,12 +1302,12 @@ exports[`NeonPage renders with an error 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1601,12 +1601,12 @@ exports[`NeonPage renders with loading message 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1700,12 +1700,12 @@ exports[`NeonPage renders with loading message 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"
@@ -1860,12 +1860,12 @@ exports[`NeonPage renders with loading message and progress 1`] = `
             class="css-fp67np-dismissOverlay"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
               >
                 <svg
                   aria-hidden="true"
@@ -1963,12 +1963,12 @@ exports[`NeonPage renders with loading message and progress 1`] = `
           class="css-fp67np-dismissOverlay"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1eserjf-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-icon MuiButton-startIcon css-1bfvbt8-MuiButton-startIcon"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
                 aria-hidden="true"

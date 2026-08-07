@@ -242,7 +242,7 @@ const useStyles = makeStyles()((theme, { sidebarWidth, sidebarDisableMaxHeight }
     maxWidth: '660px',
     color: COLORS.GREY[500],
     lineHeight: '1.5',
-    fontSize: '1.1rem',
+    fontSize: '1.125rem',
     marginTop: theme.spacing(-1),
     marginBottom: theme.spacing(4),
   },

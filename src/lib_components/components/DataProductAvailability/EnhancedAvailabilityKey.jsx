@@ -40,7 +40,7 @@ const useStyles = makeStyles()((theme) => ({
     fill: theme.palette.grey[700],
   },
   h6Small: {
-    fontSize: '0.95rem',
+    fontSize: '0.9375rem',
   },
 }));
 

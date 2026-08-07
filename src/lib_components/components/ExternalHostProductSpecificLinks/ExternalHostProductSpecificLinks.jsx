@@ -26,7 +26,7 @@ const useStyles = makeStyles()((theme) => ({
   ulLinkList: {
     paddingLeft: theme.spacing(2),
     margin: theme.spacing(0.5, 0),
-    fontSize: '0.85rem',
+    fontSize: '0.875rem',
     '& > li': {
       marginBottom: theme.spacing(0.5),
     },
@@ -70,7 +70,7 @@ export default function ExternalHostProductSpecificLinks(inProps) {
     return (
       <ul style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(0.75) }}>
         {(externalHost.getProductLinks(productCode) || []).map((link) => (
-          <li key={link.key}>
+          <li key={link.key} style={{ fontSize: '0.875rem' }}>
             {link.node}
           </li>
         ))}
