@@ -1,0 +1,44 @@
+name: Docker Publish
+
+on:
+  push:
+    branches: [ main, next ]
+
+jobs:
+  node-publish-next:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: '@neonscience'
+
+      - run: npm ci
+
+      - name: Build package
+        run: npm run publish:build
+
+      - name: Set next package version
+        run: |
+          VERSION=$(node --print "require('./package.json').version")
+          SHA=$(git rev-parse --short HEAD)
+
+          cd lib
+          npm version "${VERSION}-next.${SHA}" --no-git-tag-version
+
+      - name: Publish next package
+        run: npm publish ./lib --tag next --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
