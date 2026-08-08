@@ -17,6 +17,7 @@
   "include": [
     "./next-env.d.ts",
     "./src/mui-env.d.ts",
+    "./src/global.d.ts",
     "./src/lib_components/components/**/*",
     "./src/lib_components/flow/**/*",
     "./src/lib_components/parser/**/*",
