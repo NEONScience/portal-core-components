@@ -1,0 +1,76 @@
+name: Node Publish NPM Repo
+
+on:
+  push:
+    branches: [ main, next ]
+env:
+  NPM_REGISTRY: https://registry.npmjs.org
+  GH_NPM_REGISTRY: https://npm.pkg.github.com
+  NPM_PACKAGE_SCOPE: '@neonscience'
+  NODE_VERSION: 24
+
+jobs:
+  node-publish-npm-repo:
+    if: github.repository == 'NEONScience/portal-core-components'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Build package
+        run: npm run publish:build
+
+      - name: Set package version
+        run: |
+          VERSION=$(node --print "require('./package.json').version")
+          SHA=$(git rev-parse --short HEAD)
+
+          cd lib
+          npm version "${VERSION}-dev.${SHA}" --no-git-tag-version
+
+      # ------------------------------------------------------------------------
+      # NPM Registry Publish
+      # ------------------------------------------------------------------------
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.NPM_REGISTRY }}
+          scope: ${{ env.NPM_PACKAGE_SCOPE }}
+
+      - name: Publish package to NPM Registry
+        run: npm publish ./lib --tag dev --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      # ------------------------------------------------------------------------
+      # GitHub Packages Publish
+      # ------------------------------------------------------------------------
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.GH_NPM_REGISTRY }}
+          scope: ${{ env.NPM_PACKAGE_SCOPE }}
+
+      - name: Publish package to GitHub Packages
+        run: npm publish ./lib --tag dev --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

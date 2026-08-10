@@ -12,6 +12,7 @@ env:
 
 jobs:
   docker-publish:
+    if: github.repository == 'NEONScience/portal-core-components'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
