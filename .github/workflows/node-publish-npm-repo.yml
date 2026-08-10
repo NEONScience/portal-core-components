@@ -57,8 +57,6 @@ jobs:
 
       - name: Publish package to NPM Registry
         run: npm publish ./lib --tag dev --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       # ------------------------------------------------------------------------
       # GitHub Packages Publish
