@@ -12,6 +12,10 @@
     "url": "git+https://github.com/NEONScience/portal-core-components.git",
     "directory": "src/lib_components"
   },
+  "keywords": [
+    "react",
+    "NEONScience"
+  ],
   "dependencies": {
     "@bokeh/bokehjs": "^3.9.2",
     "@emotion/cache": "^11.14.0",

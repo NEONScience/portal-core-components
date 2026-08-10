@@ -21,19 +21,17 @@ In the target project directory, install this package for a particular tag:
 
     npm install --save @neonscience/portal-core-components@TAG
 
-So, develop would be:
+So, dev would be:
 
-    npm install --save @neonscience/portal-core-components@develop
-
-For more information on GitHub URL's, see NPM documentation: https://docs.npmjs.com/files/package.json#github-urls
+    npm install --save @neonscience/portal-core-components@dev
 
 Once installed, components should be imported in code with one of:
 
 ```javascript
 // Preferentially import specific components by default export
-import ComponentName from "portal-core-components/lib/components/ComponentName";
+import ComponentName from "@neonscience/portal-core-components/components/ComponentName";
 // Import component from top level exports
-import { <component name> } from "portal-core-components"
+import { <component name> } from "@@neonscience/portal-core-components"
 ```
 
 ### Using Components Outside of a NEON Domain
