@@ -12,7 +12,6 @@ const packageJson = JSON.parse(
 const omitPackageJsonProperties = [
   'private',
   'devDependencies',
-  'overrides',
   'scripts',
 ];
 const publishPackageJson = {
@@ -23,16 +22,35 @@ const publishPackageJson = {
   ),
   main: './index.js',
 };
+// Apply generated package specific properties
+const peerReactVersion = '^19.0.0';
+const deleteDeps = ['react', 'react-dom'];
+Object.keys(publishPackageJson.dependencies).forEach((dep) => {
+  if (deleteDeps.includes(dep)) {
+    delete publishPackageJson.dependencies[dep];
+  }
+});
+publishPackageJson.peerDependencies.react = peerReactVersion;
+publishPackageJson.peerDependencies['react-dom'] = peerReactVersion;
 fs.writeFileSync(
   path.join(outDir, 'package.json'),
   `${JSON.stringify(publishPackageJson, null, 2)}\n`,
 );
-const copyIfExists = (file) => {
+const copyIfExists = (file, copyToOutDir = outDir) => {
   const src = path.join(root, `../../${file}`);
   if (fs.existsSync(src)) {
-    fs.copyFileSync(src, path.join(outDir, file));
+    fs.copyFileSync(src, path.join(copyToOutDir, file));
   }
+};
+const copyDirectory = (dir, copyToOutDir) => {
+  const src = path.join(root, `../../${dir}`);
+  const dest = path.join(copyToOutDir);
+  if (!fs.existsSync(src)) {
+    return;
+  }
+  fs.cpSync(src, dest, { recursive: true });
 };
 // Copy package specific files
 copyIfExists('README.md');
 copyIfExists('LICENSE');
+copyDirectory('public/assets', path.join(outDir, 'bin/assets'));

@@ -37,6 +37,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   legendTitle: {
     display: 'inline-flex',
+    fontSize: '0.9375rem',
   },
   legendTitleIcon: {
     marginTop: theme.spacing(-0.5),

@@ -329,7 +329,7 @@ const QualityFlags = () => {
   const toggleFlag = (qualityFlag) => (event) => {
     dispatch({ type: 'selectToggleQualityFlag', qualityFlag, selected: event.target.checked });
   };
-  if (availableQualityFlags.size) {
+  if (!availableQualityFlags.size) {
     return (
       <div className={classes.noneContainer}>
         <NoneIcon className={classes.noneIcon} />

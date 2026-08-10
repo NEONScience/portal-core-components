@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable no-console */
 import fs from 'fs';
 import readline from 'readline';
@@ -5,8 +7,6 @@ import path, { dirname } from 'path';
 import prettier from 'prettier';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
-
-import packageJson from '../package.json' with { type: 'json' };
 
 process.env.NODE_ENV = 'DEVELOPMENT';
 
@@ -17,9 +17,11 @@ process.on('unhandledRejection', (err) => {
   throw err;
 });
 
+const SCRIPT_VERSION = '3.0.0';
+
 const program = new Command();
 program.usage('Usage: node sync-assets.js [options]')
-  .version(packageJson.version)
+  .version(SCRIPT_VERSION)
   .option(
     '--cwd-relative-public-dir-path <value>',
     'public folder path relative to current working directory',
@@ -52,7 +54,7 @@ if ((config.cwdRelativeAppDirPath === null)
 
 const fileDirName = dirname(fileURLToPath(import.meta.url));
 
-const CORE_COMPONENTS_PUBLIC_CSS_ASSETS_PATH = path.join(fileDirName, '../public/assets/css');
+const CORE_COMPONENTS_PUBLIC_CSS_ASSETS_PATH = path.join(fileDirName, './assets/css');
 
 const PUBLIC_OUTPUT_PATH = path.join(process.cwd(), config.cwdRelativePublicDirPath);
 const APP_OUTPUT_PATH = path.join(process.cwd(), config.cwdRelativeAppDirPath);

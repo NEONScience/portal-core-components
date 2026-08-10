@@ -172,6 +172,7 @@ export default defineConfig([
       '*.{js,mjs}',
       'scripts/**/*.{js,mjs}',
       'test/**/*.{js,mjs}',
+      'src/lib_components/bin/**/*.{js,mjs}',
     ],
     languageOptions: {
       ecmaVersion: 'latest',

@@ -6,9 +6,10 @@
   "private": true,
   "homepage": "https://data.neonscience.org/core-components",
   "license": "MIT",
+  "description": "A library of React components and code to be used on pages for the NEON Data Portal.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NEONScience/portal-core-components.git",
+    "url": "git+https://github.com/NEONScience/portal-core-components.git",
     "directory": "src/lib_components"
   },
   "dependencies": {
@@ -68,26 +69,10 @@
   },
   "peerDependencies": {
     "commander": "^15.0.0",
-    "cssnano": "^8.0.2",
-    "jsdom": "^30.0.1",
-    "node-fetch": "^3.3.2",
-    "postcss": "^8.5.25",
     "prettier": "^3.9.6"
   },
   "peerDependenciesMeta": {
     "commander": {
-      "optional": true
-    },
-    "cssnano": {
-      "optional": true
-    },
-    "jsdom": {
-      "optional": true
-    },
-    "node-fetch": {
-      "optional": true
-    },
-    "postcss": {
       "optional": true
     },
     "prettier": {
@@ -165,6 +150,9 @@
     "eslint": "^9.39.5",
     "eslint-plugin-react-hooks": "^7.1.1"
   },
+  "bin": {
+    "neonscience-portal-core-components--sync-assets": "./bin/sync-assets.js"
+  },
   "scripts": {
     "start": "cross-env NEXT_PUBLIC_NEON_API_HOST_OVERRIDE=${NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_NEON_API_HOST_OVERRIDE:-} NEXT_PUBLIC_NEON_ALLOWED_DEV_ORIGIN=${NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_ALLOWED_DEV_ORIGIN:-} next dev --port=3010",
     "start:lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next dev",
@@ -178,7 +166,7 @@
     "test:updateSnapshots": "npx jest --config jest.config.mjs --updateSnapshot",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
-    "publish:build": "(rm -r ./lib || true) && npm run lib:swc-build && npm run lib:types && npm run lib:post-cleanup && node ./scripts/lib-gen/lib-create-package-json.mjs",
+    "publish:build": "(rm -r ./lib || true) && npm run lib:swc-build && npm run lib:types && npm run lib:post-cleanup && node ./scripts/lib-gen/lib-create-publish-package.mjs",
     "lib": "npm run lib:pre-process && npm run lib:swc-build && npm run lib:types && npm run lib:post-cleanup",
     "lib:swc": "npm run lib:pre-process && npm run lib:swc-build && npm run lib:types && npm run lib:post-cleanup",
     "lib:babel-build": "NODE_ENV=production babel ./src/lib_components --config-file ./babel-lib.config.json --out-dir lib --extensions \".js,.jsx,.ts,.tsx\" --copy-files --no-copy-ignored",

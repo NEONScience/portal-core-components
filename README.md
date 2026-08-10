@@ -1,29 +1,29 @@
 # Portal Core Components
 
-This is a library of react components to be used on pages for the NEON Data Portal.
+This is a library of React components to be used on pages for the NEON Data Portal.
 
 Functional documentation can be found here:
 
 https://data.neonscience.org/core-components
 
 
-## Using Components
+## Using the Component Library
 
-In the target project directory, preferentially install this package with a versioned release tag:
+In the target project directory, preferentially install this package with a versioned release:
 
-    npm install github:NEONScience/portal-core-components#tag
+    npm install --save @neonscience/portal-core-components@VERSION
 
-So, v1.0.0 would be:
+So, v3.0.0 would be:
 
-    npm install github:NEONScience/portal-core-components#v1.0.0
+    npm install --save @neonscience/portal-core-components@3.0.0
 
-In the target project directory, install this package for a particular branch:
+In the target project directory, install this package for a particular tag:
 
-    npm install github:NEONScience/portal-core-components#branch
+    npm install --save @neonscience/portal-core-components@TAG
 
 So, develop would be:
 
-    npm install github:NEONScience/portal-core-components#develop
+    npm install --save @neonscience/portal-core-components@develop
 
 For more information on GitHub URL's, see NPM documentation: https://docs.npmjs.com/files/package.json#github-urls
 
@@ -35,8 +35,6 @@ import ComponentName from "portal-core-components/lib/components/ComponentName";
 // Import component from top level exports
 import { <component name> } from "portal-core-components"
 ```
-
-And used like any other component in the containing render() method.
 
 ### Using Components Outside of a NEON Domain
 
@@ -54,14 +52,8 @@ Set this environment variable to the desired API host without a trailing slash (
 
 #### Production
 
-By default, the production build will use the appropriate production values for the API host. To customize based on runtime environment variables, will need to inject the following object into the DOM prior to the application's initialization (e.g. inject into the static HTML server side or equivalent):
-
-```javascript
-window.NEON_SERVER_DATA = {
-  NeonPublicAPIHost: 'https://data.neonscience.org',
-  NeonWebHost: 'https://www.neonscience.org',
-};
-```
+By default, the production build will use the appropriate production values for the API host. 
+For further runtime based configuration options, see the NeonEnvironment component.
 
 #### Theming and Contexts Outside of a NEON Domain
 
@@ -71,8 +63,37 @@ Components are built to be as atomic as possible. As such, any components that r
 in one or more Portal Core Components Contexts will automatically detect if
 those resources are present and, if not, self-wrap.
 
-Put another way, Portal Core Components *are* atomic and can be used without having to worry about
-wrapping them in additional resources unless the documentation specifically states otherwise.
+Portal Core Components rely on a Material UI theme being provided via a ThemeProvider.
+This can be the customized NEON Theme provided by NeonThemeProvider, or any Material UI theme 
+compatible with the version of Material UI that this library depends on,
+with the caveat that it must adhere to the same NeonTheme type.
+
+```javascript
+const App = () => {
+  return (
+    <NeonThemeProvider>
+      <YourApplicationRootComponent />
+    </NeonThemeProvider>
+  );
+};
+
+export default App;
+```
+
+Components that support being utilized outside the context of another application providing
+the ThemeProvider wrapping, have "Standalone" versions of those components (eg, standalone subdirectory within the
+particular component, ComponentNameStandalone), which provide the ThemeProvider wrapping explicitly.
+
+```javascript
+// Standalone SiteMap component example
+const SiteMapStandalone = (inProps) => ((
+  <NeonThemeProvider>
+    <SiteMap {...inProps} />
+  </NeonThemeProvider>
+));
+
+export default SiteMapStandalone;
+```
 
 ## Adding a New Component
 
@@ -98,7 +119,6 @@ wrapping them in additional resources unless the documentation specifically stat
     * Use kebab-case for `name`
     * Use CamelCase for files
 6. If desirable to export the component at the library level, add the new component to `src/lib_components/index.ts`
-7. Run `npm run lib` to have the new component picked up and exported with the library
 
 ### NOTE: Verify new dependencies!
 
@@ -189,7 +209,7 @@ Note that with snapshot testing there are several components with stored snapsho
 
 To update **all** snapshots (after confirming all failures are expected from recent development) run:
 
-    npm run test:updateSnapshots
+    npm run test:docker-update-snapshots
 
 When tests are run test coverage information is generated. This appears in the shell and can also be found formatted as HTML pages in the `test_coverage` directory.
 
@@ -216,53 +236,61 @@ Example:
 
 Several mocks exist for testing any part of the core components library that may need them. These can be found in `~/src/__mocks__`. See README.md in that directory for details.
 
+## Portal Core Components Composition
+
+This project is built as both an application and as a code library:
+
+- The application: is built using NextJS as the framework, which provides a thin wrapper around the project and serves as a development environment. The application itself is for development, documentation, demonstration, and proving ground purposes. Production ready applications should be standalone applications that utilize the code library part of this project as a dependency.
+
+- The code library: utilized as a dependency when creating applications that build on top of portal-core-components.
+
+## Building and Contribution Requirements
+
+- Requires the latest LTS version of NodeJS
+- Requires a Docker runtime to utilize Docker as a build environment independent of the local system
+
 ## Building the Library
 
 After any additions or modifications to source the library must be rebuilt in order for the changes to be importable by other applications. Rebuild the library and generate TypeScript declaration files like so:
 
-    npm run lib
+    npm run checks:docker
 
-This places all built asses in /lib.  These built components should be checked into git, so make sure to `git add` any appropriate new files in /lib.
+This places all built asses in /lib.  These built components should *not* be checked into git, but *should* be tested by way of running the portal-core-components application with:
 
-### Windows Users: NODE_ENV fix
+    npm run start:lib
 
-For Windows users the `npm run lib` command may fail with complaint about 'NODE_ENV' not being a recognized command. This is due to the Linux-based syntax of one of the node scripts for portal-core-components. This can be resolved by globally installing [win-node-env](https://www.npmjs.com/package/win-node-env):
-
-    npm install -g win-node-env
-
+This targets the generated package directory when running the development server.
 
 ## Library Composition
 
-The library code is created within the `src/lib_components` directory. Babel publishes the code to a `lib` directory that matches the directory structure within `src/lib_components`.
-
+The library code is created within the `src/lib_components` directory. SWC publishes the code to a `lib` directory that matches the directory structure within `src/lib_components`.
 
 ## Scripts Overview
 
-* **`npm run start`**
-    Compile a dev (non-optimized) build and start the portal-core-components app with it running on `http://localhost:3010/`
+* **`npm run start`**  
+    Compile a dev (non-optimized) build and start the portal-core-components app with it running on `http://localhost:3010/core-components`
 
-* **`npm run build`**
-    Compile a production (optimized) build
+* **`npm run build`**  
+    Compile a production (optimized) build of the application
 
-* **`npm run test`**
+* **`npm run test:docker"`**  
     Run all unit and snapshot tests
+    - Requires `npm run build:docker-image` before performing Docker runtime environment based testing
 
-* **`npm run test:updateSnapshots`**
+* **`npm run test:docker-update-snapshots`**  
     Run all unit and snapshot tests while also updating all snapshot tests (i.e. all snapshot tests will pass by being updated)
+    - Requires `npm run build:docker-image` before performing Docker runtime environment based testing
 
-* **`npm run lint`**
+* **`npm run lint`**  
     Run the linter to get a summary of all lint errors and warnings.
-    NOTE: This script always exits 0, even when there are lint errors, to prevent a confusing NPM error from appearing at the end of the output
 
-* **`npm run lint:fix`**
-    Run the linter to automatically fix all automatically fixable lint issues and get a summary of everything that's left.
-    NOTE: This script always exits 0, even when there are lint errors, to prevent a confusing NPM error from appearing at the end of the output
-
-* **`npm run lib`**
+* **`npm run lib:docker`**  
     Generate a library build and TypeScript delcaration files (what other apps importing components from portal-core-components as a library will use)
+    - Requires `npm run build:docker-image` before performing Docker runtime environment based lib generation
 
-* **`npm run lib:babel-build`**
-    Generate a library build using Babel, sans TypeScript delcaration files
-
-* **`npm run lib:types`**
-    Utilize TypeScript compiler to generate delcaration files
+* **`npm run checks:docker`**  
+    Run all tasks related to this application and library, within a Docker runtime environment.
+    - Generates library
+    - Runs tests
+    - Runs linter
+    - Builds application

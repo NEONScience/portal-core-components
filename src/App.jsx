@@ -382,7 +382,7 @@ const sidebarLinks = [
   },
 ];
 
-export default function App() {
+const App = () => {
   let sidebarSubtitle = null;
   const appVersion = NeonEnvironment.getReactAppVersion();
   if (isStringNonEmpty(appVersion)) {
@@ -405,4 +405,6 @@ export default function App() {
       </NeonThemeProvider>
     </NeonRouter>
   );
-}
+};
+
+export default App;
