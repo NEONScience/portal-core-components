@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.neonscience.org" target="_blank"><img width="170" src="src/lib_components/images/NSF-NEON-logo.png" alt="NSF NEON Logo"></a>
+  <a href="https://www.neonscience.org" target="_blank"><img width="170" src="https://www.neonscience.org/themes/custom/neon/logo.svg" alt="NSF NEON Logo"></a>
 </p>
 
 # Portal Core Components
