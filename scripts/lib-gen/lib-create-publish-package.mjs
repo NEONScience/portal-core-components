@@ -12,6 +12,7 @@ const packageJson = JSON.parse(
 const omitPackageJsonProperties = [
   'private',
   'devDependencies',
+  'overrides',
   'scripts',
 ];
 const publishPackageJson = {
