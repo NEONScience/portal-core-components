@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "data-product-availaibility",
-  "main": "./DataProductAvailability.jsx",
-  "module": "./DataProductAvailability.js"
-}

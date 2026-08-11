@@ -9,6 +9,9 @@
 # production
 /build
 
+# library
+/lib
+
 .next
 next-env.d.ts
 

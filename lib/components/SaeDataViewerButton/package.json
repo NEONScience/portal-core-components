@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "sae-data-viewer-button",
-  "main": "./SaeDataViewerButton.jsx",
-  "module": "./SaeDataViewerButton.js"
-}

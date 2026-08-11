@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-json-ld",
-  "main": "./NeonJsonLd.js",
-  "module": "./NeonJsonLd.js"
-}

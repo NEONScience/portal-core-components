@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-router",
-  "main": "./NeonRouter.tsx",
-  "module": "./NeonRouter.tsx"
-}

@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "external-host-product-specific-links",
-  "main": "./ExternalHostProductSpecificLinks.jsx",
-  "module": "./ExternalHostProductSpecificLinks.js"
-}

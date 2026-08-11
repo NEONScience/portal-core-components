@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-page",
-  "main": "./NeonPage.jsx",
-  "module": "./NeonPage.js"
-}

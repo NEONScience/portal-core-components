@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "wind-rose-viewer",
-  "main": "./WindRoseViewer.tsx",
-  "module": "./WindRoseViewer.js"
-}

@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "site-map",
-  "main": "./SiteMap.jsx",
-  "module": "./SiteMap.js"
-}
