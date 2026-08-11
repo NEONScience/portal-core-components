@@ -182,8 +182,6 @@ const NotificationsManager = (inProps) => {
       handleFetchNotificationsSuccess,
       handleFetchNotificationsError,
       cancellationSubject$,
-      undefined,
-      true,
     );
   }, [
     fetchNotificationState,

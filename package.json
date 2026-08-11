@@ -154,9 +154,6 @@
     "eslint": "^9.39.5",
     "eslint-plugin-react-hooks": "^7.1.1"
   },
-  "bin": {
-    "neonscience-portal-core-components--sync-assets": "./bin/sync-assets.js"
-  },
   "scripts": {
     "start": "cross-env NEXT_PUBLIC_NEON_API_HOST_OVERRIDE=${NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_NEON_API_HOST_OVERRIDE:-} NEXT_PUBLIC_NEON_ALLOWED_DEV_ORIGIN=${NEON_REACT_LOCAL_DEV_NEXT_PUBLIC_ALLOWED_DEV_ORIGIN:-} next dev --port=3010",
     "start:lib": "PORTAL_CORE_COMPONENTS_TARGET=lib next dev",

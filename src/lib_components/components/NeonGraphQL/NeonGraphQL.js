@@ -214,17 +214,9 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   return transformQuery(query);
 };
 
-const getAjaxRequest = (body, includeToken = true, withCredentials = undefined) => {
-  let appliedWithCredentials = false;
-  if (!exists(withCredentials) || (typeof withCredentials !== 'boolean')) {
-    appliedWithCredentials = NeonEnvironment.requireCors();
-  } else {
-    appliedWithCredentials = withCredentials;
-  }
+const getAjaxRequest = (body, includeToken = true) => {
   const request = {
     method: 'POST',
-    crossDomain: true,
-    withCredentials: appliedWithCredentials,
     url: NeonEnvironment.getFullGraphqlPath(),
     headers: { 'Content-Type': 'application/json' },
     responseType: 'json',

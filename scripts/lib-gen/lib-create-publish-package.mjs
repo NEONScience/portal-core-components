@@ -33,6 +33,9 @@ Object.keys(publishPackageJson.dependencies).forEach((dep) => {
 });
 publishPackageJson.peerDependencies.react = peerReactVersion;
 publishPackageJson.peerDependencies['react-dom'] = peerReactVersion;
+publishPackageJson.bin = {
+  'neonscience-portal-core-components--sync-assets': './bin/sync-assets.js',
+};
 fs.writeFileSync(
   path.join(outDir, 'package.json'),
   `${JSON.stringify(publishPackageJson, null, 2)}\n`,

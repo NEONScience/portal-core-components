@@ -363,8 +363,6 @@ const AuthService: IAuthService = {
         AuthService.cancelWorkingResolver();
       },
       state.loginCancellationSubject$,
-      undefined,
-      true,
     );
   },
   logout: (path?: string, redirectUriPath?: string): void => {
@@ -417,8 +415,6 @@ const AuthService: IAuthService = {
         AuthService.cancelWorkingResolver();
       },
       state.logoutCancellationSubject$,
-      undefined,
-      true,
     );
   },
   cancellationEmitter: (): void => {
@@ -431,8 +427,6 @@ const AuthService: IAuthService = {
       cb,
       errorCb,
       state.cancellationSubject$,
-      undefined,
-      true,
     )
   ),
   fetchUserInfoWithDispatch: (
