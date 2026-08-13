@@ -1232,26 +1232,30 @@ const Provider = (inProps) => {
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const manifestRequest$ = new Subject();
-  manifestRequest$.subscribe((request) => (
-    getManifestAjaxObservable(request)
-      .pipe(
-        switchMap((resp) => of(request.body ? resp.response : resp)),
-        takeUntil(manifestCancelation$),
-      )
-      .subscribe({
-        next: (resp) => dispatch({
-          type: 'setFetchManifestSucceeded',
-          body: resp,
-          sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
-        }),
-        error: (err) => dispatch({
-          type: 'setFetchManifestFailed',
-          error: err,
-        }),
-      })
-  ));
+  const manifestRequest$ = useMemo(() => new Subject(), []);
+  useEffect(() => {
+    manifestRequest$.subscribe((request) => (
+      getManifestAjaxObservable(request)
+        .pipe(
+          switchMap((resp) => of(request.body ? resp.response : resp)),
+          takeUntil(manifestCancelation$),
+        )
+        .subscribe({
+          next: (resp) => dispatch({
+            type: 'setFetchManifestSucceeded',
+            body: resp,
+            sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
+          }),
+          error: (err) => dispatch({
+            type: 'setFetchManifestFailed',
+            error: err,
+          }),
+        })
+    ));
+    return () => {
+      manifestRequest$.unsubscribe();
+    };
+  }, [manifestRequest$]);
 
   const handleFetchS3Files = (currentState, headers) => {
     const { productCode } = currentState.productData;

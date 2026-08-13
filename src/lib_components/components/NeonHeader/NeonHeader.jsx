@@ -23,6 +23,9 @@ const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
 
+// Only do the delay effect if not in test
+const initialRenderDelay = process.env.NODE_ENV === 'test';
+
 /* eslint-disable max-len, @stylistic/max-len */
 const useStyles = (customize) => {
   const viewportStyles = customize
@@ -353,9 +356,6 @@ const NeonHeader = (inProps) => {
     html: { [DRUPAL_HEADER_HTML]: headerHTML },
     auth,
   }] = NeonContext.useNeonContextState();
-
-  // Only do the delay effect if not in test
-  const initialRenderDelay = process.env.NODE_ENV === 'test';
 
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);

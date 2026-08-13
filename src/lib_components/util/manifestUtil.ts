@@ -210,7 +210,7 @@ export const MAX_POST_BODY_SIZE = 20 * (1024 * 1024); // 20MiB
 export const DOWNLOAD_SIZE_WARN = 42949672960; // 40GB
 
 export const formatBytes = (bytes: number) => {
-  if (!Number.isInteger(bytes) || bytes < 0) {
+  if (!Number.isInteger(bytes) || bytes <= 0) {
     return '0.000 B';
   }
   const scales = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];

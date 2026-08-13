@@ -78,6 +78,7 @@ const notificationsReducer = (state, action) => {
 };
 
 const cookies = new Cookies();
+const cancellationSubject$ = new Subject();
 
 const defaultProps = {
   initialNotification: null,
@@ -85,8 +86,6 @@ const defaultProps = {
 
 const NotificationsManager = (inProps) => {
   const { initialNotification } = resolveProps(defaultProps, inProps);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const cancellationSubject$ = new Subject();
   const dismissedNotificationsCookie = cookies.get('dismissed-notifications');
   const notificationDismissals = useMemo(() => {
     if (dismissedNotificationsCookie) {
@@ -188,7 +187,6 @@ const NotificationsManager = (inProps) => {
     fetchNotificationState,
     handleFetchNotificationsSuccess,
     handleFetchNotificationsError,
-    cancellationSubject$,
     notificationDismissals,
   ]);
 
