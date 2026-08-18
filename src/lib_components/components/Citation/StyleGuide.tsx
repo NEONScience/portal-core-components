@@ -35,6 +35,7 @@ import DataProductCitationView, {
   defaultProps as viewDefaultProps,
 } from '@/components/Citation/DataProductCitation/View';
 import NeonApi from '@/components/NeonApi';
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
 import NeonContext from '@/components/NeonContext/NeonContext';
 import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
 import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
@@ -220,10 +221,10 @@ const DataProductCitationDemo = (): React.JSX.Element => {
   const {
     productCode: stateProductCode,
     release: stateRelease,
-    neonContextState,
+    neonAuthContextState,
   } = stateCtx;
   const appliedReleases: Release[] = ReleaseService.applyUserReleases(
-    neonContextState,
+    neonAuthContextState,
     stateReleases,
   );
   const viewState: DataProductCitationViewState = DataProductCitationService.useViewState(
@@ -405,7 +406,9 @@ const DataProductCitationDemoContainer = (): React.JSX.Element => ((
   </ComponentErrorBoundary>
 ));
 
-const WrappedDataProductCitationDemo = NeonContext.getWrappedComponent(DataProductCitationDemoContainer);
+const WrappedDataProductCitationDemo = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(DataProductCitationDemoContainer),
+);
 
 export default function StyleGuide() {
   const { classes } = useStyles();

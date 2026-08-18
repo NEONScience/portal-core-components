@@ -15,8 +15,6 @@ const {
   deriveRegionSites,
   parseSitesFetchResponse,
   reducer,
-  DRUPAL_HEADER_HTML,
-  DRUPAL_FOOTER_HTML,
 } = getTestableItems();
 
 describe('NeonContext', () => {
@@ -153,94 +151,6 @@ describe('NeonContext', () => {
       expect(newState.data.sites).toStrictEqual({});
       expect(newState.isFinal).toBe(false);
       expect(newState.hasError).toBe(true);
-    });
-    test('fetchHtmlSucceeded', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchHtmlSucceeded', asset: DRUPAL_HEADER_HTML, html: '<div>foo</div>' },
-      );
-      expect(newState.fetches[DRUPAL_HEADER_HTML].status).toBe(FETCH_STATUS.SUCCESS);
-      expect(newState.html[DRUPAL_HEADER_HTML]).toBe('<div>foo</div>');
-      const sameState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchHtmlSucceeded', asset: 'NOT VALID', html: '<div>foo</div>' },
-      );
-      expect(sameState).toStrictEqual(DEFAULT_STATE);
-    });
-    test('fetchHtmlFailed', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchHtmlFailed', asset: DRUPAL_FOOTER_HTML, error: 'BAD' },
-      );
-      expect(newState.fetches[DRUPAL_FOOTER_HTML].status).toBe(FETCH_STATUS.ERROR);
-      expect(newState.fetches[DRUPAL_FOOTER_HTML].error).toBe('BAD');
-      expect(newState.hasError).toBe(false); // html asset failures do not invalidate the context
-      const sameState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchHtmlFailed', asset: 'NOT VALID' },
-      );
-      expect(sameState).toStrictEqual(DEFAULT_STATE);
-    });
-    test('setAuthenticated', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'setAuthenticated', isAuthenticated: true },
-      );
-      expect(newState.auth.isAuthenticated).toBe(true);
-      const newState2 = reducer(
-        newState,
-        { type: 'setAuthenticated', isAuthenticated: false },
-      );
-      expect(newState2.auth.isAuthenticated).toBe(false);
-    });
-    test('setAuthWorking', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'setAuthWorking', isAuthWorking: true },
-      );
-      expect(newState.auth.isAuthWorking).toBe(true);
-      const newState2 = reducer(
-        newState,
-        { type: 'setAuthWorking', isAuthWorking: false },
-      );
-      expect(newState2.auth.isAuthWorking).toBe(false);
-    });
-    test('setAuthWsConnected', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'setAuthWsConnected', isAuthWsConnected: true },
-      );
-      expect(newState.auth.isAuthWsConnected).toBe(true);
-      const newState2 = reducer(
-        newState,
-        { type: 'setAuthWsConnected', isAuthWsConnected: false },
-      );
-      expect(newState2.auth.isAuthWsConnected).toBe(false);
-    });
-    test('fetchAuthSucceeded', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchAuthSucceeded', isAuthenticated: true, response: { user: 'foo' } },
-      );
-      expect(newState.fetches.auth.status).toBe(FETCH_STATUS.SUCCESS);
-      expect(newState.auth.isAuthenticated).toBe(true);
-      expect(newState.auth.userData).toStrictEqual({ user: 'foo' });
-      const newState2 = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchAuthSucceeded', isAuthenticated: false, response: {} },
-      );
-      expect(newState2.fetches.auth.status).toBe(FETCH_STATUS.SUCCESS);
-      expect(newState2.auth.isAuthenticated).toBe(false);
-      expect(newState2.auth.userData).toStrictEqual({});
-    });
-    test('fetchAuthFailed', () => {
-      const newState = reducer(
-        cloneDeep(DEFAULT_STATE),
-        { type: 'fetchAuthFailed', error: 'BAD' },
-      );
-      expect(newState.fetches.auth.status).toBe(FETCH_STATUS.ERROR);
-      expect(newState.fetches.auth.error).toBe('BAD');
-      expect(newState.hasError).toBe(false); // auth failures do not invalidate the context
     });
     test('whenFinalCalled', () => {
       const newState = reducer(

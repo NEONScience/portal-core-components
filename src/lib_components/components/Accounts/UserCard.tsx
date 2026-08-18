@@ -85,6 +85,7 @@ const useStyles = makeStyles()(() => ({
       wordBreak: 'break-all',
       whiteSpace: 'normal !important',
       padding: '6px',
+      marginLeft: '4px',
     },
     '& .chip-email.MuiChip-root': {
       fontSize: '.90em !important',

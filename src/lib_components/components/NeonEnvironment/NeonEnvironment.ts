@@ -1,5 +1,6 @@
 /* eslint-disable prefer-regex-literals */
 import { AuthSilentType, Undef } from '../../types/core';
+import { exists } from '../../util/typeUtil';
 
 // Default hosts
 export const DEFAULT_API_HOST = 'https://data.neonscience.org';
@@ -82,6 +83,7 @@ export interface INeonEnvironment {
   auth0DisableApi: boolean;
   authDisableBroadcastChannel: boolean;
   sessionDisable: boolean;
+  sessionDisablePing: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
@@ -120,6 +122,7 @@ export interface INeonEnvironment {
   getWebHostOverride: () => string;
   getBioRepoHostOverride: () => string;
   getWsHostOverride: () => string;
+  getApiSessionTokenHeaderOverride: () => Undef<string>;
 
   route: Record<string, (p?: string) => string>;
 
@@ -162,6 +165,7 @@ const NeonEnvironment: INeonEnvironment = {
   // eslint-disable-next-line max-len, @stylistic/max-len
   authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
   sessionDisable: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true',
+  sessionDisablePing: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION_PING === 'true',
   enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
   fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
@@ -225,6 +229,7 @@ const NeonEnvironment: INeonEnvironment = {
   },
   getAuthApiPath: {
     ws: () => '/ws',
+    ping: () => '/ping',
   },
   authTopics: {
     getAuth0: () => '/consumer/topic/auth0',
@@ -255,6 +260,9 @@ const NeonEnvironment: INeonEnvironment = {
   ),
   getWsHostOverride: (): string => (
     process.env.NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
+  ),
+  getApiSessionTokenHeaderOverride: (): Undef<string> => (
+    process.env.NEXT_PUBLIC_NEON_API_SESSION_TOKEN_HEADER_OVERRIDE || undefined
   ),
 
   route: {
@@ -512,6 +520,9 @@ const NeonEnvironment: INeonEnvironment = {
     const serverData = NeonEnvironment.getNeonServerData();
     if (serverData && (typeof serverData.NeonAPISessionTokenHeader === 'string')) {
       return serverData.NeonAPISessionTokenHeader;
+    }
+    if (NeonEnvironment.isDevEnv && exists(NeonEnvironment.getApiSessionTokenHeaderOverride())) {
+      return NeonEnvironment.getApiSessionTokenHeaderOverride() as string;
     }
     return '';
   },

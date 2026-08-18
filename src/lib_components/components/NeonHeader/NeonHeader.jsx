@@ -11,7 +11,8 @@ import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_HEADER_HTML_FALLBACK from '../../remoteAssets/drupal-header.html';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '../NeonAuth/NeonAuth';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
+import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import ApplicationMenu from './ApplicationMenu';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
@@ -351,17 +352,19 @@ const NeonHeader = (inProps) => {
   const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [{
-    isActive: neonContextIsActive,
+    isActive: neonPageAssetsContextIsActive,
     fetches: { [DRUPAL_HEADER_HTML]: headerFetch },
     html: { [DRUPAL_HEADER_HTML]: headerHTML },
+  }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
+  const [{
     auth,
-  }] = NeonContext.useNeonContextState();
+  }] = NeonAuthContext.useNeonAuthContextState();
 
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);
 
   let renderMode = 'loading';
-  if (neonContextIsActive) {
+  if (neonPageAssetsContextIsActive) {
     switch (headerFetch.status) {
       case FETCH_STATUS.SUCCESS:
         renderMode = (headerHTML && drupalCssLoaded && headerRenderDelayed)
@@ -426,13 +429,18 @@ const NeonHeader = (inProps) => {
       break;
   }
   useLayoutEffect(() => {
-    if (neonContextIsActive && appliedHtmlCheck && drupalCssLoaded && !headerRenderDelayed) {
+    if (
+      neonPageAssetsContextIsActive
+      && appliedHtmlCheck
+      && drupalCssLoaded
+      && !headerRenderDelayed
+    ) {
       const timeout = window.setTimeout(() => setHeaderRenderDelayed(true), 0);
       return () => window.clearTimeout(timeout);
     }
     return () => { };
   }, [
-    neonContextIsActive,
+    neonPageAssetsContextIsActive,
     appliedHtmlCheck,
     drupalCssLoaded,
     headerRenderDelayed,

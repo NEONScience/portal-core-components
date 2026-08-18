@@ -36,6 +36,7 @@ import {
 } from './windRoseUtil';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -690,6 +691,8 @@ const WindRoseViewerContainer: React.FC<WindRoseViewerProps> = (
   );
 };
 
-const WrappedWindRoseViewerContainer = NeonContext.getWrappedComponent(WindRoseViewerContainer);
+const WrappedWindRoseViewerContainer = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(WindRoseViewerContainer),
+);
 
 export default WrappedWindRoseViewerContainer;

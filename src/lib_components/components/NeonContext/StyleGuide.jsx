@@ -147,23 +147,20 @@ const MyComponent = () => {
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Authentication</Typography>
       <DocBlock>
-        The NeonContext Provider accepts a <tt>useCoreAuth</tt> boolean prop to trigger an auth
-        fetch using the core authentication function. This only works for NEON Data Portal pages.
-        A future iteration will add support for passing in a custom auth function for third party
-        core-components consumers. Until then, if any core components are used in an app deployed
-        to the NEON Data Portal but <i>not</i> using <tt>NeonPage</tt>, this is how to trigger
-        an auth fetch.
+        The NeonAuthContext Provider handles NEON auth. This only works for NEON Data Portal pages.
+        When working with portal-core-components outside of the NEON Data Portal,
+        forego using the NeonAuthContext wrapper, or components that depend on it.
       </DocBlock>
       <CodeBlock>
         {`
-import NeonContext from 'portal-core-components/lib/components/NeonContext';
+import NeonAuthContext from 'portal-core-components/lib/components/NeonContext/NeonAuthContext';
 
 const MyComponent = () => {
   ...
   return (
-    <NeonContext.Provider useCoreAuth>
+    <NeonAuthContext.Provider>
       ...
-    </NeonContext.Provider>
+    </NeonAuthContext.Provider>
   );
 };
         `}

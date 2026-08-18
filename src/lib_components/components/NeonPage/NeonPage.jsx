@@ -23,7 +23,9 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import Slide from '@mui/material/Slide';
 import Skeleton from '@mui/material/Skeleton';
+import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 
 import ClearIcon from '@mui/icons-material/Clear';
@@ -38,13 +40,16 @@ import NeonErrorPage from './NeonErrorPage';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonPageAssetsContext from '../NeonContext/NeonPageAssetsContext';
 import BrowserWarning from './BrowserWarning';
 import NotificationsManager from './NotificationsManager';
 import DrupalAssetService from '../../service/DrupalAssetService';
 
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
+import { useNetworkAvailability } from '../../hooks/customHooks';
 
 import './styles.css';
 
@@ -276,11 +281,13 @@ const defaultProps = {
   customHeader: null,
   customFooter: null,
   customizeAuthContainer: false,
+  authContextDisable: false,
   showHeaderSkeleton: false,
   showFooterSkeleton: false,
   error: null,
   loading: null,
   notification: null,
+  notificationsDisable: false,
   outerPageContainerMaxWidth: '2000px',
   progress: null,
   resetStateAfterRuntimeError: () => { },
@@ -309,11 +316,13 @@ const NeonPage = (inProps) => {
     customHeader,
     customFooter,
     customizeAuthContainer,
+    authContextDisable,
     showHeaderSkeleton,
     showFooterSkeleton,
     error,
     loading,
     notification,
+    notificationsDisable,
     outerPageContainerMaxWidth,
     progress,
     resetStateAfterRuntimeError,
@@ -349,12 +358,17 @@ const NeonPage = (inProps) => {
   };
   const { classes, theme } = useStyles(stylesParams);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
+  const [{ isActive: neonAuthContextIsActive }] = NeonAuthContext.useNeonAuthContextState();
+  const [{
+    isActive: neonPageAssetsContextIsActive,
+  }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
   const sidebarRef = useRef(null);
   const sidebarLinksContainerRef = useRef(null);
   const belowMd = useMediaQuery(theme.breakpoints.down('md'));
   const [overlayDismissed, setOverlayDismissed] = useState(false);
+  const isNetworkAvailable = useNetworkAvailability();
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
   const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
@@ -636,6 +650,13 @@ const NeonPage = (inProps) => {
     </>,
   ));
 
+  const renderNotificationsManager = () => {
+    if (notificationsDisable === true) {
+      return null;
+    }
+    return <NotificationsManager initialNotification={notification} />;
+  };
+
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarContainerStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
@@ -801,6 +822,29 @@ const NeonPage = (inProps) => {
     );
   };
 
+  const renderNetworkStatus = () => {
+    if (isNetworkAvailable) {
+      return null;
+    }
+    const offlineMessage = (
+      <div style={{ display: 'flex' }}>
+        <ErrorIcon color="warning" style={{ marginRight: theme.spacing(1.5) }} />
+        <Typography variant="body2" style={{ marginTop: '2px' }}>
+          No internet connection. Check your connection.
+        </Typography>
+      </div>
+    );
+    return (
+      <Snackbar
+        open
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        message={offlineMessage}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        slots={{ transition: (transitionProps) => <Slide {...transitionProps} direction="down" /> }}
+      />
+    );
+  };
+
   const renderNeonPage = () => {
     const outerPageContainerStyles = {};
     if (outerPageContainerMaxWidth) {
@@ -841,9 +885,8 @@ const NeonPage = (inProps) => {
             {content}
           </div>
         </Container>
-        <NotificationsManager
-          initialNotification={notification}
-        />
+        {renderNotificationsManager()}
+        {renderNetworkStatus()}
         <BrowserWarning />
         {customFooter ? (
           <footer>
@@ -862,21 +905,41 @@ const NeonPage = (inProps) => {
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider
-      useCoreAuth
-      fetchPartials={useSomeDrupalAssets}
-      {...NeonContextProviderProps}
-    >
+    <NeonContext.Provider {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );
+
+  const renderWithAuthContext = (inRenderedPage) => {
+    if (authContextDisable === true) {
+      return inRenderedPage;
+    }
+    if (neonAuthContextIsActive) {
+      return inRenderedPage;
+    }
+    return (
+      <NeonAuthContext.Provider>
+        {inRenderedPage}
+      </NeonAuthContext.Provider>
+    );
+  };
+  const renderWithPageAssetsContext = (inRenderedPage) => {
+    if (neonPageAssetsContextIsActive) {
+      return inRenderedPage;
+    }
+    return (
+      <NeonPageAssetsContext.Provider fetchPartials={useSomeDrupalAssets}>
+        {inRenderedPage}
+      </NeonPageAssetsContext.Provider>
+    );
+  };
 
   return (
     <ErrorBoundary
       FallbackComponent={NeonErrorPage}
       onReset={resetStateAfterRuntimeError}
     >
-      {renderedPage}
+      {renderWithPageAssetsContext(renderWithAuthContext(renderedPage))}
     </ErrorBoundary>
   );
 };
@@ -901,11 +964,13 @@ NeonPage.propTypes = {
   customHeader: PropTypes.node,
   customFooter: PropTypes.node,
   customizeAuthContainer: PropTypes.bool,
+  authContextDisable: PropTypes.bool,
   showHeaderSkeleton: PropTypes.bool,
   showFooterSkeleton: PropTypes.bool,
   error: PropTypes.string,
   loading: PropTypes.string,
   notification: PropTypes.string,
+  notificationsDisable: PropTypes.bool,
   outerPageContainerMaxWidth: PropTypes.string,
   progress: PropTypes.number,
   resetStateAfterRuntimeError: PropTypes.func,

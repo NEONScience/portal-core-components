@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import LoginRequiredCard from '../Card/LoginRequiredCard';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 import RouteService from '../../service/RouteService';
@@ -42,7 +42,7 @@ const TimeSeriesViewerLimitedCard = (
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const { classes } = useStyles();
   if (!state.isViewerLimitedMode) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -96,7 +96,7 @@ const TimeSeriesViewerLimitedCard = (
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
-    if (neonContextSessionState.authenticated === true) {
+    if (neonAuthContextSessionState.authenticated === true) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
@@ -112,9 +112,9 @@ const TimeSeriesViewerLimitedCard = (
           {renderSignInButton()}
         </>
       )}
-      isAuthenticated={neonContextSessionState.authenticated}
-      accountValidated={neonContextSessionState.accountValidated}
-      accountValidationSteps={neonContextSessionState.accountValidationSteps}
+      isAuthenticated={neonAuthContextSessionState.authenticated}
+      accountValidated={neonAuthContextSessionState.accountValidated}
+      accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
     />
   );
 };

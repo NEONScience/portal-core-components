@@ -118,7 +118,11 @@ const calculateFetches = (state: DataProductCitationState): DataProductCitationS
 
 const calculateAppStatus = (state: DataProductCitationState): DataProductCitationState => {
   const updatedState: DataProductCitationState = { ...state };
-  if (stateHasFetchesInStatus(state, FetchStatus.ERROR) || state.neonContextState.hasError) {
+  if (
+    stateHasFetchesInStatus(state, FetchStatus.ERROR)
+    || state.neonContextState.hasError
+    || state.neonAuthContextState.hasError
+  ) {
     updatedState.component.status = ContextStatus.ERROR;
     return updatedState;
   }
@@ -126,7 +130,11 @@ const calculateAppStatus = (state: DataProductCitationState): DataProductCitatio
     updatedState.component.status = ContextStatus.HAS_FETCHES_TO_TRIGGER;
     return updatedState;
   }
-  if (stateHasFetchesInStatus(state, FetchStatus.FETCHING) || !state.neonContextState.isFinal) {
+  if (
+    stateHasFetchesInStatus(state, FetchStatus.FETCHING)
+    || !state.neonContextState.isFinal
+    || !state.neonAuthContextState.isFinal
+  ) {
     updatedState.component.status = ContextStatus.FETCHING;
     return updatedState;
   }
@@ -212,6 +220,7 @@ const applyDoiStatusReleaseGlobally = (
  * derivation of bundles, and the resulting fetch and app status.
  * @param newState The DataProductCitationState state to build on.
  * @param neonContextState The new NeonContext state to integrate.
+ * @param neonAuthContextState The new NeonAuthContext state to integrate.
  * @param release The release to work from.
  * @param productCode The product code to work from.
  * @return The next DataProductCitationState state.
@@ -219,6 +228,7 @@ const applyDoiStatusReleaseGlobally = (
 const calculateContextState = (
   newState: DataProductCitationState,
   neonContextState: UnknownRecord,
+  neonAuthContextState: UnknownRecord,
   release: Nullable<string>,
   productCode: Nullable<string>,
 ): DataProductCitationState => {
@@ -241,6 +251,7 @@ const calculateContextState = (
   const newAppStatusState = calculateAppStatus({
     ...newFetchState,
     neonContextState,
+    neonAuthContextState,
   });
   // If the existing app state was errored due to initialization,
   // keep the current error state.

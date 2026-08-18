@@ -3,6 +3,7 @@ import React from 'react';
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitationContext from './DataProductCitation/Context';
 import DataProductCitationView from './DataProductCitation/View';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 
 import { CitationTextOnlyProps } from './DataProductCitation/ViewState';
@@ -59,6 +60,8 @@ const DataProductCitation: React.FC<DataProductCitationProps> = (
   );
 };
 
-const WrappedDataProductCitation = NeonContext.getWrappedComponent(DataProductCitation);
+const WrappedDataProductCitation = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(DataProductCitation),
+);
 
 export default WrappedDataProductCitation;

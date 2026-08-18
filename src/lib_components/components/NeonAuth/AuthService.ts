@@ -9,8 +9,13 @@ import {
   catchError,
   delay,
   tap,
+  Observable,
   ObservableInput,
+  timer,
+  exhaustMap,
 } from 'rxjs';
+
+import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 import SockJS from 'sockjs-client';
 import { Message, StompHeaders } from '@stomp/stompjs';
@@ -25,6 +30,9 @@ import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { AnyVoidFunc, Undef, AuthSilentType } from '../../types/core';
 
 const REDIRECT_URI: string = 'redirectUri';
+const PING_INITIAL_DELAY_MS = 1_000;
+const PING_INTERVAL_MS = 15_000;
+const PING_REQUIRE_CONSECUTIVE_FAILURES = 2;
 
 /**
  * Set of white listed paths that should redirect upon logout
@@ -84,7 +92,7 @@ export interface IAuthService {
   login: (path?: string, redirectUriPath?: string) => void;
   /**
    * Performs a silent login flow
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    * @param {boolean} isSsoCheck - Whether or not performaing an SSO check
    * @param {string} path - Fallback to optionally path to set for the
    *  root logout URL when defaulting to normal login flow.
@@ -105,7 +113,7 @@ export interface IAuthService {
   logout: (path?: string, redirectUriPath?: string) => void;
   /**
    * Performs a silent logout flow
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    *  upon logout
    * @param {string} path - Fallback to optionally path to set for the
    *  root logout URL when defaulting to normal login flow.
@@ -130,8 +138,8 @@ export interface IAuthService {
   fetchUserInfo: (cb: AnyVoidFunc, errorCb: AnyVoidFunc) => Subscription;
   /**
    * Fetches user info if authenticated from the auth API
-   * and dispatches the appropriate NeonContext actions when completed
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * and dispatches the appropriate NeonAuthContext actions when completed
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    * @param {boolean} refreshSubscription = Optionally refresh the WS subscription
    * @return {Subscription} The RxJS subscription for the request
    */
@@ -141,7 +149,7 @@ export interface IAuthService {
   ) => Subscription;
   /**
    * Handles actions needed from a login message from the auth broadcast channel
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    */
   handleLoginMessageFromBroadcastChannel: (dispatch: Dispatch<any>) => void;
   /**
@@ -165,7 +173,7 @@ export interface IAuthService {
 
   /**
    * Watches the Auth0 topic via STOMP / WebSocket
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    * @param {Array<AnyVoidFunc>} onConnectCbs - Set of callbacks to call when connected
    * @return {Subscription} The RxJS subscription for the RxStomp client
    */
@@ -176,7 +184,7 @@ export interface IAuthService {
   teardown: () => void;
   /**
    * Handles refreshing the watch Auth0 subscription.
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    * @param {boolean} delayed - Optionally delay the refresh
    */
   refreshWatchAuth0Subscription: (dispatch: Dispatch<any>, delayed?: boolean) => void;
@@ -184,6 +192,18 @@ export interface IAuthService {
    * Cancels the working resolver subscription if active.
    */
   cancelWorkingResolver: () => void;
+  /**
+   * Ping session state for state synchronization
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
+   * @param {Record<string, string>} headers - The headers to make the request with
+   * @param {string} sessionToken - The session token to bind to
+   * @returns {Subscription} The RxJS AJAX subscription
+   */
+  pingSession: (
+    dispatch: Dispatch<any>,
+    headers: Record<string, string>,
+    sessionToken: string,
+  ) => Subscription;
 }
 
 const factory = {
@@ -225,7 +245,7 @@ const factory = {
    * Will resolve itself after 15 seconds if not already unsubscribed.
    * @param {AuthService} service - The AuthService to perform on
    * @param {IAuthServiceState} state - The state of the auth service
-   * @param {Dispatch} dispatch - The NeonContext dispatch function
+   * @param {Dispatch} dispatch - The NeonAuthContext dispatch function
    * @param {AuthActionType} actionType - The type of action being performed
    * @param {boolean} shouldRedirect - Option to redirect when resolving
    * @return The RxJS Subscription
@@ -327,8 +347,6 @@ const AuthService: IAuthService = {
     path?: string,
     redirectUriPath?: string,
   ): void => {
-    // Until custom domains are implemented,
-    // Safari does not support silent auth flow
     const allowSilent: boolean = AuthService.allowSilentAuth();
     if (isSsoCheck && !allowSilent) {
       return;
@@ -580,6 +598,47 @@ const AuthService: IAuthService = {
       state.workingResolverSubscription$.unsubscribe();
       state.workingResolverSubscription$ = undefined;
     }
+  },
+  pingSession: (
+    dispatch: Dispatch<any>,
+    headers: Record<string, string>,
+    sessionToken: string,
+  ): Subscription => {
+    let numFailures = 0;
+    return timer(PING_INITIAL_DELAY_MS, PING_INTERVAL_MS)
+      .pipe(
+        exhaustMap((value: number, index: number): ObservableInput<unknown> => (
+          ajax<unknown>({
+            method: 'GET',
+            url: NeonEnvironment.getFullAuthApiPath('ping', false),
+            responseType: 'text',
+            headers: {
+              ...headers,
+            },
+          }).pipe(
+            map((response: AjaxResponse<unknown>): Observable<unknown> => {
+              numFailures = 0;
+              return of(true);
+            }),
+            catchError((error: any): ObservableInput<any> => {
+              if (error.status === 403) {
+                numFailures += 1;
+                if (numFailures >= PING_REQUIRE_CONSECUTIVE_FAILURES) {
+                  dispatch({ type: 'setPingSessionLogout', sessionToken });
+                  // TODO: consider rotating via silent re-auth
+                  // AuthService.loginSilently(dispatch, true);
+                }
+              } else {
+                numFailures = 0;
+                // eslint-disable-next-line no-console
+                console.error(error);
+              }
+              return of(true);
+            }),
+          )
+        )),
+      )
+      .subscribe();
   },
 };
 

@@ -22,7 +22,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Logout from '@mui/icons-material/Logout';
 
 import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonAuthContext, { FETCH_STATUS } from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import { makeStyles } from '../Theme/makeStyles';
@@ -100,7 +100,7 @@ const AccountMenu = (props: AccountMenuProps) => {
         userData,
       },
     },
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
   const user = userData?.data?.user;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerRefEl, setContainerRefEl] = useState<HTMLElement | null>(null);
@@ -307,7 +307,7 @@ const renderAuth = (
   };
   // eslint-disable-next-line react/jsx-no-useless-fragment
   let authContent: React.JSX.Element = <></>;
-  const isCustom = NeonAuthDisplayType.MENU_CUSTOM;
+  const isCustom = displayType === NeonAuthDisplayType.MENU_CUSTOM;
   switch (displayType) {
     case NeonAuthDisplayType.MENU_CUSTOM:
     case NeonAuthDisplayType.MENU:
@@ -376,7 +376,7 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
       },
     },
     dispatch,
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
 
   const { classes } = useStyles();
   const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
@@ -396,6 +396,6 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   );
 };
 
-const WrappedNeonAuth = NeonContext.getWrappedComponent(NeonAuth);
+const WrappedNeonAuth = NeonAuthContext.getWrappedComponent(NeonAuth);
 
 export default WrappedNeonAuth;

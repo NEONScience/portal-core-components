@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 
 import AuthService from '@/components/NeonAuth/AuthService';
 import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '@/components/NeonAuth/NeonAuth';
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
 import NeonContext from '@/components/NeonContext/NeonContext';
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
 import UserCard from '@/components/Accounts/UserCard';
@@ -237,7 +238,7 @@ export default function StyleGuide() {
         userData,
       },
     },
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
   const { classes } = useStyles();
   const hasSsoCookie: boolean = (document.cookie.indexOf(NEON_SSO_COOKIE_NAME) >= 0);
   const [ssoCookieEnabled, setSsoCookieEnabled] = React.useState(hasSsoCookie);

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 
 import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
@@ -18,6 +19,8 @@ const TimeSeriesViewer = (inProps) => {
 
 TimeSeriesViewer.propTypes = TimeSeriesViewerContext.TimeSeriesViewerPropTypes;
 
-const WrappedTimeSeriesViewer = NeonContext.getWrappedComponent(TimeSeriesViewer);
+const WrappedTimeSeriesViewer = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(TimeSeriesViewer),
+);
 
 export default WrappedTimeSeriesViewer;

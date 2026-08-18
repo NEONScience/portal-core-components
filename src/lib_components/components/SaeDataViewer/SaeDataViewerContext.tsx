@@ -10,7 +10,7 @@ import React, {
 import cloneDeep from 'lodash/cloneDeep';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { AnyAction, Nullable, Undef } from '../../types/core';
@@ -517,15 +517,15 @@ const getInitialState = (
 };
 
 const buildFetchRequestHeaders = (
-  neonContextSessionState: ReturnType<typeof NeonContext.useNeonContextSessionState>,
+  neonAuthContextSessionState: ReturnType<typeof NeonAuthContext.useNeonAuthContextSessionState>,
 ) => ({
   ...NeonApi.getApiTokenHeader() as Record<string, string>,
-  ...neonContextSessionState.sessionHeaders,
+  ...neonAuthContextSessionState.sessionHeaders,
 });
 
 const fetchProductsData = (
   dispatch: React.ActionDispatch<[action: AnyAction]>,
-  neonContextSessionState: ReturnType<typeof NeonContext.useNeonContextSessionState>,
+  neonAuthContextSessionState: ReturnType<typeof NeonAuthContext.useNeonAuthContextSessionState>,
   saeDataProducts: SaeDataProduct[],
 ): void => {
   dispatch({ type: 'fetchSaeProductsStarted' });
@@ -539,7 +539,7 @@ const fetchProductsData = (
     }, []);
   const query = buildFilterProductsQuery(productCodes);
   const headers = {
-    ...buildFetchRequestHeaders(neonContextSessionState),
+    ...buildFetchRequestHeaders(neonAuthContextSessionState),
     'Content-Type': 'application/json',
   };
   const requestInit: RequestInit = {
@@ -571,7 +571,7 @@ const fetchProductsData = (
 
 const fetchBokehPlotData = (
   dispatch: React.ActionDispatch<[action: AnyAction]>,
-  neonContextSessionState: ReturnType<typeof NeonContext.useNeonContextSessionState>,
+  neonAuthContextSessionState: ReturnType<typeof NeonAuthContext.useNeonAuthContextSessionState>,
   abortControllerRef: React.RefObject<AbortController>,
   isViewerLimited: boolean,
   saeProduct: SaeDataProduct,
@@ -598,7 +598,7 @@ const fetchBokehPlotData = (
     ? NeonEnvironment.getFullVizApiPath('saeDemoBokehPlot')
     : NeonEnvironment.getFullVizApiPath('saeBokehPlot');
   const apiUrl = `${rootApiUrl}?${queryParams}`;
-  const headers = buildFetchRequestHeaders(neonContextSessionState);
+  const headers = buildFetchRequestHeaders(neonAuthContextSessionState);
   const requestInit: RequestInit = {
     method: 'GET',
     signal: controller.signal,
@@ -654,10 +654,10 @@ const Provider: React.FC<React.PropsWithChildren<SaeDataViewerProps>> = (
     productCode: propProductCode,
     children,
   }: React.PropsWithChildren<SaeDataViewerProps> = props;
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   // Check preconditions for initial status
-  const preconditionsSatisfied = neonContextSessionState.ready;
-  const isViewerLimited = !neonContextSessionState.canAccessData;
+  const preconditionsSatisfied = neonAuthContextSessionState.ready;
+  const isViewerLimited = !neonAuthContextSessionState.canAccessData;
   const initialState = getInitialState(propProductCode, isViewerLimited);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -687,10 +687,10 @@ const Provider: React.FC<React.PropsWithChildren<SaeDataViewerProps>> = (
   // Fetch data product data
   useEffect(() => {
     if (productsFetchStatus !== FetchStatus.AWAITING_CALL) { return; }
-    fetchProductsData(dispatch, neonContextSessionState, saeDataProducts);
+    fetchProductsData(dispatch, neonAuthContextSessionState, saeDataProducts);
   }, [
     dispatch,
-    neonContextSessionState,
+    neonAuthContextSessionState,
     saeDataProducts,
     productsFetchStatus,
   ]);
@@ -700,7 +700,7 @@ const Provider: React.FC<React.PropsWithChildren<SaeDataViewerProps>> = (
     if (fetchStatus !== FetchStatus.AWAITING_CALL) { return; }
     fetchBokehPlotData(
       dispatch,
-      neonContextSessionState,
+      neonAuthContextSessionState,
       abortControllerRef,
       isViewerLimited,
       saeProduct,
@@ -712,7 +712,7 @@ const Provider: React.FC<React.PropsWithChildren<SaeDataViewerProps>> = (
     dispatch,
     preconditionsSatisfied,
     isViewerLimited,
-    neonContextSessionState,
+    neonAuthContextSessionState,
     abortControllerRef,
     fetchStatus,
     saeProduct,

@@ -13,7 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 
@@ -209,7 +209,7 @@ const Menu = (props: MenuProps) => {
  * @returns The menu or null if the user has no applications to display.
  */
 const ApplicationMenu = () => {
-  const [{ auth: authData }] = NeonContext.useNeonContextState();
+  const [{ auth: authData }] = NeonAuthContext.useNeonAuthContextState();
   const apps: UserApp[] = authData?.userData?.data?.apps;
   if (apps?.length > 0) {
     return (

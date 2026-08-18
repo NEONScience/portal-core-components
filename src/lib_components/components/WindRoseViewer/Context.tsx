@@ -31,6 +31,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { parse } from 'papaparse';
 
 import NeonApi from '../NeonApi/NeonApi';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
@@ -657,15 +658,15 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     children,
   } = props;
   const [neonContextState] = NeonContext.useNeonContextState();
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
-  const { sessionHeaders } = neonContextSessionState;
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
+  const { sessionHeaders } = neonAuthContextSessionState;
   const {
     isFinal: neonContextIsFinal,
     hasError: neonContextHasError,
   } = neonContextState;
   // Check preconditions for initial status
-  const preconditionsSatisfied = neonContextSessionState.ready;
-  const isViewerLimited = !neonContextSessionState.canAccessData;
+  const preconditionsSatisfied = neonAuthContextSessionState.ready;
+  const isViewerLimited = !neonAuthContextSessionState.canAccessData;
   const initialState = {
     ...getDefaultState(),
     productCode: propsProductCode,

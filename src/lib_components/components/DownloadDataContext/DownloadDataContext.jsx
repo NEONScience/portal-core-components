@@ -24,7 +24,7 @@ import {
 } from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import {
   buildManifestConfig,
@@ -1161,12 +1161,12 @@ const Provider = (inProps) => {
     stateObservable,
     children,
   } = props;
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   // Check preconditions for initial status
   const {
     ready: preconditionsSatisfied,
     canAccessData,
-  } = neonContextSessionState;
+  } = neonAuthContextSessionState;
   // Get the initial state from storage if present, else get from props.
   const initialState = getInitialStateFromProps(props);
   const { productCode: product } = initialState.productData;
@@ -1362,11 +1362,11 @@ const Provider = (inProps) => {
     }
     if (Object.values(state.s3FileFetches).some((status) => status === 'awaitingFetchCall')) {
       const headers = {
-        ...neonContextSessionState.sessionHeaders,
+        ...neonAuthContextSessionState.sessionHeaders,
       };
       handleFetchS3Files(state, headers);
     }
-  }, [state, downloadStatus, neonContextSessionState.sessionHeaders]);
+  }, [state, downloadStatus, neonAuthContextSessionState.sessionHeaders]);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values

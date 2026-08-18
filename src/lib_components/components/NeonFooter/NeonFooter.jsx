@@ -6,7 +6,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
@@ -31,13 +31,13 @@ const NeonFooter = (inProps) => {
   const { drupalCssLoaded, showSkeleton } = props;
   const { classes } = useStyles();
   const [{
-    isActive: neonContextIsActive,
+    isActive: neonPageAssetsContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },
     html: { [DRUPAL_FOOTER_HTML]: footerHTML },
-  }] = NeonContext.useNeonContextState();
+  }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
 
   let renderMode = 'legacy';
-  if (neonContextIsActive) {
+  if (neonPageAssetsContextIsActive) {
     switch (footerFetch.status) {
       case FETCH_STATUS.SUCCESS:
         renderMode = (footerHTML && drupalCssLoaded) ? 'drupal' : 'loading';

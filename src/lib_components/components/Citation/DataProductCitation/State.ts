@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 
+import NeonAuthContext from '../../NeonContext/NeonAuthContext';
 import NeonContext from '../../NeonContext/NeonContext';
 
 import { Nullable, UnknownRecord } from '../../../types/core';
@@ -69,6 +70,7 @@ export interface DataProductCitationState {
   bundle: CitationBundleState;
   data: DataState;
   neonContextState: UnknownRecord;
+  neonAuthContextState: UnknownRecord;
 }
 
 const DEFAULT_STATE: DataProductCitationState = {
@@ -106,6 +108,7 @@ const DEFAULT_STATE: DataProductCitationState = {
   },
 
   neonContextState: cloneDeep(NeonContext.DEFAULT_STATE),
+  neonAuthContextState: cloneDeep(NeonAuthContext.DEFAULT_STATE),
 };
 
 export const getDefaultState = (): DataProductCitationState => cloneDeep(DEFAULT_STATE);

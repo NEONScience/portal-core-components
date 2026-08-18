@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import LoginRequiredCard from '../Card/LoginRequiredCard';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 import RouteService from '../../service/RouteService';
@@ -22,9 +22,9 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
 
 const SaeDataViewerLimitedCard: React.FC = (): React.JSX.Element => {
   const state = SaeDataViewerContext.useSaeDataViewerContextState();
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const { classes } = useStyles();
-  if (!state.isViewerLimitedMode || !neonContextSessionState.ready) {
+  if (!state.isViewerLimitedMode || !neonAuthContextSessionState.ready) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <></>;
   }
@@ -61,7 +61,7 @@ const SaeDataViewerLimitedCard: React.FC = (): React.JSX.Element => {
     );
   };
   const renderSignInButton = (): React.JSX.Element => {
-    if (neonContextSessionState.authenticated === true) {
+    if (neonAuthContextSessionState.authenticated === true) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
@@ -77,10 +77,10 @@ const SaeDataViewerLimitedCard: React.FC = (): React.JSX.Element => {
           {renderSignInButton()}
         </>
       )}
-      isAuthenticated={neonContextSessionState.authenticated}
-      accountValidated={neonContextSessionState.accountValidated}
+      isAuthenticated={neonAuthContextSessionState.authenticated}
+      accountValidated={neonAuthContextSessionState.accountValidated}
       accountValidationSteps={
-        (neonContextSessionState.accountValidationSteps as AccountValidationStep[] | undefined)
+        (neonAuthContextSessionState.accountValidationSteps as AccountValidationStep[] | undefined)
       }
     />
   );

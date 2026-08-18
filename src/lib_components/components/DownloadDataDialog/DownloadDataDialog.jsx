@@ -35,7 +35,7 @@ import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import LoginRequiredCard from '../Card/LoginRequiredCard';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import ReleaseChip from '../Chip/ReleaseChip';
 import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
@@ -155,7 +155,7 @@ export default function DownloadDataDialog() {
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
 
   /**
      State (local)
@@ -250,7 +250,7 @@ export default function DownloadDataDialog() {
       provisionalData,
     };
     const headers = {
-      ...neonContextSessionState.sessionHeaders,
+      ...neonAuthContextSessionState.sessionHeaders,
     };
     if (fromAOPManifest) {
       const config = buildManifestConfig(manifestSelection, null, true);
@@ -489,9 +489,9 @@ export default function DownloadDataDialog() {
     return (
       <LoginRequiredCard
         showValidation
-        isAuthenticated={neonContextSessionState.authenticated}
-        accountValidated={neonContextSessionState.accountValidated}
-        accountValidationSteps={neonContextSessionState.accountValidationSteps}
+        isAuthenticated={neonAuthContextSessionState.authenticated}
+        accountValidated={neonAuthContextSessionState.accountValidated}
+        accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
       />
     );
   };

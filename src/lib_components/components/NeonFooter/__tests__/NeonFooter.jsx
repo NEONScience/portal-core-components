@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
-import '../../../../__mocks__/NeonContext';
-import NeonContext, { FETCH_STATUS } from '../../NeonContext/NeonContext';
+import '../../../../__mocks__/NeonPageAssetsContext';
+import NeonPageAssetsContext, { FETCH_STATUS } from '../../NeonContext/NeonPageAssetsContext';
 
 import NeonFooter from '../NeonFooter';
 
@@ -16,10 +16,10 @@ const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
 describe('NeonFooter', () => {
   beforeEach(() => {
-    NeonContext.useNeonContextState.mockReset();
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReset();
   });
   test('renders with no props and inactive NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: false,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: null } },
       html: { [DRUPAL_FOOTER_HTML]: null },
@@ -28,7 +28,7 @@ describe('NeonFooter', () => {
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and active/fetching NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.FETCHING } },
       html: { [DRUPAL_FOOTER_HTML]: null },
@@ -37,7 +37,7 @@ describe('NeonFooter', () => {
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and error NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.ERROR } },
       html: { [DRUPAL_FOOTER_HTML]: null },
@@ -46,7 +46,7 @@ describe('NeonFooter', () => {
     expect(tree).toMatchSnapshot();
   });
   test('renders with no props and success NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.SUCCESS } },
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },
@@ -55,7 +55,7 @@ describe('NeonFooter', () => {
     expect(tree).toMatchSnapshot();
   });
   test('renders fallback with drupalCSSLoaded prop and error NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.ERROR } },
       html: { [DRUPAL_FOOTER_HTML]: null },
@@ -64,7 +64,7 @@ describe('NeonFooter', () => {
     expect(tree).toMatchSnapshot();
   });
   test('renders with drupalCssLoaded prop and success NeonContext state', () => {
-    NeonContext.useNeonContextState.mockReturnValue([{
+    NeonPageAssetsContext.useNeonPageAssetsContextState.mockReturnValue([{
       isActive: true,
       fetches: { [DRUPAL_FOOTER_HTML]: { status: FETCH_STATUS.SUCCESS } },
       html: { [DRUPAL_FOOTER_HTML]: '<div>test drupal html</div>' },

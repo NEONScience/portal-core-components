@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AjaxResponse } from 'rxjs/ajax';
 
 import NeonApi from '../../NeonApi/NeonApi';
+import NeonAuthContext from '../../NeonContext/NeonAuthContext';
 import NeonContext from '../../NeonContext/NeonContext';
 import NeonGraphQL from '../../NeonGraphQL/NeonGraphQL';
 
@@ -105,10 +106,15 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
   }: ProviderProps = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
+  const [neonAuthContextState] = NeonAuthContext.useNeonAuthContextState();
   const {
     isFinal: neonContextIsFinal,
     hasError: neonContextHasError,
   } = neonContextState;
+  const {
+    isFinal: neonAuthContextIsFinal,
+    hasError: neonAuthContextHasError,
+  } = neonAuthContextState;
 
   const initialState = {
     ...getDefaultState(),
@@ -117,6 +123,9 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
   };
   if (neonContextIsFinal || neonContextHasError) {
     initialState.neonContextState = { ...neonContextState };
+  }
+  if (neonAuthContextIsFinal || neonAuthContextHasError) {
+    initialState.neonAuthContextState = { ...neonAuthContextState };
   }
   const [state, dispatch] = useReducer(Reducer, initialState);
   const {
@@ -160,6 +169,15 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     neonContextState,
     neonContextIsFinal,
     neonContextHasError,
+  ]);
+  useEffect(() => {
+    if (neonAuthContextIsFinal || neonAuthContextHasError) {
+      dispatch(ActionCreator.storeFinalizedNeonAuthContextState(neonAuthContextState));
+    }
+  }, [
+    neonAuthContextState,
+    neonAuthContextIsFinal,
+    neonAuthContextHasError,
   ]);
   // Transform the object to a string to ensure the effect
   // fires anytime the object changes for ensure it always resolves fetches.

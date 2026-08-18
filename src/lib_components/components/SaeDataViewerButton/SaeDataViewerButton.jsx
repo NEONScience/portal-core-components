@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import SaeDataViewerIcon from '@mui/icons-material/TimelineOutlined';
 
-import NeonContext from '../NeonContext/NeonContext';
 import RouteService from '../../service/RouteService';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
@@ -77,6 +76,4 @@ SaeDataViewerButton.propTypes = {
   endDate: PropTypes.string,
 };
 
-const WrappedSaeDataViewer = NeonContext.getWrappedComponent(SaeDataViewerButton);
-
-export default WrappedSaeDataViewer;
+export default SaeDataViewerButton;

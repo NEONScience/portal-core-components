@@ -17,6 +17,7 @@ import ActionCreator, {
   SetProductCodeAction,
   SetReleaseAction,
   StoreFinalizedNeonContextStateAction,
+  StoreFinalizedNeonAuthContextStateAction,
   FetchProductReleaseStartedAction,
   FetchProductReleaseSucceededAction,
   FetchProductReleaseDoiStartedAction,
@@ -55,15 +56,17 @@ const reinitialize = (
       productCode: action.productCode,
       release: action.release,
       neonContextState: state.neonContextState,
+      neonAuthContextState: state.neonAuthContextState,
       data: {
         ...defaultState.data,
         releases: ReleaseService.applyUserReleases<CitationRelease>(
-          state.neonContextState,
+          state.neonAuthContextState,
           defaultState.data.releases,
         ),
       },
     },
     state.neonContextState,
+    state.neonAuthContextState,
     action.release,
     action.productCode,
   );
@@ -201,13 +204,22 @@ const Reducer = (
       return reinitialize(state, action as SetParamsAction);
 
     case ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE:
+      return Service.calculateContextState(
+        newState,
+        (action as StoreFinalizedNeonContextStateAction).neonContextState,
+        newState.neonAuthContextState,
+        newState.release,
+        newState.productCode,
+      );
+    case ActionTypes.STORE_FINALIZED_NEON_AUTH_CONTEXT_STATE:
       newState.data.releases = ReleaseService.applyUserReleases<CitationRelease>(
-        action.neonContextState,
+        action.neonAuthContextState,
         newState.data.releases,
       );
       return Service.calculateContextState(
         newState,
-        (action as StoreFinalizedNeonContextStateAction).neonContextState,
+        newState.neonContextState,
+        (action as StoreFinalizedNeonAuthContextStateAction).neonAuthContextState,
         newState.release,
         newState.productCode,
       );

@@ -26,7 +26,7 @@ import {
 import { ajax } from 'rxjs/ajax';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
@@ -1610,14 +1610,14 @@ const Provider = (inProps) => {
   /**
      Initial State and Reducer Setup
   */
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
   // Check preconditions for initial status
-  const preconditionsSatisfied = neonContextSessionState.ready;
-  const isViewerLimited = !neonContextSessionState.canAccessData;
+  const preconditionsSatisfied = neonAuthContextSessionState.ready;
+  const isViewerLimited = !neonAuthContextSessionState.canAccessData;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -1901,7 +1901,7 @@ const Provider = (inProps) => {
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
         const headers = {
-          ...neonContextSessionState.sessionHeaders,
+          ...neonAuthContextSessionState.sessionHeaders,
         };
         NeonApi.getJsonObservable(getSiteMonthDataURL(siteCode, month), headers)
           .pipe(
@@ -2073,7 +2073,7 @@ const Provider = (inProps) => {
     state.release,
     preconditionsSatisfied,
     isViewerLimited,
-    neonContextSessionState,
+    neonAuthContextSessionState,
   ]);
 
   /**

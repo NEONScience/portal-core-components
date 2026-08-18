@@ -25,7 +25,7 @@ Once installed, components should be imported in code with one of:
 // Preferentially import specific components by default export
 import ComponentName from '@neonscience/portal-core-components/components/ComponentName';
 // Import component from top level exports
-import { ComponentName } from '@@neonscience/portal-core-components';
+import { ComponentName } from '@neonscience/portal-core-components';
 ```
 
 ### Using Components Outside of a NEON Domain

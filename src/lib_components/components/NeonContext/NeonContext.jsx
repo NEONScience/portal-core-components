@@ -9,16 +9,11 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { of, map, catchError } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 
-import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
-import AuthService from '../NeonAuth/AuthService';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import BundleParser from '../../parser/BundleParser';
-import BroadcastChannelService from '../../service/BroadcastChannelService';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+import { existsNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 
 import sitesJSON from '../../staticJSON/sites.json';
@@ -27,9 +22,6 @@ import domainsJSON from '../../staticJSON/domains.json';
 import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
 import aopDataProductsJSON from '../../staticJSON/aopDataProducts.json';
 import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
-
-const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
-const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
 export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -58,23 +50,9 @@ const DEFAULT_STATE = {
     stateSites: {}, // derived when sites is fetched
     domainSites: {}, // derived when sites is fetched
   },
-  html: {
-    [DRUPAL_HEADER_HTML]: null,
-    [DRUPAL_FOOTER_HTML]: null,
-  },
   fetches: {
     sites: { status: FETCH_STATUS.AWAITING_CALL, error: null },
     bundles: { status: FETCH_STATUS.AWAITING_CALL, error: null },
-    auth: { status: null, error: null },
-    [DRUPAL_HEADER_HTML]: { status: null, error: null },
-    [DRUPAL_FOOTER_HTML]: { status: null, error: null },
-  },
-  auth: {
-    useCore: false,
-    isAuthenticated: false,
-    isAuthWorking: false,
-    isAuthWsConnected: false,
-    userData: null,
   },
   isActive: false,
   isFinal: false,
@@ -127,88 +105,12 @@ const useNeonContextState = () => {
   return hookResponse;
 };
 
-const useNeonContextSessionState = () => {
-  const [
-    {
-      isFinal,
-      auth: {
-        isAuthenticated,
-        userData,
-      },
-    },
-  ] = useNeonContextState();
-  if (NeonEnvironment.sessionDisable) {
-    return {
-      enabled: false,
-      ready: true,
-      authenticated: true,
-      accountValidated: true,
-      accountValidationSteps: [],
-      canAccessData: true,
-      sessionHeaders: {},
-    };
-  }
-  const appliedIsAuthenticated = (isAuthenticated === true);
-  let token = null;
-  let canAccessData = false;
-  let accountValidated = false;
-  let accountValidationSteps = [];
-  if (appliedIsAuthenticated && exists(userData) && exists(userData.data)) {
-    token = userData.token;
-    canAccessData = userData.data.canAccessData === true;
-    accountValidated = userData.data.accountValidated === true;
-    accountValidationSteps = existsNonEmpty(userData.data.accountValidationSteps)
-      ? userData.data.accountValidationSteps
-      : [];
-  }
-  if (!isFinal) {
-    return {
-      enabled: true,
-      ready: false,
-      authenticated: appliedIsAuthenticated,
-      accountValidated,
-      accountValidationSteps,
-      canAccessData,
-      sessionHeaders: {},
-    };
-  }
-  const appliedToken = appliedIsAuthenticated ? token : null;
-  if (isStringNonEmpty(appliedToken)) {
-    const sessionHeaderName = NeonEnvironment.getApiSessionTokenHeader();
-    if (isStringNonEmpty(sessionHeaderName)) {
-      return {
-        enabled: true,
-        ready: true,
-        authenticated: appliedIsAuthenticated,
-        accountValidated,
-        accountValidationSteps,
-        canAccessData,
-        sessionHeaders: {
-          [sessionHeaderName]: appliedToken,
-        },
-      };
-    }
-  }
-  return {
-    enabled: true,
-    ready: true,
-    authenticated: appliedIsAuthenticated,
-    accountValidated,
-    accountValidationSteps,
-    canAccessData,
-    sessionHeaders: {},
-  };
-};
-
 const determineContextFetchFinal = (state) => {
-  const authFinal = !state.auth.useCore
-    || ((state.fetches.auth.status === FETCH_STATUS.SUCCESS)
-      || (state.fetches.auth.status === FETCH_STATUS.ERROR));
   const sitesFinal = (state.fetches.sites.status === FETCH_STATUS.SUCCESS)
     || (state.fetches.sites.status === FETCH_STATUS.ERROR);
   const bundlesFinal = (state.fetches.bundles.status === FETCH_STATUS.SUCCESS)
     || (state.fetches.bundles.status === FETCH_STATUS.ERROR);
-  return authFinal && sitesFinal && bundlesFinal;
+  return sitesFinal && bundlesFinal;
 };
 
 /**
@@ -218,7 +120,6 @@ const reducer = (state, action) => {
   // Always deep clone fetches as that's the main thing we care about
   // changing to trigger re-renders in the consumer.
   const newState = { ...state, fetches: cloneDeep(state.fetches) };
-  const hasValidRemoteAsset = action.asset && Object.keys(REMOTE_ASSETS).includes(action.asset);
   switch (action.type) {
     case 'fetchCalled':
       if (!action.key || !state.fetches[action.key]) { return state; }
@@ -249,42 +150,6 @@ const reducer = (state, action) => {
       newState.fetches.bundles.error = action.error;
       newState.isFinal = determineContextFetchFinal(newState);
       newState.hasError = true;
-      return newState;
-
-    // Actions for handling auth fetch
-    case 'setAuthenticated':
-      newState.auth.isAuthenticated = !!action.isAuthenticated;
-      return newState;
-    case 'setAuthWorking':
-      newState.auth.isAuthWorking = !!action.isAuthWorking;
-      return newState;
-    case 'setAuthWsConnected':
-      newState.auth.isAuthWsConnected = !!action.isAuthWsConnected;
-      return newState;
-    case 'fetchAuthSucceeded':
-      newState.fetches.auth.status = FETCH_STATUS.SUCCESS;
-      newState.auth.isAuthenticated = !!action.isAuthenticated;
-      newState.auth.userData = AuthService.parseUserData(action.response);
-      newState.isFinal = determineContextFetchFinal(newState);
-      return newState;
-    case 'fetchAuthFailed':
-      newState.fetches.auth.status = FETCH_STATUS.ERROR;
-      newState.fetches.auth.error = action.error;
-      newState.auth.isAuthenticated = false;
-      newState.auth.userData = null;
-      newState.isFinal = determineContextFetchFinal(newState);
-      return newState;
-
-    // Actions for handling remote assets
-    case 'fetchHtmlSucceeded':
-      if (!hasValidRemoteAsset) { return state; }
-      newState.fetches[action.asset].status = FETCH_STATUS.SUCCESS;
-      newState.html[action.asset] = action.html;
-      return newState;
-    case 'fetchHtmlFailed':
-      if (!hasValidRemoteAsset) { return state; }
-      newState.fetches[action.asset].status = FETCH_STATUS.ERROR;
-      newState.fetches[action.asset].error = action.error;
       return newState;
 
     case 'whenFinalCalled':
@@ -322,8 +187,6 @@ const parseSitesFetchResponse = (sitesArray = []) => {
 
 const defaultProps = {
   children: null,
-  fetchPartials: false,
-  useCoreAuth: false,
   whenFinal: () => {},
 };
 
@@ -334,82 +197,17 @@ const Provider = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const {
     children,
-    fetchPartials,
-    useCoreAuth,
     whenFinal,
   } = props;
 
   const initialState = cloneDeep(DEFAULT_STATE);
   initialState.isActive = true;
-  if (useCoreAuth) {
-    initialState.auth.useCore = true;
-    initialState.fetches.auth.status = FETCH_STATUS.AWAITING_CALL;
-  }
-  if (fetchPartials) {
-    initialState.fetches[DRUPAL_HEADER_HTML].status = FETCH_STATUS.AWAITING_CALL;
-    initialState.fetches[DRUPAL_FOOTER_HTML].status = FETCH_STATUS.AWAITING_CALL;
-  }
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const {
     isFinal,
     whenFinalCalled,
-    auth: {
-      isAuthenticated: stateIsAuthenticated,
-    },
   } = state;
-
-  useEffect(() => {
-    const authBroadcastChannelMessageHandler = (e) => {
-      if (stateIsAuthenticated) {
-        if (exists(e) && exists(e.data) && isStringNonEmpty(e.data.event)) {
-          if (e.data.event === 'account-data-changed') {
-            AuthService.handleLoginMessageFromBroadcastChannel(dispatch);
-          }
-        }
-        return;
-      }
-      AuthService.handleLoginMessageFromBroadcastChannel(dispatch);
-    };
-    BroadcastChannelService.addAuthChannelMessageEventListener(authBroadcastChannelMessageHandler);
-    return () => {
-      BroadcastChannelService.removeAuthChannelMessageEventListener(
-        authBroadcastChannelMessageHandler,
-      );
-    };
-  }, [dispatch, stateIsAuthenticated]);
-
-  // Method to sanitize partial HTML. As delivered presently there are some markup issues that
-  // throw warnings when parsed with HTMLReactParser.
-  const sanitizePartialHTML = (html) => html.replace(/ value=""/g, ' initialValue=""');
-
-  // Method to fetch header and/or footer partials
-  const fetchPartialHTML = (key) => {
-    if (!Object.keys(REMOTE_ASSETS).includes(key)) { return; }
-    const { url } = REMOTE_ASSETS[key];
-    ajax({
-      url,
-      method: 'GET',
-      responseType: 'text',
-    }).pipe(
-      map((response) => {
-        dispatch({
-          type: 'fetchHtmlSucceeded',
-          asset: key,
-          html: sanitizePartialHTML(response.response),
-        });
-        return of(true);
-      }),
-      catchError((error) => {
-        dispatch({ type: 'fetchHtmlFailed', asset: key, error });
-        return of(false);
-      }),
-    ).subscribe();
-  };
-
-  // Identify any cascading authentication fetches that require
-  // the WS to be connected to initiate.
-  const cascadeAuthFetches = [];
 
   // Subject and effect to perform and manage the sites GraphQL fetch
   const fetchMethods = {
@@ -448,46 +246,6 @@ const Provider = (inProps) => {
         }),
       ).subscribe();
     },
-    auth: () => {
-      if (NeonEnvironment.auth0DisableApi) {
-        dispatch({ type: 'fetchAuthSucceeded', isAuthenticated: false, response: null });
-        return;
-      }
-      AuthService.fetchUserInfo(
-        (response) => {
-          const isAuthenticated = AuthService.isAuthenticated(response);
-          if (!isAuthenticated && AuthService.isSsoLogin(response)) {
-            // If we're not authenticated and have identified another SSO
-            // application that's authenticated, trigger a silent authentication
-            // check flow.
-            if (AuthService.allowSilentAuth()) {
-              if (!state.auth.isAuthWsConnected) {
-                cascadeAuthFetches.push(() => AuthService.loginSilently(dispatch, true));
-              } else {
-                AuthService.loginSilently(dispatch, true);
-              }
-            } else {
-              dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
-            }
-          } else {
-            dispatch({ type: 'fetchAuthSucceeded', isAuthenticated, response });
-          }
-          // Send login notification when authenticated
-          if (isAuthenticated) {
-            BroadcastChannelService.sendLoginMessage();
-          }
-          // Initialize a subscription to the auth WS
-          AuthService.watchAuth0(dispatch, cascadeAuthFetches);
-        },
-        (error) => {
-          dispatch({ type: 'fetchAuthFailed', error });
-          // Initialize a subscription to the auth WS
-          AuthService.watchAuth0(dispatch, cascadeAuthFetches);
-        },
-      );
-    },
-    [DRUPAL_HEADER_HTML]: () => fetchPartialHTML(DRUPAL_HEADER_HTML),
-    [DRUPAL_FOOTER_HTML]: () => fetchPartialHTML(DRUPAL_FOOTER_HTML),
   };
 
   // Effect: Trigger all fetches that are awaiting call
@@ -529,8 +287,6 @@ const ProviderPropTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
-  fetchPartials: PropTypes.bool,
-  useCoreAuth: PropTypes.bool,
   whenFinal: PropTypes.func,
 };
 Provider.propTypes = ProviderPropTypes;
@@ -556,7 +312,6 @@ const getWrappedComponent = (Component) => (props) => {
 const NeonContext = {
   Provider,
   useNeonContextState,
-  useNeonContextSessionState,
   DEFAULT_STATE,
   getWrappedComponent,
   ProviderPropTypes,
@@ -569,7 +324,5 @@ export const getTestableItems = () => (
     deriveRegionSites,
     parseSitesFetchResponse,
     reducer,
-    DRUPAL_HEADER_HTML,
-    DRUPAL_FOOTER_HTML,
   }
 );

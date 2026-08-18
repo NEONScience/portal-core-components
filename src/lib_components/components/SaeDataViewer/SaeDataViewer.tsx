@@ -10,6 +10,7 @@ import SaeDataViewerContainer from './SaeDataViewerContainer';
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import CustomComponentFallback from '../Error/CustomComponentFallback';
 import ErrorCard from '../Card/ErrorCard';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -57,6 +58,8 @@ const SaeDataViewer: React.FC<SaeDataViewerProps> = (
   );
 };
 
-const WrappedSaeDataViewer = NeonContext.getWrappedComponent(SaeDataViewer);
+const WrappedSaeDataViewer = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(SaeDataViewer),
+);
 
 export default WrappedSaeDataViewer;

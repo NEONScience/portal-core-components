@@ -10,7 +10,7 @@ import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked, faTag } from '@fortawesome/free-solid-svg-icons';
 
-import NeonContext from '@/components/NeonContext/NeonContext';
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
 import InfoCard from '@/components/Card/InfoCard';
 import WarningCard from '@/components/Card/WarningCard';
 import ErrorCard from '@/components/Card/ErrorCard';
@@ -106,14 +106,14 @@ const propRows = [
 
 export default function StyleGuide() {
   const { classes } = useStyles();
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const [
     {
       auth: {
         userData,
       },
     },
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
   const hasUserData = (exists(userData) && exists(userData.data) && exists(userData.data.user));
   const appliedEmailVerified = hasUserData
     ? userData.data.user.emailVerified === true
@@ -300,9 +300,9 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
         <Paper className={classes.paper}>
           <LoginRequiredCard
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
-            accountValidationSteps={neonContextSessionState.accountValidationSteps}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
+            accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
           />
         </Paper>
       </ExampleBlock>
@@ -321,8 +321,8 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
           />
           <LoginRequiredCard
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
             accountValidationSteps={[
               { step: 'verify-email', completed: appliedEmailVerified },
               { step: 'another-step', completed: false },
@@ -331,8 +331,8 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
           <LoginRequiredCard
             customTitle="Custom Title for Card"
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
             accountValidationSteps={[
               { step: 'verify-email', completed: appliedEmailVerified },
               { step: 'another-step', completed: false },

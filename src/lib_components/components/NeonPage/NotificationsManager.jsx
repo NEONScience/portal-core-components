@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonAuthContext, { FETCH_STATUS } from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import RouteService from '../../service/RouteService';
 import LiferayNotifications from './LiferayNotifications';
@@ -113,7 +113,7 @@ const NotificationsManager = (inProps) => {
   const [{
     isActive,
     auth: { userData },
-  }] = NeonContext.useNeonContextState();
+  }] = NeonAuthContext.useNeonAuthContextState();
   const [fetchNotificationState, fetchNotificationDispatch] = useReducer(
     notificationsReducer,
     initialFetchStatusState,
