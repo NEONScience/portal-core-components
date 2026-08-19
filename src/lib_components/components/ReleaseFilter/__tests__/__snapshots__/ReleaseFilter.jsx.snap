@@ -47,7 +47,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_n_"
             role="combobox"
             tabindex="0"
@@ -145,7 +145,7 @@ exports[`ReleaseFilter Renders gracefully with an invalid selection 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_n_"
           role="combobox"
           tabindex="0"
@@ -508,7 +508,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1v_"
             role="combobox"
             tabindex="0"
@@ -657,7 +657,7 @@ exports[`ReleaseFilter Renders product counts without a defined null release cou
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1v_"
           role="combobox"
           tabindex="0"
@@ -864,7 +864,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_19_"
             role="combobox"
           >
@@ -963,7 +963,7 @@ exports[`ReleaseFilter Renders with a custom title 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_19_"
           role="combobox"
         >
@@ -1118,7 +1118,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_h_"
             role="combobox"
             tabindex="0"
@@ -1207,7 +1207,7 @@ exports[`ReleaseFilter Renders with a selected release 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_h_"
           role="combobox"
           tabindex="0"
@@ -1324,7 +1324,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1f_"
             role="combobox"
           >
@@ -1393,7 +1393,7 @@ exports[`ReleaseFilter Renders with blank title 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1f_"
           role="combobox"
         >
@@ -1555,7 +1555,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-haspopup="listbox"
-                class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                 id="mui-component-select-release-filter-input-_r_13_"
                 role="combobox"
               >
@@ -1666,7 +1666,7 @@ exports[`ReleaseFilter Renders with custom layouts 1`] = `
               aria-disabled="true"
               aria-expanded="false"
               aria-haspopup="listbox"
-              class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
               id="mui-component-select-release-filter-input-_r_13_"
               role="combobox"
             >
@@ -1827,7 +1827,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_t_"
             role="combobox"
             tabindex="0"
@@ -1925,7 +1925,7 @@ exports[`ReleaseFilter Renders with list of releases with DOIs 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_t_"
           role="combobox"
           tabindex="0"
@@ -2080,7 +2080,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_b_"
             role="combobox"
             tabindex="0"
@@ -2178,7 +2178,7 @@ exports[`ReleaseFilter Renders with list of releases without DOIs 1`] = `
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_b_"
           role="combobox"
           tabindex="0"
@@ -2334,7 +2334,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
             aria-disabled="true"
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1_"
             role="combobox"
           >
@@ -2433,7 +2433,7 @@ exports[`ReleaseFilter Renders with no props 1`] = `
           aria-disabled="true"
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1_"
           role="combobox"
         >
@@ -2588,7 +2588,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1p_"
             role="combobox"
             tabindex="0"
@@ -2686,7 +2686,7 @@ exports[`ReleaseFilter Renders with product counts (using data product codes) 1`
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1p_"
           role="combobox"
           tabindex="0"
@@ -2841,7 +2841,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
           <div
             aria-expanded="false"
             aria-haspopup="listbox"
-            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-component-select-release-filter-input-_r_1j_"
             role="combobox"
             tabindex="0"
@@ -2948,7 +2948,7 @@ exports[`ReleaseFilter Renders with product counts (using data product objects) 
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
-          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-140h50w-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1n98t2v-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
           id="mui-component-select-release-filter-input-_r_1j_"
           role="combobox"
           tabindex="0"

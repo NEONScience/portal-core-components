@@ -3506,7 +3506,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
           Add Sites
         </label>
         <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1bg02g1-MuiInputBase-root-MuiOutlinedInput-root"
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1whruu6-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <div
             aria-invalid="false"
@@ -3564,7 +3564,7 @@ exports[`TimeSeriesViewerSites SitesControl Renders as expected 1`] = `
         Add Sites
       </label>
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1bg02g1-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-1whruu6-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <div
           aria-invalid="false"

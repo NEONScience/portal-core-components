@@ -707,7 +707,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   <button
                     aria-pressed="true"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="sites"
                   >
@@ -716,7 +716,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="states"
                   >
@@ -725,7 +725,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="domains"
                   >
@@ -1662,7 +1662,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 <button
                   aria-pressed="true"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="sites"
                 >
@@ -1671,7 +1671,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="states"
                 >
@@ -1680,7 +1680,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="domains"
                 >
@@ -2674,7 +2674,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   <button
                     aria-pressed="true"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="sites"
                   >
@@ -2683,7 +2683,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="states"
                   >
@@ -2692,7 +2692,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="domains"
                   >
@@ -3629,7 +3629,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 <button
                   aria-pressed="true"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="sites"
                 >
@@ -3638,7 +3638,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="states"
                 >
@@ -3647,7 +3647,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="domains"
                 >
@@ -4160,7 +4160,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   <button
                     aria-pressed="true"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="sites"
                   >
@@ -4169,7 +4169,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="states"
                   >
@@ -4178,7 +4178,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="domains"
                   >
@@ -4550,7 +4550,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 <button
                   aria-pressed="true"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="sites"
                 >
@@ -4559,7 +4559,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="states"
                 >
@@ -4568,7 +4568,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="domains"
                 >
@@ -5478,7 +5478,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   <button
                     aria-pressed="true"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="sites"
                   >
@@ -5487,7 +5487,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="states"
                   >
@@ -5496,7 +5496,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   <button
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     type="button"
                     value="domains"
                   >
@@ -6433,7 +6433,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 <button
                   aria-pressed="true"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="sites"
                 >
@@ -6442,7 +6442,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-middleButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="states"
                 >
@@ -6451,7 +6451,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 <button
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1wurjy-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   type="button"
                   value="domains"
                 >
@@ -7489,7 +7489,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     aria-label="Sort Descending (Z-A)"
                     aria-pressed="false"
                     class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
-                    tabindex="0"
+                    tabindex="-1"
                     title="Sort Descending (Z-A)"
                     type="button"
                     value="DESC"
@@ -8441,7 +8441,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   aria-label="Sort Descending (Z-A)"
                   aria-pressed="false"
                   class="MuiButtonBase-root MuiToggleButtonGroup-grouped MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-lastButton css-1t7y65n-MuiButtonBase-root-MuiToggleButton-root"
-                  tabindex="0"
+                  tabindex="-1"
                   title="Sort Descending (Z-A)"
                   type="button"
                   value="DESC"
