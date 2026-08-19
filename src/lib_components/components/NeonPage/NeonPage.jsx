@@ -306,6 +306,8 @@ const defaultProps = {
   title: null,
   unstickyDrupalHeader: true,
   NeonContextProviderProps: {},
+  NeonAuthContextProviderProps: {},
+  NeonPageAssetsContextProviderProps: {},
 };
 
 const NeonPage = (inProps) => {
@@ -341,6 +343,8 @@ const NeonPage = (inProps) => {
     title,
     unstickyDrupalHeader,
     NeonContextProviderProps,
+    NeonAuthContextProviderProps,
+    NeonPageAssetsContextProviderProps,
     children,
   } = props;
 
@@ -918,7 +922,7 @@ const NeonPage = (inProps) => {
       return inRenderedPage;
     }
     return (
-      <NeonAuthContext.Provider>
+      <NeonAuthContext.Provider {...NeonAuthContextProviderProps}>
         {inRenderedPage}
       </NeonAuthContext.Provider>
     );
@@ -928,7 +932,10 @@ const NeonPage = (inProps) => {
       return inRenderedPage;
     }
     return (
-      <NeonPageAssetsContext.Provider fetchPartials={useSomeDrupalAssets}>
+      <NeonPageAssetsContext.Provider
+        {...NeonPageAssetsContextProviderProps}
+        fetchPartials={useSomeDrupalAssets}
+      >
         {inRenderedPage}
       </NeonPageAssetsContext.Provider>
     );
@@ -1009,6 +1016,8 @@ NeonPage.propTypes = {
   ]),
   unstickyDrupalHeader: PropTypes.bool,
   NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
+  NeonAuthContextProviderProps: PropTypes.shape(NeonAuthContext.ProviderPropTypes),
+  NeonPageAssetsContextProviderProps: PropTypes.shape(NeonPageAssetsContext.ProviderPropTypes),
   children: children.isRequired,
 };
 
