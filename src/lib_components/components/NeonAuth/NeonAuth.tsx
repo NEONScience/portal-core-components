@@ -1,4 +1,5 @@
 import React, {
+  useEffect,
   useCallback,
   useState,
   useRef,
@@ -379,16 +380,21 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   ] = NeonAuthContext.useNeonAuthContextState();
 
   const { classes } = useStyles();
-  const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
+  const isFetchingAuthentication: boolean = [
+    FETCH_STATUS.AWAITING_CALL,
+    FETCH_STATUS.FETCHING,
+  ].includes(status);
   const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
   const showAuthWorking: boolean = (isAuthWorking || isFetchingAuthentication);
 
   const authFetchCb = useCallback(() => {
     AuthService.fetchUserInfoWithDispatch(dispatch);
   }, [dispatch]);
-  if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi) {
-    authFetchCb();
-  }
+  useEffect(() => {
+    if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi) {
+      authFetchCb();
+    }
+  }, [authFetchCb, isFetchingAuthentication, isAuthFetched]);
   return (
     <>
       {renderAuth(props, classes, isAuthenticated, showAuthWorking, isAuthWsConnected, dispatch)}
