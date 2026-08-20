@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { Reducer, UnknownAction } from 'redux';
 import { Nullable } from './core';
 
 /**
@@ -35,7 +35,7 @@ export type AsyncActionType = AsyncAction
 /**
  * Async action definitions.
  */
-export interface AsyncAction {
+export interface AsyncAction extends UnknownAction {
   type: string;
 }
 /**
