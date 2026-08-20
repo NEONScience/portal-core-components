@@ -357,6 +357,7 @@ const NeonHeader = (inProps) => {
     html: { [DRUPAL_HEADER_HTML]: headerHTML },
   }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
   const [{
+    isActive: neonAuthContextIsActive,
     auth,
   }] = NeonAuthContext.useNeonAuthContextState();
 
@@ -456,7 +457,7 @@ const NeonHeader = (inProps) => {
   }
 
   // Render Drupal header
-  const injectAuth = !auth.useCore ? undefined : {
+  const injectAuth = (!auth.useCore || !neonAuthContextIsActive) ? undefined : {
     // eslint-disable-next-line react/no-unstable-nested-components
     replace: (domNode) => {
       const { attribs = {}, name } = domNode;

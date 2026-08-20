@@ -3,7 +3,7 @@ import {
   AjaxResponse,
   ajax as AjaxCreationMethod,
 } from 'rxjs/ajax';
-import { AnyAction } from 'redux';
+import { UnknownAction } from 'redux';
 import { Epic } from 'redux-observable';
 import {
   MonoTypeOperatorFunction,
@@ -15,13 +15,13 @@ export interface EpicDependencies {
   ajax: typeof AjaxCreationMethod;
 }
 
-export type EpicCreator<A extends AnyAction, S extends AnyObject> = (
+export type EpicCreator<A extends UnknownAction, S extends AnyObject> = (
   action$: A,
   state$: S,
   { ajax }: EpicDependencies,
 ) => Epic<A, A, S, EpicDependencies>;
 
-export type AjaxObservableCreator<A extends AnyAction> = (
+export type AjaxObservableCreator<A extends UnknownAction> = (
   ajax: typeof AjaxCreationMethod,
   ajaxRequest: AjaxConfig | AjaxConfig[],
   successAction: SuccessAction<A>,
@@ -30,23 +30,23 @@ export type AjaxObservableCreator<A extends AnyAction> = (
   takeUntilOperator?: MonoTypeOperatorFunction<any>,
   ajaxBodyCreator?: AjaxBodyCreator<A>,
   useForkJoin?: boolean,
-) => Observable<AnyAction>;
+) => Observable<A>;
 
 export type WorkingAction = (data?: any) => any;
-export type SuccessAction<A extends AnyAction> = (
+export type SuccessAction<A extends UnknownAction> = (
   response: AjaxResponse<unknown> | AjaxResponse<unknown>[],
   action?: A,
 ) => any;
-export type ErrorAction<A extends AnyAction> = (error: any, action?: A) => any;
+export type ErrorAction<A extends UnknownAction> = (error: any, action?: A) => any;
 
-export type AjaxBodyCreator<A extends AnyAction> = (action: A, index?: number) => any;
-export type AjaxRequestInjector<A extends AnyAction> = (
+export type AjaxBodyCreator<A extends UnknownAction> = (action: A, index?: number) => any;
+export type AjaxRequestInjector<A extends UnknownAction> = (
   request: any,
   action: A,
   index?: number,
 ) => any;
 
-export interface EpicCreationProps<A extends AnyAction> {
+export interface EpicCreationProps<A extends UnknownAction> {
   ofTypeFilter: string | string[];
   request: AjaxConfig | AjaxConfig[];
   workingAction: WorkingAction;

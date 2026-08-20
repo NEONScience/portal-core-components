@@ -15,7 +15,7 @@ import {
   AjaxResponse,
   ajax as AjaxCreationMethod,
 } from 'rxjs/ajax';
-import { AnyAction } from 'redux';
+import { UnknownAction } from 'redux';
 import { ofType, Epic, StateObservable } from 'redux-observable';
 import {
   EpicDependencies,
@@ -44,7 +44,7 @@ export interface IEpicService {
    * @type A The type of action
    * @type S The type of state
    */
-  createEpic: <A extends AnyAction, S extends AnyObject>(
+  createEpic: <A extends UnknownAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
     ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
@@ -69,7 +69,7 @@ export interface IEpicService {
    * @type A The type of action
    * @type S The type of state
    */
-  createMergeEpic: <A extends AnyAction, S extends AnyObject>(
+  createMergeEpic: <A extends UnknownAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
     ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
@@ -86,7 +86,7 @@ export interface IEpicService {
    * @type A The type of action
    * @type S The type of state
    */
-  createEpicFromProps: <A extends AnyAction, S extends AnyObject>(
+  createEpicFromProps: <A extends UnknownAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
   ) => Epic<A, A, S, EpicDependencies>;
   /**
@@ -95,7 +95,7 @@ export interface IEpicService {
    * @type A The type of action
    * @type S The type of state
    */
-  createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(
+  createMergeEpicFromProps: <A extends UnknownAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
   ) => Epic<A, A, S, EpicDependencies>;
   /**
@@ -111,7 +111,7 @@ export interface IEpicService {
    * @param useForkJoin
    * @type A The type of action
    */
-  createAjaxObservable: <A extends AnyAction>(
+  createAjaxObservable: <A extends UnknownAction>(
     ajax: typeof AjaxCreationMethod,
     ajaxConfig: AjaxConfig | AjaxConfig[],
     successAction: SuccessAction<A>,
@@ -124,7 +124,7 @@ export interface IEpicService {
   ) => Observable<A>;
 }
 
-const transformRequest = <A extends AnyAction>(
+const transformRequest = <A extends UnknownAction>(
   ajax: typeof AjaxCreationMethod,
   request: AjaxConfig,
   action?: A,
@@ -148,7 +148,7 @@ const transformRequest = <A extends AnyAction>(
   return ajax(transformed);
 };
 
-const transformRequests = <A extends AnyAction>(
+const transformRequests = <A extends UnknownAction>(
   ajax: typeof AjaxCreationMethod,
   requests: AjaxConfig[],
   action?: A,
@@ -162,7 +162,7 @@ const transformRequests = <A extends AnyAction>(
 );
 /* eslint-enable indent */
 
-const createSingleAjaxObservable = <A extends AnyAction>(
+const createSingleAjaxObservable = <A extends UnknownAction>(
   ajax: typeof AjaxCreationMethod,
   ajaxConfig: AjaxConfig,
   operators: any,
@@ -190,7 +190,7 @@ const createSingleAjaxObservable = <A extends AnyAction>(
   );
 };
 
-const createMultiAjaxObservable = <A extends AnyAction>(
+const createMultiAjaxObservable = <A extends UnknownAction>(
   ajax: typeof AjaxCreationMethod,
   ajaxConfigs: AjaxConfig[],
   operators: any,
@@ -218,7 +218,7 @@ const createMultiAjaxObservable = <A extends AnyAction>(
   );
 };
 
-const createForkJoinAjaxObservable = <A extends AnyAction>(
+const createForkJoinAjaxObservable = <A extends UnknownAction>(
   ajax: typeof AjaxCreationMethod,
   ajaxConfigs: AjaxConfig[],
   operators: any,
@@ -247,7 +247,7 @@ const createForkJoinAjaxObservable = <A extends AnyAction>(
 };
 
 const EpicService: IEpicService = {
-  createEpic: <A extends AnyAction, S extends AnyObject>(
+  createEpic: <A extends UnknownAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
     ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
@@ -262,15 +262,15 @@ const EpicService: IEpicService = {
     state$: StateObservable<S>,
     { ajax }: EpicDependencies,
   ) => {
-    const ofTypeFilters: string[] = !Array.isArray(ofTypeFilter)
+    const ofTypeFilters: [string, ...string[]] = (!Array.isArray(ofTypeFilter)
       ? [ofTypeFilter]
-      : (ofTypeFilter as string[]);
+      : ofTypeFilter) as [string, ...string[]];
     let takeUntilOperator: MonoTypeOperatorFunction<any>;
     if (exists(takeUntilTypeFilter)) {
-      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
+      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter as string)));
     }
     return action$.pipe(
-      ofType.apply(ofType, ofTypeFilters as any) as any,
+      ofType(...ofTypeFilters),
       switchMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(
@@ -287,7 +287,7 @@ const EpicService: IEpicService = {
       )),
     );
   }),
-  createMergeEpic: <A extends AnyAction, S extends AnyObject>(
+  createMergeEpic: <A extends UnknownAction, S extends AnyObject>(
     ofTypeFilter: string | string[],
     ajaxConfig: AjaxConfig | AjaxConfig[],
     workingAction: WorkingAction,
@@ -302,15 +302,15 @@ const EpicService: IEpicService = {
     state$: StateObservable<S>,
     { ajax }: EpicDependencies,
   ) => {
-    const ofTypeFilters: string[] = !Array.isArray(ofTypeFilter)
+    const ofTypeFilters: [string, ...string[]] = (!Array.isArray(ofTypeFilter)
       ? [ofTypeFilter]
-      : (ofTypeFilter as string[]);
+      : ofTypeFilter) as [string, ...string[]];
     let takeUntilOperator: MonoTypeOperatorFunction<any>;
     if (exists(takeUntilTypeFilter)) {
-      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter)));
+      takeUntilOperator = takeUntil(action$.pipe(ofType(takeUntilTypeFilter as string)));
     }
     return action$.pipe(
-      ofType.apply(ofType, ofTypeFilters as any) as any,
+      ofType(...ofTypeFilters),
       mergeMap((action: A) => concat(
         of(workingAction({ action })),
         EpicService.createAjaxObservable(
@@ -327,7 +327,7 @@ const EpicService: IEpicService = {
       )),
     );
   }),
-  createEpicFromProps: <A extends AnyAction, S extends AnyObject>(
+  createEpicFromProps: <A extends UnknownAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
   ): Epic<A, A, S, EpicDependencies> => EpicService.createEpic(
     props.ofTypeFilter,
@@ -340,7 +340,7 @@ const EpicService: IEpicService = {
     props.requestInjector,
     props.useForkJoin,
   ),
-  createMergeEpicFromProps: <A extends AnyAction, S extends AnyObject>(
+  createMergeEpicFromProps: <A extends UnknownAction, S extends AnyObject>(
     props: EpicCreationProps<A>,
   ): Epic<A, A, S, EpicDependencies> => EpicService.createMergeEpic(
     props.ofTypeFilter,
@@ -353,7 +353,7 @@ const EpicService: IEpicService = {
     props.requestInjector,
     props.useForkJoin,
   ),
-  createAjaxObservable: <A extends AnyAction>(
+  createAjaxObservable: <A extends UnknownAction>(
     ajax: typeof AjaxCreationMethod,
     ajaxConfig: AjaxConfig | AjaxConfig[],
     successAction: SuccessAction<A>,

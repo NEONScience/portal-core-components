@@ -337,7 +337,7 @@ export default html = `<header class="header" role="banner">
 
                   </li>
               <li  class="menu__item menu__item--expanded">
-          <a href="https://www.neonscience.org/data-samples/data-management" class="menu__link" data-plugin-id="menu-link-content514fa833-7231-4f27-9e3f-b881c6d5ad62" data-drupal-link-system-path="node/10557">NEON Data Management</a>
+          <a href="https://www.neonscience.org/data/data-management" class="menu__link" data-plugin-id="menu-link-content514fa833-7231-4f27-9e3f-b881c6d5ad62" data-drupal-link-system-path="node/10557">NEON Data Management</a>
 
           
             
