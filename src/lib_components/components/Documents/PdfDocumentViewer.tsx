@@ -44,7 +44,7 @@ const useStyles = makeStyles()(() => ({
     overflow: 'auto',
     backgroundColor: 'rgb(82, 86, 89, 0.9)',
     '& .pdfViewer > .page': {
-      margin: '20px',
+      margin: '13px',
       boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
         0px 1px 1px 0px rgb(0 0 0 / 14%),
         0px 1px 3px 0px rgb(0 0 0 / 12%)`,
@@ -126,7 +126,7 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       if (isViewerDeviceSupported) {
         pdfViewerRef.current.currentScaleValue = 'page-width';
       } else {
-        pdfViewerRef.current.currentScaleValue = 'page-fit';
+        pdfViewerRef.current.currentScaleValue = 'page-width';
       }
     }
   }, [
@@ -185,7 +185,7 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
         if (isViewerDeviceSupported) {
           pdfViewerRef.current.currentScaleValue = 'page-width';
         } else {
-          pdfViewerRef.current.currentScaleValue = 'page-fit';
+          pdfViewerRef.current.currentScaleValue = 'page-width';
         }
       }
     });

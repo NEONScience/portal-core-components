@@ -44,7 +44,7 @@ interface NetworkAvailabilityStore {
 }
 
 /**
- * Hook for determing the current definition of "Network Availability".
+ * Hook for determining the current definition of "Network Availability".
  * To prevent flapping and continually changing UI, this debounces the
  * offline indication such that it only reports as being disconnected
  * after a specified number of consecutive checks have failed for the check
@@ -54,7 +54,7 @@ interface NetworkAvailabilityStore {
  * immediately resumes and indicates that the connection is online.
  * @returns {boolean} Flag indicating currently determined network availability
  */
-export const useNetworkAvailability: () => boolean = () => {
+export const useNetworkAvailability: () => boolean = (): boolean => {
   const store = useMemo<NetworkAvailabilityStore>(() => {
     const snapshot: NetworkAvailabilitySnapshot = {
       isAvailable: true,
