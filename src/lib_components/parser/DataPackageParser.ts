@@ -64,12 +64,18 @@ const DataPackageParser: IDataPackageParser = {
       }
     } else {
       const parsedV2: SensorPositionV2Type = resultV2.data;
+      const appliedSensorStartDateTime = isStringNonEmpty(parsedV2.effectiveStartDateTime)
+        ? parsedV2.effectiveStartDateTime
+        : parsedV2.positionStartDateTime;
+      const appliedSensorEndDateTime = isStringNonEmpty(parsedV2.effectiveEndDateTime)
+        ? parsedV2.effectiveEndDateTime
+        : parsedV2.positionEndDateTime;
       result = {
         horVer: parsedV2['HOR.VER'],
         sensorName: parsedV2.sensorLocationID,
         sensorDescription: parsedV2.sensorLocationDescription,
-        sensorStartDateTime: parsedV2.positionStartDateTime,
-        sensorEndDateTime: parsedV2.positionEndDateTime,
+        sensorStartDateTime: appliedSensorStartDateTime,
+        sensorEndDateTime: appliedSensorEndDateTime,
         referenceLocationName: parsedV2.referenceLocationID,
         referenceLocationDescription: parsedV2.referenceLocationIDDescription,
         referenceLocationStartDateTime: parsedV2.referenceLocationIDStartDateTime,
