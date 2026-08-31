@@ -1,17 +1,18 @@
-name: Node Publish NPM Repo
+name: Node Publish NPM Repo Release
 
 on:
   push:
-    branches: [ main, next ]
+    tags: [ 'v*' ]
 env:
   NPM_REGISTRY: https://registry.npmjs.org
   GH_NPM_REGISTRY: https://npm.pkg.github.com
   NPM_PACKAGE_SCOPE: '@neonscience'
   NODE_VERSION: 24
+  VERSION: ${{ github.ref_name }}
 
 jobs:
-  node-publish-npm-repo:
-    if: github.repository == 'NEONScience/portal-core-components'
+  node-publish-npm-repo-release:
+    if: github.ref_type == 'tag' && github.repository == 'NEONScience/portal-core-components'
     runs-on: ubuntu-latest
 
     permissions:
@@ -41,11 +42,10 @@ jobs:
 
       - name: Set package version
         run: |
-          VERSION=$(node --print "require('./package.json').version")
-          SHA=$(git rev-parse --short HEAD)
+          NPM_VERSION=${VERSION#v}
 
           cd lib
-          npm version "${VERSION}-dev.${SHA}" --no-git-tag-version
+          npm version "${NPM_VERSION}" --no-git-tag-version
 
       # ------------------------------------------------------------------------
       # NPM Registry Publish
@@ -59,7 +59,7 @@ jobs:
           scope: ${{ env.NPM_PACKAGE_SCOPE }}
 
       - name: Publish package to NPM Registry
-        run: npm publish ./lib --tag dev --access public --provenance
+        run: npm publish ./lib --tag latest --access public --provenance
 
       # ------------------------------------------------------------------------
       # GitHub Packages Publish
@@ -73,6 +73,6 @@ jobs:
           scope: ${{ env.NPM_PACKAGE_SCOPE }}
 
       - name: Publish package to GitHub Packages
-        run: npm publish ./lib --tag dev --access public --provenance
+        run: npm publish ./lib --tag latest --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

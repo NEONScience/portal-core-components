@@ -1,8 +1,5 @@
-variable "NODE_VERSION" {
-  default = "24.18"
-}
 variable "PORTAL_WEB_SERVER_BUILDER_TAG" {
-  default = "v2.2.0"
+  default = "v-latest"
 }
 
 # Populated from GitHub Action
@@ -22,7 +19,7 @@ target "docker-metadata-action" {
 }
 
 target "bootstrap" {
-  platforms = [ "linux/amd64" ]
+  platforms = [ "linux/amd64", "linux/arm64" ]
   no-cache = true
 }
 
@@ -32,6 +29,5 @@ target "portal-core-components" {
   dockerfile = "bake.Dockerfile"
   contexts = {
     "portal-web-server-builder:current" = "docker-image://${REPO}/portal-web-server-builder:${PORTAL_WEB_SERVER_BUILDER_TAG}"
-    "portal-react-apps/node:current" = "docker-image://node:${NODE_VERSION}-alpine"
   }
 }

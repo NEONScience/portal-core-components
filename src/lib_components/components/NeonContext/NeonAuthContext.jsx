@@ -13,7 +13,7 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import BroadcastChannelService from '../../service/BroadcastChannelService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
-import { useDocumentVisibleStatus, useNetworkOnlineStatus } from '../../hooks/customHooks';
+import { useNetworkOnlineStatus } from '../../hooks/customHooks';
 
 export const FETCH_STATUS = {
   AWAITING_CALL: 'AWAITING_CALL',
@@ -222,7 +222,6 @@ const Provider = (inProps) => {
   initialState.isActive = true;
   const [state, dispatch] = useReducer(reducer, initialState);
   const isNetworkOnline = useNetworkOnlineStatus();
-  const isDocumentVisible = useDocumentVisibleStatus();
 
   const {
     isFinal,
@@ -246,7 +245,6 @@ const Provider = (inProps) => {
       || NeonEnvironment.sessionDisablePing
       || !preconditionsSatisfied
       || !isNetworkOnline
-      || !isDocumentVisible
       || isAuthWorking
       || !stateIsAuthenticated
       || !isStringNonEmpty(appliedSessionToken)
@@ -264,7 +262,6 @@ const Provider = (inProps) => {
   }, [
     preconditionsSatisfied,
     isNetworkOnline,
-    isDocumentVisible,
     stateIsAuthenticated,
     isAuthWorking,
     sessionState,

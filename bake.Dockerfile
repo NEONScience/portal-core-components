@@ -1,28 +1,14 @@
 #-------------------------------------------------------------------------------
-# Builder container for reproducible build environment
-
-FROM portal-react-apps/node:current AS builder
-
-WORKDIR /app
-COPY . ./build-temp/portal-core-components
-
-WORKDIR /app/build-temp/portal-core-components
-RUN npm ci
-RUN npm run build
-RUN mv ./build /app/
-RUN rm -rf /app/build-temp
-
-#-------------------------------------------------------------------------------
 # Build production container with only necessary artifacts
 
 FROM portal-web-server-builder:current AS server-builder-parent
-FROM alpine:3.23
+FROM alpine:3.24
 
 EXPOSE 3006
 
 WORKDIR /opt/go/app
 
-COPY --from=builder /app .
+COPY build /opt/go/app/build
 COPY --from=server-builder-parent /usr/src/app/go-web-server .
 
 # Set app wide env variables
