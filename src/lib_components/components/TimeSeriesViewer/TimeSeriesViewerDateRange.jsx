@@ -94,6 +94,8 @@ const TimeSeriesViewerDateRange = (props) => {
   const displayMax = displayRange.length - 1;
   let sliderMin = displayRange.indexOf(selectableRange[0]);
   let sliderMax = displayRange.indexOf(selectableRange[1]);
+  const [datePickerStartOpen, setDatePickerStartOpen] = useState(false);
+  const [datePickerEndOpen, setDatePickerEndOpen] = useState(false);
 
   const initialState = { activelySelectingDateRange: [...currentRange] };
   const [dateRangeState, dateRangeDispatch] = useReducer(dateRangeReducer, initialState);
@@ -326,9 +328,12 @@ const TimeSeriesViewerDateRange = (props) => {
               <div style={{ ...datePickerContainerStyleProps, marginRight: theme.spacing(3) }}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.start-input"
+                  open={datePickerStartOpen}
                   orientation="portrait"
                   value={getYearMonthMoment(currentRange[0] || displayRange[sliderMin])}
                   onChange={(value) => handleChangeDatePicker(0, value)}
+                  onOpen={() => setDatePickerStartOpen(true)}
+                  onClose={() => setDatePickerStartOpen(false)}
                   views={['month', 'year']}
                   label="Start"
                   openTo="month"
@@ -340,6 +345,7 @@ const TimeSeriesViewerDateRange = (props) => {
                       readOnly: true,
                       margin: 'dense',
                       size: 'small',
+                      onClick: () => setDatePickerStartOpen(true),
                     },
                   }}
                 />
@@ -347,9 +353,12 @@ const TimeSeriesViewerDateRange = (props) => {
               <div style={datePickerContainerStyleProps}>
                 <DatePicker
                   data-selenium="time-series-viewer.date-range.end-input"
+                  open={datePickerEndOpen}
                   orientation="portrait"
                   value={getYearMonthMoment(currentRange[1] || displayRange[sliderMax])}
                   onChange={(value) => handleChangeDatePicker(1, value)}
+                  onOpen={() => setDatePickerEndOpen(true)}
+                  onClose={() => setDatePickerEndOpen(false)}
                   views={['month', 'year']}
                   label="End"
                   openTo="month"
@@ -361,6 +370,7 @@ const TimeSeriesViewerDateRange = (props) => {
                       readOnly: true,
                       margin: 'dense',
                       size: 'small',
+                      onClick: () => setDatePickerEndOpen(true),
                     },
                   }}
                 />

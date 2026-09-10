@@ -182,6 +182,8 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
   ), [minDate, maxDate]);
   const sliderMin = 0;
   const sliderMax = sliderDateValues.length - 1;
+  const [datePickerStartOpen, setDatePickerStartOpen] = useState(false);
+  const [datePickerEndOpen, setDatePickerEndOpen] = useState(false);
 
   const initialState: DatePickerInternalState = {
     activelySelectingDateRange: [startDate, endDate],
@@ -345,12 +347,15 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
         <Grid size={{ xs: 12, md: appliedSidebarMode ? 12 : 6 }}>
           <DatePicker
             data-selenium="sae-data-viewer.date-range.end-input"
+            open={datePickerEndOpen}
             orientation="portrait"
             format="MMM D, YYYY"
             value={moment(endDate)}
             onChange={(value) => {
               handleDateRangeChange(startDate, moment(value).toDate());
             }}
+            onOpen={() => setDatePickerEndOpen(true)}
+            onClose={() => setDatePickerEndOpen(false)}
             views={['day']}
             label="End"
             openTo="day"
@@ -363,6 +368,7 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
                 variant: 'outlined',
                 margin: 'dense',
                 size: 'small',
+                onClick: () => setDatePickerEndOpen(true),
               },
             }}
           />
@@ -375,6 +381,7 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
           <Grid size={{ xs: 12, md: appliedSidebarMode || !isRange ? 12 : 6 }}>
             <DatePicker
               data-selenium="sae-data-viewer.date-range.start-input"
+              open={datePickerStartOpen}
               orientation="portrait"
               format="MMM D, YYYY"
               value={moment(startDate)}
@@ -385,6 +392,8 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
                   handleDateRangeChange(moment(value).toDate(), endDate);
                 }
               }}
+              onOpen={() => setDatePickerStartOpen(true)}
+              onClose={() => setDatePickerStartOpen(false)}
               views={['day']}
               label={dateSelectionType === DateSelectionType.RANGE ? 'Start' : 'Date'}
               openTo="day"
@@ -397,6 +406,7 @@ const SaeDataViewerDatePicker: React.FC<SaeDataViewerDatePickerProps> = (
                   variant: 'outlined',
                   margin: 'dense',
                   size: 'small',
+                  onClick: () => setDatePickerStartOpen(true),
                 },
               }}
             />

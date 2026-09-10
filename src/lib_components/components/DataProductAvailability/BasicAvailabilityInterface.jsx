@@ -284,6 +284,12 @@ const BasicAvailabilityInterface = (inProps) => {
   const [currentSortMethod, setCurrentSortMethod] = useState(initialSortMethod);
   const [currentSortDirection, setCurrentSortDirection] = useState(initialSortDirection);
 
+  /**
+    Date picker states
+  */
+  const [datePickerStartOpen, setDatePickerStartOpen] = useState(false);
+  const [datePickerEndOpen, setDatePickerEndOpen] = useState(false);
+
   const setSitesValue = useCallback((sitesValue) => dispatchSelection({
     type: 'setValidatableValue',
     key: 'sites',
@@ -737,11 +743,6 @@ const BasicAvailabilityInterface = (inProps) => {
       onDelete: sites.value.length ? handleSelectNoneSites : null,
     };
     const selectionButtonProps = { size: 'small', color: 'primary', variant: 'outlined' };
-    const datePickerContainerStyleProps = {
-      marginTop: '8px',
-      marginBottom: '4px',
-      width: '100%',
-    };
     const datePickerProps = {
       views: ['month', 'year'],
       openTo: 'month',
@@ -780,11 +781,14 @@ const BasicAvailabilityInterface = (inProps) => {
               <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                 <DatePicker
                   {...datePickerProps}
+                  open={datePickerStartOpen}
                   label="Start"
                   data-selenium="data-product-availability.date-range-start"
                   orientation="portrait"
                   value={TIME.getYearMonthMoment(appliedDateRange.value[0])}
                   onChange={(newDate) => handleChangeStartDate(appliedDateRange, newDate)}
+                  onOpen={() => setDatePickerStartOpen(true)}
+                  onClose={() => setDatePickerStartOpen(false)}
                   minDate={TIME.getYearMonthMoment(appliedDateRange.validValues[0])}
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.value[1])}
                   slotProps={{
@@ -794,6 +798,7 @@ const BasicAvailabilityInterface = (inProps) => {
                       readOnly: true,
                       margin: 'dense',
                       size: 'small',
+                      onClick: () => setDatePickerStartOpen(true),
                     },
                   }}
                 />
@@ -802,10 +807,13 @@ const BasicAvailabilityInterface = (inProps) => {
                 <DatePicker
                   {...datePickerProps}
                   label="End"
+                  open={datePickerEndOpen}
                   data-selenium="data-product-availability.date-range-end"
                   orientation="portrait"
                   value={TIME.getYearMonthMoment(appliedDateRange.value[1])}
                   onChange={(newDate) => handleChangeEndDate(appliedDateRange, newDate)}
+                  onOpen={() => setDatePickerEndOpen(true)}
+                  onClose={() => setDatePickerEndOpen(false)}
                   minDate={TIME.getYearMonthMoment(appliedDateRange.value[0])}
                   maxDate={TIME.getYearMonthMoment(appliedDateRange.validValues[1])}
                   slotProps={{
@@ -815,6 +823,7 @@ const BasicAvailabilityInterface = (inProps) => {
                       readOnly: true,
                       margin: 'dense',
                       size: 'small',
+                      onClick: () => setDatePickerEndOpen(true),
                     },
                   }}
                 />
