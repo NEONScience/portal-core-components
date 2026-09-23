@@ -373,7 +373,6 @@ const NeonApi = {
       `${NeonEnvironment.getFullApiPath('arcgisAssets')}/${feature}/${siteCode}`,
       undefined,
       true,
-      false,
     )
   ),
 

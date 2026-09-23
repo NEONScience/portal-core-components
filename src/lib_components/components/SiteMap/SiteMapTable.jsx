@@ -1032,7 +1032,7 @@ const SiteMapTable = () => {
     exportAllData: true,
     exportMenu: [{
       label: 'Export CSV',
-      exportFunc: (cols, datas) => exportCsv(cols, datas, EXPORT_FILENAME),
+      exportFunc: (cols, datas) => exportCsv(cols, datas),
     }],
     emptyRowsWhenPaging: false,
     thirdSortClick: false,
