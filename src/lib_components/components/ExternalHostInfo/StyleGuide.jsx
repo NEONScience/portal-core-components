@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Divider from '@mui/material/Divider';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import ExternalHostInfo from '@/components/ExternalHostInfo/ExternalHostInfo';

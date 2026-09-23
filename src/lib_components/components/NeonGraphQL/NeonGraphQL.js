@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
-import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 export const TYPES = {
   DATA_PRODUCTS: 'DATA_PRODUCTS',
