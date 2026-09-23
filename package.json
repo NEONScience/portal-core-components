@@ -1,6 +1,6 @@
 {
   "name": "@neonscience/portal-core-components",
-  "version": "3.0.0-next",
+  "version": "3.0.0",
   "author": "NEONScience",
   "main": "./src/lib_components/index.ts",
   "private": true,
