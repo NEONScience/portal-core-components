@@ -1,15 +1,17 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import BasicAvailabilityInterface from '../BasicAvailabilityInterface';
 
-jest.mock('@material-ui/core/Select', () => mockReactComponent('@material-ui/core/Select'));
+jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
+jest.mock('@mui/material/MenuItem', () => mockReactComponent('@mui/material/MenuItem'));
 
 // Mock the DownloadDataContext state
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
@@ -46,33 +48,35 @@ const siteCodes = [
 
 describe('DataProductAvailability - BasicAvailabilityInterface', () => {
   test('renders with no props', () => {
-    const tree = renderer
-      .create(<BasicAvailabilityInterface />)
-      .toJSON();
+    const tree = render(<MockTheme><BasicAvailabilityInterface /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with siteCodes and view', () => {
-    const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" />)
-      .toJSON();
+    const tree = render(<MockTheme><BasicAvailabilityInterface siteCodes={siteCodes} view="sites" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders with explicit sort method', () => {
-    const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />)
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" sortMethod="sites" />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with ungrouped view', () => {
-    const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />)
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="ungrouped" />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders with selection disabled', () => {
-    const tree = renderer
-      .create(<BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />)
-      .toJSON();
+    const tree = render(
+      <MockTheme>
+        <BasicAvailabilityInterface siteCodes={siteCodes} view="sites" disableSelection />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
 });

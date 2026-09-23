@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-environment",
-  "main": "./NeonEnvironment.ts",
-  "module": "./NeonEnvironment.ts"
-}

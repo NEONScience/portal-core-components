@@ -1,16 +1,17 @@
 import React, { Suspense } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Skeleton from '@material-ui/lab/Skeleton';
-import HomeIcon from '@material-ui/icons/Home';
-import BasicComponentsIcon from '@material-ui/icons/ViewModule';
+import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
+import HomeIcon from '@mui/icons-material/Home';
+import BasicComponentsIcon from '@mui/icons-material/ViewModule';
 
-import NeonPage from './lib_components/components/NeonPage/NeonPage';
-import NeonRouter from './lib_components/components/NeonRouter/NeonRouter';
+import NeonPage from '@/components/NeonPage/NeonPage';
+import NeonRouter from '@/components/NeonRouter/NeonRouter';
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import NeonThemeProvider from '@/components/Theme/NeonThemeProvider';
+import { isStringNonEmpty } from '@/util/typeUtil';
 
 import Home from './components/Home';
-import NeonEnvironment from './lib_components/components/NeonEnvironment/NeonEnvironment';
-import { isStringNonEmpty } from './lib_components/util/typeUtil';
 
 const BasicComponents = React.lazy(
   () => import('./components/BasicComponents'),
@@ -73,6 +74,9 @@ const ReleaseFilterStyleGuide = React.lazy(
   () => import('./lib_components/components/ReleaseFilter/StyleGuide'),
 );
 const SaeDataViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/SaeDataViewer/StyleGuide'),
+);
+const SaeDataViewerButtonStyleGuide = React.lazy(
   () => import('./lib_components/components/SaeDataViewerButton/StyleGuide'),
 );
 const SiteChipStyleGuide = React.lazy(
@@ -90,25 +94,28 @@ const ThemeStyleGuide = React.lazy(
 const TimeSeriesViewerStyleGuide = React.lazy(
   () => import('./lib_components/components/TimeSeriesViewer/StyleGuide'),
 );
+const WindRoseViewerStyleGuide = React.lazy(
+  () => import('./lib_components/components/WindRoseViewer/StyleGuide'),
+);
 
 const SuspenseFallback = () => (
   <Grid container spacing={3}>
-    <Grid item xs={12}>
+    <Grid size={{ xs: 12 }}>
       <Skeleton variant="text" width="50%" height={32} />
       <br />
-      <Skeleton variant="rect" width="100%" height={100} />
+      <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
-    <Grid item xs={12}>
+    <Grid size={{ xs: 12 }}>
       <Skeleton variant="text" width="25%" height={48} />
       <br />
       <Skeleton variant="text" width="100%" height={24} />
       <Skeleton variant="text" width="100%" height={24} />
       <Skeleton variant="text" width="100%" height={24} />
       <br />
-      <Skeleton variant="rect" width="100%" height={100} />
+      <Skeleton variant="rectangular" width="100%" height={100} />
     </Grid>
-    <Grid item xs={12}>
-      <Skeleton variant="rect" width="100%" height={400} />
+    <Grid size={{ xs: 12 }}>
+      <Skeleton variant="rectangular" width="100%" height={400} />
     </Grid>
   </Grid>
 );
@@ -306,6 +313,15 @@ const sidebarLinks = [
     hash: '#SaeDataViewerButton',
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
+        <SaeDataViewerButtonStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'SAE Data Viewer',
+    hash: '#SaeDataViewer',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
         <SaeDataViewerStyleGuide />
       </Suspense>
     ),
@@ -355,26 +371,39 @@ const sidebarLinks = [
       </Suspense>
     ),
   },
+  {
+    name: 'Wind Rose Viewer',
+    hash: '#WindRoseViewer',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <WindRoseViewerStyleGuide />
+      </Suspense>
+    ),
+  },
 ];
 
-export default function App() {
+const App = () => {
   let sidebarSubtitle = null;
   const appVersion = NeonEnvironment.getReactAppVersion();
   if (isStringNonEmpty(appVersion)) {
     sidebarSubtitle = `version ${appVersion}`;
   }
   return (
-    <NeonRouter>
-      <NeonPage
-        title="NEON Data Portal Core Components"
-        outerPageContainerMaxWidth="3000px"
-        sidebarSubtitle={sidebarSubtitle}
-        sidebarLinks={sidebarLinks}
-        sidebarLinksAsStandaloneChildren
-        useCoreAuth
-      >
-        <Home />
-      </NeonPage>
+    <NeonRouter disableRedirect cleanPath={false}>
+      <NeonThemeProvider>
+        <NeonPage
+          title="NEON Data Portal Core Components"
+          outerPageContainerMaxWidth="3000px"
+          sidebarSubtitle={sidebarSubtitle}
+          sidebarLinks={sidebarLinks}
+          sidebarLinksAsStandaloneChildren
+          customizeAuthContainer
+        >
+          <Home />
+        </NeonPage>
+      </NeonThemeProvider>
     </NeonRouter>
   );
-}
+};
+
+export default App;

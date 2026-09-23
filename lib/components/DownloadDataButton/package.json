@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "download-data-button",
-  "main": "./DownloadDataButton.jsx",
-  "module": "./DownloadDataButton.js"
-}

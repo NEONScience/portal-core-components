@@ -1,6 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import NeonContext from '../../NeonContext/NeonContext';
 
@@ -12,23 +13,17 @@ describe('DataProductAvailability - AvailabilityPending', () => {
   });
   test('renders correctly for NeonContext that is neither error nor final', () => {
     NeonContext.useNeonContextState.mockReturnValue([{ isFinal: false, hasError: false }]);
-    const tree = renderer
-      .create(<AvailabilityPending />)
-      .toJSON();
+    const tree = render(<MockTheme><AvailabilityPending /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders correctly for NeonContext that is final with error', () => {
     NeonContext.useNeonContextState.mockReturnValue([{ isFinal: true, hasError: true }]);
-    const tree = renderer
-      .create(<AvailabilityPending />)
-      .toJSON();
+    const tree = render(<MockTheme><AvailabilityPending /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('renders correctly for NeonContext that is final without error', () => {
     NeonContext.useNeonContextState.mockReturnValue([{ isFinal: true, hasError: false }]);
-    const tree = renderer
-      .create(<AvailabilityPending />)
-      .toJSON();
+    const tree = render(<MockTheme><AvailabilityPending /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

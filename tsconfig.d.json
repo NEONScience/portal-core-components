@@ -1,17 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "./src/lib_components",
     "outDir": "./lib",
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "newLine": "lf"
+    "allowImportingTsExtensions": false,
+    "newLine": "lf",
+    "incremental": false,
+    "types": [
+      "node",
+      "@types/wicg-file-system-access"
+    ]
   },
   "include": [
+    "./next-env.d.ts",
+    "./src/mui-env.d.ts",
+    "./src/global.d.ts",
     "./src/lib_components/components/**/*",
     "./src/lib_components/flow/**/*",
+    "./src/lib_components/parser/**/*",
     "./src/lib_components/service/**/*",
+    "./src/lib_components/sharedState/**/*",
     "./src/lib_components/types/**/*",
     "./src/lib_components/util/**/*",
     "./src/lib_components/*.js",
@@ -20,16 +31,19 @@
     "./src/lib_components/*.tsx"
   ],
   "exclude": [
+    "./scripts",
+    "./test",
+    "./node_modules",
+    "./lib",
+    "./test-coverage",
     "./src/**/StyleGuide.*",
     "./src/components/*",
+    "./src/app/*",
     "./src/lib_components/remoteAssets/*",
     "./src/lib_components/vendor/**/*",
     "./src/favicon/*",
     "./src/sampleData/*",
-    "./src/*.js",
-    "./src/*.jsx",
-    "./src/*.ts",
-    "./src/*.tsx",
+    "./src/App.jsx",
     "./**/__tests__/*"
   ]
 }

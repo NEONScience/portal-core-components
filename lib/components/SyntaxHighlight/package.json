@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "syntax-highlight",
-  "main": "./SyntaxHighlight.tsx",
-  "module": "./SyntaxHighlight.tsx"
-}

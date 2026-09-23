@@ -1,30 +1,20 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
-import { StylesHook } from '../../types/muiTypes';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    callout: {
-      margin: muiTheme.spacing(0.5, 0, 3, 0),
-      backgroundColor: (Theme as NeonTheme).colors.RED[50],
-      borderColor: (Theme as NeonTheme).colors.RED[300],
-    },
-    calloutIcon: {
-      color: (Theme as NeonTheme).colors.RED[300],
-      marginRight: muiTheme.spacing(2),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  callout: {
+    margin: muiTheme.spacing(0.5, 0, 3, 0),
+    backgroundColor: muiTheme.colors.RED[50],
+    borderColor: muiTheme.colors.RED[300],
+  },
+  calloutIcon: {
+    color: muiTheme.colors.RED[300],
+    marginRight: muiTheme.spacing(2),
+  },
+}));
 
 interface ErrorCardClasses {
   callout?: string;
@@ -36,8 +26,8 @@ type ErrorCardProps = BaseErrorCardProps & {
   classes?: ErrorCardClasses;
 };
 
-const ErrorCard: React.FC<ErrorCardProps> = (props: ErrorCardProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const ErrorCard: React.FC<ErrorCardProps> = (props: ErrorCardProps): React.JSX.Element => {
+  const { classes } = useStyles();
   const { classes: calloutClasses }: ErrorCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
     ? calloutClasses.callout

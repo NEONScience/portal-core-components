@@ -1,15 +1,16 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonContext';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import DownloadStepForm from '../DownloadStepForm';
 
-jest.mock('material-table', () => mockReactComponent('material-table'));
+jest.mock('@material-table/core', () => mockReactComponent('@material-table/core'));
 jest.mock('../../DataProductAvailability/DataProductAvailability', () =>
   mockReactComponent('../../DataProductAvailability/DataProductAvailability')
 );
@@ -77,9 +78,7 @@ describe('DownloadStepForm', () => {
   Object.keys(ALL_STEPS)
     .forEach((stepKey) => {
       test(`Step ${stepKey} renders correctly`, () => {
-        const tree = renderer
-          .create(<DownloadStepForm stepKey={stepKey} />)
-          .toJSON();
+        const tree = render(<MockTheme><DownloadStepForm stepKey={stepKey} /></MockTheme>);
         expect(tree).toMatchSnapshot();
       });
     });

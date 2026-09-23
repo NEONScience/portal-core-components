@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
 
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   notification: {
     color: theme.palette.text.primary,
     backgroundColor: COLORS.GOLD[50],
@@ -34,8 +35,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LiferayNotifications = (props) => {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  notifications: [],
+  onHideNotifications: null,
+};
+
+const LiferayNotifications = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes } = useStyles();
   const { notifications, onHideNotifications } = props;
 
   if (!notifications.length || notifications.every((n) => n.dismissed)) { return null; }
@@ -71,7 +78,11 @@ const LiferayNotifications = (props) => {
     <Snackbar
       open
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      ContentProps={{ 'aria-describedby': 'neon-data-portal-notifications' }}
+      slotProps={{
+        content: {
+          'aria-describedby': 'neon-data-portal-notifications',
+        },
+      }}
     >
       <SnackbarContent
         className={classes.notification}
@@ -104,11 +115,6 @@ LiferayNotifications.propTypes = {
     }),
   ),
   onHideNotifications: PropTypes.func,
-};
-
-LiferayNotifications.defaultProps = {
-  notifications: [],
-  onHideNotifications: null,
 };
 
 export default LiferayNotifications;

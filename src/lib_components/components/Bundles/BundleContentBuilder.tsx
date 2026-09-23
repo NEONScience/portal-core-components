@@ -1,32 +1,36 @@
 import React from 'react';
 
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 
 import RouteService from '../../service/RouteService';
-import Theme from '../Theme/Theme';
+import { NeonTheme } from '../Theme/types';
 import { IDataProductLike } from '../../types/internal';
 import { isStringNonEmpty } from '../../util/typeUtil';
 import { LATEST_AND_PROVISIONAL } from '../../service/ReleaseService';
 
 export interface IBundleContentBuilder {
-  getParentProductLink: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
+  getParentProductLink: (dataProduct: IDataProductLike, release?: string) => React.JSX.Element;
 
-  getBundledLink: () => JSX.Element;
+  getBundledLink: () => React.JSX.Element;
 
-  buildManyParentsMainContent: (dataProducts: IDataProductLike[], release?: string) => JSX.Element;
+  buildManyParentsMainContent: (
+    theme: NeonTheme,
+    dataProducts: IDataProductLike[],
+    release?: string,
+  ) => React.JSX.Element;
 
-  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string) => JSX.Element;
+  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string) => React.JSX.Element;
 
-  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string) => JSX.Element;
+  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string) => React.JSX.Element;
 
   buildDefaultSubTitleContent: (
     forwardAvailability: boolean,
     hasManyParents: boolean,
-  ) => JSX.Element;
+  ) => React.JSX.Element;
 }
 
 const BundleContentBuilder: IBundleContentBuilder = {
-  getParentProductLink: (dataProduct: IDataProductLike, release?: string): JSX.Element => {
+  getParentProductLink: (dataProduct: IDataProductLike, release?: string): React.JSX.Element => {
     const isRelease = isStringNonEmpty(release) && (release !== LATEST_AND_PROVISIONAL);
     const href = RouteService.getProductDetailPath(
       dataProduct.productCode,
@@ -42,7 +46,7 @@ const BundleContentBuilder: IBundleContentBuilder = {
     );
   },
 
-  getBundledLink: (): JSX.Element => {
+  getBundledLink: (): React.JSX.Element => {
     const href = RouteService.getDataProductBundlesPath();
     return (
       <Link
@@ -55,10 +59,11 @@ const BundleContentBuilder: IBundleContentBuilder = {
   },
 
   buildManyParentsMainContent: (
+    theme: NeonTheme,
     dataProducts: IDataProductLike[],
     release?: string,
-  ): JSX.Element => ((
-    <ul style={{ margin: Theme.spacing(1, 0) }}>
+  ): React.JSX.Element => ((
+    <ul style={{ margin: theme.spacing(1, 0) }}>
       {dataProducts.map((dataProduct: IDataProductLike) => (
         <li key={dataProduct.productCode}>
           {BundleContentBuilder.getParentProductLink(dataProduct, release)}
@@ -67,13 +72,16 @@ const BundleContentBuilder: IBundleContentBuilder = {
     </ul>
   )),
 
-  buildDefaultTitleContent: (dataProduct: IDataProductLike, release?: string): JSX.Element => {
+  buildDefaultTitleContent: (
+    dataProduct: IDataProductLike,
+    release?: string,
+  ): React.JSX.Element => {
     const isRelease = isStringNonEmpty(release) && (release !== LATEST_AND_PROVISIONAL);
-    const bundleParentLink: JSX.Element = BundleContentBuilder.getParentProductLink(
+    const bundleParentLink: React.JSX.Element = BundleContentBuilder.getParentProductLink(
       dataProduct,
       isRelease ? release : undefined,
     );
-    const bundledLink: JSX.Element = BundleContentBuilder.getBundledLink();
+    const bundledLink: React.JSX.Element = BundleContentBuilder.getBundledLink();
     return (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
@@ -83,8 +91,8 @@ const BundleContentBuilder: IBundleContentBuilder = {
     );
   },
 
-  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string): JSX.Element => {
-    const bundledLink: JSX.Element = BundleContentBuilder.getBundledLink();
+  buildDefaultSplitTitleContent: (isRelease: boolean, terminalChar?: string): React.JSX.Element => {
+    const bundledLink: React.JSX.Element = BundleContentBuilder.getBundledLink();
     return (
       <>
         {/* eslint-disable react/jsx-one-expression-per-line */}
@@ -98,7 +106,7 @@ const BundleContentBuilder: IBundleContentBuilder = {
   buildDefaultSubTitleContent: (
     forwardAvailability: boolean,
     hasManyParents: boolean,
-  ): JSX.Element => ((
+  ): React.JSX.Element => ((
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {forwardAvailability ? (

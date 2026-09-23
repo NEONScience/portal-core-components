@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import React, {
   useCallback,
   useEffect,
@@ -9,24 +7,22 @@ import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Typography from '@mui/material/Typography';
 
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Typography from '@material-ui/core/Typography';
-
-import AscIcon from '@material-ui/icons/KeyboardArrowDown';
-import DescIcon from '@material-ui/icons/KeyboardArrowUp';
+import AscIcon from '@mui/icons-material/KeyboardArrowDown';
+import DescIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import AvailabilityContext from './AvailabilityContext';
 import AvailabilityPending from './AvailabilityPending';
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 import EnhancedAvailabilityKey from './EnhancedAvailabilityKey';
 import EnhancedAvailabilityGrid from './EnhancedAvailabilityGrid';
@@ -44,7 +40,7 @@ const preStyle = {
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -55,13 +51,13 @@ const useStyles = makeStyles((theme) => ({
   xsSelect: {
     height: theme.spacing(4),
     '& div': {
-      padding: Theme.spacing(1, 3, 1, 1.5),
+      padding: theme.spacing(1, 3, 1, 1.5),
     },
   },
   sortSelect: {
     height: theme.spacing(4),
     '& div': {
-      paddingRight: Theme.spacing(4.5),
+      paddingRight: theme.spacing(4.5),
     },
     marginRight: theme.spacing(2),
   },
@@ -73,10 +69,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedAvailabilityInterface = (props) => {
+const defaultProps = {
+  sites: [],
+  view: null,
+  table: 'ALL',
+  sortMethod: null,
+  sortDirection: 'ASC',
+  disableSelection: false,
+};
+
+const EnhancedAvailabilityInterface = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { sites: availabilitySites, ...other } = props;
 
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
 
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },
@@ -105,6 +111,7 @@ const EnhancedAvailabilityInterface = (props) => {
   const handleSvgRedraw = useCallback(() => {
     if (!rowLabels.length) { return; }
     EnhancedAvailabilityGrid({
+      theme,
       rows,
       rowLabels,
       rowTitles,
@@ -112,6 +119,7 @@ const EnhancedAvailabilityInterface = (props) => {
       selectionEnabled,
     });
   }, [
+    theme,
     svgRef,
     rows,
     rowLabels,
@@ -150,13 +158,13 @@ const EnhancedAvailabilityInterface = (props) => {
     };
     return (
       <div
-        style={{ ...optionDivStyle, marginRight: Theme.spacing(3) }}
+        style={{ ...optionDivStyle, marginRight: theme.spacing(3) }}
         data-selenium="data-product-availability.breakout-options"
       >
         <Typography
           variant="h6"
           className={classes.h6Small}
-          style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+          style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
         >
           View By:
         </Typography>
@@ -188,7 +196,7 @@ const EnhancedAvailabilityInterface = (props) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         Sort By:
       </Typography>
@@ -286,15 +294,6 @@ EnhancedAvailabilityInterface.propTypes = {
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
-};
-
-EnhancedAvailabilityInterface.defaultProps = {
-  sites: [],
-  view: null,
-  table: 'ALL',
-  sortMethod: null,
-  sortDirection: 'ASC',
-  disableSelection: false,
 };
 
 export default EnhancedAvailabilityInterface;

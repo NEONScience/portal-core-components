@@ -10,45 +10,44 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import Checkbox from '@material-ui/core/Checkbox';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Zoom from '@material-ui/core/Zoom';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Checkbox from '@mui/material/Checkbox';
+import CircularProgress from '@mui/material/CircularProgress';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import Zoom from '@mui/material/Zoom';
 
-import HelpIcon from '@material-ui/icons/HelpOutline';
-import WarningIcon from '@material-ui/icons/Warning';
-import ErrorIcon from '@material-ui/icons/Error';
-import ExpandUpIcon from '@material-ui/icons/ExpandLess';
-import ExpandDownIcon from '@material-ui/icons/ExpandMore';
-import HideIcon from '@material-ui/icons/VisibilityOff';
-import ShowIcon from '@material-ui/icons/Visibility';
-import DownArrowIcon from '@material-ui/icons/ArrowDropDown';
-import LeftArrowIcon from '@material-ui/icons/ArrowLeft';
-import VertResizeIcon from '@material-ui/icons/Height';
-import LegendIcon from '@material-ui/icons/Toc';
-import UnselectableIcon from '@material-ui/icons/NotInterested';
-import DoneIcon from '@material-ui/icons/Done';
-import CancelIcon from '@material-ui/icons/Cancel';
-import NoneSelectedIcon from '@material-ui/icons/Remove';
-import DeleteIcon from '@material-ui/icons/Delete';
+import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import ExpandUpIcon from '@mui/icons-material/ExpandLess';
+import ExpandDownIcon from '@mui/icons-material/ExpandMore';
+import HideIcon from '@mui/icons-material/VisibilityOff';
+import ShowIcon from '@mui/icons-material/Visibility';
+import DownArrowIcon from '@mui/icons-material/ArrowDropDown';
+import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
+import VertResizeIcon from '@mui/icons-material/Height';
+import LegendIcon from '@mui/icons-material/Toc';
+import UnselectableIcon from '@mui/icons-material/NotInterested';
+import DoneIcon from '@mui/icons-material/Done';
+import CancelIcon from '@mui/icons-material/Cancel';
+import NoneSelectedIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 import SiteMapContext from './SiteMapContext';
 import SiteMapLeaflet from './SiteMapLeaflet';
@@ -64,10 +63,12 @@ import {
   getDynamicAspectRatio,
 } from './SiteMapUtils';
 
-const boxShadow = '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
-const useStyles = makeStyles((theme) => ({
+const boxShadow = `0px 2px 1px -1px rgba(0,0,0,0.2),
+0px 1px 1px 0px rgba(0,0,0,0.14),
+0px 1px 3px 0px rgba(0,0,0,0.12)`;
+const useStyles = makeStyles()((theme) => ({
   ':root': {
-    fontSize: '24px',
+    fontSize: '1.5rem',
   },
   outerContainer: {
     zIndex: 0,
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '0px', // Necessary to set a fixed aspect ratio from props (using paddingBottom)
     position: 'relative',
-    backgroundColor: Theme.colors.NEON_BLUE[200],
+    backgroundColor: theme.colors.NEON_BLUE[200],
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
@@ -145,7 +146,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     paddingRight: theme.spacing(1),
     margin: 0,
-    '& > span:nth-child(2)': {
+    '& > span:nth-of-type(2)': {
       width: '100%',
     },
     '&:hover, &:focus': {
@@ -166,23 +167,23 @@ const useStyles = makeStyles((theme) => ({
     height: '26px',
     padding: 'unset',
     borderRadius: '2px 0px 2px 0px',
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
     cursor: 'grab',
     '&:hover, &:active': {
-      color: Theme.colors.LIGHT_BLUE[400],
-      borderColor: Theme.colors.LIGHT_BLUE[400],
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
       backgroundColor: theme.palette.grey[50],
     },
     '&:active': {
       cursor: 'row-resize !important',
     },
     '& svg': {
-      fontSize: '17px !important',
+      fontSize: '1.0625rem !important',
     },
   },
   resizeBorder: {
     position: 'absolute',
-    border: `3px solid ${Theme.colors.LIGHT_BLUE[500]}`,
+    border: `3px solid ${theme.colors.LIGHT_BLUE[500]}`,
     top: '0px',
     left: '0px',
     width: '100%',
@@ -213,18 +214,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   legendButton: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: '0px 0px 0px 2px',
   },
   legendButtonFullscreen: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
   },
   unselectablesButton: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: '0px 0px 2px 2px',
   },
   unselectablesButtonFullscreen: {
-    border: `1px solid ${Theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`,
   },
   selectionSummaryContainer: {
     position: 'absolute',
@@ -236,19 +237,17 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(6),
     overflowY: 'auto',
+    width: '300px',
     borderRadius: theme.spacing(2.5),
     '& .MuiListItemText-primary': {
       fontWeight: 600,
     },
-    '& .MuiListItem-secondaryAction': {
-      paddingRight: theme.spacing(9),
-    },
     '& .MuiListItemIcon-root': {
       minWidth: 'unset',
     },
-    '& .MuiListItemSecondaryAction-root': {
-      right: theme.spacing(3),
-    },
+  },
+  selectionSummarySecondaryAction: {
+    right: theme.spacing(3),
   },
   selectionSummaryValid: {
     border: `1px solid ${theme.palette.secondary.main}`,
@@ -266,12 +265,18 @@ const useStyles = makeStyles((theme) => ({
   },
   selectionChip: {
     opacity: 1,
-    fontSize: theme.spacing(2),
+    fontSize: '1rem',
     height: theme.spacing(5),
     borderRadius: theme.spacing(2.5),
     padding: theme.spacing(0, 1),
     '& .MuiChip-label': {
       padding: theme.spacing(0, 2),
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.grey[300],
+    },
+    '&:active': {
+      backgroundColor: theme.palette.grey[400],
     },
   },
   selectionChipError: {
@@ -311,8 +316,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SiteMapContainer = (props) => {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  unusableVerticalSpace: 0,
+  mapUniqueId: 0,
+};
+
+const SiteMapContainer = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes, theme } = useStyles();
   const { unusableVerticalSpace = 0, mapUniqueId } = props;
 
   const [neonContextState] = NeonContext.useNeonContextState();
@@ -355,7 +366,7 @@ const SiteMapContainer = (props) => {
   const resizeBorderRef = useRef(null);
   const resizeButtonRef = useRef(null);
 
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
 
   /**
      Vertical Resize Hooks
@@ -529,7 +540,7 @@ const SiteMapContainer = (props) => {
         <div ref={contentDivRef} {...contentDivProps}>
           <Paper className={classes.contentPaper}>
             <WarningIcon fontSize="large" color="error" />
-            <Typography variant="h6" component="h3" style={{ marginTop: Theme.spacing(1) }}>
+            <Typography variant="h6" component="h3" style={{ marginTop: theme.spacing(1) }}>
               {`Unable to load sites: ${neonContextState.fetches.sites.error}`}
             </Typography>
           </Paper>
@@ -587,7 +598,7 @@ const SiteMapContainer = (props) => {
   const renderLegendButton = () => {
     const buttonStyle = filters.legendOpen ? {} : { backgroundColor: 'white' };
     return (
-      <div style={{ borderRadius: '2px', marginLeft: Theme.spacing(1) }}>
+      <div style={{ borderRadius: '2px', marginLeft: theme.spacing(1) }}>
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
@@ -621,7 +632,7 @@ const SiteMapContainer = (props) => {
     const items = selectionActive.toLowerCase().replace('_', '');
     const title = `Click to ${hideUnselectable ? 'show' : 'hide'} ${items} that are not selectable`;
     return (
-      <div style={{ borderRadius: '2px', marginRight: Theme.spacing(1) }}>
+      <div style={{ borderRadius: '2px', marginRight: theme.spacing(1) }}>
         <Tooltip
           enterDelay={500}
           enterNextDelay={200}
@@ -691,13 +702,17 @@ const SiteMapContainer = (props) => {
     const unit = FEATURE_TYPES[selectionActive].unit || '';
     const units = FEATURE_TYPES[selectionActive].units || '';
     const plural = selection.size !== 1;
-    const title = `${selection.size ? selection.size.toString() : 'No'} ${plural ? units : unit} selected`;
+    const title = `${selection.size ? selection.size.toString() : 'No'} `
+      + `${plural ? units : unit} selected`;
     let icon = <NoneSelectedIcon />;
     let color = 'default';
+    // eslint-disable-next-line no-undef-init
+    let backgroundColor = undefined;
     if (selection.size) {
       if (selectionValid) {
         icon = <DoneIcon />;
         color = 'secondary';
+        backgroundColor = theme.palette.secondary.main;
       } else {
         icon = <ErrorIcon />;
       }
@@ -718,19 +733,29 @@ const SiteMapContainer = (props) => {
     const chipClassName = !selection.size || selectionValid
       ? classes.selectionChip
       : `${classes.selectionChip} ${classes.selectionChipError}`;
+    const otherChipStyles = {};
+    if (backgroundColor) {
+      otherChipStyles.backgroundColor = backgroundColor;
+    }
     const summaryValidClass = selection.size && selectionValid
       ? classes.selectionSummaryValid
       : classes.selectionSummaryInvalid;
     const summaryClass = `${classes.selectionSummary} ${summaryValidClass}`;
-    let maxHeight = 72 * 3;
+    const listItemHeight = 80;
+    let maxHeight = listItemHeight * 3;
     if (contentDivRef && contentDivRef.current) {
-      maxHeight = Math.max((contentDivRef.current.clientHeight || 0) - 72 * 2, 72 * 3);
-      maxHeight -= (maxHeight % 72);
+      maxHeight = Math.max(
+        (contentDivRef.current.clientHeight || 0) - listItemHeight * 2,
+        listItemHeight * 3,
+      );
+      maxHeight -= (maxHeight % listItemHeight);
     }
-    maxHeight = Math.min(maxHeight, selection.size * 72);
+    maxHeight = Math.min(maxHeight, selection.size * listItemHeight);
     const summaryStyle = { maxHeight: `${maxHeight + 1}px` };
-    return (
-      <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
+    const renderSelectionSummaryList = () => {
+      if (!showSummary) { return null; }
+      if (selection.size <= 0) { return null; }
+      return (
         <Zoom in={showSummary} mountOnEnter unmountOnExit>
           <div className={summaryClass} style={summaryStyle}>
             <List dense>
@@ -738,7 +763,30 @@ const SiteMapContainer = (props) => {
                 const src = getSelectedItemIcon(selectedItem);
                 const remove = `Remove ${selectedItem} from selection`;
                 return (
-                  <ListItem key={selectedItem}>
+                  <ListItem
+                    key={selectedItem}
+                    secondaryAction={(
+                      <div className={classes.selectionSummarySecondaryAction}>
+                        <Tooltip
+                          title={remove}
+                          enterDelay={500}
+                          enterNextDelay={200}
+                          placement="right"
+                        >
+                          <IconButton
+                            edge="end"
+                            aria-label={remove}
+                            onClick={
+                              () => dispatch({ type: 'toggleItemSelected', item: selectedItem })
+                            }
+                            size="large"
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
+                    )}
+                  >
                     {!src ? null : (
                       <ListItemIcon>
                         <img alt={selectedItem} src={src} className={classes.summaryFeatureIcon} />
@@ -748,34 +796,24 @@ const SiteMapContainer = (props) => {
                       primary={selectedItem}
                       secondary={getSelectedItemDescription(selectedItem)}
                     />
-                    <ListItemSecondaryAction>
-                      <Tooltip
-                        title={remove}
-                        enterDelay={500}
-                        enterNextDelay={200}
-                        placement="right"
-                      >
-                        <IconButton
-                          edge="end"
-                          aria-label={remove}
-                          onClick={() => dispatch({ type: 'toggleItemSelected', item: selectedItem })}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
                   </ListItem>
                 );
               })}
             </List>
           </div>
         </Zoom>
+      );
+    };
+    return (
+      <div className={classes.selectionSummaryContainer} style={summaryContainerStyle}>
+        {renderSelectionSummaryList()}
         <Chip
           icon={icon}
           color={color}
           label={limit ? `${title} (${limit})` : title}
           aria-label="Current selection status"
           className={chipClassName}
+          style={otherChipStyles}
           onClick={() => dispatch({ type: 'toggleSelectionSummary', showSummary: !showSummary })}
           deleteIcon={(
             <Tooltip enterDelay={500} enterNextDelay={200} title="Deselect all">
@@ -812,6 +850,7 @@ const SiteMapContainer = (props) => {
           onDragStart={resizeVerticallyDragStart}
           onDrag={resizeVerticallyDrag}
           onDragEnd={resizeVerticallyDragEnd}
+          size="large"
         >
           <VertResizeIcon fontSize="small" />
         </IconButton>
@@ -943,7 +982,7 @@ const SiteMapContainer = (props) => {
             <IconButton
               size="small"
               aria-label={collapseTitle}
-              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
+              style={{ margin: theme.spacing(0, -2, 0, 1) }}
               onClick={(event) => {
                 event.preventDefault();
                 // We use setTimeout here so the icon doesn't change before the click event bubbles.
@@ -1001,13 +1040,12 @@ const SiteMapContainer = (props) => {
             enterDelay={500}
             enterNextDelay={200}
             placement="bottom-start"
-            TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}
           </Tooltip>
         ) : formControl}
         {!allChildren.length ? null : (
-          <div style={{ marginLeft: Theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
+          <div style={{ marginLeft: theme.spacing(3), display: collapsed ? 'none' : 'block' }}>
             {allChildren
               .filter((f) => state.filters.features.available[f])
               .map(renderFeatureOption)}
@@ -1050,7 +1088,6 @@ const SiteMapContainer = (props) => {
           enterDelay={500}
           enterNextDelay={200}
           placement="left"
-          TransitionComponent={({ children }) => children}
         >
           {itemLabel}
         </Tooltip>
@@ -1116,7 +1153,7 @@ const SiteMapContainer = (props) => {
             <IconButton
               size="small"
               aria-label={collapseTitle}
-              style={{ margin: Theme.spacing(0, -2, 0, 1) }}
+              style={{ margin: theme.spacing(0, -2, 0, 1) }}
               onClick={(event) => {
                 event.preventDefault();
                 // We use setTimeout here so the icon doesn't change before the click event bubbles.
@@ -1170,7 +1207,6 @@ const SiteMapContainer = (props) => {
             enterDelay={500}
             enterNextDelay={200}
             placement="bottom-start"
-            TransitionComponent={({ children }) => children} // set no transition by mock component
           >
             {formControl}
           </Tooltip>
@@ -1215,7 +1251,7 @@ const SiteMapContainer = (props) => {
                 <Tooltip title={description}>
                   <IconButton
                     size="small"
-                    style={{ margin: Theme.spacing(0, -0.75, 0, 1) }}
+                    style={{ margin: theme.spacing(0, -0.75, 0, 1) }}
                     aria-label={`${title} layer group description`}
                   >
                     <HelpIcon style={{ fontSize: '1rem' }} />
@@ -1256,12 +1292,11 @@ const SiteMapContainer = (props) => {
   let legendContainerClassName = classes.legendContainer;
   let viewLegendButtonsContainerClassName = classes.viewLegendButtonsContainer;
   if (fullscreen) {
-    /* eslint-disable max-len */
     legendContainerClassName = `${classes.legendContainer} ${classes.legendContainerFullscreen}`;
-    viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} ${classes.viewLegendButtonsContainerFullscreen}`;
-    /* eslint-enable max-len */
+    viewLegendButtonsContainerClassName = `${classes.viewLegendButtonsContainer} `
+      + `${classes.viewLegendButtonsContainerFullscreen}`;
   }
-  const ret = (
+  return (
     <div {...containerProps} aria-describedby={progressId}>
       <div ref={contentDivRef} {...contentDivProps}>
         {view === VIEWS.MAP || view === VIEWS.SPLIT ? <SiteMapLeaflet /> : null }
@@ -1281,23 +1316,22 @@ const SiteMapContainer = (props) => {
           {renderMapTableToggleButtonGroup()}
           {renderLegendButton()}
         </div>
+        {/*
+          Disabling this lint rule here intentionally as we are managing the
+          ref / HTMLElement directly
+        */}
+        {/* eslint-disable-next-line react-hooks/refs */}
         {renderSelectionSummary()}
       </div>
       {fullscreen ? null : <div ref={resizeBorderRef} className={classes.resizeBorder} />}
       {view === VIEWS.SPLIT ? <SiteMapTable /> : null }
     </div>
   );
-  return ret;
 };
 
 SiteMapContainer.propTypes = {
   unusableVerticalSpace: PropTypes.number,
   mapUniqueId: PropTypes.number,
-};
-
-SiteMapContainer.defaultProps = {
-  unusableVerticalSpace: 0,
-  mapUniqueId: 0,
 };
 
 export default SiteMapContainer;

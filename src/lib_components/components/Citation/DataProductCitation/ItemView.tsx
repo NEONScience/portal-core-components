@@ -3,20 +3,19 @@ import React, { useCallback } from 'react';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CopyIcon from '@material-ui/icons/Assignment';
-import DownloadIcon from '@material-ui/icons/SaveAlt';
+import CopyIcon from '@mui/icons-material/Assignment';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
 import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
@@ -26,12 +25,13 @@ import DataCiteService, {
   CitationDownloadType, CitationFormat,
 } from '../../../service/DataCiteService';
 import RouteService from '../../../service/RouteService';
-import Theme from '../../Theme/Theme';
+import { withDefaultProps } from '../../../util/defaultProps';
 import { PROVISIONAL_RELEASE } from '../../../service/ReleaseService';
 import { exists, isStringNonEmpty } from '../../../util/typeUtil';
 import { Nullable, Undef, UnknownRecord } from '../../../types/core';
 import { DataProductRelease } from '../../../types/neonApi';
 import { IDataProductLike } from '../../../types/internal';
+import { makeStyles } from '../../Theme/makeStyles';
 import { NeonTheme } from '../../Theme/types';
 
 import ActionCreator from './Actions';
@@ -50,7 +50,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardActions: {
     flexWrap: 'wrap',
     marginTop: theme.spacing(-1),
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
       marginLeft: '0px !important',
       marginTop: theme.spacing(1),
     },
-    '&> :not(:last-child)': {
+    '&> :not(span:last-of-type)': {
       marginRight: theme.spacing(1),
     },
   },
@@ -87,16 +87,26 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
     marginBottom: theme.spacing(2),
   },
   tombstoneBlurb: {
-    fontSize: '0.8rem',
   },
   noticeCardDivider: {
     margin: theme.spacing(0, 0, 2, 0),
   },
 }));
 
+const defaultProps: Omit<
+  DataProductCitationItemViewProps,
+  'citationItem'|'viewState'|'hasManyParents'
+> = {
+  showQuoteIcon: false,
+  disableConditional: false,
+  disableSkeleton: false,
+  showTextOnly: false,
+  textOnlyProps: undefined,
+};
+
 const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = (
   props: DataProductCitationItemViewProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     showTextOnly,
     textOnlyProps,
@@ -104,7 +114,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     viewState,
     hasManyParents,
   }: DataProductCitationItemViewProps = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const dispatch = DataProductCitationContext.useDataProductCitationContextDispatch();
 
   let appliedTextOnly: CitationTextOnlyProps = {
@@ -186,7 +196,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
   }, [dispatch, releases, doiUrl, handleResetCitationDownloadsCb]);
 
-  const renderTombstoneNotice = (): Nullable<JSX.Element> => {
+  const renderTombstoneNotice = (): Nullable<React.JSX.Element> => {
     if (!isTombstoned) {
       return null;
     }
@@ -196,37 +206,37 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       const doiId: string = citationRelease.productDoi.url.split('/').slice(-2).join('/');
       doiDisplay = ` (DOI:${doiId}) `;
     }
-    let latestAvailableReleaseBlurb: JSX.Element|null = null;
+    let latestAvailableReleaseBlurb: React.JSX.Element|null = null;
     if (citableBaseProduct?.releases && (citableBaseProduct?.releases.length > 0)) {
       const latestAvailableProductRelease: DataProductRelease = citableBaseProduct?.releases[0];
       if (latestAvailableProductRelease.release.localeCompare(citationRelease.release) !== 0) {
-        const dataProductDetailLink: JSX.Element = (
+        const dataProductDetailLink: React.JSX.Element = (
           <Link href={RouteService.getProductDetailPath(citableBaseProduct.productCode)}>
             newer release
           </Link>
         );
         latestAvailableReleaseBlurb = (
           <>
-            {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+            {/* eslint-disable react/jsx-one-expression-per-line */}
             has been replaced by a {dataProductDetailLink} and&nbsp;
-            {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+            {/* eslint-enable react/jsx-one-expression-per-line */}
           </>
         );
       }
     }
-    const contactUsLink: JSX.Element = (
+    const contactUsLink: React.JSX.Element = (
       <Link href={RouteService.getContactUsPath()}>
         Contact Us
       </Link>
     );
-    const tombstoneNote: JSX.Element = (
+    const tombstoneNote: React.JSX.Element = (
       <>
-        {/* eslint-disable react/jsx-one-expression-per-line, max-len */}
+        {/* eslint-disable react/jsx-one-expression-per-line */}
         <b>{citationRelease.release}</b> of this data product
         {doiDisplay} {latestAvailableReleaseBlurb}is no longer available for download.
         If this specific release is needed for research purposes, please fill out
         the {contactUsLink} form.
-        {/* eslint-enable react/jsx-one-expression-per-line, max-len */}
+        {/* eslint-enable react/jsx-one-expression-per-line */}
       </>
     );
     return (
@@ -243,7 +253,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     );
   };
 
-  const renderBundleParentLink = (): Nullable<JSX.Element> => {
+  const renderBundleParentLink = (): Nullable<React.JSX.Element> => {
     if (!isStringNonEmpty(bundleParentCode) || hasManyParents) {
       return null;
     }
@@ -290,7 +300,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
     release: string,
     conditional = false,
     provisional = false,
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const citationProduct: ContextDataProduct = provisional
       ? citableBaseProduct as ContextDataProduct
       : citableReleaseProduct as ContextDataProduct;
@@ -312,7 +322,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
         );
       } else {
         conditionalText = (
-          <Typography variant="body1" component="h6">
+          <Typography variant="body2" component="h6">
             {provReleaseText}
           </Typography>
         );
@@ -347,7 +357,7 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       citationProduct.productCode,
       FetchStatus.FETCHING,
     );
-    let downloadStatus: Nullable<JSX.Element>;
+    let downloadStatus: Nullable<React.JSX.Element>;
     if (
       Service.hasCitationDownloadStatus(
         citationDownloadsFetchStatus,
@@ -385,78 +395,81 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
       <Card className={classes.citationCard}>
         <CardContent>
           {conditionalText}
-          <Typography variant="body1" className={citationClassName}>
+          <Typography variant="body2" className={citationClassName}>
             {citationText}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Tooltip
-            placement="bottom-start"
-            title="Click to copy the above plain text citation to the clipboard"
-          >
-            <CopyToClipboard text={citationText}>
-              <Button
-                size="small"
-                color="primary"
-                variant="outlined"
-                startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
-                className={classes.cardButton}
-              >
-                Copy
-              </Button>
-            </CopyToClipboard>
-          </Tooltip>
-          {DataCiteService.getDataProductFormats().map((format: CitationFormat): JSX.Element => {
-            const key: string = Service.buildCitationDownloadKey(
-              citationProduct,
-              release,
-              format.shortName,
-              provisional,
-            );
-            const isDownloading: boolean = !exists(citationDownloadsFetchStatus[key])
-              ? false
-              : citationDownloadsFetchStatus[key].status === FetchStatus.FETCHING;
-            return (
-              <Tooltip
-                key={format.shortName}
-                placement="bottom-start"
-                title={(
-                  `Click to download the ${citationProduct.productCode}/${release} citation as a `
-                    + `file in ${format.longName} format`
-                )}
-              >
-                <span>
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="outlined"
-                    className={classes.cardButton}
-                    disabled={isDownloading || isSectionDownloading}
-                    startIcon={isDownloading
-                      ? <CircularProgress size={18} className={classes.cardButtonIcon} />
-                      : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
-                    onClick={() => {
-                      handleCitationDownloadCb(
-                        citationProduct,
-                        release,
-                        format.shortName,
-                        provisional,
-                      );
-                    }}
-                  >
-                    {`Download (${format.shortName})`}
-                  </Button>
-                </span>
-              </Tooltip>
-            );
-          })}
+          <CopyToClipboard text={citationText}>
+            <Tooltip
+              placement="bottom-start"
+              title="Click to copy the above plain text citation to the clipboard"
+            >
+              <span>
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  startIcon={<CopyIcon fontSize="small" className={classes.cardButtonIcon} />}
+                  className={classes.cardButton}
+                >
+                  Copy
+                </Button>
+              </span>
+            </Tooltip>
+          </CopyToClipboard>
+          {DataCiteService.getDataProductFormats()
+            .map((format: CitationFormat): React.JSX.Element => {
+              const key: string = Service.buildCitationDownloadKey(
+                citationProduct,
+                release,
+                format.shortName,
+                provisional,
+              );
+              const isDownloading: boolean = !exists(citationDownloadsFetchStatus[key])
+                ? false
+                : citationDownloadsFetchStatus[key].status === FetchStatus.FETCHING;
+              return (
+                <Tooltip
+                  key={format.shortName}
+                  placement="bottom-start"
+                  title={(
+                    `Click to download the ${citationProduct.productCode}/${release} citation as a `
+                      + `file in ${format.longName} format`
+                  )}
+                >
+                  <span>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="outlined"
+                      className={classes.cardButton}
+                      disabled={isDownloading || isSectionDownloading}
+                      startIcon={isDownloading
+                        ? <CircularProgress size={18} className={classes.cardButtonIcon} />
+                        : <DownloadIcon fontSize="small" className={classes.cardButtonIcon} />}
+                      onClick={() => {
+                        handleCitationDownloadCb(
+                          citationProduct,
+                          release,
+                          format.shortName,
+                          provisional,
+                        );
+                      }}
+                    >
+                      {`Download (${format.shortName})`}
+                    </Button>
+                  </span>
+                </Tooltip>
+              );
+            })}
         </CardActions>
         {downloadStatus}
       </Card>
     );
   };
 
-  let citationCard: JSX.Element;
+  let citationCard: React.JSX.Element;
   switch (displayType) {
     case DisplayType.CONDITIONAL:
       citationCard = (
@@ -494,12 +507,4 @@ const DataProductCitationItemView: React.FC<DataProductCitationItemViewProps> = 
   );
 };
 
-DataProductCitationItemView.defaultProps = {
-  showQuoteIcon: false,
-  disableConditional: false,
-  disableSkeleton: false,
-  showTextOnly: false,
-  textOnlyProps: undefined,
-};
-
-export default DataProductCitationItemView;
+export default withDefaultProps(DataProductCitationItemView, defaultProps);

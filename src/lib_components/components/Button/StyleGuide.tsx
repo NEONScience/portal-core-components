@@ -1,23 +1,21 @@
-/* eslint react/jsx-one-expression-per-line: 0 */
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
 import SplitButton from './SplitButton';
-import Theme from '../Theme/Theme';
-// import { exists } from '../../util/typeUtil';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -32,8 +30,8 @@ const state = {
 };
 const options = ['Option 1', 'Option 2', 'Yet another option!'];
 
-const CustomButtonDemo = (): JSX.Element => {
-  const classes = useStyles(Theme);
+const CustomButtonDemo = (): React.JSX.Element => {
+  const { classes } = useStyles();
   const [selectedSize, setSelectedSize] = useState(false);
   const [selectedVal, setSelectedVal] = useState(options[0]);
   const [inputText, setInputText] = useState('color: #ff00ff; padding: 36px 0px');
@@ -63,7 +61,7 @@ const CustomButtonDemo = (): JSX.Element => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -87,7 +85,7 @@ const CustomButtonDemo = (): JSX.Element => {
             )))}
           </Select>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -105,7 +103,7 @@ const CustomButtonDemo = (): JSX.Element => {
             style={{ width: '100%', marginBottom: '32px' }}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <SplitButton
             styleOverrides={parseCssString(inputText)}
             // styleOverrides={{ padding: '16px 0px' }}
@@ -115,7 +113,7 @@ const CustomButtonDemo = (): JSX.Element => {
             onChange={(option: string) => (
               setSelectedVal(option)
             )}
-            selectedOptionDisplayCallback={(selOption:string) => (
+            selectedOptionDisplayCallback={(selOption: string) => (
               selOption
             )}
             onClick={() => (
@@ -131,7 +129,7 @@ const CustomButtonDemo = (): JSX.Element => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
   return (
@@ -151,10 +149,11 @@ import SplitButton from 'portal-core-components/lib/components/Button/SplitButto
         The split button presents multiple options where each one is a clickable button.
         The button can be set to take up full width. Also since the other buttons have
         icons with a hight of 20px and the split button icon is 24x24 its style can be
-        overriden to provide a consistent hieght or any other desired changes.
+        overridden to provide a consistent height or any other desired changes.
       </DocBlock>
       <ExampleBlock>
         <SplitButton
+          name="split-button-demo-2"
           isFullWidth={false}
           styleOverrides={{ padding: '6px 0px' }}
           options={['Option 1', 'Option 2', 'Yet another option!']}
@@ -166,7 +165,7 @@ import SplitButton from 'portal-core-components/lib/components/Button/SplitButto
             // eslint-disable-next-line no-alert
             alert(`You chose ${selectedOption}`)
           )}
-          selectedOptionDisplayCallback={(selOption:string) => (
+          selectedOptionDisplayCallback={(selOption: string) => (
             selOption
           )}
         />
@@ -186,7 +185,7 @@ const [selectedOption, setSelectedOption] = useState('Option 1');
     // eslint-disable-next-line no-alert
     alert(\`You chose ${selectedOption}\`)
   )}
-  selectedOptionDisplayCallback={(selOption:string) => (
+  selectedOptionDisplayCallback={(selOption: string) => (
     selOption
   )}
 />
@@ -203,7 +202,6 @@ const [selectedOption, setSelectedOption] = useState('Option 1');
       <Typography variant="h6" component="h4" gutterBottom>Failure State</Typography>
 
       <DocBlock>
-        { /* @ts-ignore */ }
         Any invalid paramaters to the component are ignored so failures only happen
         when events like OnChange not correctly hooked up.
       </DocBlock>

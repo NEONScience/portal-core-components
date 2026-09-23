@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "release-filter",
-  "main": "./ReleaseFilter.jsx",
-  "module": "./ReleaseFilter.js"
-}

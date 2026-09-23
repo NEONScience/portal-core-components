@@ -2,42 +2,43 @@ import React, { useState } from 'react';
 
 import lzw from 'node-lzw';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Chip from '@material-ui/core/Chip';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import LinearProgress from '@mui/material/LinearProgress';
+import MobileStepper from '@mui/material/MobileStepper';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepButton from '@mui/material/StepButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CircleStarIcon from '@material-ui/icons/Stars';
-import DownloadIcon from '@material-ui/icons/SaveAlt';
-import ErrorIcon from '@material-ui/icons/ErrorOutline';
-import LeftIcon from '@material-ui/icons/ChevronLeft';
-import RightIcon from '@material-ui/icons/ChevronRight';
-import WarningIcon from '@material-ui/icons/Warning';
+import CircleStarIcon from '@mui/icons-material/Stars';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
+import ErrorIcon from '@mui/icons-material/ErrorOutlined';
+import LeftIcon from '@mui/icons-material/ChevronLeft';
+import RightIcon from '@mui/icons-material/ChevronRight';
+import WarningIcon from '@mui/icons-material/Warning';
 
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import LoginRequiredCard from '../Card/LoginRequiredCard';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import ReleaseChip from '../Chip/ReleaseChip';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import {
   buildManifestConfig,
@@ -48,7 +49,7 @@ import {
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
 
-const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
+const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
   stepChip: {
     marginRight: theme.spacing(1),
     fontSize: '1rem',
@@ -64,11 +65,11 @@ const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
     margin: theme.spacing(-0.5, 1.5, 0, 0),
   },
   releaseChip: {
-    color: Theme.colors.LIGHT_BLUE[600],
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[600]}`,
-    backgroundColor: Theme.colors.LIGHT_BLUE[50],
+    color: theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
-    fontSize: '0.9rem',
+    fontSize: '0.875rem',
     cursor: 'help',
     height: belowSmMd && !belowSm ? 'auto' : undefined,
     padding: theme.spacing(2, 1, 2, 1),
@@ -89,17 +90,17 @@ const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
     },
   },
   summaryIcon: {
-    fontSize: '30px',
+    fontSize: '1.875rem',
     color: theme.palette.primary.main,
   },
   summaryIconTitleMarker: {
-    fontSize: '38px',
+    fontSize: '2.375rem',
     color: theme.palette.primary.main,
     margin: '-2px 6px -2px -4px',
   },
   callout: {
     backgroundColor: COLORS.GOLD[300],
-    margin: Theme.spacing(0.5, 0, 2, 0),
+    margin: theme.spacing(0.5, 0, 3, 0),
   },
   calloutIcon: {
     color: COLORS.GOLD[800],
@@ -112,7 +113,7 @@ const useStyles = (belowSm, belowSmMd) => makeStyles((theme) => ({
   },
 }));
 
-const useDialogBaseStyles = (belowSm) => makeStyles((theme) => ({
+const useDialogBaseStyles = makeStyles()((theme, { belowSm }) => ({
   contentPaper: {
     margin: theme.spacing(10, 2, belowSm ? 9 : 2, 2),
     padding: theme.spacing(3),
@@ -121,12 +122,13 @@ const useDialogBaseStyles = (belowSm) => makeStyles((theme) => ({
 }));
 
 export default function DownloadDataDialog() {
-  const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
+  const theme = useTheme();
+  const belowSm = useMediaQuery(theme.breakpoints.only('xs'));
   const belowSmMd = useMediaQuery('(max-width: 750px)');
   const belowSmMdStepper = useMediaQuery('(max-width: 700px)');
   const belowMdStepper = useMediaQuery('(max-width: 800px)');
-  const classes = useStyles(belowSm, belowSmMd)(Theme);
-  const dialogBaseClasses = useDialogBaseStyles(belowSm)(Theme);
+  const { classes } = useStyles({ belowSm, belowSmMd });
+  const { classes: dialogBaseClasses } = useDialogBaseStyles({ belowSm });
 
   /**
      State (from DownloadDataContext)
@@ -153,7 +155,7 @@ export default function DownloadDataDialog() {
     dispatch,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
 
   /**
      State (local)
@@ -173,7 +175,7 @@ export default function DownloadDataDialog() {
   */
   const externalHost = ExternalHost.getByProductCode(productData.productCode);
   const renderExternalHostInfo = () => {
-    if (!externalHost || externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA) {
+    if (!externalHost || externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA) {
       return null;
     }
     if (activeStepIndex !== 0) {
@@ -248,7 +250,7 @@ export default function DownloadDataDialog() {
       provisionalData,
     };
     const headers = {
-      ...neonContextSessionState.sessionHeaders,
+      ...neonAuthContextSessionState.sessionHeaders,
     };
     if (fromAOPManifest) {
       const config = buildManifestConfig(manifestSelection, null, true);
@@ -266,7 +268,7 @@ export default function DownloadDataDialog() {
   const renderSizeEstimate = () => {
     const alignRight = { style: { textAlign: 'right' } };
     const subtitleStyle = {
-      style: { lineHeight: '1rem', fontSize: '0.9rem', marginBottom: '4px' },
+      style: { lineHeight: '1rem', fontSize: '0.875rem', marginBottom: '4px' },
     };
     if (
       (fromManifest && manifest.status === 'awaitingFetchCall')
@@ -276,12 +278,12 @@ export default function DownloadDataDialog() {
       return belowSm ? (
         <div className={classes.startFlex}>
           <Typography variant="body2">Estimating size...</Typography>
-          <CircularProgress size={16} style={{ marginLeft: Theme.spacing(1) }} />
+          <CircularProgress size={16} style={{ marginLeft: theme.spacing(1) }} />
         </div>
       ) : (
         <div {...alignRight}>
           <Typography variant="subtitle1" {...subtitleStyle}>Estimating size...</Typography>
-          <LinearProgress style={{ marginTop: Theme.spacing(1.5) }} />
+          <LinearProgress style={{ marginTop: theme.spacing(1.5) }} />
         </div>
       );
     }
@@ -310,7 +312,9 @@ export default function DownloadDataDialog() {
       }
       return (
         <div {...alignRight}>
-          <Typography variant="subtitle1" {...subtitleStyle}>Estimated size{uncompressed}</Typography>
+          <Typography variant="subtitle1" {...subtitleStyle}>
+            Estimated size{uncompressed}
+          </Typography>
           <Typography variant="h5" style={{ color: estimateColor }}>
             {estimateIcon}
             {formatBytes(bytes)}
@@ -327,7 +331,8 @@ export default function DownloadDataDialog() {
       const hasProvisionalDataStep = requiredSteps.some((step) => (
         (step.key === 'provisionalData')
       ));
-      const excludeProvisionalData = hasProvisionalDataStep && (provisionalData.value === 'exclude');
+      const excludeProvisionalData = hasProvisionalDataStep
+        && (provisionalData.value === 'exclude');
       const showNoReleaseData = hasProvisionalDataStep && excludeProvisionalData;
       return (
         <Typography variant="body2" color="error">
@@ -409,7 +414,7 @@ export default function DownloadDataDialog() {
     let disabled = true;
     let buttonText = 'Download Data';
     const iconProps = {
-      style: { marginLeft: Theme.spacing(1) },
+      style: { marginLeft: theme.spacing(1) },
     };
     let icon = <DownloadIcon {...iconProps} />;
     if (downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.AWAITING_PRECONDITIONS) {
@@ -484,9 +489,9 @@ export default function DownloadDataDialog() {
     return (
       <LoginRequiredCard
         showValidation
-        isAuthenticated={neonContextSessionState.authenticated}
-        accountValidated={neonContextSessionState.accountValidated}
-        accountValidationSteps={neonContextSessionState.accountValidationSteps}
+        isAuthenticated={neonAuthContextSessionState.authenticated}
+        accountValidated={neonAuthContextSessionState.accountValidated}
+        accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
       />
     );
   };
@@ -503,14 +508,16 @@ export default function DownloadDataDialog() {
         && !(manifest.sizeEstimate > 0))
       || (fromAOPManifest && !(s3Files.totalSize > 0));
     if (!allStepsComplete) {
+      const completeStepsMessage = 'Complete all steps to enable download. '
+        + `${completedSteps.length} of ${completableSteps.length} completed.`;
       return (
-        <Typography variant="body2" style={{ marginTop: Theme.spacing(2), textAlign: 'right' }}>
-          {`Complete all steps to enable download. ${completedSteps.length} of ${completableSteps.length} completed.`}
+        <Typography variant="body2" style={{ marginTop: theme.spacing(2), textAlign: 'right' }}>
+          {completeStepsMessage}
         </Typography>
       );
     }
     return (
-      <Typography variant="body2" style={{ marginTop: Theme.spacing(2), textAlign: 'right' }}>
+      <Typography variant="body2" style={{ marginTop: theme.spacing(2), textAlign: 'right' }}>
         {noDataAvailable ? 'No data selected.' : 'All steps completed.'}
       </Typography>
     );
@@ -524,11 +531,11 @@ export default function DownloadDataDialog() {
         <div>
           <Grid container spacing={2}>
             {showDownloadButton ? (
-              <Grid item xs={12} sm={12} md={8}>
+              <Grid size={{ xs: 12, sm: 12, md: 8 }}>
                 {renderDownloadButton()}
               </Grid>
             ) : null}
-            <Grid item xs={12} sm={12} md={showDownloadButton ? 4 : 12}>
+            <Grid size={{ xs: 12, sm: 12, md: showDownloadButton ? 4 : 12 }}>
               <Button
                 fullWidth
                 data-selenium="download-data-dialog.cancel-button"
@@ -537,7 +544,7 @@ export default function DownloadDataDialog() {
                 color="primary"
                 variant="outlined"
                 onClick={handleCancel}
-                style={{ marginRight: Theme.spacing(showDownloadButton ? 1 : 0) }}
+                style={{ marginRight: theme.spacing(showDownloadButton ? 1 : 0) }}
                 className={classes.gtmCaptureButton}
               >
                 {showDownloadButton ? 'Cancel' : 'Done'}
@@ -552,7 +559,7 @@ export default function DownloadDataDialog() {
     }
     let appliedActionsContainerStyles = {};
     let appliedDismissActionStyle = {
-      marginRight: Theme.spacing(showDownloadButton ? 1 : 0),
+      marginRight: theme.spacing(showDownloadButton ? 1 : 0),
     };
     if (showDownloadButton && belowSmMd) {
       appliedActionsContainerStyles = {
@@ -604,7 +611,7 @@ export default function DownloadDataDialog() {
         variant="outlined"
         aria-label="Next"
         disabled={activeStepIndex === requiredSteps.length - 1}
-        style={{ marginLeft: Theme.spacing(1) }}
+        style={{ marginLeft: theme.spacing(1) }}
         onClick={() => changeToStep(activeStepIndex + 1)}
         endIcon={<RightIcon />}
       >
@@ -638,7 +645,7 @@ export default function DownloadDataDialog() {
                 onClick={handleBack}
                 disabled={activeStepIndex === 0}
               >
-                {Theme.direction === 'rtl' ? <RightIcon /> : <LeftIcon />}
+                {theme.direction === 'rtl' ? <RightIcon /> : <LeftIcon />}
                 Back
               </Button>
             )}
@@ -649,7 +656,7 @@ export default function DownloadDataDialog() {
                 disabled={activeStepIndex === maxSteps - 1}
               >
                 Next
-                {Theme.direction === 'rtl' ? <LeftIcon /> : <RightIcon />}
+                {theme.direction === 'rtl' ? <LeftIcon /> : <RightIcon />}
               </Button>
             )}
           />
@@ -706,13 +713,13 @@ export default function DownloadDataDialog() {
       return (
         <>
           {getStep(activeStepIndex).title ? (
-            <div style={{ marginTop: Theme.spacing(3) }}>
+            <div style={{ marginTop: theme.spacing(3) }}>
               <Typography variant="h5" style={{ flexGrow: 1 }}>
                 {getStep(activeStepIndex).title}
               </Typography>
             </div>
           ) : null}
-          <div style={{ margin: Theme.spacing(3, belowSm ? 0 : 5) }}>
+          <div style={{ margin: theme.spacing(3, belowSm ? 0 : 5) }}>
             <DownloadStepForm stepKey={requiredSteps[activeStepIndex].key} />
           </div>
         </>
@@ -723,14 +730,14 @@ export default function DownloadDataDialog() {
       : <Chip color="primary" label={activeStepIndex + 1} className={classes.stepChip} />;
     return (
       <>
-        <div className={classes.startFlex} style={{ marginTop: Theme.spacing(3) }}>
+        <div className={classes.startFlex} style={{ marginTop: theme.spacing(3) }}>
           {titleMarker}
           <Typography variant="h5" style={{ flexGrow: 1 }}>
             {getStep(activeStepIndex).title}
           </Typography>
           {belowSm ? null : renderStepNavButtons()}
         </div>
-        <div style={{ margin: Theme.spacing(2, belowSm ? 0 : 5) }}>
+        <div style={{ margin: theme.spacing(2, belowSm ? 0 : 5) }}>
           <DownloadStepForm
             stepKey={requiredSteps[activeStepIndex].key}
             changeToStep={changeToStep}
@@ -784,20 +791,52 @@ export default function DownloadDataDialog() {
   const renderGtmTags = () => (
     <>
       {/* Google Tag Manager elements to track download progress */}
-      <input type="hidden" data-gtm="download-data-dialog.product-code" value={productData.productCode} />
-      <input type="hidden" data-gtm="download-data-dialog.size-estimate-bytes" value={getSizeEstimateBytes()} />
-      <input type="hidden" data-gtm="download-data-dialog.steps-completed" value={getStepsCompleted().join(', ')} />
-      <input type="hidden" data-gtm="download-data-dialog.steps-not-completed" value={getStepsNotCompleted().join(', ')} />
-      <input type="hidden" data-gtm="download-data-dialog.step-completion-percentage" value={getStepCompletionPercentage()} />
-      <input type="hidden" data-gtm="download-data-dialog.download-executed" value={downloadExecuted ? 1 : 0} />
-      <input type="hidden" data-gtm="download-data-dialog.lzw-compressed-config" value={getLZWCompressedConfig()} />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.product-code"
+        value={productData.productCode}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.size-estimate-bytes"
+        value={getSizeEstimateBytes()}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.steps-completed"
+        value={getStepsCompleted().join(', ')}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.steps-not-completed"
+        value={getStepsNotCompleted().join(', ')}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.step-completion-percentage"
+        value={getStepCompletionPercentage()}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.download-executed"
+        value={downloadExecuted ? 1 : 0}
+      />
+      <input
+        type="hidden"
+        data-gtm="download-data-dialog.lzw-compressed-config"
+        value={getLZWCompressedConfig()}
+      />
       {/* end Google Tag Manager elements */}
     </>
   );
-
-  const releaseTooltip = release.value === null
-    ? `You are downloading only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
-    : `You are downloading product data only from the ${release.value} release (no provisional data will be included).`;
+  let releaseTooltip;
+  if (release.value === null) {
+    releaseTooltip = 'You are downloading only the latest released and provisional data '
+      + `(release: ${latestRelease || 'unknown'}).`;
+  } else {
+    releaseTooltip = 'You are downloading product data only from the '
+      + `${release.value} release (no provisional data will be included).`;
+  }
   const releaseChipLabel = release.value === null
     ? 'Latest released and provisional data'
     : `Release: ${release.value}`;
@@ -808,26 +847,41 @@ export default function DownloadDataDialog() {
       open={dialogOpen}
       onClose={handleCancel}
       customClasses={dialogBaseClasses}
-      title={fromManifest || fromAOPManifest ? 'Configure Data for Download' : 'Download Data from External Host'}
+      title={
+        fromManifest || fromAOPManifest
+          ? 'Configure Data for Download'
+          : 'Download Data from External Host'
+      }
       closeButtonProps={{
         'data-gtm': 'download-data-dialog.cancel-button',
         className: classes.gtmCaptureButton,
       }}
       toolbarChildren={fromManifest || fromAOPManifest ? (
-        <Hidden xsDown>
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <div data-selenium="download-data-dialog.size-estimate">
             {renderSizeEstimate()}
           </div>
-        </Hidden>
+        </Box>
       ) : null}
     >
       {renderGtmTags()}
-      <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: Theme.spacing(2) }}>
-        <Grid item xs={12} sm={6} md={6} lg={8} data-selenium="download-data-dialog.product-info">
-          <Typography variant="h5" style={{ marginBottom: Theme.spacing(1.5) }}>
+      { /* eslint-disable object-curly-newline */ }
+      <Grid
+        container
+        spacing={2}
+        style={{
+          alignItems: 'flex-start',
+          marginBottom: theme.spacing(3),
+        }}
+      >
+        <Grid
+          size={{ xs: 12, sm: 6, md: 6, lg: 8 }}
+          data-selenium="download-data-dialog.product-info"
+        >
+          <Typography variant="h5" style={{ marginBottom: theme.spacing(1.5) }}>
             {productData.productName}
           </Typography>
-          <div className={classes.startFlex} style={{ marginBottom: Theme.spacing(1.5) }}>
+          <div className={classes.startFlex} style={{ marginBottom: theme.spacing(1.5) }}>
             <Tooltip
               placement="right"
               title="The unique identifier for this data product independent of release"
@@ -835,7 +889,7 @@ export default function DownloadDataDialog() {
               <Chip label={productData.productCode} className={classes.productCodeChip} />
             </Tooltip>
             {(productData.themes || []).map((dataTheme) => (
-              <div key={dataTheme} style={{ marginLeft: Theme.spacing(1.5) }}>
+              <div key={dataTheme} style={{ marginLeft: theme.spacing(1.5) }}>
                 <DataThemeIcon size={3} theme={dataTheme} />
               </div>
             ))}
@@ -857,31 +911,32 @@ export default function DownloadDataDialog() {
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4 }}>
           {fromManifest || fromAOPManifest ? (
-            <Hidden smUp>
-              <div style={{ marginBottom: Theme.spacing(2) }}>
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+              <div style={{ marginBottom: theme.spacing(2) }}>
                 {renderFileType()}
                 <div data-selenium="download-data-dialog.size-estimate">
                   {renderSizeEstimate()}
                 </div>
               </div>
-            </Hidden>
+            </Box>
           ) : null}
           {renderActions()}
           {fromManifest || fromAOPManifest ? (
-            <Hidden xsDown>
-              <div style={{ marginTop: Theme.spacing(1), textAlign: 'right' }}>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <div style={{ marginTop: theme.spacing(1), textAlign: 'right' }}>
                 {renderFileType()}
               </div>
-            </Hidden>
+            </Box>
           ) : null}
         </Grid>
       </Grid>
+      { /* eslint-enable object-curly-newline */ }
       {renderLoginRequired()}
       {renderExternalHostInfo()}
       {renderDownloadSizeWarning()}
-      {getSizeEstimateBytes() < DOWNLOAD_SIZE_WARN ? <Divider /> : null}
+      <Divider />
       {renderStepper()}
       {renderActiveStep()}
     </DialogBase>

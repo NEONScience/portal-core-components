@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
-import Theme, { COLORS } from '../lib_components/components/Theme/Theme';
+import { COLORS } from '@/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { resolveProps } from '@/util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   propTableRowGrey: {
     backgroundColor: theme.palette.grey[50],
   },
@@ -24,9 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PropsTable = (props) => {
+const defaultProps = {
+  fullHeight: false,
+};
+
+const PropsTable = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { props: propRows, fullHeight } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   return (
     <TableContainer component={Paper} style={fullHeight ? {} : { maxHeight: '70vh' }}>
@@ -75,10 +81,6 @@ PropsTable.propTypes = {
     }),
   ).isRequired,
   fullHeight: PropTypes.bool,
-};
-
-PropsTable.defaultProps = {
-  fullHeight: false,
 };
 
 export default PropsTable;

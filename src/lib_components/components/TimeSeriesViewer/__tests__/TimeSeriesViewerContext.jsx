@@ -1,6 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { renderHook } from '@testing-library/react-hooks';
+import { render } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -48,43 +48,6 @@ const expectedInitialSite = {
 };
 
 describe('TimeSeriesViewerContext', () => {
-  describe('Provider', () => {
-    test.skip('renders with productData prop', (done) => {
-      const productData = {
-        productCode: 'foo',
-        productName: 'bar',
-        siteCodes: [
-          {
-            siteCode: 'A',
-            availableMonths: ['2001-01', '2001-02'],
-          },
-        ],
-      };
-      setTimeout(() => {
-        const tree = renderer
-          .create(
-            <Provider productData={productData}>
-              <div>children</div>
-            </Provider>,
-          ).toJSON();
-        expect(tree).toMatchSnapshot();
-        done();
-      });
-    });
-    test('renders with productCode prop', (done) => {
-      setTimeout(() => {
-        const tree = renderer
-          .create(
-            <Provider productCode="DP1.23456.789">
-              <div>children</div>
-            </Provider>,
-          ).toJSON();
-        expect(tree).toMatchSnapshot();
-        done();
-      });
-    });
-  });
-
   describe('useTimeSeriesViewerState()', () => {
     test('returns default state and a passthough when invoked outside of a provider', (done) => {
       setTimeout(() => {

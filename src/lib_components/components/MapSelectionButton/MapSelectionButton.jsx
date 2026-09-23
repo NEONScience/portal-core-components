@@ -1,29 +1,29 @@
 import React, { Suspense, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
-import GlobeIcon from '@material-ui/icons/Language';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
+import GlobeIcon from '@mui/icons-material/Language';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import {
   FEATURE_TYPES,
   SITE_MAP_PROP_TYPES,
   getDefaultState,
 } from '../SiteMap/SiteMapUtils';
+import { resolveProps } from '../../util/defaultProps';
 
 const SiteMap = React.lazy(() => import('../SiteMap/SiteMap'));
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   appBar: {
     position: 'relative',
     paddingRight: '0px !important',
@@ -58,7 +58,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapSelectionButton = (props) => {
+const defaultProps = {
+  label: 'Map',
+  icon: true,
+  dialogTitle: null,
+  buttonProps: {},
+  siteMapProps: null,
+  tooltipProps: { children: <div /> },
+  validItems: null,
+  selectedItems: [],
+  selectionLimit: null,
+  onSave: () => {},
+};
+
+const MapSelectionButton = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     label,
     icon,
@@ -73,7 +87,7 @@ const MapSelectionButton = (props) => {
     onSave,
   } = props;
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogEntered, setDialogEntered] = useState(false);
   const [selection, setSelection] = useState(getDefaultState().selection);
@@ -133,23 +147,27 @@ const MapSelectionButton = (props) => {
         aria-label={`${dialogTitle} using the observatory map`}
         {...tooltipProps}
       >
-        <Button
-          color="primary"
-          variant="contained"
-          data-selenium="map-selection-button"
-          startIcon={icon ? <GlobeIcon /> : null}
-          {...buttonProps}
-          onClick={() => setDialogOpen(true)}
-        >
-          {label}
-        </Button>
+        <span>
+          <Button
+            color="primary"
+            variant="contained"
+            data-selenium="map-selection-button"
+            startIcon={icon ? <GlobeIcon /> : null}
+            {...buttonProps}
+            onClick={() => setDialogOpen(true)}
+          >
+            {label}
+          </Button>
+        </span>
       </Tooltip>
       <Dialog
         fullScreen
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        TransitionProps={{
-          onEntered: () => setDialogEntered(true),
+        slotProps={{
+          transition: {
+            onEntered: () => setDialogEntered(true),
+          },
         }}
       >
         <AppBar color="secondary" className={classes.appBar}>
@@ -216,19 +234,4 @@ MapSelectionButton.propTypes = {
   onSave: PropTypes.func,
 };
 
-MapSelectionButton.defaultProps = {
-  label: 'Map',
-  icon: true,
-  dialogTitle: null,
-  buttonProps: {},
-  siteMapProps: null,
-  tooltipProps: {},
-  validItems: null,
-  selectedItems: [],
-  selectionLimit: null,
-  onSave: () => {},
-};
-
-const WrappedMapSelectionButton = Theme.getWrappedComponent(MapSelectionButton);
-
-export default WrappedMapSelectionButton;
+export default MapSelectionButton;

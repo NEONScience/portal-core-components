@@ -7,7 +7,7 @@ import React, {
 import PropTypes, { number } from 'prop-types';
 
 import moment from 'moment';
-import get from 'lodash/get';
+import lodashGet from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -26,21 +26,18 @@ import {
 import { ajax } from 'rxjs/ajax';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { forkJoinWithProgress } from '../../util/rxUtil';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
 
 import DataPackageParser from '../../parser/DataPackageParser';
 import { getUserAgentHeader } from '../../util/requestUtil';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
-
-// 'get' is a reserved word so can't be imported with import
-// eslint-disable-next-line import/extensions
-const lodashGet = require('lodash/get.js');
 
 const VIEWER_MODE = {
   DEFAULT: 'DEFAULT',
@@ -66,7 +63,11 @@ export const TIME_SERIES_VIEWER_STATUS_TITLES = {
   READY: null,
 };
 
+// Maximum number of allowable data points
 export const POINTS_PERFORMANCE_LIMIT = 250000;
+
+// Maximum number of allowable selected sites
+export const MAX_NUM_SITES_SELECTABLE = 5;
 
 // List of common date-time variable names to verify against
 // The variables file ultimately controls the datetime variable that will
@@ -313,8 +314,12 @@ const getPositionCount = (sitesArray, siteCodeToExclude) => {
   return total;
 };
 
-// yearMonth param is in the format of 'yyyy-mm' which is
-// a typical dateRange item
+/**
+ * The yearMonth param is in the format of 'yyyy-mm' which is
+ * a typical dateRange item
+ * @param {*} yearMonth
+ * @returns
+ */
 const getLastDayInMonth = (yearMonth) => {
   const date = new Date(`${yearMonth}-01T00:00:00Z`);
   date.setUTCMonth(date.getUTCMonth() + 1);
@@ -322,27 +327,26 @@ const getLastDayInMonth = (yearMonth) => {
   return date.getUTCDate();
 };
 
-const getTotalHoursCustom = (startDate, endDate) => {
-  const date1 = new Date(`${startDate}-01T00:00:00Z`);
+const getTotalHours = (startDate, endDate) => {
+  const startDateTime = new Date(`${startDate}-01T00:00:00Z`);
   const lastDay = getLastDayInMonth(endDate);
-  const date2 = new Date(`${endDate}-${lastDay}T23:59:59Z`);
-  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+  const endDateTime = new Date(`${endDate}-${lastDay}T23:59:59Z`);
+  return Math.round((endDateTime.getTime() - startDateTime.getTime()) / 1000 / 60 / 60);
 };
 
-const getTotalHours = (state) => {
-  const date1 = new Date(`${state.selection.dateRange[0]}-01T00:00:00Z`);
-  let date2;
+const getTotalHoursFromState = (state) => {
+  const selectionDate = state.selection.dateRange[0];
+  let rangeDate;
   if (state.selection.continuousDateRange.length === 1) {
-    const lastDay = getLastDayInMonth(state.selection.continuousDateRange[0]);
-    date2 = new Date(`${state.selection.continuousDateRange[0]}-${lastDay}T23:59:59Z`);
+    rangeDate = `${state.selection.continuousDateRange[0]}`;
   } else if (state.selection.dateRange.length === 2) {
-    const lastDay = getLastDayInMonth(state.selection.dateRange[1]);
-    date2 = new Date(`${state.selection.dateRange[1]}-${lastDay}T23:59:59Z`);
+    rangeDate = `${state.selection.dateRange[1]}`;
   } else {
     // eslint-disable-next-line no-console
     console.error('Unknown date range');
+    return 0;
   }
-  return Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+  return getTotalHours(selectionDate, rangeDate);
 };
 
 const getPointsPerHour = (state, currentTimeStep) => {
@@ -356,65 +360,54 @@ const calcPointTotal = (data) => {
   if (!data) {
     return 0;
   }
-
   let varsAndPositions = 0;
-
   if (data.length > 0 && data[0].length > 1) {
-    // first array position is dateTime.  Count items after it
+    // First array position is dateTime.  Count items after it
     varsAndPositions = data[0].length - 1;
   }
-
   return data.length * varsAndPositions;
 };
 
 const calcPredictedPointsByTimeStep = (state, timeStep) => {
   if (!state.selection.autoTimeStep) return 0;
-
-  // formula: points per hour (seconds in hour / Time Step seconds)
+  // Formula: points per hour (seconds in hour / Time Step seconds)
   // x hours (months selected converted to hours) x positions * variables
   // using seconds for points per hour since that is what TIME_STEPS has.
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
-  const totalHours = getTotalHours(state);
-
+  const totalHours = getTotalHoursFromState(state);
   return pointPerHour * totalHours * positions * variables;
 };
 
 const calcPredictedPointsForNewPosition = (state, numPositionsOverride) => {
   if (!state.selection.autoTimeStep) return 0;
-
   const positions = numPositionsOverride ?? getPositionCount(state.selection.sites) + 1;
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
-  const totalHours = getTotalHours(state);
-
+  const totalHours = getTotalHoursFromState(state);
   return pointPerHour * totalHours * positions * variables;
 };
 
 const calcPredictedPointsForNewVariable = (state) => {
   if (!state.selection.autoTimeStep) return 0;
-
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
-  const totalHours = getTotalHours(state);
+  const totalHours = getTotalHoursFromState(state);
   const variables = state.selection.variables.length === 0
     ? 1
     : state.selection.variables.length + 1;
-
   return pointPerHour * totalHours * positions * variables;
 };
 
-// note that the dates are not JS dates but from dateRange and should be
+// Note that the dates are not JS dates but from dateRange and should be
 // in the format of 'yyyy-mm'.
 const calcPredictedPointsByDateRange = (state, startDate, endDate) => {
   if (!state.selection.autoTimeStep) return 0;
-
   const positions = getPositionCount(state.selection.sites);
   const pointPerHour = getPointsPerHour(state, state.selection.timeStep);
   const variables = state.selection.variables.length === 0 ? 1 : state.selection.variables.length;
-  const totalHours = getTotalHoursCustom(startDate, endDate);
-
+  const totalHours = getTotalHours(startDate, endDate);
   return pointPerHour * totalHours * positions * variables;
 };
 
@@ -533,7 +526,9 @@ const getContinuousDatesArray = (dateRange, roundToYears = false) => {
 const checkDateTimeVariable = (dateTimeVariable) => {
   if (!PREFERRED_DATETIME_VARIABLES.includes(dateTimeVariable)) {
     // eslint-disable-next-line no-console
-    console.debug(`Determined datetime variable does not match known preferred: ${dateTimeVariable}`);
+    console.debug(
+      `Determined datetime variable does not match known preferred: ${dateTimeVariable}`,
+    );
   }
 };
 
@@ -571,7 +566,7 @@ const determineDateTimeVariable = (variables, timeStep) => {
   }
   if (dateTimeVars.length > 0) {
     dateTimeVars.sort((a, b) => sortDateTimeVariables(variables, a, b));
-    const determinedDateTimeVar = dateTimeVars[0]; // eslint-disable-line prefer-destructuring
+    const determinedDateTimeVar = dateTimeVars[0];
     checkDateTimeVariable(determinedDateTimeVar);
     return determinedDateTimeVar;
   }
@@ -709,7 +704,8 @@ const parseSiteMonthData = (site, files) => {
       return !isValid(parts[offset]);
     })) { return; }
     // Extract parts
-    const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
+    const position = `${parts[DATA_FILE_PARTS.POSITION_H.offset]}`
+      + `.${parts[DATA_FILE_PARTS.POSITION_V.offset]}`;
     const month = parts[DATA_FILE_PARTS.MONTH.offset];
     const packageType = parts[DATA_FILE_PARTS.PACKAGE_TYPE.offset];
     const timeStep = getTimeStep(parts[DATA_FILE_PARTS.TIME_STEP.offset]);
@@ -1077,7 +1073,7 @@ const setDataFileFetchStatuses = (state, fetches) => {
         || !newState.product.sites[siteCode].positions[position].data[month]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg]
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep]
-        // eslint-disable-next-line max-len
+        // eslint-disable-next-line max-len, @stylistic/max-len
         || !newState.product.sites[siteCode].positions[position].data[month][downloadPkg][timeStep][table]
     ) { return; }
     newState.product
@@ -1246,15 +1242,20 @@ const reducer = (state, action) => {
         ...parsedContent.availableTimeSteps,
       ]);
       if (newState.timeStep.availableTimeSteps.size === 1) { // Need more than just 'auto'
-        return fail('This data product is not compatible with the Time Series Viewer (no valid time step found)');
+        return fail(
+          'This data product is not compatible with the Time Series Viewer '
+            + '(no valid time step found)',
+        );
       }
       calcSelection();
       if (
         newState.product.sites[action.siteCode].fetches.variables.status !== FETCH_STATUS.SUCCESS
-          || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS // eslint-disable-line max-len
+        || newState.product.sites[action.siteCode].fetches.positions.status !== FETCH_STATUS.SUCCESS
       ) {
         newState.status = TIME_SERIES_VIEWER_STATUS.LOADING_META;
-      } else { calcStatus(); }
+      } else {
+        calcStatus();
+      }
       return newState;
 
     // Fetch Site Variables Actions
@@ -1297,7 +1298,10 @@ const reducer = (state, action) => {
       ]);
       // A valid dateTime variable must be present otherwise we have no x-axis
       if (Object.keys(newState.variables).every((v) => !newState.variables[v].isDateTime)) {
-        return fail('This data product is not compatible with the Time Series Viewer (no dateTime data found)');
+        return fail(
+          'This data product is not compatible with the Time Series Viewer '
+            + '(no dateTime data found)',
+        );
       }
       calcSelection();
       calcStatus();
@@ -1311,7 +1315,10 @@ const reducer = (state, action) => {
             state.selection.yAxes[y].dataRange.every((x) => x === null)
           ))
       ) {
-        return softFail('Current selection of dates/sites/positions/variables does not have any valid numeric data.');
+        return softFail(
+          'Current selection of dates/sites/positions/variables does not have '
+            + 'any valid numeric data.',
+        );
       }
       newState.graphData = action.graphData;
       newState.pointTotal = calcPointTotal(action.graphData.data);
@@ -1360,7 +1367,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
       if (!newState.selection.variables.length) {
-        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+        return softFail(
+          'None of the variables for this product\'s default site/month/position have data. '
+            + 'Please select a different site, month, or position.',
+        );
       }
       return newState;
     case 'noDataFilesFetchNecessary':
@@ -1372,7 +1382,10 @@ const reducer = (state, action) => {
       newState.status = TIME_SERIES_VIEWER_STATUS.READY_FOR_SERIES;
       calcSelection();
       if (!newState.selection.variables.length) {
-        return softFail('None of the variables for this product\'s default site/month/position have data. Please select a different site, month, or position.');
+        return softFail(
+          'None of the variables for this product\'s default site/month/position have data. '
+            + 'Please select a different site, month, or position.',
+        );
       }
       return newState;
 
@@ -1400,22 +1413,6 @@ const reducer = (state, action) => {
         .positions[action.position]
         .data[action.month][action.downloadPkg][action.timeStep][action.table]
         .series = action.series;
-      /*  uncomment for troubleshooting to get number of points downloaded
-      try {
-        if (!newState.product.pointTotal || isNaN(newState.product.pointTotal)) {
-          newState.product.pointTotal = 0;
-        }
-
-        newState.product.pointTotal += action.series.endDateTime.data.length;
-        console.log("newState", newState);
-        // console.log("action", action);
-        console.log("fetchDataFileSucceeded - pointTotal", newState.product.pointTotal);
-        // console.log("newState.selection.continuousDateRange.length",
-        // newState.selection.continuousDateRange.length);
-      } catch (error) {
-        console.log("my derpy code crashed", action);
-      }
-      */
       return newState;
 
     // Core Selection Actions
@@ -1589,10 +1586,19 @@ const reducer = (state, action) => {
   }
 };
 
+export const defaultProps = {
+  timeSeriesUniqueId: 0,
+  mode: VIEWER_MODE.DEFAULT,
+  productCode: null,
+  productData: null,
+  release: null,
+};
+
 /**
    Context Provider
 */
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     mode: modeProp,
     productCode: productCodeProp,
@@ -1604,14 +1610,14 @@ const Provider = (props) => {
   /**
      Initial State and Reducer Setup
   */
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const initialState = cloneDeep(DEFAULT_STATE);
   if ((typeof modeProp === 'string') && (modeProp !== VIEWER_MODE.DEFAULT)) {
     initialState.mode = modeProp;
   }
   // Check preconditions for initial status
-  const preconditionsSatisfied = neonContextSessionState.ready;
-  const isViewerLimited = !neonContextSessionState.canAccessData;
+  const preconditionsSatisfied = neonAuthContextSessionState.ready;
+  const isViewerLimited = !neonAuthContextSessionState.canAccessData;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -1895,7 +1901,7 @@ const Provider = (props) => {
         metaFetchTriggered = true;
         dispatch({ type: 'fetchSiteMonth', siteCode, month });
         const headers = {
-          ...neonContextSessionState.sessionHeaders,
+          ...neonAuthContextSessionState.sessionHeaders,
         };
         NeonApi.getJsonObservable(getSiteMonthDataURL(siteCode, month), headers)
           .pipe(
@@ -1937,9 +1943,10 @@ const Provider = (props) => {
         const { downloadPkg } = state.variables[variable];
         positions.forEach((position) => {
           continuousDateRange.forEach((month) => {
-            // eslint-disable-next-line max-len
-            const path = `sites['${siteCode}'].positions['${position}'].data['${month}']['${downloadPkg}']['${timeStep}']`;
-            const timeStepTables = get(state.product, path, {});
+            const path = `sites['${siteCode}']`
+              + `.positions['${position}']`
+              + `.data['${month}']['${downloadPkg}']['${timeStep}']`;
+            const timeStepTables = lodashGet(state.product, path, {});
             Object.keys(timeStepTables).forEach((tableName) => {
               const timeStepTable = timeStepTables[tableName];
               const { url, status } = timeStepTable;
@@ -1947,7 +1954,12 @@ const Provider = (props) => {
               if (!url || status !== FETCH_STATUS.AWAITING_CALL) { return; }
               // Use the dataFetchTokens set to make sure we don't somehow add the same fetch twice
               const previousSize = dataFetchTokens.size;
-              const token = `${siteCode};${position};${month};${downloadPkg};${timeStep};${tableName}`;
+              const token = `${siteCode};`
+                + `${position};`
+                + `${month};`
+                + `${downloadPkg};`
+                + `${timeStep};`
+                + `${tableName}`;
               dataFetchTokens.add(token);
               if (dataFetchTokens.size === previousSize) { return; }
               // Save the action props to pass to the fetchDataFiles
@@ -2032,9 +2044,6 @@ const Provider = (props) => {
       } else {
         const masterFetchToken = `fetchDataFiles.${uniqueId()}`;
         dispatch({ type: 'fetchDataFiles', token: masterFetchToken, fetches: dataActions });
-        // this is the point where we can capture the user fetch criteria
-        // eslint-disable-next-line no-console
-        // console.log('Fetching data', state, dataFetches);
         forkJoinWithProgress(dataFetches).pipe(
           mergeMap(([finalResult, progress]) => merge(
             progress.pipe(
@@ -2064,7 +2073,7 @@ const Provider = (props) => {
     state.release,
     preconditionsSatisfied,
     isViewerLimited,
-    neonContextSessionState,
+    neonAuthContextSessionState,
   ]);
 
   /**
@@ -2085,7 +2094,9 @@ const TimeSeriesViewerPropTypes = {
   productCode: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
-      return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
+      return new Error(
+        `One of props 'productCode' or 'productData' was not specified in '${componentName}'.`,
+      );
     }
     if (productData && !productCode) { return null; }
     if (productCode && typeof productCode === 'string' && productCode.length > 0) {
@@ -2096,7 +2107,9 @@ const TimeSeriesViewerPropTypes = {
   productData: (props, propName, componentName) => {
     const { productCode, productData } = props;
     if (!productCode && !productData) {
-      return new Error(`One of props 'productCode' or 'productData' was not specified in '${componentName}'.`);
+      return new Error(
+        `One of props 'productCode' or 'productData' was not specified in '${componentName}'.`,
+      );
     }
     if (productCode && !productData) { return null; }
     if (
@@ -2129,14 +2142,6 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-Provider.defaultProps = {
-  timeSeriesUniqueId: 0,
-  mode: VIEWER_MODE.DEFAULT,
-  productCode: null,
-  productData: null,
-  release: null,
 };
 
 /**

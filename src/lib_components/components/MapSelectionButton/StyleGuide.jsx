@@ -1,23 +1,20 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, react/no-unescaped-entities, max-len */
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import { FEATURE_TYPES } from '@/components/SiteMap/SiteMapUtils';
+import MapSelectionButton from '@/components/MapSelectionButton/MapSelectionButton';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import { FEATURE_TYPES } from '../SiteMap/SiteMapUtils';
-
-import MapSelectionButton from './MapSelectionButton';
-
-import Theme from '../Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -218,7 +215,7 @@ const MyComponent = () => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   return (
     <>

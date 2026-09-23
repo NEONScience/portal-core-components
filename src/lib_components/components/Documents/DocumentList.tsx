@@ -1,27 +1,20 @@
 import React from 'react';
 
-import List from '@material-ui/core/List';
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+import List from '@mui/material/List';
 
 import DocumentListItem, { DocumentListItemModel } from './DocumentListItem';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
 
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { existsNonEmpty } from '../../util/typeUtil';
 import { Nullable } from '../../types/core';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    list: {
-      paddingTop: muiTheme.spacing(0),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  list: {
+    paddingTop: muiTheme.spacing(0),
+  },
+}));
 
 export interface DocumentListProps {
   documents: DocumentListItemModel[];
@@ -31,8 +24,8 @@ export interface DocumentListProps {
   enableVariantChips: Nullable<boolean>;
 }
 
-const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): React.JSX.Element => {
+  const { classes } = useStyles();
   const {
     documents,
     makeDownloadableLink,
@@ -42,7 +35,7 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
   }: DocumentListProps = props;
   if (!existsNonEmpty(documents)) {
     return (
-      <div className={classes.container}>
+      <div>
         <WarningCard
           title="No Documents"
           message="No documents available to display"
@@ -50,8 +43,8 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
       </div>
     );
   }
-  const renderDocuments = (): JSX.Element[] => (
-    documents.map((document: DocumentListItemModel, index: number): JSX.Element => ((
+  const renderDocuments = (): React.JSX.Element[] => (
+    documents.map((document: DocumentListItemModel, index: number): React.JSX.Element => ((
       <DocumentListItem
         key={document.name}
         id={index}
@@ -72,6 +65,4 @@ const DocumentList: React.FC<DocumentListProps> = (props: DocumentListProps): JS
   );
 };
 
-const WrappedDocumentList = (Theme as any).getWrappedComponent(DocumentList);
-
-export default WrappedDocumentList;
+export default DocumentList;

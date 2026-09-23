@@ -1,6 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import ReleaseFilter from '../ReleaseFilter';
 
 const basicReleases = [
@@ -66,99 +67,82 @@ const dataProductCodesReleases = [
 
 describe('ReleaseFilter', () => {
   test('Renders with no props', () => {
-    const tree = renderer
-      .create(<ReleaseFilter />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders in skeleton mode', () => {
-    const tree = renderer
-      .create(<ReleaseFilter skeleton />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter skeleton /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with list of releases without DOIs', () => {
-    const tree = renderer
-      .create(<ReleaseFilter releases={basicReleases} showGenerationDate />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter releases={basicReleases} showGenerationDate /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with a selected release', () => {
-    const tree = renderer
-      .create(<ReleaseFilter releases={basicReleases} selected="TEST-TAG-2" />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter releases={basicReleases} selected="TEST-TAG-2" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders gracefully with an invalid selection', () => {
-    const tree = renderer
-      .create(<ReleaseFilter releases={basicReleases} selected="TEST-TAG-7" />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter releases={basicReleases} selected="TEST-TAG-7" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with list of releases with DOIs', () => {
-    const tree = renderer
-      .create(<ReleaseFilter releases={doiReleases} showDoi />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter releases={doiReleases} showDoi /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with custom layouts', () => {
-    const tree = renderer
-      .create(<ReleaseFilter horizontal maxWidth={300} />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter horizontal maxWidth={300} /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with a custom title', () => {
-    const tree = renderer
-      .create(<ReleaseFilter title="Foo" />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter title="Foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with blank title', () => {
-    const tree = renderer
-      .create(<ReleaseFilter title="" />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter title="" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Renders with product counts (using data product objects)', () => {
-    const tree = renderer
-      .create(
+    const tree = render(
+      <MockTheme>
         <ReleaseFilter
           releases={dataProductsReleases}
           nullReleaseProductCount={5}
           onChange={() => {}}
           showProductCount
-        />,
-      ).toJSON();
+        />
+      </MockTheme>,
+    );
     expect(tree).toMatchSnapshot();
   });
   test('Renders with product counts (using data product codes)', () => {
-    const tree = renderer
-      .create(
+    const tree = render(
+      <MockTheme>
         <ReleaseFilter
           releases={dataProductCodesReleases}
           excludeNullRelease
           showProductCount
-        />,
-      ).toJSON();
+        />
+      </MockTheme>,
+    );
     expect(tree).toMatchSnapshot();
   });
   test('Renders product counts without a defined null release count', () => {
-    const tree = renderer
-      .create(
+    const tree = render(
+      <MockTheme>
         <ReleaseFilter
           releases={dataProductCodesReleases}
           selected="TEST-TAG-2"
           showProductCount
           showGenerationDate
           showDoi
-        />,
-      ).toJSON();
+        />
+      </MockTheme>,
+    );
     expect(tree).toMatchSnapshot();
   });
   test('Renders nothing with no releases and an excluded null release', () => {
-    const tree = renderer
-      .create(<ReleaseFilter excludeNullRelease />)
-      .toJSON();
+    const tree = render(<MockTheme><ReleaseFilter excludeNullRelease /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

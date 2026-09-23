@@ -258,6 +258,7 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getWebHost()}/domains/${domainCode}`
   ),
   getReleaseDetailPath: (release: string): string => (
+    // eslint-disable-next-line max-len, @stylistic/max-len
     `${NeonEnvironment.getWebHost()}/data-samples/data-management/data-revisions-releases/${release}`
   ),
 
@@ -288,7 +289,6 @@ const RouteService: IRouteService = {
     `${NeonEnvironment.getApiHost()}/prototype-datasets/${uuid}`
   ),
   getSaeViewerUrl: (): string => (
-    // TODO: replace with web host once switch over happens
     `${NeonEnvironment.getApiHost()}/visualizations/sae-visualization`
   ),
   getSaeViewerUrlPath: (

@@ -1,0 +1,311 @@
+import React, {
+  useEffect,
+  useContext,
+  createContext,
+  useReducer,
+  useId,
+  Dispatch,
+} from 'react';
+
+import L from 'leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from 'react-leaflet';
+
+import debounce from 'lodash/debounce';
+
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
+import ObservatoryIcon from '@mui/icons-material/Public';
+
+import MarkerIcon2xPng from 'leaflet/dist/images/marker-icon-2x.png';
+import MarkerIconPng from 'leaflet/dist/images/marker-icon.png';
+import MarkerIconShadowPng from 'leaflet/dist/images/marker-shadow.png';
+
+import { NeonTheme } from '@/components/Theme/types';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { AnyAction, Nullable, Undef } from '@/types/core';
+import { exists } from '@/util/typeUtil';
+
+import 'leaflet/dist/leaflet.css';
+
+const LEAFLET_ATTR_PREFIX = `
+<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
+`;
+
+const useStyles = makeStyles()((theme: NeonTheme) => ({
+  mapContainer: {
+    width: '100%',
+    height: '600px',
+  },
+  mapNavButton: {
+    backgroundColor: '#fff !important',
+    width: '32px',
+    height: '32px',
+    padding: 'unset',
+    borderRadius: '2px 0px 2px 0px',
+    border: `1px solid ${theme.colors.LIGHT_BLUE[500]}`,
+    '&:hover, &:active': {
+      color: theme.colors.LIGHT_BLUE[400],
+      borderColor: theme.colors.LIGHT_BLUE[400],
+      backgroundColor: theme.palette.grey[50],
+    },
+    '& svg': {
+      fontSize: '1.15rem !important',
+      width: '1.2em',
+      height: '1.2em',
+    },
+  },
+  mapNavButtonContainer: {
+    position: 'absolute',
+    zIndex: 999,
+    margin: '0px',
+    left: '11px',
+  },
+  observatoryButton: {
+    top: '82px',
+  },
+}));
+
+interface BasicLeafletMapState {
+  initialZoom: number;
+  initialCenter: L.LatLngExpression;
+  zoom: Nullable<number>;
+  center: Nullable<L.LatLngExpression>;
+}
+
+const DEFAULT_STATE: BasicLeafletMapState = {
+  initialZoom: 3,
+  initialCenter: [52.68, -110.75],
+  zoom: null,
+  center: null,
+};
+const StateContext = createContext<BasicLeafletMapState>(DEFAULT_STATE);
+const DispatchContext = createContext<Undef<Dispatch<AnyAction>>>(undefined);
+
+const useContextDispatch = (): Dispatch<AnyAction> => {
+  const dispatchContext = useContext(DispatchContext);
+  if (!dispatchContext) {
+    throw new Error('Failed to initialize dispatch context');
+  }
+  return dispatchContext;
+};
+
+enum ActionTypes {
+  SET_VIEW = 'SET_VIEW',
+  SET_ZOOM = 'SET_ZOOM',
+  SET_CENTER = 'SET_CENTER',
+}
+
+interface SetViewAction extends AnyAction {
+  type: typeof ActionTypes.SET_VIEW;
+  zoom: number;
+  center: L.LatLngExpression;
+}
+interface SetZoomAction extends AnyAction {
+  type: typeof ActionTypes.SET_ZOOM;
+  zoom: number;
+}
+interface SetCenterAction extends AnyAction {
+  type: typeof ActionTypes.SET_CENTER;
+  center: L.LatLngExpression;
+}
+
+type BasicLeafletMapActionTypes = (
+  SetViewAction
+  | SetZoomAction
+  | SetCenterAction
+  | AnyAction
+);
+
+const ActionCreator = {
+  setView: (zoom: number, center: L.LatLngExpression): SetViewAction => ({
+    type: ActionTypes.SET_VIEW,
+    zoom,
+    center,
+  }),
+  setZoom: (zoom: number): SetZoomAction => ({
+    type: ActionTypes.SET_ZOOM,
+    zoom,
+  }),
+  setCenter: (center: L.LatLngExpression): SetCenterAction => ({
+    type: ActionTypes.SET_CENTER,
+    center,
+  }),
+};
+
+const reducer = (
+  state: BasicLeafletMapState,
+  action: BasicLeafletMapActionTypes,
+): BasicLeafletMapState => {
+  const newState: BasicLeafletMapState = { ...state };
+  switch (action.type) {
+    case ActionTypes.SET_VIEW:
+      newState.zoom = (action as SetViewAction).zoom;
+      newState.center = (action as SetViewAction).center;
+      break;
+    case ActionTypes.SET_ZOOM:
+      newState.zoom = (action as SetZoomAction).zoom;
+      break;
+    case ActionTypes.SET_CENTER:
+      newState.center = (action as SetCenterAction).center;
+      break;
+    default:
+      break;
+  }
+  return newState;
+};
+
+interface ProviderProps {
+  children?: React.ReactNode | React.ReactNode[];
+}
+const providerDefaultProps: ProviderProps = {
+  children: undefined,
+};
+
+export const Provider: React.FC<ProviderProps> = (
+  props: ProviderProps = providerDefaultProps,
+): React.JSX.Element => {
+  const { children } = props;
+  const [state, dispatch] = useReducer(reducer, DEFAULT_STATE);
+  return (
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        {children}
+      </DispatchContext.Provider>
+    </StateContext.Provider>
+  );
+};
+
+interface LeafletMapStates {
+  isAutoPanning: boolean;
+}
+const LEAFLET_MAP_STATES: LeafletMapStates = {
+  isAutoPanning: false,
+};
+
+const LeafletMapManager: React.FC = (): React.JSX.Element => {
+  const state: BasicLeafletMapState = useContext(StateContext);
+  const dispatch: Dispatch<AnyAction> = useContextDispatch();
+  const { classes } = useStyles();
+  const { center }: BasicLeafletMapState = state;
+  const map: L.Map = useMapEvents({
+    zoomend: (event: L.LeafletEvent): void => {
+      const targetZoom: number = event.target.getZoom();
+      const targetCenter: L.LatLngLiteral = event.target.getCenter();
+      const appliedCenter: L.LatLngExpression = [targetCenter.lat, targetCenter.lng];
+      dispatch(ActionCreator.setView(targetZoom, appliedCenter));
+    },
+    moveend: (event: L.LeafletEvent): void => {
+      const targetCenter: L.LatLngLiteral = event.target.getCenter();
+      const appliedCenter: L.LatLngExpression = [targetCenter.lat, targetCenter.lng];
+      const isCenterUpdated = (): boolean => {
+        if (!exists(center)) {
+          return true;
+        }
+        const coercedCenter = center as L.LatLngTuple;
+        if ((appliedCenter[0] === coercedCenter[0])
+            && (appliedCenter[1] === coercedCenter[1])) {
+          return false;
+        }
+        return true;
+      };
+      if (LEAFLET_MAP_STATES.isAutoPanning) {
+        const debouncedSetCenter = debounce(() => {
+          if (isCenterUpdated()) {
+            dispatch(ActionCreator.setCenter(appliedCenter));
+          }
+          LEAFLET_MAP_STATES.isAutoPanning = false;
+        }, 500);
+        debouncedSetCenter();
+        return;
+      }
+      if (!isCenterUpdated()) {
+        return;
+      }
+      dispatch(ActionCreator.setCenter(appliedCenter));
+    },
+    autopanstart: (event: L.LeafletEvent): void => {
+      LEAFLET_MAP_STATES.isAutoPanning = true;
+    },
+  });
+  useEffect(() => {
+    map.attributionControl.setPrefix(LEAFLET_ATTR_PREFIX);
+  }, [map]);
+  return (
+    <Tooltip placement="right" title="Reset Map">
+      <div className={`${classes.mapNavButtonContainer} ${classes.observatoryButton}`}>
+        <IconButton
+          className={classes.mapNavButton}
+          type="button"
+          size="large"
+          onClick={() => {
+            map.setView(DEFAULT_STATE.initialCenter, DEFAULT_STATE.initialZoom);
+          }}
+        >
+          <ObservatoryIcon fontSize="small" />
+        </IconButton>
+      </div>
+    </Tooltip>
+  );
+};
+
+const BasicLeafletMap: React.FC = (): React.JSX.Element => {
+  const state: BasicLeafletMapState = useContext(StateContext);
+  const mapInstanceId = useId();
+  const { classes } = useStyles();
+  const {
+    initialZoom,
+    initialCenter,
+    zoom,
+    center,
+  } = state;
+  return (
+    <div className={classes.mapContainer}>
+      <MapContainer
+        id={`sitemap-${mapInstanceId}`}
+        center={exists(center) ? center as L.LatLngExpression : initialCenter}
+        zoom={exists(zoom) ? zoom as number : initialZoom}
+        minZoom={1}
+        maxZoom={19}
+        style={{
+          width: '100%',
+          height: '600px',
+        }}
+        worldCopyJump
+        dragging
+        tapHold={false}
+        boxZoom={false}
+        data-component="SiteMap"
+        data-selenium="sitemap-content-map"
+      >
+        <LeafletMapManager />
+        <TileLayer
+          data-id={`tile-layer-${mapInstanceId}`}
+          attribution="© Natl. Geographic et al."
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
+        />
+        <Marker
+          position={[40.015, -105.271]}
+          icon={new L.Icon({
+            ...L.Icon.Default.prototype.options,
+            iconRetinaUrl: MarkerIcon2xPng as unknown as string,
+            iconUrl: MarkerIconPng as unknown as string,
+            shadowUrl: MarkerIconShadowPng as unknown as string,
+          })}
+        >
+          <Popup>
+            Marker
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  );
+};
+
+export default BasicLeafletMap;

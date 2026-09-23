@@ -1,1229 +1,3558 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`ExternalHostInfo renders graceful failure with no valid product code 1`] = `null`;
+exports[`ExternalHostInfo renders graceful failure with no valid product code 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
 exports[`ExternalHostInfo renders with valid product code and no sites 1`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Data for this product are available in other formats from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="AMERIFLUX"
-              data-gtm-product-code="DP1.00001.001"
-              href="https://ameriflux.lbl.gov"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              AmeriFlux
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are available in other formats from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="AMERIFLUX"
+                  data-gtm-product-code="DP1.00001.001"
+                  href="https://ameriflux.lbl.gov"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  AmeriFlux
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code and no sites 2`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
-            Raw sequence data associated with this product are available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="BOLD"
-              data-gtm-product-code="DP1.10020.001"
-              href="https://boldsystems.org/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
-              BOLD (Barcode of Life Datasystem)
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
-          <ul
-            style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
-              }
-            }
-          >
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETN"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                Ground beetle sequences DNA barcode
-              </a>
-            </li>
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETP"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
-                Ground beetle sequences DNA barcode (Prototype Data)
-              </a>
-            </li>
-          </ul>
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Raw sequence data associated with this product are available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="BOLD"
+                  data-gtm-product-code="DP1.10020.001"
+                  href="https://boldsystems.org/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  BOLD (Barcode of Life Datasystem)
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <ul
+                style="margin-top: 24px; margin-bottom: 6px;"
+              >
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETN"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode
+                  </a>
+                </li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETP"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode (Prototype Data)
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code and no sites 3`] = `
-<div
-  data-selenium="foo"
->
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Data for this product are only available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="PHENOCAM"
-              data-gtm-product-code="DP1.00033.001"
-              href="https://phenocam.nau.edu/webcam/about/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              The PhenoCam Network
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        data-selenium="foo"
+      >
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are only available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="PHENOCAM"
+                    data-gtm-product-code="DP1.00033.001"
+                    href="https://phenocam.nau.edu/webcam/about/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    The PhenoCam Network
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-selenium="foo"
+    >
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are only available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="PHENOCAM"
+                  data-gtm-product-code="DP1.00033.001"
+                  href="https://phenocam.nau.edu/webcam/about/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  The PhenoCam Network
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code and sites 1`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Data for this product are available in other formats from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="AMERIFLUX"
-              data-gtm-product-code="DP1.00001.001"
-              href="https://ameriflux.lbl.gov"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              AmeriFlux
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are available in other formats from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="AMERIFLUX"
+                  data-gtm-product-code="DP1.00001.001"
+                  href="https://ameriflux.lbl.gov"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  AmeriFlux
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code and sites 2`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
-            Raw sequence data associated with this product are available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="BOLD"
-              data-gtm-product-code="DP1.10020.001"
-              href="https://boldsystems.org/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
-              BOLD (Barcode of Life Datasystem)
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
-          <ul
-            style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
-              }
-            }
-          >
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETN"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                Ground beetle sequences DNA barcode
-              </a>
-            </li>
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETP"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
-                Ground beetle sequences DNA barcode (Prototype Data)
-              </a>
-            </li>
-          </ul>
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Raw sequence data associated with this product are available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="BOLD"
+                  data-gtm-product-code="DP1.10020.001"
+                  href="https://boldsystems.org/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  BOLD (Barcode of Life Datasystem)
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <ul
+                style="margin-top: 24px; margin-bottom: 6px;"
+              >
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETN"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode
+                  </a>
+                </li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETP"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode (Prototype Data)
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code and sites 3`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Data for this product are only available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="PHENOCAM"
-              data-gtm-product-code="DP1.00033.001"
-              href="https://phenocam.nau.edu/webcam/about/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              The PhenoCam Network
-            </a>
-          </h6>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "block",
-            }
-          }
-        >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are only available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="PHENOCAM"
+                    data-gtm-product-code="DP1.00033.001"
+                    href="https://phenocam.nau.edu/webcam/about/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    The PhenoCam Network
+                  </a>
+                </h6>
+              </div>
+              <div
+                style="display: block;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are only available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="PHENOCAM"
+                  data-gtm-product-code="DP1.00033.001"
+                  href="https://phenocam.nau.edu/webcam/about/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  The PhenoCam Network
+                </a>
+              </h6>
+            </div>
+            <div
+              style="display: block;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 1`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
-            Data for this product are available in other formats from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="AMERIFLUX"
-              data-gtm-product-code="DP1.00001.001"
-              href="https://ameriflux.lbl.gov"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              AmeriFlux
-            </a>
-          </h6>
-          <button
-            aria-describedby={null}
-            aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
-            disabled={false}
-            onBlur={[Function]}
-            onClick={[Function]}
-            onDragLeave={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseOver={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            style={
-              Object {
-                "marginLeft": 16,
-              }
-            }
-            tabIndex={0}
-            title="Show links to externally hosted data"
-            type="button"
-          >
-            <span
-              className="MuiIconButton-label"
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
-            </span>
-            <span
-              className="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-        >
-          <div
-            className="makeStyles-siteLinksLoadingContainer-11"
-          >
-            <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
-            >
-              <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are available in other formats from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="AMERIFLUX"
+                  data-gtm-product-code="DP1.00001.001"
+                  href="https://ameriflux.lbl.gov"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  AmeriFlux
+                </a>
+              </h6>
+              <button
+                aria-label="Show links to externally hosted data"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                data-mui-internal-clone-element="true"
+                style="margin-left: 16px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ExpandMoreIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              style="display: none;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 2`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Raw sequence data associated with this product are available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="BOLD"
-              data-gtm-product-code="DP1.10020.001"
-              href="https://boldsystems.org/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              BOLD (Barcode of Life Datasystem)
-            </a>
-          </h6>
-          <button
-            aria-describedby={null}
-            aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
-            disabled={false}
-            onBlur={[Function]}
-            onClick={[Function]}
-            onDragLeave={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseOver={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            style={
-              Object {
-                "marginLeft": 16,
-              }
-            }
-            tabIndex={0}
-            title="Show links to externally hosted data"
-            type="button"
-          >
-            <span
-              className="MuiIconButton-label"
-            >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-                />
-              </svg>
-            </span>
-            <span
-              className="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-        >
-          <ul
-            style={
-              Object {
-                "marginBottom": 6,
-                "marginTop": 24,
-              }
-            }
-          >
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETN"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Ground beetle sequences DNA barcode
-              </a>
-            </li>
-            <li>
-              <a
-                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                data-gtm-external-host="BOLD"
-                data-gtm-product-code="DP1.10020.001"
-                href="https://portal.boldsystems.org/recordset/BETP"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Ground beetle sequences DNA barcode (Prototype Data)
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 3`] = `
-<div>
-  <div>
-    <div
-      className="MuiPaper-root MuiCard-root makeStyles-card-3 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        className="MuiCardContent-root makeStyles-startFlex-6 makeStyles-titleContentContainer-7"
-      >
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-primaryIcon-4 MuiSvgIcon-fontSizeSmall"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-        <h6
-          className="MuiTypography-root makeStyles-textTitleContent-8 MuiTypography-subtitle2"
-        >
-          External Host
-        </h6>
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-secondaryIcon-5 MuiSvgIcon-fontSizeLarge"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          />
-        </svg>
-      </div>
-      <div
-        className="makeStyles-messageContainer-9"
-      >
-        <hr
-          className="MuiDivider-root makeStyles-cardDivider-2"
-        />
-        <div
-          className="makeStyles-startFlex-1"
-        >
-          <h6
-            className="MuiTypography-root MuiTypography-subtitle2"
-            style={
-              Object {
-                "flexGrow": 1,
-              }
-            }
-          >
-            Data for this product are only available from
-             
-            <a
-              className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              data-gtm-external-host="PHENOCAM"
-              data-gtm-product-code="DP1.00033.001"
-              href="https://phenocam.nau.edu/webcam/about/"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              The PhenoCam Network
-            </a>
-          </h6>
-          <button
-            aria-describedby={null}
-            aria-label="Show links to externally hosted data"
-            className="MuiButtonBase-root MuiIconButton-root"
-            disabled={false}
-            onBlur={[Function]}
-            onClick={[Function]}
-            onDragLeave={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseOver={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            style={
-              Object {
-                "marginLeft": 16,
-              }
-            }
-            tabIndex={0}
-            title="Show links to externally hosted data"
-            type="button"
-          >
-            <span
-              className="MuiIconButton-label"
-            >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-                />
-              </svg>
-            </span>
-            <span
-              className="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <div
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-        >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
           <div
-            className="makeStyles-siteLinksLoadingContainer-11"
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
           >
             <div
-              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-              role="progressbar"
-              style={
-                Object {
-                  "height": 36,
-                  "margin": "32px 0px",
-                  "width": 36,
-                }
-              }
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
             >
               <svg
-                className="MuiCircularProgress-svg"
-                viewBox="22 22 44 44"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
               >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                  cx={44}
-                  cy={44}
-                  fill="none"
-                  r={20.2}
-                  strokeWidth={3.6}
-                  style={Object {}}
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
                 />
               </svg>
             </div>
-            <p
-              className="MuiTypography-root MuiTypography-body1"
-              style={
-                Object {
-                  "marginBottom": 32,
-                }
-              }
+            <div
+              class="css-x8fjos-messageContainer"
             >
-              Loading sites...
-            </p>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Raw sequence data associated with this product are available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="BOLD"
+                  data-gtm-product-code="DP1.10020.001"
+                  href="https://boldsystems.org/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  BOLD (Barcode of Life Datasystem)
+                </a>
+              </h6>
+              <button
+                aria-label="Show links to externally hosted data"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                data-mui-internal-clone-element="true"
+                style="margin-left: 16px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ExpandMoreIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              style="display: none;"
+            >
+              <ul
+                style="margin-top: 24px; margin-bottom: 6px;"
+              >
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETN"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode
+                  </a>
+                </li>
+                <li
+                  style="font-size: 0.875rem;"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://portal.boldsystems.org/recordset/BETP"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Ground beetle sequences DNA barcode (Prototype Data)
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`ExternalHostInfo renders with valid product code, sites, and expandable boolean 3`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are available in other formats from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="AMERIFLUX"
+                    data-gtm-product-code="DP1.00001.001"
+                    href="https://ameriflux.lbl.gov"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    AmeriFlux
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Raw sequence data associated with this product are available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="BOLD"
+                    data-gtm-product-code="DP1.10020.001"
+                    href="https://boldsystems.org/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    BOLD (Barcode of Life Datasystem)
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <ul
+                  style="margin-top: 24px; margin-bottom: 6px;"
+                >
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETN"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode
+                    </a>
+                  </li>
+                  <li
+                    style="font-size: 0.875rem;"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                      data-gtm-external-host="BOLD"
+                      data-gtm-product-code="DP1.10020.001"
+                      href="https://portal.boldsystems.org/recordset/BETP"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ground beetle sequences DNA barcode (Prototype Data)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <div
+            class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+          >
+            <div
+              class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+              >
+                External Host
+              </h6>
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+                data-testid="InfoOutlinedIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+                />
+              </svg>
+            </div>
+            <div
+              class="css-x8fjos-messageContainer"
+            >
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+              />
+              <div
+                class="css-koi2n8-startFlex"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                  style="flex-grow: 1;"
+                >
+                  Data for this product are only available from
+                   
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                    data-gtm-external-host="PHENOCAM"
+                    data-gtm-product-code="DP1.00033.001"
+                    href="https://phenocam.nau.edu/webcam/about/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    The PhenoCam Network
+                  </a>
+                </h6>
+                <button
+                  aria-label="Show links to externally hosted data"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  style="margin-left: 16px;"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                    data-testid="ExpandMoreIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                style="display: none;"
+              >
+                <div
+                  class="css-1mzmfm4-siteLinksLoadingContainer"
+                >
+                  <span
+                    class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                    role="progressbar"
+                    style="width: 36px; height: 36px; margin: 32px 0px;"
+                  >
+                    <svg
+                      class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                        cx="44"
+                        cy="44"
+                        fill="none"
+                        r="20.2"
+                        stroke-width="3.6"
+                      />
+                    </svg>
+                  </span>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                    style="margin-bottom: 32px;"
+                  >
+                    Loading sites...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div>
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1t33162-MuiPaper-root-MuiCard-root-card"
+        >
+          <div
+            class="MuiCardContent-root css-11qe429-MuiCardContent-root-startFlex-titleContentContainer"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-vdikrd-MuiSvgIcon-root-primaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-22i9mn-MuiTypography-root-textTitleContent"
+            >
+              External Host
+            </h6>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-1m4d5e1-MuiSvgIcon-root-secondaryIcon"
+              data-testid="InfoOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"
+              />
+            </svg>
+          </div>
+          <div
+            class="css-x8fjos-messageContainer"
+          >
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-zxhdgh-MuiDivider-root-cardDivider"
+            />
+            <div
+              class="css-koi2n8-startFlex"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+                style="flex-grow: 1;"
+              >
+                Data for this product are only available from
+                 
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                  data-gtm-external-host="PHENOCAM"
+                  data-gtm-product-code="DP1.00033.001"
+                  href="https://phenocam.nau.edu/webcam/about/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  The PhenoCam Network
+                </a>
+              </h6>
+              <button
+                aria-label="Show links to externally hosted data"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                data-mui-internal-clone-element="true"
+                style="margin-left: 16px;"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ExpandMoreIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              style="display: none;"
+            >
+              <div
+                class="css-1mzmfm4-siteLinksLoadingContainer"
+              >
+                <span
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+                  role="progressbar"
+                  style="width: 36px; height: 36px; margin: 32px 0px;"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </span>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-kcm4qi-MuiTypography-root"
+                  style="margin-bottom: 32px;"
+                >
+                  Loading sites...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

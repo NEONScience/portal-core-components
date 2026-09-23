@@ -10,6 +10,7 @@ export enum ActionTypes {
   SET_RELEASE = 'SET_RELEASE',
   SET_PARAMS = 'SET_PARAMS',
   STORE_FINALIZED_NEON_CONTEXT_STATE = 'STORE_FINALIZED_NEON_CONTEXT_STATE',
+  STORE_FINALIZED_NEON_AUTH_CONTEXT_STATE = 'STORE_FINALIZED_NEON_AUTH_CONTEXT_STATE',
 
   FETCH_PRODUCT_STARTED = 'FETCH_PRODUCT_STARTED',
   FETCH_PRODUCT_FAILED = 'FETCH_PRODUCT_FAILED',
@@ -62,6 +63,10 @@ export interface SetParamsAction extends AnyAction {
 export interface StoreFinalizedNeonContextStateAction extends AnyAction {
   type: typeof ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE;
   neonContextState: UnknownRecord;
+}
+export interface StoreFinalizedNeonAuthContextStateAction extends AnyAction {
+  type: typeof ActionTypes.STORE_FINALIZED_NEON_AUTH_CONTEXT_STATE;
+  neonAuthContextState: UnknownRecord;
 }
 export interface FetchProductStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_STARTED;
@@ -159,6 +164,7 @@ export type DataProducCitationActionTypes = (
   | SetReleaseAction
   | SetParamsAction
   | StoreFinalizedNeonContextStateAction
+  | StoreFinalizedNeonAuthContextStateAction
   | FetchProductStartedAction
   | FetchProductFailedAction
   | FetchProductSucceededAction
@@ -219,6 +225,12 @@ const ActionCreator = {
   ): StoreFinalizedNeonContextStateAction => ({
     type: ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE,
     neonContextState,
+  }),
+  storeFinalizedNeonAuthContextState: (
+    neonAuthContextState: UnknownRecord,
+  ): StoreFinalizedNeonAuthContextStateAction => ({
+    type: ActionTypes.STORE_FINALIZED_NEON_AUTH_CONTEXT_STATE,
+    neonAuthContextState,
   }),
   fetchProductStarted: (): FetchProductStartedAction => ({
     type: ActionTypes.FETCH_PRODUCT_STARTED,

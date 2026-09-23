@@ -1,36 +1,36 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Typography from '@mui/material/Typography';
+import NoSsr from '@mui/material/NoSsr';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import Skeleton from '@mui/material/Skeleton';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import ClearIcon from '@mui/icons-material/Clear';
+import NoneIcon from '@mui/icons-material/NotInterested';
+import SearchIcon from '@mui/icons-material/Search';
+import SelectAllIcon from '@mui/icons-material/DoneAll';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import MenuItem from '@material-ui/core/MenuItem';
-import NoneIcon from '@material-ui/icons/NotInterested';
-import SearchIcon from '@material-ui/icons/Search';
-import SelectAllIcon from '@material-ui/icons/DoneAll';
-
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     left: 2,
     bottom: 6,
-    fontSize: 16,
+    fontSize: '1rem',
   },
   paper: {
     position: 'absolute',
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   optionSubtitle: {
     fontSize: '0.75rem',
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   variableCard: {
     display: 'inline-flex',
@@ -90,17 +90,17 @@ const useStyles = makeStyles((theme) => ({
   noneIcon: {
     color: theme.palette.grey[400],
     margin: theme.spacing(0.375, 0.5, 0, 0),
-    fontSize: '1rem',
+    fontSize: '1.2rem',
   },
   noneLabel: {
-    fontSize: '0.95rem',
+    fontSize: '1rem',
   },
   qualityFlagsContainer: {
     marginTop: theme.spacing(2),
   },
   qualityFlagsHeading: {
     fontWeight: 600,
-    marginBottom: Theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
   qualityFlagsButtons: {
     marginBottom: theme.spacing(2),
@@ -112,18 +112,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
 
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
-
-inputComponent.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
-  ]).isRequired,
-};
+const inputComponent = forwardRef((props, ref) => (
+  <div ref={ref} {...props} />
+));
 
 function Control(props) {
   const {
@@ -134,8 +125,8 @@ function Control(props) {
   } = props;
 
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const labelText = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
-  > POINTS_PERFORMANCE_LIMIT
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state);
+  const labelText = numPoints > POINTS_PERFORMANCE_LIMIT
     ? 'Add Variables (disabled)'
     : 'Add Variables';
 
@@ -144,18 +135,20 @@ function Control(props) {
       fullWidth
       label={labelText}
       variant="outlined"
-      InputProps={{
-        inputComponent,
-        inputProps: {
-          ref: innerRef,
-          children,
-          ...innerProps,
+      slotProps={{
+        input: {
+          inputComponent,
+          inputProps: {
+            ref: innerRef,
+            children,
+            ...innerProps,
+          },
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon color="disabled" />
+            </InputAdornment>
+          ),
         },
-        endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon color="disabled" />
-          </InputAdornment>
-        ),
       }}
       {...TextFieldProps}
     />
@@ -177,8 +170,16 @@ Control.propTypes = {
   selectProps: PropTypes.object.isRequired,
 };
 
-function Option(props) {
-  const classes = useStyles(Theme);
+const optionDefaultProps = {
+  children: null,
+  innerProps: null,
+  innerRef: null,
+  isDisabled: false,
+};
+
+function Option(inProps) {
+  const props = resolveProps(optionDefaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -192,39 +193,49 @@ function Option(props) {
     description,
   } = data;
   const textStyle = isDisabled ? {
-    color: Theme.palette.grey[200],
+    color: theme.palette.grey[200],
   } : {};
+  // Note: wrapping each of these MenuItem elements in a MenuList
+  // is a workaround for no longer being able to utilize the MenuItem
+  // component as a standalone component outside of a Menu or MenuList.
+  // The MenuItem brings along desired characteristics for selection
+  // interactions.
   return (
-    <MenuItem
-      key={value}
-      ref={innerRef}
-      selected={isFocused && !isDisabled}
-      component="div"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }}
-      {...innerProps}
-    >
-      <Typography variant="body1" style={{ ...textStyle }}>
-        {value}
-        <span
-          className={classes.optionSubtitle}
-          style={{ ...textStyle, marginLeft: '8px' }}
-        >
-          {`(${units})`}
-        </span>
-      </Typography>
-      <Typography
-        variant="body2"
-        className={classes.optionSubtitle}
-        style={{ ...textStyle }}
+    <MenuList style={{ padding: 0, margin: 0 }}>
+      <MenuItem
+        key={value}
+        ref={innerRef}
+        selected={isFocused && !isDisabled}
+        component="div"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          cursor: isDisabled ? 'not-allowed' : 'pointer',
+        }}
+        {...innerProps}
       >
-        {description}
-      </Typography>
-    </MenuItem>
+        <Typography variant="body1" style={{ ...textStyle }}>
+          {value}
+          <span
+            className={classes.optionSubtitle}
+            style={{ ...textStyle, marginLeft: '8px' }}
+          >
+            {`(${units})`}
+          </span>
+        </Typography>
+        <Typography
+          variant="body2"
+          className={classes.optionSubtitle}
+          style={{
+            ...textStyle,
+            wordBreak: 'break-word',
+          }}
+        >
+          {description}
+        </Typography>
+      </MenuItem>
+    </MenuList>
   );
 }
 
@@ -249,12 +260,6 @@ Option.propTypes = {
   isSelected: PropTypes.bool.isRequired,
   isDisabled: PropTypes.bool,
   data: PropTypes.object.isRequired,
-};
-Option.defaultProps = {
-  children: null,
-  innerProps: null,
-  innerRef: null,
-  isDisabled: false,
 };
 
 function ValueContainer(props) {
@@ -294,10 +299,10 @@ const components = {
   IndicatorsContainer: () => null,
 };
 
-const selectStyles = {
+const builbSelectStyles = (theme) => ({
   input: (base) => ({
     ...base,
-    color: Theme.palette.text.primary,
+    color: theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
@@ -309,15 +314,15 @@ const selectStyles = {
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
-    color: Theme.palette.primary.main,
+    color: theme.palette.primary.main,
   }),
-};
+});
 
 /**
    Quality Flags
 */
 const QualityFlags = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableQualityFlags } = state;
   const { qualityFlags: selectedQualityFlags } = state.selection;
@@ -352,7 +357,7 @@ const QualityFlags = () => {
             variant="outlined"
             onClick={() => { dispatch({ type: 'selectNoneQualityFlags' }); }}
             startIcon={<ClearIcon />}
-            style={{ marginRight: Theme.spacing(2) }}
+            style={{ marginRight: theme.spacing(2) }}
           >
             Select None
           </Button>
@@ -378,11 +383,11 @@ const QualityFlags = () => {
               <>
                 {organizedQualityFlags[downloadPkg].map((qf) => {
                   const checked = selectedQualityFlags.includes(qf);
-                  const captionStyle = { display: 'block', color: Theme.palette.grey[400] };
+                  const captionStyle = { display: 'block', color: theme.palette.grey[400] };
                   return (
                     <FormControlLabel
                       key={qf}
-                      style={{ alignItems: 'flex-start', marginBottom: Theme.spacing(1) }}
+                      style={{ alignItems: 'flex-start', marginBottom: theme.spacing(1) }}
                       control={(
                         <Checkbox
                           value={qf}
@@ -392,7 +397,7 @@ const QualityFlags = () => {
                         />
                       )}
                       label={(
-                        <div style={{ paddingTop: Theme.spacing(0.5) }}>
+                        <div style={{ paddingTop: theme.spacing(0.5) }}>
                           <Typography variant="body2">
                             {qf}
                             <Typography variant="caption" style={captionStyle}>
@@ -414,7 +419,7 @@ const QualityFlags = () => {
 };
 
 export default function TimeSeriesViewerVariables() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const selectedVariables = state.selection.variables.map((variable) => ({
@@ -447,9 +452,7 @@ export default function TimeSeriesViewerVariables() {
     });
 
   if (!selectableVariablesCount) {
-    return (
-      <Skeleton variant="rect" width="100%" height={56} />
-    );
+    return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
   const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewVariable(state)
@@ -463,9 +466,9 @@ export default function TimeSeriesViewerVariables() {
           isSearchable
           blurInputOnSelect="true"
           isDisabled={isDisabled}
-          clearable={false}
+          isClearable={false}
           classes={classes}
-          styles={selectStyles}
+          styles={builbSelectStyles(theme)}
           aria-label="Add Variables"
           data-gtm="time-series-viewer.add-variables"
           options={selectableVariables}
@@ -491,13 +494,14 @@ export default function TimeSeriesViewerVariables() {
               <IconButton
                 aria-label={`remove variable ${variable}`}
                 disabled={state.selection.variables.length < 2}
-                style={{ marginRight: Theme.spacing(1) }}
+                style={{ marginRight: theme.spacing(1) }}
                 onClick={() => {
                   dispatch({
                     type: 'selectVariables',
                     variables: state.selection.variables.filter((v) => v !== variable),
                   });
                 }}
+                size="large"
               >
                 <ClearIcon fontSize="small" />
               </IconButton>
@@ -520,11 +524,11 @@ export default function TimeSeriesViewerVariables() {
         <Typography variant="subtitle1" className={classes.qualityFlagsHeading}>
           Quality Flags
         </Typography>
-        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+        <Typography variant="caption" style={{ color: theme.palette.grey[400] }}>
           Enabling one or more quality flags will highlight regions on the chart
           to illustrate the results of data quality tests.
         </Typography>
-        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+        <div style={{ width: '100%', marginTop: theme.spacing(1) }}>
           <QualityFlags />
         </div>
       </div>

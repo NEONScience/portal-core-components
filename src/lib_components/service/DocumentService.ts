@@ -1,12 +1,15 @@
-import ArchiveIcon from '@material-ui/icons/Archive';
-import CodeIcon from '@material-ui/icons/Code';
-import DocumentIcon from '@material-ui/icons/DescriptionOutlined';
-import FileIcon from '@material-ui/icons/InsertDriveFile';
-import ImageIcon from '@material-ui/icons/Photo';
-import PresentationIcon from '@material-ui/icons/Tv';
-import SpreadsheetIcon from '@material-ui/icons/GridOn';
+import React from 'react';
 
-import UAParser, { IDevice, UAParserInstance } from 'ua-parser-js';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import CodeIcon from '@mui/icons-material/Code';
+import DocumentIcon from '@mui/icons-material/DescriptionOutlined';
+import FileIcon from '@mui/icons-material/InsertDriveFile';
+import ImageIcon from '@mui/icons-material/Photo';
+import PresentationIcon from '@mui/icons-material/Tv';
+import SpreadsheetIcon from '@mui/icons-material/GridOn';
+import { SvgIconComponent } from '@mui/icons-material';
+
+import { UAParser, IDevice } from 'ua-parser-js';
 
 import NeonEnvironment from '../components/NeonEnvironment/NeonEnvironment';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
@@ -17,7 +20,7 @@ import { getUserAgentHeader } from '../util/requestUtil';
 export interface DocumentTypeListItemDef {
   match: (type: string) => boolean;
   title: (type?: string) => string;
-  Icon: React.ReactNode;
+  Icon: SvgIconComponent;
 }
 
 export interface ParsedQsgNameResult {
@@ -94,7 +97,9 @@ const documentTypes: Record<string, DocumentTypeListItemDef> = {
     Icon: SpreadsheetIcon,
   },
   presentation: {
-    match: (type: string): boolean => (type.includes('presentation') || type.includes('powerpoint')),
+    match: (type: string): boolean => (
+      (type.includes('presentation') || type.includes('powerpoint'))
+    ),
     title: (type?: string): string => 'Presentation',
     Icon: PresentationIcon,
   },
@@ -241,7 +246,7 @@ const DocumentService: IDocumentService = {
     isStringNonEmpty(name) && (name as string).startsWith('NEON.QSG.')
   ),
   getQuickStartGuideNameRegex: (): RegExp => (
-    // eslint-disable-next-line prefer-regex-literals
+    // eslint-disable-next-line prefer-regex-literals, max-len, @stylistic/max-len
     new RegExp(/^(?<name>NEON[.]QSG[.]DP[0-9]{1}[.][0-9]{5}[.][0-9]{3})(?<version>v(?<versionNumber>[0-9]+))*(?<extension>[.](?<extensionName>[a-z]+))*$/)
   ),
   parseQuickStartGuideName: (name: string): Nullable<ParsedQsgNameResult> => {
@@ -271,7 +276,7 @@ const DocumentService: IDocumentService = {
     && PDF_VIEWER_SUPPORTED_DOC_TYPES.includes(doc.type)
   ),
   isViewerDeviceSupported: (): boolean => {
-    const uaParser: UAParserInstance = new UAParser();
+    const uaParser = new UAParser();
     const device: IDevice = uaParser.getDevice();
     let isSupported = true;
     if (isStringNonEmpty(device.type)
@@ -462,6 +467,7 @@ const DocumentService: IDocumentService = {
         if (!isStringNonEmpty(filename)) {
           filename = document.name;
         }
+        // eslint-disable-next-line no-undef
         const saveOpts: SaveFilePickerOptions = {
           suggestedName: filename as string,
         };

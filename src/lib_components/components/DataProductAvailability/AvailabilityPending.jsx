@@ -2,16 +2,22 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 
-import ErrorIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@mui/icons-material/Warning';
 
 import NeonContext from '../NeonContext/NeonContext';
+import { resolveProps } from '../../util/defaultProps';
 
-export default function AvailabilityPending(props) {
+const defaultProps = {
+  message: 'Loading Sites...',
+};
+
+export default function AvailabilityPending(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const [
     { isFinal: neonContextIsFinal, hasError: neonContextHasError },
   ] = NeonContext.useNeonContextState();
@@ -56,8 +62,4 @@ export default function AvailabilityPending(props) {
 
 AvailabilityPending.propTypes = {
   message: PropTypes.string,
-};
-
-AvailabilityPending.defaultProps = {
-  message: 'Loading Sites...',
 };

@@ -1,10 +1,10 @@
-/* eslint-disable max-len, no-unused-vars */
-
 import React, {
   createContext,
   useContext,
   useReducer,
   useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,8 +24,8 @@ import {
 } from 'rxjs';
 
 import NeonApi from '../NeonApi/NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import {
   buildManifestConfig,
   buildS3FilesRequestUrl,
@@ -42,6 +42,7 @@ import ReleaseService from '../../service/ReleaseService';
 // eslint-disable-next-line import/no-cycle
 import { convertStateForStorage, convertAOPInitialState } from './StateStorageConverter';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 const ALL_POSSIBLE_VALID_DATE_RANGE = ['2010-01', moment().format('YYYY-MM')];
 const ALL_POSSIBLE_VALID_DOCUMENTATION = ['include', 'exclude'];
@@ -271,10 +272,8 @@ const newStateIsAllowable = (key, value) => {
     case 'release':
       return (value === null || (typeof value === 'string' && value.length > 0));
     case 'sites':
-      return (
-        Array.isArray(value)
-        && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)))
-      );
+      return Array.isArray(value)
+      && value.every((site) => (typeof site === 'string' && /^[A-Z]{4}$/.test(site)));
     case 'dateRange':
       return (
         Array.isArray(value)
@@ -465,7 +464,7 @@ const getInitialStateFromProps = (props) => {
   if (externalHost) {
     fromExternalHost = true;
     const allowNoAvailability = (externalHostProduct.allowNoAvailability === true);
-    const useExternalExclusiveData = (externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+    const useExternalExclusiveData = (externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA)
       || (allowNoAvailability && !existsNonEmpty(productData.siteCodes));
     if (useExternalExclusiveData) {
       fromManifest = false;
@@ -486,7 +485,9 @@ const getInitialStateFromProps = (props) => {
     ];
   }
   // Remove package type step if product does not offer expanded data
-  if (productData.productHasExpanded === false && requiredSteps.some((step) => step.key === 'packageType')) {
+  const packageTypeStepNotRequired = (productData.productHasExpanded === false)
+    && requiredSteps.some((step) => step.key === 'packageType');
+  if (packageTypeStepNotRequired) {
     requiredSteps.splice(requiredSteps.findIndex((step) => step.key === 'packageType'), 1);
   }
   // Remove provisional data step if release specified and is not a non-release
@@ -642,7 +643,10 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         });
       }
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false;
+        newState.s3Files
+          .validValues[idx]
+          .tableData
+          .checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
 
@@ -678,7 +682,10 @@ const getAndValidateNewS3FilesState = (previousState, action, broadcast = false)
         });
       }
       newState.s3Files.validValues.forEach((file, idx) => {
-        newState.s3Files.validValues[idx].tableData.checked = newState.s3Files.valueMap[file.url] || false; // eslint-disable-line max-len
+        newState.s3Files
+          .validValues[idx]
+          .tableData
+          .checked = newState.s3Files.valueMap[file.url] || false;
       });
       break;
 
@@ -746,9 +753,10 @@ const regenerateS3FilesFiltersAndValidValues = (state) => {
       && updated.dateRange.value[0] <= file.yearMonth
       && file.yearMonth <= updated.dateRange.value[1]
     ))
-    .map((file) => ({
+    .map((file, index) => ({
       ...file,
       tableData: { checked: updated.s3Files.valueMap[file.url] || false },
+      id: `${file.name}-${index}`,
     }));
   const filterKeys = Object.keys(updated.s3Files.valueLookups || {});
   filterKeys.forEach((key) => {
@@ -863,8 +871,8 @@ const getAndValidateNewState = (previousState, action, broadcast = false) => {
     Object.keys(previousState.s3FileFetches)
       .filter((key) => ['notRequested', 'error'].includes(previousState.s3FileFetches[key]))
       .filter((key) => {
-        const site = key.substr(0, 4);
-        const yearMonth = key.substr(5, 7);
+        const site = key.slice(0, 4);
+        const yearMonth = key.slice(5, 12);
         return (
           newState.sites.value.includes(site)
           && newState.dateRange.value[0] <= yearMonth
@@ -1055,7 +1063,7 @@ const reducer = (state, action) => {
           });
           // Cache file attributes by url:
           // file size fast summing, url for building final download request
-          newState.s3Files.bytesByUrl[file.url] = file.size;
+          newState.s3Files.bytesByUrl[file.url] = file.size || 0;
           // If new unique values are present add them to the s3File value lookups
           Object.keys(newState.s3Files.valueLookups).forEach((lookup) => {
             if (typeof file[lookup] === 'undefined') { return; }
@@ -1132,47 +1140,71 @@ const getManifestAjaxObservable = (request) => (
   NeonApi.postJsonObservable(request.url, request.body, null, false)
 );
 
-/**
- * Defines a lookup of state key to a boolean
- * designating whether or not that instance of the context
- * should pull the state from the session storage and restore.
- * Keeping this lookup outside of the context provider function
- * as to not incur lifecycle interference by storing with useState.
- */
-const restoreStateLookup = {};
+const defaultProps = {
+  downloadDataContextUniqueId: 0,
+  stateObservable: null,
+  productData: {},
+  availabilityView: DEFAULT_STATE.availabilityView,
+  release: DEFAULT_STATE.release.value,
+  sites: DEFAULT_STATE.sites.value,
+  dateRange: DEFAULT_STATE.dateRange.value,
+  documentation: DEFAULT_STATE.documentation.value,
+  packageType: DEFAULT_STATE.packageType.value,
+  provisionalData: DEFAULT_STATE.provisionalData.value,
+};
 
 // Provider
-const Provider = (props) => {
+const Provider = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     downloadDataContextUniqueId,
     stateObservable,
     children,
   } = props;
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   // Check preconditions for initial status
   const {
     ready: preconditionsSatisfied,
     canAccessData,
-  } = neonContextSessionState;
+  } = neonAuthContextSessionState;
   // Get the initial state from storage if present, else get from props.
-  let initialState = getInitialStateFromProps(props);
+  const initialState = getInitialStateFromProps(props);
   const { productCode: product } = initialState.productData;
   const stateKey = `downloadDataContextState-${product}-${downloadDataContextUniqueId}`;
-  if (typeof restoreStateLookup[stateKey] === 'undefined') {
-    restoreStateLookup[stateKey] = true;
-  }
-  const shouldRestoreState = restoreStateLookup[stateKey];
-  const stateStorage = makeStateStorage(stateKey);
-  const savedState = stateStorage.readState();
-  if (savedState && shouldRestoreState) {
-    restoreStateLookup[stateKey] = false;
-    stateStorage.removeState();
-    initialState = convertAOPInitialState(savedState, initialState);
-  }
+  const stateStorage = useMemo(() => makeStateStorage(stateKey), [stateKey]);
   // Apply precondition state regardless of stored state for initial state
   initialState.downloadStatus = DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
-  const [state, dispatch] = useReducer(wrappedReducer, initialState);
+  // Determine initial state from session storage once
+  const [initState] = useState(() => {
+    const savedState = stateStorage.readState();
+    const hasSavedState = exists(savedState);
+    let sessionInitialState;
+    let restoredStateFromStorage = false;
+    if (hasSavedState) {
+      sessionInitialState = convertAOPInitialState(savedState, initialState);
+      restoredStateFromStorage = true;
+      // Apply precondition state regardless of stored state for initial state
+      sessionInitialState.downloadStatus = DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
+    } else {
+      sessionInitialState = initialState;
+    }
+    return {
+      restoredStateFromStorage,
+      initialState: sessionInitialState,
+    };
+  });
+  // Determine initialized state from stored state once
+  const appliedInitialState = initState.restoredStateFromStorage
+    ? initState.initialState
+    : initialState;
+  const [state, dispatch] = useReducer(wrappedReducer, appliedInitialState);
   const { downloadStatus, downloadContextIsActive, dialogOpen } = state;
+  // Clean up session state
+  useEffect(() => {
+    if (initState.restoredStateFromStorage) {
+      stateStorage.removeState();
+    }
+  }, [stateStorage, initState]);
 
   useEffect(() => {
     if (!preconditionsSatisfied) { return; }
@@ -1190,7 +1222,6 @@ const Provider = (props) => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
         if (!downloadContextIsActive || !dialogOpen) return;
-        restoreStateLookup[stateKey] = false;
         stateStorage.saveState(convertStateForStorage(state));
       },
     });
@@ -1201,26 +1232,30 @@ const Provider = (props) => {
 
   // Create an observable for manifests requests and subscribe to it to execute
   // the manifest fetch and dispatch results when updated.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const manifestRequest$ = new Subject();
-  manifestRequest$.subscribe((request) => (
-    getManifestAjaxObservable(request)
-      .pipe(
-        switchMap((resp) => of(request.body ? resp.response : resp)),
-        takeUntil(manifestCancelation$),
-      )
-      .subscribe({
-        next: (resp) => dispatch({
-          type: 'setFetchManifestSucceeded',
-          body: resp,
-          sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
-        }),
-        error: (err) => dispatch({
-          type: 'setFetchManifestFailed',
-          error: err,
-        }),
-      })
-  ));
+  const manifestRequest$ = useMemo(() => new Subject(), []);
+  useEffect(() => {
+    manifestRequest$.subscribe((request) => (
+      getManifestAjaxObservable(request)
+        .pipe(
+          switchMap((resp) => of(request.body ? resp.response : resp)),
+          takeUntil(manifestCancelation$),
+        )
+        .subscribe({
+          next: (resp) => dispatch({
+            type: 'setFetchManifestSucceeded',
+            body: resp,
+            sizeEstimate: getSizeEstimateFromManifestRollupResponse(resp),
+          }),
+          error: (err) => dispatch({
+            type: 'setFetchManifestFailed',
+            error: err,
+          }),
+        })
+    ));
+    return () => {
+      manifestRequest$.unsubscribe();
+    };
+  }, [manifestRequest$]);
 
   const handleFetchS3Files = (currentState, headers) => {
     const { productCode } = currentState.productData;
@@ -1230,8 +1265,8 @@ const Provider = (props) => {
     dispatch({ type: 'setS3FileFetchesCalled', keys });
     const observable = forkJoinWithProgress(
       keys.map((key) => {
-        const site = key.substr(0, 4);
-        const yearMonth = key.substr(5, 7);
+        const site = key.slice(0, 4);
+        const yearMonth = key.slice(5, 12);
         const release = currentState.release && currentState.release.value
           ? currentState.release.value
           : null;
@@ -1327,12 +1362,11 @@ const Provider = (props) => {
     }
     if (Object.values(state.s3FileFetches).some((status) => status === 'awaitingFetchCall')) {
       const headers = {
-        ...neonContextSessionState.sessionHeaders,
+        ...neonAuthContextSessionState.sessionHeaders,
       };
       handleFetchS3Files(state, headers);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, downloadStatus, neonContextSessionState.sessionHeaders]);
+  }, [state, downloadStatus, neonAuthContextSessionState.sessionHeaders]);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -1378,19 +1412,6 @@ Provider.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-Provider.defaultProps = {
-  downloadDataContextUniqueId: 0,
-  stateObservable: null,
-  productData: {},
-  availabilityView: DEFAULT_STATE.availabilityView,
-  release: DEFAULT_STATE.release.value,
-  sites: DEFAULT_STATE.sites.value,
-  dateRange: DEFAULT_STATE.dateRange.value,
-  documentation: DEFAULT_STATE.documentation.value,
-  packageType: DEFAULT_STATE.packageType.value,
-  provisionalData: DEFAULT_STATE.provisionalData.value,
 };
 
 const DownloadDataContext = {

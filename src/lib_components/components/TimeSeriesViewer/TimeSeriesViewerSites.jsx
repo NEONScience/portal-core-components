@@ -4,6 +4,7 @@ import React, {
   useLayoutEffect,
   useCallback,
   useRef,
+  forwardRef,
 } from 'react';
 
 import PropTypes from 'prop-types';
@@ -11,50 +12,51 @@ import Select from 'react-select';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Checkbox from '@material-ui/core/Checkbox';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import NoSsr from '@material-ui/core/NoSsr';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import NoSsr from '@mui/material/NoSsr';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import ElevationIcon from '@material-ui/icons/Terrain';
-import HistoryIcon from '@material-ui/icons/History';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import LocationIcon from '@material-ui/icons/MyLocation';
-import NoneIcon from '@material-ui/icons/NotInterested';
-import SearchIcon from '@material-ui/icons/Search';
-import SelectIcon from '@material-ui/icons/TouchApp';
+import ClearIcon from '@mui/icons-material/Clear';
+import ElevationIcon from '@mui/icons-material/Terrain';
+import HistoryIcon from '@mui/icons-material/History';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
+import LocationIcon from '@mui/icons-material/MyLocation';
+import NoneIcon from '@mui/icons-material/NotInterested';
+import SearchIcon from '@mui/icons-material/Search';
+import SelectIcon from '@mui/icons-material/TouchApp';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
+import { makeStyles } from '../Theme/makeStyles';
 
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 import iconCoreTerrestrialSVG from '../SiteMap/svg/icon-site-core-terrestrial.svg';
 import iconCoreAquaticSVG from '../SiteMap/svg/icon-site-core-aquatic.svg';
@@ -64,6 +66,7 @@ import iconGradientAquaticSVG from '../SiteMap/svg/icon-site-gradient-aquatic.sv
 import TimeSeriesViewerContext, {
   TabComponentPropTypes,
   POINTS_PERFORMANCE_LIMIT,
+  MAX_NUM_SITES_SELECTABLE,
 } from './TimeSeriesViewerContext';
 
 const ucWord = (word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
@@ -82,7 +85,7 @@ const ICON_SVGS = {
 /**
    Classes and Styles
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
@@ -120,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
   },
   optionSubtitle: {
     fontSize: '0.75rem',
-    color: Theme.palette.grey[500],
+    color: theme.palette.grey[500],
   },
   sitesContainer: {
     display: 'flex',
@@ -137,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: Theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
   },
   siteDetailsRow: {
     display: 'flex',
@@ -149,11 +152,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
-    marginBottom: Theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
   siteDetail: {
-    marginBottom: Theme.spacing(1),
-    marginRight: Theme.spacing(4),
+    marginBottom: theme.spacing(1),
+    marginRight: theme.spacing(4),
   },
   noneIcon: {
     color: theme.palette.grey[400],
@@ -193,10 +196,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const selectStyles = {
+const buildSelectStyles = (theme) => ({
   input: (base) => ({
     ...base,
-    color: Theme.palette.text.primary,
+    color: theme.palette.text.primary,
     '& input': {
       font: 'inherit',
     },
@@ -208,25 +211,16 @@ const selectStyles = {
     ...base,
     fontSize: '1rem',
     fontWeight: 600,
-    color: Theme.palette.primary.main,
+    color: theme.palette.primary.main,
   }),
-};
+});
 
 /**
    Common React-Select Components - used by both site-specific and position-specific react-selects
 */
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
-
-inputComponent.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
-  ]).isRequired,
-};
+const inputComponent = forwardRef((props, ref) => (
+  <div ref={ref} {...props} />
+));
 
 function ValueContainer(props) {
   const { selectProps, children } = props;
@@ -314,11 +308,16 @@ const positionsSeriesDescription = `
   positions × 3 variables = 6 distinct series).
 `;
 
+const positionHistoryButtonDefaultProps = {
+  fullWidth: false,
+};
+
 /**
    PositionHistoryButton - button that opens a dialog to show all history for a given position
 */
-function PositionHistoryButton(props) {
-  const classes = useStyles(Theme);
+function PositionHistoryButton(inProps) {
+  const props = resolveProps(positionHistoryButtonDefaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     siteCode,
     position,
@@ -341,6 +340,8 @@ function PositionHistoryButton(props) {
       </Button>
     );
   }
+  const dialogDescription = `${positionsDescription} The table below shows changes to the physical `
+    + 'location of this position since its creation.';
   return (
     <>
       <Button
@@ -360,19 +361,19 @@ function PositionHistoryButton(props) {
         aria-labelledby="position-history-dialog-title"
         aria-describedby="position-history-dialog-description"
       >
-        <DialogTitle id="position-history-dialog-title" disableTypography>
-          <Typography variant="h6" id="position-history-dialog-title">
+        <DialogTitle id="position-history-dialog-title">
+          <Typography variant="h6" component="p" id="position-history-dialog-title">
             {`Position History: ${siteCode} - ${position}`}
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText id="position-history-dialog-description" tabIndex={-1} variant="body2">
-            {`${positionsDescription} The table below shows changes to the physical location of this position since its creation.`}
+            {dialogDescription}
           </DialogContentText>
           <TableContainer>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
-                <TableRow style={{ backgroundColor: Theme.palette.grey[50] }}>
+                <TableRow style={{ backgroundColor: theme.palette.grey[50] }}>
                   <TableCell>Start Date</TableCell>
                   <TableCell>End Date</TableCell>
                   <TableCell align="right">x</TableCell>
@@ -392,10 +393,10 @@ function PositionHistoryButton(props) {
                     referenceLocationElevation,
                   } = row;
                   const hasReferenceElevation = exists(referenceLocationElevation)
-                    && !isNaN(referenceLocationElevation);
-                  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
-                  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
-                  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
+                    && !Number.isNaN(referenceLocationElevation);
+                  const hasXOffset = exists(xOffset) && !Number.isNaN(xOffset);
+                  const hasYOffset = exists(yOffset) && !Number.isNaN(yOffset);
+                  const hasZOffset = exists(zOffset) && !Number.isNaN(zOffset);
                   const parsedReferenceElevation = hasReferenceElevation
                     ? referenceLocationElevation
                     : NaN;
@@ -403,9 +404,12 @@ function PositionHistoryButton(props) {
                   const parsedYOffset = hasYOffset ? yOffset : NaN;
                   const parsedZOffset = hasZOffset ? zOffset : NaN;
                   let elevation = 'unknown';
-                  if (!isNaN(parsedReferenceElevation)) {
-                    if (!isNaN(parsedZOffset)) {
-                      elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
+                  if (!Number.isNaN(parsedReferenceElevation)) {
+                    if (!Number.isNaN(parsedZOffset)) {
+                      const calcOffsetElevation = (parsedReferenceElevation + parsedZOffset)
+                        .toFixed(2)
+                        .toString();
+                      elevation = `${calcOffsetElevation}m`;
                     } else {
                       elevation = `${parsedReferenceElevation}m`;
                     }
@@ -416,10 +420,16 @@ function PositionHistoryButton(props) {
                   const end = rawEnd === '' ? 'Current' : rawEnd;
                   const cellStyle = idx !== history.length - 1 ? {}
                     : { fontWeight: '600', borderBottom: 'none' };
-                  const key = `${sensorStartDateTime}${end}${parsedXOffset}${parsedYOffset}${parsedZOffset}`;
+                  const key = `${sensorStartDateTime}`
+                    + `${end}`
+                    + `${parsedXOffset}`
+                    + `${parsedYOffset}`
+                    + `${parsedZOffset}`;
                   return (
                     <TableRow key={key}>
-                      <TableCell component="th" scope="row" style={cellStyle}>{sensorStartDateTime}</TableCell>
+                      <TableCell component="th" scope="row" style={cellStyle}>
+                        {sensorStartDateTime}
+                      </TableCell>
                       <TableCell component="th" scope="row" style={cellStyle}>{end}</TableCell>
                       <TableCell align="right" style={cellStyle}>{displayXOffset}</TableCell>
                       <TableCell align="right" style={cellStyle}>{displayYOffset}</TableCell>
@@ -433,7 +443,11 @@ function PositionHistoryButton(props) {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => { setHistoryDialogOpen(false); }} color="primary" variant="outlined">
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => { setHistoryDialogOpen(false); }}
+          >
             Return
           </Button>
         </DialogActions>
@@ -464,21 +478,20 @@ PositionHistoryButton.propTypes = {
   })).isRequired,
 };
 
-PositionHistoryButton.defaultProps = {
-  fullWidth: false,
-};
-
 const POSITION_DETAIL_COMPONENT_XS_UPPER = 300;
 const POSITION_DETAIL_COMPONENT_MD_LOWER = 600;
+
+const positionDetailDefaultProps = { wide: false };
 
 /**
    PositionDetail - Component to display neatly-formatted position content
 */
-function PositionDetail(props) {
+function PositionDetail(inProps) {
+  const props = resolveProps(positionDetailDefaultProps, inProps);
   const { siteCode, position, wide } = props;
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const containerRef = useRef();
+  const containerRef = useRef(undefined);
   const [componentWidth, setComponentWidth] = useState(0);
   let atComponentXs = false;
   let atComponentMd = false;
@@ -526,10 +539,10 @@ function PositionDetail(props) {
     zOffset,
   } = history[current] || {};
   const hasReferenceElevation = exists(referenceLocationElevation)
-    && !isNaN(referenceLocationElevation);
-  const hasXOffset = exists(xOffset) && !isNaN(xOffset);
-  const hasYOffset = exists(yOffset) && !isNaN(yOffset);
-  const hasZOffset = exists(zOffset) && !isNaN(zOffset);
+    && !Number.isNaN(referenceLocationElevation);
+  const hasXOffset = exists(xOffset) && !Number.isNaN(xOffset);
+  const hasYOffset = exists(yOffset) && !Number.isNaN(yOffset);
+  const hasZOffset = exists(zOffset) && !Number.isNaN(zOffset);
   const parsedReferenceElevation = hasReferenceElevation
     ? referenceLocationElevation
     : NaN;
@@ -538,15 +551,15 @@ function PositionDetail(props) {
   const displayYOffset = hasYOffset ? `${yOffset}m` : '--';
   const displayZOffset = hasZOffset ? `${zOffset}m` : '--';
   let elevation = '--';
-  if (!isNaN(parsedReferenceElevation)) {
-    if (!isNaN(parsedZOffset)) {
+  if (!Number.isNaN(parsedReferenceElevation)) {
+    if (!Number.isNaN(parsedZOffset)) {
       elevation = `${(parsedReferenceElevation + parsedZOffset).toFixed(2).toString()}m`;
     } else {
       elevation = `${parsedReferenceElevation}m`;
     }
   }
-  const fadeStyle = { color: Theme.palette.grey[500] };
-  const axisStyle = { marginRight: Theme.spacing(1), fontWeight: 600 };
+  const fadeStyle = { color: theme.palette.grey[500] };
+  const axisStyle = { marginRight: theme.spacing(1), fontWeight: 600 };
   const renderDescription = () => {
     const hasName = isStringNonEmpty(sensorName);
     const hasDescription = isStringNonEmpty(sensorDescription);
@@ -563,7 +576,7 @@ function PositionDetail(props) {
       <>
         <div
           className={classes.startFlex}
-          style={{ ...fadeStyle, marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}
+          style={{ ...fadeStyle, marginRight: theme.spacing(3), marginTop: theme.spacing(0.5) }}
         >
           <Typography variant="caption">
             <span style={{ fontWeight: 600 }}>Location: </span>
@@ -573,7 +586,7 @@ function PositionDetail(props) {
         {!includeReference ? null : (
           <div
             className={classes.startFlex}
-            style={{ ...fadeStyle, marginRight: Theme.spacing(3) }}
+            style={{ ...fadeStyle, marginRight: theme.spacing(3) }}
           >
             <Typography variant="caption">
               <span style={{ fontWeight: 600 }}>Reference Location: </span>
@@ -583,7 +596,7 @@ function PositionDetail(props) {
         )}
       </>
     ) : (
-      <div style={{ marginRight: Theme.spacing(3), marginTop: Theme.spacing(0.5) }}>
+      <div style={{ marginRight: theme.spacing(3), marginTop: theme.spacing(0.5) }}>
         <div>
           <Typography variant="body2" style={{ fontWeight: 600 }}>
             Location:
@@ -631,7 +644,7 @@ function PositionDetail(props) {
     historyButtonContainerStyle = {
       ...historyButtonContainerStyle,
       textAlign: 'unset',
-      marginTop: Theme.spacing(1),
+      marginTop: theme.spacing(1),
       width: '100%',
     };
   }
@@ -644,12 +657,12 @@ function PositionDetail(props) {
   return wide ? (
     <div ref={containerRef}>
       <div className={classes.startFlex} style={{ alignItems: 'flex-end' }}>
-        <Typography variant="body1" style={{ fontWeight: 600, marginRight: Theme.spacing(3) }}>
+        <Typography variant="body1" style={{ fontWeight: 600, marginRight: theme.spacing(3) }}>
           {position}
         </Typography>
         <div className={classes.startFlex} style={{ alignItems: 'center', ...fadeStyle }}>
           <Typography variant="body2">Elevation:</Typography>
-          <ElevationIcon fontSize="small" style={{ margin: Theme.spacing(0, 0.5, 0, 1) }} />
+          <ElevationIcon fontSize="small" style={{ margin: theme.spacing(0, 0.5, 0, 1) }} />
           <Typography variant="body2">{elevation}</Typography>
         </div>
       </div>
@@ -669,7 +682,7 @@ function PositionDetail(props) {
     >
       <div style={positionSectionsContainerStyle}>
         <div className={classes.startFlex} style={{ alignItems: 'center' }}>
-          <div style={{ marginRight: Theme.spacing(3) }}>
+          <div style={{ marginRight: theme.spacing(3) }}>
             <Typography variant="body1" style={{ fontWeight: 600 }}>
               {position}
             </Typography>
@@ -679,14 +692,14 @@ function PositionDetail(props) {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <ElevationIcon
                 fontSize="small"
-                style={{ marginRight: Theme.spacing(0.5), ...fadeStyle }}
+                style={{ marginRight: theme.spacing(0.5), ...fadeStyle }}
               />
               <Typography variant="body2" style={{ ...fadeStyle }}>
                 {elevation}
               </Typography>
             </div>
           </div>
-          <div style={{ marginRight: Theme.spacing(3) }}>
+          <div style={{ marginRight: theme.spacing(3) }}>
             <Typography variant="body2">
               <span style={{ ...axisStyle }}>x:</span>
               {`${displayXOffset}`}
@@ -719,13 +732,14 @@ PositionDetail.propTypes = {
   wide: PropTypes.bool,
 };
 
-PositionDetail.defaultProps = { wide: false };
+const selectedPositionDefaultProps = { disabled: false };
 
 /**
    Selected Position - Component for a single deletable position paper to show within a SelectedSite
 */
-function SelectedPosition(props) {
-  const classes = useStyles(Theme);
+function SelectedPosition(inProps) {
+  const props = resolveProps(selectedPositionDefaultProps, inProps);
+  const { classes, theme } = useStyles();
   const { siteCode, position, disabled } = props;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   return (
@@ -733,7 +747,7 @@ function SelectedPosition(props) {
       <IconButton
         aria-label={`remove position ${position} from ${siteCode}`}
         disabled={disabled}
-        style={{ marginLeft: Theme.spacing(1), marginRight: Theme.spacing(1) }}
+        style={{ marginLeft: theme.spacing(1), marginRight: theme.spacing(1) }}
         onClick={() => {
           if (disabled) { return; }
           const selectedSiteIdx = state.selection.sites
@@ -742,6 +756,7 @@ function SelectedPosition(props) {
             .filter((p) => p !== position);
           dispatch({ type: 'selectSitePositions', positions, siteCode });
         }}
+        size="large"
       >
         <ClearIcon fontSize="small" />
       </IconButton>
@@ -758,13 +773,11 @@ SelectedPosition.propTypes = {
   disabled: PropTypes.bool,
 };
 
-SelectedPosition.defaultProps = { disabled: false };
-
 /**
    SelectPositionsButton - button that opens a dialog for position selection
 */
 function SelectPositionsButton(props) {
-  const { selectedSite } = props;
+  const { selectedSite, theme } = props;
   const { siteCode, positions: selectedPositions } = selectedSite;
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const availablePositions = state.product.sites[siteCode]
@@ -786,34 +799,39 @@ function SelectPositionsButton(props) {
     setSelectDialogOpen(false);
     dispatch({ type: 'selectSitePositions', siteCode, positions: localSelectedPositions });
   };
-
-  const isApplyButtonDisabled = (selectedPositions2) => {
-    // state.selection does not include what was added by users dialog selections so exclude
-    // current site from getPositionCount and use sites from localSelectedPositions
-    const allCurrentPositions = selectedPositions2.length
-      + TimeSeriesViewerContext.getPositionCount(state.selection.sites, siteCode);
+  const checkIsApplyButtonDisabled = (checkSelectedPositions) => {
+    // Include positions from currently selected state.selection, exclude current site
+    // from position selection determination as it is currently being modified prior
+    // to committing to state, account for current site by inspecting the state
+    // of the currently selected positions for this site.
+    const currentSelectedPositions = TimeSeriesViewerContext.getPositionCount(
+      state.selection.sites,
+      siteCode,
+    );
+    const allCurrentPositions = checkSelectedPositions.length + currentSelectedPositions;
+    const numPointsAllPositions = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(
+      state,
+      allCurrentPositions,
+    );
     let isDisabled = false;
-
-    if (!selectedPositions2.length) {
+    if (!checkSelectedPositions.length) {
       isDisabled = true;
-    } else if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state, allCurrentPositions)
-      > POINTS_PERFORMANCE_LIMIT) {
+    } else if (numPointsAllPositions > POINTS_PERFORMANCE_LIMIT) {
       isDisabled = true;
     }
-
     return isDisabled;
   };
-
   const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
     > POINTS_PERFORMANCE_LIMIT;
-
+  const isApplyButtonDisabled = checkIsApplyButtonDisabled(localSelectedPositions)
+    && localSelectedPositions.length > 0;
   return (
     <>
       <Button
         size="small"
         variant="outlined"
         startIcon={<SelectIcon />}
-        style={{ marginLeft: Theme.spacing(4) }}
+        style={{ marginLeft: theme.spacing(4) }}
         disabled={isDisabled}
         onClick={() => {
           setLocalSelectedPositions(selectedPositions);
@@ -829,7 +847,7 @@ function SelectPositionsButton(props) {
         aria-labelledby="add-positions-dialog-title"
         aria-describedby="add-positions-dialog-description"
       >
-        <DialogTitle id="add-positions-dialog-title" disableTypography>
+        <DialogTitle id="add-positions-dialog-title">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant="h6" id="add-positions-dialog-title">Select Positions</Typography>
             <Typography
@@ -840,18 +858,16 @@ function SelectPositionsButton(props) {
               {`${localSelectedPositions.length} of ${availablePositions.length} selected`}
               <br />
               <span
-                style={{ fontWeight: 300, color: Theme.palette.grey[500], fontStyle: 'italic' }}
+                style={{ fontWeight: 300, color: theme.palette.grey[500], fontStyle: 'italic' }}
               >
                 at least one is required
               </span>
               <br />
-
               <span
                 style={{
                   fontWeight: 300,
                   fontStyle: 'italic',
-                  // eslint-disable-next-line max-len
-                  visibility: isApplyButtonDisabled(localSelectedPositions) && localSelectedPositions.length > 0
+                  visibility: isApplyButtonDisabled
                     ? 'visible'
                     : 'hidden',
                 }}
@@ -860,12 +876,6 @@ function SelectPositionsButton(props) {
                 Number of positions selected may cause performance issues
               </span>
             </Typography>
-            {/* <Typography
-              variant="subtitle2"
-              style={{ textAlign: 'right' }}
-            >
-
-            </Typography> */}
           </div>
         </DialogTitle>
         <DialogContent dividers>
@@ -879,11 +889,10 @@ function SelectPositionsButton(props) {
             {availablePositions.map((position) => {
               const labelId = `position-list-label-${position}`;
               return (
-                <ListItem
+                <ListItemButton
                   key={position}
                   role={undefined}
                   dense
-                  button
                   onClick={() => { togglePosition(position); }}
                 >
                   <ListItemIcon>
@@ -892,14 +901,18 @@ function SelectPositionsButton(props) {
                       checked={localSelectedPositions.includes(position)}
                       tabIndex={-1}
                       disableRipple
-                      inputProps={{ 'aria-labelledby': labelId }}
+                      slotProps={{
+                        input: {
+                          'aria-labelledby': labelId,
+                        },
+                      }}
                     />
                   </ListItemIcon>
                   <ListItemText
                     id={labelId}
                     primary={<PositionDetail siteCode={siteCode} position={position} wide />}
                   />
-                </ListItem>
+                </ListItemButton>
               );
             })}
           </List>
@@ -911,7 +924,7 @@ function SelectPositionsButton(props) {
           <Button
             onClick={handleApply}
             variant="contained"
-            disabled={isApplyButtonDisabled(localSelectedPositions)}
+            disabled={checkIsApplyButtonDisabled(localSelectedPositions)}
           >
             Apply
           </Button>
@@ -926,6 +939,7 @@ SelectPositionsButton.propTypes = {
     siteCode: PropTypes.string.isRequired,
     positions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+  theme: PropTypes.any.isRequired,
 };
 
 /**
@@ -938,30 +952,30 @@ function SitesControl(props) {
     innerRef,
     selectProps: { TextFieldProps },
   } = props;
-
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const labelText = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
-    > POINTS_PERFORMANCE_LIMIT
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const labelText = (numPoints > POINTS_PERFORMANCE_LIMIT)
     ? 'Add Sites (disabled)'
     : 'Add Sites';
-
   return (
     <TextField
       fullWidth
       label={labelText}
       variant="outlined"
-      InputProps={{
-        inputComponent,
-        inputProps: {
-          ref: innerRef,
-          children,
-          ...innerProps,
+      slotProps={{
+        input: {
+          inputComponent,
+          inputProps: {
+            ref: innerRef,
+            children,
+            ...innerProps,
+          },
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon color="disabled" />
+            </InputAdornment>
+          ),
         },
-        endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon color="disabled" />
-          </InputAdornment>
-        ),
       }}
       {...TextFieldProps}
     />
@@ -970,11 +984,14 @@ function SitesControl(props) {
 
 SitesControl.propTypes = ControlPropTypes;
 
+const siteOptionDefaultProps = OptionDefaultProps;
+
 /**
    SiteOption - Component for a single site as it appears in the drop-down menu
 */
-function SiteOption(props) {
-  const classes = useStyles(Theme);
+function SiteOption(inProps) {
+  const props = resolveProps(siteOptionDefaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     innerRef,
     isFocused,
@@ -997,16 +1014,19 @@ function SiteOption(props) {
   let optionContent = <Typography variant="body1" gutterBottom>{siteCode}</Typography>;
   if (stateCode) {
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
+    const optionSubtitle = `${terrainTypeTitle} `
+      + `- Domain ${domainCode} (${domainName}) `
+      + `- Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
     optionContent = (
       <div className={classes.startFlex}>
         {iconSvg ? (
           <img
-            src={iconSvg}
+            src={iconSvg.src}
             alt={terrainTypeTitle}
             title={terrainTypeTitle}
-            width={Theme.spacing(3)}
-            height={Theme.spacing(3)}
-            style={{ marginRight: Theme.spacing(1.5), marginTop: Theme.spacing(0.5), flexGrow: 0 }}
+            width={theme.spacing(3)}
+            height={theme.spacing(3)}
+            style={{ marginRight: theme.spacing(1.5), marginTop: theme.spacing(0.5), flexGrow: 0 }}
           />
         ) : null}
         <div style={{ flexGrow: 1 }}>
@@ -1014,39 +1034,48 @@ function SiteOption(props) {
             {`${siteCode} - ${description}, ${stateCode}`}
           </Typography>
           <Typography variant="body2" className={classes.optionSubtitle} gutterBottom>
-            {`${terrainTypeTitle} - Domain ${domainCode} (${domainName}) - Lat/Lon: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`}
+            {optionSubtitle}
           </Typography>
         </div>
       </div>
     );
   }
+  // Note: wrapping each of these MenuItem elements in a MenuList
+  // is a workaround for no longer being able to utilize the MenuItem
+  // component as a standalone component outside of a Menu or MenuList.
+  // The MenuItem brings along desired characteristics for selection
+  // interactions.
   return (
-    <MenuItem
-      key={siteCode}
-      ref={innerRef}
-      selected={isFocused && !isDisabled}
-      component="div"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }}
-      {...innerProps}
-    >
-      {optionContent}
-    </MenuItem>
+    <MenuList style={{ padding: 0, margin: 0 }}>
+      <MenuItem
+        key={siteCode}
+        ref={innerRef}
+        selected={isFocused && !isDisabled}
+        component="div"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          cursor: isDisabled ? 'not-allowed' : 'pointer',
+        }}
+        {...innerProps}
+      >
+        {optionContent}
+      </MenuItem>
+    </MenuList>
   );
 }
 
 SiteOption.propTypes = OptionPropTypes;
-SiteOption.defaultProps = OptionDefaultProps;
+
+const selectedSiteDefaultProps = { disabled: false };
 
 /**
    Selected Site - Component for a single deletable site paper to show below the search box
 */
-function SelectedSite(props) {
-  const classes = useStyles(Theme);
+function SelectedSite(inProps) {
+  const props = resolveProps(selectedSiteDefaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     site,
     disabled,
@@ -1057,7 +1086,6 @@ function SelectedSite(props) {
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates, domains: allDomains } = neonContextData;
   const [, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  // style={{ fontSize: '0.8rem', fontWeight: 600 }}
   const dateRangeTabButton = (
     <Button
       size="small"
@@ -1076,7 +1104,7 @@ function SelectedSite(props) {
         if (disabled) { return; }
         dispatch({ type: 'selectRemoveSite', siteCode });
       }}
-      style={{ minWidth: Theme.spacing(13), whiteSpace: 'nowrap' }}
+      style={{ minWidth: theme.spacing(13), whiteSpace: 'nowrap' }}
       disabled={disabled}
       startIcon={<ClearIcon />}
     >
@@ -1121,12 +1149,12 @@ function SelectedSite(props) {
     const iconSvg = ICON_SVGS[type] && ICON_SVGS[type][terrain] ? ICON_SVGS[type][terrain] : null;
     const terrainIcon = iconSvg ? (
       <img
-        src={iconSvg}
+        src={iconSvg.src}
         alt={terrainTypeTitle}
         title={terrainTypeTitle}
-        width={Theme.spacing(4)}
-        height={Theme.spacing(4)}
-        style={{ marginRight: Theme.spacing(1), flexGrow: 0 }}
+        width={theme.spacing(4)}
+        height={theme.spacing(4)}
+        style={{ marginRight: theme.spacing(1), flexGrow: 0 }}
       />
     ) : null;
     selectedSiteContent = (
@@ -1143,7 +1171,7 @@ function SelectedSite(props) {
             {/* Terrain and Type */}
             <div className={classes.siteDetail}>
               <Typography variant="subtitle2">{terrainTypeTitle}</Typography>
-              <Typography variant="body2" style={{ fontSize: '0.8rem' }}>
+              <Typography variant="body2" style={{ fontSize: '0.8125rem' }}>
                 <i>{terrainTypeSubtitle}</i>
               </Typography>
             </div>
@@ -1154,7 +1182,7 @@ function SelectedSite(props) {
                   <Tooltip title="Latitude / Longitude (click to copy)">
                     <IconButton
                       size="small"
-                      style={{ marginRight: Theme.spacing(0.5) }}
+                      style={{ marginRight: theme.spacing(0.5) }}
                       aria-label="Latitude / Longitude (click to copy)"
                     >
                       <LocationIcon />
@@ -1164,7 +1192,7 @@ function SelectedSite(props) {
                 <Typography
                   variant="caption"
                   aria-label="Latitude / Longitude"
-                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.85rem' }}
+                  style={{ fontFamily: 'monospace', textAlign: 'right', fontSize: '0.875rem' }}
                 >
                   {latitude}
                   <br />
@@ -1210,11 +1238,11 @@ function SelectedSite(props) {
                 </>
               )}
             >
-              <IconButton size="small" style={{ marginLeft: Theme.spacing(1) }}>
+              <IconButton size="small" style={{ marginLeft: theme.spacing(1) }}>
                 <InfoIcon fontSize="small" />
               </IconButton>
             </Tooltip>
-            <SelectPositionsButton selectedSite={site} />
+            <SelectPositionsButton selectedSite={site} theme={theme} />
           </div>
           <div className={classes.positionsCardContainer}>
             {positions.map((position) => (
@@ -1235,7 +1263,11 @@ function SelectedSite(props) {
               No Positions Available.
             </Typography>
           </div>
-          <Typography variant="body2" className={classes.noneLabel} style={{ fontSize: '0.8rem' }}>
+          <Typography
+            variant="body2"
+            className={classes.noneLabel}
+            style={{ fontSize: '0.8125rem' }}
+          >
             <i>
               {/* eslint-disable react/jsx-one-expression-per-line */}
               This site has no available data for the current selected date range, and thus
@@ -1257,7 +1289,6 @@ SelectedSite.propTypes = {
   disabled: PropTypes.bool,
   ...TabComponentPropTypes,
 };
-SelectedSite.defaultProps = { disabled: false };
 
 /**
    Complete Select for Sites
@@ -1272,12 +1303,11 @@ const SitesSelectComponents = {
   IndicatorsContainer: () => null,
 };
 const SitesSelect = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { states: allStates, sites: allSites, domains: allDomains } = neonContextData;
-  let isDisabled = false;
 
   // Build list of selectable sites grouped by US state
   const selectableSiteCodes = Object.keys(state.product.sites);
@@ -1319,8 +1349,8 @@ const SitesSelect = () => {
 
   if (!selectableSitesCount) { return null; }
 
-  isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
-    > POINTS_PERFORMANCE_LIMIT;
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
 
   return (
     <NoSsr>
@@ -1329,9 +1359,9 @@ const SitesSelect = () => {
           isMulti
           isSearchable
           isDisabled={isDisabled}
-          clearable={false}
+          isClearable={false}
           classes={classes}
-          styles={selectStyles}
+          styles={buildSelectStyles(theme)}
           aria-label="Add Sites"
           data-gtm="time-series-viewer.add-sites"
           options={selectableSites}
@@ -1355,38 +1385,39 @@ const SitesSelect = () => {
    Primary Component
 */
 export default function TimeSeriesViewerSites(props) {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { sites: allSites } = neonContextData;
 
   if (!state.selection.sites.length || !Object.keys(allSites).length) {
-    return (
-      <Skeleton variant="rect" width="100%" height={56} />
-    );
+    return <Skeleton variant="rectangular" width="100%" height={56} />;
   }
 
   const calcUpperSelectionLimit = () => {
     let upperLimit = 0;
     const currentPositionCount = TimeSeriesViewerContext.getPositionCount(state.selection.sites);
-
-    for (let upperLimitCandidate = 1; upperLimitCandidate <= 5; upperLimitCandidate += 1) {
-      const numNewPositions = currentPositionCount + upperLimitCandidate;
-
-      if (TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state, numNewPositions)
-        < POINTS_PERFORMANCE_LIMIT) {
-        upperLimit = upperLimitCandidate;
+    for (let numNewPos = 1; numNewPos <= MAX_NUM_SITES_SELECTABLE; numNewPos += 1) {
+      const numNewPositions = currentPositionCount + numNewPos;
+      const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(
+        state,
+        numNewPositions,
+      );
+      if (numPoints < POINTS_PERFORMANCE_LIMIT) {
+        upperLimit = numNewPos;
       }
     }
-
     return upperLimit;
   };
 
   const selectedItems = state.selection.sites.map((site) => site.siteCode);
-  const isDisabled = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state)
-    > POINTS_PERFORMANCE_LIMIT;
-  const upperLimit = Math.min(calcUpperSelectionLimit() + selectedItems.length, 5);
+  const numPoints = TimeSeriesViewerContext.calcPredictedPointsForNewPosition(state);
+  const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
+  const upperLimit = Math.min(
+    calcUpperSelectionLimit() + selectedItems.length,
+    MAX_NUM_SITES_SELECTABLE,
+  );
 
   return (
     <div className={classes.root}>
@@ -1397,7 +1428,13 @@ export default function TimeSeriesViewerSites(props) {
           selectionLimit={[1, upperLimit]}
           selectedItems={selectedItems}
           validItems={Object.keys(state.product.sites)}
-          buttonProps={{ style: { size: 'large', marginLeft: Theme.spacing(1.5) }, disabled: isDisabled }}
+          buttonProps={{
+            style: {
+              size: 'large',
+              marginLeft: theme.spacing(1.5),
+            },
+            disabled: isDisabled,
+          }}
           onSave={(newSites) => { dispatch({ type: 'updateSelectedSites', siteCodes: newSites }); }}
         />
       </div>

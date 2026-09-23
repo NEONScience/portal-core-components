@@ -1,1526 +1,2845 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for default state 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <h6
-        className="MuiTypography-root MuiTypography-h6"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      />
-    </div>
-    <div>
-      <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 10,
-            "marginBottom": "12px",
-            "marginTop": "4px",
-            "width": 200,
-          }
-        }
-      />
-      <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 10,
-            "marginBottom": "12px",
-            "marginTop": "4px",
-            "width": "100%",
-          }
-        }
-      />
-      <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 10,
-            "marginBottom": "12px",
-            "marginTop": "4px",
-            "width": "100%",
-          }
-        }
-      />
-      <span
-        className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 10,
-            "marginBottom": "12px",
-            "marginTop": "4px",
-            "width": 125,
-          }
-        }
-      />
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
-          >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+          <div>
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            />
+          </div>
+          <div>
+            <span
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              style="width: 200px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+            />
+            <span
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+            />
+            <span
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+            />
+            <span
+              class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+              style="width: 125px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+            />
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div>
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-u37euc-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          />
+        </div>
+        <div>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 200px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 100%; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 125px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product with sensor / with default selection 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <b>
-          Sensor:
-        </b>
-        <span
-          style={
-            Object {
-              "marginLeft": 4,
-            }
-          }
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          product sensor 123
-        </span>
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
-        >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <b>
+                Sensor:
+              </b>
+              <span
+                style="margin-left: 4px;"
+              >
+                product sensor 123
               </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <b>
+              Sensor:
+            </b>
+            <span
+              style="margin-left: 4px;"
+            >
+              product sensor 123
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for defined product without sensor / with default selection 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with axes 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <div
+            style="margin-right: 8px;"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+            >
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
+              >
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      30min
+                    </div>
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Roll period:
+                      </span>
+                      5 hour
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    y1
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Scale:
+                      </span>
+                      Linear
+                    </div>
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Units:
+                      </span>
+                      meters
+                    </div>
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Range:
+                      </span>
+                      From Zero (0 - 36.7 meters)
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    y2
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Scale:
+                      </span>
+                      Linear
+                    </div>
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Units:
+                      </span>
+                      degrees
+                    </div>
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Range:
+                      </span>
+                      Centered (10 - 30 degrees)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
       >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+        <div
+          style="margin-right: 8px;"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
           >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
-              >
-                Time step:
-              </span>
-              30min
-            </div>
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
-              >
-                Roll period:
-              </span>
-              5 hour
-            </div>
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
-          >
-            y1
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
-              >
-                Scale:
-              </span>
-              Linear
-            </div>
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
-              >
-                Units:
-              </span>
-              meters
-            </div>
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
-              >
-                Range:
-              </span>
-              From Zero (0 - 36.7 meters)
-            </div>
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
           >
-            y2
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
               >
-                Scale:
-              </span>
-              Linear
-            </div>
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    30min
+                  </div>
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Roll period:
+                    </span>
+                    5 hour
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
               >
-                Units:
-              </span>
-              degrees
-            </div>
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
-            >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  y1
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Scale:
+                    </span>
+                    Linear
+                  </div>
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Units:
+                    </span>
+                    meters
+                  </div>
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Range:
+                    </span>
+                    From Zero (0 - 36.7 meters)
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
               >
-                Range:
-              </span>
-              Centered (10 - 30 degrees)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  y2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Scale:
+                    </span>
+                    Linear
+                  </div>
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Units:
+                    </span>
+                    degrees
+                  </div>
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Range:
+                    </span>
+                    Centered (10 - 30 degrees)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only date range 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Apr 2018 - Jan 2020 (1 year, 10 months)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Apr 2018 - Jan 2020 (1 year, 10 months)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Apr 2018 - Jan 2020 (1 year, 10 months)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only sites 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      ABBY - 000.010, 000.020
-    </p>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      BARR - 000.030
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 250,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            ABBY - 000.010, 000.020
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            BARR - 000.030
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          ABBY - 000.010, 000.020
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          BARR - 000.030
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 250px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with only variables 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      var1, var2
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            var1, var2
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          var1, var2
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`TimeSeriesViewerContainer TimeSeriesViewerSummary Renders for selection with variables and qualityFlags 1`] = `
-<div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <div
-      style={
-        Object {
-          "marginRight": 8,
-        }
-      }
-    >
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle2"
-      >
-        Data Product
-      </h6>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <a
-          className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-          href="https://data.neonscience.org/data-products/DP0.00000.000"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          style={
-            Object {
-              "fontWeight": 600,
-            }
-          }
-          target="_blank"
-        >
-          Foo product - (DP0.00000.000)
-        </a>
-      </p>
-    </div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        This is a product that products
-      </p>
-    </div>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Release
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Latest released and provisional data (release: unknown)
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Sites & Positions
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 175,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Date Range
-    </h6>
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": 10,
-          "marginBottom": "12px",
-          "marginTop": "4px",
-          "width": 300,
-        }
-      }
-    />
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      Variables
-    </h6>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      var1, var2
-    </p>
-    <p
-      className="MuiTypography-root MuiTypography-body2"
-    >
-      Quality flags: qfA, qfB, qfC
-    </p>
-  </div>
-  <div
-    className="makeStyles-summaryDiv-9"
-  >
-    <h6
-      className="MuiTypography-root MuiTypography-subtitle2"
-    >
-      x/y Axes
-    </h6>
-    <table
-      className="MuiTable-root"
-      role={null}
-    >
-      <tbody
-        className="MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root"
-          role={null}
+      <div>
+        <div
+          class="css-yy92n4-summaryDiv"
         >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisTitle-10 MuiTableCell-sizeSmall"
+          <div
+            style="margin-right: 8px;"
           >
-            x
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-axisSettings-11 MuiTableCell-sizeSmall"
-          >
-            <div
-              style={
-                Object {
-                  "marginRight": 16,
-                  "whiteSpace": "nowrap",
-                }
-              }
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
             >
-              <span
-                className="makeStyles-axisSettingTitle-12"
+              Data Product
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+                href="https://data.neonscience.org/data-products/DP0.00000.000"
+                style="font-weight: 600;"
+                target="_blank"
               >
-                Time step:
-              </span>
-              Auto (null)
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                Foo product - (DP0.00000.000)
+              </a>
+            </p>
+          </div>
+          <div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+            >
+              This is a product that products
+            </p>
+          </div>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Release
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Latest released and provisional data (release: unknown)
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Sites & Positions
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Date Range
+          </h6>
+          <span
+            class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+            style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+          />
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Variables
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            var1, var2
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            Quality flags: qfA, qfB, qfC
+          </p>
+        </div>
+        <div
+          class="css-yy92n4-summaryDiv"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            x/y Axes
+          </h6>
+          <div
+            class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+          >
+            <table
+              class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+            >
+              <tbody
+                class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                  >
+                    x
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                  >
+                    <div
+                      style="margin-right: 16px; white-space: nowrap;"
+                    >
+                      <span
+                        class="css-lie7ob-axisSettingTitle"
+                      >
+                        Time step:
+                      </span>
+                      Auto (null)
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <div
+          style="margin-right: 8px;"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+          >
+            Data Product
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-q29pfw-MuiTypography-root-MuiLink-root"
+              href="https://data.neonscience.org/data-products/DP0.00000.000"
+              style="font-weight: 600;"
+              target="_blank"
+            >
+              Foo product - (DP0.00000.000)
+            </a>
+          </p>
+        </div>
+        <div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+          >
+            This is a product that products
+          </p>
+        </div>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Release
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Latest released and provisional data (release: unknown)
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Sites & Positions
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 175px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Date Range
+        </h6>
+        <span
+          class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-3sr0vz-MuiSkeleton-root"
+          style="width: 300px; height: 10px; margin-top: 4px; margin-bottom: 12px;"
+        />
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          Variables
+        </h6>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          var1, var2
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-kycpur-MuiTypography-root"
+        >
+          Quality flags: qfA, qfB, qfC
+        </p>
+      </div>
+      <div
+        class="css-yy92n4-summaryDiv"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-1ewozox-MuiTypography-root"
+        >
+          x/y Axes
+        </h6>
+        <div
+          class="MuiTableContainer-root css-70zvr5-MuiTableContainer-root"
+        >
+          <table
+            class="MuiTable-root css-kzwjmv-MuiTable-root-axisTableRoot"
+          >
+            <tbody
+              class="MuiTableBody-root css-gmh7jj-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-1s6vu4h-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-163nlgv-MuiTableCell-root-axisTitle"
+                >
+                  x
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1e6stb3-MuiTableCell-root-axisSettings"
+                >
+                  <div
+                    style="margin-right: 16px; white-space: nowrap;"
+                  >
+                    <span
+                      class="css-lie7ob-axisSettingTitle"
+                    >
+                      Time step:
+                    </span>
+                    Auto (null)
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

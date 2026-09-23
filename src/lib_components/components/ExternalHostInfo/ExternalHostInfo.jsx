@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
-import ExternalHost from '../ExternalHost/ExternalHost';
+import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { existsNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   startFlex: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -27,8 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ExternalHostInfo = (props) => {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  expandable: false,
+  siteCodes: null,
+};
+
+const ExternalHostInfo = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     productCode,
     expandable,
@@ -63,7 +69,7 @@ const ExternalHostInfo = (props) => {
 
   let blurb = null;
   let dataVariety = externalHost.hostDataVariety || 'Data';
-  if (externalHost.hostType === ExternalHost.HOST_TYPES.REFORMATTED_DATA) {
+  if (externalHost.hostType === HOST_TYPES.REFORMATTED_DATA) {
     blurb = (
       <>
         {`${dataVariety} for this product are available in other formats from`}
@@ -72,7 +78,7 @@ const ExternalHostInfo = (props) => {
       </>
     );
   }
-  if ((externalHost.hostType === ExternalHost.HOST_TYPES.EXCLUSIVE_DATA)
+  if ((externalHost.hostType === HOST_TYPES.EXCLUSIVE_DATA)
       || allowNoLinks) {
     blurb = (
       <>
@@ -111,7 +117,8 @@ const ExternalHostInfo = (props) => {
                   <IconButton
                     aria-label={expandTitle}
                     onClick={() => setExpanded(!expanded)}
-                    style={{ marginLeft: Theme.spacing(2) }}
+                    style={{ marginLeft: theme.spacing(2) }}
+                    size="large"
                   >
                     {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                   </IconButton>
@@ -136,11 +143,4 @@ ExternalHostInfo.propTypes = {
   siteCodes: PropTypes.arrayOf(PropTypes.string),
 };
 
-ExternalHostInfo.defaultProps = {
-  expandable: false,
-  siteCodes: null,
-};
-
-const WrappedExternalHostInfo = Theme.getWrappedComponent(ExternalHostInfo);
-
-export default WrappedExternalHostInfo;
+export default ExternalHostInfo;

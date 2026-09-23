@@ -1,47 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es6"
-    ],
-    "rootDir": "./src",
-    "outDir": "./lib",
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "isolatedModules": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": [
-    "./src/**/*",
-    "react-app-env.d.ts"
-  ],
-  "exclude": [
-    "src/**/*.d.ts",
-    "node_modules",
-    "dist",
-    "test",
-    "build",
-    "lib",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
-  ]
+    "paths": {
+      "@/components/*": ["./src/lib_components/components/*"],
+      "@/flow/*": ["./src/lib_components/flow/*"],
+      "@/images/*": ["./src/lib_components/images/*"],
+      "@/parser/*": ["./src/lib_components/parser/*"],
+      "@/remoteAssets/*": ["./src/lib_components/remoteAssets/*"],
+      "@/remoteAssetsMap/*": ["./src/lib_components/remoteAssetsMap/*"],
+      "@/service/*": ["./src/lib_components/service/*"],
+      "@/sharedState/*": ["./src/lib_components/sharedState/*"],
+      "@/staticJSON/*": ["./src/lib_components/staticJSON/*"],
+      "@/types/*": ["./src/lib_components/types/*"],
+      "@/util/*": ["./src/lib_components/util/*"],
+      "@/vendor/*": ["./src/lib_components/vendor/*"],
+      "@/workers/*": ["./src/lib_components/workers/*"]
+    }
+  }
 }

@@ -1,20 +1,20 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import Cookies from 'universal-cookie'; // eslint-disable-line no-unused-vars
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
-jest.mock('@material-ui/core/Snackbar', () => mockReactComponent('@material-ui/core/Snackbar'));
+jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
 
 // eslint-disable-next-line import/first
 import BrowserWarning from '../BrowserWarning';
 
-let mockCookieGet;
+const mockCookieGet = jest.fn();
 jest.mock('universal-cookie', () => {
-  mockCookieGet = jest.fn();
   return jest.fn().mockImplementation(() => ({
-    get: mockCookieGet,
+    get: () => mockCookieGet(),
     set: jest.fn(),
   }));
 });
@@ -34,25 +34,31 @@ describe('NeonPage - BrowserWarning', () => {
     global.navigator.appVersion = 'bar';
   });
   test('renders nothing if browser is not IE', () => {
-    const tree = renderer.create(
-      <BrowserWarning />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders nothing if browser is found to be IE but ignore cookie is present', () => {
     global.navigator.userAgent = 'foo MSIE qux';
     mockCookieGet.mockReturnValue(true);
-    const tree = renderer.create(
-      <BrowserWarning />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders warning if browser is found to be IE and ignore cookie is not set', () => {
     global.navigator.appVersion = 'bar Trident/qux';
     mockCookieGet.mockReturnValue(false);
-    const tree = renderer.create(
-      <BrowserWarning />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <BrowserWarning />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
 });

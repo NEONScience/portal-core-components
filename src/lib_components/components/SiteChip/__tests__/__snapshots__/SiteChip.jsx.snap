@@ -1,83 +1,235 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SiteChip Preserves MUI chip props 1`] = `
-<div
-  className="MuiChip-root MuiChip-colorPrimary"
-  data-selenium="chip"
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  style={
-    Object {
-      "borderRadius": "20px",
-      "fontSize": "1rem",
-      "height": "40px",
-    }
-  }
->
-  <div
-    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar makeStyles-avatarLarge-1 MuiChip-avatarColorPrimary MuiAvatar-colorDefault"
-    style={
-      Object {
-        "backgroundColor": "#0073cf",
-        "height": "40px",
-        "marginLeft": "0px",
-        "width": "40px",
-      }
-    }
-  >
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      viewBox="0 0 24 24"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary css-7ejqiq-MuiChip-root-colorPrimary"
+        data-selenium="chip"
+        style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
+      >
+        <div
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
+          style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 115, 207);"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="PlaceIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
+            />
+          </svg>
+        </div>
+        <span
+          class="MuiChip-label css-xs6136-MuiChip-label-label"
+        >
+          foo
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiChip-root MuiChip-filled MuiChip-sizeLarge MuiChip-colorPrimary css-7ejqiq-MuiChip-root-colorPrimary"
+      data-selenium="chip"
+      style="color: rgb(255, 255, 255); background-color: rgb(0, 115, 207); font-size: 1rem; border-radius: 20px; height: 40px;"
     >
-      <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-      />
-    </svg>
-  </div>
-  <span
-    className="MuiChip-label"
-  >
-    foo
-  </span>
-</div>
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-1jkgxcn-MuiAvatar-root-avatarLarge"
+        style="width: 40px; height: 40px; margin-left: 0px; background-color: rgb(0, 115, 207);"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+          data-testid="PlaceIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
+          />
+        </svg>
+      </div>
+      <span
+        class="MuiChip-label css-xs6136-MuiChip-label-label"
+      >
+        foo
+      </span>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`SiteChip Renders correctly with only a label 1`] = `
-<div
-  className="MuiChip-root MuiChip-colorSecondary MuiChip-outlined makeStyles-outlined-2 MuiChip-outlinedSecondary makeStyles-outlinedSecondary-4 MuiChip-sizeSmall"
-  data-selenium="site-chip"
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  style={Object {}}
->
-  <div
-    className="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarSmall MuiChip-avatarColorSecondary MuiAvatar-colorDefault"
-    style={
-      Object {
-        "backgroundColor": "#002c77",
-        "height": "24px",
-        "marginLeft": "0px",
-        "width": "24px",
-      }
-    }
-  >
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      viewBox="0 0 24 24"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary css-8x99by-MuiChip-root-outlined-colorSecondary"
+        data-selenium="site-chip"
+        style="background-color: transparent;"
+      >
+        <div
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-f25j1d-MuiAvatar-root"
+          style="width: 24px; height: 24px; margin-left: 0px; background-color: rgb(0, 44, 119);"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="PlaceIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
+            />
+          </svg>
+        </div>
+        <span
+          class="MuiChip-label css-m59w38-MuiChip-label-label"
+        >
+          foo
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorSecondary css-8x99by-MuiChip-root-outlined-colorSecondary"
+      data-selenium="site-chip"
+      style="background-color: transparent;"
     >
-      <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-      />
-    </svg>
-  </div>
-  <span
-    className="MuiChip-label MuiChip-labelSmall"
-  >
-    foo
-  </span>
-</div>
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault MuiChip-avatar css-f25j1d-MuiAvatar-root"
+        style="width: 24px; height: 24px; margin-left: 0px; background-color: rgb(0, 44, 119);"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+          data-testid="PlaceIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5"
+          />
+        </svg>
+      </div>
+      <span
+        class="MuiChip-label css-m59w38-MuiChip-label-label"
+      >
+        foo
+      </span>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

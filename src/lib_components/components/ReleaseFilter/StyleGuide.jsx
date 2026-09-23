@@ -1,19 +1,18 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import ReleaseFilter from './ReleaseFilter';
-import Theme from '../Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -277,7 +276,7 @@ const onChange = (newRelease) => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   return (
     <>

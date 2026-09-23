@@ -5,32 +5,24 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonDocument } from '../../types/neonApi';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 import PdfDocumentViewer from './PdfDocumentViewer';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    container: {
-      width: '100%',
-    },
-    iframe: {
-      border: 'none',
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()(() => ({
+  container: {
+    width: '100%',
+  },
+  iframe: {
+    border: 'none',
+  },
+}));
 
 export interface DocumentViewerProps {
   document: NeonDocument;
@@ -55,8 +47,15 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
-const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  fullUrlPath: undefined,
+};
+
+const DocumentViewer: React.FC<DocumentViewerProps> = (
+  inProps: DocumentViewerProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as DocumentViewerProps;
+  const { classes } = useStyles();
   const {
     document,
     width,
@@ -71,8 +70,8 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
   const isPdfViewerSupported: boolean = DocumentService.isPdfViewerSupported(document);
   const isDocSupported: boolean = isViewerDeviceSupported || isPdfViewerSupported;
 
-  const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const iframeRef: React.MutableRefObject<HTMLIFrameElement|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const iframeRef: React.RefObject<HTMLIFrameElement|undefined> = useRef(undefined);
   const [
     viewerWidth,
     setViewerWidth,
@@ -124,7 +123,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
     );
   }
 
-  const renderObject = (): JSX.Element => {
+  const renderObject = (): React.JSX.Element => {
     if (!DocumentService.isViewerSupported(document)) {
       return (
         <ErrorCard
@@ -135,7 +134,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
     }
     return (
       <iframe
-        ref={iframeRef as React.MutableRefObject<HTMLIFrameElement>}
+        ref={iframeRef as React.RefObject<HTMLIFrameElement>}
         src={dataUrl}
         aria-label={document.description}
         title={document.description}
@@ -148,16 +147,12 @@ const DocumentViewer: React.FC<DocumentViewerProps> = (props: DocumentViewerProp
 
   return (
     <div
-      ref={containerRef as React.MutableRefObject<HTMLDivElement>}
+      ref={containerRef as React.RefObject<HTMLDivElement>}
       className={classes.container}
     >
       {renderObject()}
     </div>
   );
-};
-
-DocumentViewer.defaultProps = {
-  fullUrlPath: undefined,
 };
 
 export default DocumentViewer;

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 
 import Cookies from 'universal-cookie';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 /*
   Browser duck typing and warning
@@ -23,7 +22,7 @@ const isBrowserIE = () => (
     || navigator.appVersion.indexOf('Trident/') > -1
 );
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   browserWarning: {
     backgroundColor: theme.palette.error.main,
   },
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const cookies = new Cookies();
 
 const BrowserWarning = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const browserIsIE = isBrowserIE();
   const [browserWarningOpen, setBrowserWarningOpen] = useState(browserIsIE);
 
@@ -108,6 +107,7 @@ const BrowserWarning = () => {
             aria-label="close"
             color="inherit"
             onClick={handleBrowserWarningClose}
+            size="large"
           >
             <CloseIcon />
           </IconButton>

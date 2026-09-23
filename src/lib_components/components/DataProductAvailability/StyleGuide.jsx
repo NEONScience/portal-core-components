@@ -1,22 +1,20 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len */
+import React, { useEffect, useState, useRef } from 'react';
 
-import React, { useEffect, useState } from 'react';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography';
+import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DataProductAvailability from './DataProductAvailability';
-import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.00001.001.json';
 import sampleSiteData from '../../../sampleData/CPER.json';
@@ -24,34 +22,35 @@ import sampleAvaProvData from '../../../sampleData/DP4.00130.001.release.prov.js
 
 import crunch from '../../../sampleData/DataProductAvailability/crunch';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 const EnhancedAvailability = () => {
-  const [initialized, setInitialized] = useState(false);
+  const theme = useTheme();
+  const initializedRef = useRef(false);
   const [loading, setLoading] = useState(true);
   const [availability, setAvailability] = useState({});
   const [selectedProductCode, setSelectedProductCode] = useState(null);
 
   useEffect(() => {
-    if (!initialized) {
-      setInitialized(true);
+    if (!initializedRef.current) {
+      initializedRef.current = true;
       crunch((result) => {
         setAvailability(result);
         setSelectedProductCode('DP1.20093.001'); // result.products[0].productCode
         setLoading(false);
       });
     }
-  }, [initialized, setInitialized, setLoading, setAvailability]);
+  }, [initializedRef, setLoading, setAvailability]);
 
   const productIdx = !availability.products ? -1
     : availability.products.findIndex((p) => p.productCode === selectedProductCode);
   const sites = productIdx === -1 ? [] : availability.products[productIdx].sites;
 
-  const paperStyles = { width: '100%', padding: Theme.spacing(3) };
+  const paperStyles = { width: '100%', padding: theme.spacing(3) };
   return loading ? (
     <Paper style={paperStyles}>loading...</Paper>
   ) : (
@@ -85,7 +84,7 @@ const sites = ['ARIK', 'COMO', 'CPER', 'NIWO', 'RMNP', 'STER', 'UNDE', 'WLOU'];
 const dateRange = ['2018-01', '2018-12'];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   const DownloadDataContextLink = (
     <Link href="#DownloadDataContext">

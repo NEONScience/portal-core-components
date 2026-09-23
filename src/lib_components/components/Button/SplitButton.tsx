@@ -1,24 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import ButtonGroup, { ButtonGroupProps } from '@material-ui/core/ButtonGroup';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Button, { ButtonProps } from '@mui/material/Button';
+import ButtonGroup, { ButtonGroupProps } from '@mui/material/ButtonGroup';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { Nullable } from '../../types/core';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   fullWidth: {
     width: '100%',
   },
@@ -29,21 +28,23 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   },
 }));
 
+type SelectedOptionRenderType = (selectedOption: string) => string;
+
 interface SplitButtonProps {
   name: string;
   options: string[];
   selectedOption: string;
   onClick: (selectedOption: string) => void;
   onChange: (selectedOption: string) => void;
-  buttonGroupProps: Nullable<ButtonGroupProps>;
-  buttonMenuProps: Nullable<ButtonProps>;
-  buttonProps: Nullable<ButtonProps>;
-  selectedOptionDisplayCallback: Nullable<(selectedOption: string) => string>;
-  isFullWidth: Nullable<boolean>;
-  styleOverrides: Nullable<React.CSSProperties>;
+  buttonGroupProps?: Nullable<ButtonGroupProps>;
+  buttonMenuProps?: Nullable<ButtonProps>;
+  buttonProps?: Nullable<ButtonProps>;
+  selectedOptionDisplayCallback?: Nullable<SelectedOptionRenderType>;
+  isFullWidth?: Nullable<boolean>;
+  styleOverrides?: Nullable<React.CSSProperties>;
 }
 
-const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.Element => {
+const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): React.JSX.Element => {
   const {
     name,
     options,
@@ -58,10 +59,11 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
     styleOverrides,
   }: SplitButtonProps = props;
 
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [open, setOpen] = useState(false);
   const [stateSelectedOption, setStateSelectedOption] = useState(selectedOption);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const [anchorRefEl, setAnchorRefEl] = useState<HTMLElement | null>(null);
   let appliedButtonGroupProps: ButtonGroupProps = {
     variant: 'outlined',
     color: 'primary',
@@ -84,10 +86,9 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
     appliedButtonMenuProps = buttonMenuProps as ButtonProps;
   }
 
-  useEffect(() => {
-    if (selectedOption === stateSelectedOption) return;
+  if (selectedOption !== stateSelectedOption) {
     setStateSelectedOption(selectedOption);
-  }, [selectedOption, stateSelectedOption]);
+  }
 
   const handleClick = (): void => {
     onClick(stateSelectedOption);
@@ -101,9 +102,10 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
     setOpen(false);
   };
   const handleToggle = (): void => {
+    setAnchorRefEl(anchorRef.current);
     setOpen((prevOpen) => !prevOpen);
   };
-  const handleClose = (event: React.MouseEvent<Document, MouseEvent>): void => {
+  const handleClose = (event: MouseEvent | TouchEvent): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
@@ -112,8 +114,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
 
   const renderSelectedOption = (): string => {
     if (exists(selectedOptionDisplayCallback)) {
-      // eslint-disable-next-line max-len
-      return (selectedOptionDisplayCallback as (selectedOption: string) => string)(stateSelectedOption);
+      return (selectedOptionDisplayCallback as SelectedOptionRenderType)(stateSelectedOption);
     }
     return stateSelectedOption;
   };
@@ -123,8 +124,14 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
   const customStyles = exists(styleOverrides) ? styleOverrides : {};
 
   return (
-    <Grid container direction="column" alignItems="center" className={widthStyle}>
-      <Grid item xs={12} className={widthStyle}>
+    <Grid
+      container
+      className={widthStyle}
+      style={{
+        alignItems: 'center',
+      }}
+    >
+      <Grid size={{ xs: 12 }} className={widthStyle}>
         <ButtonGroup
           aria-label={`${name}-split-button`}
           {...appliedButtonGroupProps}
@@ -153,7 +160,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
         </ButtonGroup>
         <Popper
           transition
-          anchorEl={anchorRef.current}
+          anchorEl={anchorRefEl}
           open={open}
           role={undefined}
         >
@@ -169,7 +176,7 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList id={`${name}-split-button-menu`}>
-                    {options.map((option: string, index: number): JSX.Element => ((
+                    {options.map((option: string, index: number): React.JSX.Element => ((
                       <MenuItem
                         key={option}
                         selected={option === stateSelectedOption}
@@ -189,6 +196,4 @@ const SplitButton: React.FC<SplitButtonProps> = (props: SplitButtonProps): JSX.E
   );
 };
 
-const WrappedSplitButton = (Theme as any).getWrappedComponent(SplitButton);
-
-export default WrappedSplitButton;
+export default SplitButton;

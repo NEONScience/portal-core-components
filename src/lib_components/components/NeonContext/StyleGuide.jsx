@@ -1,19 +1,17 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+
+import NeonContext from '@/components/NeonContext/NeonContext';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import NeonContext from './NeonContext';
-import Theme from '../Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -52,7 +50,7 @@ const NeonContextStateComponent = () => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const NeonPageLink = (
     <Link href="#NeonPage">NeonPage</Link>
   );
@@ -149,23 +147,20 @@ const MyComponent = () => {
       <Divider className={classes.divider} />
       <Typography variant="h6" component="h4" gutterBottom>Authentication</Typography>
       <DocBlock>
-        The NeonContext Provider accepts a <tt>useCoreAuth</tt> boolean prop to trigger an auth
-        fetch using the core authentication function. This only works for NEON Data Portal pages.
-        A future iteration will add support for passing in a custom auth function for third party
-        core-components consumers. Until then, if any core components are used in an app deployed
-        to the NEON Data Portal but <i>not</i> using <tt>NeonPage</tt>, this is how to trigger
-        an auth fetch.
+        The NeonAuthContext Provider handles NEON auth. This only works for NEON Data Portal pages.
+        When working with portal-core-components outside of the NEON Data Portal,
+        forego using the NeonAuthContext wrapper, or components that depend on it.
       </DocBlock>
       <CodeBlock>
         {`
-import NeonContext from 'portal-core-components/lib/components/NeonContext';
+import NeonAuthContext from 'portal-core-components/lib/components/NeonContext/NeonAuthContext';
 
 const MyComponent = () => {
   ...
   return (
-    <NeonContext.Provider useCoreAuth>
+    <NeonAuthContext.Provider>
       ...
-    </NeonContext.Provider>
+    </NeonAuthContext.Provider>
   );
 };
         `}
@@ -247,15 +242,18 @@ export default NeonContextStateComponent;
       <CodeBlock>
         {`
 import NeonContext from 'portal-core-components/lib/components/NeonContext';
+import { resolveProps } from 'portal-core-components/lib/util/defaultProps';
 
-const Foo = (props) => {
+const defaultProps = { ... };
+
+const Foo = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   ...
   return (...);
 }
 
 Foo.propTypes = { ... };
-Foo.defaultProps = { ... };
 
 const WrappedFoo = NeonContext.getWrappedComponent(Foo);
 

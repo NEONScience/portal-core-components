@@ -1,1360 +1,2525 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`NeonPage NeonErrorPage 1`] = `
-<div
-  className="MuiContainer-root makeStyles-outerPageContainer-664 MuiContainer-maxWidthLg"
->
-  <div
-    className="makeStyles-pageContent-665"
-    data-selenium="neon-page.content"
-  >
-    <img
-      alt="NEON Data Portal"
-      className="makeStyles-errorPageLogo-683"
-      src="NSF-NEON-logo.png"
-      title="NEON Data Portal"
-    />
-    <h1
-      className="MuiTypography-root makeStyles-pageTitle-679 MuiTypography-h3"
-    >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root makeStyles-errorPageTitleIcon-681"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
-        />
-      </svg>
-      Something broke.
-    </h1>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      <span
-        className="MuiTypography-root makeStyles-errorPageCaption-682 MuiTypography-caption"
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
       >
-        fail
-      </span>
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+        >
+          <img
+            alt="NEON Data Portal"
+            class="css-1fhg076-errorPageLogo"
+            title="NEON Data Portal"
+          />
+          <h1
+            class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-hvywmc-MuiSvgIcon-root-errorPageTitleIcon"
+              data-testid="WarningIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+              />
+            </svg>
+            Something broke.
+          </h1>
+          <div>
+            <span
+              class="MuiTypography-root MuiTypography-caption css-1ta6h9i-MuiTypography-root-errorPageCaption"
+            >
+              fail
+            </span>
+          </div>
+          <div
+            style="display: flex;"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeMedium MuiButton-colorPrimary css-1smoduw-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="AutorenewIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6m6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26"
+                  />
+                </svg>
+              </span>
+              Reset and Try Again
+            </button>
+            <a
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-7kabyi-MuiButtonBase-root-MuiButton-root"
+              href="/"
+              style="margin-left: 32px;"
+              tabindex="0"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="HomeIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                  />
+                </svg>
+              </span>
+              Return Home
+            </a>
+          </div>
+        </div>
+        <input
+          data-gtm="react-page-run-time-error.stack"
+          type="hidden"
+          value="Disregard; this is console.error() call is expected in the NeonErrorPage test"
+        />
+      </div>
     </div>
+  </body>,
+  "container": <div>
     <div
-      style={
-        Object {
-          "display": "flex",
-        }
-      }
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
     >
-      <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
-        disabled={false}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex={0}
-        type="button"
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
       >
-        <span
-          className="MuiButton-label"
-        >
-          <span
-            className="MuiButton-startIcon MuiButton-iconSizeMedium"
-          >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
-              />
-            </svg>
-          </span>
-          Reset and Try Again
-        </span>
-        <span
-          className="MuiTouchRipple-root"
+        <img
+          alt="NEON Data Portal"
+          class="css-1fhg076-errorPageLogo"
+          title="NEON Data Portal"
         />
-      </button>
-      <a
-        aria-disabled={false}
-        className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
-        href="/"
-        onBlur={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        style={
-          Object {
-            "marginLeft": 32,
-          }
-        }
-        tabIndex={0}
-      >
-        <span
-          className="MuiButton-label"
+        <h1
+          class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
         >
-          <span
-            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-hvywmc-MuiSvgIcon-root-errorPageTitleIcon"
+            data-testid="WarningIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
           >
-            <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-              />
-            </svg>
+            <path
+              d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+            />
+          </svg>
+          Something broke.
+        </h1>
+        <div>
+          <span
+            class="MuiTypography-root MuiTypography-caption css-1ta6h9i-MuiTypography-root-errorPageCaption"
+          >
+            fail
           </span>
-          Return Home
-        </span>
-        <span
-          className="MuiTouchRipple-root"
-        />
-      </a>
+        </div>
+        <div
+          style="display: flex;"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeMedium MuiButton-colorPrimary css-1smoduw-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="AutorenewIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6m6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26"
+                />
+              </svg>
+            </span>
+            Reset and Try Again
+          </button>
+          <a
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-7kabyi-MuiButtonBase-root-MuiButton-root"
+            href="/"
+            style="margin-left: 32px;"
+            tabindex="0"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon css-iqinn9-MuiButton-startIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="HomeIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                />
+              </svg>
+            </span>
+            Return Home
+          </a>
+        </div>
+      </div>
+      <input
+        data-gtm="react-page-run-time-error.stack"
+        type="hidden"
+        value="Disregard; this is console.error() call is expected in the NeonErrorPage test"
+      />
     </div>
-  </div>
-  <input
-    data-gtm="react-page-run-time-error.stack"
-    type="hidden"
-    value="Disregard; this is console.error() call is expected in the NeonErrorPage test"
-  />
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders a basic functional page with no props 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-1 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
+      >
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
+        >
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
     <div
-      className="makeStyles-pageContent-2"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
     >
-      <div>
-        content
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <div>
+          content
+        </div>
       </div>
     </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-517 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "calc(2000px - 348px)",
-      }
-    }
-  >
-    <div
-      className="makeStyles-sidebarContainer-520"
-      style={
-        Object {
-          "width": "300px",
-        }
-      }
-    >
-      <div>
-        Sidebar
-      </div>
-    </div>
-    <div
-      className="makeStyles-pageContent-518"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "12px",
-        }
-      }
-    >
-      <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 24,
-            "margin": "16px 0px 32px 0px",
-            "width": "45%",
-          }
-        }
-      />
-      <div>
-        content
-      </div>
-    </div>
-  </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-  <div
-    ComponentPath="@material-ui/core/Backdrop"
-    prop-open={true}
-  >
-    <div
-      className="MuiPaper-root makeStyles-backdropPaper-531 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
-      >
-        Loading
-      </h3>
-      <div
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-        role="progressbar"
-        style={
-          Object {
-            "height": 40,
-            "width": 40,
-          }
-        }
-      >
-        <svg
-          className="MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
         >
-          <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-            cx={44}
-            cy={44}
-            fill="none"
-            r={20.2}
-            strokeWidth={3.6}
-            style={Object {}}
-          />
-        </svg>
-      </div>
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="makeStyles-dismissOverlay-537"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: calc(2000px - 348px);"
       >
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
+        <div
+          class="css-qmaohn-sidebarContainer"
+          style="width: 300px;"
+        >
+          <div>
+            Sidebar
+          </div>
+        </div>
+        <div
+          class="css-17fvrha-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 12px;"
         >
           <span
-            className="MuiButton-label"
+            class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+            style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+          />
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+      <div
+        data-component-path="@mui/material/Backdrop"
+        data-prop-open="true"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+          style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+          >
+            Loading
+          </h3>
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 40px; height: 40px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+          <div
+            class="css-fp67np-dismissOverlay"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: calc(2000px - 348px);"
+    >
+      <div
+        class="css-qmaohn-sidebarContainer"
+        style="width: 300px;"
+      >
+        <div>
+          Sidebar
+        </div>
+      </div>
+      <div
+        class="css-17fvrha-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 12px;"
+      >
+        <span
+          class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+          style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+        />
+        <div>
+          content
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
+    <div
+      data-component-path="@mui/material/Backdrop"
+      data-prop-open="true"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+        style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+        >
+          Loading
+        </h3>
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+        <div
+          class="css-fp67np-dismissOverlay"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
           >
             <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="ClearIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
             </span>
             Dismiss
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with a custom header/footer 1`] = `
-Array [
-  <header>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
     <div>
-      Header
+      <header>
+        <div>
+          Header
+        </div>
+      </header>
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
+      >
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
+        >
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div>
+          Header
+        </div>
+      </footer>
+      ,
     </div>
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-391 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
-    <div
-      className="makeStyles-pageContent-392"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
-    >
+  </body>,
+  "container": <div>
+    <header>
       <div>
-        content
+        Header
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
+    >
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <div>
+          content
+        </div>
       </div>
     </div>
+    <footer>
+      <div>
+        Header
+      </div>
+    </footer>
+    ,
   </div>,
-  <footer>
-    <div>
-      Header
-    </div>
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with a notification 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-328 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
-    <div
-      className="makeStyles-pageContent-329"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
-    >
-      <div>
-        content
-      </div>
-    </div>
-  </div>,
-  <div
-    ComponentPath="@material-ui/core/Snackbar"
-    prop-ContentProps="{\\"aria-describedby\\":\\"neon-data-portal-notifications\\"}"
-    prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
-    prop-open={true}
-  >
-    <div
-      className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-27 MuiPaper-elevation6"
-      role="alert"
-    >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="MuiSnackbarContent-message"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
       >
         <div
-          id="neon-data-portal-notifications"
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
         >
           <div>
-            <div
-              className="makeStyles-notificationDiv-28"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": "Notification",
-                }
-              }
-            />
-            <hr
-              className="MuiDivider-root"
-            />
+            content
           </div>
         </div>
       </div>
       <div
-        className="MuiSnackbarContent-action"
+        data-component-path="@mui/material/Snackbar"
+        data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+        data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
-        <button
-          aria-label="close"
-          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+          role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
         >
-          <span
-            className="MuiIconButton-label"
+          <div
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
+          >
+            <div
+              id="neon-data-portal-notifications"
+            >
+              <div>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  Notification
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
+          >
+            <button
+              aria-label="close"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="CloseIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
+    >
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <div>
+          content
+        </div>
+      </div>
+    </div>
+    <div
+      data-component-path="@mui/material/Snackbar"
+      data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+      data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+        role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
+      >
+        <div
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
+        >
+          <div
+            id="neon-data-portal-notifications"
+          >
+            <div>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                Notification
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
+        >
+          <button
+            aria-label="close"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+            tabindex="0"
+            type="button"
           >
             <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root"
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+              data-testid="CloseIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
               <path
-                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
               />
             </svg>
-          </span>
-          <span
-            className="MuiTouchRipple-root"
-          />
-        </button>
+          </button>
+        </div>
       </div>
     </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with a title and subtitle 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-75 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
+      >
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
+            data-selenium="neon-page.title"
+          >
+            Title
+          </h1>
+          <p
+            class="MuiTypography-root MuiTypography-subtitle1 css-agnnxc-MuiTypography-root-pageSubtitle"
+            data-selenium="neon-page.subtitle"
+          >
+            Subtitle
+          </p>
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
     <div
-      className="makeStyles-pageContent-76"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
     >
-      <h1
-        className="MuiTypography-root makeStyles-pageTitle-90 MuiTypography-h3"
-        data-selenium="neon-page.title"
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
       >
-        Title
-      </h1>
-      <p
-        className="MuiTypography-root makeStyles-pageSubtitle-91 MuiTypography-subtitle1"
-        data-selenium="neon-page.subtitle"
-      >
-        Subtitle
-      </p>
-      <div>
-        content
+        <h1
+          class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
+          data-selenium="neon-page.title"
+        >
+          Title
+        </h1>
+        <p
+          class="MuiTypography-root MuiTypography-subtitle1 css-agnnxc-MuiTypography-root-pageSubtitle"
+          data-selenium="neon-page.subtitle"
+        >
+          Subtitle
+        </p>
+        <div>
+          content
+        </div>
       </div>
     </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with an error 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-265 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
-    <div
-      className="makeStyles-pageContent-266"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
-    >
-      <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 24,
-            "margin": "16px 0px 32px 0px",
-            "width": "45%",
-          }
-        }
-      />
-      <div>
-        content
-      </div>
-    </div>
-  </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-  <div
-    ComponentPath="@material-ui/core/Backdrop"
-    prop-open={true}
-  >
-    <div
-      className="MuiPaper-root makeStyles-backdropPaper-279 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
-        />
-      </svg>
-      <h3
-        className="MuiTypography-root MuiTypography-h5"
-        style={
-          Object {
-            "marginTop": 8,
-          }
-        }
-      >
-        Fail
-      </h3>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="makeStyles-dismissOverlay-285"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
       >
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
         >
           <span
-            className="MuiButton-label"
+            class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+            style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+          />
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+      <div
+        data-component-path="@mui/material/Backdrop"
+        data-prop-open="true"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+          style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-ponwwo-MuiSvgIcon-root"
+            data-testid="WarningIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+            />
+          </svg>
+          <h3
+            class="MuiTypography-root MuiTypography-h5 css-152cces-MuiTypography-root"
+            style="margin-top: 8px;"
+          >
+            Fail
+          </h3>
+          <div
+            class="css-fp67np-dismissOverlay"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
+    >
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <span
+          class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+          style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+        />
+        <div>
+          content
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
+    <div
+      data-component-path="@mui/material/Backdrop"
+      data-prop-open="true"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+        style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-ponwwo-MuiSvgIcon-root"
+          data-testid="WarningIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"
+          />
+        </svg>
+        <h3
+          class="MuiTypography-root MuiTypography-h5 css-152cces-MuiTypography-root"
+          style="margin-top: 8px;"
+        >
+          Fail
+        </h3>
+        <div
+          class="css-fp67np-dismissOverlay"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
           >
             <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="ClearIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
             </span>
             Dismiss
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with custom sidebar content 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-454 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "calc(2000px - 348px)",
-      }
-    }
-  >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: calc(2000px - 348px);"
+      >
+        <div
+          class="css-qmaohn-sidebarContainer"
+          style="width: 300px;"
+        >
+          <div>
+            Sidebar
+          </div>
+        </div>
+        <div
+          class="css-17fvrha-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 12px;"
+        >
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
     <div
-      className="makeStyles-sidebarContainer-457"
-      style={
-        Object {
-          "width": "300px",
-        }
-      }
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: calc(2000px - 348px);"
     >
-      <div>
-        Sidebar
+      <div
+        class="css-qmaohn-sidebarContainer"
+        style="width: 300px;"
+      >
+        <div>
+          Sidebar
+        </div>
+      </div>
+      <div
+        class="css-17fvrha-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 12px;"
+      >
+        <div>
+          content
+        </div>
       </div>
     </div>
-    <div
-      className="makeStyles-pageContent-455"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "12px",
-        }
-      }
-    >
-      <div>
-        content
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
       </div>
-    </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with loading message 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-139 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "3333px",
-      }
-    }
-  >
-    <div
-      className="makeStyles-pageContent-140"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
-    >
-      <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 24,
-            "margin": "16px 0px 32px 0px",
-            "width": "45%",
-          }
-        }
-      />
-      <div>
-        content
-      </div>
-    </div>
-  </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-  <div
-    ComponentPath="@material-ui/core/Backdrop"
-    prop-open={true}
-  >
-    <div
-      className="MuiPaper-root makeStyles-backdropPaper-153 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
-      >
-        Loading
-      </h3>
-      <div
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-        role="progressbar"
-        style={
-          Object {
-            "height": 40,
-            "width": 40,
-          }
-        }
-      >
-        <svg
-          className="MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
         >
-          <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-            cx={44}
-            cy={44}
-            fill="none"
-            r={20.2}
-            strokeWidth={3.6}
-            style={Object {}}
-          />
-        </svg>
-      </div>
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="makeStyles-dismissOverlay-159"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 3333px;"
       >
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
         >
           <span
-            className="MuiButton-label"
+            class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+            style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+          />
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+      <div
+        data-component-path="@mui/material/Backdrop"
+        data-prop-open="true"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+          style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+          >
+            Loading
+          </h3>
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 40px; height: 40px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+          <div
+            class="css-fp67np-dismissOverlay"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 3333px;"
+    >
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <span
+          class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+          style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+        />
+        <div>
+          content
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
+    <div
+      data-component-path="@mui/material/Backdrop"
+      data-prop-open="true"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+        style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+        >
+          Loading
+        </h3>
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-8b1t2c-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle css-19t5dcl-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+        <div
+          class="css-fp67np-dismissOverlay"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
           >
             <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="ClearIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
             </span>
             Dismiss
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with loading message and progress 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-202 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "2000px",
-      }
-    }
-  >
-    <div
-      className="makeStyles-pageContent-203"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "0px",
-        }
-      }
-    >
-      <span
-        className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse"
-        style={
-          Object {
-            "height": 24,
-            "margin": "16px 0px 32px 0px",
-            "width": "45%",
-          }
-        }
-      />
-      <div>
-        content
-      </div>
-    </div>
-  </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-  <div
-    ComponentPath="@material-ui/core/Backdrop"
-    prop-open={true}
-  >
-    <div
-      className="MuiPaper-root makeStyles-backdropPaper-216 MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <h3
-        className="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom"
-      >
-        Loading
-      </h3>
-      <div
-        aria-valuenow={62}
-        className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-determinate"
-        role="progressbar"
-        style={
-          Object {
-            "height": 40,
-            "transform": "rotate(-90deg)",
-            "width": 40,
-          }
-        }
-      >
-        <svg
-          className="MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
         >
-          <circle
-            className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate"
-            cx={44}
-            cy={44}
-            fill="none"
-            r={20.2}
-            strokeWidth={3.6}
-            style={
-              Object {
-                "strokeDasharray": "126.920",
-                "strokeDashoffset": "48.230px",
-              }
-            }
-          />
-        </svg>
-      </div>
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="makeStyles-dismissOverlay-222"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: 2000px;"
       >
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
-          type="button"
+        <div
+          class="css-om5qko-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 0px;"
         >
           <span
-            className="MuiButton-label"
+            class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+            style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+          />
+          <div>
+            content
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
+      <div
+        data-component-path="@mui/material/Backdrop"
+        data-prop-open="true"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+          style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+          >
+            Loading
+          </h3>
+          <span
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="62"
+            class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 40px; height: 40px; transform: rotate(-90deg);"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle css-eorpq6-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+                style="stroke-dasharray: 126.920; stroke-dashoffset: 48.230px;"
+              />
+            </svg>
+          </span>
+          <div
+            class="css-fp67np-dismissOverlay"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                  data-testid="ClearIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: 2000px;"
+    >
+      <div
+        class="css-om5qko-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 0px;"
+      >
+        <span
+          class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8csvkh-MuiSkeleton-root"
+          style="width: 45%; height: 24px; margin: 16px 0px 32px 0px;"
+        />
+        <div>
+          content
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
+    <div
+      data-component-path="@mui/material/Backdrop"
+      data-prop-open="true"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-p43xbz-MuiPaper-root-backdropPaper"
+        style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-op720h-MuiTypography-root"
+        >
+          Loading
+        </h3>
+        <span
+          aria-valuemax="100"
+          aria-valuemin="0"
+          aria-valuenow="62"
+          class="MuiCircularProgress-root MuiCircularProgress-determinate MuiCircularProgress-colorPrimary css-kf1wwg-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px; transform: rotate(-90deg);"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-54pwck-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle css-eorpq6-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+              style="stroke-dasharray: 126.920; stroke-dashoffset: 48.230px;"
+            />
+          </svg>
+        </span>
+        <div
+          class="css-fp67np-dismissOverlay"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-e1sq3x-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
           >
             <span
-              className="MuiButton-startIcon MuiButton-iconSizeSmall"
+              class="MuiButton-icon MuiButton-startIcon css-1nz9r24-MuiButton-startIcon"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="ClearIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                 />
               </svg>
             </span>
             Dismiss
-          </span>
-          <span
-            className="MuiTouchRipple-root"
-          />
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with sidebar links 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-580 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "calc(2000px - 348px)",
-      }
-    }
-  >
-    <div
-      className="makeStyles-sidebarContainer-583"
-      style={
-        Object {
-          "width": "300px",
-        }
-      }
-    >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className="makeStyles-sidebarInnerStickyContainer-584 neon__sidebar-sticky"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: calc(2000px - 348px);"
       >
         <div
-          className="makeStyles-sidebarTitleContainer-585"
+          class="css-qmaohn-sidebarContainer"
+          style="width: 300px;"
         >
           <div
-            className="makeStyles-sidebarTitlesContainer-588"
+            class="css-1quetxa-sidebarInnerStickyContainer neon__sidebar-sticky"
           >
-            <h3
-              className="MuiTypography-root makeStyles-sidebarTitle-586 MuiTypography-h5"
+            <div
+              class="css-o33ds9-sidebarTitleContainer"
             >
-              foo
-            </h3>
-            <h4
-              className="MuiTypography-root makeStyles-sidebarSubtitle-587 MuiTypography-subtitle2"
+              <div
+                class="css-48dzrj-sidebarTitlesContainer"
+              >
+                <h3
+                  class="MuiTypography-root MuiTypography-h5 css-p9036h-MuiTypography-root-sidebarTitle"
+                >
+                  foo
+                </h3>
+                <h4
+                  class="MuiTypography-root MuiTypography-subtitle2 css-15zaxpb-MuiTypography-root-sidebarSubtitle"
+                >
+                  bar
+                </h4>
+              </div>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+              style="width: 236px;"
+            />
+            <div>
+              More
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+              style="width: 236px;"
+            />
+            <div
+              class="css-138p0hz-sidebarLinksContainer"
+              style="max-height: 664px;"
             >
-              bar
-            </h4>
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                href="#"
+              >
+                Section A
+              </a>
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+                href="#sectionB"
+              >
+                Section B
+              </a>
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+                href="#sectionC"
+              >
+                <div>
+                  stub icon
+                </div>
+                Section C
+              </a>
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+                href="#sectionD"
+              >
+                Section D
+              </a>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+              style="margin-bottom: 0px; width: 236px;"
+            />
           </div>
         </div>
-        <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-593"
-          style={
-            Object {
-              "width": "236px",
-            }
-          }
-        />
-        <div>
-          More
-        </div>
-        <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-593"
-          style={
-            Object {
-              "width": "236px",
-            }
-          }
-        />
         <div
-          className="makeStyles-sidebarLinksContainer-592"
+          class="css-17fvrha-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 12px;"
         >
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-589 makeStyles-sidebarLinkCurrent-590 MuiTypography-colorPrimary"
-            href="#"
-            onBlur={[Function]}
-            onClick={null}
-            onFocus={[Function]}
-            style={Object {}}
-          >
-            Section A
-          </a>
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-589 MuiTypography-colorPrimary"
-            href="#sectionB"
-            onBlur={[Function]}
-            onClick={null}
-            onFocus={[Function]}
-            style={Object {}}
-          >
-            Section B
-          </a>
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-589 MuiTypography-colorPrimary"
-            href="#sectionC"
-            onBlur={[Function]}
-            onClick={null}
-            onFocus={[Function]}
-            style={Object {}}
-          >
-            <div>
-              stub icon
-            </div>
-            Section C
-          </a>
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-589 MuiTypography-colorPrimary"
-            href="#sectionD"
-            onBlur={[Function]}
-            onClick={null}
-            onFocus={[Function]}
-            style={Object {}}
-          >
-            Section D
-          </a>
+          <div>
+            content
+          </div>
         </div>
-        <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-593"
-          style={
-            Object {
-              "marginBottom": "0px",
-              "width": "236px",
-            }
-          }
-        />
       </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
     </div>
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
     <div
-      className="makeStyles-pageContent-581"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "12px",
-        }
-      }
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: calc(2000px - 348px);"
     >
-      <div>
-        content
+      <div
+        class="css-qmaohn-sidebarContainer"
+        style="width: 300px;"
+      >
+        <div
+          class="css-1quetxa-sidebarInnerStickyContainer neon__sidebar-sticky"
+        >
+          <div
+            class="css-o33ds9-sidebarTitleContainer"
+          >
+            <div
+              class="css-48dzrj-sidebarTitlesContainer"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h5 css-p9036h-MuiTypography-root-sidebarTitle"
+              >
+                foo
+              </h3>
+              <h4
+                class="MuiTypography-root MuiTypography-subtitle2 css-15zaxpb-MuiTypography-root-sidebarSubtitle"
+              >
+                bar
+              </h4>
+            </div>
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+            style="width: 236px;"
+          />
+          <div>
+            More
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+            style="width: 236px;"
+          />
+          <div
+            class="css-138p0hz-sidebarLinksContainer"
+            style="max-height: 664px;"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              href="#"
+            >
+              Section A
+            </a>
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+              href="#sectionB"
+            >
+              Section B
+            </a>
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+              href="#sectionC"
+            >
+              <div>
+                stub icon
+              </div>
+              Section C
+            </a>
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1dnolxd-MuiTypography-root-MuiLink-root-sidebarLink"
+              href="#sectionD"
+            >
+              Section D
+            </a>
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+            style="margin-bottom: 0px; width: 236px;"
+          />
+        </div>
+      </div>
+      <div
+        class="css-17fvrha-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 12px;"
+      >
+        <div>
+          content
+        </div>
       </div>
     </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage renders with sidebar links as standlone children 1`] = `
-Array [
-  <header
-    className="makeStyles-skeletonHeader-22"
-    id="header"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "120px",
-          "width": "100%",
-        }
-      }
-    />
-  </header>,
-  <div
-    className="MuiContainer-root makeStyles-outerPageContainer-643 MuiContainer-maxWidthLg"
-    style={
-      Object {
-        "maxWidth": "calc(2000px - 470px)",
-      }
-    }
-  >
-    <div
-      className="makeStyles-sidebarContainer-646 sidebarClassName"
-      style={
-        Object {
-          "width": "422px",
-        }
-      }
-    >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <div
+          style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Header
+          </span>
+        </div>
+      </header>
       <div
-        className={null}
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+        style="max-width: calc(2000px - 470px);"
       >
         <div
-          className="makeStyles-sidebarTitleContainer-648"
-        />
-        <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-656"
-          style={
-            Object {
-              "width": "358px",
-            }
-          }
-        />
-        <div
-          className="makeStyles-sidebarLinksContainer-655"
+          class="css-qmaohn-sidebarContainer sidebarClassName"
+          style="width: 422px;"
         >
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-652 makeStyles-sidebarLinkCurrent-653 MuiTypography-colorPrimary"
-            href="#sectionA"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            style={Object {}}
-          >
-            Section A
-          </a>
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineAlways makeStyles-sidebarLink-652 makeStyles-sidebarLinkCurrent-653 MuiTypography-colorPrimary"
-            href="#sectionA"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            style={Object {}}
+          <div>
+            <div
+              class="css-o33ds9-sidebarTitleContainer"
+            />
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+              style="width: 358px;"
+            />
+            <div
+              class="css-138p0hz-sidebarLinksContainer"
+            >
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                href="#sectionA"
+              >
+                Section A
+              </a>
+              <a
+                class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+                href="#sectionA"
+              >
+                Section B
+              </a>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+              style="margin-bottom: 0px; width: 358px;"
+            />
+          </div>
+        </div>
+        <div
+          class="css-1c6c8yy-pageContent"
+          data-selenium="neon-page.content"
+          style="top: 12px;"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
+            data-selenium="neon-page.title"
           >
             Section B
-          </a>
+          </h1>
+          <div>
+            stub component B
+          </div>
         </div>
-        <hr
-          className="MuiDivider-root makeStyles-sidebarDivider-656"
-          style={
-            Object {
-              "marginBottom": "0px",
-              "width": "358px",
-            }
-          }
-        />
       </div>
+      <footer>
+        <div
+          style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+        >
+          <span>
+            Custom Footer
+          </span>
+        </div>
+      </footer>
     </div>
-    <div
-      className="makeStyles-pageContent-644"
-      data-selenium="neon-page.content"
-      style={
-        Object {
-          "top": "12px",
-        }
-      }
-    >
-      <h1
-        className="MuiTypography-root makeStyles-pageTitle-658 MuiTypography-h3"
-        data-selenium="neon-page.title"
+  </body>,
+  "container": <div>
+    <header>
+      <div
+        style="background-color: green; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
       >
-        Section B
-      </h1>
-      <div>
-        stub component B
+        <span>
+          Custom Header
+        </span>
+      </div>
+    </header>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
+      style="max-width: calc(2000px - 470px);"
+    >
+      <div
+        class="css-qmaohn-sidebarContainer sidebarClassName"
+        style="width: 422px;"
+      >
+        <div>
+          <div
+            class="css-o33ds9-sidebarTitleContainer"
+          />
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+            style="width: 358px;"
+          />
+          <div
+            class="css-138p0hz-sidebarLinksContainer"
+          >
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              href="#sectionA"
+            >
+              Section A
+            </a>
+            <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-so51db-MuiTypography-root-MuiLink-root-sidebarLink-sidebarLinkCurrent"
+              href="#sectionA"
+            >
+              Section B
+            </a>
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-5gej9c-MuiDivider-root-sidebarDivider"
+            style="margin-bottom: 0px; width: 358px;"
+          />
+        </div>
+      </div>
+      <div
+        class="css-1c6c8yy-pageContent"
+        data-selenium="neon-page.content"
+        style="top: 12px;"
+      >
+        <h1
+          class="MuiTypography-root MuiTypography-h3 css-10eedje-MuiTypography-root-pageTitle"
+          data-selenium="neon-page.title"
+        >
+          Section B
+        </h1>
+        <div>
+          stub component B
+        </div>
       </div>
     </div>
+    <footer>
+      <div
+        style="background-color: purple; width: 100%; height: 100px; font-size: 3rem; display: flex; align-items: center; justify-content: center;"
+      >
+        <span>
+          Custom Footer
+        </span>
+      </div>
+    </footer>
   </div>,
-  <footer
-    id="footer"
-  >
-    <span
-      className="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse"
-      style={
-        Object {
-          "height": "300px",
-          "width": "100%",
-        }
-      }
-    />
-  </footer>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

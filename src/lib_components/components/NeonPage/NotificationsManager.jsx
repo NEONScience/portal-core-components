@@ -1,16 +1,18 @@
 import React, {
   useState,
   useEffect,
+  useCallback,
+  useMemo,
+  useReducer,
 } from 'react';
-import { string } from 'prop-types';
 
 import Cookies from 'universal-cookie';
 import { Subject } from 'rxjs';
 
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext, { FETCH_STATUS } from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import RouteService from '../../service/RouteService';
 import LiferayNotifications from './LiferayNotifications';
@@ -20,6 +22,7 @@ import {
 } from '../../util/liferayNotificationsUtil';
 import { getJson } from '../../util/rxUtil';
 import { existsNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 const myAccountLink = (
   <Link href={NeonEnvironment.route.buildAccountRoute()} target="_blank">
@@ -51,16 +54,55 @@ const TOKEN_EXPIRY_MESSAGE = (
 );
 /* eslint-enable react/jsx-one-expression-per-line */
 
+const notificationsReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'fetchNotifications':
+      newState.fetchStatus = FETCH_STATUS.FETCHING;
+      return newState;
+    case 'fetchNotificationsSuccess':
+      newState.fetchStatus = FETCH_STATUS.SUCCESS;
+      return newState;
+    case 'fetchNotificationsError':
+      newState.fetchStatus = FETCH_STATUS.ERROR;
+      return newState;
+    case 'userInfoNotificationsFetchCompleted':
+      newState.userInfoNotificationsFetchCompleted = true;
+      return newState;
+    case 'setUserInfoNotifications':
+      newState.userInfoNotifications = action.userInfoNotifications;
+      return newState;
+    default:
+      return state;
+  }
+};
+
 const cookies = new Cookies();
+const cancellationSubject$ = new Subject();
 
-const NotificationsManager = (props) => {
-  const { initialNotification } = props;
-  const notificationDismissals = cookies.get('dismissed-notifications') || [];
-  const cancellationSubject$ = new Subject();
+const defaultProps = {
+  initialNotification: null,
+};
 
+const NotificationsManager = (inProps) => {
+  const { initialNotification } = resolveProps(defaultProps, inProps);
+  const dismissedNotificationsCookie = cookies.get('dismissed-notifications');
+  const notificationDismissals = useMemo(() => {
+    if (dismissedNotificationsCookie) {
+      return dismissedNotificationsCookie;
+    }
+    return [];
+  }, [dismissedNotificationsCookie]);
+
+  const initialFetchStatusState = {
+    fetchStatus: null,
+    userInfoNotificationsFetchCompleted: false,
+    userInfoNotifications: [],
+  };
   let initialNotifications = [];
   if (initialNotification !== null && initialNotification.length) {
     const notificationPropId = generateNotificationId(initialNotification);
+    initialFetchStatusState.fetchStatus = 'success';
     initialNotifications = [{
       id: notificationPropId,
       message: initialNotification,
@@ -71,15 +113,17 @@ const NotificationsManager = (props) => {
   const [{
     isActive,
     auth: { userData },
-  }] = NeonContext.useNeonContextState();
-  const [fetchNotificationsStatus, setFetchNotificationsStatus] = useState(null);
+  }] = NeonAuthContext.useNeonAuthContextState();
+  const [fetchNotificationState, fetchNotificationDispatch] = useReducer(
+    notificationsReducer,
+    initialFetchStatusState,
+  );
   const [manualNotifications, setManualNotifications] = useState(initialNotifications);
   const [liferayNotifications, setLiferayNotifications] = useState([]);
-  const [userInfoNotifications, setUserInfoNotifications] = useState([]);
-  const [isUserStatusNotificationsFetched, setIsUserStatusNotificationsFetched] = useState(false);
+  const { userInfoNotificationsFetchCompleted, userInfoNotifications } = fetchNotificationState;
 
-  const handleFetchNotificationsSuccess = (response) => {
-    setFetchNotificationsStatus('success');
+  const handleFetchNotificationsSuccess = useCallback((response) => {
+    fetchNotificationDispatch({ type: 'fetchNotificationsSuccess' });
     if (!Array.isArray(response.notifications)) { return; }
     const newNotifications = [...liferayNotifications];
     response.notifications.forEach((message) => {
@@ -88,34 +132,18 @@ const NotificationsManager = (props) => {
       newNotifications.push({ id, message, dismissed });
     });
     setLiferayNotifications(newNotifications);
-  };
-
-  const handleUserInfoNotifications = () => {
-    // verifies user is logged in
-    if (!isActive || !userData?.data?.user) { return; }
-    setIsUserStatusNotificationsFetched(true);
-    if (userData?.data?.expiringApiToken === true) {
-      const idObject = {
-        message: TOKEN_EXPIRY_MESSAGE,
-      };
-      const id = generateNotificationId(JSON.stringify(idObject));
-      const dismissed = notificationDismissals.includes(id);
-      const newNotifications = [...userInfoNotifications];
-      const newNotification = {
-        id,
-        dismissed,
-        message: TOKEN_EXPIRY_MESSAGE,
-        isReactNode: true,
-      };
-      newNotifications.push(newNotification);
-      setUserInfoNotifications(newNotifications);
-    }
-  };
+  }, [
+    fetchNotificationDispatch,
+    setLiferayNotifications,
+    liferayNotifications,
+    notificationDismissals,
+  ]);
 
   // If the endpoint fails don't bother with any visible error. Just let it go.
-  const handleFetchNotificationsError = () => {
-    setFetchNotificationsStatus('error');
-  };
+  const handleFetchNotificationsError = useCallback(() => {
+    fetchNotificationDispatch({ type: 'fetchNotificationsError' });
+    setLiferayNotifications([]);
+  }, [fetchNotificationDispatch, setLiferayNotifications]);
 
   const handleHideNotifications = () => {
     const dismissNotifications = [
@@ -132,7 +160,10 @@ const NotificationsManager = (props) => {
       setLiferayNotifications(liferayNotifications.map((n) => ({ ...n, dismissed: true })));
     }
     if (existsNonEmpty(userInfoNotifications)) {
-      setUserInfoNotifications(userInfoNotifications.map((n) => ({ ...n, dismissed: true })));
+      fetchNotificationDispatch({
+        type: 'setUserInfoNotifications',
+        userInfoNotifications: userInfoNotifications.map((n) => ({ ...n, dismissed: true })),
+      });
     }
   };
 
@@ -140,27 +171,60 @@ const NotificationsManager = (props) => {
    Effect - Fetch liferay notifications
   */
   useEffect(() => {
-    if (fetchNotificationsStatus !== null) { return; }
-    setFetchNotificationsStatus('fetching');
+    if (fetchNotificationState.fetchStatus !== null) { return; }
+    if (NeonEnvironment.auth0DisableApi) {
+      fetchNotificationDispatch({ type: 'fetchNotificationsSuccess' });
+      return;
+    }
+    fetchNotificationDispatch({ type: 'fetchNotifications' });
     getJson(
       getLiferayNotificationsApiPath(),
       handleFetchNotificationsSuccess,
       handleFetchNotificationsError,
       cancellationSubject$,
-      undefined,
-      true,
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchNotificationsStatus]);
+  }, [
+    fetchNotificationState,
+    handleFetchNotificationsSuccess,
+    handleFetchNotificationsError,
+    notificationDismissals,
+  ]);
 
   /**
    Effect - Listen for userData/auth fetch
   */
   useEffect(() => {
-    if (!userData || isUserStatusNotificationsFetched) { return; }
-    handleUserInfoNotifications();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData, isUserStatusNotificationsFetched]);
+    if (!userData || userInfoNotificationsFetchCompleted) { return; }
+    // Verifies user is logged in
+    if (!isActive || !userData?.data?.user) { return; }
+    fetchNotificationDispatch({ type: 'userInfoNotificationsFetchCompleted' });
+    if (userData?.data?.expiringApiToken === true) {
+      const idObject = {
+        message: TOKEN_EXPIRY_MESSAGE,
+      };
+      const id = generateNotificationId(JSON.stringify(idObject));
+      const dismissed = notificationDismissals.includes(id);
+      const newNotifications = [...userInfoNotifications];
+      const newNotification = {
+        id,
+        dismissed,
+        message: TOKEN_EXPIRY_MESSAGE,
+        isReactNode: true,
+      };
+      newNotifications.push(newNotification);
+      fetchNotificationDispatch({
+        type: 'setUserInfoNotifications',
+        userInfoNotifications: newNotifications,
+      });
+    }
+  }, [
+    userData,
+    userInfoNotificationsFetchCompleted,
+    isActive,
+    fetchNotificationDispatch,
+    notificationDismissals,
+    userInfoNotifications,
+  ]);
 
   const appliedNotifications = [
     ...manualNotifications,
@@ -174,14 +238,6 @@ const NotificationsManager = (props) => {
       onHideNotifications={handleHideNotifications}
     />
   );
-};
-
-NotificationsManager.propTypes = {
-  initialNotification: string,
-};
-
-NotificationsManager.defaultProps = {
-  initialNotification: null,
 };
 
 export default NotificationsManager;

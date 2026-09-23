@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonApi from '../NeonApi/NeonApi';
-import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 export const TYPES = {
   DATA_PRODUCTS: 'DATA_PRODUCTS',
@@ -214,17 +214,9 @@ const getQueryBody = (type = '', dimensionality = '', args = {}) => {
   return transformQuery(query);
 };
 
-const getAjaxRequest = (body, includeToken = true, withCredentials = undefined) => {
-  let appliedWithCredentials = false;
-  if (!exists(withCredentials) || (typeof withCredentials !== 'boolean')) {
-    appliedWithCredentials = NeonEnvironment.requireCors();
-  } else {
-    appliedWithCredentials = withCredentials;
-  }
+const getAjaxRequest = (body, includeToken = true) => {
   const request = {
     method: 'POST',
-    crossDomain: true,
-    withCredentials: appliedWithCredentials,
     url: NeonEnvironment.getFullGraphqlPath(),
     headers: { 'Content-Type': 'application/json' },
     responseType: 'json',

@@ -65,6 +65,20 @@ const neonContextData = {
   },
 };
 
+function setWindowSize(width, height) {
+  Object.defineProperty(window, 'innerWidth', {
+    writable: true,
+    configurable: true,
+    value: width,
+  });
+  Object.defineProperty(window, 'innerHeight', {
+    writable: true,
+    configurable: true,
+    value: height,
+  });
+  window.dispatchEvent(new Event('resize'));
+}
+
 describe('SiteMap - SiteMapUtils', () => {
   /**
      Functions
@@ -185,10 +199,10 @@ describe('SiteMap - SiteMapUtils', () => {
   describe('deriveFullObservatoryZoomLevel()', () => {
     test('returns FALLBACK_ZOOM if provided mapRef is not valid', () => {
       expect(deriveFullObservatoryZoomLevel()).toBe(2);
-      expect(deriveFullObservatoryZoomLevel({ current: null })).toBe(2);
+      expect(deriveFullObservatoryZoomLevel({ _container: null })).toBe(2);
     });
     test('returns appropriate zoom levels for various container sizes', () => {
-      const mapRef = { current: { container: { parentElement: {} } } };
+      const mapRef = { _container: { parentElement: {} } };
       [
         [10, 0, 2],
         [0, 10, 2],
@@ -202,8 +216,8 @@ describe('SiteMap - SiteMapUtils', () => {
         [1200, 600, 2],
       ].forEach((test) => {
         /* eslint-disable prefer-destructuring */
-        mapRef.current.container.parentElement.clientWidth = test[0];
-        mapRef.current.container.parentElement.clientHeight = test[1];
+        mapRef._container.parentElement.clientWidth = test[0];
+        mapRef._container.parentElement.clientHeight = test[1];
         expect(deriveFullObservatoryZoomLevel(mapRef)).toBe(test[2]);
         /* eslint-enable prefer-destructuring */
       });
@@ -211,13 +225,6 @@ describe('SiteMap - SiteMapUtils', () => {
   });
 
   describe('getDynamicAspectRatio()', () => {
-    let windowSpy;
-    beforeEach(() => {
-      windowSpy = jest.spyOn(global, 'window', 'get');
-    });
-    afterEach(() => {
-      windowSpy.mockRestore();
-    });
     test('gets appropriate aspect ratios for various window sizes without a buffer', () => {
       [
         [800, 1, (1 / 3)],
@@ -236,9 +243,7 @@ describe('SiteMap - SiteMapUtils', () => {
         [100, 1000, (2 / 1)],
         [1, 1000, (2 / 1)],
       ].forEach((test) => {
-        windowSpy.mockImplementation(() => (
-          { innerWidth: test[0], innerHeight: test[1] }
-        ));
+        setWindowSize(test[0], test[1]);
         expect(getDynamicAspectRatio()).toBe(test[2]);
       });
     });
@@ -260,9 +265,7 @@ describe('SiteMap - SiteMapUtils', () => {
         [100, 1300, (2 / 1)],
         [1, 1300, (2 / 1)],
       ].forEach((test) => {
-        windowSpy.mockImplementation(() => (
-          { innerWidth: test[0], innerHeight: test[1] }
-        ));
+        setWindowSize(test[0], test[1]);
         expect(getDynamicAspectRatio(300)).toBe(test[2]);
       });
     });
@@ -655,7 +658,7 @@ describe('SiteMap - SiteMapUtils', () => {
       expect(parseManualLocationFeatureData(initialState)).toStrictEqual({
         neonContextHydrated: true,
         sites: { ...neonContextData.sites },
-        map: { ...getDefaultState().map, center: [52.68, -110.75] },
+        map: { ...getDefaultState().map, center: [52.68, -110.75], zoom: null },
         manualLocationData: [
           {
             manualLocationType: MANUAL_LOCATION_TYPES.PROTOTYPE_SITE,

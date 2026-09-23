@@ -1,4 +1,4 @@
-import dateFormat from 'dateformat';
+import moment from 'moment';
 
 import RouteService from './RouteService';
 
@@ -20,7 +20,7 @@ const NEON = 'NEON (National Ecological Observatory Network)';
 const CitationService: ICitationService = {
   getDateFormatted: (): string => {
     const now = new Date();
-    return dateFormat(now, 'mmmm d, yyyy');
+    return moment(now).format('MMMM D, YYYY');
   },
   buildDataProductCitationText: (
     product: any,

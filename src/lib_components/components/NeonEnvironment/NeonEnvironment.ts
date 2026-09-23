@@ -1,5 +1,6 @@
 /* eslint-disable prefer-regex-literals */
 import { AuthSilentType, Undef } from '../../types/core';
+import { exists } from '../../util/typeUtil';
 
 // Default hosts
 export const DEFAULT_API_HOST = 'https://data.neonscience.org';
@@ -16,6 +17,7 @@ export const HostRegexService: IHostRegexService = {
     new RegExp(/^(data|cert-data|int-data|local-data)[.]neonscience[.]org$/)
   ),
   getWebHostRegex: (): RegExp => (
+    // eslint-disable-next-line max-len, @stylistic/max-len
     new RegExp(/^(www|cert-www|int-www|local-www)[.](neonscience[.]org|.+[.]us-[0-9]{1}[.]platformsh[.]site)$/)
   ),
   getBioRepoHostRegex: (): RegExp => (
@@ -28,12 +30,12 @@ export const HostRegexService: IHostRegexService = {
 // that are expected to be referenced by all apps. Standard vars present in all
 // node environments (e.g. PORT, NODE_ENV, etc.) are not listed here.
 export const requiredEnvironmentVars = [
-  'REACT_APP_NEON_PATH_API',
-  'REACT_APP_NEON_PATH_PUBLIC_GRAPHQL',
-  'REACT_APP_NEON_PATH_AUTH_API',
-  'REACT_APP_NEON_PATH_AUTH0_API',
-  'REACT_APP_NEON_ROUTER_BASE',
-  'REACT_APP_NEON_ROUTER_BASE_HOME',
+  'NEXT_PUBLIC_NEON_PATH_API',
+  'NEXT_PUBLIC_NEON_PATH_PUBLIC_GRAPHQL',
+  'NEXT_PUBLIC_NEON_PATH_AUTH_API',
+  'NEXT_PUBLIC_NEON_PATH_AUTH0_API',
+  'NEXT_PUBLIC_NEON_ROUTER_BASE',
+  'NEXT_PUBLIC_NEON_ROUTER_BASE_HOME',
 ];
 
 // Names of additional environment variables that may be referenced by
@@ -41,20 +43,20 @@ export const requiredEnvironmentVars = [
 // required list this makes a complete set of all environment variables
 // this module will ever reference.
 export const optionalEnvironmentVars = [
-  'REACT_APP_NEON_PATH_LD_API',
-  'REACT_APP_NEON_PATH_DOWNLOAD_API',
-  'REACT_APP_NEON_AUTH_DISABLE_WS',
-  'REACT_APP_NEON_AUTH_DISABLE_SESSION',
-  'REACT_APP_NEON_USE_GRAPHQL',
-  'REACT_APP_NEON_SHOW_AOP_VIEWER',
-  'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
-  'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
-  'REACT_APP_NEON_AOP_GEE_DATA_VIEWER_VIDEO',
-  'REACT_APP_NEON_API_HOST_OVERRIDE',
-  'REACT_APP_BIOREPO_HOST_OVERRIDE',
-  'REACT_APP_NEON_WEB_HOST_OVERRIDE',
-  'REACT_APP_NEON_WS_HOST_OVERRIDE',
-  'REACT_APP_NEON_FETCH_DRUPAL_ASSETS',
+  'NEXT_PUBLIC_NEON_PATH_LD_API',
+  'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
+  'NEXT_PUBLIC_NEON_PATH_VIZ_API',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
+  'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO',
+  'NEXT_PUBLIC_NEON_API_HOST_OVERRIDE',
+  'NEXT_PUBLIC_BIOREPO_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE',
+  'NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS',
 ];
 
 const EnvType = {
@@ -77,11 +79,11 @@ export interface INeonEnvironment {
   isValid: boolean;
   isDevEnv: boolean;
   isProdEnv: boolean;
-  useGraphql: boolean;
-  showAopViewer: boolean;
   authDisableWs: boolean;
+  auth0DisableApi: boolean;
   authDisableBroadcastChannel: boolean;
   sessionDisable: boolean;
+  sessionDisablePing: boolean;
   enableGlobalSignInState: boolean;
   fetchDrupalAssets: boolean;
 
@@ -94,11 +96,13 @@ export interface INeonEnvironment {
   getRootAuthApiPath: () => string;
   getRootAuth0ApiPath: () => string;
   getRootDownloadApiPath: () => string;
+  getRootVizApiPath: () => string;
 
   getApiPath: Record<string, () => string>;
   getApiLdPath: Record<string, () => string>;
   getAuthApiPath: Record<string, () => string>;
   getDownloadApiPath: Record<string, () => string>;
+  getVizApiPath: Record<string, () => string>;
 
   getDataProductTaxonTypesPath: () => string;
   getTaxonTypeDataProductsPath: () => string;
@@ -118,6 +122,7 @@ export interface INeonEnvironment {
   getWebHostOverride: () => string;
   getBioRepoHostOverride: () => string;
   getWsHostOverride: () => string;
+  getApiSessionTokenHeaderOverride: () => Undef<string>;
 
   route: Record<string, (p?: string) => string>;
 
@@ -144,6 +149,7 @@ export interface INeonEnvironment {
   getFullAuthApiPath: (path: string, useWs: boolean) => string;
   getFullGraphqlPath: () => string;
   getFullDownloadApiPath: (path: string) => string;
+  getFullVizApiPath: (path: string) => string;
 
   getFullAuthPath: (path: string) => string;
 
@@ -154,23 +160,29 @@ const NeonEnvironment: INeonEnvironment = {
   isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
-  useGraphql: process.env.REACT_APP_NEON_USE_GRAPHQL === 'true',
-  showAopViewer: process.env.REACT_APP_NEON_SHOW_AOP_VIEWER === 'true',
-  authDisableWs: process.env.REACT_APP_NEON_AUTH_DISABLE_WS === 'true',
-  authDisableBroadcastChannel: process.env.REACT_APP_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
-  sessionDisable: process.env.REACT_APP_NEON_AUTH_DISABLE_SESSION === 'true',
-  enableGlobalSignInState: process.env.REACT_APP_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
-  fetchDrupalAssets: process.env.REACT_APP_NEON_FETCH_DRUPAL_ASSETS !== 'false',
+  authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
+  auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
+  // eslint-disable-next-line max-len, @stylistic/max-len
+  authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
+  sessionDisable: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true',
+  sessionDisablePing: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION_PING === 'true',
+  enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
+  fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
 
-  getReactAppName: () => process.env.REACT_APP_NAME || '',
-  getReactAppVersion: () => process.env.REACT_APP_VERSION || '',
+  getReactAppName: () => process.env.NEXT_PUBLIC_NAME || '',
+  getReactAppVersion: () => process.env.NEXT_PUBLIC_VERSION || '',
 
-  getRootApiPath: () => process.env.REACT_APP_NEON_PATH_API || '/api/v0',
-  getRootGraphqlPath: () => process.env.REACT_APP_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
-  getRootJsonLdPath: () => `${NeonEnvironment.getRootApiPath()}${process.env.REACT_APP_NEON_PATH_LD_API}`,
-  getRootAuthApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH_API || '/api/auth/v0',
-  getRootAuth0ApiPath: () => process.env.REACT_APP_NEON_PATH_AUTH0_API || '/auth0',
-  getRootDownloadApiPath: () => process.env.REACT_APP_NEON_PATH_DOWNLOAD_API || '/api/download/v0',
+  getRootApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_API || '/api/v0',
+  getRootGraphqlPath: () => process.env.NEXT_PUBLIC_NEON_PATH_PUBLIC_GRAPHQL || '/graphql',
+  getRootJsonLdPath: () => (
+    `${NeonEnvironment.getRootApiPath()}${process.env.NEXT_PUBLIC_NEON_PATH_LD_API}`
+  ),
+  getRootAuthApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH_API || '/api/auth/v0',
+  getRootAuth0ApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_AUTH0_API || '/auth0',
+  getRootDownloadApiPath: () => (
+    process.env.NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API || '/api/download/v0'
+  ),
+  getRootVizApiPath: () => process.env.NEXT_PUBLIC_NEON_PATH_VIZ_API || '/api/visualizations/v0',
 
   getApiPath: {
     data: (): string => '/data',
@@ -197,6 +209,11 @@ const NeonEnvironment: INeonEnvironment = {
     prototypeManifestRollup: (): string => '/prototype/manifest/rollup',
   },
 
+  getVizApiPath: {
+    saeBokehPlot: (): string => '/sae/bokeh-plot',
+    saeDemoBokehPlot: (): string => '/sae/demo/bokeh-plot',
+  },
+
   getApiLdPath: {
     repo: (): string => '/repository',
   },
@@ -212,32 +229,40 @@ const NeonEnvironment: INeonEnvironment = {
   },
   getAuthApiPath: {
     ws: () => '/ws',
+    ping: () => '/ping',
   },
   authTopics: {
     getAuth0: () => '/consumer/topic/auth0',
   },
 
   getDataProductTaxonTypesPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/types`,
-  getTaxonTypeDataProductsPath: (): string => `${NeonEnvironment.getFullApiPath('taxonomy')}/products`,
+  getTaxonTypeDataProductsPath: (): string => (
+    `${NeonEnvironment.getFullApiPath('taxonomy')}/products`
+  ),
 
-  getAopGEEDesktopUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_DESKTOP,
-  getAopGEEMobileUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
-  getAopGEEVideoUrl: (): Undef<string> => process.env.REACT_APP_NEON_AOP_GEE_DATA_VIEWER_VIDEO,
+  getRouterBasePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE || '',
+  getRouterBaseHomePath: (): string => process.env.NEXT_PUBLIC_NEON_ROUTER_BASE_HOME || '',
 
-  getRouterBasePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE || '',
-  getRouterBaseHomePath: (): string => process.env.REACT_APP_NEON_ROUTER_BASE_HOME || '',
+  getAopGEEDesktopUrl: (): Undef<string> => (
+    process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP
+  ),
+  getAopGEEMobileUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE,
+  getAopGEEVideoUrl: (): Undef<string> => process.env.NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO,
 
   getApiHostOverride: (): string => (
-    process.env.REACT_APP_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
+    process.env.NEXT_PUBLIC_NEON_API_HOST_OVERRIDE || DEFAULT_API_HOST
   ),
   getBioRepoHostOverride: (): string => (
-    process.env.REACT_APP_BIOREPO_HOST_OVERRIDE || DEFAULT_BIOREPO_HOST
+    process.env.NEXT_PUBLIC_BIOREPO_HOST_OVERRIDE || DEFAULT_BIOREPO_HOST
   ),
   getWebHostOverride: (): string => (
-    process.env.REACT_APP_NEON_WEB_HOST_OVERRIDE || DEFAULT_WEB_HOST
+    process.env.NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE || DEFAULT_WEB_HOST
   ),
   getWsHostOverride: (): string => (
-    process.env.REACT_APP_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
+    process.env.NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE || DEFAULT_API_HOST
+  ),
+  getApiSessionTokenHeaderOverride: (): Undef<string> => (
+    process.env.NEXT_PUBLIC_NEON_API_SESSION_TOKEN_HEADER_OVERRIDE || undefined
   ),
 
   route: {
@@ -266,11 +291,11 @@ const NeonEnvironment: INeonEnvironment = {
       // @ts-ignore
       return self.NEON_SERVER_DATA ? self.NEON_SERVER_DATA : null;
     }
-    /* eslint-enable */
     if (typeof window === 'object') {
       // @ts-ignore
       return window.NEON_SERVER_DATA ? window.NEON_SERVER_DATA : null;
     }
+    /* eslint-enable */
     return null;
   },
 
@@ -496,6 +521,9 @@ const NeonEnvironment: INeonEnvironment = {
     if (serverData && (typeof serverData.NeonAPISessionTokenHeader === 'string')) {
       return serverData.NeonAPISessionTokenHeader;
     }
+    if (NeonEnvironment.isDevEnv && exists(NeonEnvironment.getApiSessionTokenHeaderOverride())) {
+      return NeonEnvironment.getApiSessionTokenHeaderOverride() as string;
+    }
     return '';
   },
 
@@ -529,6 +557,14 @@ const NeonEnvironment: INeonEnvironment = {
     const root = NeonEnvironment.getRootDownloadApiPath();
     return NeonEnvironment.getDownloadApiPath[path]
       ? `${host}${root}${NeonEnvironment.getDownloadApiPath[path]()}`
+      : `${host}${root}`;
+  },
+
+  getFullVizApiPath: (path: string = ''): string => {
+    const host = NeonEnvironment.getApiHost();
+    const root = NeonEnvironment.getRootVizApiPath();
+    return NeonEnvironment.getVizApiPath[path]
+      ? `${host}${root}${NeonEnvironment.getVizApiPath[path]()}`
       : `${host}${root}`;
   },
 

@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
 
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step/Step';
-import StepContent from '@material-ui/core/StepContent';
-import StepButton from '@material-ui/core/StepButton';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepButton from '@mui/material/StepButton';
+import Typography from '@mui/material/Typography';
 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
-import CompletedIcon from '@material-ui/icons/CheckCircle';
-import VerifiedEmailIcon from '@material-ui/icons/VerifiedUser';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CompletedIcon from '@mui/icons-material/CheckCircle';
+import VerifiedEmailIcon from '@mui/icons-material/VerifiedUser';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
 import RouteService from '../../service/RouteService';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
+import { resolveProps } from '../../util/defaultProps';
 import { AccountValidationStep } from '../../types/account';
 import { exists, existsNonEmpty } from '../../util/typeUtil';
 
@@ -43,18 +39,18 @@ const accountInfoLink = (
 );
 
 export type ValidationStepDisplay = {
-  displayLabel: string,
-  getContents: (completed: boolean) => JSX.Element,
-}
+  displayLabel: string;
+  getContents: (theme: NeonTheme, completed: boolean) => React.JSX.Element;
+};
 
 const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   login: {
     displayLabel: 'Sign In',
-    getContents: (completed: boolean): JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <div>
-            <Typography variant="body2" style={{ marginBottom: Theme.spacing(2) }}>
+            <Typography variant="body2" style={{ marginBottom: theme.spacing(2) }}>
               Sign in or create an account before proceeding
             </Typography>
             <NeonSignInButton disableMargin />
@@ -63,7 +59,7 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <CompletedIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Sign In Completed
           </Typography>
@@ -73,19 +69,18 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   },
   'verify-email': {
     displayLabel: 'Verify Email',
-    getContents: (completed: boolean): JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <Typography variant="body2">
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
             Navigate to {myAccountLink} to verify email
-            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           </Typography>
         );
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <VerifiedEmailIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <VerifiedEmailIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Email Verified
           </Typography>
@@ -95,20 +90,19 @@ const VALIDATION_STEPS: Record<string, ValidationStepDisplay> = {
   },
   'validate-account': {
     displayLabel: 'Validate Account',
-    getContents: (completed: boolean): JSX.Element => {
+    getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
       if (!completed) {
         return (
           <Typography variant="body2">
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
             Validate your account by navigating to {myAccountLink} and updating
             your account information with all required fields.
-            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           </Typography>
         );
       }
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <CompletedIcon color="primary" style={{ marginRight: Theme.spacing(1.5) }} />
+          <CompletedIcon color="primary" style={{ marginRight: theme.spacing(1.5) }} />
           <Typography variant="body2" style={{ height: '24px', paddingTop: '3px' }}>
             Account Validated
           </Typography>
@@ -193,23 +187,24 @@ const getStepDisplayLabel = (
 };
 
 const getStepContents = (
+  theme: NeonTheme,
   activeStep: string,
   stepCompleted: boolean,
   customSteps?: Record<string, ValidationStepDisplay>,
-): JSX.Element => {
+): React.JSX.Element => {
   const hasCustomStep = (exists(customSteps)
     && exists((customSteps as Record<string, ValidationStepDisplay>)[activeStep]));
   if (hasCustomStep) {
     const coercedStep = (customSteps as Record<string, ValidationStepDisplay>)[activeStep];
-    return coercedStep.getContents(stepCompleted);
+    return coercedStep.getContents(theme, stepCompleted);
   }
   if (exists(VALIDATION_STEPS[activeStep])) {
-    return VALIDATION_STEPS[activeStep].getContents(stepCompleted);
+    return VALIDATION_STEPS[activeStep].getContents(theme, stepCompleted);
   }
   return <div>{activeStep}</div>;
 };
 
-const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   accountValidationNotesContainer: {
     margin: theme.spacing(1, 0, 0, 0),
   },
@@ -230,7 +225,7 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
   horizontalContentsContainer: {
     margin: theme.spacing(0, 0, 0, 4),
   },
-})) as StylesHook;
+}));
 
 export type AccountValidationStepperProps = {
   isAuthenticated: boolean;
@@ -239,9 +234,14 @@ export type AccountValidationStepperProps = {
   accountValidationStepDisplay?: Record<string, ValidationStepDisplay>;
 };
 
+const defaultProps = {
+  accountValidationStepDisplay: undefined,
+};
+
 const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
-  props: AccountValidationStepperProps,
-): JSX.Element => {
+  inProps: AccountValidationStepperProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as AccountValidationStepperProps;
   const {
     isAuthenticated,
     accountValidated,
@@ -252,8 +252,8 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
     isAuthenticated,
     accountValidationSteps,
   );
-  const classes = useStyles(Theme);
-  const belowMd = useMediaQuery(Theme.breakpoints.down('md'));
+  const { classes, theme } = useStyles();
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
   const [activeStep, setActiveStep] = useState<string>(getInitialActiveStep(appliedSteps));
 
   const renderStepsCompleted = (): string => {
@@ -271,13 +271,13 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
     }
     return `${numCompleted} of ${appliedSteps.length} completed`;
   };
-  const renderVerticalStepContents = (): JSX.Element|null => {
+  const renderVerticalStepContents = (): React.JSX.Element|null => {
     if (!belowMd) {
       return null;
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
     const stepContents = hasStep(activeStep, accountValidationStepDisplay)
-      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
+      ? getStepContents(theme, activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <StepContent>
@@ -285,13 +285,13 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       </StepContent>
     );
   };
-  const renderHorizontalStepContents = (): JSX.Element|null => {
+  const renderHorizontalStepContents = (): React.JSX.Element|null => {
     if (belowMd) {
       return null;
     }
     const stepCompleted = getActiveStep(activeStep, appliedSteps)?.completed || false;
     const stepContents = hasStep(activeStep, accountValidationStepDisplay)
-      ? getStepContents(activeStep, stepCompleted, accountValidationStepDisplay)
+      ? getStepContents(theme, activeStep, stepCompleted, accountValidationStepDisplay)
       : activeStep;
     return (
       <div className={classes.horizontalContentsContainer}>
@@ -299,14 +299,14 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       </div>
     );
   };
-  const renderValidationSteps = (steps: AccountValidationStep[]): JSX.Element[] => (
-    steps.map((step: AccountValidationStep): JSX.Element => {
+  const renderValidationSteps = (steps: AccountValidationStep[]): React.JSX.Element[] => (
+    steps.map((step: AccountValidationStep): React.JSX.Element => {
       const stepDisplayLabel = hasStep(step.step, accountValidationStepDisplay)
         ? getStepDisplayLabel(step.step, accountValidationStepDisplay)
         : step.step;
       return (
         <Step key={step.step} completed={step.completed}>
-          <StepButton onClick={() => setActiveStep(step.step)} completed={step.completed}>
+          <StepButton onClick={() => setActiveStep(step.step)}>
             {stepDisplayLabel}
           </StepButton>
           {renderVerticalStepContents()}
@@ -314,7 +314,7 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       );
     })
   );
-  const renderValidation = (): JSX.Element|null => {
+  const renderValidation = (): React.JSX.Element|null => {
     if (exists(accountValidated) && (accountValidated === true)) {
       return null;
     }
@@ -332,7 +332,6 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
         <Typography variant="body2" className={classes.accountValidationNotesContainer}>
           {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           {accountInfoLink} about account validation.
-          {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
         </Typography>
         <Divider className={classes.stepperTopDivider} />
         <Stepper
@@ -353,10 +352,6 @@ const AccountValidationStepper: React.FC<AccountValidationStepperProps> = (
       {renderValidation()}
     </div>
   );
-};
-
-AccountValidationStepper.defaultProps = {
-  accountValidationStepDisplay: undefined,
 };
 
 export default AccountValidationStepper;

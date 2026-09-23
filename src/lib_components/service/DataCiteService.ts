@@ -178,7 +178,8 @@ ER  - `;
         break;
       case CitationDownloadType.DATA_PRODUCT:
       default:
-        fileName = `NEON-${target.productCode as string}-${appliedRelease}.${citationFormat.extension}`;
+        fileName = `NEON-${target.productCode as string}`
+          + `-${appliedRelease}.${citationFormat.extension}`;
         break;
     }
     if (useProvisional) {

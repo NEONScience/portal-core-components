@@ -1,44 +1,46 @@
 import React, {
   useState,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useCallback,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 
 import { uniqueId } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Typography from '@mui/material/Typography';
 
-import AscIcon from '@material-ui/icons/KeyboardArrowDown';
-import DescIcon from '@material-ui/icons/KeyboardArrowUp';
-import ClickIcon from '@material-ui/icons/TouchApp';
-import DragIcon from '@material-ui/icons/VerticalAlignCenter';
-import PanIcon from '@material-ui/icons/PanTool';
+import AscIcon from '@mui/icons-material/KeyboardArrowDown';
+import DescIcon from '@mui/icons-material/KeyboardArrowUp';
+import ClickIcon from '@mui/icons-material/TouchApp';
+import DragIcon from '@mui/icons-material/VerticalAlignCenter';
+import PanIcon from '@mui/icons-material/PanTool';
 
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import FullWidthVisualization from '../FullWidthVisualization/FullWidthVisualization';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
 import NeonContext from '../NeonContext/NeonContext';
 import MapSelectionButton from '../MapSelectionButton/MapSelectionButton';
 import SiteChip from '../SiteChip/SiteChip';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
@@ -49,7 +51,7 @@ import { SvgDefs } from './AvailabilitySvgComponents';
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   svg: {
     minWidth: `${SVG.MIN_WIDTH}px`,
     minHeight: `${SVG.MIN_HEIGHT}px`,
@@ -58,22 +60,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-  h5Small: {
-    fontSize: '1.075rem',
-  },
   h6Small: {
-    fontSize: '0.95rem',
+    fontSize: '0.9375rem',
   },
   xsSelect: {
     height: theme.spacing(4),
     '& div': {
-      padding: Theme.spacing(1, 3, 1, 1.5),
+      padding: theme.spacing(1, 3, 1, 1.5),
     },
   },
   sortSelect: {
     height: theme.spacing(4),
     '& div': {
-      paddingRight: Theme.spacing(4.5),
+      paddingRight: theme.spacing(4.5),
     },
     marginRight: theme.spacing(2),
   },
@@ -95,22 +94,37 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  datePickerInput: {
+    width: '100%',
+  },
 }));
 
-const useSiteChipStyles = makeStyles((theme) => ({
+const useSiteChipStyles = makeStyles()((theme) => ({
   deleteIcon: {
     marginLeft: theme.spacing(-0.25),
   },
 }));
 
+const defaultProps = {
+  siteCodes: [],
+  dataProducts: [],
+  view: null,
+  sortMethod: null,
+  sortDirection: 'ASC',
+  disableSelection: false,
+  delineateRelease: false,
+  availabilityStatusType: null,
+};
+
 /**
    Main Function
 */
-const BasicAvailabilityInterface = (props) => {
-  const classes = useStyles(Theme);
-  const atXs = useMediaQuery(Theme.breakpoints.only('xs'));
-  const atSm = useMediaQuery(Theme.breakpoints.only('sm'));
-  const siteChipClasses = useSiteChipStyles(Theme);
+const BasicAvailabilityInterface = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes, theme } = useStyles();
+  const atXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const atSm = useMediaQuery(theme.breakpoints.only('sm'));
+  const { classes: siteChipClasses } = useSiteChipStyles();
   const { dataProducts, ...other } = props;
 
   const [
@@ -121,7 +135,7 @@ const BasicAvailabilityInterface = (props) => {
   /**
      Sort methods and directions
   */
-  const SORT_METHODS = {
+  const SORT_METHODS = useMemo(() => ({
     states: {
       label: 'by State',
       getSortFunction: (ret) => (a, b) => {
@@ -144,28 +158,27 @@ const BasicAvailabilityInterface = (props) => {
       label: 'by Site',
       getSortFunction: (ret) => (a, b) => (a < b ? ret[0] : ret[1]),
     },
-  };
+  }), [allStates, allSites]);
   const SORT_DIRECTIONS = ['ASC', 'DESC'];
 
-  const PRODUCT_LOOKUP = {};
-  dataProducts.forEach((product) => {
-    PRODUCT_LOOKUP[product.dataProductCode] = product.dataProductTitle;
-  });
+  const PRODUCT_LOOKUP = useMemo(() => {
+    const lookup = {};
+    dataProducts.forEach((product) => {
+      lookup[product.dataProductCode] = product.dataProductTitle;
+    });
+    return lookup;
+  }, [dataProducts]);
 
   /**
      State: Views
      Contain and sort the availability data.
      Afford different methods for presenting/grouping data along the y-axis (geospatial)
   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const views = {
+  const views = useMemo(() => ({
     summary: {
       view: 'summary',
       name: 'Summary',
       selectable: true,
-      rows: {
-        summary: {},
-      },
       getLabel: {
         text: () => 'ALL ',
         title: () => 'All Sites',
@@ -175,7 +188,6 @@ const BasicAvailabilityInterface = (props) => {
       view: 'sites',
       name: 'Site',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => key,
         title: (key) => allSites[key].description,
@@ -185,7 +197,6 @@ const BasicAvailabilityInterface = (props) => {
       view: 'states',
       name: 'State',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => ` ${key} `,
         title: (key) => allStates[key].name,
@@ -195,7 +206,6 @@ const BasicAvailabilityInterface = (props) => {
       view: 'domains',
       name: 'Domain',
       selectable: true,
-      rows: {},
       getLabel: {
         text: (key) => `${key} `,
         title: (key) => allDomains[key].name,
@@ -219,14 +229,12 @@ const BasicAvailabilityInterface = (props) => {
       view: 'products',
       name: 'Product',
       selectable: false,
-      rows: {},
       getLabel: {
         text: (key) => key,
         title: (key) => PRODUCT_LOOKUP[key],
       },
     },
-  };
-  views.ungrouped.rows = views.sites.rows;
+  }), [allDomains, allStates, allSites, PRODUCT_LOOKUP]);
   const selectableViewKeys = Object.keys(views).filter((key) => views[key].selectable);
 
   /**
@@ -276,6 +284,12 @@ const BasicAvailabilityInterface = (props) => {
   const [currentSortMethod, setCurrentSortMethod] = useState(initialSortMethod);
   const [currentSortDirection, setCurrentSortDirection] = useState(initialSortDirection);
 
+  /**
+    Date picker states
+  */
+  const [datePickerStartOpen, setDatePickerStartOpen] = useState(false);
+  const [datePickerEndOpen, setDatePickerEndOpen] = useState(false);
+
   const setSitesValue = useCallback((sitesValue) => dispatchSelection({
     type: 'setValidatableValue',
     key: 'sites',
@@ -296,25 +310,27 @@ const BasicAvailabilityInterface = (props) => {
   const handleSelectNoneSites = () => {
     setSitesValue([]);
   };
-  const handleSelectAllDateRange = () => {
-    setDateRangeValue(dateRange.validValues);
+  const handleSelectAllDateRange = (inValidValues) => {
+    setDateRangeValue(inValidValues);
   };
-  const handleSelectLatestYearDateRange = () => {
-    const start = TIME.getYearMonthMoment(dateRange.validValues[1]).subtract(11, 'months').format('YYYY-MM');
+  const handleSelectLatestYearDateRange = (inDateRange) => {
+    const start = TIME.getYearMonthMoment(inDateRange.validValues[1])
+      .subtract(11, 'months')
+      .format('YYYY-MM');
     setDateRangeValue([
-      start < dateRange.validValues[0] ? dateRange.validValues[0] : start,
-      dateRange.validValues[1],
+      start < inDateRange.validValues[0] ? inDateRange.validValues[0] : start,
+      inDateRange.validValues[1],
     ]);
   };
-  const handleChangeStartDate = (newStartDate) => {
+  const handleChangeStartDate = (inDateRange, newStartDate) => {
     setDateRangeValue([
       newStartDate.format('YYYY-MM'),
-      dateRange.value[1],
+      inDateRange.value[1],
     ]);
   };
-  const handleChangeEndDate = (newEndDate) => {
+  const handleChangeEndDate = (inDateRange, newEndDate) => {
     setDateRangeValue([
-      dateRange.value[0],
+      inDateRange.value[0],
       newEndDate.format('YYYY-MM'),
     ]);
   };
@@ -331,20 +347,6 @@ const BasicAvailabilityInterface = (props) => {
     }
     setCurrentView(newView);
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let sortedSites = [];
-  const applySort = () => {
-    if (currentView !== 'ungrouped') { return; }
-    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
-    // (though of course a user will read it top-down).
-    const sortReturns = [
-      currentSortDirection === 'ASC' ? 1 : -1,
-      currentSortDirection === 'ASC' ? -1 : 1,
-    ];
-    sortedSites = Object.keys(views.ungrouped.rows);
-    sortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
-  };
   const handleChangeSortMethod = (event) => {
     const newSortMethod = event.target.value;
     if (
@@ -358,7 +360,6 @@ const BasicAvailabilityInterface = (props) => {
       });
     }
     setCurrentSortMethod(newSortMethod);
-    applySort();
   };
   const handleChangeSortDirection = (event, newSortDirection) => {
     if (
@@ -372,7 +373,6 @@ const BasicAvailabilityInterface = (props) => {
       });
     }
     setCurrentSortDirection(newSortDirection);
-    applySort();
   };
 
   /**
@@ -383,82 +383,137 @@ const BasicAvailabilityInterface = (props) => {
      all aggregation views.
      TODO: Add other statuses. Currently the only status is "available".
   */
-  let siteCodes = [];
   const { siteCodes: propsSiteCodes } = props;
   const { siteCodes: contextSiteCodes } = productData;
-  if (propsSiteCodes && propsSiteCodes.length) {
-    siteCodes = propsSiteCodes;
-  } else if (contextSiteCodes && contextSiteCodes.length) {
-    siteCodes = contextSiteCodes;
-  }
-  siteCodes.forEach((site) => {
-    const { siteCode, availableMonths, availableReleases } = site;
-    if (!allSites[siteCode]) { return; }
-    const { stateCode, domainCode } = allSites[siteCode];
-    if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
-    let provAvailableMonths = [];
-    if (delineateRelease && Array.isArray(availableReleases)) {
-      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
-      if (provRelease) {
-        provAvailableMonths = provRelease.availableMonths;
-      }
+  const siteCodes = useMemo(() => {
+    let computedSiteCodes = [];
+    if (propsSiteCodes && propsSiteCodes.length) {
+      computedSiteCodes = propsSiteCodes;
+    } else if (contextSiteCodes && contextSiteCodes.length) {
+      computedSiteCodes = contextSiteCodes;
     }
-    views.sites.rows[siteCode] = {};
-    views.states.rows[stateCode] = views.states.rows[stateCode] || {};
-    views.domains.rows[domainCode] = views.domains.rows[domainCode] || {};
-    availableMonths.forEach((month) => {
-      let status = availabilityStatusType || 'available';
-      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
-        if (provAvailableMonths.includes(month)) {
-          status = 'available-provisional';
+    return computedSiteCodes;
+  }, [propsSiteCodes, contextSiteCodes]);
+  const viewData = useMemo(() => {
+    const newViewData = {};
+    Object.keys(views).forEach((key) => {
+      newViewData[key] = {
+        rows: {},
+      };
+      if (key === 'summary') {
+        newViewData[key].rows.summary = {};
+      }
+    });
+    siteCodes.forEach((site) => {
+      const { siteCode, availableMonths, availableReleases } = site;
+      if (!allSites[siteCode]) { return; }
+      const { stateCode, domainCode } = allSites[siteCode];
+      if (!downloadContextIsActive) { sites.validValues.push(siteCode); }
+      let provAvailableMonths = [];
+      if (delineateRelease && Array.isArray(availableReleases)) {
+        const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+        if (provRelease) {
+          provAvailableMonths = provRelease.availableMonths;
         }
       }
-      if (!views.summary.rows.summary[month]) {
-        views.summary.rows.summary[month] = new Set();
-      }
-      if (!views.sites.rows[siteCode][month]) {
-        views.sites.rows[siteCode][month] = new Set();
-      }
-      if (!views.states.rows[stateCode][month]) {
-        views.states.rows[stateCode][month] = new Set();
-      }
-      if (!views.domains.rows[domainCode][month]) {
-        views.domains.rows[domainCode][month] = new Set();
-      }
-      views.summary.rows.summary[month].add(status);
-      views.sites.rows[siteCode][month].add(status);
-      views.states.rows[stateCode][month].add(status);
-      views.domains.rows[domainCode][month].add(status);
+      newViewData.sites.rows[siteCode] = {};
+      newViewData.states.rows[stateCode] = newViewData.states.rows[stateCode] || {};
+      newViewData.domains.rows[domainCode] = newViewData.domains.rows[domainCode] || {};
+      availableMonths.forEach((month) => {
+        let status = availabilityStatusType || 'available';
+        if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+          if (provAvailableMonths.includes(month)) {
+            status = 'available-provisional';
+          }
+        }
+        if (!newViewData.summary.rows.summary[month]) {
+          newViewData.summary.rows.summary[month] = new Set();
+        }
+        if (!newViewData.sites.rows[siteCode][month]) {
+          newViewData.sites.rows[siteCode][month] = new Set();
+        }
+        if (!newViewData.states.rows[stateCode][month]) {
+          newViewData.states.rows[stateCode][month] = new Set();
+        }
+        if (!newViewData.domains.rows[domainCode][month]) {
+          newViewData.domains.rows[domainCode][month] = new Set();
+        }
+        newViewData.summary.rows.summary[month].add(status);
+        newViewData.sites.rows[siteCode][month].add(status);
+        newViewData.states.rows[stateCode][month].add(status);
+        newViewData.domains.rows[domainCode][month].add(status);
+      });
     });
-  });
-  dataProducts.forEach((product) => {
-    const { dataProductCode, availableMonths, availableReleases } = product;
-    let provAvailableMonths = [];
-    if (delineateRelease && Array.isArray(availableReleases)) {
-      const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
-      if (provRelease) {
-        provAvailableMonths = provRelease.availableMonths;
-      }
-    }
-    views.products.rows[dataProductCode] = {};
-    availableMonths.forEach((month) => {
-      let status = availabilityStatusType || 'available';
-      if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
-        if (provAvailableMonths.includes(month)) {
-          status = 'available-provisional';
+    dataProducts.forEach((product) => {
+      const { dataProductCode, availableMonths, availableReleases } = product;
+      let provAvailableMonths = [];
+      if (delineateRelease && Array.isArray(availableReleases)) {
+        const provRelease = availableReleases.find((value) => value.release === 'PROVISIONAL');
+        if (provRelease) {
+          provAvailableMonths = provRelease.availableMonths;
         }
       }
-      if (!views.products.rows[dataProductCode][month]) {
-        views.products.rows[dataProductCode][month] = new Set();
-      }
-      views.products.rows[dataProductCode][month].add(status);
+      newViewData.products.rows[dataProductCode] = {};
+      availableMonths.forEach((month) => {
+        let status = availabilityStatusType || 'available';
+        if (delineateRelease && provAvailableMonths && (provAvailableMonths.length > 0)) {
+          if (provAvailableMonths.includes(month)) {
+            status = 'available-provisional';
+          }
+        }
+        if (!newViewData.products.rows[dataProductCode][month]) {
+          newViewData.products.rows[dataProductCode][month] = new Set();
+        }
+        newViewData.products.rows[dataProductCode][month].add(status);
+      });
     });
-  });
-  if (!downloadContextIsActive) {
-    const summaryMonths = Object.keys(views.summary.rows.summary).sort();
-    dateRange.validValues[0] = summaryMonths[0]; // eslint-disable-line prefer-destructuring
-    dateRange.validValues[1] = summaryMonths.pop();
-  }
+    newViewData.ungrouped.rows = newViewData.sites.rows;
+    return newViewData;
+  }, [
+    views,
+    siteCodes,
+    dataProducts,
+    allSites,
+    downloadContextIsActive,
+    availabilityStatusType,
+    delineateRelease,
+    sites.validValues,
+  ]);
+  const appliedDateRange = useMemo(() => {
+    if (!downloadContextIsActive) {
+      const summaryMonths = Object.keys(viewData.summary.rows.summary).sort();
+      const summaryDateRange = {
+        ...dateRange,
+      };
+      // eslint-disable-next-line prefer-destructuring
+      summaryDateRange.validValues[0] = summaryMonths[0];
+      summaryDateRange.validValues[1] = summaryMonths.pop();
+      return summaryDateRange;
+    }
+    return {
+      ...dateRange,
+    };
+  }, [viewData, downloadContextIsActive, dateRange]);
+  const sortedSites = useMemo(() => {
+    if (currentView !== 'ungrouped') {
+      return [];
+    }
+    // NOTE - these returns are backwards because the rendering in the chart is bottom-up
+    // (though of course a user will read it top-down).
+    const sortReturns = [
+      currentSortDirection === 'ASC' ? 1 : -1,
+      currentSortDirection === 'ASC' ? -1 : 1,
+    ];
+    const calcSortedSites = Object.keys(viewData.ungrouped.rows);
+    calcSortedSites.sort(SORT_METHODS[currentSortMethod].getSortFunction(sortReturns));
+    return calcSortedSites;
+  }, [
+    currentView,
+    currentSortDirection,
+    currentSortMethod,
+    viewData,
+    SORT_METHODS,
+  ]);
 
   /**
      Redraw setup
@@ -467,33 +522,36 @@ const BasicAvailabilityInterface = (props) => {
 
   const handleSvgRedraw = useCallback(() => {
     BasicAvailabilityGrid({
-      data: views[currentView],
+      view: views[currentView],
+      data: viewData[currentView],
+      theme,
       svgRef,
       allSites,
       sites,
       sortedSites,
       setSitesValue,
-      dateRange,
+      dateRange: appliedDateRange,
       setDateRangeValue,
       selectionEnabled,
     });
   }, [
+    theme,
     svgRef,
     views,
+    viewData,
     currentView,
     allSites,
     sites,
     sortedSites,
     setSitesValue,
-    dateRange,
+    appliedDateRange,
     setDateRangeValue,
     selectionEnabled,
   ]);
 
-  useEffect(() => {
-    applySort();
+  useLayoutEffect(() => {
     handleSvgRedraw();
-  });
+  }, [handleSvgRedraw]);
 
   let justify = 'end';
   if (currentView === 'ungrouped') {
@@ -526,11 +584,11 @@ const BasicAvailabilityInterface = (props) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         View By:
       </Typography>
-      <Hidden smDown key="viewMdUp">
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <ToggleButtonGroup
           exclusive
           color="primary"
@@ -545,13 +603,18 @@ const BasicAvailabilityInterface = (props) => {
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
-      </Hidden>
-      <Hidden mdUp key="viewSmDown">
+      </Box>
+      <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
         <FormControl variant="filled">
           <Select
             value={currentView}
             onChange={(event) => handleChangeView(event, event.target.value)}
-            input={<OutlinedInput margin="dense" className={selectionEnabled ? null : classes.xsSelect} />}
+            input={(
+              <OutlinedInput
+                size="small"
+                className={selectionEnabled ? null : classes.xsSelect}
+              />
+            )}
             variant="filled"
           >
             {selectableViewKeys.map((key) => (
@@ -559,7 +622,7 @@ const BasicAvailabilityInterface = (props) => {
             ))}
           </Select>
         </FormControl>
-      </Hidden>
+      </Box>
     </div>
   );
 
@@ -574,7 +637,7 @@ const BasicAvailabilityInterface = (props) => {
       <Typography
         variant="h6"
         className={classes.h6Small}
-        style={{ marginRight: Theme.spacing(1.5), whiteSpace: 'nowrap' }}
+        style={{ marginRight: theme.spacing(1.5), whiteSpace: 'nowrap' }}
       >
         Sort By:
       </Typography>
@@ -630,10 +693,10 @@ const BasicAvailabilityInterface = (props) => {
   */
   const renderViewControls = () => {
     if (currentView === 'products') {
-      return (<Grid item xs={12} />);
+      return (<Grid size={{ xs: 12 }} />);
     }
     return (
-      <Grid item xs={12} sm={currentView === 'ungrouped' ? 12 : 5} md={6}>
+      <Grid size={{ xs: 12, md: 6, sm: currentView === 'ungrouped' ? 12 : 5 }}>
         {currentView === 'ungrouped' ? renderSortOptions() : renderViewOptions()}
       </Grid>
     );
@@ -651,10 +714,7 @@ const BasicAvailabilityInterface = (props) => {
     }
     return (
       <Grid
-        item
-        xs={12}
-        sm={smWidth}
-        md={mdWidth}
+        size={{ xs: 12, sm: smWidth, md: mdWidth }}
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <BasicAvailabilityKey
@@ -684,18 +744,16 @@ const BasicAvailabilityInterface = (props) => {
     };
     const selectionButtonProps = { size: 'small', color: 'primary', variant: 'outlined' };
     const datePickerProps = {
-      inputVariant: 'outlined',
-      margin: 'dense',
       views: ['month', 'year'],
       openTo: 'month',
     };
     return (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={5} md={6}>
+        <Grid size={{ xs: 12, sm: 5, md: 6 }}>
           <div className={classes.topFormHeader}>
             <Typography variant="h6" className={classes.h6Small}>Sites</Typography>
           </div>
-          <div style={{ marginTop: Theme.spacing(1), marginBottom: Theme.spacing(1.5) }}>
+          <div style={{ marginTop: theme.spacing(1), marginBottom: theme.spacing(1.5) }}>
             <SiteChip {...siteChipProps} />
           </div>
           <div style={{ display: 'flex' }}>
@@ -710,58 +768,87 @@ const BasicAvailabilityInterface = (props) => {
               selection="SITES"
               selectedItems={sites.value}
               validItems={sites.validValues}
-              buttonProps={{ ...selectionButtonProps, style: { marginLeft: Theme.spacing(1) } }}
+              buttonProps={{ ...selectionButtonProps, style: { marginLeft: theme.spacing(1) } }}
               data-selenium="data-product-availability.map-button"
               onSave={(newSites) => { setSitesValue(Array.from(newSites)); }}
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={7} md={6}>
+        <Grid size={{ xs: 12, sm: 7, md: 6 }}>
           <Typography variant="h6" className={classes.h6Small}>Date Range</Typography>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
-            <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-              <DatePicker
-                {...datePickerProps}
-                label="Start"
-                data-selenium="data-product-availability.date-range-start"
-                orientation="portrait"
-                value={TIME.getYearMonthMoment(dateRange.value[0])}
-                onChange={(newDate) => handleChangeStartDate(newDate)}
-                minDate={TIME.getYearMonthMoment(dateRange.validValues[0])}
-                maxDate={TIME.getYearMonthMoment(dateRange.value[1])}
-                style={{ marginRight: Theme.spacing(1.5) }}
-              />
-              <DatePicker
-                {...datePickerProps}
-                label="End"
-                data-selenium="data-product-availability.date-range-end"
-                orientation="portrait"
-                value={TIME.getYearMonthMoment(dateRange.value[1])}
-                onChange={(newDate) => handleChangeEndDate(newDate)}
-                minDate={TIME.getYearMonthMoment(dateRange.value[0])}
-                maxDate={TIME.getYearMonthMoment(dateRange.validValues[1])}
-              />
-            </div>
-          </MuiPickersUtilsProvider>
-          <div style={{ display: 'flex', marginTop: Theme.spacing(1) }}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <Grid container spacing={1}>
+              <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                <DatePicker
+                  {...datePickerProps}
+                  open={datePickerStartOpen}
+                  label="Start"
+                  data-selenium="data-product-availability.date-range-start"
+                  orientation="portrait"
+                  value={TIME.getYearMonthMoment(appliedDateRange.value[0])}
+                  onChange={(newDate) => handleChangeStartDate(appliedDateRange, newDate)}
+                  onOpen={() => setDatePickerStartOpen(true)}
+                  onClose={() => setDatePickerStartOpen(false)}
+                  minDate={TIME.getYearMonthMoment(appliedDateRange.validValues[0])}
+                  maxDate={TIME.getYearMonthMoment(appliedDateRange.value[1])}
+                  slotProps={{
+                    textField: {
+                      className: classes.datePickerInput,
+                      variant: 'outlined',
+                      readOnly: true,
+                      margin: 'dense',
+                      size: 'small',
+                      onClick: () => setDatePickerStartOpen(true),
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                <DatePicker
+                  {...datePickerProps}
+                  label="End"
+                  open={datePickerEndOpen}
+                  data-selenium="data-product-availability.date-range-end"
+                  orientation="portrait"
+                  value={TIME.getYearMonthMoment(appliedDateRange.value[1])}
+                  onChange={(newDate) => handleChangeEndDate(appliedDateRange, newDate)}
+                  onOpen={() => setDatePickerEndOpen(true)}
+                  onClose={() => setDatePickerEndOpen(false)}
+                  minDate={TIME.getYearMonthMoment(appliedDateRange.value[0])}
+                  maxDate={TIME.getYearMonthMoment(appliedDateRange.validValues[1])}
+                  slotProps={{
+                    textField: {
+                      className: classes.datePickerInput,
+                      variant: 'outlined',
+                      readOnly: true,
+                      margin: 'dense',
+                      size: 'small',
+                      onClick: () => setDatePickerEndOpen(true),
+                    },
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </LocalizationProvider>
+          <div style={{ display: 'flex', marginTop: theme.spacing(1) }}>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.all-years-button"
-              onClick={handleSelectAllDateRange}
+              onClick={() => handleSelectAllDateRange(appliedDateRange.validValues)}
             >
               Select All Years
             </Button>
             <Button
               {...selectionButtonProps}
               data-selenium="data-product-availability.latest-year-button"
-              onClick={handleSelectLatestYearDateRange}
-              style={{ marginLeft: Theme.spacing(1) }}
+              onClick={() => handleSelectLatestYearDateRange(appliedDateRange)}
+              style={{ marginLeft: theme.spacing(1) }}
             >
               Select Latest Year
             </Button>
           </div>
         </Grid>
-        <Grid item xs={12} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid size={{ xs: 12 }} style={{ marginBottom: theme.spacing(1) }}>
           <Card>
             <CardContent className={classes.helpGridContainer}>
               <div className={classes.helpGrid}>
@@ -792,7 +879,7 @@ const BasicAvailabilityInterface = (props) => {
   /**
      Render: Final Component
   */
-  const currentRows = views[currentView].rows;
+  const currentRows = viewData[currentView].rows;
   const currentRowCount = Object.keys(currentRows).length;
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (currentRowCount + 1);
@@ -809,10 +896,10 @@ const BasicAvailabilityInterface = (props) => {
         container
         spacing={2}
         direction="row-reverse"
-        style={{ marginBottom: Theme.spacing(1) }}
+        style={{ marginBottom: theme.spacing(2) }}
       >
         {selectionEnabled ? (
-          <Grid item xs={12} sm={12}>
+          <Grid size={{ xs: 12, sm: 12 }}>
             {renderSelection()}
           </Grid>
         ) : null}
@@ -830,7 +917,6 @@ const BasicAvailabilityInterface = (props) => {
 };
 
 BasicAvailabilityInterface.propTypes = {
-  // eslint-disable-line react/no-unused-prop-types
   siteCodes: AvailabilityPropTypes.basicSiteCodes,
   dataProducts: AvailabilityPropTypes.dataProducts,
   view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped', 'products']),
@@ -839,17 +925,6 @@ BasicAvailabilityInterface.propTypes = {
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
-};
-
-BasicAvailabilityInterface.defaultProps = {
-  siteCodes: [],
-  dataProducts: [],
-  view: null,
-  sortMethod: null,
-  sortDirection: 'ASC',
-  disableSelection: false,
-  delineateRelease: false,
-  availabilityStatusType: null,
 };
 
 export default BasicAvailabilityInterface;

@@ -4,20 +4,25 @@ import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
 import ComponentFallback from './ComponentFallback';
 
-interface ErrorInfo {
-  componentStack: string;
-}
+import { resolveProps } from '../../util/defaultProps';
 
 interface ComponentErrorBoundaryProps {
   children: React.ReactNode | React.ReactNode[];
   onReset?: (...args: Array<unknown>) => void;
-  onError?: (error: Error, info: ErrorInfo) => void;
+  onError?: (error: Error, info: React.ErrorInfo) => void;
   fallbackComponent?: React.ComponentType<FallbackProps>;
 }
 
+const defaultProps = {
+  onReset: (...args: Array<unknown>): void => {},
+  onError: (error: Error, info: React.ErrorInfo): void => {},
+  fallbackComponent: undefined,
+};
+
 const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
-  props: ComponentErrorBoundaryProps,
-): JSX.Element => {
+  inProps: ComponentErrorBoundaryProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as ComponentErrorBoundaryProps;
   const {
     children,
     onReset,
@@ -28,17 +33,11 @@ const ComponentErrorBoundary: React.FC<ComponentErrorBoundaryProps> = (
     <ErrorBoundary
       FallbackComponent={fallbackComponent || ComponentFallback}
       onReset={onReset}
-      onError={onError}
+      onError={onError as (error: unknown, info: React.ErrorInfo) => void}
     >
       {children}
     </ErrorBoundary>
   );
-};
-
-ComponentErrorBoundary.defaultProps = {
-  onReset: (...args: Array<unknown>): void => {},
-  onError: (error: Error, info: ErrorInfo): void => {},
-  fallbackComponent: undefined,
 };
 
 export default ComponentErrorBoundary;

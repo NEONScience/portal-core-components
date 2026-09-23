@@ -1,21 +1,37 @@
-/* eslint-disable react/no-unused-prop-types */
-import React, { useCallback, Dispatch } from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  useState,
+  useRef,
+  Dispatch,
+} from 'react';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles, Theme as MuiThemeType } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import CircularProgress from '@mui/material/CircularProgress';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import Logout from '@mui/icons-material/Logout';
 
 import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonAuthContext, { FETCH_STATUS } from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
 import { StringPropsObject } from '../../types/objectTypes';
-import { StylesHook } from '../../types/muiTypes';
 import { Undef } from '../../types/core';
-import { isStringNonEmpty } from '../../util/typeUtil';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
 export enum NeonAuthType {
   REDIRECT = 'REDIRECT',
@@ -23,8 +39,12 @@ export enum NeonAuthType {
 }
 export enum NeonAuthDisplayType {
   MENU = 'MENU',
+  MENU_CUSTOM = 'MENU_CUSTOM',
 }
 
+// This lint rule is confused here as these props are used in
+// the NeonAuth component.
+/* eslint-disable react/no-unused-prop-types */
 export interface NeonAuthProps {
   loginType: NeonAuthType;
   logoutType: NeonAuthType;
@@ -33,8 +53,9 @@ export interface NeonAuthProps {
   logoutPath: string;
   accountPath: string;
 }
+/* eslint-enable react/no-unused-prop-types */
 
-const useStyles: StylesHook = makeStyles((theme: MuiThemeType) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css
@@ -46,9 +67,157 @@ const useStyles: StylesHook = makeStyles((theme: MuiThemeType) => ({
     fontFamily: '"Inter",Helvetica,Arial,sans-serif !important',
     lineHeight: '1.75 !important',
   },
-})) as StylesHook;
+  loadingContainer: {
+    display: 'flex',
+    width: '64px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: theme.spacing(0.5),
+  },
+  loadingContainerSpan: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.grey[400],
+  },
+  accountMenuContainer: {
+    '& :focus': {
+      outline: 'none !important',
+    },
+  },
+}));
 
 const UX_TIMEOUT_MS: number = 300;
+
+export interface AccountMenuProps {
+  accountPath: string;
+  handleLogout: () => void;
+}
+
+const AccountMenu = (props: AccountMenuProps) => {
+  const { accountPath, handleLogout } = props;
+  const { classes, theme } = useStyles();
+  const [
+    {
+      auth: {
+        userData,
+      },
+    },
+  ] = NeonAuthContext.useNeonAuthContextState();
+  const user = userData?.data?.user;
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [containerRefEl, setContainerRefEl] = useState<HTMLElement | null>(null);
+  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+    setContainerRefEl(containerRef.current);
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMyAccountNav = (): void => {
+    window.location.href = accountPath;
+  };
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
+  let avatarAlt;
+  if (exists(user)) {
+    if (isStringNonEmpty(user.name)) {
+      avatarAlt = user.name;
+    } else if (isStringNonEmpty(user.email)) {
+      avatarAlt = user.email;
+    }
+  }
+  const avatarContainerSx = {
+    display: 'block',
+    width: '64px',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: '-4px',
+  };
+  if (belowLg) {
+    avatarContainerSx.marginTop = '-3px';
+    avatarContainerSx.textAlign = 'right';
+  }
+  return (
+    <>
+      <Box sx={avatarContainerSx}>
+        <Tooltip title="My Account">
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            autoFocus={false}
+            sx={{ padding: 0 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar
+              alt={avatarAlt}
+              src={user?.picture}
+              sx={{ width: 32, height: 32 }}
+            >
+              {avatarAlt?.charAt(0)?.toUpperCase()}
+            </Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <div ref={containerRef} className={classes.accountMenuContainer}>
+        <Menu
+          container={containerRefEl}
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          variant="menu"
+          autoFocus={false}
+          disableAutoFocusItem
+          onClose={handleClose}
+          onClick={handleClose}
+          slotProps={{
+            paper: {
+              elevation: 0,
+              sx: {
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                '&::before': {
+                  content: '""',
+                  display: 'block',
+                  position: 'absolute',
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: 'background.paper',
+                  transform: 'translateY(-50%) rotate(45deg)',
+                  zIndex: 0,
+                },
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <MenuItem onClick={handleMyAccountNav}>
+            <Avatar style={{ width: '24px', height: '24px' }} sx={{ width: 24, height: 24 }} />
+            {' My Account'}
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={() => handleLogout()}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Menu>
+      </div>
+    </>
+  );
+};
 
 const triggerAuth = (
   path: string,
@@ -79,7 +248,7 @@ const renderAuth = (
   showAuthWorking: boolean,
   isAuthWsConnected: boolean,
   dispatch: Dispatch<any>,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     loginType,
     logoutType,
@@ -138,8 +307,10 @@ const renderAuth = (
     }
   };
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  let authContent: JSX.Element = <></>;
+  let authContent: React.JSX.Element = <></>;
+  const isCustom = displayType === NeonAuthDisplayType.MENU_CUSTOM;
   switch (displayType) {
+    case NeonAuthDisplayType.MENU_CUSTOM:
     case NeonAuthDisplayType.MENU:
     default:
       authContent = (
@@ -155,45 +326,43 @@ const renderAuth = (
       );
       if (showAuthWorking) {
         authContent = (
-          <div style={{ display: 'flex', alignItems: 'center', margin: Theme.spacing(0.5) }}>
-            <span
-              style={{
-                fontStyle: 'italic',
-                marginRight: Theme.spacing(1),
-                color: Theme.palette.grey[400],
-              }}
-            >
-              {isAuthenticated ? 'Signing out...' : 'Signing in...'}
-            </span>
+          <div className={classes.loadingContainer}>
+            {isCustom ? null : (
+              <span className={classes.loadingContainerSpan}>
+                {isAuthenticated ? 'Signing out...' : 'Signing in...'}
+              </span>
+            )}
             <CircularProgress size={20} />
           </div>
         );
       } else if (isAuthenticated) {
-        authContent = (
-          <ButtonGroup size="small" aria-label="Authentication">
-            <Button
-              className={classes.button}
-              data-selenium="neon-menu.sign-out-button"
-              onClick={() => handleLogout()}
-            >
-              Sign Out
-            </Button>
-            <Button
-              href={accountPath}
-              className={classes.button}
-              data-selenium="neon-menu.my-account-button"
-            >
-              My Account
-            </Button>
-          </ButtonGroup>
-        );
+        authContent = isCustom
+          ? (<AccountMenu accountPath={accountPath} handleLogout={handleLogout} />)
+          : (
+            <ButtonGroup size="small" aria-label="Authentication">
+              <Button
+                className={classes.button}
+                data-selenium="neon-menu.sign-out-button"
+                onClick={() => handleLogout()}
+              >
+                Sign Out
+              </Button>
+              <Button
+                href={accountPath}
+                className={classes.button}
+                data-selenium="neon-menu.my-account-button"
+              >
+                My Account
+              </Button>
+            </ButtonGroup>
+          );
       }
       break;
   }
   return authContent;
 };
 
-const NeonAuth = (props: NeonAuthProps): JSX.Element => {
+const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
   const [
     {
       auth: {
@@ -208,20 +377,24 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
       },
     },
     dispatch,
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
 
-  const classes: StringPropsObject = useStyles(Theme);
-
-  const isFetchingAuthentication: boolean = (status === FETCH_STATUS.FETCHING);
+  const { classes } = useStyles();
+  const isFetchingAuthentication: boolean = [
+    FETCH_STATUS.AWAITING_CALL,
+    FETCH_STATUS.FETCHING,
+  ].includes(status);
   const isAuthFetched: boolean = ([FETCH_STATUS.SUCCESS, FETCH_STATUS.ERROR].indexOf(status) >= 0);
   const showAuthWorking: boolean = (isAuthWorking || isFetchingAuthentication);
 
   const authFetchCb = useCallback(() => {
     AuthService.fetchUserInfoWithDispatch(dispatch);
   }, [dispatch]);
-  if (!isFetchingAuthentication && !isAuthFetched) {
-    authFetchCb();
-  }
+  useEffect(() => {
+    if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi) {
+      authFetchCb();
+    }
+  }, [authFetchCb, isFetchingAuthentication, isAuthFetched]);
   return (
     <>
       {renderAuth(props, classes, isAuthenticated, showAuthWorking, isAuthWsConnected, dispatch)}
@@ -229,8 +402,6 @@ const NeonAuth = (props: NeonAuthProps): JSX.Element => {
   );
 };
 
-const WrappedNeonAuth = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(NeonAuth),
-);
+const WrappedNeonAuth = NeonAuthContext.getWrappedComponent(NeonAuth);
 
 export default WrappedNeonAuth;

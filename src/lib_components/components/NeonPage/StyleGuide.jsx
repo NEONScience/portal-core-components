@@ -1,25 +1,24 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 
 import { useErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
+
+import NeonPage from '@/components/NeonPage/NeonPage';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import NeonPage from './NeonPage';
-import Theme from '../Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -246,7 +245,7 @@ const propRows = [
     examples: (
       <CodeBlock>
         {`
-import FooIcon from '@material-ui/icons/Foo';
+import FooIcon from '@mui/icons-material/Foo';
 import MyComponent from './MyComponent';
 
 const sidebarLinks = [
@@ -400,7 +399,7 @@ const sidebarLinks = [
 ];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -416,12 +415,12 @@ export default function StyleGuide() {
   const notification = 'Here is a sample NeonPage notification with a <a href="https://github.com/NEONScience/portal-core-components/">link</a>.';
 
   const skeletionGrid = (
-    <Grid item xs={4}>
-      <Skeleton variant="rect" width="100%" height={100} />
+    <Grid size={{ xs: 4 }}>
+      <Skeleton variant="rectangular" width="100%" height={100} />
       <br />
-      <Skeleton variant="rect" width="100%" height={16} />
+      <Skeleton variant="rectangular" width="100%" height={16} />
       <br />
-      <Skeleton variant="rect" width="60%" height={16} />
+      <Skeleton variant="rectangular" width="60%" height={16} />
     </Grid>
   );
 
@@ -854,7 +853,7 @@ const breadcrumbs = [
 ];
 
 const skeletionGrid = (
-  <Grid item xs={4}>
+  <Grid size={{ xs: 4 }}>
     <Skeleton variant="rect" width="100%" height={100} />
     <br />
     <Skeleton variant="rect" width="100%" height={16} />
@@ -926,7 +925,7 @@ export default function MyNeonPage() {
 import React, { useState } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 export default function TriggerRunTimeErrorButtons() {
   const [lifecycleRunTimeError, setLifecycleRunTimeError] = useState(false);

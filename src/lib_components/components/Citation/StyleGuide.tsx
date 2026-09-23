@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @stylistic/quotes */
+
 import React, {
   useReducer,
   useEffect,
@@ -14,50 +17,53 @@ import { AjaxResponse } from 'rxjs/ajax';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Select from '@mui/material/Select';
+import Skeleton from '@mui/material/Skeleton';
+import Typography from '@mui/material/Typography';
+
+import ActionCreator from '@/components/Citation/DataProductCitation/Actions';
+import ComponentErrorBoundary from '@/components/Error/ComponentErrorBoundary';
+import DataProductCitation from '@/components/Citation/DataProductCitation';
+import DataProductCitationContext from '@/components/Citation/DataProductCitation/Context';
+import DataProductCitationService from '@/components/Citation/DataProductCitation/Service';
+import DataProductCitationView, {
+  defaultProps as viewDefaultProps,
+} from '@/components/Citation/DataProductCitation/View';
+import NeonApi from '@/components/NeonApi';
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+import ReleaseService from '@/service/ReleaseService';
+import { Release } from '@/types/internal';
+import { exists, existsNonEmpty, isStringNonEmpty } from '@/util/typeUtil';
+import {
+  DataProductCitationItem,
+  DataProductCitationViewProps,
+  DataProductCitationViewState,
+} from '@/components/Citation/DataProductCitation/ViewState';
+import { Nullable } from '@/types/core';
+import { CitationRelease } from '@/components/Citation/DataProductCitation/State';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import ActionCreator from './DataProductCitation/Actions';
-import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
-import DataProductCitation from './DataProductCitation';
-import DataProductCitationContext from './DataProductCitation/Context';
-import DataProductCitationService from './DataProductCitation/Service';
-import DataProductCitationView from './DataProductCitation/View';
-import NeonApi from '../NeonApi';
-import NeonContext from '../NeonContext/NeonContext';
-import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
-import ReleaseService from '../../service/ReleaseService';
-import Theme from '../Theme/Theme';
-import { Release } from '../../types/internal';
-import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
-import {
-  DataProductCitationItem,
-  DataProductCitationViewProps,
-  DataProductCitationViewState,
-} from './DataProductCitation/ViewState';
-import { Nullable } from '../../types/core';
-import { CitationRelease } from './DataProductCitation/State';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
   title: {
     fontWeight: 500,
@@ -204,16 +210,8 @@ const dataProductCitationReducer = (state: any, action: any) => {
   }
 };
 
-const DataProductCitationDemoContainer = (): JSX.Element => ((
-  <ComponentErrorBoundary onReset={() => {}}>
-    <DataProductCitationContext.Provider contextControlled>
-      <DataProductCitationDemo />
-    </DataProductCitationContext.Provider>
-  </ComponentErrorBoundary>
-));
-
-const DataProductCitationDemo = (): JSX.Element => {
-  const classes = useStyles(Theme);
+const DataProductCitationDemo = (): React.JSX.Element => {
+  const { classes } = useStyles();
   const [state, dispatch] = useReducer(
     dataProductCitationReducer,
     cloneDeep(DATA_PRODUCT_CITATION_DEFAULT_STATE),
@@ -223,15 +221,15 @@ const DataProductCitationDemo = (): JSX.Element => {
   const {
     productCode: stateProductCode,
     release: stateRelease,
-    neonContextState,
+    neonAuthContextState,
   } = stateCtx;
   const appliedReleases: Release[] = ReleaseService.applyUserReleases(
-    neonContextState,
+    neonAuthContextState,
     stateReleases,
   );
   const viewState: DataProductCitationViewState = DataProductCitationService.useViewState(
     stateCtx,
-    DataProductCitationView.defaultProps as DataProductCitationViewProps,
+    viewDefaultProps as DataProductCitationViewProps,
   );
   const { citationItems }: DataProductCitationViewState = viewState;
   const appliedItem: Nullable<DataProductCitationItem> = existsNonEmpty(citationItems)
@@ -241,9 +239,8 @@ const DataProductCitationDemo = (): JSX.Element => {
   if (exists(appliedItem)) {
     appliedCitationReleaseObject = (appliedItem as DataProductCitationItem).releaseObject;
   }
-  // eslint-disable-next-line max-len
   const citationDispatch = DataProductCitationContext.useDataProductCitationContextDispatch() as Dispatch<any>;
-  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts() as Observable<AjaxResponse<unknown>>)
+  const fetchAllProducts$ = (NeonGraphQL.getAllDataProducts(null) as Observable<AjaxResponse<unknown>>)
     .pipe(
       map((response: any) => {
         if (response.response && response.response.data && response.response.data.products) {
@@ -310,7 +307,7 @@ const DataProductCitationDemo = (): JSX.Element => {
   if (isLoading) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={400} />
+        <Skeleton variant="rectangular" width="100%" height={400} />
       </div>
     );
   }
@@ -348,7 +345,7 @@ const DataProductCitationDemo = (): JSX.Element => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -375,7 +372,7 @@ const DataProductCitationDemo = (): JSX.Element => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ReleaseFilter
             showGenerationDate
             showProductCount
@@ -384,7 +381,7 @@ const DataProductCitationDemo = (): JSX.Element => {
             onChange={handleReleaseChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="subtitle2" className={classes.title}>
             The citation context will determine the applied release based
             on the available releases for the product, release, and bundle.
@@ -393,7 +390,7 @@ const DataProductCitationDemo = (): JSX.Element => {
           </Typography>
           <Divider className={classes.divider} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <DataProductCitationView />
         </Grid>
       </Grid>
@@ -401,12 +398,20 @@ const DataProductCitationDemo = (): JSX.Element => {
   );
 };
 
-const WrappedDataProductCitationDemo = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(DataProductCitationDemoContainer),
+const DataProductCitationDemoContainer = (): React.JSX.Element => ((
+  <ComponentErrorBoundary onReset={() => {}}>
+    <DataProductCitationContext.Provider contextControlled>
+      <DataProductCitationDemo />
+    </DataProductCitationContext.Provider>
+  </ComponentErrorBoundary>
+));
+
+const WrappedDataProductCitationDemo = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(DataProductCitationDemoContainer),
 );
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   return (
     <>
       <DocBlock>

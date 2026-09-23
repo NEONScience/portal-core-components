@@ -2,8 +2,10 @@ import React, {
   useRef,
   useState,
   useEffect,
+  useMemo,
   useCallback,
   useLayoutEffect,
+  useReducer,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,56 +13,47 @@ import uniqueId from 'lodash/uniqueId';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Backdrop from '@material-ui/core/Backdrop';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Backdrop from '@mui/material/Backdrop';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Slide from '@mui/material/Slide';
+import Skeleton from '@mui/material/Skeleton';
+import Snackbar from '@mui/material/Snackbar';
+import Typography from '@mui/material/Typography';
 
-import ClearIcon from '@material-ui/icons/Clear';
-import CollapseIcon from '@material-ui/icons/ExpandLess';
-import ErrorIcon from '@material-ui/icons/Warning';
-import ExpandIcon from '@material-ui/icons/ExpandMore';
-import HomeIcon from '@material-ui/icons/Home';
-import ResetIcon from '@material-ui/icons/Autorenew';
-
-import Skeleton from '@material-ui/lab/Skeleton';
+import ClearIcon from '@mui/icons-material/Clear';
+import CollapseIcon from '@mui/icons-material/ExpandLess';
+import ErrorIcon from '@mui/icons-material/Warning';
+import ExpandIcon from '@mui/icons-material/ExpandMore';
+import HomeIcon from '@mui/icons-material/Home';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS, getThemeSpacingNumber } from '../Theme/Theme';
+import NeonErrorPage from './NeonErrorPage';
 import NeonHeader from '../NeonHeader/NeonHeader';
 import NeonFooter from '../NeonFooter/NeonFooter';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonPageAssetsContext from '../NeonContext/NeonPageAssetsContext';
 import BrowserWarning from './BrowserWarning';
 import NotificationsManager from './NotificationsManager';
 import DrupalAssetService from '../../service/DrupalAssetService';
 
-import NeonLogo from '../../images/NSF-NEON-logo.png';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
+import { useNetworkAvailability } from '../../hooks/customHooks';
 
 import './styles.css';
 
 const DRUPAL_THEME_CSS = REMOTE_ASSETS.DRUPAL_THEME_CSS.KEY;
-
-// Global CSS
-const GlobalCss = withStyles({
-  '@global': {
-    code: {
-      fontSize: '115%',
-      padding: Theme.spacing(0.25, 0.5),
-      backgroundColor: 'rgba(0, 0, 0, 0.11)',
-    },
-  },
-})(() => null);
 
 // Function to determine if we're effectively scrolled to the bottom of the page. Used to set
 // current sidebar link to the last one automatically when the associated content for the last link
@@ -83,25 +76,22 @@ const isAtMaxScroll = () => {
 };
 
 // Google Tag Manager Data Layer
-// Define if not already defined. This must be set in the public/index.html for any apps/pages that
+// Define if not already defined. This must be set in the index.html for any apps/pages that
 // would seek to use it. More info: https://developers.google.com/tag-manager/devguide
 if (!window.gtmDataLayer) {
   window.gtmDataLayer = [];
 }
 
-// NOTE: because these are defined outside the ThemeProvider any theme vars must come directly from
-// the Theme import, unlike most other useStyles() instances where the Theme import is passed to the
-// hook as an argument.
-const useStyles = (sidebarWidth) => makeStyles(() => ({
+const useStyles = makeStyles()((theme, { sidebarWidth, sidebarDisableMaxHeight }) => ({
   outerPageContainer: {
     display: 'flex',
     position: 'relative',
-    minHeight: Theme.spacing(30),
+    minHeight: theme.spacing(30),
     borderTop: '2px solid transparent',
     paddingLeft: '0px',
     paddingRight: '0px',
-    [Theme.breakpoints.down('sm')]: {
-      paddingBottom: Theme.spacing(2.5),
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: theme.spacing(2.5),
       flexDirection: 'column',
     },
   },
@@ -109,12 +99,12 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     display: 'block',
     verticalAlign: 'top',
     position: 'relative',
-    padding: Theme.spacing(4, 8, 12, 8),
+    padding: theme.spacing(4, 8, 12, 8),
     width: `calc(100% - ${sidebarWidth}px)`,
-    [Theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
       display: 'block',
-      padding: Theme.spacing(3, 5, 8, 5),
+      padding: theme.spacing(3, 5, 8, 5),
     },
     // These override links created with a naked <a> tag, as opposed to a <Link>
     // component, to appear the same as the <Link> component. This is especially
@@ -128,28 +118,29 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     },
   },
   breadcrumbs: {
-    margin: Theme.spacing(2, 0, 4, 0),
-    [Theme.breakpoints.down('sm')]: {
-      margin: Theme.spacing(1, 0, 2, 0),
+    margin: theme.spacing(2, 0, 4, 0),
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(1, 0, 2, 0),
     },
   },
   sidebarContainer: {
     display: 'block',
     verticalAlign: 'top',
     backgroundColor: COLORS.GREY[50],
-    padding: Theme.spacing(5, 4),
-    [Theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(5, 4),
+    lineHeight: 1.43,
+    [theme.breakpoints.down('md')]: {
       display: 'inline-block',
       width: '100%',
-      maxHeight: 'calc(100vh - 84px)',
-      padding: Theme.spacing(2.5, 2),
+      maxHeight: sidebarDisableMaxHeight ? 'unset' : 'calc(100vh - 84px)',
+      padding: theme.spacing(2.5, 2),
       position: 'sticky',
       top: '-2px',
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
       zIndex: 2,
     },
-    [Theme.breakpoints.down('xs')]: {
-      padding: Theme.spacing(1.5),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(1.5),
     },
   },
   sidebarInnerStickyContainer: {
@@ -163,32 +154,32 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   },
   sidebarTitle: {
     fontWeight: 700,
-    [Theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
-    [Theme.breakpoints.only('sm')]: {
-      marginRight: Theme.spacing(1.5),
+    [theme.breakpoints.only('sm')]: {
+      marginRight: theme.spacing(1.5),
     },
   },
   sidebarSubtitle: {
     color: COLORS.GREY[300],
-    marginTop: Theme.spacing(1),
-    [Theme.breakpoints.down('sm')]: {
+    marginTop: theme.spacing(1),
+    [theme.breakpoints.down('md')]: {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       marginTop: '0px',
     },
-    [Theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   sidebarTitlesContainer: {
     minWidth: '0px',
-    paddingRight: Theme.spacing(1),
-    [Theme.breakpoints.only('sm')]: {
+    paddingRight: theme.spacing(1),
+    [theme.breakpoints.only('sm')]: {
       display: 'flex',
       alignItems: 'baseline',
     },
@@ -196,7 +187,7 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   sidebarLink: {
     cursor: 'pointer',
     display: 'block',
-    fontSize: '0.9rem',
+    fontSize: '0.875rem',
     marginBottom: '12px',
   },
   sidebarLinkCurrent: {
@@ -220,10 +211,10 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
   },
   sidebarDivider: {
     margin: '24px 0px',
-    [Theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       margin: '16px 0px',
     },
-    [Theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: '8px 0px 12px 0px',
     },
   },
@@ -234,127 +225,106 @@ const useStyles = (sidebarWidth) => makeStyles(() => ({
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '4px',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
     position: 'sticky',
-    top: Theme.spacing(12),
+    top: theme.spacing(12),
     left: 0,
     right: 0,
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '70%',
-    [Theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '50%',
     },
   },
   pageTitle: {
-    margin: Theme.spacing(3, 0, 4, 0),
-    [Theme.breakpoints.up('sm')]: {
-      margin: Theme.spacing(3, 0, 4, 0),
+    margin: theme.spacing(3, 0, 4, 0),
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(3, 0, 4, 0),
     },
   },
   pageSubtitle: {
     maxWidth: '660px',
     color: COLORS.GREY[500],
     lineHeight: '1.5',
-    fontSize: '1.1rem',
-    marginTop: Theme.spacing(-1),
-    marginBottom: Theme.spacing(4),
-  },
-  errorPageTitleIcon: {
-    marginRight: Theme.spacing(1.5),
-    color: Theme.palette.error.dark,
-    fontSize: '2.3rem',
-    marginBottom: '-3px',
-  },
-  errorPageCaption: {
-    display: 'block',
-    fontSize: '1rem',
-    fontFamily: 'monospace, monospace',
-    marginBottom: Theme.spacing(4),
-  },
-  errorPageLogo: {
-    height: '6em',
-    marginTop: Theme.spacing(3),
-    marginBottom: Theme.spacing(4),
+    fontSize: '1.125rem',
+    marginTop: theme.spacing(-1),
+    marginBottom: theme.spacing(4),
   },
   dismissOverlay: {
     width: '100%',
     textAlign: 'right',
-    marginTop: Theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
 }));
 
-/**
-  NEON Error Page
-  Shown as the fallback for a general error boundary around all NEON page instances
- */
-export const NeonErrorPage = (props) => {
-  const {
-    error: { message, stack },
-    resetErrorBoundary,
-  } = props;
-  const classes = useStyles(0)();
-  // eslint-disable-next-line no-console
-  console.error(stack);
-  return (
-    <ThemeProvider theme={Theme}>
-      <CssBaseline />
-      <GlobalCss />
-      <Container className={classes.outerPageContainer}>
-        <div className={classes.pageContent} data-selenium="neon-page.content">
-          <img
-            title="NEON Data Portal"
-            alt="NEON Data Portal"
-            className={classes.errorPageLogo}
-            src={NeonLogo}
-          />
-          <Typography variant="h3" component="h1" className={classes.pageTitle}>
-            <ErrorIcon className={classes.errorPageTitleIcon} />
-            Something broke.
-          </Typography>
-          <div>
-            <Typography variant="caption" className={classes.errorPageCaption}>
-              {message}
-            </Typography>
-          </div>
-          <div style={{ display: 'flex' }}>
-            <Button startIcon={<ResetIcon />} variant="outlined" onClick={resetErrorBoundary}>
-              Reset and Try Again
-            </Button>
-            <Button startIcon={<HomeIcon />} href="/" style={{ marginLeft: Theme.spacing(4) }}>
-              Return Home
-            </Button>
-          </div>
-        </div>
-        <input
-          type="hidden"
-          data-gtm="react-page-run-time-error.stack"
-          value={`${stack}`}
-        />
-      </Container>
-    </ThemeProvider>
-  );
+const drupalAssetsReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'fetchDrupalCss':
+      newState.fetchStatus = FETCH_STATUS.FETCHING;
+      return newState;
+    case 'fetchDrupalCssSuccess':
+      newState.fetchStatus = FETCH_STATUS.SUCCESS;
+      return newState;
+    case 'fetchDrupalCssError':
+      newState.fetchStatus = FETCH_STATUS.ERROR;
+      return newState;
+    default:
+      return state;
+  }
 };
 
-NeonErrorPage.propTypes = {
-  error: PropTypes.shape({
-    message: PropTypes.string.isRequired,
-    stack: PropTypes.string,
-  }).isRequired,
-  resetErrorBoundary: PropTypes.func.isRequired,
+const defaultProps = {
+  breadcrumbHomeHref: '/',
+  breadcrumbs: [],
+  customHeader: null,
+  customFooter: null,
+  customizeAuthContainer: false,
+  authContextDisable: false,
+  showHeaderSkeleton: false,
+  showFooterSkeleton: false,
+  error: null,
+  loading: null,
+  notification: null,
+  notificationsDisable: false,
+  outerPageContainerMaxWidth: '2000px',
+  progress: null,
+  resetStateAfterRuntimeError: () => { },
+  sidebarContent: null,
+  sidebarContentResponsive: false,
+  sidebarContainerClassName: null,
+  sidebarLinks: null,
+  sidebarLinksAdditionalContent: null,
+  sidebarLinksAsStandaloneChildren: false,
+  sidebarSubtitle: null,
+  sidebarTitle: null,
+  sidebarWidth: 300,
+  sidebarUnsticky: false,
+  sidebarDisableMaxHeight: false,
+  subtitle: null,
+  title: null,
+  unstickyDrupalHeader: true,
+  NeonContextProviderProps: {},
+  NeonAuthContextProviderProps: {},
+  NeonPageAssetsContextProviderProps: {},
 };
 
-const NeonPage = (props) => {
+const NeonPage = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     breadcrumbHomeHref,
     breadcrumbs,
     customHeader,
     customFooter,
+    customizeAuthContainer,
+    authContextDisable,
     showHeaderSkeleton,
     showFooterSkeleton,
     error,
     loading,
     notification,
+    notificationsDisable,
     outerPageContainerMaxWidth,
     progress,
     resetStateAfterRuntimeError,
@@ -368,10 +338,13 @@ const NeonPage = (props) => {
     sidebarTitle,
     sidebarWidth,
     sidebarUnsticky,
+    sidebarDisableMaxHeight,
     subtitle,
     title,
     unstickyDrupalHeader,
     NeonContextProviderProps,
+    NeonAuthContextProviderProps,
+    NeonPageAssetsContextProviderProps,
     children,
   } = props;
 
@@ -383,14 +356,23 @@ const NeonPage = (props) => {
   const hasSidebarLinks = !sidebarContent && Array.isArray(sidebarLinks) && sidebarLinks.length > 0;
   const hasSidebar = hasSidebarContent || hasSidebarLinks;
 
-  const classes = useStyles(hasSidebar ? sidebarWidth : 0)();
+  const stylesParams = {
+    sidebarWidth: hasSidebar ? sidebarWidth : 0,
+    sidebarDisableMaxHeight,
+  };
+  const { classes, theme } = useStyles(stylesParams);
   const [{ isActive: neonContextIsActive }] = NeonContext.useNeonContextState();
+  const [{ isActive: neonAuthContextIsActive }] = NeonAuthContext.useNeonAuthContextState();
+  const [{
+    isActive: neonPageAssetsContextIsActive,
+  }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
   const sidebarRef = useRef(null);
   const sidebarLinksContainerRef = useRef(null);
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
   const [overlayDismissed, setOverlayDismissed] = useState(false);
+  const isNetworkAvailable = useNetworkAvailability();
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
   const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
@@ -402,24 +384,43 @@ const NeonPage = (props) => {
   const sidebarLinksAsStandaloneChildren = hasSidebarLinks && sidebarLinksAsStandaloneChildrenProp
     ? sidebarLinks.every((link) => link.component)
     : false;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const sidebarHashMap = !hasSidebarLinks ? {} : Object.fromEntries(
-    sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
-  );
+  const sidebarHashMap = useMemo(() => ((
+    !hasSidebarLinks ? {} : Object.fromEntries(
+      sidebarLinks.map((link, idx) => [link.hash || '#', idx]),
+    )
+  // Note that the compiler is not aware that this value is not being modified
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
+  )), [hasSidebarLinks, sidebarLinks]);
   const initialCurrentSidebarHash = hasSidebarLinks ? sidebarLinks[0].hash || '#' : '#';
   const [currentSidebarHash, setCurrentSidebarHash] = useState(initialCurrentSidebarHash);
-  const [hashInitialized, setHashInitialized] = useState(false);
+  const hashInitializedRef = useRef(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(false); // for small viewports only
 
   // Get the vertical pixel offset for the content associated to any sidebar link by hash
-  const getSidebarLinkScrollPosition = useCallback((hash) => {
-    if (!hasSidebarLinks || sidebarLinksAsStandaloneChildren || !contentRef.current) { return -1; }
+  const sidebarLinkScrollPositionNudge = getThemeSpacingNumber(theme.spacing(5));
+  const getSidebarLinkScrollPosition = useCallback((hash, inSidebarLinksAsStandaloneChildren) => {
+    if (!hasSidebarLinks || inSidebarLinksAsStandaloneChildren || !contentRef.current) {
+      return -1;
+    }
     const headerOffset = (headerRef.current || {}).offsetHeight || 0;
     const stickyOffset = belowMd ? (sidebarRef.current || {}).offsetHeight || 0 : 0;
     if (hash === '#') { return 0; }
     const anchor = contentRef.current.querySelector(hash);
-    return !anchor ? -1 : anchor.offsetTop + headerOffset - stickyOffset - Theme.spacing(5);
-  }, [hasSidebarLinks, sidebarLinksAsStandaloneChildren, belowMd]);
+    return !anchor
+      ? -1
+      : anchor.offsetTop + headerOffset - stickyOffset - sidebarLinkScrollPositionNudge;
+  }, [
+    hasSidebarLinks,
+    belowMd,
+    contentRef,
+    headerRef,
+    sidebarRef,
+    sidebarLinkScrollPositionNudge,
+  ]);
+
+  const handleHashNav = useCallback((hashNav) => {
+    window.location.hash = hashNav;
+  }, []);
 
   /**
      Effect - For sidebarLinks pages, on successful load, if hash is present then update the current
@@ -433,22 +434,27 @@ const NeonPage = (props) => {
       // If standard sidebar mode (scroll to content) also perform the scroll offset here
       if (!sidebarLinksAsStandaloneChildren) {
         window.setTimeout(() => {
-          window.scrollTo(0, getSidebarLinkScrollPosition(hash));
+          window.scrollTo(0, getSidebarLinkScrollPosition(hash, sidebarLinksAsStandaloneChildren));
         }, 0);
       }
     };
     // Handle URL-defined hash on initial load
-    if (document.location.hash && !hashInitialized) {
+    if (document.location.hash && !hashInitializedRef.current) {
+      hashInitializedRef.current = true;
       // Ensure the document hash maps to a defined hash or '#' at all times
       if (!Object.keys(sidebarHashMap).includes(document.location.hash)) {
-        document.location.hash = '#';
+        handleHashNav('#');
       }
       handleHashChange();
-      setHashInitialized(true);
     }
     // Set max-height on sidebar links container when the sidebar is sticky so the links get
     // a dedicated scrollbar instead of clipping
-    if (!sidebarUnsticky && hasSidebarLinks && sidebarLinksContainerRef.current) {
+    if (
+      !sidebarUnsticky
+      && hasSidebarLinks
+      && sidebarLinksContainerRef.current
+      && !sidebarDisableMaxHeight
+    ) {
       const maxHeight = window.innerHeight - sidebarLinksContainerRef.current.offsetTop - 104;
       sidebarLinksContainerRef.current.style.maxHeight = `${maxHeight}px`;
     }
@@ -462,7 +468,7 @@ const NeonPage = (props) => {
     // Set up event listener / handler for user-input scroll events for standard scrolling pages
     const handleScroll = () => {
       const scrollBreaks = sidebarLinks.map((link) => ({
-        y: getSidebarLinkScrollPosition(link.hash || '#'),
+        y: getSidebarLinkScrollPosition(link.hash || '#', sidebarLinksAsStandaloneChildren),
         hash: link.hash || '#',
       }));
       // Determine the current scrolled-to hash. If at the max scroll always go to the last hash.
@@ -487,11 +493,12 @@ const NeonPage = (props) => {
     sidebarLinks,
     sidebarHashMap,
     sidebarUnsticky,
+    sidebarDisableMaxHeight,
     hasSidebarLinks,
-    hashInitialized,
-    setHashInitialized,
+    hashInitializedRef,
     currentSidebarHash,
     setCurrentSidebarHash,
+    handleHashNav,
     sidebarLinksContainerRef,
     getSidebarLinkScrollPosition,
     sidebarLinksAsStandaloneChildren,
@@ -500,14 +507,24 @@ const NeonPage = (props) => {
   /**
      Effect - Load Drupal CSS
   */
-  const [drupalCssStatus, setDrupalCssStatus] = useState(FETCH_STATUS.AWAITING_CALL);
+  const initialDrupalFetchStatusState = {
+    fetchStatus: useSomeDrupalAssets
+      ? FETCH_STATUS.AWAITING_CALL
+      : FETCH_STATUS.SUCCESS,
+  };
+  const [fetchDrupalCssState, fetchDrupalCssDispatch] = useReducer(
+    drupalAssetsReducer,
+    initialDrupalFetchStatusState,
+  );
+  const isDrupalCssStatusFinished = (fetchDrupalCssState.fetchStatus === FETCH_STATUS.SUCCESS);
   useEffect(() => {
     if (!useSomeDrupalAssets) {
-      setDrupalCssStatus(FETCH_STATUS.SUCCESS);
       return;
     }
-    if (drupalCssStatus !== FETCH_STATUS.AWAITING_CALL) { return; }
-    setDrupalCssStatus(FETCH_STATUS.FETCHING);
+    if (fetchDrupalCssState.fetchStatus !== FETCH_STATUS.AWAITING_CALL) {
+      return;
+    }
+    fetchDrupalCssDispatch({ type: 'fetchDrupalCss' });
     fetch(REMOTE_ASSETS[DRUPAL_THEME_CSS].url)
       .then((response) => {
         if (!response.ok) {
@@ -517,6 +534,8 @@ const NeonPage = (props) => {
       })
       .then((data) => {
         const drupalStyle = document.createElement('style');
+        drupalStyle.setAttribute('data-meta', 'drupal-theme');
+        drupalStyle.setAttribute('data-meta-runtime', 'drupal-theme');
         const appliedData = DrupalAssetService.cleanCss(data, true);
         drupalStyle.textContent = appliedData;
         document.head.appendChild(drupalStyle);
@@ -528,14 +547,14 @@ const NeonPage = (props) => {
         } catch (e) {
           console.error(e); // eslint-disable-line no-console
         }
-        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+        fetchDrupalCssDispatch({ type: 'fetchDrupalCssSuccess' });
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.error(err);
-        setDrupalCssStatus(FETCH_STATUS.SUCCESS);
+        fetchDrupalCssDispatch({ type: 'fetchDrupalCssSuccess' });
       });
-  }, [useSomeDrupalAssets, drupalCssStatus, setDrupalCssStatus]);
+  }, [useSomeDrupalAssets, fetchDrupalCssState, fetchDrupalCssDispatch]);
 
   /**
      Render functions
@@ -543,7 +562,7 @@ const NeonPage = (props) => {
   const renderTitle = () => {
     if ((loading || error) && !title) {
       return (
-        <Skeleton width="45%" height={24} style={{ margin: Theme.spacing(2, 0, 4, 0) }} />
+        <Skeleton width="45%" height={24} style={{ margin: theme.spacing(2, 0, 4, 0) }} />
       );
     }
     if ((!title || !title.length) && !sidebarLinksAsStandaloneChildren) {
@@ -629,16 +648,25 @@ const NeonPage = (props) => {
   const renderError = () => (!error ? null : renderOverlay(
     <>
       <ErrorIcon fontSize="large" color="error" />
-      <Typography variant="h5" component="h3" style={{ marginTop: Theme.spacing(1) }}>
+      <Typography variant="h5" component="h3" style={{ marginTop: theme.spacing(1) }}>
         {error}
       </Typography>
     </>,
   ));
 
+  const renderNotificationsManager = () => {
+    if (notificationsDisable === true) {
+      return null;
+    }
+    return <NotificationsManager initialNotification={notification} />;
+  };
+
   const renderSidebar = () => {
     if (!hasSidebar) { return null; }
     const sidebarContainerStyle = belowMd ? {} : { width: `${sidebarWidth}px` };
-    const dividerStyle = !belowMd ? { width: `${sidebarWidth - Theme.spacing(8)}px` } : {};
+    const dividerStyle = !belowMd
+      ? { width: `${sidebarWidth - getThemeSpacingNumber(theme.spacing(8))}px` }
+      : {};
     const sidebarClassName = sidebarContainerClassNameProp
       ? `${classes.sidebarContainer} ${sidebarContainerClassNameProp}`
       : classes.sidebarContainer;
@@ -657,9 +685,9 @@ const NeonPage = (props) => {
         <div className={classes.sidebarTitlesContainer}>
           {loading || error ? (
             <>
-              <Skeleton width={200} height={22} style={{ marginBottom: Theme.spacing(1) }} />
+              <Skeleton width={200} height={22} style={{ marginBottom: theme.spacing(1) }} />
               {!sidebarSubtitle ? null : (
-                <Skeleton width={120} height={16} style={{ marginBottom: Theme.spacing(1) }} />
+                <Skeleton width={120} height={16} style={{ marginBottom: theme.spacing(1) }} />
               )}
             </>
           ) : (
@@ -798,6 +826,29 @@ const NeonPage = (props) => {
     );
   };
 
+  const renderNetworkStatus = () => {
+    if (isNetworkAvailable) {
+      return null;
+    }
+    const offlineMessage = (
+      <div style={{ display: 'flex' }}>
+        <ErrorIcon color="warning" style={{ marginRight: theme.spacing(1.5) }} />
+        <Typography variant="body2" style={{ marginTop: '2px' }}>
+          No internet connection. Check your connection.
+        </Typography>
+      </div>
+    );
+    return (
+      <Snackbar
+        open
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        message={offlineMessage}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        slots={{ transition: (transitionProps) => <Slide {...transitionProps} direction="down" /> }}
+      />
+    );
+  };
+
   const renderNeonPage = () => {
     const outerPageContainerStyles = {};
     if (outerPageContainerMaxWidth) {
@@ -811,18 +862,17 @@ const NeonPage = (props) => {
       content = <CurrentComponent />;
     }
     return (
-      <ThemeProvider theme={Theme}>
-        <CssBaseline />
-        <GlobalCss />
+      <>
         {customHeader ? (
           <header ref={headerRef}>
             {customHeader}
           </header>
         ) : (
           <NeonHeader
+            customizeAuthContainer={customizeAuthContainer}
             ref={headerRef}
             unstickyDrupalHeader={unstickyDrupalHeader}
-            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+            drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showHeaderSkeleton}
           />
         )}
@@ -839,9 +889,8 @@ const NeonPage = (props) => {
             {content}
           </div>
         </Container>
-        <NotificationsManager
-          initialNotification={notification}
-        />
+        {renderNotificationsManager()}
+        {renderNetworkStatus()}
         <BrowserWarning />
         {customFooter ? (
           <footer>
@@ -849,32 +898,55 @@ const NeonPage = (props) => {
           </footer>
         ) : (
           <NeonFooter
-            drupalCssLoaded={drupalCssStatus === FETCH_STATUS.SUCCESS}
+            drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showFooterSkeleton}
           />
         )}
         {renderLoading()}
         {renderError()}
-      </ThemeProvider>
+      </>
     );
   };
 
   const renderedPage = neonContextIsActive ? renderNeonPage() : (
-    <NeonContext.Provider
-      useCoreAuth
-      fetchPartials={useSomeDrupalAssets}
-      {...NeonContextProviderProps}
-    >
+    <NeonContext.Provider {...NeonContextProviderProps}>
       {renderNeonPage()}
     </NeonContext.Provider>
   );
+
+  const renderWithAuthContext = (inRenderedPage) => {
+    if (authContextDisable === true) {
+      return inRenderedPage;
+    }
+    if (neonAuthContextIsActive) {
+      return inRenderedPage;
+    }
+    return (
+      <NeonAuthContext.Provider {...NeonAuthContextProviderProps}>
+        {inRenderedPage}
+      </NeonAuthContext.Provider>
+    );
+  };
+  const renderWithPageAssetsContext = (inRenderedPage) => {
+    if (neonPageAssetsContextIsActive) {
+      return inRenderedPage;
+    }
+    return (
+      <NeonPageAssetsContext.Provider
+        {...NeonPageAssetsContextProviderProps}
+        fetchPartials={useSomeDrupalAssets}
+      >
+        {inRenderedPage}
+      </NeonPageAssetsContext.Provider>
+    );
+  };
 
   return (
     <ErrorBoundary
       FallbackComponent={NeonErrorPage}
       onReset={resetStateAfterRuntimeError}
     >
-      {renderedPage}
+      {renderWithPageAssetsContext(renderWithAuthContext(renderedPage))}
     </ErrorBoundary>
   );
 };
@@ -898,11 +970,14 @@ NeonPage.propTypes = {
   ),
   customHeader: PropTypes.node,
   customFooter: PropTypes.node,
+  customizeAuthContainer: PropTypes.bool,
+  authContextDisable: PropTypes.bool,
   showHeaderSkeleton: PropTypes.bool,
   showFooterSkeleton: PropTypes.bool,
   error: PropTypes.string,
   loading: PropTypes.string,
   notification: PropTypes.string,
+  notificationsDisable: PropTypes.bool,
   outerPageContainerMaxWidth: PropTypes.string,
   progress: PropTypes.number,
   resetStateAfterRuntimeError: PropTypes.func,
@@ -930,6 +1005,7 @@ NeonPage.propTypes = {
   sidebarTitle: PropTypes.string,
   sidebarWidth: PropTypes.number,
   sidebarUnsticky: PropTypes.bool,
+  sidebarDisableMaxHeight: PropTypes.bool,
   subtitle: PropTypes.oneOfType([
     PropTypes.string,
     children,
@@ -940,36 +1016,9 @@ NeonPage.propTypes = {
   ]),
   unstickyDrupalHeader: PropTypes.bool,
   NeonContextProviderProps: PropTypes.shape(NeonContext.ProviderPropTypes),
+  NeonAuthContextProviderProps: PropTypes.shape(NeonAuthContext.ProviderPropTypes),
+  NeonPageAssetsContextProviderProps: PropTypes.shape(NeonPageAssetsContext.ProviderPropTypes),
   children: children.isRequired,
-};
-
-NeonPage.defaultProps = {
-  breadcrumbHomeHref: '/',
-  breadcrumbs: [],
-  customHeader: null,
-  customFooter: null,
-  showHeaderSkeleton: false,
-  showFooterSkeleton: false,
-  error: null,
-  loading: null,
-  notification: null,
-  outerPageContainerMaxWidth: '2000px',
-  progress: null,
-  resetStateAfterRuntimeError: () => { },
-  sidebarContent: null,
-  sidebarContentResponsive: false,
-  sidebarContainerClassName: null,
-  sidebarLinks: null,
-  sidebarLinksAdditionalContent: null,
-  sidebarLinksAsStandaloneChildren: false,
-  sidebarSubtitle: null,
-  sidebarTitle: null,
-  sidebarWidth: 300,
-  sidebarUnsticky: false,
-  subtitle: null,
-  title: null,
-  unstickyDrupalHeader: true,
-  NeonContextProviderProps: {},
 };
 
 export default NeonPage;

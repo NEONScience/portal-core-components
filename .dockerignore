@@ -1,6 +1,7 @@
 .git
+.github
+.next
 node_modules
-build
 test-coverage
 reference
 

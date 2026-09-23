@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Skeleton from '@mui/material/Skeleton';
+import Typography from '@mui/material/Typography';
 
-import QuoteIcon from '@material-ui/icons/FormatQuote';
+import QuoteIcon from '@mui/icons-material/FormatQuote';
 
 import BundleContentBuilder from '../../Bundles/BundleContentBuilder';
 import DataProductBundleCard from '../../Bundles/DataProductBundleCard';
 import ErrorCard from '../../Card/ErrorCard';
 import WarningCard from '../../Card/WarningCard';
-import Theme from '../../Theme/Theme';
 
 import RouteService from '../../../service/RouteService';
+import { withDefaultProps } from '../../../util/defaultProps';
+import { makeStyles } from '../../Theme/makeStyles';
 import { NeonTheme } from '../../Theme/types';
 import { Nullable } from '../../../types/core';
 import {
@@ -39,7 +39,7 @@ import {
   DataProductCitationItem,
 } from './ViewState';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   citationTextOnly: {
     color: theme.palette.grey[400],
   },
@@ -61,9 +61,18 @@ const useStyles = makeStyles((theme: NeonTheme) => ({
   },
 }));
 
+export const defaultProps: DataProductCitationViewProps = {
+  showQuoteIcon: false,
+  disableConditional: false,
+  disableSkeleton: false,
+  showTextOnly: false,
+  textOnlyProps: undefined,
+  showManyParents: true,
+};
+
 const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   props: DataProductCitationViewProps,
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     showQuoteIcon,
     disableSkeleton,
@@ -71,7 +80,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     textOnlyProps,
     showManyParents,
   }: DataProductCitationViewProps = props;
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const state = DataProductCitationContext.useDataProductCitationContextState();
 
   let appliedTextOnly: CitationTextOnlyProps = {
@@ -103,25 +112,25 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
   });
 
-  const renderSkeleton = (): JSX.Element => {
+  const renderSkeleton = (): React.JSX.Element => {
     if (disableSkeleton) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return (<></>);
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Skeleton variant="rect" width="100%" height={40} />
+        <Grid size={{ xs: 12 }}>
+          <Skeleton variant="rectangular" width="100%" height={40} />
         </Grid>
         {!showTextOnly ? (
-          <Grid item xs={12}>
-            <Skeleton variant="rect" width="100%" height={180} />
+          <Grid size={{ xs: 12 }}>
+            <Skeleton variant="rectangular" width="100%" height={180} />
           </Grid>
         ) : null}
       </Grid>
     );
   };
-  const renderError = (): JSX.Element => {
+  const renderError = (): React.JSX.Element => {
     const errorTitle = 'Data Product Citation Generation Error';
     if (showTextOnly) {
       return (
@@ -136,14 +145,14 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <ErrorCard title={errorTitle} />
         </Grid>
       </Grid>
     );
   };
 
-  const renderNotAvailable = (): JSX.Element => {
+  const renderNotAvailable = (): React.JSX.Element => {
     const errorTitle = 'Data Product Citation Not Available';
     const errorMessage = 'A citation is not available for the specified data product and release.';
     if (showTextOnly) {
@@ -161,14 +170,14 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     }
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <WarningCard title={errorTitle} message={errorMessage} />
         </Grid>
       </Grid>
     );
   };
 
-  const renderCitationBlurb = (): Nullable<JSX.Element> => {
+  const renderCitationBlurb = (): Nullable<React.JSX.Element> => {
     if (showTextOnly) {
       return null;
     }
@@ -176,7 +185,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
       DisplayType.RELEASE,
       DisplayType.PROVISIONAL,
     ].includes(displayType);
-    const quoteIcon: Nullable<JSX.Element> = showQuoteIcon
+    const quoteIcon: Nullable<React.JSX.Element> = showQuoteIcon
       ? (<QuoteIcon fontSize="large" className={classes.calloutIcon} />)
       : null;
     let blurb = 'Please use the appropriate citation(s) from below in your publications. '
@@ -184,7 +193,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     if (showNonConditionalBlurb) {
       blurb = 'Please use this citation in your publications. ';
     }
-    const dataPolicyLink: JSX.Element = (
+    const dataPolicyLink: React.JSX.Element = (
       <Link href={RouteService.getDataPoliciesCitationPath()}>
         Acknowledging and Citing NEON Data
       </Link>
@@ -202,7 +211,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
   };
 
-  const renderBundleParentsCard = (): Nullable<JSX.Element> => {
+  const renderBundleParentsCard = (): Nullable<React.JSX.Element> => {
     const filteredCitationItems: DataProductCitationItem[] = citationItems
       .filter((item: DataProductCitationItem): boolean => (
         exists(item)
@@ -218,13 +227,13 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     const bundleNoteTerminalChar = !showManyParents
       ? '.'
       : ':';
-    const titleContent: JSX.Element = BundleContentBuilder.buildDefaultSplitTitleContent(
+    const titleContent: React.JSX.Element = BundleContentBuilder.buildDefaultSplitTitleContent(
       isReleaseDisplay,
       bundleNoteTerminalChar,
     );
     const detailContent = !showManyParents ? undefined : (
-      <ul style={{ margin: Theme.spacing(1, 0) }}>
-        {filteredCitationItems.map((item: DataProductCitationItem): JSX.Element => {
+      <ul style={{ margin: theme.spacing(1, 0) }}>
+        {filteredCitationItems.map((item: DataProductCitationItem): React.JSX.Element => {
           const bundleParentName: string = isReleaseDisplay
             ? (item.citableReleaseProduct as ContextDataProduct).productName
             : (item.citableBaseProduct as ContextDataProduct).productName;
@@ -267,11 +276,10 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     );
   };
 
-  const renderItems = (): JSX.Element[] => (
-    citationItems.map((item: DataProductCitationItem, index: number): JSX.Element => (
+  const renderItems = (): React.JSX.Element[] => (
+    citationItems.map((item: DataProductCitationItem, index: number): React.JSX.Element => (
       <div
         className={classes.itemContainer}
-        // eslint-disable-next-line react/no-array-index-key
         key={`DataProductCitationItemKey-${item.doiUrl || index}`}
       >
         <DataProductCitationItemView
@@ -284,7 +292,7 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
     ))
   );
 
-  const renderCitationDisplay = (): JSX.Element => {
+  const renderCitationDisplay = (): React.JSX.Element => {
     switch (displayType) {
       case DisplayType.CONDITIONAL:
       case DisplayType.PROVISIONAL:
@@ -319,13 +327,4 @@ const DataProductCitationView: React.FC<DataProductCitationViewProps> = (
   return renderCitationDisplay();
 };
 
-DataProductCitationView.defaultProps = {
-  showQuoteIcon: false,
-  disableConditional: false,
-  disableSkeleton: false,
-  showTextOnly: false,
-  textOnlyProps: undefined,
-  showManyParents: true,
-};
-
-export default DataProductCitationView;
+export default withDefaultProps(DataProductCitationView, defaultProps);

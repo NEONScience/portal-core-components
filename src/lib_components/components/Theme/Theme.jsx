@@ -1,8 +1,20 @@
 import React from 'react';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
-import { useTheme, createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import {
+  createTheme,
+  useTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
+
+import { buttonClasses } from '@mui/material/Button';
+import { buttonGroupClasses } from '@mui/material/ButtonGroup';
+import { chipClasses } from '@mui/material/Chip';
+import { iconButtonClasses } from '@mui/material/IconButton';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
+import { sliderClasses } from '@mui/material/Slider';
+import { typographyClasses } from '@mui/material/Typography';
 
 // Values defined here are based on the NEON Style Guide,
 // expanded out through color scale generators.
@@ -125,8 +137,56 @@ const PALETTES = {
 
 const COLOR_TEXT_PRIMARY = 'rgba(0, 0, 0, 0.9)';
 
+// MUI5+ now includes the unit in the spacing value,
+// so we need to remove it to get the raw number for calculations
+export const getThemeSpacingNumber = (spacing) => Number(spacing.slice(0, -2));
+
+/**
+ * Font size definitions from point/px to rem, dependent on body/root rem definition
+ */
+export const FONT_SIZES = {
+  9: {
+    rem: 0.5625,
+  },
+  10: {
+    rem: 0.625,
+  },
+  11: {
+    rem: 0.6875,
+  },
+  12: {
+    rem: 0.75,
+  },
+  13: {
+    rem: 0.8125,
+  },
+  14: {
+    rem: 0.875,
+  },
+  15: {
+    rem: 0.9375,
+  },
+  16: {
+    rem: 1,
+  },
+  17: {
+    rem: 1.0625,
+  },
+  18: {
+    rem: 1.125,
+  },
+  19: {
+    rem: 1.1875,
+  },
+  20: {
+    rem: 1.25,
+  },
+};
+
 // See all customizable Material UI theme keys here:
-// https://material-ui.com/customization/default-theme/#explore
+// https://mui.com/material-ui/customization/default-theme/
+
+/* eslint-disable max-len, @stylistic/max-len */
 
 const baseTheme = createTheme({
   breakpoints: {
@@ -182,622 +242,738 @@ const baseTheme = createTheme({
     },
     h6: {
       fontWeight: 400,
+      fontSize: '1.125rem',
+    },
+    subtitle1: {
       fontSize: '1rem',
     },
+    subtitle2: {
+      fontSize: '0.875rem',
+    },
     body1: {
-      fontSize: '0.9rem',
+      fontSize: '1rem',
     },
     body2: {
-      fontSize: '0.8rem',
+      fontSize: '0.875rem',
     },
     caption: {
       fontSize: '0.75rem',
     },
   },
-  props: {
-    MuiBackdrop: {
-      timeout: 0,
-    },
-    MuiBreadcrumbs: {
-      separator: '/',
-    },
-    MuiButton: {
-      color: 'primary',
-    },
-    MuiButtonGroup: {
-      color: 'primary',
-    },
-    MuiCard: {
-      variant: 'outlined',
-    },
-    MuiCheckbox: {
-      color: 'primary',
-      size: 'small',
-    },
-    MuiIconButton: {
-      color: 'primary',
-    },
-    MuiLink: {
-      color: 'primary',
-      underline: 'always',
-    },
-    MuiRadio: {
-      color: 'primary',
-      size: 'small',
-    },
-    MuiSwitch: {
-      color: 'primary',
-      size: 'small',
-    },
-  },
-  overrides: {
-    // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+  // We have lots of overrides. Please keep them alphabetized for easier maintenance!
+  components: {
     MuiAccordion: {
-      root: {
-        border: `1px solid ${COLORS.GREY[300]}`,
-        boxShadow: 'none',
-        '&:hover, &:active': {
-          border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
-          backgroundColor: `${COLORS.LIGHT_BLUE[500]}08`,
-        },
-        '&$expanded': {
-          margin: '0px',
-          border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+      styleOverrides: {
+        root: {
+          border: `1px solid ${COLORS.GREY[300]}`,
+          boxShadow: 'none',
           '&:hover, &:active': {
-            backgroundColor: '#fff',
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+            backgroundColor: `${COLORS.LIGHT_BLUE[500]}08`,
+          },
+          '&.Mui-expanded': {
+            margin: '0px',
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}`,
+            '&:hover, &:active': {
+              backgroundColor: '#fff',
+            },
           },
         },
-      },
-      rounded: {
-        '&:first-child': {
-          borderTopLeftRadius: '2px',
-          borderTopRightRadius: '2px',
-        },
-        '&:last-child': {
-          borderBottomLeftRadius: '2px',
-          borderBottomRightRadius: '2px',
-        },
-        '&:not(:first-child)': {
-          borderTopWidth: '0px',
+        rounded: {
+          '&:is(div:first-of-type)': {
+            borderTopLeftRadius: '2px',
+            borderTopRightRadius: '2px',
+          },
+          '&:is(div:last-of-type)': {
+            borderBottomLeftRadius: '2px',
+            borderBottomRightRadius: '2px',
+          },
+          '&:not(div:first-of-type)': {
+            borderTopWidth: '0px',
+          },
         },
       },
     },
     MuiAccordionActions: {
-      root: {
-        padding: '16px 24px',
+      styleOverrides: {
+        root: {
+          padding: '16px 24px',
+        },
       },
     },
     MuiAccordionDetails: {
-      root: {
-        padding: '0px 24px 24px 24px',
-        '&:not(:last-child)': {
-          paddingBottom: '0px',
+      styleOverrides: {
+        root: {
+          padding: '0px 24px 24px 24px',
+          '&:not(div:last-of-type)': {
+            paddingBottom: '0px',
+          },
         },
       },
     },
     MuiAccordionSummary: {
-      root: {
-        padding: '12px 24px',
-      },
-      content: {
-        fontSize: '0.95rem',
-        fontWeight: 500,
-      },
-      expandIcon: {
-        '&:hover': {
-          backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+      styleOverrides: {
+        root: {
+          padding: '12px 24px',
+          font: 'inherit',
+        },
+        content: {
+          fontSize: '0.95rem',
+          fontWeight: 500,
+        },
+        expandIconWrapper: {
+          padding: '12px',
+          borderRadius: '50%',
+          border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
+          '&:hover': {
+            padding: '12px',
+            backgroundColor: `${COLORS.LIGHT_BLUE[500]}14`,
+            color: COLORS.LIGHT_BLUE[400],
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+          },
         },
       },
     },
     MuiBackdrop: {
-      root: {
-        zIndex: 50,
+      defaultProps: {
+        timeout: 0,
+      },
+      styleOverrides: {
+        root: {
+          zIndex: 50,
+        },
       },
     },
     MuiBreadcrumbs: {
-      root: {
-        padding: '8px 0px',
-        marginBottom: '16px',
-        '@media (max-width:599.95px)': {
-          marginBottom: '8px',
-        },
+      defaultProps: {
+        separator: '/',
       },
-      separator: {
-        fontSize: '1.1rem',
-        fontWeight: 700,
-        color: COLORS.GREY[200],
+      styleOverrides: {
+        root: {
+          padding: '8px 0px',
+          marginBottom: '16px',
+          '@media (max-width:599.95px)': {
+            marginBottom: '8px',
+          },
+        },
+        separator: {
+          fontSize: '1.1rem',
+          fontWeight: 700,
+          color: COLORS.GREY[200],
+        },
       },
     },
     MuiButton: {
-      root: {
-        borderRadius: '2px',
-        letterSpacing: '0.06em',
-        fontSize: '0.7rem',
-        padding: '8px 16px',
+      defaultProps: {
+        color: 'primary',
       },
-      contained: {
-        '&$disabled': {
-          color: COLORS.GREY[300],
-          backgroundColor: COLORS.GREY[100],
+      styleOverrides: {
+        root: {
+          borderRadius: '2px',
+          letterSpacing: '0.06em',
+          fontSize: '0.7rem',
+          padding: '8px 16px',
         },
-      },
-      containedPrimary: {
-        padding: '8px 16px',
-        '&:hover, &:active': {
-          backgroundColor: COLORS.LIGHT_BLUE[400],
+        contained: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            '&:hover, &:active': {
+              backgroundColor: COLORS.LIGHT_BLUE[400],
+            },
+          },
+          '&.Mui-disabled': {
+            color: COLORS.GREY[300],
+            backgroundColor: COLORS.GREY[100],
+          },
         },
-      },
-      outlined: {
-        '&$disabled': {
-          color: COLORS.GREY[300],
-          borderColor: COLORS.GREY[300],
+        outlined: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            border: `1px solid ${COLORS.LIGHT_BLUE[500]}`,
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+            },
+          },
+          '&.Mui-disabled': {
+            color: COLORS.GREY[300],
+            borderColor: COLORS.GREY[300],
+          },
         },
-      },
-      outlinedPrimary: {
-        padding: '8px 16px',
-        border: `1px solid ${COLORS.LIGHT_BLUE[500]}`,
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          borderColor: COLORS.LIGHT_BLUE[400],
-          textDecoration: 'underline',
+        text: {
+          [`&.${buttonClasses.colorPrimary}`]: {
+            border: '1px solid transparent',
+            '&:focus': {
+              border: `1px dashed ${COLORS.GOLD[500]}ff`,
+            },
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+              border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+            },
+          },
+          '&.Mui-disabled': {
+            color: COLORS.GREY[300],
+          },
         },
-      },
-      text: {
-        '&$disabled': {
-          color: COLORS.GREY[300],
+        sizeSmall: {
+          fontSize: `${FONT_SIZES[9].rem}rem`,
+          padding: '5px 10px',
         },
-      },
-      textPrimary: {
-        padding: '8px 16px',
-        border: '1px solid transparent',
-        '&:focus': {
-          border: `1px dashed ${COLORS.GOLD[500]}ff`,
+        sizeLarge: {
+          fontSize: `${FONT_SIZES[15].rem}rem`,
+          padding: '12px 24px',
         },
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          textDecoration: 'underline',
-          border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+        startIcon: {
+          marginRight: '4px',
+          marginTop: '-2px',
         },
-      },
-      sizeSmall: {
-        fontSize: '0.55rem',
-        padding: '5px 10px',
-      },
-      sizeLarge: {
-        fontSize: '0.9rem',
-        padding: '12px 24px',
-      },
-      startIcon: {
-        marginRight: '4px',
-      },
-      endIcon: {
-        marginLeft: '4px',
+        endIcon: {
+          marginLeft: '4px',
+          marginTop: '-2px',
+        },
       },
     },
     MuiButtonBase: {
-      root: {
-        fontWeight: 600,
-        borderRadius: '2px',
-        letterSpacing: '0.06em',
-        fontSize: '0.7rem',
-        padding: '8px 16px',
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+          borderRadius: '2px',
+          letterSpacing: '0.06em',
+          fontSize: '0.7rem',
+          padding: '8px 16px',
+        },
       },
     },
     MuiButtonGroup: {
-      groupedOutlinedPrimary: {
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          borderColor: COLORS.LIGHT_BLUE[400],
-          textDecoration: 'underline',
-        },
+      defaultProps: {
+        color: 'primary',
       },
-      groupedTextPrimary: {
-        border: '1px solid transparent !important',
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
-          textDecoration: 'underline',
-        },
-        '&:not(:last-child)': {
-          borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
-        },
-        '&:not(:first-child)': {
-          marginLeft: '-1px',
+      styleOverrides: {
+        root: {
+          [`&.${buttonGroupClasses.outlined}.${buttonGroupClasses.colorPrimary} > .${buttonGroupClasses.grouped}`]: {
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+            },
+          },
+          [`&.${buttonGroupClasses.text}.${buttonGroupClasses.colorPrimary} > .${buttonGroupClasses.grouped}`]: {
+            border: '1px solid transparent !important',
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: `${COLORS.LIGHT_BLUE[400]} !important`,
+              textDecoration: 'underline',
+            },
+            '&:not(div:last-of-type)': {
+              borderRightColor: `${COLORS.LIGHT_BLUE[500]} !important`,
+            },
+            '&:not(div:first-of-type)': {
+              marginLeft: '-1px',
+            },
+          },
         },
       },
     },
     MuiCard: {
-      root: {
-        borderRadius: '4px',
-        border: `1px solid ${COLORS.GREY[200]}`,
+      defaultProps: {
+        variant: 'outlined',
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: '4px',
+          border: `1px solid ${COLORS.GREY[200]}`,
+        },
       },
     },
     MuiCardContent: {
-      root: {
-        padding: '24px',
-        '@media (max-width:959.95px)': {
-          padding: '16px',
-          '&:last-child': {
-            paddingBottom: '16px',
+      styleOverrides: {
+        root: {
+          padding: '24px',
+          '@media (max-width:959.95px)': {
+            padding: '16px',
+            '&:is(div:last-of-type)': {
+              paddingBottom: '16px',
+            },
           },
         },
       },
     },
     MuiCardActions: {
-      root: {
-        padding: '0px 24px 24px 24px',
+      styleOverrides: {
+        root: {
+          padding: '0px 24px 24px 24px',
+        },
       },
     },
     MuiCheckbox: {
-      root: {
-        padding: '6px',
+      defaultProps: {
+        color: 'primary',
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          padding: '6px',
+        },
       },
     },
     MuiChip: {
-      root: {
-        backgroundColor: COLORS.GREY[200],
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.GREY[200],
+          letterSpacing: 'normal',
+          [`&.${chipClasses.colorPrimary}`]: {
+            backgroundColor: PALETTES.PRIMARY.main,
+          },
+          [`&.${chipClasses.sizeSmall} > .${chipClasses.label}`]: {
+            padding: '0 8px',
+          },
+        },
+        outlined: {
+          borderColor: 'rgba(0, 0, 0, 0.23)',
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontSize: '1rem',
+          lineHeight: 1.5,
+        },
+        code: {
+          fontSize: `${FONT_SIZES[14].rem}rem`,
+          padding: '1px 2px',
+          backgroundColor: 'rgba(0, 0, 0, 0.11)',
+        },
       },
     },
     MuiDialog: {
-      root: {
-        zIndex: 105,
-      },
-      paper: {
-        zIndex: 60,
+      styleOverrides: {
+        root: {
+          zIndex: 105,
+        },
+        paper: {
+          zIndex: 60,
+        },
       },
     },
     MuiFormControlLabel: {
-      root: {
-        marginLeft: '-8px',
-      },
-      label: {
-        marginLeft: '4px',
-        marginBottom: '-1px',
+      styleOverrides: {
+        root: {
+          marginLeft: '-8px',
+        },
+        label: {
+          marginLeft: '4px',
+          marginBottom: '1.5px',
+        },
       },
     },
     MuiIconButton: {
-      root: {
-        padding: '12px',
+      defaultProps: {
+        color: 'primary',
       },
-      sizeSmall: {
-        padding: '6px',
-        '& svg': {
-          fontSize: '1.2rem',
+      styleOverrides: {
+        root: {
+          padding: '12px',
         },
-      },
-      colorPrimary: {
-        backgroundColor: `${COLORS.LIGHT_BLUE[500]}00`,
-        border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
-        '&:focus': {
-          border: `1px dashed ${COLORS.GOLD[500]}ff`,
+        sizeSmall: {
+          padding: '6px',
+          '& svg': {
+            fontSize: '1.2rem',
+          },
         },
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          backgroundColor: `${COLORS.LIGHT_BLUE[400]}14`,
-          border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+        colorPrimary: {
+          backgroundColor: `${COLORS.LIGHT_BLUE[500]}00`,
+          border: `1px solid ${COLORS.LIGHT_BLUE[500]}00`,
+          '&:focus': {
+            border: `1px dashed ${COLORS.GOLD[500]}ff`,
+          },
+          '&:hover, &:active': {
+            color: COLORS.LIGHT_BLUE[400],
+            backgroundColor: `${COLORS.LIGHT_BLUE[400]}14`,
+            border: `1px solid ${COLORS.LIGHT_BLUE[400]}ff`,
+          },
         },
       },
     },
     MuiInputBase: {
-      root: {
-        fontSize: '0.85rem',
+      styleOverrides: {
+        root: {
+          fontSize: `${FONT_SIZES[14].rem}rem`,
+        },
       },
     },
     MuiLink: {
-      root: {
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
+      defaultProps: {
+        color: 'primary',
+        underline: 'always',
+      },
+      styleOverrides: {
+        root: {
+          textDecorationColor: COLORS.LIGHT_BLUE[500],
+          '&:hover, &:active': {
+            color: COLORS.LIGHT_BLUE[400],
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          [`& .${outlinedInputClasses.notchedOutline}`]: {
+            '& legend': {
+              fontSize: `${FONT_SIZES[12].rem}rem`,
+            },
+          },
+        },
+      },
+    },
+    MuiPickersInputBase: {
+      styleOverrides: {
+        root: {
+          fontSize: `${FONT_SIZES[14].rem}rem`,
         },
       },
     },
     MuiRadio: {
-      root: {
-        padding: '6px',
+      defaultProps: {
+        color: 'primary',
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          padding: '6px',
+        },
       },
     },
     MuiSlider: {
-      root: {
-        '&$disabled': {
-          '& $rail': {
-            backgroundColor: COLORS.GREY[300],
-          },
-          '& $track': {
-            backgroundColor: COLORS.GREY[300],
-          },
-          '& $mark': {
-            backgroundColor: COLORS.GREY[300],
-          },
-          '& $markLabel': {
-            color: `${COLORS.GREY[300]} !important`,
-          },
-          '& $markLabelActive': {
-            color: `${COLORS.GREY[300]} !important`,
+      styleOverrides: {
+        root: {
+          '&.Mui-disabled': {
+            [`& .${sliderClasses.rail}`]: {
+              backgroundColor: COLORS.GREY[300],
+            },
+            [`& .${sliderClasses.track}`]: {
+              backgroundColor: COLORS.GREY[300],
+            },
+            [`& .${sliderClasses.mark}`]: {
+              backgroundColor: COLORS.GREY[300],
+            },
+            [`& .${sliderClasses.markLabel}`]: {
+              color: `${COLORS.GREY[300]} !important`,
+            },
+            [`& .${sliderClasses.markActive}`]: {
+              color: `${COLORS.GREY[300]} !important`,
+            },
           },
         },
-      },
-      rail: {
-        height: 2,
-        opacity: 1,
-        backgroundColor: COLORS.LIGHT_BLUE[300],
-        '&$disabled': {
-          backgroundColor: COLORS.GREY[300],
+        rail: {
+          opacity: 1,
+          backgroundColor: COLORS.LIGHT_BLUE[300],
+          borderRadius: 0,
+          '&.Mui-disabled': {
+            backgroundColor: COLORS.GREY[300],
+          },
         },
-      },
-      track: {
-        height: 7,
-        marginTop: -2.5,
-        '&$disabled': {
-          backgroundColor: COLORS.GREY[300],
+        track: {
+          borderRadius: 0,
+          '&.Mui-disabled': {
+            backgroundColor: COLORS.GREY[300],
+          },
         },
-      },
-      marked: {
-        marginBottom: 26,
-      },
-      mark: {
-        width: 2,
-        height: 12,
-        marginTop: -5,
-        backgroundColor: COLORS.LIGHT_BLUE[300],
-      },
-      markActive: {
-        width: 3,
-        height: 12,
-        marginTop: -5,
-        marginLeft: -1,
-        backgroundColor: COLORS.LIGHT_BLUE[500],
-      },
-      markLabel: {
-        marginTop: 12,
-      },
-      thumb: {
-        height: 28,
-        width: 12,
-        marginTop: -13,
-        marginLeft: -6,
-        borderRadius: 2,
-        backgroundColor: COLORS.GREY[50],
-        border: `2px solid ${COLORS.LIGHT_BLUE[500]}`,
-        '&$disabled': {
+        mark: {
+          width: 2,
+          height: 12,
+          backgroundColor: COLORS.LIGHT_BLUE[300],
+        },
+        markActive: {
+          width: 3,
+          height: 12,
+          backgroundColor: COLORS.LIGHT_BLUE[500],
+        },
+        markLabel: {
+          marginTop: 10,
+        },
+        thumb: {
           height: 28,
           width: 12,
-          marginTop: -13,
-          marginLeft: -6,
-          border: `2px solid ${COLORS.GREY[300]}`,
-        },
-      },
-      valueLabel: {
-        left: 'initial',
-        fontWeight: 600,
-        top: -28,
-        whiteSpace: 'nowrap',
-        '& span': {
-          width: 'auto',
-          height: 'auto',
-          padding: '4px 8px',
           borderRadius: 2,
-          transform: 'none',
-          '& span': {
-            transform: 'none',
-            padding: 0,
-            borderRadius: 0,
+          backgroundColor: COLORS.GREY[50],
+          border: `2px solid ${COLORS.LIGHT_BLUE[500]}`,
+          '&.Mui-disabled': {
+            height: 28,
+            width: 12,
+            border: `2px solid ${COLORS.GREY[300]}`,
           },
         },
-      },
-      vertical: {
-        '& $track': {
-          width: '7px !important',
-          marginLeft: -2,
-          left: 20,
+        valueLabel: {
+          fontWeight: 600,
+          backgroundColor: COLORS.LIGHT_BLUE[500],
+          color: '#fff',
+          whiteSpace: 'nowrap',
+          '&::before': {
+            display: 'none',
+          },
+          '& span': {
+            width: 'auto',
+            height: 'auto',
+            borderRadius: 2,
+            transform: 'none',
+            '& span': {
+              transform: 'none',
+              padding: 0,
+              borderRadius: 0,
+            },
+          },
         },
-        '& $marked': {
-          marginRight: 34,
-        },
-        '& $mark': {
-          height: 2,
-          width: 12,
-          marginLeft: 2,
-        },
-        '& $markActive': {
-          height: 3,
-          width: 12,
-          marginLeft: 2,
-          marginTop: -1,
-        },
-        '& $markLabel': {
-          marginTop: 0,
-          left: '46px !important',
-        },
-        '& $rail': {
-          width: '2px !important',
-          left: 20,
-        },
-        '& $thumb': {
-          height: 12,
-          width: 27,
-          marginTop: -6,
-          marginLeft: -14,
-          '&$disabled': {
+        vertical: {
+          [`& .${sliderClasses.track}`]: {
+            borderRadius: 0,
+          },
+          [`& .${sliderClasses.mark}`]: {
+            height: 2,
+            width: 12,
+          },
+          [`& .${sliderClasses.markActive}`]: {
+            height: 3,
+            width: 12,
+          },
+          [`& .${sliderClasses.markLabel}`]: {
+            marginTop: 0,
+            marginLeft: 6,
+          },
+          [`& .${sliderClasses.rail}`]: {
+            borderRadius: 0,
+          },
+          [`& .${sliderClasses.thumb}`]: {
             height: 12,
             width: 27,
-            marginTop: -6,
-            marginLeft: '-5px !important',
+            '&.Mui-disabled': {
+              height: 12,
+              width: 27,
+            },
           },
         },
       },
     },
     MuiSnackbar: {
-      root: {
-        borderRadius: '4px',
+      styleOverrides: {
+        root: {
+          borderRadius: '4px',
+        },
+      },
+    },
+    MuiStepper: {
+      styleOverrides: {
+        root: {
+          padding: '24px',
+        },
       },
     },
     MuiSwitch: {
-      sizeSmall: {
-        width: '42px',
-        height: '26px',
+      defaultProps: {
+        color: 'primary',
+        size: 'small',
+      },
+      styleOverrides: {
+        sizeSmall: {
+          width: '42px',
+          height: '26px',
+        },
       },
     },
     MuiTab: {
-      root: {
-        color: COLORS.LIGHT_BLUE[500],
-        backgroundColor: COLORS.GREY[50],
-        border: `1.5px solid ${COLORS.GREY[200]}`,
-        borderRadius: '0px',
-        fontSize: '0.75rem',
-        '&$selected': {
-          zIndex: 1,
-          backgroundColor: '#fff',
-          borderColor: COLORS.LIGHT_BLUE[500],
+      styleOverrides: {
+        root: {
+          color: COLORS.LIGHT_BLUE[500],
+          backgroundColor: COLORS.GREY[50],
+          border: `1.5px solid ${COLORS.GREY[200]}`,
+          borderRadius: '0px',
+          fontSize: `${FONT_SIZES[12].rem}rem`,
+          padding: '12px',
+          lineHeight: 1.75,
+          '&.Mui-selected': {
+            zIndex: 1,
+            backgroundColor: '#fff',
+            borderColor: COLORS.LIGHT_BLUE[500],
+          },
+          '&:hover, &:active': {
+            backgroundColor: '#fff',
+          },
+          '@media (min-width:599.95px)': {
+            minWidth: '160px',
+          },
         },
-        '&:hover, &:active': {
-          backgroundColor: '#fff',
+        textColorInherit: {
+          color: COLORS.LIGHT_BLUE[500],
         },
-      },
-      textColorInherit: {
-        color: COLORS.LIGHT_BLUE[500],
-      },
-      textColorPrimary: {
-        color: COLORS.LIGHT_BLUE[500],
+        textColorPrimary: {
+          color: COLORS.LIGHT_BLUE[500],
+        },
       },
     },
     MuiTabScrollButton: {
-      root: {
-        color: COLORS.LIGHT_BLUE[500],
-        backgroundColor: COLORS.GREY[50],
-        border: `1.5px solid ${COLORS.GREY[200]}`,
-        borderRadius: '0px',
-        '&:hover, &:active': {
-          zIndex: 1,
-          backgroundColor: '#fff',
-          borderColor: COLORS.LIGHT_BLUE[500],
+      styleOverrides: {
+        root: {
+          color: COLORS.LIGHT_BLUE[500],
+          backgroundColor: COLORS.GREY[50],
+          border: `1.5px solid ${COLORS.GREY[200]}`,
+          borderRadius: '0px',
+          '&:hover, &:active': {
+            zIndex: 1,
+            backgroundColor: '#fff',
+            borderColor: COLORS.LIGHT_BLUE[500],
+          },
         },
       },
     },
     MuiTableCell: {
-      root: {
-        fontSize: '0.8rem',
-        '&:not(:last-child)': {
-          borderRight: `1px solid ${COLORS.GREY[200]}`,
+      styleOverrides: {
+        root: {
+          fontFamily: '"Inter", Helvetica, Arial, sans-serif !important',
+          '&:not(td:last-of-type)': {
+            borderRight: `1px solid ${COLORS.GREY[200]}`,
+          },
         },
-      },
-      head: {
-        color: '#fff',
-        backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
-        borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
-        '&:not(:last-child)': {
-          borderRight: `1px solid ${COLORS.NEON_BLUE[700]}`,
+        head: {
+          color: '#fff',
+          backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
+          borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
+          '&:not(th:last-of-type)': {
+            borderRight: `1px solid ${COLORS.NEON_BLUE[700]}`,
+          },
         },
-      },
-      stickyHeader: {
-        zIndex: 'auto',
-        color: '#fff',
-        backgroundColor: COLORS.LIGHT_BLUE[500],
-        borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
+        stickyHeader: {
+          zIndex: 'auto',
+          color: '#fff',
+          backgroundColor: COLORS.LIGHT_BLUE[500],
+          borderBottom: `1.5px solid ${COLORS.NEON_BLUE[700]}`,
+        },
       },
     },
     MuiTableSortLabel: {
-      root: {
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[100],
-          textDecoration: 'underline',
-        },
-      },
-      active: {
-        color: `${COLORS.LIGHT_BLUE[100]} !important`,
-        textDecoration: 'underline',
-        '& svg': {
-          color: `${COLORS.LIGHT_BLUE[100]} !important`,
+      styleOverrides: {
+        root: {
+          '&:hover, &:active': {
+            color: COLORS.LIGHT_BLUE[100],
+            textDecoration: 'underline',
+          },
+          '&.Mui-active': {
+            color: `${COLORS.LIGHT_BLUE[100]} !important`,
+            textDecoration: 'underline',
+            '& svg': {
+              color: `${COLORS.LIGHT_BLUE[100]} !important`,
+            },
+          },
         },
       },
     },
     MuiTablePagination: {
-      toolbar: {
-        '& .MuiIconButton-root': {
-          borderRadius: '2px',
-          padding: '4px',
-          '& svg': {
-            fontSize: '1.4rem',
+      styleOverrides: {
+        toolbar: {
+          [`& .${iconButtonClasses.root}`]: {
+            borderRadius: '2px',
+            padding: '4px',
+            '& svg': {
+              fontSize: '1.4rem',
+            },
+          },
+          [`& .${typographyClasses.caption}`]: {
+            margin: '0px 8px',
           },
         },
-        '& .MuiTypography-caption': {
-          margin: '0px 8px',
+        input: {
+          margin: 0,
+        },
+        selectLabel: {
+          display: 'none',
+        },
+        displayedRows: {
+          display: 'none',
         },
       },
     },
     MuiToggleButton: {
-      root: {
-        height: 'unset',
-        color: COLORS.LIGHT_BLUE[500],
-        borderColor: COLORS.LIGHT_BLUE[500],
-        fontSize: '0.7rem',
-        padding: '8px 16px !important',
-        whiteSpace: 'nowrap',
-        '&$selected': {
-          color: '#fff !important',
-          backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
-          textDecoration: 'none !important',
-        },
-        '&:hover, &:active': {
-          color: COLORS.LIGHT_BLUE[400],
-          borderColor: COLORS.LIGHT_BLUE[400],
-          textDecoration: 'underline',
-        },
-      },
-      sizeSmall: {
-        height: 'unset',
-        fontSize: '0.55rem',
-        padding: '5px 10px !important',
-      },
-      sizeLarge: {
-        height: 'unset',
-        fontSize: '0.9rem',
-        padding: '12px 24px !important',
-      },
-    },
-    MuiToggleButtonGroup: {
-      grouped: {
-        '&:first-child': {
-          borderTopLeftRadius: '2px',
-          borderBottomLeftRadius: '2px',
-        },
-        '&:last-child': {
-          borderTopRightRadius: '2px',
-          borderBottomRightRadius: '2px',
-        },
-      },
-    },
-    MuiTooltip: {
-      popper: {
-        zIndex: 2500,
-      },
-      tooltip: {
-        backgroundColor: COLORS.GREY[50],
-        border: `1px solid ${COLORS.GREY[600]}`,
-        color: COLOR_TEXT_PRIMARY,
-        borderRadius: '2px',
-        padding: '12px 16px',
-        fontSize: '0.9rem',
-        fontWeight: 400,
-        boxShadow: 'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px',
-        '& a': {
+      styleOverrides: {
+        root: {
+          height: 'unset',
           color: COLORS.LIGHT_BLUE[500],
+          borderColor: COLORS.LIGHT_BLUE[500],
+          fontSize: `${FONT_SIZES[12].rem}rem`,
+          padding: '8px 16px !important',
+          whiteSpace: 'nowrap',
+          '&.Mui-selected': {
+            color: '#fff !important',
+            backgroundColor: `${COLORS.LIGHT_BLUE[500]} !important`,
+            textDecoration: 'none !important',
+          },
           '&:hover, &:active': {
             color: COLORS.LIGHT_BLUE[400],
             borderColor: COLORS.LIGHT_BLUE[400],
             textDecoration: 'underline',
           },
         },
+        sizeSmall: {
+          height: 'unset',
+          fontSize: `${FONT_SIZES[9].rem}rem`,
+          padding: '5px 10px !important',
+        },
+        sizeLarge: {
+          height: 'unset',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
+          padding: '12px 24px !important',
+        },
+      },
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          '&:is(button:first-of-type)': {
+            borderTopLeftRadius: '2px',
+            borderBottomLeftRadius: '2px',
+          },
+          '&:is(button:last-of-type)': {
+            borderTopRightRadius: '2px',
+            borderBottomRightRadius: '2px',
+          },
+        },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        popper: {
+          zIndex: 2500,
+        },
+        tooltip: {
+          backgroundColor: COLORS.GREY[50],
+          border: `1px solid ${COLORS.GREY[600]}`,
+          color: COLOR_TEXT_PRIMARY,
+          borderRadius: '2px',
+          padding: '12px 16px',
+          fontSize: `${FONT_SIZES[14].rem}rem`,
+          fontWeight: 400,
+          boxShadow: 'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px',
+          '& a': {
+            color: COLORS.LIGHT_BLUE[500],
+            '&:hover, &:active': {
+              color: COLORS.LIGHT_BLUE[400],
+              borderColor: COLORS.LIGHT_BLUE[400],
+              textDecoration: 'underline',
+            },
+          },
+        },
       },
     },
     MuiTypography: {
-      body1: {
-        fontSize: '0.95rem',
-      },
-      gutterBottom: {
-        marginBottom: '1em',
+      styleOverrides: {
+        gutterBottom: {
+          marginBottom: '1em',
+        },
       },
     },
   },
 });
+
+/* eslint-enable max-len, @stylistic/max-len */
 
 const theme = responsiveFontSizes(baseTheme);
 theme.isNeonTheme = true;
@@ -811,7 +987,7 @@ theme.colors = COLORS;
 theme.getWrappedComponent = (Component) => (props) => {
   const currentTheme = useTheme();
   const isJsdom = navigator.userAgent.includes('Node.js') || navigator.userAgent.includes('jsdom');
-  if (!currentTheme.isNeonTheme && !isJsdom) {
+  if ((!currentTheme || !currentTheme.isNeonTheme) && !isJsdom) {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />

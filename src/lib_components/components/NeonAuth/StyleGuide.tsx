@@ -1,33 +1,34 @@
-/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
 import React, { CSSProperties } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+
+import AuthService from '@/components/NeonAuth/AuthService';
+import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from '@/components/NeonAuth/NeonAuth';
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import UserCard from '@/components/Accounts/UserCard';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import AuthService from './AuthService';
-import NeonAuth, { NeonAuthType, NeonAuthDisplayType } from './NeonAuth';
-import NeonContext from '../NeonContext/NeonContext';
-import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
-import UserCard from '../Accounts/UserCard';
-
 const NEON_SSO_COOKIE_NAME: string = 'X-NEON-SSO';
 const ALLOW_SSO_TOGGLE: boolean = false;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -96,7 +97,7 @@ const propRows = [
   },
 ];
 
-const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element => {
+const renderUserCard = (isAuthenticated: boolean, userData: any): React.JSX.Element => {
   if (!isAuthenticated || !userData?.data?.user) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return (<></>);
@@ -119,8 +120,8 @@ const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element =>
   }
   return (
     <>
-      <Grid item xs={12} md={3} />
-      <Grid item xs={12} md={6}>
+      <Grid size={{ xs: 12, md: 3 }} />
+      <Grid size={{ xs: 12, md: 6 }}>
         <Paper style={{ padding: '15px' }}>
           <UserCard
             pictureUrl={user.picture}
@@ -131,7 +132,7 @@ const renderUserCard = (isAuthenticated: boolean, userData: any): JSX.Element =>
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={3} />
+      <Grid size={{ xs: 12, md: 3 }} />
     </>
   );
 };
@@ -143,9 +144,9 @@ const renderSilentAuthSection = (
   handleSsoCookieToggle: (enable: boolean) => void,
   classes: Record<string, string>,
   containerStyle: CSSProperties,
-): JSX.Element => {
+): React.JSX.Element => {
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  let ssoToggleContent: JSX.Element = (<></>);
+  let ssoToggleContent: React.JSX.Element = (<></>);
   if (ALLOW_SSO_TOGGLE) {
     ssoToggleContent = (
       <ExampleBlock>
@@ -164,11 +165,11 @@ const renderSilentAuthSection = (
       </ExampleBlock>
     );
   }
-  let silentAuthExampleContent: JSX.Element = (
+  let silentAuthExampleContent: React.JSX.Element = (
     <>
       <ExampleBlock>
-        <Grid container spacing={1}>
-          <Grid item xs={12} style={containerStyle}>
+        <Grid container spacing={1} style={{ width: '100%' }}>
+          <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
                 loginPath={NeonEnvironment.getFullAuthPath('login')}
@@ -237,8 +238,8 @@ export default function StyleGuide() {
         userData,
       },
     },
-  ] = NeonContext.useNeonContextState();
-  const classes = useStyles(Theme);
+  ] = NeonAuthContext.useNeonAuthContextState();
+  const { classes } = useStyles();
   const hasSsoCookie: boolean = (document.cookie.indexOf(NEON_SSO_COOKIE_NAME) >= 0);
   const [ssoCookieEnabled, setSsoCookieEnabled] = React.useState(hasSsoCookie);
   const handleSsoCookieToggle = (enable: boolean): void => {
@@ -279,8 +280,8 @@ import NeonAuth from 'portal-core-components/lib/components/NeonAuth';
         flow for each action respectively.
       </DocBlock>
       <ExampleBlock>
-        <Grid container spacing={1}>
-          <Grid item xs={12} style={containerStyle}>
+        <Grid container spacing={1} style={{ width: '100%' }}>
+          <Grid size={{ xs: 12 }} style={containerStyle}>
             <div style={{ alignSelf: 'center' }}>
               <NeonAuth
                 loginPath={NeonEnvironment.getFullAuthPath('login')}

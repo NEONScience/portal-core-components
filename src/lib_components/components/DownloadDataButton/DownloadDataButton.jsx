@@ -1,16 +1,16 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import DownloadIcon from '@material-ui/icons/SaveAlt';
+import Button from '@mui/material/Button';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 const DownloadDataDialog = React.lazy(() => import('../DownloadDataDialog/DownloadDataDialog'));
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
   gtmCaptureButton: {
     '& span': {
       pointerEvents: 'none',
@@ -18,13 +18,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DownloadDataButton = (props) => {
+const defaultProps = {
+  label: 'Download Data',
+};
+
+const DownloadDataButton = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     label,
     ...other
   } = props;
 
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [{ dialogOpen, productData }, dispatch] = DownloadDataContext.useDownloadDataState();
 
@@ -43,8 +48,7 @@ const DownloadDataButton = (props) => {
       <Button
         color="primary"
         variant="contained"
-        // eslint-disable-next-line react/jsx-no-bind
-        onClick={handleOpenDialog}
+        onClick={() => handleOpenDialog()}
         data-selenium="download-data-button"
         endIcon={<DownloadIcon />}
         {...gtmProps}
@@ -65,10 +69,4 @@ DownloadDataButton.propTypes = {
   label: PropTypes.string,
 };
 
-DownloadDataButton.defaultProps = {
-  label: 'Download Data',
-};
-
-const WrappedDownloadDataButton = Theme.getWrappedComponent(DownloadDataButton);
-
-export default WrappedDownloadDataButton;
+export default DownloadDataButton;

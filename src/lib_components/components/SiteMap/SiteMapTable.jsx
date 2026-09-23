@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
+import MaterialTable, { MTableToolbar, MTableFilterRow } from '@material-table/core';
 
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import SiteMapContext from './SiteMapContext';
 import {
@@ -127,8 +127,9 @@ const exportCsv = (columns = [], rows = []) => {
   }
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tableContainer: {
+    fontSize: '0.875rem',
     backgroundColor: 'white',
     overflowWrap: 'normal',
     '& table': {
@@ -139,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
       },
       '& tr.MuiTableRow-head': {
         backgroundColor: theme.palette.primary.main,
-        '& th:first-child span.MuiCheckbox-root': {
+        '& th:first-of-type span.MuiCheckbox-root': {
           margin: theme.spacing(0, 0.5),
           backgroundColor: '#ffffff88',
           '&:hover': {
@@ -147,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
           },
         },
       },
-      '& tbody tr:first-child': {
+      '& tbody tr:first-of-type': {
         backgroundColor: theme.palette.grey[50],
       },
       '& tfoot': {
@@ -190,7 +191,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarContainer: {
     backgroundColor: theme.palette.grey[50],
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4.5),
     },
     '& div.MuiToolbar-root': {
@@ -215,7 +216,7 @@ const useStyles = makeStyles((theme) => ({
     },
     // This hides all but the search input, show columns, and export buttons.
     // No other way to have material table NOT show a selection title in the toolbar.
-    '& div.MuiToolbar-root > div:not(:nth-last-child(-n+2))': {
+    '& div.MuiToolbar-root > div:not(div:nth-last-of-type(-n+2))': {
       display: 'none',
     },
   },
@@ -255,7 +256,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 1, 0, 1),
   },
   siteDetailsLink: {
-    fontSize: '80%',
+    fontSize: '0.60rem',
     fontStyle: 'italic',
     textAlign: 'center',
   },
@@ -281,7 +282,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SiteMapTable = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const tableRef = useRef(null);
 
   // Neon Context State
@@ -345,6 +346,7 @@ const SiteMapTable = () => {
   /**
     Layout Effect - Inject a second horizontal scrollbar above the table linked to the main
   */
+  const scrollbarBackgroundColor = theme.palette.grey[50];
   useLayoutEffect(() => {
     const noop = () => {};
     // This all only applies to full height table and/or split view (which behaves as full height)
@@ -366,8 +368,7 @@ const SiteMapTable = () => {
       scrollbar.appendChild(document.createElement('div'));
       scrollbar.style.overflow = 'auto';
       scrollbar.style.overflowY = 'hidden';
-      // eslint-disable-next-line prefer-destructuring
-      scrollbar.style.backgroundColor = Theme.palette.grey[50];
+      scrollbar.style.backgroundColor = scrollbarBackgroundColor;
       scrollbar.firstChild.style.width = `${tableNode.scrollWidth || 0}px`;
       scrollbar.firstChild.style.paddingTop = '1px';
       scrollbar.onscroll = () => {
@@ -400,6 +401,7 @@ const SiteMapTable = () => {
     tableRef,
     fullHeight,
     view,
+    scrollbarBackgroundColor,
   ]);
 
   if (!canRender) { return null; }
@@ -504,7 +506,7 @@ const SiteMapTable = () => {
     const visibleSites = manualLocationData.map((ml) => ml.siteCode);
     initialRows = initialRows.filter((item) => visibleSites.includes(item));
   }
-  const rows = initialRows.map((key) => locations[key]);
+  const rows = initialRows.map((key, index) => ({ ...locations[key], id: `${key}-${index}` }));
   if (selectionActive) {
     rows.forEach((row, idx) => {
       let selected = false;
@@ -559,7 +561,6 @@ const SiteMapTable = () => {
         const bName = siteB.description;
         return aName > bName ? -1 : 1;
       },
-      // eslint-disable-next-line arrow-body-style
       render: (row) => {
         const site = getSite(row);
         if (!site) { return null; }
@@ -692,6 +693,9 @@ const SiteMapTable = () => {
       sorting: false,
       filtering: false,
       searchable: false,
+      headerStyle: {
+        fontSize: '0.7rem',
+      },
       render: (row) => {
         const { latitude: rowLatitude, longitude: rowLongitude } = row;
         const latitude = Number.isFinite(rowLatitude) ? rowLatitude.toFixed(5) : null;
@@ -946,11 +950,10 @@ const SiteMapTable = () => {
           if (!Array.isArray(samplingModules)) { return renderCaptionString(); }
           return (
             <Tooltip
-              interactive
               placement="left"
               title={
                 samplingModules.length ? (
-                  <ul style={{ marginLeft: Theme.spacing(-1) }}>
+                  <ul style={{ marginLeft: theme.spacing(-1) }}>
                     {samplingModules.map((m) => (
                       <li key={m}>{PLOT_SAMPLING_MODULES[m]}</li>
                     ))}
@@ -997,7 +1000,7 @@ const SiteMapTable = () => {
     FilterRow: (filterRowProps) => (
       <MTableFilterRow
         {...filterRowProps}
-        filterCellStyle={{ padding: '8px', backgroundColor: Theme.palette.grey[50] }}
+        filterCellStyle={{ padding: '8px', backgroundColor: theme.palette.grey[50] }}
       />
     ),
   };
@@ -1006,7 +1009,8 @@ const SiteMapTable = () => {
       searchPlaceholder: `Search ${focus.toLowerCase()} in view`,
     },
     body: {
-      emptyDataSourceMessage: `No ${focus.toLowerCase()} in current map view match the current filters.`,
+      emptyDataSourceMessage: `No ${focus.toLowerCase()} `
+        + 'in current map view match the current filters.',
     },
   };
 
@@ -1020,13 +1024,16 @@ const SiteMapTable = () => {
     headerStyle: {
       position: 'sticky',
       top: 0,
-      backgroundColor: Theme.palette.grey[50],
+      backgroundColor: theme.palette.grey[50],
+      zIndex: 10,
     },
     pageSize: 100,
     pageSizeOptions: [100, 200, 500],
-    exportButton: { csv: true },
-    exportCsv,
-    exportFileName: EXPORT_FILENAME,
+    exportAllData: true,
+    exportMenu: [{
+      label: 'Export CSV',
+      exportFunc: (cols, datas) => exportCsv(cols, datas),
+    }],
     emptyRowsWhenPaging: false,
     thirdSortClick: false,
     rowStyle: (row) => {
@@ -1042,7 +1049,7 @@ const SiteMapTable = () => {
     },
     selection: selectionActive,
     selectionProps: !selectionActive ? null : (row) => ({
-      style: { margin: Theme.spacing(0, 0.5) },
+      style: { margin: theme.spacing(0, 0.5) },
       disabled: !rowIsSelectable(row),
     }),
   };

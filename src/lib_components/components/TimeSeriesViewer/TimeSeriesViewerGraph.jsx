@@ -18,21 +18,21 @@ import cloneDeep from 'lodash/cloneDeep';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 
-import ImageIcon from '@material-ui/icons/Image';
-import ShowIcon from '@material-ui/icons/Visibility';
-import HideIcon from '@material-ui/icons/VisibilityOff';
+import ImageIcon from '@mui/icons-material/Image';
+import ShowIcon from '@mui/icons-material/Visibility';
+import HideIcon from '@mui/icons-material/VisibilityOff';
 
 import generateTimeSeriesGraphData from '../../workers/generateTimeSeriesGraphData';
 
 import DataProductCitation from '../Citation/DataProductCitation';
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
@@ -40,10 +40,10 @@ import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 // Load Dygraph plugins. These are not built as modules and require a global Dygraph instance. =(
 if (!window.Dygraph) { window.Dygraph = Dygraph; }
-// eslint-disable-next-line import/extensions
-require('dygraphs/src/extras/shapes.js');
-// eslint-disable-next-line import/extensions
-require('dygraphs/src/extras/crosshair.js');
+// eslint-disable-next-line import/extensions, import/first
+import 'dygraphs/src/extras/shapes.js';
+// eslint-disable-next-line import/extensions, import/first
+import 'dygraphs/src/extras/crosshair.js';
 
 const SERIES_COLORS = [
   '#4e79a7',
@@ -73,14 +73,14 @@ const QUALITY_COLORS = [
   '#ffed6f',
 ];
 
-const BASE_GRAPH_OPTIONS = {
+const getBaseGraphOptions = (theme) => ({
   includeZero: true,
   labelsUTC: true,
   labelsKMB: false,
   showRangeSelector: true,
   interactionModel: Dygraph.defaultInteractionModel,
   connectSeparatedPoints: false,
-  rangeSelectorPlotFillColor: Theme.palette.secondary.light,
+  rangeSelectorPlotFillColor: theme.palette.secondary.light,
   animatedZooms: false,
   colors: SERIES_COLORS,
   highlightCircleSize: 3,
@@ -95,9 +95,9 @@ const BASE_GRAPH_OPTIONS = {
   plugins: [
     new Dygraph.Plugins.Crosshair({ direction: 'vertical' }),
   ],
-};
+});
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   graphOuterContainer: {
     backgroundColor: '#ffffff',
     padding: theme.spacing(2),
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   graphInnerContainer: {
     display: 'flex',
     alignItems: 'flex-start',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexWrap: 'wrap',
     },
   },
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '320px',
     flexGrow: 1,
     width: '50%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -134,13 +134,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   citationContainer: {
-    marginTop: Theme.spacing(2),
+    marginTop: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   citation: {
-    color: Theme.palette.grey[400],
+    color: theme.palette.grey[400],
   },
   title: {
     textAlign: 'center',
@@ -153,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
   legendDiv: {
     flexShrink: 0,
     marginLeft: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
       marginTop: theme.spacing(2),
     },
@@ -166,6 +166,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.grey[50],
+    border: `1px solid ${theme.palette.grey[200]}`,
+    borderRadius: '4px',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#fff',
@@ -175,6 +177,8 @@ const useStyles = makeStyles((theme) => ({
   legendSeriesActive: {
     backgroundColor: '#fff',
     borderColor: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
   },
   legendSeriesX: {
     whiteSpace: 'nowrap',
@@ -182,7 +186,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     padding: theme.spacing(1),
     backgroundColor: '#fff',
-    borderColor: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
   },
   legendSeriesColor: {
     width: theme.spacing(3),
@@ -259,7 +264,7 @@ const graphReducer = (state, action) => {
 };
 
 export default function TimeSeriesViewerGraph() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const [graphState, graphDispatch] = useReducer(graphReducer, cloneDeep(INITIAL_GRAPH_STATE));
   const downloadRef = useRef(null);
@@ -269,7 +274,7 @@ export default function TimeSeriesViewerGraph() {
   const legendRef = useRef(null);
   const axisCountRef = useRef(1);
   const axisCountChangedRef = useRef(false);
-  const belowSm = useMediaQuery(Theme.breakpoints.down('sm'));
+  const belowSm = useMediaQuery(theme.breakpoints.down('md'));
   const {
     selectionDigest,
     logscale,
@@ -278,8 +283,7 @@ export default function TimeSeriesViewerGraph() {
     yAxes,
   } = state.selection;
 
-  // let data = cloneDeep(NULL_DATA);
-  let graphOptions = cloneDeep(BASE_GRAPH_OPTIONS);
+  let graphOptions = cloneDeep(getBaseGraphOptions(theme));
 
   // Build the axes option
   const buildAxesOption = (axes = []) => {
@@ -383,29 +387,32 @@ export default function TimeSeriesViewerGraph() {
         : classes.legendSeries;
       const seriesStyle = {};
       if (isHidden) { seriesStyle.opacity = 0.5; }
-      const colorStyle = { backgroundColor: s.color || Theme.palette.grey[200] };
+      const colorStyle = { backgroundColor: s.color || theme.palette.grey[200] };
       if (s.isHighlighted) { colorStyle.height = '6px'; }
       return (
         <Card
           variant="outlined"
-          className={className}
           key={s.label}
           style={seriesStyle}
-          data-label={s.label}
-          data-kind="series"
           title={`Click to ${isHidden ? 'show' : 'hide'} this series`}
         >
-          <div className={classes.legendSeriesColor} style={colorStyle} />
-          <div className={classes.legendSeriesLabel}>
-            {s.label}
-            <br />
-            {yUnits}
-            {!belowSm || !s.isHighlighted ? null : (
-              <>
-                <br />
-                {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
-              </>
-            )}
+          <div
+            className={className}
+            data-label={s.label}
+            data-kind="series"
+          >
+            <div className={classes.legendSeriesColor} style={colorStyle} />
+            <div className={classes.legendSeriesLabel}>
+              {s.label}
+              <br />
+              {yUnits}
+              {!belowSm || !s.isHighlighted ? null : (
+                <>
+                  <br />
+                  {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+                </>
+              )}
+            </div>
           </div>
         </Card>
       );
@@ -420,7 +427,7 @@ export default function TimeSeriesViewerGraph() {
         const isHighlighted = graphData.series.some((s) => (
           s.isHighlighted && s.label.includes(qualityLabel)
         ));
-        const qualityStyle = isHighlighted ? { backgroundColor: Theme.palette.grey[100] } : {};
+        const qualityStyle = isHighlighted ? { backgroundColor: theme.palette.grey[100] } : {};
         if (isHidden) { qualityStyle.opacity = 0.5; }
         const colorStyle = { backgroundColor: QUALITY_COLORS[qlIdx % 12] };
         return (
@@ -456,8 +463,10 @@ export default function TimeSeriesViewerGraph() {
     let dateLegend = null;
     if (graphData.x && !belowSm) {
       dateLegend = (
-        <Card variant="outlined" className={classes.legendSeriesX}>
-          {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+        <Card variant="outlined">
+          <div className={classes.legendSeriesX}>
+            {moment.utc(graphData.x).format('YYYY-MM-DD HH:mm:ss')}
+          </div>
         </Card>
       );
     }
@@ -484,7 +493,8 @@ export default function TimeSeriesViewerGraph() {
       for (let c = 2; c < row.length; c += 1) {
         if (!graphState.hiddenQualityFlags.has(qualityLabels[c])) {
           if (row[c] && row[c].some((v) => v !== 0 && v !== null)) {
-            canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12]; // eslint-disable-line no-param-reassign, max-len
+            // eslint-disable-next-line no-param-reassign
+            canvas.fillStyle = QUALITY_COLORS[(c - 2) % 12];
             canvas.fillRect(startX, y, endX - startX, h);
           }
           y += h;
@@ -517,7 +527,9 @@ export default function TimeSeriesViewerGraph() {
       dispatch({ type: 'regenerateGraphData', graphData });
     });
   });
-
+  // Disabling this rule as we are using refs to track state about
+  // and interact with Dygraphs, which is managed outside of React
+  /* eslint-disable react-hooks/refs */
   if (state.status === TIME_SERIES_VIEWER_STATUS.READY) {
     // Determine the set of axes and their units
     const previousAxisCount = axisCountRef.current;
@@ -532,7 +544,7 @@ export default function TimeSeriesViewerGraph() {
     // Build graphOptions
     const { series, labels } = state.graphData;
     graphOptions = {
-      ...cloneDeep(BASE_GRAPH_OPTIONS),
+      ...cloneDeep(getBaseGraphOptions(theme)),
       labels,
       axes: buildAxesOption(axes),
       series: buildSeriesOption(axes),
@@ -550,6 +562,7 @@ export default function TimeSeriesViewerGraph() {
       graphOptions[`${axis.axis}label`] = axis.units;
     });
   }
+  /* eslint-enable react-hooks/refs */
 
   // Callback to refresh graph dimensions for current DOM
   const handleResize = useCallback(() => {
@@ -652,6 +665,9 @@ export default function TimeSeriesViewerGraph() {
     selectionDigest,
     state.status,
     state.graphData.data,
+    // Disabling this rule as we are using refs to track state about
+    // and interact with Dygraphs, which is managed outside of React
+    // eslint-disable-next-line react-hooks/refs
     graphOptions,
     dygraphRef,
     handleResize,
@@ -703,7 +719,10 @@ export default function TimeSeriesViewerGraph() {
     domtoimage.toBlob(downloadRef.current)
       .then((blob) => {
         const siteCodes = state.selection.sites.map((site) => site.siteCode).join(' ');
-        const fileName = `NEON Time Series - ${state.product.productCode} - ${state.product.productName} - ${siteCodes}.png`;
+        const fileName = 'NEON Time Series '
+          + `- ${state.product.productCode} `
+          + `- ${state.product.productName} `
+          + `- ${siteCodes}.png`;
         saveAs(blob, fileName);
       })
       .catch((error) => {
@@ -713,6 +732,9 @@ export default function TimeSeriesViewerGraph() {
   const getPngDimensions = () => (
     `${graphState.pngDimensions[0] || '?'}px x ${graphState.pngDimensions[1] || '?'}px`
   );
+  // Disabling this rule as we are using refs to track state about
+  // the DOM directly outside of react for image download support
+  /* eslint-disable react-hooks/refs */
   const downloadImageButton = (
     <Button
       size="small"
@@ -721,12 +743,13 @@ export default function TimeSeriesViewerGraph() {
       onClick={exportGraphImage}
       disabled={downloadRef.current === null}
       title={`Download current graph as a PNG (${getPngDimensions()})`}
-      style={{ whiteSpace: 'nowrap', marginRight: Theme.spacing(1.5) }}
+      style={{ whiteSpace: 'nowrap', marginRight: theme.spacing(1.5) }}
       startIcon={<ImageIcon />}
     >
       Download Image (png)
     </Button>
   );
+  /* eslint-enable react-hooks/refs */
 
   // Toggle Series Visibility Button
   const { series } = state.graphData;
@@ -742,7 +765,7 @@ export default function TimeSeriesViewerGraph() {
       title="Toggle Visibility for All Series"
       onClick={toggleSeriesVisibility}
       disabled={series.length === 0}
-      style={{ whiteSpace: 'nowrap', marginLeft: Theme.spacing(1.5) }}
+      style={{ whiteSpace: 'nowrap', marginLeft: theme.spacing(1.5) }}
       startIcon={graphState.hiddenSeries.size ? <ShowIcon /> : <HideIcon />}
     >
       {graphState.hiddenSeries.size ? (
@@ -799,17 +822,17 @@ export default function TimeSeriesViewerGraph() {
             title="NEON"
             alt="NEON Logo"
             className={classes.neonLogo}
-            src={NeonLogo}
+            src={NeonLogo.src}
           />
           {renderCitation()}
         </div>
       </div>
       <div className={classes.buttonsOuterContainer}>
         <div className={classes.buttonsInnerContainer}>
-          <div style={{ marginTop: Theme.spacing(1.5) }}>
+          <div style={{ marginTop: theme.spacing(1.5) }}>
             {downloadImageButton}
           </div>
-          <div style={{ marginTop: Theme.spacing(1.5), textAlign: 'right' }}>
+          <div style={{ marginTop: theme.spacing(1.5), textAlign: 'right' }}>
             {toggleQualityFlagsVisibilityButton}
             {toggleSeriesVisibilityButton}
           </div>

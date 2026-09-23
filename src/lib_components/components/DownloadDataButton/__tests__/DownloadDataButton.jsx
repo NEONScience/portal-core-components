@@ -1,9 +1,12 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React, { act } from 'react';
+import { render } from '@testing-library/react';
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
+import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 import DownloadDataButton from '../DownloadDataButton';
 
+jest.mock('@material-table/core', () => mockReactComponent('@material-table/core'));
 jest.mock('../../DownloadDataContext/DownloadDataContext', () => ({
   ...(jest.requireActual('../../DownloadDataContext/DownloadDataContext').default),
   useDownloadDataState: jest.fn(),
@@ -19,14 +22,12 @@ describe('DownloadDataButton', () => {
     }]);
   });
   test('Renders correctly with only a label', () => {
-    const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
-      .toJSON();
+    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
   test('Preserves MUI button props', () => {
-    const tree = renderer
-      .create((
+    const tree = render(
+      <MockTheme>
         <DownloadDataButton
           label="foo"
           size="large"
@@ -34,19 +35,20 @@ describe('DownloadDataButton', () => {
           variant="outlined"
           data-selenium="download"
         />
-      ))
-      .toJSON();
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
-  test('Renders with the dialog open from context state', () => {
+  test('Renders with the dialog open from context state', async () => {
     useDownloadDataState.mockReset();
     useDownloadDataState.mockReturnValue([{
       ...DEFAULT_STATE,
       dialogOpen: true,
     }]);
-    const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
-      .toJSON();
+    let tree;
+    await act(async () => {
+      tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
+    });
     expect(tree).toMatchSnapshot();
   });
   test('Automatically includes data-gtm props from product in context state', () => {
@@ -57,9 +59,7 @@ describe('DownloadDataButton', () => {
         productCode: 'DPX.XXXXX.XXX',
       },
     }]);
-    const tree = renderer
-      .create(<DownloadDataButton label="foo" />)
-      .toJSON();
+    const tree = render(<MockTheme><DownloadDataButton label="foo" /></MockTheme>);
     expect(tree).toMatchSnapshot();
   });
 });

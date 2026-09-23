@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce';
 import { exists, isStringNonEmpty } from '../util/typeUtil';
 
 const debouncedGaExploreSearchEvent = debounce((searchTerm: string): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window.gtmDataLayer.push({
     event: 'explore_data_products_search',
@@ -11,6 +12,7 @@ const debouncedGaExploreSearchEvent = debounce((searchTerm: string): void => {
 }, 1000);
 
 const debouncedGaPrototypeDataSearchEvent = debounce((searchTerm: string): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window.gtmDataLayer.push({
     event: 'prototype_data_search',
@@ -19,6 +21,7 @@ const debouncedGaPrototypeDataSearchEvent = debounce((searchTerm: string): void 
 }, 1000);
 
 const gaPortalHomeSearchEvent = (searchTerm: string): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window.gtmDataLayer.push({
     event: 'portal_home_search',
@@ -47,6 +50,7 @@ export interface IAnalyticsService {
 }
 
 const checkValid = (searchTerm: string): boolean => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   if (!exists(window.gtmDataLayer)) {
     return false;

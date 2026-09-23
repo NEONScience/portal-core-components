@@ -1,30 +1,20 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
 import BaseCard, { CardType, BaseCardProps } from './BaseCard';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
-import { StylesHook } from '../../types/muiTypes';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    callout: {
-      margin: muiTheme.spacing(0.5, 0, 3, 0),
-      backgroundColor: (Theme as NeonTheme).colors.BROWN[50],
-      borderColor: (Theme as NeonTheme).colors.BROWN[300],
-    },
-    calloutIcon: {
-      color: (Theme as NeonTheme).colors.BROWN[300],
-      marginRight: muiTheme.spacing(2),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((theme: NeonTheme) => ({
+  callout: {
+    margin: theme.spacing(0.5, 0, 3, 0),
+    backgroundColor: theme.colors.BROWN[50],
+    borderColor: theme.colors.BROWN[300],
+  },
+  calloutIcon: {
+    color: theme.colors.BROWN[300],
+    marginRight: theme.spacing(2),
+  },
+}));
 
 interface WarningCardClasses {
   callout?: string;
@@ -36,8 +26,8 @@ type WarningCardProps = BaseWarningCardProps & {
   classes?: WarningCardClasses;
 };
 
-const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const WarningCard: React.FC<WarningCardProps> = (props: WarningCardProps): React.JSX.Element => {
+  const { classes } = useStyles();
   const { classes: calloutClasses }: WarningCardProps = props;
   const injectedCallout: string|undefined = calloutClasses
     ? calloutClasses.callout

@@ -1,46 +1,42 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React, { useEffect, useReducer, useState } from 'react';
 
 import { of, map, catchError } from 'rxjs';
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Skeleton from '@mui/material/Skeleton';
+import Typography from '@mui/material/Typography';
+
+import DialogBase from '@/components/DialogBase/DialogBase';
+import NeonApi from '@/components/NeonApi';
+import NeonGraphQL from '@/components/NeonGraphQL/NeonGraphQL';
+import NeonContext from '@/components/NeonContext/NeonContext';
+import ReleaseFilter from '@/components/ReleaseFilter/ReleaseFilter';
+
+import BundleService from '@/service/BundleService';
+import parseTimeSeriesData from '@/workers/parseTimeSeriesData';
+import timeSeriesDataProductsJSON from '@/staticJSON/timeSeriesDataProducts.json';
+
+import TimeSeriesViewerContext from '@/components/TimeSeriesViewer/TimeSeriesViewerContext';
+import TimeSeriesViewer from '@/components/TimeSeriesViewer/TimeSeriesViewer';
+import TimeSeriesViewerContainer from '@/components/TimeSeriesViewer/TimeSeriesViewerContainer';
+
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import DialogBase from '../DialogBase/DialogBase';
-import NeonApi from '../NeonApi';
-import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
-import NeonContext from '../NeonContext/NeonContext';
-import ReleaseFilter from '../ReleaseFilter/ReleaseFilter';
-import Theme from '../Theme/Theme';
-
-import BundleService from '../../service/BundleService';
-
-import TimeSeriesViewerContext from './TimeSeriesViewerContext';
-import TimeSeriesViewer from './TimeSeriesViewer';
-import TimeSeriesViewerContainer from './TimeSeriesViewerContainer';
-
-import parseTimeSeriesData from '../../workers/parseTimeSeriesData';
-
-import timeSeriesDataProductsJSON from '../../staticJSON/timeSeriesDataProducts.json';
-
 import DP1_00001_001_ABBY_BASIC_30MIN_2018_12 from '../../../sampleData/TimeSeries/D16.ABBY.DP1.00001.001.2018-12.30min.basic';
 
 import productJSON from '../../../sampleData/DP1.00001.001.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -178,7 +174,7 @@ const AllProductsTimeSeries = () => {
   if (isLoading) {
     return (
       <div>
-        <Skeleton variant="rect" width="100%" height={800} />
+        <Skeleton variant="rectangular" width="100%" height={800} />
       </div>
     );
   }
@@ -203,7 +199,7 @@ const AllProductsTimeSeries = () => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h6" id="all-products-time-series-select-label" gutterBottom>
             Select Data Product
           </Typography>
@@ -225,7 +221,7 @@ const AllProductsTimeSeries = () => {
             })}
           </Select>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ReleaseFilter
             showGenerationDate
             showProductCount
@@ -234,7 +230,7 @@ const AllProductsTimeSeries = () => {
             onChange={handleReleaseChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TimeSeriesViewer
             productCode={state.selectedProduct}
             release={state.selectedRelease}
@@ -303,7 +299,7 @@ const StaticTimeSeriesViewer = () => {
 };
 
 const StaticTimeSeriesViewerDialog = () => {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -315,7 +311,7 @@ const StaticTimeSeriesViewerDialog = () => {
       </DocBlock>
       <CodeBlock>
         {`
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import DialogBase from '../DialogBase/DialogBase';
 import TimeSeriesViewerContext from 'portal-core-components/lib/components/TimeSeriesViewerContext/TimeSeriesViewerContext';
 import TimeSeriesViewerContainer from 'portal-core-components/lib/components/TimeSeriesViewerContainer/TimeSeriesViewerContainer';
@@ -384,7 +380,7 @@ return (
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   return (
     <>

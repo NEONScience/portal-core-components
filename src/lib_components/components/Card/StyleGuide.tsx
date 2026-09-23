@@ -1,39 +1,37 @@
 import React from 'react';
 
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
-import ReleaseIconOutlined from '@material-ui/icons/LocalOfferOutlined';
+import ReleaseIconOutlined from '@mui/icons-material/LocalOfferOutlined';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked, faTag } from '@fortawesome/free-solid-svg-icons';
+
+import NeonAuthContext from '@/components/NeonContext/NeonAuthContext';
+import InfoCard from '@/components/Card/InfoCard';
+import WarningCard from '@/components/Card/WarningCard';
+import ErrorCard from '@/components/Card/ErrorCard';
+import InfoMessageCard from '@/components/Card/InfoMessageCard';
+import LoginRequiredCard from '@/components/Card/LoginRequiredCard';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { NeonTheme } from '@/components/Theme/types';
+import { exists } from '@/util/typeUtil';
 
 import CodeBlock from '../../../components/CodeBlock';
 import DocBlock from '../../../components/DocBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 import PropsTable from '../../../components/PropsTable';
 
-import NeonContext from '../NeonContext/NeonContext';
-import InfoCard from './InfoCard';
-import WarningCard from './WarningCard';
-import ErrorCard from './ErrorCard';
-import InfoMessageCard from './InfoMessageCard';
-import LoginRequiredCard from './LoginRequiredCard';
-import Theme from '../Theme/Theme';
-
-import { NeonTheme } from '../Theme/types';
-import { exists } from '../../util/typeUtil';
-
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
   paper: {
     width: '100%',
-    padding: Theme.spacing(3),
+    padding: theme.spacing(3),
   },
   customReleaseIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
@@ -107,21 +105,21 @@ const propRows = [
 ];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
+  const { classes } = useStyles();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
   const [
     {
       auth: {
         userData,
       },
     },
-  ] = NeonContext.useNeonContextState();
+  ] = NeonAuthContext.useNeonAuthContextState();
   const hasUserData = (exists(userData) && exists(userData.data) && exists(userData.data.user));
   const appliedEmailVerified = hasUserData
     ? userData.data.user.emailVerified === true
     : false;
-  /* eslint-disable jsx-a11y/anchor-is-valid, react/jsx-one-expression-per-line */
   const link = (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link href="#">
       Insert Link Here
     </Link>
@@ -138,7 +136,6 @@ Lorem in proin in nunc in cras et gravida. Urna congue neque risus risus a
 lectus veneatis sed gravida volutpat viverra. Aenean sem tellus at proin dictum
 scelerisque metus. Sit sit tellus risus diam ultrices amet tortor molestie scelerisque.
   `;
-  /* eslint-enable jsx-a11y/anchor-is-valid, react/jsx-one-expression-per-line */
   return (
     <>
       <DocBlock>
@@ -303,9 +300,9 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
         <Paper className={classes.paper}>
           <LoginRequiredCard
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
-            accountValidationSteps={neonContextSessionState.accountValidationSteps}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
+            accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
           />
         </Paper>
       </ExampleBlock>
@@ -324,8 +321,8 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
           />
           <LoginRequiredCard
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
             accountValidationSteps={[
               { step: 'verify-email', completed: appliedEmailVerified },
               { step: 'another-step', completed: false },
@@ -334,8 +331,8 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
           <LoginRequiredCard
             customTitle="Custom Title for Card"
             showValidation
-            isAuthenticated={neonContextSessionState.authenticated}
-            accountValidated={neonContextSessionState.accountValidated}
+            isAuthenticated={neonAuthContextSessionState.authenticated}
+            accountValidated={neonAuthContextSessionState.accountValidated}
             accountValidationSteps={[
               { step: 'verify-email', completed: appliedEmailVerified },
               { step: 'another-step', completed: false },
@@ -344,7 +341,7 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
               'verify-email': {
                 displayLabel: 'Custom verify email display label',
                 // eslint-disable-next-line react/no-unstable-nested-components
-                getContents: (completed: boolean): JSX.Element => {
+                getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
                   if (!completed) {
                     return (
                       <div>
@@ -364,7 +361,7 @@ import LoginRequiredCard from 'portal-core-components/lib/components/Card/LoginR
               'another-step': {
                 displayLabel: 'Custom another-step display label',
                 // eslint-disable-next-line react/no-unstable-nested-components
-                getContents: (completed: boolean): JSX.Element => {
+                getContents: (theme: NeonTheme, completed: boolean): React.JSX.Element => {
                   if (!completed) {
                     return (
                       <div>

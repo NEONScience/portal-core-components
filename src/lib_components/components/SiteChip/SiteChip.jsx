@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import PlaceIcon from '@material-ui/icons/Place';
-import DeleteIcon from '@material-ui/icons/Cancel';
+import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
+import PlaceIcon from '@mui/icons-material/Place';
+import DeleteIcon from '@mui/icons-material/Cancel';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   avatarLarge: {
     '& svg': {
       height: theme.spacing(3),
@@ -17,21 +16,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useChipStyles = makeStyles((theme) => ({
+const useChipStyles = makeStyles()((theme) => ({
   outlined: {
     color: theme.palette.grey.A200,
+    borderColor: 'unset',
   },
-  outlinedPrimary: {
+  colorPrimary: {
     color: theme.palette.primary.main,
   },
-  outlinedSecondary: {
+  colorSecondary: {
     color: theme.palette.secondary.main,
+  },
+  label: {
+    fontWeight: 400,
   },
 }));
 
 const SiteChip = (props) => {
-  const classes = useStyles(Theme);
-  const chipClasses = useChipStyles(Theme);
+  const { classes, theme } = useStyles();
+  const { classes: chipClasses } = useChipStyles();
   const { label, ...otherProps } = props;
 
   // Default optional props
@@ -39,6 +42,13 @@ const SiteChip = (props) => {
   if (!otherProps.variant) { otherProps.variant = 'outlined'; }
   if (!otherProps.size) { otherProps.size = 'small'; }
   if (!otherProps['data-selenium']) { otherProps['data-selenium'] = 'site-chip'; }
+
+  // Backwards compatible with MUI v4
+  const chipStyle = {};
+  if (otherProps.variant === 'default') {
+    otherProps.variant = 'filled';
+    chipStyle.color = '#fff';
+  }
 
   /*
     Avatar style overrides
@@ -55,7 +65,7 @@ const SiteChip = (props) => {
     marginLeft: '0px',
   };
   if (['primary', 'secondary'].includes(otherProps.color)) {
-    avatarStyle.backgroundColor = Theme.palette[otherProps.color].main;
+    avatarStyle.backgroundColor = theme.palette[otherProps.color].main;
   }
   if (otherProps.size === 'small') {
     avatarStyle.width = '24px';
@@ -67,11 +77,16 @@ const SiteChip = (props) => {
     There is also 'large' size despite having a small and medium, and we have
     use cases for large (see DataProductAvailability).
   */
-  const chipStyle = {};
+  if (otherProps.variant === 'outlined') {
+    chipStyle.backgroundColor = 'transparent';
+  } else if ((otherProps.variant === 'filled') && (otherProps.color === 'secondary')) {
+    chipStyle.backgroundColor = theme.palette.secondary.main;
+  } else if ((otherProps.variant === 'filled') && (otherProps.color === 'primary')) {
+    chipStyle.backgroundColor = theme.palette.primary.main;
+  }
   const deleteIconStyle = {};
   let avatarClass = null;
   if (otherProps.size === 'large') {
-    otherProps.size = null; // to prevent a PropTypes error in Mui/Chip
     avatarClass = classes.avatarLarge;
     chipStyle.fontSize = '1rem';
     chipStyle.borderRadius = '20px';
@@ -99,6 +114,4 @@ SiteChip.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const WrappedSiteChip = Theme.getWrappedComponent(SiteChip);
-
-export default WrappedSiteChip;
+export default SiteChip;

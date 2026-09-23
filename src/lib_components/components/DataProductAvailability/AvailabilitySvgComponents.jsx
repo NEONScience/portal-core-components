@@ -1,16 +1,20 @@
-/* eslint-disable import/prefer-default-export, max-len */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
+
+const diagLinesPatternDefaultProps = {
+  secondaryColor: '#ffffff',
+};
 
 /**
    SVG_DEFS
 */
-const DiagLinesPattern = (props) => {
+const DiagLinesPattern = (inProps) => {
+  const props = resolveProps(diagLinesPatternDefaultProps, inProps);
   const { id, color, secondaryColor } = props;
   const width = SVG.CELL_WIDTH;
   const height = SVG.CELL_HEIGHT / 4;
@@ -23,7 +27,13 @@ const DiagLinesPattern = (props) => {
       patternTransform="rotate(45)"
     >
       <rect x={0} y={0} width={width} height={(height / 2) - 0.25} fill={color} />
-      <rect x={0} y={(height / 2) - 0.25} width={width} height={(height / 2) + 0.25} fill={secondaryColor} />
+      <rect
+        x={0}
+        y={(height / 2) - 0.25}
+        width={width}
+        height={(height / 2) + 0.25}
+        fill={secondaryColor}
+      />
     </pattern>
   );
 };
@@ -32,10 +42,12 @@ DiagLinesPattern.propTypes = {
   color: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string,
 };
-DiagLinesPattern.defaultProps = {
+
+const halfAndHalfPatternDefaultProps = {
   secondaryColor: '#ffffff',
 };
-const HalfAndHalfPattern = (props) => {
+const HalfAndHalfPattern = (inProps) => {
+  const props = resolveProps(halfAndHalfPatternDefaultProps, inProps);
   const { id, color, secondaryColor } = props;
   return (
     <pattern
@@ -54,10 +66,12 @@ HalfAndHalfPattern.propTypes = {
   color: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string,
 };
-HalfAndHalfPattern.defaultProps = {
-  secondaryColor: '#ffffff',
+
+const diagHalfAndHalfPatternDefaultProps = {
+  secondaryDiagColor: '#ffffff',
 };
-const DiagHalfAndHalfPattern = (props) => {
+const DiagHalfAndHalfPattern = (inProps) => {
+  const props = resolveProps(diagHalfAndHalfPatternDefaultProps, inProps);
   const {
     id,
     color,
@@ -177,14 +191,15 @@ DiagHalfAndHalfPattern.propTypes = {
   diagColorFillOpacity: PropTypes.number.isRequired,
   secondaryDiagColor: PropTypes.string,
 };
-DiagHalfAndHalfPattern.defaultProps = {
-  secondaryDiagColor: '#ffffff',
-};
 
 export const SvgDefs = () => (
   <svg width="0px" height="0px">
     <defs>
-      <DiagLinesPattern id="availableProvisionalPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.NEON_BLUE[50]} />
+      <DiagLinesPattern
+        id="availableProvisionalPattern"
+        color={COLORS.NEON_BLUE[700]}
+        secondaryColor={COLORS.NEON_BLUE[50]}
+      />
       <DiagHalfAndHalfPattern
         id="mixedAvailableProvisionalPattern"
         color={COLORS.NEON_BLUE[700]}
@@ -194,9 +209,21 @@ export const SvgDefs = () => (
       />
       <DiagLinesPattern id="beingProcessedPattern" color={COLORS.NEON_BLUE[700]} />
       <DiagLinesPattern id="delayedPattern" color={COLORS.GOLD[400]} />
-      <DiagLinesPattern id="partialSelectionPattern" color={COLORS.LIGHT_BLUE[300]} secondaryColor={COLORS.LIGHT_BLUE[100]} />
-      <HalfAndHalfPattern id="mixedSomeAvailabilityPattern" color={COLORS.NEON_BLUE[700]} secondaryColor={COLORS.GOLD[400]} />
-      <HalfAndHalfPattern id="mixedNoAvailabilityPattern" color={Theme.palette.grey[200]} secondaryColor={COLORS.GOLD[400]} />
+      <DiagLinesPattern
+        id="partialSelectionPattern"
+        color={COLORS.LIGHT_BLUE[300]}
+        secondaryColor={COLORS.LIGHT_BLUE[100]}
+      />
+      <HalfAndHalfPattern
+        id="mixedSomeAvailabilityPattern"
+        color={COLORS.NEON_BLUE[700]}
+        secondaryColor={COLORS.GOLD[400]}
+      />
+      <HalfAndHalfPattern
+        id="mixedNoAvailabilityPattern"
+        color={COLORS.GREY[200]}
+        secondaryColor={COLORS.GOLD[400]}
+      />
     </defs>
   </svg>
 );
@@ -249,7 +276,7 @@ export const CELL_ATTRS = {
     ...thinStrokeAttrs,
   },
   'not available': {
-    fill: Theme.palette.grey[200],
+    fill: COLORS.GREY[200],
     ...noStrokeAttrs,
   },
   tombstoned: {
@@ -257,7 +284,7 @@ export const CELL_ATTRS = {
     // #5A6673 darker slate gray
     // #727C8C more modified hue towards gray
     // #272727 greyscale of available blue color (rgba(39, 39, 39, 0.9))
-    // Theme.palette.grey[500]
+    // COLORS.GREY[500]
     fill: 'rgba(39, 39, 39, 0.9)',
     ...noStrokeAttrs,
   },
@@ -277,7 +304,7 @@ export const CELL_ATTRS = {
   },
   'not expected': {
     fill: '#ffffff',
-    stroke: Theme.palette.grey[200],
+    stroke: COLORS.GREY[200],
     ...fatStrokeAttrs,
   },
   'being processed': {
@@ -302,7 +329,10 @@ export const CELL_ATTRS = {
   },
 };
 
-export const JsxCell = (props) => {
+const jsxCellDefaultProps = { x: 0, y: 0 };
+
+export const JsxCell = (inProps) => {
+  const props = resolveProps(jsxCellDefaultProps, inProps);
   const { status, x, y } = props;
   const { nudge = 0, ...attrs } = CELL_ATTRS[status];
   return (
@@ -314,4 +344,3 @@ JsxCell.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
 };
-JsxCell.defaultProps = { x: 0, y: 0 };

@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser from 'html-react-parser';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
 import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
-import NeonContext, { FETCH_STATUS } from '../NeonContext/NeonContext';
+import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   footerContainer: {
     '& .footer-bottom__wrapper': {
       background: '#4B372E',
@@ -21,17 +21,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NeonFooter = (props) => {
+const defaultProps = {
+  drupalCssLoaded: false,
+  showSkeleton: false,
+};
+
+const NeonFooter = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const { drupalCssLoaded, showSkeleton } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [{
-    isActive: neonContextIsActive,
+    isActive: neonPageAssetsContextIsActive,
     fetches: { [DRUPAL_FOOTER_HTML]: footerFetch },
     html: { [DRUPAL_FOOTER_HTML]: footerHTML },
-  }] = NeonContext.useNeonContextState();
+  }] = NeonPageAssetsContext.useNeonPageAssetsContextState();
 
   let renderMode = 'legacy';
-  if (neonContextIsActive) {
+  if (neonPageAssetsContextIsActive) {
     switch (footerFetch.status) {
       case FETCH_STATUS.SUCCESS:
         renderMode = (footerHTML && drupalCssLoaded) ? 'drupal' : 'loading';
@@ -62,7 +68,7 @@ const NeonFooter = (props) => {
       }
       return (
         <footer id="footer">
-          <Skeleton variant="rect" height="300px" width="100%" />
+          <Skeleton variant="rectangular" height="300px" width="100%" />
         </footer>
       );
 
@@ -82,11 +88,6 @@ const NeonFooter = (props) => {
 NeonFooter.propTypes = {
   drupalCssLoaded: PropTypes.bool,
   showSkeleton: PropTypes.bool,
-};
-
-NeonFooter.defaultProps = {
-  drupalCssLoaded: false,
-  showSkeleton: false,
 };
 
 export default NeonFooter;

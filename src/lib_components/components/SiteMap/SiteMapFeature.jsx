@@ -2,30 +2,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import tinycolor from 'tinycolor2';
-
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import HelpIcon from '@material-ui/icons/HelpOutline';
-import ClickIcon from '@material-ui/icons/TouchApp';
-import ElevationIcon from '@material-ui/icons/Terrain';
-import ExploreDataProductsIcon from '@material-ui/icons/InsertChartOutlined';
-import LocationIcon from '@material-ui/icons/MyLocation';
-import MarkerIcon from '@material-ui/icons/Place';
-import SiteDetailsIcon from '@material-ui/icons/InfoOutlined';
-import UnselectableIcon from '@material-ui/icons/NotInterested';
+import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
+import ClickIcon from '@mui/icons-material/TouchApp';
+import ElevationIcon from '@mui/icons-material/Terrain';
+import ExploreDataProductsIcon from '@mui/icons-material/InsertChartOutlined';
+import LocationIcon from '@mui/icons-material/MyLocation';
+import MarkerIcon from '@mui/icons-material/Place';
+import SiteDetailsIcon from '@mui/icons-material/InfoOutlined';
+import UnselectableIcon from '@mui/icons-material/NotInterested';
 
-import SelectedIcon from '@material-ui/icons/DoneOutline';
-import UnselectedIcon from '@material-ui/icons/Remove';
+import SelectedIcon from '@mui/icons-material/DoneOutlined';
+import UnselectedIcon from '@mui/icons-material/Remove';
 
 import 'leaflet/dist/leaflet.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,12 +32,12 @@ import {
 
 import {
   CircleMarker,
-  Map,
   FeatureGroup,
   Marker,
   Polygon,
   Polyline,
   Popup,
+  useMap,
 } from 'react-leaflet';
 
 import SiteMapContext from './SiteMapContext';
@@ -61,10 +58,12 @@ import {
   UNSELECTABLE_MARKER_FILTER,
 } from './SiteMapUtils';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { desaturate } from '../Theme/color';
+import { makeStyles } from '../Theme/makeStyles';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   selectionSnackbar: {
     width: '100%',
     color: '#000',
@@ -125,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: theme.spacing(2),
-    '& > :not(:last-child)': {
+    '& > :not(a:last-of-type)': {
       marginRight: theme.spacing(1),
     },
   },
@@ -216,9 +215,96 @@ const checkValidPositions = (positions, checkAllCoords = false) => {
   return isCoord(positions);
 };
 
+/**
+  Util: Position Popup
+  Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
+  in view. This poses a problem when in selection mode and we want the mouseover evenr to trigger
+  the popup instead of click. We get around this by solving the same root problem (want
+  popups to render in view) in a different way... specifically by positioning them around their
+  parent element dynamcally based on which direction has the most room to render.
+*/
+const positionPopup = (
+  map,
+  target = null,
+  latlng = null,
+  hideCloseButton = false,
+  isOpening = false,
+  isOverlay = false,
+) => {
+  if (!target || !latlng || !map) { return; }
+  const { _popup: popup, _icon: icon } = target;
+  if (!popup) { return; }
+  // Render the changes in an animation frame to prevent jumping around
+  window.requestAnimationFrame(() => {
+    if (isOpening) {
+      target.openPopup();
+      if (popup._container) {
+        popup._container.classList.add('leaflet-popup-selection-visually-hidden');
+      }
+    }
+  });
+  // Wrap rendering updates in a timeout to allow leaflet to finish
+  // making changes to the popup elements and push to the UI
+  // so they do not override or conflict with our positioning updates.
+  window.setTimeout(() => {
+    window.requestAnimationFrame(() => {
+      if (!popup || !popup.isOpen()) { return; }
+      const {
+        _container: containerNode,
+        _containerLeft: containerLeft,
+        _containerBottom: containerBottom,
+        _tipContainer: tipNode,
+      } = popup;
+      popup.setLatLng(latlng);
+      const containerPoint = map.latLngToContainerPoint(latlng);
+      const iconHeight = icon ? icon.height : 0;
+      containerNode.style.marginBottom = '0px';
+      // Leaflet popups always open above; open below if mouse event is in the top half of the map
+      if (containerPoint.y < (map._container.clientHeight / 2)) {
+        const contentHeight = containerNode.clientHeight;
+        const tipHeight = tipNode.clientHeight;
+        const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
+        const tipBottom = contentHeight + tipHeight - 1;
+        const nudgeBottom = isOverlay ? 10 : 0;
+        containerNode.style.bottom = `${contentBottom - nudgeBottom}px`;
+        tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
+      } else {
+        const nudgeBottom = isOverlay ? 10 : 0;
+        containerNode.style.bottom = `${-1.5 * containerBottom + nudgeBottom}px`;
+        popup._tipContainer.style.transform = 'translate(0px, -1px)';
+      }
+      // For left/right we move the popup horizontally as needed while keeping the tip stationary
+      const contentWidth = containerNode.clientWidth;
+      const mapWidth = map._container.parentNode.clientWidth || 0;
+      const nudgeBuffer = 40;
+      const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
+      let overlap = 0;
+      if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
+        let nudge = 0;
+        if (containerPoint.x - (contentWidth / 2) < 0) {
+          overlap = containerPoint.x - (contentWidth / 2);
+          nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
+        } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
+          overlap = mapWidth - containerPoint.x - (contentWidth / 2);
+          nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
+        }
+        if (nudge !== 0) {
+          containerNode.style.left = `${containerLeft + nudge}px`;
+        }
+        tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
+      }
+      if (hideCloseButton) {
+        popup._closeButton.style.display = 'none';
+      }
+      containerNode.classList.remove('leaflet-popup-selection-visually-hidden');
+    });
+  }, 200);
+};
+
 const SiteMapFeature = (props) => {
-  const classes = useStyles(Theme);
-  const { mapRef, featureKey } = props;
+  const { classes, theme } = useStyles();
+  const { featureKey } = props;
+  const map = useMap();
 
   const feature = FEATURES[featureKey] || {};
 
@@ -238,7 +324,7 @@ const SiteMapFeature = (props) => {
   } = feature;
   const featureName = nameSingular || name || featureKey;
 
-  if (!FEATURES[featureKey] || !mapRef.current) { return null; }
+  if (!FEATURES[featureKey]) { return null; }
 
   let featureDescription = description;
   let parentFeature = null;
@@ -297,65 +383,6 @@ const SiteMapFeature = (props) => {
   // Jump-To function to afford map navigation where appropriate
   const jumpTo = (locationCode = '') => {
     dispatch({ type: 'setNewFocusLocation', location: locationCode });
-  };
-
-  /**
-     Util: Position Popup
-     Leaflet's AutoPan for popups does a "transition" of map center to ensure a new popup renders
-     in view. This poses a problem when the center is in the main context state - every micro-step
-     of the AutoPan transition is a state update. The transition appears to run recursively as it
-     causes a max update depth crash. We get around this by solving the same root problem (want
-     popups to render in view) in a different way... specifically by positioning them around their
-     parent element dynamcally based on which direction has the most room to render.
-  */
-  const positionPopup = (target = null, latlng = null, hideCloseButton = false) => {
-    if (!target || !latlng || !mapRef.current || !mapRef.current.leafletElement) { return; }
-    const { _popup: popup, _icon: icon } = target;
-    popup.setLatLng(latlng);
-    const containerPoint = mapRef.current.leafletElement.latLngToContainerPoint(latlng);
-    const iconHeight = icon ? icon.height : 0;
-    const {
-      _container: containerNode,
-      _containerLeft: containerLeft,
-      _containerBottom: containerBottom,
-      _tipContainer: tipNode,
-    } = popup;
-    containerNode.style.marginBottom = '0px';
-    // Leaflet popups always open above; open below if mouse event is in the top half of the map
-    if (containerPoint.y < (mapRef.current.container.clientHeight / 2)) {
-      const contentHeight = containerNode.clientHeight;
-      const tipHeight = tipNode.clientHeight;
-      const contentBottom = 0 - iconHeight - contentHeight - tipHeight - (1.5 * containerBottom);
-      const tipBottom = contentHeight + tipHeight - 1;
-      containerNode.style.bottom = `${contentBottom}px`;
-      tipNode.style.transform = `rotate(0.5turn) translate(0px, ${tipBottom}px)`;
-    } else {
-      containerNode.style.bottom = `${-1.5 * containerBottom}px`;
-      popup._tipContainer.style.transform = 'translate(0px, -1px)';
-    }
-    // For left/right we move the popup horizontally as needed while keeping the tip stationary
-    const contentWidth = containerNode.clientWidth;
-    const mapWidth = mapRef.current.container.parentNode.clientWidth || 0;
-    const nudgeBuffer = 40;
-    const nudgeLimit = (contentWidth / 2) - (nudgeBuffer / 2);
-    let overlap = 0;
-    if (mapWidth > (contentWidth + (nudgeBuffer * 3))) {
-      let nudge = 0;
-      if (containerPoint.x - (contentWidth / 2) < 0) {
-        overlap = containerPoint.x - (contentWidth / 2);
-        nudge = Math.min((0 - overlap) + nudgeBuffer, nudgeLimit);
-      } else if (containerPoint.x + (contentWidth / 2) > mapWidth) {
-        overlap = mapWidth - containerPoint.x - (contentWidth / 2);
-        nudge = Math.min(overlap - nudgeBuffer, nudgeLimit);
-      }
-      if (nudge !== 0) {
-        containerNode.style.left = `${containerLeft + nudge}px`;
-      }
-      tipNode.style.left = `${(0 - containerLeft) - nudge}px`;
-    }
-    if (hideCloseButton) {
-      popup._closeButton.style.display = 'none';
-    }
   };
 
   const markerIcon = <MarkerIcon className={classes.markerIcon} />;
@@ -427,7 +454,15 @@ const SiteMapFeature = (props) => {
   /**
      Render: a numerical value with units and optional label
   */
-  const renderNumericalValue = (value, label = null, unit = '', precision = 0, aria = null, right = false, parens = false) => { // eslint-disable-line max-len
+  const renderNumericalValue = (
+    value,
+    label = null,
+    unit = '',
+    precision = 0,
+    aria = null,
+    right = false,
+    parens = false,
+  ) => {
     let numberString = Number.isFinite(value) ? `${value.toFixed(precision)}${unit}` : '--';
     if (parens) { numberString = `(${numberString})`; }
     const visibleValue = (
@@ -437,7 +472,7 @@ const SiteMapFeature = (props) => {
     );
     return !label ? visibleValue : (
       <div className={classes[right ? 'endFlex' : 'startFlex']}>
-        <Typography variant="caption" style={{ marginRight: Theme.spacing(1) }}>
+        <Typography variant="caption" style={{ marginRight: theme.spacing(1) }}>
           {label}
         </Typography>
         {visibleValue}
@@ -461,7 +496,6 @@ const SiteMapFeature = (props) => {
     const markerStyle = {};
     if (selectionActive && selectionType === FEATURE_TYPES.SITES.KEY) {
       if (validItems && !validItems.has(siteCode)) {
-        // eslint-disable-next-line max-len
         selectedIcon = (
           <UnselectableIcon
             color="disabled"
@@ -489,14 +523,14 @@ const SiteMapFeature = (props) => {
       </>
     );
     const containerProps = {
-      key: siteCode,
       className: classes.popupSiteContainer,
-      style: { marginTop: Theme.spacing(0.5) },
+      style: { marginTop: theme.spacing(0.5) },
     };
     return selectionActive ? (
-      <div {...containerProps}>{internal}</div>
+      <div key={siteCode} {...containerProps}>{internal}</div>
     ) : (
       <Link
+        key={siteCode}
         variant="caption"
         component="button"
         onClick={() => jumpTo(site.siteCode)}
@@ -514,7 +548,7 @@ const SiteMapFeature = (props) => {
   const renderLatLon = (latitude, longitude, right = false, renderSubtitle = false) => {
     const iconButtonProps = {
       size: 'small',
-      style: { marginRight: Theme.spacing(0.5) },
+      style: { marginRight: theme.spacing(0.5) },
     };
     const coords = Number.isFinite(latitude) && Number.isFinite(longitude) ? (
       <div
@@ -527,6 +561,7 @@ const SiteMapFeature = (props) => {
               {...iconButtonProps}
               aria-label="Latitude / Longitude"
               disabled={selectionActive}
+              size="small"
             >
               <LocationIcon />
             </IconButton>
@@ -536,6 +571,7 @@ const SiteMapFeature = (props) => {
                 {...iconButtonProps}
                 aria-label="Latitude / Longitude (click to copy)"
                 disabled={selectionActive}
+                size="small"
               >
                 <LocationIcon />
               </IconButton>
@@ -592,7 +628,7 @@ const SiteMapFeature = (props) => {
           </div>
         ) : (
           <div className={classes[right ? 'endFlex' : 'startFlex']}>
-            <ElevationIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+            <ElevationIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
             {renderNumericalValue(elevation, null, 'm', 2, 'Elevation')}
           </div>
         )}
@@ -639,8 +675,7 @@ const SiteMapFeature = (props) => {
     const count = loc.samplingModules.length ? ` (${loc.samplingModules.length})` : '';
     return (
       <Grid
-        item
-        xs={12}
+        size={{ xs: 12 }}
         key="plotSamplingModules"
         data-selenium="sitemap-map-popup-samplingModules"
       >
@@ -665,12 +700,12 @@ const SiteMapFeature = (props) => {
     const { areaKm2 } = bound.properties || {};
     const areaAcres = Number.isFinite(areaKm2) ? KM2_TO_ACRES * areaKm2 : null;
     return (
-      <Grid item xs={12} data-selenium="sitemap-map-popup-area">
+      <Grid size={{ xs: 12 }} data-selenium="sitemap-map-popup-area">
         <Typography variant="subtitle2">Area</Typography>
         <div className={classes.startFlex}>
           {renderNumericalValue(areaKm2, null, 'km\u00b2', 2, 'Area (km\u00b2)')}
           {areaAcres === null ? null : (
-            <div style={{ marginLeft: Theme.spacing(1) }}>
+            <div style={{ marginLeft: theme.spacing(1) }}>
               {renderNumericalValue(areaAcres, null, ' acres', 2, 'Area (acres)', false, true)}
             </div>
           )}
@@ -700,10 +735,9 @@ const SiteMapFeature = (props) => {
     return (
       <Grid
         key="childSites"
-        item
-        xs={12}
+        size={{ xs: 12 }}
         data-selenium="sitemap-map-popup-childSites"
-        style={{ marginBottom: Theme.spacing(2) }}
+        style={{ marginBottom: theme.spacing(2) }}
       >
         {!sites.size ? (
           <>
@@ -737,10 +771,10 @@ const SiteMapFeature = (props) => {
     );
     return (
       <React.Fragment key="coordsAndElevation">
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           {renderElevation(loc)}
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           {renderLatLon(loc.latitude, loc.longitude, true, renderCoordsSubtitle)}
         </Grid>
       </React.Fragment>
@@ -752,10 +786,10 @@ const SiteMapFeature = (props) => {
   */
   const renderPlotSizeAndSlope = (loc) => (
     <React.Fragment key="plotSizeAndSlope">
-      <Grid item xs={6}>
+      <Grid size={{ xs: 6 }}>
         {renderPlotSize(loc)}
       </Grid>
-      <Grid item xs={6}>
+      <Grid size={{ xs: 6 }}>
         {renderPlotSlope(loc, true)}
       </Grid>
     </React.Fragment>
@@ -765,7 +799,7 @@ const SiteMapFeature = (props) => {
      Render: Popup Row; Tower Details
   */
   const renderTowerDetails = (loc) => (
-    <Grid key="towerDetails" item xs={12} data-selenium="sitemap-map-popup-towerDetails">
+    <Grid key="towerDetails" size={{ xs: 12 }} data-selenium="sitemap-map-popup-towerDetails">
       <Typography variant="subtitle2">Levels</Typography>
       <Typography variant="caption">{(loc.children || []).length}</Typography>
     </Grid>
@@ -781,7 +815,8 @@ const SiteMapFeature = (props) => {
       nlcd = loc.nlcdClass;
       if (NLCD_CLASSES[loc.nlcdClass]) {
         titleStyle.marginBottom = '-4px';
-        const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} - ${NLCD_CLASSES[loc.nlcdClass].description}`;
+        const tooltip = `${NLCD_CLASSES[loc.nlcdClass].name} `
+          + `- ${NLCD_CLASSES[loc.nlcdClass].description}`;
         nlcd = (
           <>
             {NLCD_CLASSES[loc.nlcdClass].name}
@@ -793,7 +828,7 @@ const SiteMapFeature = (props) => {
             <Tooltip title={tooltip}>
               <IconButton
                 size="small"
-                style={{ marginLeft: Theme.spacing(0.5), marginBottom: '1px' }}
+                style={{ marginLeft: theme.spacing(0.5), marginBottom: '1px' }}
                 aria-label="NLCD Class Description"
               >
                 <HelpIcon style={{ fontSize: '1rem' }} />
@@ -804,7 +839,7 @@ const SiteMapFeature = (props) => {
       }
     }
     return (
-      <Grid key="nlcdClass" item xs={12} data-selenium="sitemap-map-popup-nlcdClass">
+      <Grid key="nlcdClass" size={{ xs: 12 }} data-selenium="sitemap-map-popup-nlcdClass">
         <Typography variant="subtitle2" style={titleStyle}>NLCD Class</Typography>
         <Typography variant="caption">{nlcd}</Typography>
       </Grid>
@@ -821,11 +856,15 @@ const SiteMapFeature = (props) => {
     const domainTitle = `${site.domainCode} - ${domainName}`;
     return (
       <React.Fragment key="locationSiteAndDomain">
-        <Grid item xs={7} data-selenium="sitemap-map-popup-site">
+        <Grid size={{ xs: 7 }} data-selenium="sitemap-map-popup-site">
           <Typography variant="subtitle2">NEON Site</Typography>
           {renderSite(siteCode)}
         </Grid>
-        <Grid item xs={5} style={{ textAlign: 'right' }} data-selenium="sitemap-map-popup-domain">
+        <Grid
+          size={{ xs: 5 }}
+          style={{ textAlign: 'right' }}
+          data-selenium="sitemap-map-popup-domain"
+        >
           <Typography variant="subtitle2">Domain</Typography>
           <Tooltip title={`Jump to ${site.domainCode} on the map`}>
             <Link
@@ -845,8 +884,10 @@ const SiteMapFeature = (props) => {
   };
 
   const popupProps = {
-    className: classes.popup,
-    autoPan: false,
+    className: !selectionActive
+      ? classes.popup
+      : `${classes.popup} leaflet-popup-selection-visually-hidden`,
+    autoPan: !selectionActive,
     id: 'sitemap-map-popup',
   };
 
@@ -899,6 +940,10 @@ const SiteMapFeature = (props) => {
     if (
       !selectionActive || !state.selection.derived[boundaryFeatureKey] || selectionLimit === 1
     ) { return null; }
+    const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
+    if (isAreaSelect) {
+      return null;
+    }
     const { sites: boundarySites = new Set() } = featureData[boundaryKey];
     if (!boundarySites.size) { return null; }
     const selectionPortion = state.selection.derived[boundaryFeatureKey][boundaryKey] || null;
@@ -913,10 +958,12 @@ const SiteMapFeature = (props) => {
       ? `add ${thisOne}${selectable} site`
       : `add all ${selectableCount}${selectable} sites`;
     let preposition = 'to';
-    /* eslint-disable max-len */
-    let snackbarClass = classes[selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar'];
-    let snackbarIconClass = classes[selectableCount ? 'addToSelectionSnackbarIcon' : 'unselectableSnackbarIcon'];
-    /* eslint-enable max-len */
+    const snackbarClassName = selectableCount ? 'addToSelectionSnackbar' : 'unselectableSnackbar';
+    const snackbarIconClassName = selectableCount
+      ? 'addToSelectionSnackbarIcon'
+      : 'unselectableSnackbarIcon';
+    let snackbarClass = classes[snackbarClassName];
+    let snackbarIconClass = classes[snackbarIconClassName];
     let actionText = `No sites in this ${FEATURES[boundaryFeatureKey].nameSingular} are selectable`;
     if (selectableCount) {
       if (selectionPortion === SELECTION_PORTIONS.PARTIAL) {
@@ -941,7 +988,7 @@ const SiteMapFeature = (props) => {
       );
     }
     return (
-      <div key={boundaryKey} className={classes.centerFlex} style={{ padding: Theme.spacing(0.5) }}>
+      <div key={boundaryKey} className={classes.centerFlex} style={{ padding: theme.spacing(0.5) }}>
         <SnackbarContent
           className={`${classes.selectionSnackbar} ${snackbarClass}`}
           message={(
@@ -964,7 +1011,8 @@ const SiteMapFeature = (props) => {
      (Only for selecting the item directly; selection by proxy action snackbars are different)
   */
   const renderItemSelectionActionSnackbar = (item) => {
-    if (!selectionActive) { return null; }
+    const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
+    if (!selectionActive || isAreaSelect) { return null; }
     const unit = FEATURE_TYPES[selectionType].unit || 'item';
     const isSelectable = !validItems || validItems.has(item);
     const isSelected = selectedItems.has(item);
@@ -1091,14 +1139,14 @@ const SiteMapFeature = (props) => {
             {`Jump to ${site.siteCode} on the map`}
           </Link>
         )}
-        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid container spacing={1} style={{ marginBottom: theme.spacing(1) }}>
           {/* Terrain and Type */}
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
             <Typography variant="caption"><i>{featureDescription}</i></Typography>
           </Grid>
           {/* State/Territory */}
-          <Grid item xs={4} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 4 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
             {selectionActive ? (
               <Typography variant="caption">{usState.name}</Typography>
@@ -1118,11 +1166,11 @@ const SiteMapFeature = (props) => {
             )}
           </Grid>
           {/* Latitude/Longitude */}
-          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Grid size={{ xs: 5 }} style={{ display: 'flex', alignItems: 'flex-end' }}>
             {renderLatLon(site.latitude, site.longitude)}
           </Grid>
           {/* Domain */}
-          <Grid item xs={7} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 7 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             {selectionActive ? (
               <Typography variant="caption">{`${site.domainCode} - ${domain.name}`}</Typography>
@@ -1170,14 +1218,14 @@ const SiteMapFeature = (props) => {
           {markerIcon}
           {`Jump to ${site.siteCode} on the map`}
         </Link>
-        <Grid container spacing={1} style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid container spacing={1} style={{ marginBottom: theme.spacing(1) }}>
           {/* Terrain and Type */}
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Typography variant="subtitle2">{feature.nameSingular}</Typography>
             <Typography variant="caption"><i>{featureDescription}</i></Typography>
           </Grid>
           {/* State/Territory */}
-          <Grid item xs={4} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 4 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">{stateFieldTitle}</Typography>
             {selectionActive ? (
               <Typography variant="caption">{usState.name}</Typography>
@@ -1197,11 +1245,11 @@ const SiteMapFeature = (props) => {
             )}
           </Grid>
           {/* Latitude/Longitude */}
-          <Grid item xs={5} style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Grid size={{ xs: 5 }} style={{ display: 'flex', alignItems: 'flex-end' }}>
             {renderLatLon(site.latitude, site.longitude)}
           </Grid>
           {/* Domain */}
-          <Grid item xs={7} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 7 }} style={{ textAlign: 'right' }}>
             <Typography variant="subtitle2">Domain</Typography>
             {selectionActive ? (
               <Typography variant="caption">{`${site.domain} - ${domain.name}`}</Typography>
@@ -1360,11 +1408,11 @@ const SiteMapFeature = (props) => {
      Render a single shape (marker, rectangle, or polygon)
   */
   const baseColor = featureStyle ? featureStyle.color : '#666666';
-  const hoverColor = `#${tinycolor(baseColor).lighten(10).toHex()}`;
-  const ghostedBaseColor = `#${tinycolor(baseColor).lighten(10).desaturate(60).toHex()}`;
-  const ghostedHoverColor = `#${tinycolor(hoverColor).lighten(10).desaturate(60).toHex()}`;
-  const darkenedBaseColor = `#${tinycolor(baseColor).darken(15).toHex()}`;
-  const darkenedMoreBaseColor = `#${tinycolor(darkenedBaseColor).darken(15).toHex()}`;
+  const hoverColor = theme.lighten(baseColor, 0.18);
+  const ghostedBaseColor = desaturate(theme.lighten(baseColor, 0.3), 0.2);
+  const ghostedHoverColor = desaturate(theme.lighten(hoverColor, 0.3), 0.2);
+  const darkenedBaseColor = theme.darken(baseColor, 0.4);
+  const darkenedMoreBaseColor = theme.darken(darkenedBaseColor, 0.6);
   const isPoint = (shapeData) => {
     const shapeKeys = Object.keys(shapeData);
     return (
@@ -1380,13 +1428,15 @@ const SiteMapFeature = (props) => {
   };
   const renderShape = (primaryId, secondaryId = null) => {
     const polygonInteractionProps = {
-      onMouseOver: (e) => {
-        e.target._path.setAttribute('stroke', hoverColor);
-        e.target._path.setAttribute('fill', hoverColor);
-      },
-      onMouseOut: (e) => {
-        e.target._path.setAttribute('stroke', featureStyle.color);
-        e.target._path.setAttribute('fill', featureStyle.color);
+      eventHandlers: {
+        mouseover: (e) => {
+          e.target._path.setAttribute('stroke', hoverColor);
+          e.target._path.setAttribute('fill', hoverColor);
+        },
+        mouseout: (e) => {
+          e.target._path.setAttribute('stroke', featureStyle.color);
+          e.target._path.setAttribute('fill', featureStyle.color);
+        },
       },
     };
     const shapeData = secondaryId && featureData[primaryId][secondaryId]
@@ -1423,12 +1473,14 @@ const SiteMapFeature = (props) => {
       // Polyline
       if (featureShape === 'Polyline') {
         shapeProps = {
-          ...featureStyle || {},
-          onMouseOver: (e) => {
-            e.target._path.setAttribute('stroke', hoverColor);
-          },
-          onMouseOut: (e) => {
-            e.target._path.setAttribute('stroke', baseColor);
+          ...(featureStyle || {}),
+          eventHandlers: {
+            mouseover: (e) => {
+              e.target._path.setAttribute('stroke', hoverColor);
+            },
+            mouseout: (e) => {
+              e.target._path.setAttribute('stroke', baseColor);
+            },
           },
         };
       }
@@ -1439,8 +1491,10 @@ const SiteMapFeature = (props) => {
         // feature is still visible, resulting in an always-on popup with no context otherwise
         if (!calculateLocationsInBounds({ X: shapeData }, mapBounds).length) { return null; }
         shapeProps = {
-          ...featureStyle || {},
-          ...polygonInteractionProps,
+          ...(featureStyle || {}),
+          eventHandlers: {
+            ...polygonInteractionProps.eventHandlers,
+          },
         };
         // ReactLeaflet does not suport the mask prop, so add it as an unused class.
         // The LayoutEffect in SiteMapLeaflet.jsx then applies it as a mask attribute.
@@ -1449,7 +1503,7 @@ const SiteMapFeature = (props) => {
         }
         if (isHighlighted) {
           shapeProps.color = darkenedBaseColor;
-          shapeProps.onMouseOut = (e) => {
+          shapeProps.eventHandlers.mouseout = (e) => {
             e.target._path.setAttribute('stroke', darkenedBaseColor);
             e.target._path.setAttribute('fill', darkenedBaseColor);
           };
@@ -1470,13 +1524,14 @@ const SiteMapFeature = (props) => {
           });
           if (isFocusAmplifiable) {
             shapeProps.color = ghostedHoverColor;
-            shapeProps.onMouseOut = (e) => {
+            shapeProps.eventHandlers.mouseout = (e) => {
               e.target._path.setAttribute('stroke', ghostedHoverColor);
               e.target._path.setAttribute('fill', ghostedHoverColor);
             };
           }
         }
         if (selectionActive) {
+          const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
           let returnColor = isHighlighted ? darkenedBaseColor : featureStyle.color;
           let useHoverColor = hoverColor;
           if (selectingCurrentFeatureType) {
@@ -1495,25 +1550,24 @@ const SiteMapFeature = (props) => {
               state.selection.derived[featureKey]
                 && state.selection.derived[featureKey][primaryId]
             ) {
-              // eslint-disable-next-line max-len
-              returnColor = baseColors[state.selection.derived[featureKey][primaryId]] || featureStyle.color;
+              returnColor = baseColors[state.selection.derived[featureKey][primaryId]]
+                || featureStyle.color;
             }
           }
           shapeProps.color = returnColor;
-          shapeProps.onMouseOver = (e) => {
+          shapeProps.eventHandlers.mouseover = (e) => {
             e.target._path.setAttribute('stroke', useHoverColor);
             e.target._path.setAttribute('fill', useHoverColor);
             if (hasPopup) {
-              e.target.openPopup();
-              positionPopup(e.target, e.latlng, true);
+              positionPopup(map, e.target, e.latlng, true, true, true);
             }
           };
-          shapeProps.onMouseMove = (e) => {
+          shapeProps.eventHandlers.mousemove = (e) => {
             if (hasPopup) {
-              positionPopup(e.target, e.latlng, true);
+              positionPopup(map, e.target, e.latlng, true, false, true);
             }
           };
-          shapeProps.onMouseOut = (e) => {
+          shapeProps.eventHandlers.mouseout = (e) => {
             e.target._path.setAttribute('stroke', returnColor);
             e.target._path.setAttribute('fill', returnColor);
             if (hasPopup) {
@@ -1521,8 +1575,8 @@ const SiteMapFeature = (props) => {
             }
           };
           // Onclick to select sites by way of clicking a state or domain to capture sites within
-          if (selectingActiveTypeByProxy && selectionLimit !== 1) {
-            shapeProps.onClick = () => {
+          if (!isAreaSelect && selectingActiveTypeByProxy && selectionLimit !== 1) {
+            shapeProps.eventHandlers.click = () => {
               if (featureKey === FEATURES.DOMAINS.KEY) {
                 dispatch({ type: 'toggleSitesSelectedForDomain', domainCode: primaryId });
               }
@@ -1532,8 +1586,8 @@ const SiteMapFeature = (props) => {
             };
           }
           // Onclick to select states or domains directly
-          if (selectionType === featureType) {
-            shapeProps.onClick = () => {
+          if (!isAreaSelect && selectionType === featureType) {
+            shapeProps.eventHandlers.click = () => {
               if (isSelectable) {
                 dispatch({ type: 'toggleItemSelected', item: primaryId });
               }
@@ -1559,45 +1613,43 @@ const SiteMapFeature = (props) => {
           ? SELECTION_STATUS.SELECTED
           : SELECTION_STATUS.UNSELECTED;
         const initialHighlight = isHighlighted ? HIGHLIGHT_STATUS.HIGHLIGHT : HIGHLIGHT_STATUS.NONE;
+        const isAreaSelect = state.map.mouseMode === MAP_MOUSE_MODES.AREA_SELECT;
         if (baseIcon && baseIcon[selection]) {
           icon = baseIcon[selection][initialHighlight];
           interaction = {
-            onMouseOver: (e) => {
-              let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
-              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-                highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
-              }
-              e.target.setIcon(baseIcon[selection][highlight]);
-              e.target._bringToFront();
-              if (hasPopup && selectionActive) {
-                e.target.openPopup();
-                positionPopup(e.target, e.latlng, selectionActive);
-              }
-            },
-            onMouseOut: (e) => {
-              e.target.setIcon(baseIcon[selection][initialHighlight]);
-              if (hasPopup && selectionActive) {
-                e.target.closePopup();
-              }
-            },
-            onClick: (e) => {
-              if (!selectionActive && hasPopup) {
-                const popupOpen = e.target._popup.isOpen();
-                const func = () => positionPopup(e.target, e.latlng, selectionActive);
-                dispatch({ type: 'setMapRepositionOpenPopupFunc', func });
-                if (popupOpen) { func(); }
-              }
-              if (selectionActive && selectingCurrentFeatureType && isSelectable) {
-                switch (selectionType) {
-                  case FEATURE_TYPES.SITES.KEY:
-                    if (shapeData.siteCode) {
-                      dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
-                    }
-                    break;
-                  default:
-                    break;
+            eventHandlers: {
+              mouseover: (e) => {
+                let highlight = HIGHLIGHT_STATUS.HIGHLIGHT;
+                if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                  highlight = HIGHLIGHT_STATUS[isSelected ? 'HIGHLIGHT' : 'SELECT'];
                 }
-              }
+                e.target.setIcon(baseIcon[selection][highlight]);
+                e.target._bringToFront();
+                if (hasPopup && selectionActive) {
+                  positionPopup(map, e.target, e.latlng, selectionActive, true);
+                }
+              },
+              mouseout: (e) => {
+                e.target.setIcon(baseIcon[selection][initialHighlight]);
+                if (hasPopup && selectionActive) {
+                  e.target.closePopup();
+                }
+              },
+              click: (e) => {
+                if (!isAreaSelect) {
+                  if (selectionActive && selectingCurrentFeatureType && isSelectable) {
+                    switch (selectionType) {
+                      case FEATURE_TYPES.SITES.KEY:
+                        if (shapeData.siteCode) {
+                          dispatch({ type: 'toggleItemSelected', item: shapeData.siteCode });
+                        }
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                }
+              },
             },
           };
         }
@@ -1643,9 +1695,6 @@ const SiteMapFeature = (props) => {
             key={`${key}-polygon`}
             positions={positions}
             {...shapeProps}
-            onMouseOver={null}
-            onMouseMove={null}
-            onMouseOut={null}
           />
         ) : (
           <Polygon key={`${key}-polygon`} positions={positions} {...shapeProps}>
@@ -1704,9 +1753,6 @@ const SiteMapFeature = (props) => {
 };
 
 SiteMapFeature.propTypes = {
-  mapRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Map),
-  }).isRequired,
   featureKey: PropTypes.oneOf(Object.keys(FEATURES)).isRequired,
 };
 

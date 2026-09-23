@@ -1,21 +1,20 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import AopDataViewerIcon from '@material-ui/icons/SatelliteOutlined';
-import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import AopDataViewerIcon from '@mui/icons-material/SatelliteOutlined';
 import PropTypes from 'prop-types';
 
-import UAParser from 'ua-parser-js';
+import { UAParser } from 'ua-parser-js';
 
-import Theme from '../Theme/Theme';
-import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 /**
    Setup: CSS classes
 */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   productPaperButton: {
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(1.5),
@@ -30,7 +29,7 @@ const isMobileDevice = () => {
   const uaParser = new UAParser();
   const device = uaParser.getDevice();
   let isMobile = false;
-  // On my ARM64 Mac device.type is blank
+  // Handle device case where type is blank
   if (device.type === 'mobile') {
     isMobile = true;
   }
@@ -44,14 +43,19 @@ const getMobileOrDesktopUrl = () => {
   return NeonEnvironment.getAopGEEDesktopUrl();
 };
 
+const defaultProps = {
+  isFullWidth: true,
+};
+
 /**
    Main Function
 */
-const AopGEEDataViewer = (props) => {
+const AopGEEDataViewer = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
   const {
     isFullWidth,
   } = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const aopButtonName = 'AOP GEE Data Viewer';
   const tooltip = 'Launch the AOP Google Earth Engine data visuialization tool.';
   const url = getMobileOrDesktopUrl();
@@ -78,12 +82,4 @@ AopGEEDataViewer.propTypes = {
   isFullWidth: PropTypes.bool,
 };
 
-AopGEEDataViewer.defaultProps = {
-  isFullWidth: true,
-};
-
-const WrappedAopGEEDataViewer = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(AopGEEDataViewer),
-);
-
-export default WrappedAopGEEDataViewer;
+export default AopGEEDataViewer;

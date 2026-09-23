@@ -1,19 +1,16 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
-
-import DownloadDataButton from './DownloadDataButton';
-
-import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
-import Theme from '../Theme/Theme';
 
 import sampleProductData from '../../../sampleData/DP1.10017.001.json';
 import sampleProductDataAeronet from '../../../sampleData/DP1.00043.001.json';
@@ -27,14 +24,14 @@ import sampleProductDataRelease from '../../../sampleData/DP1.00001.001.release.
 import sampleProductDataReleaseProv from '../../../sampleData/DP4.00130.001.release.prov.json';
 import sampleProductDataAopReleaseProv from '../../../sampleData/DP3.30011.001.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const downloadDataContextLink = (
     <Link
       href="#DownloadDataContext"

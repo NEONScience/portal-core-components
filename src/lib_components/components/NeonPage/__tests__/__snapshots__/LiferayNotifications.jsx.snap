@@ -1,139 +1,404 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`NeonPage - LiferayNotifications renders nothing if passed an empty array 1`] = `null`;
+exports[`NeonPage - LiferayNotifications renders nothing if passed an empty array 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
 exports[`NeonPage - LiferayNotifications renders notifications with actions if onHideNotifications is present 1`] = `
-<div
-  ComponentPath="@material-ui/core/Snackbar"
-  prop-ContentProps="{\\"aria-describedby\\":\\"neon-data-portal-notifications\\"}"
-  prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
-  prop-open={true}
->
-  <div
-    className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-1 MuiPaper-elevation6"
-    role="alert"
-  >
-    <div
-      className="MuiSnackbarContent-message"
-    >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        id="neon-data-portal-notifications"
+        data-component-path="@mui/material/Snackbar"
+        data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+        data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
-        <div>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+          role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
+        >
           <div
-            className="makeStyles-notificationDiv-2"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "bar",
-              }
-            }
-          />
-          <hr
-            className="MuiDivider-root"
-          />
-        </div>
-        <div>
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
+          >
+            <div
+              id="neon-data-portal-notifications"
+            >
+              <div>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  bar
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
+              </div>
+              <div>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  <b>
+                    HTML
+                  </b>
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
+              </div>
+            </div>
+          </div>
           <div
-            className="makeStyles-notificationDiv-2"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<b>HTML</b>",
-              }
-            }
-          />
-          <hr
-            className="MuiDivider-root"
-          />
+            class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
+          >
+            <button
+              aria-label="close"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+                data-testid="CloseIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  </body>,
+  "container": <div>
     <div
-      className="MuiSnackbarContent-action"
+      data-component-path="@mui/material/Snackbar"
+      data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+      data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
     >
-      <button
-        aria-label="close"
-        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-        disabled={false}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex={0}
-        type="button"
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+        role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
       >
-        <span
-          className="MuiIconButton-label"
+        <div
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
         >
-          <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root"
-            focusable="false"
-            viewBox="0 0 24 24"
+          <div
+            id="neon-data-portal-notifications"
           >
-            <path
-              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-            />
-          </svg>
-        </span>
-      </button>
+            <div>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                bar
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
+            </div>
+            <div>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                <b>
+                  HTML
+                </b>
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiSnackbarContent-action css-1po4j4v-MuiSnackbarContent-action"
+        >
+          <button
+            aria-label="close"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+              data-testid="CloseIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`NeonPage - LiferayNotifications renders notifications with no actions if onHideNotifications not present 1`] = `
-<div
-  ComponentPath="@material-ui/core/Snackbar"
-  prop-ContentProps="{\\"aria-describedby\\":\\"neon-data-portal-notifications\\"}"
-  prop-anchorOrigin="{\\"vertical\\":\\"bottom\\",\\"horizontal\\":\\"right\\"}"
-  prop-open={true}
->
-  <div
-    className="MuiPaper-root MuiSnackbarContent-root makeStyles-notification-1 MuiPaper-elevation6"
-    role="alert"
-  >
-    <div
-      className="MuiSnackbarContent-message"
-    >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        id="neon-data-portal-notifications"
+        data-component-path="@mui/material/Snackbar"
+        data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+        data-prop-open="true"
+        data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
       >
-        <div>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+          role="alert"
+          style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
+        >
           <div
-            className="makeStyles-notificationDiv-2"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "bar",
-              }
-            }
-          />
-          <hr
-            className="MuiDivider-root"
-          />
-        </div>
-        <div>
-          <div
-            className="makeStyles-notificationDiv-2"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<b>HTML</b>",
-              }
-            }
-          />
-          <hr
-            className="MuiDivider-root"
-          />
+            class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
+          >
+            <div
+              id="neon-data-portal-notifications"
+            >
+              <div>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  bar
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
+              </div>
+              <div>
+                <div
+                  class="css-1y840rg-notificationDiv"
+                >
+                  <b>
+                    HTML
+                  </b>
+                </div>
+                <hr
+                  class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      data-component-path="@mui/material/Snackbar"
+      data-prop-anchororigin="{"vertical":"bottom","horizontal":"right"}"
+      data-prop-open="true"
+      data-prop-slotprops="{"content":{"aria-describedby":"neon-data-portal-notifications"}}"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation6 MuiSnackbarContent-root css-qxirhr-MuiPaper-root-MuiSnackbarContent-root-notification"
+        role="alert"
+        style="--Paper-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);"
+      >
+        <div
+          class="MuiSnackbarContent-message css-ozrxnr-MuiSnackbarContent-message"
+        >
+          <div
+            id="neon-data-portal-notifications"
+          >
+            <div>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                bar
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
+            </div>
+            <div>
+              <div
+                class="css-1y840rg-notificationDiv"
+              >
+                <b>
+                  HTML
+                </b>
+              </div>
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

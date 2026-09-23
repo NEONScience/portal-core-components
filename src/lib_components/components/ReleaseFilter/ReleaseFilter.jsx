@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { useId } from 'react';
 import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import { useId } from 'react-id-generator';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
-import CopyIcon from '@material-ui/icons/Assignment';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import CopyIcon from '@mui/icons-material/Assignment';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import RouteService from '../../service/RouteService';
 import ReleaseService from '../../service/ReleaseService';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   title: {
     fontWeight: 500,
   },
@@ -74,9 +73,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   copyButtonAdornment: {
-    padding: Theme.spacing(1.25, 1),
+    padding: theme.spacing(1.25, 1),
     backgroundColor: '#fff',
-    marginRight: Theme.spacing(-1.75),
+    marginRight: theme.spacing(-1.75),
     '& svg': {
       width: '0.9rem',
       height: '0.9rem',
@@ -91,8 +90,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
   },
   horizontalDescriptions: {
-    marginLeft: Theme.spacing(3),
-    '& > div:first-child': {
+    marginLeft: theme.spacing(3),
+    '& > div:first-of-type': {
       marginTop: '-2px !important',
     },
   },
@@ -102,16 +101,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UNSPECIFIED_NAME = 'Latest and Provisional';
-const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to provisional data (not yet in any release)';
-const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link to this this data product release';
+const UNSPECIFIED_DESCRIPTION = 'Data in the latest release in addition to '
+  + 'provisional data (not yet in any release)';
+const DOI_TITLE = 'Digital Object Identifier (DOI) - A citable permanent link '
+  + 'to this this data product release';
 
 const formatGenerationDate = (generationDate) => {
   const generationMoment = moment.utc(generationDate);
   return generationMoment.isValid() ? generationMoment.format('MMMM D, YYYY') : null;
 };
 
-const ReleaseFilter = (props) => {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  excludeNullRelease: false,
+  horizontal: false,
+  maxWidth: null,
+  nullReleaseProductCount: null,
+  onChange: () => {},
+  releases: [],
+  selected: null,
+  showDoi: false,
+  showGenerationDate: false,
+  showProductCount: false,
+  showReleaseLink: false,
+  releaseLinkDisplayType: 'Button',
+  skeleton: false,
+  title: 'Release',
+};
+
+const ReleaseFilter = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes, theme } = useStyles();
   const {
     excludeNullRelease,
     horizontal,
@@ -130,7 +149,7 @@ const ReleaseFilter = (props) => {
     ...otherProps
   } = props;
 
-  const [instanceId] = useId();
+  const instanceId = useId();
   const inputId = `release-filter-input-${instanceId}`;
   const labelId = `release-filter-label-${instanceId}`;
 
@@ -170,7 +189,7 @@ const ReleaseFilter = (props) => {
     <OutlinedInput
       id={inputId}
       name={inputId}
-      margin="dense"
+      size="small"
       className={classes.selectInput}
       style={maxWidthStyle}
     />
@@ -194,8 +213,8 @@ const ReleaseFilter = (props) => {
       <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
         {title}
       </Typography>
-      <Tooltip placement="right" title={tooltip} interactive>
-        <IconButton size="small" aria-label={tooltip} style={{ marginLeft: Theme.spacing(0.5) }}>
+      <Tooltip placement="right" title={tooltip}>
+        <IconButton size="small" aria-label={tooltip} style={{ marginLeft: theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>
       </Tooltip>
@@ -204,11 +223,16 @@ const ReleaseFilter = (props) => {
 
   // Render skeleton
   if (skeleton) {
-    const skeletonStyle = { marginBottom: Theme.spacing(1) };
+    const skeletonStyle = { marginBottom: theme.spacing(1) };
     return (
       <div {...otherProps} style={{ ...maxWidthStyle, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth || '100%'} height={36} style={skeletonStyle} />
+        <Skeleton
+          variant="rectangular"
+          width={maxWidth || '100%'}
+          height={36}
+          style={skeletonStyle}
+        />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
@@ -340,7 +364,7 @@ const ReleaseFilter = (props) => {
               className={classes.copyButton}
               title={`Copy DOI: ${doiUrl}`}
             >
-              <CopyIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+              <CopyIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
               Copy DOI
             </Button>
           </CopyToClipboard>
@@ -470,23 +494,4 @@ ReleaseFilter.propTypes = {
   title: PropTypes.string,
 };
 
-ReleaseFilter.defaultProps = {
-  excludeNullRelease: false,
-  horizontal: false,
-  maxWidth: null,
-  nullReleaseProductCount: null,
-  onChange: () => {},
-  releases: [],
-  selected: null,
-  showDoi: false,
-  showGenerationDate: false,
-  showProductCount: false,
-  showReleaseLink: false,
-  releaseLinkDisplayType: 'Button',
-  skeleton: false,
-  title: 'Release',
-};
-
-const WrappedReleaseFilter = Theme.getWrappedComponent(ReleaseFilter);
-
-export default WrappedReleaseFilter;
+export default ReleaseFilter;

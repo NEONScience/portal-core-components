@@ -17,36 +17,30 @@ import {
 
 import cloneDeep from 'lodash/cloneDeep';
 
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
-import DownloadIcon from '@material-ui/icons/SaveAlt';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import NeonApi from '../NeonApi';
 import SplitButton from '../Button/SplitButton';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
 import DocumentParser from '../../parser/DocumentParser';
 import DocumentService, {
   DocumentTypeListItemDef,
   ParsedQsgNameResult,
 } from '../../service/DocumentService';
-import { StylesHook } from '../../types/muiTypes';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 import {
   AnyAction,
@@ -62,22 +56,42 @@ import {
 
 const COMPONENT_XS_UPPER = 480;
 const COMPONENT_SM_UPPER = 805;
+const COMPONENT_SECONDARY_ACTION_BREAKPOINT = 600;
 
-const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
+type MakeStylesProps = {
+  fullSecondaryAction: boolean;
+};
+
+const useStyles = makeStyles<MakeStylesProps>()((muiTheme: NeonTheme, { fullSecondaryAction }) => ({
   listItemContainer: {
     display: 'flex',
     overflow: 'auto',
+    paddingTop: muiTheme.spacing(1),
+    paddingBottom: muiTheme.spacing(1),
+    paddingRight: '0',
+    '& .MuiListItemSecondaryAction-root': {
+      display: 'flex',
+      alignItems: 'center',
+      position: 'unset',
+      transform: 'unset',
+      top: 'unset',
+      right: 'unset',
+      whiteSpace: 'nowrap',
+    },
   },
-  listItem: {
-    display: 'flex',
+  listItemText: {
     wordBreak: 'break-word',
     paddingLeft: muiTheme.spacing(1),
+    paddingRight: muiTheme.spacing(1),
     '& p': {
       marginTop: muiTheme.spacing(0.5),
       '& > span > span': {
         whiteSpace: 'nowrap',
       },
     },
+  },
+  listItemButton: {
+    padding: '0',
   },
   listItemSecondarySpacer: {
     margin: muiTheme.spacing(0, 2),
@@ -86,10 +100,19 @@ const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
   listItemIcon: {
     minWidth: muiTheme.spacing(4),
     marginRight: muiTheme.spacing(1),
+    alignSelf: 'center',
+  },
+  listItemSecondaryActionContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    width: fullSecondaryAction ? '200px' : '60px',
   },
   fileTypeChip: {
     marginRight: '5px',
-    '&:last-child': {
+    backgroundColor: 'transparent',
+    fontWeight: '400',
+    '& span:last-of-type': {
       marginRight: '0px',
     },
   },
@@ -107,21 +130,7 @@ const useStyles = makeStyles((muiTheme: MuiTheme) => createStyles({
   downloadErrorContainer: {
     marginTop: muiTheme.spacing(2),
   },
-})) as StylesHook;
-
-const useListItemSecondaryActionStyles = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    root: {
-      display: 'flex',
-      alignItems: 'center',
-      position: 'unset',
-      transform: 'unset',
-      top: 'unset',
-      right: 'unset',
-      whiteSpace: 'nowrap',
-    },
-  })) as StylesHook;
+}));
 
 enum ActionTypes {
   FETCH_VARIANTS_STARTED = 'FETCH_VARIANTS_STARTED',
@@ -206,8 +215,8 @@ enum FetchStatus {
 }
 
 interface FetchStatusState {
-  status: FetchStatus,
-  error?: Nullable<UnknownRecord|string>,
+  status: FetchStatus;
+  error?: Nullable<UnknownRecord|string>;
 }
 
 interface DocumentListItemState {
@@ -279,15 +288,15 @@ export interface DocumentListItemProps {
   id: number;
   document: DocumentListItemModel;
   makeDownloadableLink: boolean;
-  enableDownloadButton: Nullable<boolean>;
-  fetchVariants: Nullable<boolean>;
-  enableVariantChips: Nullable<boolean>;
-  containerComponent: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
+  enableDownloadButton?: Nullable<boolean>;
+  fetchVariants?: Nullable<boolean>;
+  enableVariantChips?: Nullable<boolean>;
+  containerComponent?: Undef<React.ElementType<React.HTMLAttributes<HTMLDivElement>>>;
 }
 
 const DocumentListItem: React.FC<DocumentListItemProps> = (
   props: DocumentListItemProps,
-): JSX.Element|null => {
+): React.JSX.Element|null => {
   const {
     id,
     document,
@@ -297,19 +306,22 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     enableVariantChips,
     containerComponent,
   }: DocumentListItemProps = props;
-  const classes = useStyles(Theme);
-  const listItemSecondaryActionClasses = useListItemSecondaryActionStyles(Theme);
-  const containerRef: React.MutableRefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|HTMLAnchorElement|undefined> = useRef(
+    undefined,
+  );
   const [
     componentWidth,
     setComponentWidth,
   ]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(0);
   let atComponentXs = false;
   let atComponentSm = false;
+  let fullSecondaryAction = true;
   if (componentWidth > 0) {
     atComponentXs = (componentWidth <= COMPONENT_XS_UPPER);
     atComponentSm = (componentWidth >= COMPONENT_XS_UPPER) && (componentWidth < COMPONENT_SM_UPPER);
+    fullSecondaryAction = (componentWidth >= COMPONENT_SECONDARY_ACTION_BREAKPOINT);
   }
+  const { classes } = useStyles({ fullSecondaryAction });
   const [
     state,
     dispatch,
@@ -442,7 +454,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     ? appliedDocument.description
     : <i>No description</i>;
   const spacer = <span className={classes.listItemSecondarySpacer}>|</span>;
-  const renderTypes = (): JSX.Element => {
+  const renderTypes = (): React.JSX.Element => {
     if (!(enableVariantChips === true)) {
       return (<span title={`file type: ${typeTitleString}`}>{typeTitleString}</span>);
     }
@@ -468,7 +480,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
     }
     return (
       <>
-        {appliedVariants.map((variant: NeonDocument, index: number): JSX.Element => {
+        {appliedVariants.map((variant: NeonDocument, index: number): React.JSX.Element => {
           const variantTypeTitleString = DocumentService.getDocumentTypeTitle(variant);
           const isSelected = (appliedDocument.name === variant.name);
           const isLast = (index === (appliedVariants.length - 1));
@@ -491,7 +503,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </>
     );
   };
-  const renderSecondaryItem = (): JSX.Element => {
+  const renderSecondaryItem = (): React.JSX.Element => {
     let sizeDisplay = (<span><i>n/a</i></span>);
     if (appliedDocument.size) {
       sizeDisplay = (
@@ -540,18 +552,18 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </span>
     );
   };
-  const renderAction = (): JSX.Element|null => {
+  const renderAction = (): React.JSX.Element|null => {
     if (!(enableDownloadButton === true)) return null;
     if (isFetchingVariants) {
       return (
-        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+        <div className={classes.listItemSecondaryActionContainer}>
           <CircularProgress size={36} className={classes.variantFetchingProgress} />
-        </ListItemSecondaryAction>
+        </div>
       );
     }
-    if (atComponentXs) {
+    if (!fullSecondaryAction) {
       return (
-        <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+        <div className={classes.listItemSecondaryActionContainer}>
           <Tooltip
             placement="top"
             title={`Download ${appliedDocument.name}`}
@@ -568,6 +580,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
                     (downloadDoc: NeonDocument): void => handleDownloadFailed(),
                   );
                 }}
+                size="large"
               >
                 {isDownloading
                   ? <CircularProgress size={18} />
@@ -575,12 +588,13 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               </IconButton>
             </div>
           </Tooltip>
-        </ListItemSecondaryAction>
+        </div>
       );
     }
     const button = !hasAppliedVariants
       ? (
         <Button
+          fullWidth
           variant="outlined"
           disabled={isDownloading || isDownloadError}
           startIcon={isDownloading
@@ -599,6 +613,7 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         </Button>
       ) : (
         <SplitButton
+          isFullWidth
           name={`${appliedDocument.name}-document-list-item-download-split-button`}
           selectedOption={`${typeTitleString}`}
           selectedOptionDisplayCallback={(selectedOption: string): string => (
@@ -627,6 +642,9 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
               handleSelectedVariantChanged(nextSelectedVariant as NeonDocument);
             }
           }}
+          styleOverrides={{
+            padding: '6px 10px',
+          }}
           buttonGroupProps={{
             size: 'small',
             variant: 'outlined',
@@ -648,12 +666,12 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
         />
       );
     return (
-      <ListItemSecondaryAction classes={listItemSecondaryActionClasses}>
+      <div className={classes.listItemSecondaryActionContainer}>
         {button}
-      </ListItemSecondaryAction>
+      </div>
     );
   };
-  const renderDownloadError = (): JSX.Element|null => {
+  const renderDownloadError = (): React.JSX.Element|null => {
     if (!isDownloadError) return null;
     return (
       <div className={classes.downloadErrorContainer}>
@@ -664,42 +682,78 @@ const DocumentListItem: React.FC<DocumentListItemProps> = (
       </div>
     );
   };
+
+  if (makeDownloadableLink) {
+    return (
+      <>
+        <ListItem
+          ref={containerRef as never}
+          key={id}
+          component="div"
+          slots={{
+            root: containerComponent,
+          }}
+          slotProps={{
+            root: {
+              className: classes.listItemContainer,
+            },
+          }}
+          secondaryAction={renderAction()}
+        >
+          <ListItemButton
+            className={classes.listItemButton}
+            title={`Click to download ${document.name}`}
+            onClick={(): void => {
+              handleDownloadStarted();
+              DocumentService.downloadDocument(
+                appliedDocument,
+                (downloadDoc: NeonDocument): void => handleDownloadIdle(),
+                (downloadDoc: NeonDocument): void => handleDownloadFailed(),
+              );
+            }}
+          >
+            <ListItemIcon className={classes.listItemIcon}>
+              <TypeIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={primary}
+              secondary={renderSecondaryItem()}
+              className={classes.listItemText}
+            />
+          </ListItemButton>
+        </ListItem>
+        {renderDownloadError()}
+      </>
+    );
+  }
   return (
     <>
       <ListItem
         ref={containerRef as never}
         key={id}
-        className={classes.listItem}
         component="div"
-        ContainerComponent={containerComponent}
-        ContainerProps={{ className: classes.listItemContainer }}
-        title={makeDownloadableLink ? `Click to download ${document.name}` : undefined}
-        // @ts-ignore
-        button={makeDownloadableLink}
-        onClick={!makeDownloadableLink ? undefined : (): void => {
-          handleDownloadStarted();
-          DocumentService.downloadDocument(
-            appliedDocument,
-            (downloadDoc: NeonDocument): void => handleDownloadIdle(),
-            (downloadDoc: NeonDocument): void => handleDownloadFailed(),
-          );
+        slots={{
+          root: containerComponent,
         }}
+        slotProps={{
+          root: {
+            className: classes.listItemContainer,
+          },
+        }}
+        secondaryAction={renderAction()}
       >
         <ListItemIcon className={classes.listItemIcon}>
-          {/* @ts-ignore */}
           <TypeIcon />
         </ListItemIcon>
         <ListItemText
           primary={primary}
           secondary={renderSecondaryItem()}
+          className={classes.listItemText}
         />
-        {renderAction()}
       </ListItem>
       {renderDownloadError()}
     </>
   );
 };
 
-const WrappedDocumentListItem = (Theme as any).getWrappedComponent(DocumentListItem);
-
-export default WrappedDocumentListItem;
+export default DocumentListItem;

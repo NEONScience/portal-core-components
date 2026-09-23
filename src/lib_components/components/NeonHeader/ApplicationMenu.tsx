@@ -1,18 +1,21 @@
-import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Tooltip from '@material-ui/core/Tooltip';
-import AppsIcon from '@material-ui/icons/Apps';
-import Fade from '@material-ui/core/Fade';
-import LaunchIcon from '@material-ui/icons/Launch';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import NeonContext from '../NeonContext/NeonContext';
+import React, { useCallback, useRef, useState } from 'react';
+
+import IconButton from '@mui/material/IconButton';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import Tooltip from '@mui/material/Tooltip';
+import AppsIcon from '@mui/icons-material/Apps';
+import Fade from '@mui/material/Fade';
+import LaunchIcon from '@mui/icons-material/Launch';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
 // interface for user application data
 interface UserApp {
@@ -27,7 +30,7 @@ interface MenuProps {
 }
 
 // declare styles
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   menuContainer: {
     zIndex: 1000, // be sure to display the menu over other elements
   },
@@ -85,17 +88,19 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 // define the menu component
 const Menu = (props: MenuProps) => {
   const { apps } = props;
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const { classes } = useStyles();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const [anchorRefEl, setAnchorRefEl] = useState<HTMLElement | null>(null);
 
   // handle menu toggle
   const handleToggle = () => {
+    setAnchorRefEl(anchorRef.current);
     setOpen((prevOpen) => !prevOpen);
   };
 
   // close the menu
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+  const handleClose = (event: MouseEvent | TouchEvent): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
@@ -111,9 +116,9 @@ const Menu = (props: MenuProps) => {
   };
 
   // handle a menu selection
-  const handleMenuItemClick = (event: React.MouseEvent<EventTarget>, url: string) => {
+  const handleMenuItemClick = useCallback((url: string) => {
     window.location.href = url;
-  };
+  }, []);
 
   return (
     <div className={classes.toolbarContainer}>
@@ -122,8 +127,14 @@ const Menu = (props: MenuProps) => {
           title="Neon Applications"
           aria-label="Neon Applications"
           placement="left"
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 200 }}
+          slots={{
+            transition: Fade,
+          }}
+          slotProps={{
+            transition: {
+              timeout: 200,
+            },
+          }}
           arrow
         >
           <IconButton
@@ -134,6 +145,7 @@ const Menu = (props: MenuProps) => {
             aria-haspopup="true"
             onClick={handleToggle}
             onKeyDown={handleMenuKeyDown}
+            size="large"
           >
             <AppsIcon />
           </IconButton>
@@ -141,7 +153,7 @@ const Menu = (props: MenuProps) => {
         <Popper
           className={classes.menuContainer}
           open={open}
-          anchorEl={anchorRef.current}
+          anchorEl={anchorRefEl}
           role="presentation"
           transition
         >
@@ -156,23 +168,26 @@ const Menu = (props: MenuProps) => {
                   <Grid
                     container
                     spacing={4}
-                    alignItems="stretch"
+                    sx={{
+                      alignItems: 'stretch',
+                    }}
                   >
-                    {apps.map((app: { name: string, description: string, url: string }) => (
+                    {apps.map((app: { name: string; description: string; url: string }) => (
                       <Grid
-                        item
-                        xs={(apps.length === 1) ? 12 : 6}
+                        size={{ xs: (apps.length === 1) ? 12 : 6 }}
                         className={classes.gridItem}
                         key={app.name}
                       >
                         <Card
-                          onClick={(event) => handleMenuItemClick(event, app.url)}
+                          onClick={(event) => handleMenuItemClick(app.url)}
                           key={app.url}
                           className={classes.card}
                         >
                           <CardContent className={classes.cardContent}>
                             <LaunchIcon fontSize="large" />
-                            <Typography variant="subtitle1" gutterBottom style={{ lineHeight: 1 }}>{app.name}</Typography>
+                            <Typography variant="subtitle1" gutterBottom style={{ lineHeight: 1 }}>
+                              {app.name}
+                            </Typography>
                             {app.description}
                           </CardContent>
                         </Card>
@@ -194,7 +209,7 @@ const Menu = (props: MenuProps) => {
  * @returns The menu or null if the user has no applications to display.
  */
 const ApplicationMenu = () => {
-  const [{ auth: authData }] = NeonContext.useNeonContextState();
+  const [{ auth: authData }] = NeonAuthContext.useNeonAuthContextState();
   const apps: UserApp[] = authData?.userData?.data?.apps;
   if (apps?.length > 0) {
     return (

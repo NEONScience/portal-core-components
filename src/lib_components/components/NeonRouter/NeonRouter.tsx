@@ -1,11 +1,10 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import {
   BrowserRouter,
   Route,
   Routes,
   Navigate,
-} from 'react-router-dom';
+} from 'react-router';
 
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import HistoryService from '../../util/historyUtil';
@@ -16,7 +15,7 @@ interface NeonRouterProps {
   children?: React.ReactNode;
 }
 
-const NeonRouter = (props: NeonRouterProps): JSX.Element => {
+const NeonRouter = (props: NeonRouterProps): React.JSX.Element => {
   const {
     cleanPath,
     disableRedirect,

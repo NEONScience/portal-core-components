@@ -4,11 +4,12 @@ import moment from 'moment';
 
 import { transition } from 'd3-transition';
 
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
 
 /**
   All possible valid statuses (enhanced availability only)
 */
+/* eslint-disable max-len, @stylistic/max-len */
 export const VALID_ENHANCED_STATUSES = {
   expected: {
     title: 'Expected',
@@ -63,6 +64,7 @@ export const VALID_ENHANCED_STATUSES = {
     description: 'More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)',
   },
 };
+/* eslint-enable max-len, @stylistic/max-len */
 
 export const calcBasicRollupStatus = (statuses) => {
   if (!statuses) {
@@ -223,16 +225,16 @@ export const SVG_STYLES = {
       outline: 'none',
     },
     timeDivider: {
-      stroke: Theme.palette.grey[400],
+      stroke: COLORS.GREY[400],
       strokeDasharray: 3,
       strokeWidth: '1.2px',
     },
     timeBound: {
-      stroke: Theme.palette.grey[700],
+      stroke: COLORS.GREY[700],
       strokeWidth: '2px',
     },
     timeLabel: {
-      fill: Theme.palette.grey[700],
+      fill: COLORS.GREY[700],
       textAnchor: 'middle',
       fontFamily: '"Cutive Mono","Lucida Console",Monaco,monospace',
       fontWeight: 400,

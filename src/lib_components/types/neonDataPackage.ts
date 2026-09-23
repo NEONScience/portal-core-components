@@ -64,6 +64,12 @@ const sensorPositionV2Schema = z.object({
   'HOR.VER': z.string(),
   sensorLocationID: z.string(),
   sensorLocationDescription: z.string().nullable(),
+  // The effectiveStartDateTime and effectiveEndDateTime
+  // fields are a non-breaking addition to the existing "v2" schema.
+  // To keep the "v2" schema definition here backwards compatible,
+  // these two field additions are marked as optional.
+  effectiveStartDateTime: z.string().optional().nullable(),
+  effectiveEndDateTime: z.string().optional().nullable(),
   positionStartDateTime: z.string().nullable(),
   positionEndDateTime: z.string().nullable(),
   referenceLocationID: z.string().optional().nullable(),

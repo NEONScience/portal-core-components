@@ -1,7 +1,7 @@
 /* eslint max-len: 0 */
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { renderHook } from '@testing-library/react-hooks';
+import { render } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -68,13 +68,11 @@ const {
 describe('SiteMap - SiteMapContext', () => {
   describe('Provider', () => {
     test('renders with no props', () => {
-      const tree = renderer
-        .create((
-          <Provider>
-            <div>children</div>
-          </Provider>
-        ))
-        .toJSON();
+      const tree = render((
+        <Provider>
+          <div>children</div>
+        </Provider>
+      ));
       expect(tree).toMatchSnapshot();
     });
   });
@@ -1628,30 +1626,26 @@ and so this test must be updated.`);
         ).toStrictEqual(state);
       });
       test('sets only zoom (not center and not bounds) if only passed zoom', () => {
-        getZoomedIcons.mockReset();
-        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
         const newState = reducer(state, { type: 'setMapZoom', zoom: 10 });
         expect(newState.map.zoom).toBe(10);
-        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+        expect(newState.map.zoomedIcons).toStrictEqual({});
       });
       test('sets center if provided', () => {
-        getZoomedIcons.mockReset();
-        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
         const newState = reducer(state, { type: 'setMapZoom', zoom: 12, center: [50, 80] });
         expect(newState.map.zoom).toBe(12);
         expect(newState.map.center).toStrictEqual([50, 80]);
-        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+        expect(newState.map.zoomedIcons).toStrictEqual({});
       });
       test('sets bounds if provided', () => {
         const bounds = 'BOUNDS';
         boundsAreValid.mockReset();
         boundsAreValid.mockReturnValue(true);
         getZoomedIcons.mockReset();
-        getZoomedIcons.mockReturnValue('ZOOMED ICONS');
+        getZoomedIcons.mockReturnValue({});
         const newState = reducer(state, { type: 'setMapZoom', zoom: 5, bounds });
         expect(newState.map.zoom).toBe(5);
         expect(newState.map.bounds).toBe(bounds);
-        expect(newState.map.zoomedIcons).toBe('ZOOMED ICONS');
+        expect(newState.map.zoomedIcons).toStrictEqual({});
       });
     });
     describe('setMapBounds', () => {
@@ -1754,31 +1748,11 @@ and so this test must be updated.`);
         expect(newState.filters.overlays.expanded).toStrictEqual(new Set([overlay0]));
       });
     });
-    describe('setMapRepositionOpenPopupFunc', () => {
-      test('sets reposition function to null if passed anything but a function', () => {
-        state.map.repositionOpenPopupFunc = 'foo';
-        const newState = reducer(
-          state,
-          { type: 'setMapRepositionOpenPopupFunc', func: 123 },
-        );
-        expect(newState.map.repositionOpenPopupFunc).toBe(null);
-      });
-      test('sets reposition function to passed function', () => {
-        state.map.repositionOpenPopupFunc = 'foo';
-        const func = () => 'funcreturn';
-        const newState = reducer(
-          state,
-          { type: 'setMapRepositionOpenPopupFunc', func },
-        );
-        expect(typeof newState.map.repositionOpenPopupFunc).toBe('function');
-        expect(newState.map.repositionOpenPopupFunc()).toBe('funcreturn');
-      });
-    });
     describe('showFullObservatory', () => {
       test('resets map center and zoom appropriately', () => {
         deriveFullObservatoryZoomLevel.mockReset();
         deriveFullObservatoryZoomLevel.mockReturnValue(7);
-        const newState = reducer(state, { type: 'showFullObservatory', mapRef: 'foo' });
+        const newState = reducer(state, { type: 'showFullObservatory', mapRef: { current: 'foo' } });
         expect(newState.map.center).toStrictEqual(OBSERVATORY_CENTER);
         expect(deriveFullObservatoryZoomLevel).toHaveBeenCalledTimes(1);
         expect(deriveFullObservatoryZoomLevel).toHaveBeenCalledWith('foo');

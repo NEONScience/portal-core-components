@@ -6,6 +6,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
+import { resolveProps } from '../../util/defaultProps';
+
 /**
    Function: Generate an appropriate height for the visualization given its width.
    Maintain a more square aspect ratio for smaller widths and prefer a 16:9
@@ -22,7 +24,16 @@ const autoVizHeight = (width) => {
   return Math.floor(width * mult);
 };
 
-export default function FullWidthVisualization(props) {
+const defaultProps = {
+  minWidth: 1,
+  handleRedraw: null,
+  deriveHeightFromWidth: null,
+  allowHeightResize: false,
+  containerStyle: null,
+};
+
+export default function FullWidthVisualization(inProps) {
+  const props = resolveProps(defaultProps, inProps);
   const {
     vizRef,
     minWidth,
@@ -93,14 +104,19 @@ export default function FullWidthVisualization(props) {
     };
   }, [vizRef, handleResize]);
 
+  let divStyle = { width: '100%', minWidth: `${minWidth}px` };
+  if (containerStyle) {
+    divStyle = containerStyle;
+  }
+  const divDataProps = {};
+  if (other['data-selenium']) {
+    divDataProps['data-selenium'] = other['data-selenium'];
+  }
   const divProps = {
     ref: containerRef,
-    style: { width: '100%', minWidth: `${minWidth}px` },
+    style: divStyle,
+    ...divDataProps,
   };
-  if (containerStyle) {
-    divProps.style = containerStyle;
-  }
-  if (other['data-selenium']) { divProps['data-selenium'] = other['data-selenium']; }
 
   return (
     <div {...divProps}>
@@ -132,12 +148,4 @@ FullWidthVisualization.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-FullWidthVisualization.defaultProps = {
-  minWidth: 1,
-  handleRedraw: null,
-  deriveHeightFromWidth: null,
-  allowHeightResize: false,
-  containerStyle: null,
 };

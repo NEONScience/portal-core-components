@@ -1,44 +1,49 @@
 import React from 'react';
 
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-
-import {
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import LoginRequiredCard from '../Card/LoginRequiredCard';
-import NeonContext from '../NeonContext/NeonContext';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
-import Theme from '../Theme/Theme';
 import RouteService from '../../service/RouteService';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 import TimeSeriesViewerContext from './TimeSeriesViewerContext';
 
-const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   messageContent: {
     margin: theme.spacing(0, 0, 2, 0),
   },
   messageContentNoMargin: {
     margin: theme.spacing(0, 0, 0, 0),
   },
-})) as StylesHook;
+}));
 
 export interface TimeSeriesViewerLimitedCardProps {
   showInfoOnly?: boolean;
 }
 
-const TimeSeriesViewerLimitedCard = (props: TimeSeriesViewerLimitedCardProps): JSX.Element => {
-  const { showInfoOnly }: TimeSeriesViewerLimitedCardProps = props;
+const defaultProps = {
+  showInfoOnly: undefined,
+};
+
+const TimeSeriesViewerLimitedCard = (
+  inProps: TimeSeriesViewerLimitedCardProps,
+): React.JSX.Element => {
+  const { showInfoOnly }: TimeSeriesViewerLimitedCardProps = resolveProps(
+    defaultProps,
+    inProps,
+  ) as TimeSeriesViewerLimitedCardProps;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const neonContextSessionState = NeonContext.useNeonContextSessionState();
-  const classes = useStyles(Theme);
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
+  const { classes } = useStyles();
   if (!state.isViewerLimitedMode) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <></>;
@@ -65,7 +70,7 @@ const TimeSeriesViewerLimitedCard = (props: TimeSeriesViewerLimitedCardProps): J
     }
     return 'Viewing Limited Time Series Data - Login Required';
   };
-  const renderContents = (): JSX.Element => {
+  const renderContents = (): React.JSX.Element => {
     let details = `The time series viewer is displaying a limited dataset that does not
       reflect the actual data availability for this data product. You must sign in or create
       and validate an account before viewing the full dataset for this data product.
@@ -86,12 +91,12 @@ const TimeSeriesViewerLimitedCard = (props: TimeSeriesViewerLimitedCardProps): J
       </Typography>
     );
   };
-  const renderSignInButton = (): JSX.Element => {
+  const renderSignInButton = (): React.JSX.Element => {
     if (showInfoOnly === true) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
-    if (neonContextSessionState.authenticated === true) {
+    if (neonAuthContextSessionState.authenticated === true) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return <></>;
     }
@@ -107,15 +112,11 @@ const TimeSeriesViewerLimitedCard = (props: TimeSeriesViewerLimitedCardProps): J
           {renderSignInButton()}
         </>
       )}
-      isAuthenticated={neonContextSessionState.authenticated}
-      accountValidated={neonContextSessionState.accountValidated}
-      accountValidationSteps={neonContextSessionState.accountValidationSteps}
+      isAuthenticated={neonAuthContextSessionState.authenticated}
+      accountValidated={neonAuthContextSessionState.accountValidated}
+      accountValidationSteps={neonAuthContextSessionState.accountValidationSteps}
     />
   );
-};
-
-TimeSeriesViewerLimitedCard.defaultProps = {
-  showInfoOnly: undefined,
 };
 
 export default TimeSeriesViewerLimitedCard;

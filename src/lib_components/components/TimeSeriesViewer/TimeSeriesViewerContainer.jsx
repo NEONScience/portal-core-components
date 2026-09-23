@@ -1,41 +1,47 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useReducer,
+} from 'react';
 import moment from 'moment';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Card from '@material-ui/core/Card';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Link from '@material-ui/core/Link';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Card from '@mui/material/Card';
+import CircularProgress from '@mui/material/CircularProgress';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@mui/material/Skeleton';
 
-import ErrorIcon from '@material-ui/icons/Error';
-import SummaryIcon from '@material-ui/icons/Toc';
-import SitesIcon from '@material-ui/icons/Place';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import VariablesIcon from '@material-ui/icons/Timeline';
-import AxesIcon from '@material-ui/icons/BorderInner';
-import WarnIcon from '@material-ui/icons/Warning';
-import InfoIcon from '@material-ui/icons/Info';
-import ComputerIcon from '@material-ui/icons/Computer';
+import ErrorIcon from '@mui/icons-material/Error';
+import SummaryIcon from '@mui/icons-material/Toc';
+import SitesIcon from '@mui/icons-material/Place';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import VariablesIcon from '@mui/icons-material/Timeline';
+import AxesIcon from '@mui/icons-material/BorderInner';
+import WarnIcon from '@mui/icons-material/Warning';
+import InfoIcon from '@mui/icons-material/Info';
+import ComputerIcon from '@mui/icons-material/Computer';
 
 import ReleaseChip from '../Chip/ReleaseChip';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 
 import RouteService from '../../service/RouteService';
 
 import TimeSeriesViewerContext, {
-  POINTS_PERFORMANCE_LIMIT,
   summarizeTimeSteps,
   TIME_SERIES_VIEWER_STATUS_TITLES,
   Y_AXIS_RANGE_MODE_DETAILS,
+  POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 import { TIME_SERIES_VIEWER_STATUS } from './constants';
 import TimeSeriesViewerSites from './TimeSeriesViewerSites';
@@ -48,11 +54,11 @@ import TimeSeriesViewerLimitedCard from './TimeSeriesViewerLimitedCard';
 // We can't rely on flex-sizing to work during resize events as some components within tabs
 // won't be able to shrink correctly on resize (notably: Data Product Availability charts).
 const VERTICAL_TABS_WIDTH = 150;
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   tabsContainer: {
     display: 'flex',
     margin: theme.spacing(0, -0.5, -0.5, -0.5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     },
   },
@@ -61,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
   },
   tabsHorizontal: {
     flexShrink: 0,
+    '& .MuiTabs-scrollButtons.Mui-disabled': {
+      opacity: 0.4,
+    },
   },
   tabPanels: {
     width: '100%',
@@ -103,6 +112,9 @@ const useStyles = makeStyles((theme) => ({
   summaryDiv: {
     marginBottom: theme.spacing(1),
   },
+  axisTableRoot: {
+    borderCollapse: 'separate',
+  },
   axisTitle: {
     fontWeight: 600,
     paddingLeft: '0px',
@@ -117,25 +129,26 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     color: theme.palette.grey[300],
     fontWeight: 700,
-    fontSize: '85%',
-    marginRight: Theme.spacing(1),
+    fontSize: '0.75rem',
+    marginRight: theme.spacing(1),
   },
   errorIcon: {
-    color: Theme.colors.RED[400],
+    color: theme.colors.RED[400],
   },
   warningIcon: {
-    color: Theme.colors.GOLD[500],
+    color: theme.colors.GOLD[500],
   },
   infoIcon: {
-    color: Theme.colors.GOLD[500],
+    color: theme.colors.GOLD[500],
   },
   releaseChip: {
-    color: Theme.colors.LIGHT_BLUE[600],
-    border: `1px solid ${Theme.colors.LIGHT_BLUE[600]}`,
-    backgroundColor: Theme.colors.LIGHT_BLUE[50],
+    color: theme.colors.LIGHT_BLUE[600],
+    border: `1px solid ${theme.colors.LIGHT_BLUE[600]}`,
+    backgroundColor: theme.colors.LIGHT_BLUE[50],
     fontWeight: 600,
     cursor: 'help',
-    marginTop: Theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
+    paddingTop: '1px',
   },
   startFlex: {
     display: 'flex',
@@ -145,22 +158,36 @@ const useStyles = makeStyles((theme) => ({
   statusBar: {
     marginLeft: '-4px',
     marginRight: '-4px',
-    backgroundColor: Theme.palette.grey[200],
+    backgroundColor: theme.palette.grey[100],
+    borderTop: '1px solid rgb(215, 217, 217)',
+    borderLeft: '1px solid rgb(215, 217, 217)',
+    borderRight: '1px solid rgb(215, 217, 217)',
     padding: '4px 4px 4px 12px',
     '& svg': {
       verticalAlign: 'bottom',
       marginRight: '4px',
     },
-    '& .warningMessage': {
-      marginLeft: '20px',
-      '& svg': {
-        color: Theme.colors.BROWN[300],
-      },
-    },
+  },
+  statusBarIcon: {
+    marginRight: theme.spacing(3),
+  },
+  statusBarText: {
+    marginLeft: theme.spacing(1),
+    alignSelf: 'center',
+    paddingTop: '1px',
+  },
+  statusBarPointsText: {
+    marginLeft: theme.spacing(1),
+    alignSelf: 'center',
+    paddingTop: '2.5px',
+  },
+  statusBarWarningIcon: {
+    color: theme.colors.BROWN[300],
+    marginRight: theme.spacing(3),
   },
 }));
 
-const useTabsStyles = makeStyles((theme) => ({
+const useTabsStyles = makeStyles()((theme) => ({
   scroller: {
     [theme.breakpoints.up('md')]: {
       backgroundColor: theme.palette.grey[200],
@@ -168,35 +195,26 @@ const useTabsStyles = makeStyles((theme) => ({
   },
 }));
 
-const useTabStyles = makeStyles((theme) => ({
+const useTabStyles = makeStyles()((theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       marginLeft: '-1.5px',
-      '&:first-child': {
+      '&:is(button:first-of-type)': {
         marginBottom: '-0.5px',
       },
-      '&:not(:first-child)': {
+      '&:not(button:first-of-type)': {
         marginTop: '-1.5px',
       },
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(2.5),
-      '&:not(:first-child)': {
+      '&:not(button:first-of-type)': {
         marginLeft: '-1.5px',
       },
     },
+    minWidth: 'inherit !important',
     textTransform: 'none',
     opacity: 1,
-  },
-  labelIcon: {
-    minHeight: theme.spacing(8),
-    minWidth: theme.spacing(15),
-    [theme.breakpoints.down('sm')]: {
-      minHeight: theme.spacing(6),
-      minWidth: theme.spacing(17),
-    },
-  },
-  wrapper: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -205,8 +223,16 @@ const useTabStyles = makeStyles((theme) => ({
       margin: `${theme.spacing(0, 1, 0, 0)} !important`,
     },
   },
+  labelIcon: {
+    minHeight: theme.spacing(8),
+    minWidth: theme.spacing(15),
+    [theme.breakpoints.down('md')]: {
+      minHeight: theme.spacing(6),
+      minWidth: theme.spacing(17),
+    },
+  },
   selected: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       borderBottom: 'none',
     },
     [theme.breakpoints.up('md')]: {
@@ -220,7 +246,7 @@ const useTabStyles = makeStyles((theme) => ({
    Summary Component
 */
 export function TimeSeriesViewerSummary() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
   const {
@@ -236,7 +262,7 @@ export function TimeSeriesViewerSummary() {
   } = state.selection;
 
   const skeletonProps = {
-    variant: 'rect',
+    variant: 'rectangular',
     height: 10,
     style: { marginTop: '4px', marginBottom: '12px' },
   };
@@ -259,7 +285,7 @@ export function TimeSeriesViewerSummary() {
   );
   if (state.product.productName) {
     productSummaryTitle = (
-      <div style={{ marginRight: Theme.spacing(1) }}>
+      <div style={{ marginRight: theme.spacing(1) }}>
         <Typography variant="subtitle2">Data Product</Typography>
         <Typography variant="body2">
           <Link href={productHref} target="_blank" style={{ fontWeight: 600 }}>
@@ -276,7 +302,7 @@ export function TimeSeriesViewerSummary() {
         {state.product.productSensor ? (
           <Typography variant="body2">
             <b>Sensor:</b>
-            <span style={{ marginLeft: Theme.spacing(0.5) }}>
+            <span style={{ marginLeft: theme.spacing(0.5) }}>
               {state.product.productSensor}
             </span>
           </Typography>
@@ -297,9 +323,14 @@ export function TimeSeriesViewerSummary() {
   const latestReleaseClause = useReleaseChip
     ? ''
     : ` (release: ${latestRelease || 'unknown'})`;
-  const releaseTooltip = state.release === null
-    ? `You are viewing only the latest released and provisional data (release: ${latestRelease || 'unknown'}).`
-    : `You are viewing product data only from the ${state.release} release (no provisional data will be included).`;
+  let releaseTooltip;
+  if (state.release === null) {
+    releaseTooltip = 'You are viewing only the latest released and provisional data '
+      + `(release: ${latestRelease || 'unknown'}).`;
+  } else {
+    releaseTooltip = `You are viewing product data only from the ${state.release} `
+      + 'release (no provisional data will be included).';
+  }
   const releaseChipLabel = state.release === null
     ? `Latest released and provisional data${latestReleaseClause}`
     : `${state.release}`;
@@ -389,12 +420,13 @@ export function TimeSeriesViewerSummary() {
       axes[yAxis].push({ title: 'Scale', value: logscale ? 'Logarithmic' : 'Linear' });
       axes[yAxis].push({ title: 'Units', value: yAxes[yAxis].units });
       const rangeMode = Y_AXIS_RANGE_MODE_DETAILS[yAxes[yAxis].rangeMode].name;
-      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} - ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
+      const range = `${rangeMode} (${yAxes[yAxis].axisRange[0].toString()} `
+        + `- ${yAxes[yAxis].axisRange[1].toString()} ${yAxes[yAxis].units})`;
       axes[yAxis].push({ title: 'Range', value: range });
     }
   });
   const renderAxisSetting = (setting) => (
-    <div key={setting.title} style={{ marginRight: Theme.spacing(2), whiteSpace: 'nowrap' }}>
+    <div key={setting.title} style={{ marginRight: theme.spacing(2), whiteSpace: 'nowrap' }}>
       <span className={classes.axisSettingTitle}>
         {`${setting.title}:`}
       </span>
@@ -402,26 +434,34 @@ export function TimeSeriesViewerSummary() {
     </div>
   );
   const axesSummary = (
-    <Table size="small">
-      <TableBody>
-        <TableRow>
-          <TableCell className={classes.axisTitle}>x</TableCell>
-          <TableCell className={classes.axisSettings}>{axes.x.map(renderAxisSetting)}</TableCell>
-        </TableRow>
-        {!axes.y1.length ? null : (
+    <TableContainer>
+      <Table size="small" className={classes.axisTableRoot}>
+        <TableBody>
           <TableRow>
-            <TableCell className={classes.axisTitle}>y1</TableCell>
-            <TableCell className={classes.axisSettings}>{axes.y1.map(renderAxisSetting)}</TableCell>
+            <TableCell className={classes.axisTitle}>x</TableCell>
+            <TableCell className={classes.axisSettings}>
+              {axes.x.map(renderAxisSetting)}
+            </TableCell>
           </TableRow>
-        )}
-        {!axes.y2.length ? null : (
-          <TableRow>
-            <TableCell className={classes.axisTitle}>y2</TableCell>
-            <TableCell className={classes.axisSettings}>{axes.y2.map(renderAxisSetting)}</TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+          {!axes.y1.length ? null : (
+            <TableRow>
+              <TableCell className={classes.axisTitle}>y1</TableCell>
+              <TableCell className={classes.axisSettings}>
+                {axes.y1.map(renderAxisSetting)}
+              </TableCell>
+            </TableRow>
+          )}
+          {!axes.y2.length ? null : (
+            <TableRow>
+              <TableCell className={classes.axisTitle}>y2</TableCell>
+              <TableCell className={classes.axisSettings}>
+                {axes.y2.map(renderAxisSetting)}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 
   return (
@@ -500,27 +540,54 @@ const TABS = {
 
 const DEFAULT_TAB = 'SUMMARY';
 
-export default function TimeSeriesViewerContainer() {
-  const classes = useStyles(Theme);
-  const tabClasses = useTabStyles(Theme);
-  const tabsClasses = useTabsStyles(Theme);
-  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
+const containerReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'resetState':
+      newState.selectedTab = action.selectedTab;
+      newState.loadedProductCode = action.loadedProductCode;
+      return newState;
+    case 'setSelectedTab':
+      newState.selectedTab = action.selectedTab;
+      return newState;
+    default:
+      return state;
+  }
+};
 
-  // console.log('TIME SERIES VIEWER STATE:', state);
+export default function TimeSeriesViewerContainer() {
+  const { classes, theme } = useStyles();
+  const { classes: tabClasses } = useTabStyles();
+  const { classes: tabsClasses } = useTabsStyles();
+  const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const initialTab = DEFAULT_TAB;
-  const [selectedTab, setSelectedTab] = useState(initialTab);
-  const [loadedProductCode, setLoadedProductCode] = useState(state.product.productCode);
+  const initialContainerState = {
+    selectedTab: initialTab,
+    loadedProductCode: state.product.productCode,
+  };
+  const [containerState, containerDispatch] = useReducer(containerReducer, initialContainerState);
+  const { selectedTab, loadedProductCode } = containerState;
+
+  const setSelectedTab = (newSelectedTab) => {
+    containerDispatch({ type: 'setSelectedTab', selectedTab: newSelectedTab });
+  };
 
   // Effect to handle a reinitialize event from the context. We track the loaded product code
   // separate from the context product code so when the latter changes we know to reset the
   // tab to SUMMARY and completely unmount and remount the TimeSeriesGraph.
   useEffect(() => {
-    if (state.product.productCode === loadedProductCode) { return; }
-    setLoadedProductCode(state.product.productCode);
-    setSelectedTab(DEFAULT_TAB);
-  }, [state.product.productCode, loadedProductCode, setSelectedTab]);
+    if (state.product.productCode === containerState.loadedProductCode) {
+      return;
+    }
+    const action = {
+      type: 'resetState',
+      selectedTab: DEFAULT_TAB,
+      loadedProductCode: state.product.productCode,
+    };
+    containerDispatch(action);
+  }, [state.product.productCode, containerState, containerDispatch]);
 
   // Slider position is not controlled in state because doing so kills mouse drag performance.
   // Use a ref to deterministically set slider position for all slider-based features.
@@ -528,15 +595,22 @@ export default function TimeSeriesViewerContainer() {
 
   const renderTabs = () => (
     <Tabs
+      allowScrollButtonsMobile
       orientation={belowMd ? 'horizontal' : 'vertical'}
-      scrollButtons={belowMd ? 'on' : 'auto'}
+      scrollButtons={belowMd ? true : 'auto'}
       variant="scrollable"
       value={selectedTab}
       className={belowMd ? classes.tabsHorizontal : classes.tabsVertical}
       classes={tabsClasses}
       aria-label="Time Series Viewer Controls"
       onChange={(event, newTab) => { setSelectedTab(newTab); }}
-      TabIndicatorProps={{ style: { display: 'none' } }}
+      slotProps={{
+        indicator: {
+          style: {
+            display: 'none',
+          },
+        },
+      }}
     >
       {Object.keys(TABS).map((tabId) => {
         const { label, ariaLabel, Icon: TabIcon } = TABS[tabId];
@@ -587,10 +661,15 @@ export default function TimeSeriesViewerContainer() {
     if (isError || isWarning || isLoginRequired) {
       const icon = isLoginRequired
         ? (<InfoIcon fontSize="large" className={classes.infoIcon} />)
-        : (<ErrorIcon fontSize="large" className={classes[isError ? 'errorIcon' : 'warningIcon']} />);
+        : (
+          <ErrorIcon
+            fontSize="large"
+            className={classes[isError ? 'errorIcon' : 'warningIcon']}
+          />
+        );
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>
             {state.displayError || 'An unknown error occurred; unable to visualize data product'}
           </Typography>
           {icon}
@@ -609,7 +688,7 @@ export default function TimeSeriesViewerContainer() {
       }
       return (
         <div className={classes.graphOverlay}>
-          <Typography variant="subtitle2" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="subtitle2" style={{ marginBottom: theme.spacing(4) }}>
             {title}
           </Typography>
           <CircularProgress {...progressProps} />
@@ -653,23 +732,39 @@ export default function TimeSeriesViewerContainer() {
       showWarning = true;
     }
 
+    const renderWarning = () => {
+      if (!showWarning) {
+        // eslint-disable-next-line react/jsx-no-useless-fragment
+        return <></>;
+      }
+      return (
+        <Grid>
+          <WarnIcon fontSize="medium" className={classes.statusBarWarningIcon} />
+          <div style={{ display: 'inline-flex', height: '24px' }}>
+            <Typography variant="body2" className={classes.statusBarText}>
+              Data point total approaching limit; some options are disabled.
+            </Typography>
+          </div>
+        </Grid>
+      );
+    };
+
     return (
       <div className={classes.statusBar}>
-        <ComputerIcon fontSize="medium" />
-        <span>
-          <b>Data Points</b>
-          :&nbsp;
-        </span>
-        {pointTotal}
-        <span> of </span>
-        {addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}
-        <span
-          className="warningMessage"
-          style={{ visibility: showWarning ? 'visible' : 'hidden' }}
-        >
-          <WarnIcon fontSize="medium" />
-          Data point total approaching limit; some options are disabled.
-        </span>
+        <Grid container>
+          <Grid sx={{ width: '260px' }}>
+            <ComputerIcon fontSize="medium" className={classes.statusBarIcon} />
+            <div style={{ display: 'inline-flex', height: '24px' }}>
+              <Typography variant="subtitle2" className={classes.statusBarText}>
+                Data Points
+              </Typography>
+              <Typography variant="body2" className={classes.statusBarPointsText}>
+                {`${pointTotal} of ${addThousandsSeparator(POINTS_PERFORMANCE_LIMIT)}`}
+              </Typography>
+            </div>
+          </Grid>
+          {renderWarning()}
+        </Grid>
       </div>
     );
   };

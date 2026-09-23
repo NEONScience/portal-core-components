@@ -1,31 +1,30 @@
 /* eslint react/jsx-one-expression-per-line: 0, max-len: 0 */
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from './DocBlock';
 
-import NeonEnvironment from '../lib_components/components/NeonEnvironment/NeonEnvironment';
-import Theme from '../lib_components/components/Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function Home() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
     <>
 
       <DocBlock>
-        NEON Data Portal Core Components is an open source library of <Link href="https://reactjs.org" target="_blank">React</Link> components
+        NEON Data Portal Core Components is an open source library of <Link color="primary" href="https://reactjs.org" target="_blank">React</Link> components
         intended for use on <Link href={`${NeonEnvironment.getWebHost()}`} target="_blank">NEON Data Portal</Link> pages.
       </DocBlock>
       <DocBlock>

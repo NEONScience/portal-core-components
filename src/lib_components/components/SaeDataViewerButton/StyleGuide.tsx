@@ -1,15 +1,18 @@
-/* eslint react/jsx-one-expression-per-line: 0 */
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+// import { LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import moment from 'moment';
-import MomentUtils from '@date-io/moment';
+
+import SaeDataViewerButton from '@/components/SaeDataViewerButton/SaeDataViewerButton';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -17,10 +20,7 @@ import ExampleBlock from '../../../components/ExampleBlock';
 import NeonContext from '../NeonContext/NeonContext';
 import saeDataProductsJSON from '../../staticJSON/saeDataProducts.json';
 
-import SaeDataViewerButton from './SaeDataViewerButton';
-import Theme from '../Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -34,8 +34,8 @@ const buttonFullWidthState = {
   states: [true, false, 'bogus'],
 };
 
-const SaeViewerDemo = (): JSX.Element => {
-  const classes = useStyles(Theme);
+const SaeViewerDemo = (): React.JSX.Element => {
+  const { classes } = useStyles();
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const {
     sites,
@@ -49,7 +49,7 @@ const SaeViewerDemo = (): JSX.Element => {
   const handleChange = (event: any) => {
     setFullWidth(event.target.value);
   };
-  const handleChangeDatePicker = (rangeIndex: Number, event: any) => {
+  const handleChangeDatePicker = (rangeIndex: number, event: any) => {
     if (rangeIndex === 0) {
       setStartDate(event);
     } else {
@@ -73,7 +73,7 @@ const SaeViewerDemo = (): JSX.Element => {
   return (
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography
             variant="h5"
             component="h3"
@@ -91,7 +91,7 @@ const SaeViewerDemo = (): JSX.Element => {
             onChange={handleChangeSite}
             style={{ width: 'fit-content', marginBottom: '32px' }}
           >
-            { renderSiteList() }
+            {renderSiteList()}
           </Select>
           <Typography
             variant="h5"
@@ -110,13 +110,13 @@ const SaeViewerDemo = (): JSX.Element => {
             onChange={handleChangeProduct}
             style={{ width: 'fit-content', marginBottom: '32px' }}
           >
-            { saeDataProducts.map((val: any) => ((
+            {saeDataProducts.map((val: any) => ((
               <MenuItem key={val} value={val}>
                 {`${val}`}
               </MenuItem>
             )))}
           </Select>
-          <Typography
+          {/* <Typography
             variant="h5"
             component="h3"
             id="full-width-select-label"
@@ -124,38 +124,34 @@ const SaeViewerDemo = (): JSX.Element => {
           >
             Date Range
           </Typography>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <DatePicker
               data-selenium="date-range.start-input"
               disableFuture
               format="YYYY-mm-DD"
-              inputVariant="outlined"
               label="From"
-              minDate={moment().subtract(5, 'years')}
-              maxDate={moment().subtract(1, 'day')}
-              margin="dense"
+              minDate={moment(moment().subtract(5, 'years').format('YYYY-MM-dd'))}
+              maxDate={moment(moment().subtract(1, 'day').format('YYYY-MM-dd'))}
               orientation="portrait"
               onChange={(value) => handleChangeDatePicker(0, value)}
-              style={{ width: 'fit-content', marginBottom: Theme.spacing(2) }}
               value={startDate}
-              views={['year', 'month', 'date']}
+              views={['day']}
+              openTo="day"
             />
             <DatePicker
               data-selenium="date-range.end-input"
               disableFuture
               format="YYYY-mm-DD"
-              inputVariant="outlined"
               label="Through"
-              minDate={moment().subtract(5, 'years')}
-              maxDate={moment().subtract(1, 'day')}
-              margin="dense"
+              minDate={moment(moment().subtract(5, 'years').format('YYYY-MM-dd'))}
+              maxDate={moment(moment().subtract(1, 'day').format('YYYY-MM-dd'))}
               orientation="portrait"
               onChange={(value) => handleChangeDatePicker(1, value)}
-              style={{ width: 'fit-content' }}
               value={endDate}
-              views={['year', 'month', 'date']}
+              views={['day']}
+              openTo="day"
             />
-          </MuiPickersUtilsProvider>
+          </LocalizationProvider> */}
           <Typography
             variant="h5"
             component="h3"
@@ -180,7 +176,7 @@ const SaeViewerDemo = (): JSX.Element => {
             )))}
           </Select>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <SaeDataViewerButton
             isFullWidth={isFullWidth}
             site={selectedSite}
@@ -195,7 +191,7 @@ const SaeViewerDemo = (): JSX.Element => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   return (
     <>
@@ -211,7 +207,6 @@ import SaeDataViewerButton from 'portal-core-components/lib/components/SaeDataVi
       <Typography variant="h5" component="h3" gutterBottom>Usage</Typography>
 
       <DocBlock>
-        { /* @ts-ignore */ }
         The SAE Data Viewer button defaults to taking up the full width unless
         isFullWidth is set to false in which case it fits contents.
       </DocBlock>
@@ -234,7 +229,6 @@ import SaeDataViewerButton from 'portal-core-components/lib/components/SaeDataVi
       <Typography variant="h6" component="h4" gutterBottom>Failure State</Typography>
 
       <DocBlock>
-        { /* @ts-ignore */ }
         Any invalid paramaters to the component are ignored. Invalid parameters can be passed to
         the SAE data viewer.
       </DocBlock>

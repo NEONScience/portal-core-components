@@ -1,10 +1,10 @@
-import { Reducer } from 'redux';
+import { Reducer, UnknownAction } from 'redux';
 import { Nullable } from './core';
 
 /**
  * State shapes
  */
-export interface AsyncState<T extends any> {
+export interface AsyncState<T> {
   asyncState: AsyncStateType;
   data: T;
   error: Nullable<ErrorState>;
@@ -21,14 +21,13 @@ export enum AsyncStateType {
   IDLE,
   WORKING,
   FULLFILLED,
-  FAILED
+  FAILED,
 }
 
 /**
  * Action type union
  */
-export type AsyncActionType =
-  AsyncAction
+export type AsyncActionType = AsyncAction
   | AsyncParamAction
   | AsyncCompletedAction
   | AsyncErrorAction;
@@ -36,14 +35,14 @@ export type AsyncActionType =
 /**
  * Async action definitions.
  */
-export interface AsyncAction {
+export interface AsyncAction extends UnknownAction {
   type: string;
 }
 /**
  * General parameter passing actions
  */
 export interface AsyncParamAction extends AsyncAction {
-  param?: any
+  param?: any;
 }
 /**
  * Completed async action for propagating the result data
@@ -79,7 +78,7 @@ export type AsyncActionErrorFunction = (
 /**
  * Parser function declaration for parsing the raw response to types result data
  */
-export type ParserFunction<T extends any> = (data: any) => T;
+export type ParserFunction<T> = (data: any) => T;
 
 /**
  * Core set of flow actions
@@ -91,7 +90,7 @@ export interface CoreAsyncFlowActionTypes {
   reset: Nullable<string>;
 }
 
-export type FlowActionTypes = {[key: string]: AsyncFlowActionTypes};
+export type FlowActionTypes = { [key: string]: AsyncFlowActionTypes };
 
 /**
  * Async flow action type wrapper
@@ -102,7 +101,7 @@ export interface AsyncFlowActionTypes extends CoreAsyncFlowActionTypes {
 /**
  * Async flow handler declaration
  */
-export interface CoreAsyncFlowHandler<T extends any> {
+export interface CoreAsyncFlowHandler<T> {
   asyncWorkingAction: AsyncActionFunction;
   asyncCompletedAction: AsyncActionCompletedFunction;
   asyncErrorAction: AsyncActionErrorFunction;
@@ -112,7 +111,7 @@ export interface CoreAsyncFlowHandler<T extends any> {
 /**
  * Async flow handler declaration
  */
-export interface AsyncFlowHandler<S, A extends AsyncActionType, T extends any>
+export interface AsyncFlowHandler<S, A extends AsyncActionType, T>
     extends CoreAsyncFlowHandler<T> {
   asyncAction: AsyncActionFunction;
   reducer: Reducer<S, A>;

@@ -17,6 +17,7 @@ const DrupalAssetService: IDrupalAssetService = {
     if (!isStringNonEmpty(scrubbedContent)) {
       return scrubbedContent;
     }
+    // eslint-disable-next-line max-len, @stylistic/max-len
     const matches: RegExpMatchArray|null = scrubbedContent.match(/^(.*url\(["']((?!data|https)).*)$/mg);
     if (!exists(matches)) {
       return scrubbedContent;
@@ -24,6 +25,7 @@ const DrupalAssetService: IDrupalAssetService = {
     (matches as RegExpMatchArray).forEach((match: string): void => {
       let shouldCommentMatch = true;
       if (replaceRelativeUrlsWithRoot) {
+        // eslint-disable-next-line max-len, @stylistic/max-len
         const relativeUrlRegex = /(?<relative>url\(["'](?<relativePathSegments>\.\.\/\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/\.\.\/|\.\.\/\.\.\/|\.\.\/)(?<path>images\/.+)["']\))/;
         const matchesRelative: RegExpExecArray|null = relativeUrlRegex.exec(match);
         if (exists(matchesRelative)
@@ -34,7 +36,10 @@ const DrupalAssetService: IDrupalAssetService = {
         ) {
           const replaceRelative = (matchesRelative as RegExpExecArray).groups?.relative as string;
           const replaceRelativePath = (matchesRelative as RegExpExecArray).groups?.path as string;
-          const replaceWith = `url("${NeonEnvironment.getWebHost()}/themes/custom/neon/${replaceRelativePath}")`;
+          const replacePath = `${NeonEnvironment.getWebHost()}`
+            + '/themes/custom/neon/'
+            + `${replaceRelativePath}`;
+          const replaceWith = `url("${replacePath}")`;
           scrubbedContent = scrubbedContent.replace(replaceRelative, replaceWith);
           shouldCommentMatch = false;
         }

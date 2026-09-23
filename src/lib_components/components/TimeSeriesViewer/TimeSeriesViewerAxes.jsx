@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
-import Skeleton from '@material-ui/lab/Skeleton';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Skeleton from '@mui/material/Skeleton';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import SwapIcon from '@material-ui/icons/SwapHoriz';
+import SwapIcon from '@mui/icons-material/SwapHoriz';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
 import TimeSeriesViewerContext, {
   TIME_STEPS,
   Y_AXIS_RANGE_MODES,
@@ -24,7 +23,7 @@ import TimeSeriesViewerContext, {
   POINTS_PERFORMANCE_LIMIT,
 } from './TimeSeriesViewerContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   optionsContainer: {
     display: 'flex',
     alignItems: 'flex-start',
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   smallButton: {
-    fontSize: '0.55rem',
+    fontSize: '0.625rem',
     padding: theme.spacing(0.25, 0.75),
     whiteSpace: 'nowrap',
   },
@@ -109,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.75rem',
   },
   horizSlider: {
-    width: `calc(100% - ${theme.spacing(6)}px)`,
+    width: `calc(100% - ${theme.spacing(6)})`,
     marginLeft: theme.spacing(3),
     marginBottom: '24px !important',
   },
@@ -122,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
    y Axes - Scale Option
 */
 const YAxisScaleOption = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { yAxes, logscale } = state.selection;
   const classNames = {
@@ -130,7 +129,7 @@ const YAxisScaleOption = () => {
     deselected: classes.optionButton,
   };
   return (
-    <div style={{ minWidth: Theme.spacing(21.5) }}>
+    <div style={{ minWidth: theme.spacing(21.5) }}>
       <ToggleButtonGroup
         exclusive
         color="primary"
@@ -165,7 +164,7 @@ const YAxisScaleOption = () => {
           variant="outlined"
           onClick={() => { dispatch({ type: 'selectSwapYAxes' }); }}
           className={classes.smallButton}
-          style={{ marginTop: Theme.spacing(1) }}
+          style={{ marginTop: theme.spacing(1) }}
         >
           <SwapIcon className={classes.smallButtonIcon} />
           Swap Y Axes
@@ -181,7 +180,7 @@ const YAxisScaleOption = () => {
 const YAxisRangeOption = (props) => {
   const { axis } = props;
 
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const classNames = {
     selected: `${classes.optionButton} ${classes.optionButtonSelected}`,
     deselected: classes.optionButton,
@@ -266,12 +265,27 @@ const YAxisRangeOption = (props) => {
   return !render ? (
     <div className={classes.yAxisRangeOuterContainer}>
       <div className={classes.yAxisRangeOptions}>
-        <Skeleton variant="rect" width={200} height={30} style={{ margin: Theme.spacing(0.5, 0) }} />
+        <Skeleton
+          variant="rectangular"
+          width={200}
+          height={30}
+          style={{ margin: theme.spacing(0.5, 0) }}
+        />
       </div>
       <div className={classes.yAxisRangeInnerContainer}>
         <div className={classes.yAxisRangeTextfieldContainer}>
-          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
-          <Skeleton variant="rect" width={96} height={36} style={{ margin: Theme.spacing(1, 0) }} />
+          <Skeleton
+            variant="rectangular"
+            width={96}
+            height={36}
+            style={{ margin: theme.spacing(1, 0) }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={96}
+            height={36}
+            style={{ margin: theme.spacing(1, 0) }}
+          />
         </div>
       </div>
     </div>
@@ -310,9 +324,11 @@ const YAxisRangeOption = (props) => {
           <TextField
             label="Max"
             type="number"
-            margin="dense"
-            inputProps={{ step }}
-            InputLabelProps={{ shrink: true }}
+            size="small"
+            slotProps={{
+              input: { step },
+              inputLabel: { shrink: true },
+            }}
             variant="outlined"
             disabled={!isCustom}
             value={activeRange[1]}
@@ -330,9 +346,11 @@ const YAxisRangeOption = (props) => {
           <TextField
             label="Min"
             type="number"
-            margin="dense"
-            inputProps={{ step }}
-            InputLabelProps={{ shrink: true }}
+            size="small"
+            slotProps={{
+              input: { step },
+              inputLabel: { shrink: true },
+            }}
             variant="outlined"
             disabled={!isCustom}
             value={activeRange[0]}
@@ -379,13 +397,24 @@ const YAxisRangeOption = (props) => {
 };
 YAxisRangeOption.propTypes = PropTypes.oneOf(['y1', 'y2']).isRequired;
 
+const rollPeriodReducer = (state, action) => {
+  const newState = { ...state };
+  switch (action.type) {
+    case 'setActiveRollPeriod':
+      newState.activeRollPeriod = action.activeRollPeriod;
+      return newState;
+    default:
+      return state;
+  }
+};
+
 /**
    x Axis - Roll Period Option
 */
 const RollPeriodOption = () => {
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
 
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const { selection } = state;
   const {
     rollPeriod: currentRollPeriod,
@@ -402,17 +431,21 @@ const RollPeriodOption = () => {
 
   // Local state for the slider value as we change it. This lets us change the value with a
   // controlled slider component without having to send all updates through the main context reducer
-  const [activeRollPeriod, setActiveRollPeriod] = useState(currentRollPeriod);
+  const initialState = { activeRollPeriod: currentRollPeriod };
+  const [rollPeriodState, rollPeriodDispatch] = useReducer(rollPeriodReducer, initialState);
   const [isActivelySetting, setIsActivelySetting] = useState(false);
   useEffect(() => {
-    if (activeRollPeriod !== currentRollPeriod && !isActivelySetting) {
-      setActiveRollPeriod(currentRollPeriod);
+    if (rollPeriodState.activeRollPeriod !== currentRollPeriod && !isActivelySetting) {
+      rollPeriodDispatch({
+        type: 'setActiveRollPeriod',
+        activeRollPeriod: currentRollPeriod,
+      });
     }
   }, [
-    activeRollPeriod,
+    rollPeriodState,
+    rollPeriodDispatch,
     currentRollPeriod,
     isActivelySetting,
-    setActiveRollPeriod,
   ]);
 
   // Determine slider marks
@@ -428,21 +461,25 @@ const RollPeriodOption = () => {
   }));
 
   return !currentTimeStep ? (
-    <Skeleton variant="rect" width="100%" height={56} />
+    <Skeleton variant="rectangular" width="100%" height={56} />
   ) : (
-    <div style={{ width: '100%', minWidth: Theme.spacing(40) }}>
+    <div style={{ width: '100%', minWidth: theme.spacing(40) }}>
       <Slider
         className={classes.horizSlider}
         marks={marks}
         data-selenium="time-series-viewer.options.roll-period-slider"
-        value={activeRollPeriod}
+        value={rollPeriodState.activeRollPeriod}
         valueLabelDisplay="auto"
         valueLabelFormat={(x) => summarizeTimeSteps(x, currentTimeStep)}
         min={rollMin}
         max={rollMax}
-        onMouseDown={() => { setIsActivelySetting(true); }}
+        onPointerDown={() => { setIsActivelySetting(true); }}
         onChange={(event, value) => {
-          setActiveRollPeriod(Math.min(Math.max(value, rollMin), rollMax));
+          const newActiveRollPeriod = Math.min(Math.max(value, rollMin), rollMax);
+          rollPeriodDispatch({
+            type: 'setActiveRollPeriod',
+            activeRollPeriod: newActiveRollPeriod,
+          });
         }}
         onChangeCommitted={(event, value) => {
           setIsActivelySetting(false);
@@ -460,14 +497,13 @@ const RollPeriodOption = () => {
    x Axis - Time Step Option
 */
 const TimeStepOption = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state, dispatch] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { availableTimeSteps } = state.timeStep;
   const { timeStep: selectedTimeStep } = state.selection;
   const handleChangeTimeStep = (event, timeStep) => {
     dispatch({ type: 'selectTimeStep', timeStep });
   };
-
   return (
     <ToggleButtonGroup
       exclusive
@@ -477,16 +513,14 @@ const TimeStepOption = () => {
       className={classes.optionButtonGroup}
       value={selectedTimeStep}
       onChange={handleChangeTimeStep}
-      style={{ marginBottom: Theme.spacing(3) }}
+      style={{ marginBottom: theme.spacing(3) }}
     >
       {Array.from(availableTimeSteps).map((timeStep) => {
         const className = timeStep === selectedTimeStep
           ? `${classes.optionButton} ${classes.optionButtonSelected}`
           : classes.optionButton;
-
-        const isDisabled = TimeSeriesViewerContext.calcPredictedPointsByTimeStep(state, timeStep)
-          > POINTS_PERFORMANCE_LIMIT;
-
+        const numPoints = TimeSeriesViewerContext.calcPredictedPointsByTimeStep(state, timeStep);
+        const isDisabled = numPoints > POINTS_PERFORMANCE_LIMIT;
         return (
           <ToggleButton
             key={timeStep}
@@ -540,7 +574,7 @@ const OPTIONS = {
    Main Component
 */
 export default function TimeSeriesViewerAxes() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const [state] = TimeSeriesViewerContext.useTimeSeriesViewerState();
   const { selection } = state;
   const renderOption = (key) => {
@@ -557,10 +591,10 @@ export default function TimeSeriesViewerAxes() {
     return (
       <div>
         <Typography variant="subtitle2">{title}</Typography>
-        <Typography variant="caption" style={{ color: Theme.palette.grey[400] }}>
+        <Typography variant="caption" style={{ color: theme.palette.grey[400] }}>
           {description}
         </Typography>
-        <div style={{ width: '100%', marginTop: Theme.spacing(1) }}>
+        <div style={{ width: '100%', marginTop: theme.spacing(1) }}>
           <Component />
         </div>
       </div>
@@ -569,14 +603,14 @@ export default function TimeSeriesViewerAxes() {
   const hasY2Axis = selection.yAxes.y2.units !== null;
   return (
     <div className={classes.optionsContainer}>
-      <div style={{ marginRight: Theme.spacing(5) }}>
-        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>y Axes</Typography>
+      <div style={{ marginRight: theme.spacing(5) }}>
+        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>y Axes</Typography>
         <div className={classes.optionsContainer}>
-          <div style={{ marginBottom: Theme.spacing(3), marginRight: Theme.spacing(4) }}>
+          <div style={{ marginBottom: theme.spacing(3), marginRight: theme.spacing(4) }}>
             {renderOption('Y_AXIS_SCALE')}
           </div>
           <div className={classes.yAxesRangesContainer}>
-            <div style={!hasY2Axis ? null : { marginRight: Theme.spacing(4) }}>
+            <div style={!hasY2Axis ? null : { marginRight: theme.spacing(4) }}>
               {renderOption('Y1_AXIS_RANGE')}
             </div>
             {!hasY2Axis ? null : renderOption('Y2_AXIS_RANGE')}
@@ -584,10 +618,12 @@ export default function TimeSeriesViewerAxes() {
         </div>
       </div>
       <div>
-        <Typography variant="h6" style={{ marginBottom: Theme.spacing(2) }}>x Axis (Time)</Typography>
+        <Typography variant="h6" style={{ marginBottom: theme.spacing(2) }}>
+          x Axis (Time)
+        </Typography>
         <div className={classes.optionsContainer}>
           {state.timeStep.availableTimeSteps.size < 3 ? null : (
-            <div style={{ marginRight: Theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
+            <div style={{ marginRight: theme.spacing(4) }}>{renderOption('TIME_STEP')}</div>
           )}
           {renderOption('ROLL_PERIOD')}
         </div>

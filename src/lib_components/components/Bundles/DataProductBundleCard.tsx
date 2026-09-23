@@ -1,21 +1,21 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 
 import InfoMessageCard from '../Card/InfoMessageCard';
-import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { exists } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme: NeonTheme) => ({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   cardIcon: {
     color: 'rgba(0, 0, 0, 0.9)',
     padding: '5px 0px',
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     marginRight: theme.spacing(2),
   },
   cardSecondaryIcon: {
@@ -44,10 +44,20 @@ export interface DataProductBundleCardProps {
   classes?: DataProductBundleCardClasses;
 }
 
+const defaultProps: DataProductBundleCardProps = {
+  titleContent: undefined,
+  detailContent: undefined,
+  subTitleContent: undefined,
+  customContent: undefined,
+  isSplit: false,
+  classes: undefined,
+};
+
 const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
-  props: DataProductBundleCardProps,
-): JSX.Element => {
-  const classes = useStyles(Theme);
+  inProps: DataProductBundleCardProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes } = useStyles();
   const {
     titleContent,
     subTitleContent,
@@ -60,7 +70,7 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
     ? customClasses.cardIcon
     : undefined;
 
-  const renderContent = (): JSX.Element => {
+  const renderContent = (): React.JSX.Element => {
     if (exists(customContent)) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       return (<>{customContent}</>);
@@ -103,15 +113,6 @@ const DataProductBundleCard: React.FC<DataProductBundleCardProps> = (
       }}
     />
   );
-};
-
-DataProductBundleCard.defaultProps = {
-  titleContent: undefined,
-  detailContent: undefined,
-  subTitleContent: undefined,
-  customContent: undefined,
-  isSplit: false,
-  classes: undefined,
 };
 
 export default DataProductBundleCard;

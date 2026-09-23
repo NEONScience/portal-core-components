@@ -4,7 +4,7 @@ import { ajax } from 'rxjs/ajax';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 import { getJson } from '../../util/rxUtil';
-import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { isStringNonEmpty } from '../../util/typeUtil';
 
 /**
  * Gets the API Token header from the environment.
@@ -34,45 +34,48 @@ const getApiTokenHeader = (headers = undefined) => {
  */
 const mapResponse = map((x) => x.response);
 
-const getAppliedWithCredentials = (withCredentials = undefined) => {
-  let appliedWithCredentials = false;
-  if (!exists(withCredentials) || (typeof withCredentials !== 'boolean')) {
-    appliedWithCredentials = NeonEnvironment.requireCors();
-  } else {
-    appliedWithCredentials = withCredentials;
-  }
-  return appliedWithCredentials;
-};
-
 /**
  * Gets the RxJS GET AjaxRequest
  * @param {string} url The URL to make the API request to
  * @param {Object|undefined} headers The headers to add to the request
  * @param {boolean} includeToken Option to include the API token in the request
- * @param {boolean} withCredentials Option to include credentials with a CORS request
  * @return The RxJS GET AjaxRequest
  */
 const getJsonAjaxRequest = (
   url,
   headers = undefined,
   includeToken = true,
-  withCredentials = undefined,
 ) => {
   let appliedHeaders = headers || {};
   if (includeToken) {
     appliedHeaders = getApiTokenHeader(appliedHeaders);
   }
-  const appliedWithCredentials = getAppliedWithCredentials(withCredentials);
   return {
     url,
     method: 'GET',
     responseType: 'json',
-    crossDomain: true,
-    withCredentials: appliedWithCredentials,
     headers: {
       ...appliedHeaders,
     },
   };
+};
+
+/**
+ * Gets the RxJS Ajax observable for making an API request to the specified URL
+ * with optional headers.
+ * @param {string} url The URL to make the API request to
+ * @param {Object|undefined} headers The headers to add to the request
+ * @param {boolean} includeToken Option to include the API token in the request
+ * @return The RxJS Ajax Observable
+ */
+const getJsonAjaxObservable = (
+  url,
+  headers = undefined,
+  includeToken = true,
+) => {
+  if (typeof url !== 'string' || !url.length) { return of(null); }
+  const request = getJsonAjaxRequest(url, headers, includeToken);
+  return ajax(request);
 };
 
 /**
@@ -81,45 +84,36 @@ const getJsonAjaxRequest = (
  * @param {string} url The URL to make the API request to
  * @param {Object|undefined} headers The headers to add to the request
  * @param {boolean} includeToken Option to include the API token in the request
- * @param {boolean} withCredentials Option to include credentials with a CORS request
  * @return The RxJS Ajax Observable
  */
 const getJsonObservable = (
   url,
   headers = undefined,
   includeToken = true,
-  withCredentials = undefined,
-) => {
-  if (typeof url !== 'string' || !url.length) { return of(null); }
-  const request = getJsonAjaxRequest(url, headers, includeToken, withCredentials);
-  return mapResponse(ajax(request));
-};
+) => (
+  mapResponse(getJsonAjaxObservable(url, headers, includeToken))
+);
 
 /**
  * Gets the RxJS HEAD AjaxRequest
  * @param {string} url The URL to make the API request to
  * @param {Object|undefined} headers The headers to add to the request
  * @param {boolean} includeToken Option to include the API token in the request
- * @param {boolean} withCredentials Option to include credentials with a CORS request
  * @return The RxJS HEAD AjaxRequest
  */
 const headJsonAjaxRequest = (
   url,
   headers = undefined,
   includeToken = true,
-  withCredentials = undefined,
 ) => {
   let appliedHeaders = headers || {};
   if (includeToken) {
     appliedHeaders = getApiTokenHeader(appliedHeaders);
   }
-  const appliedWithCredentials = getAppliedWithCredentials(withCredentials);
   return {
     url,
     method: 'HEAD',
     responseType: 'json',
-    crossDomain: true,
-    withCredentials: appliedWithCredentials,
     headers: {
       ...appliedHeaders,
     },
@@ -132,17 +126,15 @@ const headJsonAjaxRequest = (
  * @param {string} url The URL to make the API request to
  * @param {Object|undefined} headers The headers to add to the request
  * @param {boolean} includeToken Option to include the API token in the request
- * @param {boolean} withCredentials Option to include credentials with a CORS request
  * @return The RxJS Ajax Observable
  */
 const headJsonObservable = (
   url,
   headers = undefined,
   includeToken = true,
-  withCredentials = undefined,
 ) => {
   if (typeof url !== 'string' || !url.length) { return of(null); }
-  const request = headJsonAjaxRequest(url, headers, includeToken, withCredentials);
+  const request = headJsonAjaxRequest(url, headers, includeToken);
   return ajax(request);
 };
 
@@ -153,7 +145,6 @@ const headJsonObservable = (
  * @param {any} body The body to send with the POST request
  * @param {Object|undefined} headers The headers to add to the request
  * @param {boolean} includeToken Option to include the API token in the request
- * @param {boolean} withCredentials Option to include credentials with a CORS request
  * @return The RxJS Ajax Observable
  */
 const postJsonObservable = (
@@ -161,20 +152,16 @@ const postJsonObservable = (
   body,
   headers = undefined,
   includeToken = true,
-  withCredentials = undefined,
 ) => {
   if (typeof url !== 'string' || !url.length) { return of(null); }
   let appliedHeaders = headers || {};
   if (includeToken) {
     appliedHeaders = getApiTokenHeader(appliedHeaders);
   }
-  const appliedWithCredentials = getAppliedWithCredentials(withCredentials);
   return ajax({
     url,
     method: 'POST',
     responseType: 'json',
-    crossDomain: true,
-    withCredentials: appliedWithCredentials,
     headers: {
       ...appliedHeaders,
       'Content-Type': 'application/json',
@@ -193,6 +180,17 @@ const NeonApi = {
    * @return {Object} The resulting header object with API token set.
    */
   getApiTokenHeader: (headers = undefined) => getApiTokenHeader(headers),
+  /**
+   * Gets the RxJS observable Ajax request for making an API request to the
+   * specified URL with optional headers.
+   * @param {string} url The URL to make the API request to
+   * @param {Object|undefined} headers The headers to add to the request
+   * @param {boolean} includeToken Option to include the API token in the request
+   * @return The RxJS Ajax Observable
+   */
+  getJsonAjaxObservable: (url, headers = undefined, includeToken = true) => (
+    getJsonAjaxObservable(url, headers, includeToken)
+  ),
   /**
    * Gets the RxJS observable for making an API request to the specified URL
    * with optional headers.
@@ -309,8 +307,9 @@ const NeonApi = {
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/datasets/${uuid}`)
   ),
   getPrototypeManifestRollupObservable: (uuid) => (
-    // eslint-disable-next-line max-len
-    getJsonObservable(`${NeonEnvironment.getFullDownloadApiPath('prototypeManifestRollup')}?uuid=${uuid}`)
+    getJsonObservable(
+      `${NeonEnvironment.getFullDownloadApiPath('prototypeManifestRollup')}?uuid=${uuid}`,
+    )
   ),
   getPrototypeDataFileObservable: (uuid, fileName) => (
     getJsonObservable(`${NeonEnvironment.getFullApiPath('prototype')}/data/${uuid}/${fileName}`)
@@ -374,7 +373,6 @@ const NeonApi = {
       `${NeonEnvironment.getFullApiPath('arcgisAssets')}/${feature}/${siteCode}`,
       undefined,
       true,
-      false,
     )
   ),
 
@@ -393,7 +391,9 @@ const NeonApi = {
    * @return The RxJS Ajax Observable
    */
   getQuickStartGuideDetailObservable: (name, version) => (
-    getJsonObservable(`${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`)
+    getJsonObservable(
+      `${NeonEnvironment.getFullApiPath('quickStartGuides')}/details/${name}/${version}`,
+    )
   ),
   /**
    * Gets the RxJS Observable for the quick start guides HEAD endpoint for a given name

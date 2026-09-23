@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "neon-context",
-  "main": "./NeonContext.jsx",
-  "module": "./NeonContext.js"
-}

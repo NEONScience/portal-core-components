@@ -2,42 +2,41 @@
 
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import Radio from '@material-ui/core/Radio';
-import Slider from '@material-ui/core/Slider';
-import Switch from '@material-ui/core/Switch';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import Radio from '@mui/material/Radio';
+import Slider from '@mui/material/Slider';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import DownloadIcon from '@material-ui/icons/SaveAlt';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info';
-import LeftIcon from '@material-ui/icons/ChevronLeft';
-import RightIcon from '@material-ui/icons/ChevronRight';
+import DownloadIcon from '@mui/icons-material/SaveAlt';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
+import LeftIcon from '@mui/icons-material/ChevronLeft';
+import RightIcon from '@mui/icons-material/ChevronRight';
+
+import SplitButton from '@/components/Button/SplitButton';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from './DocBlock';
 
-import SplitButton from '../lib_components/components/Button/SplitButton';
-import Theme from '../lib_components/components/Theme/Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
     marginBottom: theme.spacing(4),
-    '& > :not(:last-child)': {
+    '& > :not(div:last-of-type)': {
       marginRight: theme.spacing(4),
     },
   },
@@ -55,13 +54,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    '& > :not(:last-child)': {
+    '& > :not(div:last-of-type)': {
       marginRight: theme.spacing(4),
       marginBottom: theme.spacing(2),
     },
   },
   typographyContainer: {
-    '& > *': {
+    '& > .MuiTypography-root': {
       marginBottom: theme.spacing(3),
     },
   },
@@ -82,7 +81,7 @@ const marks = [
 ];
 
 export default function BasicComponents() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const styleGuideUrl = 'https://www.figma.com/proto/Oppe8meMyYmzaSeEpXeSfZ/NEON---Styleguide?node-id=736%3A3056&scaling=scale-down-width';
 
   return (
@@ -97,7 +96,7 @@ export default function BasicComponents() {
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>Accordion</Typography>
 
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Basic Accordion
@@ -119,7 +118,7 @@ export default function BasicComponents() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Stacked Accordions (1)
@@ -131,7 +130,7 @@ export default function BasicComponents() {
               rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
               molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
             </Typography>
-            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+            <Typography variant="body1" style={{ marginLeft: theme.spacing(3) }}>
               Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
               diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
               interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
@@ -168,7 +167,7 @@ export default function BasicComponents() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div style={{ marginBottom: Theme.spacing(4) }}>
+      <div style={{ marginBottom: theme.spacing(4) }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             Accordion with Actions
@@ -180,7 +179,7 @@ export default function BasicComponents() {
               rutrum. Pellentesque iaculis id orci eu laoreet. Integer placerat quam felis, ac
               molestie urna feugiat at. Nunc id felis vulputate, commodo leo quis, consectetur diam.
             </Typography>
-            <Typography variant="body1" style={{ marginLeft: Theme.spacing(3) }}>
+            <Typography variant="body1" style={{ marginLeft: theme.spacing(3) }}>
               Aenean diam erat, imperdiet ut ipsum sit amet, luctus blandit ante. Sed sed euismod
               diam, vitae dignissim ex. In hac habitasse platea dictumst. In suscipit, lectus vitae
               interdum rhoncus, velit turpis pharetra est, quis fringilla magna tortor posuere
@@ -415,7 +414,7 @@ export default function BasicComponents() {
           <CardContent style={{ display: 'flex', alignItems: 'center' }}>
             <InfoIcon
               fontSize="large"
-              style={{ color: Theme.palette.grey[300], marginRight: Theme.spacing(2) }}
+              style={{ color: theme.palette.grey[300], marginRight: theme.spacing(2) }}
             />
             <Typography variant="body2" component="p">
               Some info that is important to know about
@@ -453,17 +452,17 @@ export default function BasicComponents() {
       <Divider className={classes.divider} />
       <Typography variant="h4" component="h2" gutterBottom>IconButton</Typography>
       <div className={classes.row} style={{ marginBottom: 'unset' }}>
-        <div className={classes.row} style={{ marginRight: Theme.spacing(8) }}>
+        <div className={classes.row} style={{ marginRight: theme.spacing(8) }}>
           <IconButton size="small">
             <DownloadIcon />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon fontSize="small" />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <DownloadIcon fontSize="large" />
           </IconButton>
         </div>
@@ -471,13 +470,13 @@ export default function BasicComponents() {
           <IconButton disabled size="small">
             <DownloadIcon />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon fontSize="small" />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon />
           </IconButton>
-          <IconButton disabled>
+          <IconButton disabled size="large">
             <DownloadIcon fontSize="large" />
           </IconButton>
         </div>
@@ -580,7 +579,7 @@ export default function BasicComponents() {
         <Tooltip
           title="A basic short tooltip"
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>
@@ -588,11 +587,12 @@ export default function BasicComponents() {
           placement="right"
           title="A longer-form tooltip with a few sentences. There is more info here but no HTML. Still there is plenty of text to read."
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>
         <Tooltip
+          /* eslint-disable @next/next/no-html-link-for-pages */
           title={(
             <>
               <div>
@@ -612,9 +612,9 @@ export default function BasicComponents() {
               </div>
             </>
           )}
-          interactive
+          /* eslint-enable @next/next/no-html-link-for-pages */
         >
-          <IconButton aria-label="tooltip">
+          <IconButton aria-label="tooltip" size="large">
             <InfoIcon />
           </IconButton>
         </Tooltip>
@@ -625,34 +625,34 @@ export default function BasicComponents() {
       <Typography variant="h4" component="h2" gutterBottom>Typography</Typography>
 
       <div className={classes.typographyContainer}>
-        <Typography variant="h1" gutterBottom>h1. Heading ({Theme.typography.h1.fontSize})</Typography>
-        <Typography variant="h2" gutterBottom>h2. Heading ({Theme.typography.h2.fontSize})</Typography>
-        <Typography variant="h3">h3. Heading ({Theme.typography.h3.fontSize})</Typography>
-        <Typography variant="h4">h4. Heading ({Theme.typography.h4.fontSize})</Typography>
-        <Typography variant="h5">h5. Heading ({Theme.typography.h5.fontSize})</Typography>
-        <Typography variant="h6">h6. Heading ({Theme.typography.h6.fontSize})</Typography>
+        <Typography variant="h1" gutterBottom>h1. Heading ({theme.typography.h1.fontSize})</Typography>
+        <Typography variant="h2" gutterBottom>h2. Heading ({theme.typography.h2.fontSize})</Typography>
+        <Typography variant="h3">h3. Heading ({theme.typography.h3.fontSize})</Typography>
+        <Typography variant="h4">h4. Heading ({theme.typography.h4.fontSize})</Typography>
+        <Typography variant="h5">h5. Heading ({theme.typography.h5.fontSize})</Typography>
+        <Typography variant="h6">h6. Heading ({theme.typography.h6.fontSize})</Typography>
         <Typography variant="subtitle1">
-          subtitle1. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle1.fontSize})
+          subtitle1. Lorem Ipsum Dolor Sit Amet ({theme.typography.subtitle1.fontSize})
         </Typography>
         <Typography variant="subtitle2">
-          subtitle2. Lorem Ipsum Dolor Sit Amet ({Theme.typography.subtitle2.fontSize})
+          subtitle2. Lorem Ipsum Dolor Sit Amet ({theme.typography.subtitle2.fontSize})
         </Typography>
         <Typography variant="body1">
           body1. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
-          ({Theme.typography.body1.fontSize})
+          ({theme.typography.body1.fontSize})
         </Typography>
         <Typography variant="body2">
           body2. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?
-          ({Theme.typography.body2.fontSize})
+          ({theme.typography.body2.fontSize})
         </Typography>
-        <Typography variant="button" display="block" gutterBottom>
-          button text ({Theme.typography.button.fontSize})
+        <Typography variant="button" style={{ display: 'block' }} gutterBottom>
+          button text ({theme.typography.button.fontSize})
         </Typography>
-        <Typography variant="caption" display="block" gutterBottom>
-          caption text ({Theme.typography.caption.fontSize})
+        <Typography variant="caption" style={{ display: 'block' }} gutterBottom>
+          caption text ({theme.typography.caption.fontSize})
         </Typography>
-        <Typography variant="overline" display="block" gutterBottom>
-          overline text ({Theme.typography.overline.fontSize})
+        <Typography variant="overline" style={{ display: 'block' }} gutterBottom>
+          overline text ({theme.typography.overline.fontSize})
         </Typography>
       </div>
 

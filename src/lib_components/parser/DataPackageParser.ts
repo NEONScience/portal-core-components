@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 import { exists, isStringNonEmpty } from '../util/typeUtil';
 import { Nullable, UnknownRecord } from '../types/core';
 import { SensorPosition } from '../types/internal';
@@ -29,8 +31,8 @@ const DataPackageParser: IDataPackageParser = {
       // Check for v1 schema
       const resultV1 = sensorPositionV1Schema.safeParse(position);
       if (!resultV1.success) {
-        const v2ErrorFormat = resultV2.error.format();
-        const v1ErrorFormat = resultV1.error.format();
+        const v2ErrorFormat = z.treeifyError(resultV2.error);
+        const v1ErrorFormat = z.treeifyError(resultV1.error);
         // eslint-disable-next-line no-console
         console.error('Failed to detect sensor position schema', v2ErrorFormat, v1ErrorFormat);
       } else {
@@ -62,12 +64,18 @@ const DataPackageParser: IDataPackageParser = {
       }
     } else {
       const parsedV2: SensorPositionV2Type = resultV2.data;
+      const appliedSensorStartDateTime = isStringNonEmpty(parsedV2.effectiveStartDateTime)
+        ? parsedV2.effectiveStartDateTime
+        : parsedV2.positionStartDateTime;
+      const appliedSensorEndDateTime = isStringNonEmpty(parsedV2.effectiveEndDateTime)
+        ? parsedV2.effectiveEndDateTime
+        : parsedV2.positionEndDateTime;
       result = {
         horVer: parsedV2['HOR.VER'],
         sensorName: parsedV2.sensorLocationID,
         sensorDescription: parsedV2.sensorLocationDescription,
-        sensorStartDateTime: parsedV2.positionStartDateTime,
-        sensorEndDateTime: parsedV2.positionEndDateTime,
+        sensorStartDateTime: appliedSensorStartDateTime,
+        sensorEndDateTime: appliedSensorEndDateTime,
         referenceLocationName: parsedV2.referenceLocationID,
         referenceLocationDescription: parsedV2.referenceLocationIDDescription,
         referenceLocationStartDateTime: parsedV2.referenceLocationIDStartDateTime,

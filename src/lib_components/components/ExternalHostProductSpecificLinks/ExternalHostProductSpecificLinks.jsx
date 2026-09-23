@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import WarningIcon from '@material-ui/icons/Warning';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import WarningIcon from '@mui/icons-material/Warning';
 
-import Theme from '../Theme/Theme';
 import NeonContext from '../NeonContext/NeonContext';
 import ExternalHost from '../ExternalHost/ExternalHost';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   siteLinksContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -26,15 +26,21 @@ const useStyles = makeStyles((theme) => ({
   ulLinkList: {
     paddingLeft: theme.spacing(2),
     margin: theme.spacing(0.5, 0),
-    fontSize: '0.85rem',
+    fontSize: '0.875rem',
     '& > li': {
       marginBottom: theme.spacing(0.5),
     },
   },
 }));
 
-export default function ExternalHostProductSpecificLinks(props) {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  productCode: null,
+  siteCodes: null,
+};
+
+export default function ExternalHostProductSpecificLinks(inProps) {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes, theme } = useStyles();
 
   const { productCode, siteCodes } = props;
 
@@ -44,9 +50,9 @@ export default function ExternalHostProductSpecificLinks(props) {
   }] = NeonContext.useNeonContextState();
   const { sites: allSites, states: allStates } = neonContextData;
 
-  const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const belowMd = useMediaQuery(Theme.breakpoints.down('sm'));
-  const belowLg = useMediaQuery(Theme.breakpoints.down('md'));
+  const belowSm = useMediaQuery(theme.breakpoints.only('xs'));
+  const belowMd = useMediaQuery(theme.breakpoints.down('md'));
+  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const externalHost = ExternalHost.getByProductCode(productCode);
   if (!externalHost || !Object.keys(ExternalHost.LINK_TYPES).includes(externalHost.linkType)) {
@@ -57,14 +63,14 @@ export default function ExternalHostProductSpecificLinks(props) {
   if (belowLg) { columnBasis = '33.33%'; }
   if (belowMd) { columnBasis = '50%'; }
   if (belowSm) { columnBasis = '100%'; }
-  const listDivStyle = { flex: `1 0 ${columnBasis}`, padding: Theme.spacing(0, 2, 2, 0) };
+  const listDivStyle = { flex: `1 0 ${columnBasis}`, padding: theme.spacing(0, 2, 2, 0) };
 
   const renderLinksByProduct = () => {
     if (typeof externalHost.getProductLinks !== 'function') { return null; }
     return (
-      <ul style={{ marginTop: Theme.spacing(3), marginBottom: Theme.spacing(0.75) }}>
+      <ul style={{ marginTop: theme.spacing(3), marginBottom: theme.spacing(0.75) }}>
         {(externalHost.getProductLinks(productCode) || []).map((link) => (
-          <li key={link.key}>
+          <li key={link.key} style={{ fontSize: '0.875rem' }}>
             {link.node}
           </li>
         ))}
@@ -75,12 +81,10 @@ export default function ExternalHostProductSpecificLinks(props) {
   const renderLinksBySite = () => {
     if (typeof externalHost.getSiteLink !== 'function') { return null; }
     // What sites are available? If a list was not provided then show them all.
-    // eslint-disable-next-line react/prop-types
     const filterByAvailability = Array.isArray(siteCodes) && siteCodes.length;
     let availableSites = allSites;
     if (filterByAvailability) {
       availableSites = Object.fromEntries(
-        // eslint-disable-next-line react/prop-types
         siteCodes.map((siteCode) => [siteCode, allSites[siteCode]]),
       );
     }
@@ -88,8 +92,8 @@ export default function ExternalHostProductSpecificLinks(props) {
     if (!neonContextIsFinal) {
       return (
         <div className={classes.siteLinksLoadingContainer}>
-          <CircularProgress size={36} style={{ margin: Theme.spacing(4, 0) }} />
-          <Typography variant="body1" style={{ marginBottom: Theme.spacing(4) }}>
+          <CircularProgress size={36} style={{ margin: theme.spacing(4, 0) }} />
+          <Typography variant="body1" style={{ marginBottom: theme.spacing(4) }}>
             Loading sites...
           </Typography>
         </div>
@@ -101,9 +105,9 @@ export default function ExternalHostProductSpecificLinks(props) {
         <div className={classes.siteLinksLoadingContainer}>
           <WarningIcon
             fontSize="large"
-            style={{ margin: Theme.spacing(4, 0), color: Theme.palette.error.main }}
+            style={{ margin: theme.spacing(4, 0), color: theme.palette.error.main }}
           />
-          <Typography variant="body1" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="body1" style={{ marginBottom: theme.spacing(4) }}>
             Sites failed to load.
           </Typography>
         </div>
@@ -122,7 +126,6 @@ export default function ExternalHostProductSpecificLinks(props) {
           .sort()
           .map((stateName) => {
             const links = sitesByStateName[stateName]
-              // eslint-disable-next-line react/prop-types
               .filter((siteCode) => !filterByAvailability || siteCodes.includes(siteCode))
               .map((siteCode) => (
                 { siteCode, link: externalHost.getSiteLink(allSites, siteCode, productCode) }
@@ -157,9 +160,4 @@ export default function ExternalHostProductSpecificLinks(props) {
 ExternalHostProductSpecificLinks.propTypes = {
   productCode: PropTypes.string,
   siteCodes: PropTypes.arrayOf(PropTypes.string),
-};
-
-ExternalHostProductSpecificLinks.defaultProps = {
-  productCode: null,
-  siteCodes: null,
 };

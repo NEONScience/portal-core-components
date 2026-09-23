@@ -14,20 +14,14 @@ import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { PDFViewerOptions } from 'pdfjs-dist/types/web/pdf_viewer';
 import { PDFLinkServiceOptions } from 'pdfjs-dist/types/web/pdf_link_service';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
 import DocumentService from '../../service/DocumentService';
 import ErrorCard from '../Card/ErrorCard';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
 import { NeonDocument } from '../../types/neonApi';
+import { makeStyles } from '../Theme/makeStyles';
 import { isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
 // Pull in PDF JS and set up a reference to the worker source
 pdfjs.GlobalWorkerOptions.workerPort = new Worker(
@@ -35,30 +29,28 @@ pdfjs.GlobalWorkerOptions.workerPort = new Worker(
   { type: 'module' },
 );
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    parentContainer: {
-      width: '100%',
+const useStyles = makeStyles()(() => ({
+  parentContainer: {
+    width: '100%',
+  },
+  container: {
+    width: '100%',
+    position: 'relative',
+  },
+  pdfViewerContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    overflow: 'auto',
+    backgroundColor: 'rgb(82, 86, 89, 0.9)',
+    '& .pdfViewer > .page': {
+      margin: '13px',
+      boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%),
+        0px 1px 3px 0px rgb(0 0 0 / 12%)`,
     },
-    container: {
-      width: '100%',
-      position: 'relative',
-    },
-    pdfViewerContainer: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      overflow: 'auto',
-      backgroundColor: 'rgb(82, 86, 89, 0.9)',
-      '& .pdfViewer > .page': {
-        margin: '20px',
-        boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%),
-          0px 1px 1px 0px rgb(0 0 0 / 14%),
-          0px 1px 3px 0px rgb(0 0 0 / 12%)`,
-      },
-    },
-  })) as StylesHook;
+  },
+}));
 
 export interface PdfDocumentViewerProps {
   document: NeonDocument;
@@ -85,10 +77,15 @@ const calcAutoHeight = (width: number): number => {
   return Math.floor(width * mult);
 };
 
+const defaultProps = {
+  fullUrlPath: undefined,
+};
+
 const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
-  props: PdfDocumentViewerProps,
-): JSX.Element => {
-  const classes = useStyles(Theme);
+  inProps: PdfDocumentViewerProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as PdfDocumentViewerProps;
+  const { classes } = useStyles();
   const {
     document,
     width,
@@ -98,10 +95,11 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     ? fullUrlPath
     : NeonEnvironment.getFullApiPath('documents');
   const dataUrl: string = `${appliedUrlPath}/${document.name}?inline=true&fallback=html`;
+  const isViewerDeviceSupported: boolean = DocumentService.isViewerDeviceSupported();
 
-  const containerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const pdfContainerRef: React.MutableRefObject<HTMLDivElement|undefined> = useRef();
-  const pdfViewerRef: React.MutableRefObject<PDFViewer|undefined> = useRef();
+  const containerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const pdfContainerRef: React.RefObject<HTMLDivElement|undefined> = useRef(undefined);
+  const pdfViewerRef: React.RefObject<PDFViewer|undefined> = useRef(undefined);
   const [
     viewerWidth,
     setViewerWidth,
@@ -125,9 +123,19 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     pdfContainerElement.style.width = `${newWidth}px`;
     pdfContainerElement.style.height = `${calcAutoHeight(newWidth)}px`;
     if (pdfViewerRef.current && (newWidth >= MIN_PDF_VIEWER_WIDTH)) {
-      pdfViewerRef.current.currentScaleValue = 'page-width';
+      if (isViewerDeviceSupported) {
+        pdfViewerRef.current.currentScaleValue = 'page-width';
+      } else {
+        pdfViewerRef.current.currentScaleValue = 'page-width';
+      }
     }
-  }, [containerRef, pdfContainerRef, viewerWidth, setViewerWidth]);
+  }, [
+    containerRef,
+    pdfContainerRef,
+    isViewerDeviceSupported,
+    viewerWidth,
+    setViewerWidth,
+  ]);
 
   const handleSetErrorStateCb = useCallback((isErrorStateCb: boolean): void => {
     setIsErrorState(isErrorStateCb);
@@ -174,7 +182,11 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
     pdfLinkService.setViewer(pdfViewerRef.current);
     eventBus.on('pagesinit', () => {
       if (pdfViewerRef.current) {
-        pdfViewerRef.current.currentScaleValue = 'page-width';
+        if (isViewerDeviceSupported) {
+          pdfViewerRef.current.currentScaleValue = 'page-width';
+        } else {
+          pdfViewerRef.current.currentScaleValue = 'page-width';
+        }
       }
     });
     const loadingTask = pdfjs.getDocument(config);
@@ -189,7 +201,13 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       console.error(`Error during ${dataUrl} loading: ${reason}`);
       handleSetErrorStateCb(true);
     });
-  }, [dataUrl, pdfContainerRef, isErrorState, handleSetErrorStateCb]);
+  }, [
+    dataUrl,
+    pdfContainerRef,
+    isViewerDeviceSupported,
+    isErrorState,
+    handleSetErrorStateCb,
+  ]);
 
   if (isErrorState) {
     return (
@@ -212,11 +230,11 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
   return (
     <div className={classes.parentContainer}>
       <div
-        ref={containerRef as React.MutableRefObject<HTMLDivElement>}
+        ref={containerRef as React.RefObject<HTMLDivElement>}
         className={classes.container}
       >
         <div
-          ref={pdfContainerRef as React.MutableRefObject<HTMLDivElement>}
+          ref={pdfContainerRef as React.RefObject<HTMLDivElement>}
           className={`${classes.pdfViewerContainer}`}
         >
           <div className="pdfViewer" />
@@ -224,10 +242,6 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       </div>
     </div>
   );
-};
-
-PdfDocumentViewer.defaultProps = {
-  fullUrlPath: undefined,
 };
 
 export default PdfDocumentViewer;

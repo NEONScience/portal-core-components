@@ -1,32 +1,25 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
-
 import BaseMessageCard, { MessageCardType, BaseMessageCardProps } from './BaseMessageCard';
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    card: {
-      margin: muiTheme.spacing(0.5, 0, 3, 0),
-      backgroundColor: 'rgba(230, 241, 251, 0.5)', // theme.colors.LIGHT_BLUE[50] with 'a' value applied
-      borderColor: 'rgba(138, 191, 236, 0.5)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
-    },
-    primaryIcon: {
-      marginRight: muiTheme.spacing(2),
-    },
-    secondaryIcon: {
-      color: 'rgba(138, 191, 236, 0.9)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
-      marginLeft: muiTheme.spacing(2),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  card: {
+    margin: muiTheme.spacing(0.5, 0, 3, 0),
+    // theme.colors.LIGHT_BLUE[50] with 'a' value applied
+    backgroundColor: 'rgba(230, 241, 251, 0.5)',
+    // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+    borderColor: 'rgba(138, 191, 236, 0.5)',
+  },
+  primaryIcon: {
+    marginRight: muiTheme.spacing(2),
+  },
+  secondaryIcon: {
+    color: 'rgba(138, 191, 236, 0.9)', // theme.colors.LIGHT_BLUE[200] with 'a' value applied
+    marginLeft: muiTheme.spacing(2),
+  },
+}));
 
 interface InfoMessageCardClasses {
   card?: string;
@@ -41,8 +34,10 @@ export type InfoMessageCardProps = BaseInfoMessageCardProps & {
   classes?: InfoMessageCardClasses;
 };
 
-const InfoCard: React.FC<InfoMessageCardProps> = (props: InfoMessageCardProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const InfoCard: React.FC<InfoMessageCardProps> = (
+  props: InfoMessageCardProps,
+): React.JSX.Element => {
+  const { classes } = useStyles();
   const { classes: messageCardClasses }: InfoMessageCardProps = props;
   const injectedCard: string|undefined = messageCardClasses
     ? messageCardClasses.card

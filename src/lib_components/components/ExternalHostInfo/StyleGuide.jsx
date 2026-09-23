@@ -1,30 +1,23 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid */
-
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import ExternalHostInfo from '@/components/ExternalHostInfo/ExternalHostInfo';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import Theme from '../Theme/Theme';
-
-import ExternalHostInfo from './ExternalHostInfo';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
-  const externalHostJsxUrl = 'https://github.com/NEONScience/portal-core-components/blob/master/src/lib_components/components/ExternalHost/ExternalHost.jsx';
-  const snackbarUrl = 'https://material-ui.com/components/snackbars/';
+  const { classes } = useStyles();
 
   return (
     <>
@@ -43,11 +36,7 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
 
       <DocBlock>
         All an External Host Info component needs to render successfully is
-        a <tt>productCode</tt> prop that has a mapping to an external host. This
-        renders a <Link href={snackbarUrl}>Material UI Snackbar</Link> to serve
-        as a notice to the user about the relationship to the host in context of
-        the product, including all relevant links to and info about the external
-        host and what relevant data it may or may not offer.
+        a <tt>productCode</tt> prop that has a mapping to an external host.
       </DocBlock>
       <ExampleBlock column>
         <ExternalHostInfo productCode="DP1.10038.001" />
@@ -120,10 +109,6 @@ import ExternalHostInfo from 'portal-core-components/lib/components/ExternalHost
         tools to curate data and relationships. While this is a medium-term goal, the nature of the
         data model is fluid / changing enough that it is easier to be responsive through
         hard-coding in this actively developed library.
-      </DocBlock>
-      <DocBlock>
-        See <Link href={externalHostJsxUrl}>Portal Core Components | External Host</Link> for the
-        latest model, relationships, and functions.
       </DocBlock>
     </>
   );

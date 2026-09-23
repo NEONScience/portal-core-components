@@ -63,13 +63,13 @@ export default function parseLocationsArray(locationsArray = []) {
     ) => {
       // Function to convert a prop key into camelCase or, if applicable, a defined alias
       const cleanPropKey = (inKey = '') => {
-        const words = inKey.substr(10)
+        const words = inKey.slice(10)
           .replace(/[^A-Za-z0-9_ -]/g, '')
           .replace(/[_-]/g, ' ')
           .toLowerCase()
           .split(' ');
         const newPropKey = words.map((word, idx) => (
-          idx === 0 ? word : `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`
+          idx === 0 ? word : `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`
         )).join('');
         return RENAME_LOCATION_PROPERTIES[newPropKey] || newPropKey;
       };

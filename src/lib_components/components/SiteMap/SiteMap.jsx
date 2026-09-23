@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import CustomComponentFallback from '../Error/CustomComponentFallback';
 import ErrorCard from '../Card/ErrorCard';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
+import { resolveProps } from '../../util/defaultProps';
 
 import SiteMapContext from './SiteMapContext';
 import SiteMapContainer from './SiteMapContainer';
@@ -20,7 +20,7 @@ const SiteMapFallbackComponent = (props) => {
       // eslint-disable-next-line react/no-unstable-nested-components
       FallbackComponent={() => (
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <ErrorCard
               title="Component Error"
               message="Site map encountered a problem"
@@ -38,8 +38,9 @@ SiteMapFallbackComponent.propTypes = {
   resetErrorBoundary: PropTypes.func.isRequired,
 };
 
-const SiteMap = (props) => {
-  // no need to store this in state, just pass it thru
+const SiteMap = (inProps) => {
+  const props = resolveProps(SITE_MAP_DEFAULT_PROPS, inProps);
+  // no need to store this in state, just pass it through
   const { unusableVerticalSpace = 0, mapUniqueId = 0 } = props;
   return (
     <ComponentErrorBoundary
@@ -54,10 +55,7 @@ const SiteMap = (props) => {
 };
 
 SiteMap.propTypes = SITE_MAP_PROP_TYPES;
-SiteMap.defaultProps = SITE_MAP_DEFAULT_PROPS;
 
-const WrappedSiteMap = Theme.getWrappedComponent(
-  NeonContext.getWrappedComponent(SiteMap),
-);
+const WrappedSiteMap = NeonContext.getWrappedComponent(SiteMap);
 
 export default WrappedSiteMap;

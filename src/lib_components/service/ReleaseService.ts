@@ -1,4 +1,4 @@
-import NeonContextService from './NeonContextService';
+import NeonAuthContextService from './NeonAuthContextService';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../util/typeUtil';
 import { UserRelease } from '../types/neonContext';
 import { Release as InternalRelease, IReleaseLike, ReleaseProps } from '../types/internal';
@@ -55,12 +55,12 @@ export interface IReleaseService {
   /**
    * Applies the set of user accessible releases for the currently
    * authenticated user with the set of current releases.
-   * @param neonContextState The context state to build from
+   * @param neonAuthContextState The auth context state to build from
    * @param currentReleases The set of releases to apply
    * @return The combined set of accessible releases for the current user
    */
   applyUserReleases: <T extends IReleaseLike>(
-    neonContextState: any,
+    neonAuthContextState: any,
     currentReleases: IReleaseLike[],
   ) => T[];
   /**
@@ -86,9 +86,7 @@ const ReleaseService: IReleaseService = {
     return exists(matches) && ((matches as RegExpExecArray).length > 0);
   },
   isNonRelease: (releaseTag: string): boolean => {
-    // eslint-disable-next-line prefer-regex-literals
     const regexLatestProv: RegExp = new RegExp(`^${LATEST_AND_PROVISIONAL}$`, 'i');
-    // eslint-disable-next-line prefer-regex-literals
     const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
     const matchesLatestProv: RegExpExecArray|null = regexLatestProv.exec(releaseTag);
     const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
@@ -102,13 +100,13 @@ const ReleaseService: IReleaseService = {
     if (!isStringNonEmpty(releaseTag)) {
       return true;
     }
-    // eslint-disable-next-line prefer-regex-literals
     const regexProv: RegExp = new RegExp(`^${PROVISIONAL_RELEASE}$`, 'i');
     const matchesProv: RegExpExecArray|null = regexProv.exec(releaseTag);
     return exists(matchesProv) && ((matchesProv as RegExpExecArray).length > 0);
   },
   isInternalReleaseLike: (release: IReleaseLike): boolean => {
     let isLike = true;
+    // eslint-disable-next-line no-restricted-syntax
     for (const p in ReleaseProps) {
       if (Object.prototype.hasOwnProperty.call(ReleaseProps, p)) {
         if (!(p in release)) {
@@ -144,11 +142,11 @@ const ReleaseService: IReleaseService = {
     return sorted[0].release;
   },
   applyUserReleases: <T extends IReleaseLike>(
-    neonContextState: any,
+    neonAuthContextState: any,
     currentReleases: IReleaseLike[],
   ): T[] => {
-    const userReleases: UserRelease[] = NeonContextService.getContextUserReleases(
-      neonContextState,
+    const userReleases: UserRelease[] = NeonAuthContextService.getAuthContextUserReleases(
+      neonAuthContextState,
     );
     if (!Array.isArray(currentReleases) || !Array.isArray(userReleases)) {
       return [];

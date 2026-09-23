@@ -1,26 +1,21 @@
 import React from 'react';
 
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-
-import {
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import AccountValidationStepper, { ValidationStepDisplay } from '../Accounts/AccountValidationStepper';
 import InfoMessageCard, { InfoMessageCardProps } from './InfoMessageCard';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButton from '../NeonSignInButton/NeonSignInButton';
-import Theme from '../Theme/Theme';
 import RouteService from '../../service/RouteService';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 import { AccountValidationStep } from '../../types/account';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
+import { resolveProps } from '../../util/defaultProps';
 
-const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
+const useStyles = makeStyles()((theme: NeonTheme) => ({
   loginContentsDivider: {
     margin: theme.spacing(0, 0, 2, 0),
   },
@@ -36,7 +31,7 @@ const useStyles: StylesHook = makeStyles((theme: NeonTheme) => createStyles({
     color: theme.colors.GOLD[300],
     marginLeft: theme.spacing(2),
   },
-})) as StylesHook;
+}));
 
 export type LoginRequiredProps = InfoMessageCardProps & {
   customTitle?: string;
@@ -48,9 +43,20 @@ export type LoginRequiredProps = InfoMessageCardProps & {
   accountValidationStepDisplay?: Record<string, ValidationStepDisplay>;
 };
 
+const defaultProps = {
+  customTitle: undefined,
+  customContent: undefined,
+  isAuthenticated: false,
+  showValidation: true,
+  accountValidated: undefined,
+  accountValidationSteps: undefined,
+  accountValidationStepDisplay: undefined,
+};
+
 const LoginRequiredCard: React.FC<LoginRequiredProps> = (
-  props: LoginRequiredProps,
-): JSX.Element => {
+  inProps: LoginRequiredProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as LoginRequiredProps;
   const {
     customTitle,
     customContent,
@@ -60,7 +66,7 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
     accountValidationSteps,
     accountValidationStepDisplay,
   }: LoginRequiredProps = props;
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const hasValidationSteps = existsNonEmpty(accountValidationSteps);
 
   const myAccountLink = (
@@ -80,7 +86,7 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
     </Link>
   );
 
-  const renderValidation = (): JSX.Element|null => {
+  const renderValidation = (): React.JSX.Element|null => {
     if (showValidation !== true) {
       return null;
     }
@@ -99,8 +105,8 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
       />
     );
   };
-  const renderContents = (): JSX.Element => {
-    let message: JSX.Element;
+  const renderContents = (): React.JSX.Element => {
+    let message: React.JSX.Element;
     if (exists(customContent)) {
       // eslint-disable-next-line react/jsx-no-useless-fragment
       message = (<>{customContent}</>);
@@ -139,16 +145,6 @@ const LoginRequiredCard: React.FC<LoginRequiredProps> = (
       messageContent={renderContents()}
     />
   );
-};
-
-LoginRequiredCard.defaultProps = {
-  customTitle: undefined,
-  customContent: undefined,
-  isAuthenticated: false,
-  showValidation: true,
-  accountValidated: undefined,
-  accountValidationSteps: undefined,
-  accountValidationStepDisplay: undefined,
 };
 
 export default LoginRequiredCard;

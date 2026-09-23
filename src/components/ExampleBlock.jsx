@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 
-import Theme from '../lib_components/components/Theme/Theme';
+import { makeStyles } from '@/components/Theme/makeStyles';
+import { resolveProps } from '@/util/defaultProps';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     maxWidth: 'unset !important',
     margin: theme.spacing(2, 0),
@@ -18,8 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExampleBlock(props) {
-  const classes = useStyles(Theme);
+const defaultProps = {
+  column: false,
+};
+
+export default function ExampleBlock(inProps) {
+  const props = resolveProps(defaultProps, inProps);
+  const { classes } = useStyles();
   const { column, children } = props;
   return (
     <Container
@@ -41,8 +46,4 @@ ExampleBlock.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-};
-
-ExampleBlock.defaultProps = {
-  column: false,
 };

@@ -1,40 +1,37 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { debounce } from 'lodash';
 
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Typography from '@mui/material/Typography';
+import InfoIcon from '@mui/icons-material/Info';
+import FileIcon from '@mui/icons-material/Description';
+import SelectAllIcon from '@mui/icons-material/DoneAll';
+import SelectNoneIcon from '@mui/icons-material/Clear';
+import SelectFilteredIcon from '@mui/icons-material/FilterList';
+import ClearFiltersIcon from '@mui/icons-material/DeleteSweep';
+import WarningIcon from '@mui/icons-material/Warning';
+import ExploreIcon from '@mui/icons-material/Explore';
 
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Typography from '@material-ui/core/Typography';
-import InfoIcon from '@material-ui/icons/Info';
-import FileIcon from '@material-ui/icons/Description';
-import SelectAllIcon from '@material-ui/icons/DoneAll';
-import SelectNoneIcon from '@material-ui/icons/Clear';
-import SelectFilteredIcon from '@material-ui/icons/FilterList';
-import ClearFiltersIcon from '@material-ui/icons/DeleteSweep';
-import WarningIcon from '@material-ui/icons/Warning';
-import ExploreIcon from '@material-ui/icons/Explore';
-
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import moment from 'moment';
 
-import MaterialTable, { MTableToolbar, MTableFilterRow } from 'material-table';
+import MaterialTable, { MTableToolbar, MTableFilterRow } from '@material-table/core';
 
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -49,7 +46,9 @@ import ExternalHost from '../ExternalHost/ExternalHost';
 import ExternalHostProductSpecificLinks from '../ExternalHostProductSpecificLinks/ExternalHostProductSpecificLinks';
 import MaterialTableIcons from '../MaterialTableIcons/MaterialTableIcons';
 import SiteChip from '../SiteChip/SiteChip';
-import Theme, { COLORS } from '../Theme/Theme';
+import { COLORS } from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 import ReleaseService from '../../service/ReleaseService';
 import RouteService from '../../service/RouteService';
@@ -57,17 +56,21 @@ import DataLicenseService from '../../service/DataLicenseService';
 import { formatBytes, MAX_POST_BODY_SIZE } from '../../util/manifestUtil';
 import { exists, existsNonEmpty, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   copyButton: {
     marginLeft: theme.spacing(2),
   },
   fileTable: {
+    fontSize: '0.875rem',
     position: 'relative',
     '& td': {
       whiteSpace: 'nowrap',
     },
     '& label + .MuiInput-formControl': {
       marginTop: '0px',
+    },
+    '& .MuiFormControl-root': {
+      width: '100%',
     },
   },
   formControlBold: {
@@ -98,9 +101,8 @@ const useStyles = makeStyles((theme) => ({
   },
   showColumnsLabel: {
     backgroundColor: theme.palette.grey[50],
-    '& span': {
-      color: '#000',
-    },
+    border: `1px solid ${theme.palette.primary.main} !important`,
+    color: '#000 !important',
   },
   startFlex: {
     display: 'flex',
@@ -133,21 +135,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   summaryText: {
-    fontSize: '1.2rem',
+    fontSize: '1.25rem',
   },
   summaryTextIncomplete: {
-    fontSize: '1.2rem',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
     color: theme.palette.error.main,
   },
   markdownWrapper: {
+    fontSize: theme.typography.body2.fontSize,
     '& p': {
       margin: 0,
     },
   },
 }));
 
-const TextComponent = (props) => {
+const textComponentDefaultProps = {
+  content: null,
+};
+
+const TextComponent = (inProps) => {
+  const props = resolveProps(textComponentDefaultProps, inProps);
   const { content } = props;
   return (
     <Typography variant="body2" component="p">
@@ -157,9 +165,6 @@ const TextComponent = (props) => {
 };
 TextComponent.propTypes = {
   content: PropTypes.string,
-};
-TextComponent.defaultProps = {
-  content: null,
 };
 
 const MarkdownFallbackComponent = (props) => ((
@@ -229,16 +234,25 @@ const renderStepSummary = {
   },
   s3Files: (classes, state) => {
     const { value: files, totalSize } = state.s3Files;
+    const summary = `${files.length} file${files.length === 1 ? '' : 's'} `
+      + `(${formatBytes(totalSize)} uncompressed)`;
     return (
       <Typography variant="body2" className={classes.summaryText}>
-        {`${files.length} file${files.length === 1 ? '' : 's'} (${formatBytes(totalSize)} uncompressed)`}
+        {summary}
       </Typography>
     );
   },
 };
 
-const DownloadStepForm = (props) => {
-  const classes = useStyles(Theme);
+const downloadStepFormDefaultProps = {
+  changeToStep: () => {},
+  changeToNextUncompletedStep: () => {},
+  renderDownloadButton: () => null,
+};
+
+const DownloadStepForm = (inProps) => {
+  const props = resolveProps(downloadStepFormDefaultProps, inProps);
+  const { classes, theme } = useStyles();
 
   const {
     stepKey,
@@ -294,10 +308,12 @@ const DownloadStepForm = (props) => {
       <Grid
         container
         spacing={2}
-        alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.documentation"
+        sx={{
+          alignItems: 'flex-start',
+        }}
       >
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="Documentation"
@@ -337,8 +353,8 @@ const DownloadStepForm = (props) => {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Card style={{ marginTop: Theme.spacing(1.5) }}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card style={{ marginTop: theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
               <Typography variant="body1">
@@ -374,11 +390,13 @@ const DownloadStepForm = (props) => {
       <Grid
         container
         spacing={2}
-        alignItems="flex-start"
         data-selenium="download-data-dialog.step-form.provisional-data"
+        sx={{
+          alignItems: 'flex-start',
+        }}
       >
         {!excludeProvisionalData ? null : (
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <InfoMessageCard
               title="Provisional Data"
               messageContent={(
@@ -393,7 +411,7 @@ const DownloadStepForm = (props) => {
             />
           </Grid>
         )}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="Provisional Data"
@@ -436,8 +454,8 @@ const DownloadStepForm = (props) => {
             </RadioGroup>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Card style={{ marginTop: Theme.spacing(1.5) }}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card style={{ marginTop: theme.spacing(1.5) }}>
             <CardContent className={classes.startFlex}>
               <InfoIcon fontSize="large" className={classes.calloutIcon} />
               <Typography variant="body1">
@@ -456,7 +474,7 @@ const DownloadStepForm = (props) => {
   const renderS3FilesStep = () => {
     if (downloadStatus !== DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD) {
       return (
-        <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+        <Typography variant="subtitle1" style={{ marginTop: theme.spacing(3) }}>
           You must sign in or create and validate an account before proceeding.
         </Typography>
       );
@@ -552,8 +570,8 @@ const DownloadStepForm = (props) => {
     const noFiltersApplied = Object.keys(filters).every((col) => !filters[col].length);
     /* eslint-disable react/jsx-one-expression-per-line */
     const postSizeError = (estimatedPostSize >= MAX_POST_BODY_SIZE) ? (
-      <Grid item xs={12}>
-        <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+      <Grid size={{ xs: 12 }}>
+        <Card style={{ marginBottom: theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
               fontSize="large"
@@ -572,8 +590,8 @@ const DownloadStepForm = (props) => {
     ) : null;
     /* eslint-disable react/jsx-one-expression-per-line */
     const tooManyFilesWarning = (!allowSelectAll && !allowSelectFiltered) ? (
-      <Grid item xs={12}>
-        <Card style={{ marginBottom: Theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
+      <Grid size={{ xs: 12 }}>
+        <Card style={{ marginBottom: theme.spacing(2), backgroundColor: COLORS.GOLD[300] }}>
           <CardContent className={classes.startFlex} style={{ justifyContent: 'center' }}>
             <WarningIcon
               fontSize="large"
@@ -594,9 +612,9 @@ const DownloadStepForm = (props) => {
     const components = {
       Container: Box,
       Toolbar: (toolbarProps) => (
-        <Grid container spacing={2} alignItems="flex-start" style={{ marginBottom: '24px' }}>
-          <Grid item xs={12} md={6}>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+        <Grid container spacing={2} style={{ alignItems: 'flex-start', marginBottom: '24px' }}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <div style={{ marginBottom: theme.spacing(1) }}>
               <ToggleButtonGroup
                 size="small"
                 value={visibleColumns}
@@ -627,7 +645,7 @@ const DownloadStepForm = (props) => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
-            <div style={{ marginBottom: Theme.spacing(1) }}>
+            <div style={{ marginBottom: theme.spacing(1) }}>
               <Button
                 data-selenium="download-data-dialog.s3-files.select-all-button"
                 size="small"
@@ -637,7 +655,7 @@ const DownloadStepForm = (props) => {
                 disabled={isLoading || !appliedValidValues.length || !allowSelectAll}
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <SelectAllIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectAllIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select All ({isLoading ? '…' : appliedValidValues.length})
               </Button>
               <Button
@@ -647,9 +665,9 @@ const DownloadStepForm = (props) => {
                 variant="outlined"
                 onClick={() => { dispatch({ type: 'setS3FilesValueSelectNone' }); }}
                 disabled={isLoading || !appliedValidValues.length}
-                style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
+                style={{ marginLeft: theme.spacing(1), whiteSpace: 'nowrap' }}
               >
-                <SelectNoneIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectNoneIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select None
               </Button>
             </div>
@@ -663,7 +681,7 @@ const DownloadStepForm = (props) => {
                 disabled={noFiltersApplied || isLoading || !allowSelectFiltered}
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <SelectFilteredIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <SelectFilteredIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Select Filtered{filterButtonLabel}
               </Button>
               <Button
@@ -673,14 +691,14 @@ const DownloadStepForm = (props) => {
                 variant="outlined"
                 disabled={noFiltersApplied || isLoading}
                 onClick={() => { dispatch({ type: 'clearS3FilesFilterValues' }); }}
-                style={{ marginLeft: Theme.spacing(1), whiteSpace: 'nowrap' }}
+                style={{ marginLeft: theme.spacing(1), whiteSpace: 'nowrap' }}
               >
-                <ClearFiltersIcon fontSize="small" style={{ marginRight: Theme.spacing(1) }} />
+                <ClearFiltersIcon fontSize="small" style={{ marginRight: theme.spacing(1) }} />
                 Clear Filters
               </Button>
             </div>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <MTableToolbar {...toolbarProps} />
           </Grid>
           {postSizeError}
@@ -726,13 +744,15 @@ const DownloadStepForm = (props) => {
     /* eslint-enable react/jsx-one-expression-per-line */
     const localization = {
       pagination: {
-        labelRowsSelect: 'files',
+        labelRows: 'files',
       },
       toolbar: {
-        nRowsSelected: `{0} file${selection.length === 1 ? '' : 's'} selected (${formatBytes(totalSize)} uncompressed)`,
+        nRowsSelected: `{0} file${selection.length === 1 ? '' : 's'} `
+          + `selected (${formatBytes(totalSize)} uncompressed)`,
       },
       body: {
-        emptyDataSourceMessage: 'No files to display. Select more sites, broaden date range, or broaden search / filters.',
+        emptyDataSourceMessage: 'No files to display. Select more sites, '
+          + 'broaden date range, or broaden search / filters.',
       },
     };
     return (appliedValidValues.length || isLoading) ? (
@@ -764,14 +784,14 @@ const DownloadStepForm = (props) => {
           }}
         />
         <div className={classes.loadingOverlay} style={{ display: isLoading ? 'block' : 'none' }}>
-          <Typography variant="h6" style={{ marginBottom: Theme.spacing(4) }}>
+          <Typography variant="h6" style={{ marginBottom: theme.spacing(4) }}>
             {`Loading files (${Math.floor(s3FileFetchProgress || 0)}%)...`}
           </Typography>
           <CircularProgress variant="determinate" value={s3FileFetchProgress} />
         </div>
       </div>
     ) : (
-      <Typography variant="subtitle1" style={{ marginTop: Theme.spacing(3) }}>
+      <Typography variant="subtitle1" style={{ marginTop: theme.spacing(3) }}>
         Select sites and date range in order to generate a list of files to choose from.
       </Typography>
     );
@@ -781,10 +801,12 @@ const DownloadStepForm = (props) => {
     const { value, validValues } = state.packageType;
     let { productBasicDescription, productExpandedDescription } = state.productData;
     if (!productBasicDescription) {
-      productBasicDescription = 'Includes the data product, summary statistics, expanded uncertainty, and final quality flag';
+      productBasicDescription = 'Includes the data product, summary statistics, '
+        + 'expanded uncertainty, and final quality flag';
     }
     if (!productExpandedDescription) {
-      productExpandedDescription = 'Includes the basic package information plus quality metrics for all of the quality assessment and quality control analysis';
+      productExpandedDescription = 'Includes the basic package information plus '
+        + 'quality metrics for all of the quality assessment and quality control analysis';
     }
     return (
       <FormControl
@@ -808,18 +830,16 @@ const DownloadStepForm = (props) => {
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Basic</Typography>
                 <ComponentErrorBoundary
-                  // eslint-disable-next-line react/no-unstable-nested-components
                   fallbackComponent={() => ((
                     <MarkdownFallbackComponent content={productBasicDescription} />
                   ))}
                   onReset={() => { /* noop for boundary reset */ }}
                 >
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
-                  >
-                    {productBasicDescription}
-                  </Markdown>
+                  <div className={`${classes.markdownWrapper} MuiTypography-root`}>
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {productBasicDescription}
+                    </Markdown>
+                  </div>
                 </ComponentErrorBoundary>
               </div>
             )}
@@ -832,18 +852,16 @@ const DownloadStepForm = (props) => {
               <div className={classes.radioLabel}>
                 <Typography variant="h6">Expanded</Typography>
                 <ComponentErrorBoundary
-                  // eslint-disable-next-line react/no-unstable-nested-components
                   fallbackComponent={() => ((
                     <MarkdownFallbackComponent content={productExpandedDescription} />
                   ))}
                   onReset={() => { /* noop for boundary reset */ }}
                 >
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    className={`${classes.markdownWrapper} MuiTypography-root MuiTypography-body2`}
-                  >
-                    {productExpandedDescription}
-                  </Markdown>
+                  <div className={`${classes.markdownWrapper} MuiTypography-root`}>
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {productExpandedDescription}
+                    </Markdown>
+                  </div>
                 </ComponentErrorBoundary>
               </div>
             )}
@@ -888,7 +906,11 @@ const DownloadStepForm = (props) => {
       );
     }
     return (
-      <div data-selenium={`download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`}>
+      <div
+        data-selenium={
+          `download-data-dialog.step-form.external-links.${externalHost.id.toLowerCase()}`
+        }
+      >
         <InfoMessageCard
           title="External Host"
           messageContent={(
@@ -952,7 +974,7 @@ const DownloadStepForm = (props) => {
                 tabIndex={0}
                 className={classes.stepSummaryHeader}
                 onClick={() => changeToStep(index)}
-                onKeyPress={() => changeToStep(index)}
+                onKeyUp={() => changeToStep(index)}
               >
                 <Chip
                   color={isComplete ? 'primary' : 'default'}
@@ -989,7 +1011,7 @@ const DownloadStepForm = (props) => {
     );
     const downloadAndExploreCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.download-and-explore"
       >
         <CardContent className={classes.startFlex}>
@@ -1015,7 +1037,7 @@ const DownloadStepForm = (props) => {
     );
     const fileNamingCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.file-naming"
       >
         <CardContent className={classes.startFlex}>
@@ -1038,7 +1060,7 @@ const DownloadStepForm = (props) => {
     }
     const citationCallout = (
       <Card
-        style={{ margin: Theme.spacing(0.5, 0, 3, 0) }}
+        style={{ margin: theme.spacing(0.5, 0, 3, 0) }}
         data-selenium="download-data-dialog.step-form.summary.citation"
       >
         <CardContent>
@@ -1054,12 +1076,14 @@ const DownloadStepForm = (props) => {
       <Grid
         container
         spacing={2}
-        alignItems="flex-start"
+        sx={{
+          alignItems: 'flex-start',
+        }}
       >
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {stepSummary}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {downloadAndExploreCallout}
           {fileNamingCallout}
           {citationCallout}
@@ -1099,12 +1123,6 @@ DownloadStepForm.propTypes = {
   changeToStep: PropTypes.func,
   changeToNextUncompletedStep: PropTypes.func,
   renderDownloadButton: PropTypes.func,
-};
-
-DownloadStepForm.defaultProps = {
-  changeToStep: () => {},
-  changeToNextUncompletedStep: () => {},
-  renderDownloadButton: () => null,
 };
 
 export default DownloadStepForm;

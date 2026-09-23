@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "name": "full-width-visualization",
-  "main": "./FullWidthVisualization.jsx",
-  "module": "./FullWidthVisualization.js"
-}

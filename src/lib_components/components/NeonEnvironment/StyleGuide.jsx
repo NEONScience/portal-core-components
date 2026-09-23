@@ -2,27 +2,26 @@
 
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import NeonEnvironment, {
+  requiredEnvironmentVars,
+  optionalEnvironmentVars,
+} from '@/components/NeonEnvironment/NeonEnvironment';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 
-import Theme from '../Theme/Theme';
-import NeonEnvironment, {
-  requiredEnvironmentVars,
-  optionalEnvironmentVars,
-} from './NeonEnvironment';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
 
   const attributes = Object.keys(NeonEnvironment)
     .map((key) => {

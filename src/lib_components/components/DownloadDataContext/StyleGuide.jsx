@@ -1,28 +1,25 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, max-len, no-unused-vars */
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
 
 import { ReplaySubject } from 'rxjs';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import DownloadDataContext from '@/components/DownloadDataContext/DownloadDataContext';
+import DownloadDataButton from '@/components/DownloadDataButton/DownloadDataButton';
+import DataProductAvailability from '@/components/DataProductAvailability/DataProductAvailability';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import ExampleBlock from '../../../components/ExampleBlock';
 
-import DownloadDataContext from './DownloadDataContext';
-
-import DownloadDataButton from '../DownloadDataButton/DownloadDataButton';
-import DataProductAvailability from '../DataProductAvailability/DataProductAvailability';
-import Theme from '../Theme/Theme';
-
 import sampleProductData1 from '../../../sampleData/DP1.00001.001.json';
 import sampleProductData2 from '../../../sampleData/DP1.00004.001.json';
 import sampleProductData3 from '../../../sampleData/DP1.00001.001.release.json';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -183,7 +180,7 @@ const MyAppComponent = () => {
 };
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const useReducerLink = (
     <Link
       target="_new"

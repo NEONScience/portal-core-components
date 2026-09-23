@@ -3,11 +3,12 @@ import React from 'react';
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
 import DataProductCitationContext from './DataProductCitation/Context';
 import DataProductCitationView from './DataProductCitation/View';
+import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
-import Theme from '../Theme/Theme';
 
 import { CitationTextOnlyProps } from './DataProductCitation/ViewState';
 import { Nullable } from '../../types/core';
+import { resolveProps } from '../../util/defaultProps';
 
 interface DataProductCitationProps {
   productCode: string;
@@ -19,9 +20,19 @@ interface DataProductCitationProps {
   textOnlyProps?: CitationTextOnlyProps;
 }
 
+const defaultProps: Omit<DataProductCitationProps, 'productCode'> = {
+  release: undefined,
+  showQuoteIcon: false,
+  disableConditional: false,
+  disableSkeleton: false,
+  showTextOnly: false,
+  textOnlyProps: undefined,
+};
+
 const DataProductCitation: React.FC<DataProductCitationProps> = (
-  props: DataProductCitationProps,
-): JSX.Element => {
+  inProps: DataProductCitationProps,
+): React.JSX.Element => {
+  const props = resolveProps(defaultProps, inProps) as DataProductCitationProps;
   const {
     productCode,
     release,
@@ -49,17 +60,8 @@ const DataProductCitation: React.FC<DataProductCitationProps> = (
   );
 };
 
-DataProductCitation.defaultProps = {
-  release: undefined,
-  showQuoteIcon: false,
-  disableConditional: false,
-  disableSkeleton: false,
-  showTextOnly: false,
-  textOnlyProps: undefined,
-};
-
-const WrappedDataProductCitation = (Theme as any).getWrappedComponent(
-  NeonContext.getWrappedComponent(DataProductCitation),
+const WrappedDataProductCitation = NeonContext.getWrappedComponent(
+  NeonAuthContext.getWrappedComponent(DataProductCitation),
 );
 
 export default WrappedDataProductCitation;

@@ -1,26 +1,27 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
-import AppBar from '@material-ui/core/AppBar';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from '@mui/material/AppBar';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Slide from '@mui/material/Slide';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 
-import Theme from '../Theme/Theme';
+import { makeStyles } from '../Theme/makeStyles';
+import { resolveProps } from '../../util/defaultProps';
 
 const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-const useStyles = (belowSm) => makeStyles((theme) => ({
+const useStyles = makeStyles()((theme, { belowSm }) => ({
   dialogTitle: {
     marginLeft: theme.spacing(2),
     flex: 1,
@@ -38,9 +39,20 @@ const useStyles = (belowSm) => makeStyles((theme) => ({
   },
 }));
 
-const DialogBase = (props) => {
-  const belowSm = useMediaQuery(Theme.breakpoints.only('xs'));
-  const classes = useStyles(belowSm)(Theme);
+const defaultProps = {
+  open: true,
+  toolbarChildren: null,
+  closeButtonProps: {},
+  customClasses: {},
+  nopaper: false,
+  style: {},
+};
+
+const DialogBase = (inProps) => {
+  const props = resolveProps(defaultProps, inProps);
+  const theme = useTheme();
+  const belowSm = useMediaQuery(theme.breakpoints.only('xs'));
+  const { classes } = useStyles({ belowSm });
 
   const {
     open,
@@ -63,12 +75,16 @@ const DialogBase = (props) => {
     <Dialog
       open={open}
       onClose={onClose}
-      TransitionComponent={Transition}
       fullScreen
-      PaperProps={{
-        className: classes.dialogPaper,
+      slots={{
+        transition: Transition,
       }}
-      style={{ ...style, zIndex: Theme.zIndex.fullScreenBackdrop }}
+      slotProps={{
+        paper: {
+          className: classes.dialogPaper,
+        },
+      }}
+      style={{ ...style, zIndex: theme.zIndex.fullScreenBackdrop }}
       {...other}
     >
       <AppBar color="secondary">
@@ -80,6 +96,7 @@ const DialogBase = (props) => {
             onClick={onClose}
             aria-label="cancel"
             {...closeButtonProps}
+            size="large"
           >
             <CloseIcon />
           </IconButton>
@@ -135,15 +152,6 @@ DialogBase.propTypes = {
   ),
   nopaper: PropTypes.bool,
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
-
-DialogBase.defaultProps = {
-  open: true,
-  toolbarChildren: null,
-  closeButtonProps: {},
-  customClasses: {},
-  nopaper: false,
-  style: {},
 };
 
 export default DialogBase;

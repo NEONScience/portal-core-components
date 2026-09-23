@@ -1,41 +1,33 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
-import InfoIcon from '@material-ui/icons/Info';
-import WarnIcon from '@material-ui/icons/Warning';
-import ErrorIcon from '@material-ui/icons/Error';
-import ResetIcon from '@material-ui/icons/Autorenew';
+import InfoIcon from '@mui/icons-material/Info';
+import WarnIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import ResetIcon from '@mui/icons-material/Autorenew';
 
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { exists, isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    startFlex: {
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
-    divider: {
-      margin: muiTheme.spacing(0, 3, 0, 3),
-    },
-    messageContainer: {
-      padding: muiTheme.spacing(3, 3, 3, 3),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  startFlex: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  divider: {
+    margin: muiTheme.spacing(0, 3, 0, 3),
+  },
+  messageContainer: {
+    padding: muiTheme.spacing(3, 3, 3, 3),
+  },
+}));
 
 export enum CardType {
   INFO = 'INFO',
@@ -58,8 +50,8 @@ export interface BaseCardProps {
   onActionClick?: () => void;
 }
 
-const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): React.JSX.Element => {
+  const { classes } = useStyles();
   const {
     type,
     title,
@@ -70,7 +62,7 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
     onActionClick,
   }: BaseCardProps = props;
 
-  let iconContent: JSX.Element = (
+  let iconContent: React.JSX.Element = (
     <InfoIcon fontSize="large" className={calloutClasses.calloutIcon} />
   );
   switch (type) {
@@ -89,8 +81,8 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
       break;
   }
 
-  const renderTitle = (): JSX.Element => {
-    let titleTextContent: JSX.Element|null = null;
+  const renderTitle = (): React.JSX.Element => {
+    let titleTextContent: React.JSX.Element|null = null;
     if (isStringNonEmpty(title)) {
       titleTextContent = (
         <Typography variant="subtitle2" style={{ flexGrow: 1 }}>
@@ -98,7 +90,7 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
         </Typography>
       );
     }
-    let appliedTitleContent: JSX.Element|null = null;
+    let appliedTitleContent: React.JSX.Element|null = null;
     if (exists(titleContent)) {
       appliedTitleContent = (
         <div style={{ flexGrow: 1 }}>
@@ -106,7 +98,7 @@ const BaseCard: React.FC<BaseCardProps> = (props: BaseCardProps): JSX.Element =>
         </div>
       );
     }
-    let action: JSX.Element|undefined;
+    let action: React.JSX.Element|undefined;
     const appliedLabel: string = isStringNonEmpty(actionLabel)
       ? actionLabel as string
       : 'Reset';

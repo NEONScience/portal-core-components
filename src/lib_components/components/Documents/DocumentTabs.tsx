@@ -1,76 +1,65 @@
 import React, { useState } from 'react';
 
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 import DocumentListItem from './DocumentListItem';
 import DocumentService from '../../service/DocumentService';
 import DocumentViewer from './DocumentViewer';
 import NeonEnvironment from '../NeonEnvironment';
-import Theme from '../Theme/Theme';
 import WarningCard from '../Card/WarningCard';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { NeonDocument } from '../../types/neonApi';
 import { existsNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    container: {
-      width: '100%',
-      display: 'flex',
-      margin: muiTheme.spacing(0, -0.5, -0.5, -0.5),
-      flexDirection: 'column',
-    },
-    tabPanels: {
-      width: '100%',
-      backgroundColor: '#fff',
-    },
-    tabContentContainer: {
-      width: '100%',
-      padding: muiTheme.spacing(3, 3, 3, 3),
-    },
-  })) as StylesHook;
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  container: {
+    width: '100%',
+    display: 'flex',
+    margin: muiTheme.spacing(0, -0.5, -0.5, -0.5),
+    flexDirection: 'column',
+  },
+  tabPanels: {
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  tabContentContainer: {
+    width: '100%',
+    padding: muiTheme.spacing(3, 3, 3, 3),
+  },
+}));
 
-const useTabsStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    scroller: {
-      backgroundColor: muiTheme.palette.grey[200],
+const useTabsStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  scroller: {
+    backgroundColor: muiTheme.palette.grey[200],
+  },
+  scrollButtons: {
+    '&.Mui-disabled': {
+      opacity: 0.6,
     },
-    scrollButtons: {
-      '&.Mui-disabled': {
-        opacity: 0.6,
-      },
-    },
-  })) as StylesHook;
+  },
+}));
 
-const useTabStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    root: {
-      textTransform: 'none',
-      opacity: 1,
-      maxWidth: 464,
+const useTabStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  root: {
+    textTransform: 'none',
+    opacity: 1,
+    maxWidth: 464,
+  },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& svg': {
+      margin: `${muiTheme.spacing(0, 1, 0, 0)} !important`,
     },
-    wrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '& svg': {
-        margin: `${muiTheme.spacing(0, 1, 0, 0)} !important`,
-      },
-    },
-    selected: {
-      borderBottom: 'none',
-    },
-  })) as StylesHook;
+  },
+  selected: {
+    borderBottom: 'none',
+  },
+}));
 
 interface DocumentTabModel {
   index: number;
@@ -81,10 +70,10 @@ export interface DocumentTabsProps {
   documents: NeonDocument[];
 }
 
-const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JSX.Element => {
-  const classes = useStyles(Theme);
-  const tabClasses = useTabStyles(Theme);
-  const tabsClasses = useTabsStyles(Theme);
+const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): React.JSX.Element => {
+  const { classes } = useStyles();
+  const { classes: tabClasses } = useTabStyles();
+  const { classes: tabsClasses } = useTabsStyles();
   const { documents }: DocumentTabsProps = props;
 
   const initialTabIdx = 0;
@@ -111,25 +100,32 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     }),
   );
 
-  const renderTabs = (): JSX.Element => ((
+  const renderTabs = (): React.JSX.Element => ((
     <Tabs
       orientation="horizontal"
-      scrollButtons="on"
+      scrollButtons
       variant="scrollable"
       value={selectedTab}
       aria-label="Document Tabs"
       classes={tabsClasses}
       onChange={(event, newTab) => { setSelectedTab(newTab); }}
-      TabIndicatorProps={{ style: { display: 'none' } }}
+      slotProps={{
+        indicator: {
+          style: {
+            display: 'none',
+          },
+        },
+      }}
+      allowScrollButtonsMobile
     >
-      {docTabs.map((docTab: DocumentTabModel): JSX.Element => ((
+      {docTabs.map((docTab: DocumentTabModel): React.JSX.Element => ((
         <Tab
           key={docTab.index}
           value={docTab.index}
           label={(
             <DocumentListItem
               id={docTab.index}
-              document={docTab.document}
+              document={{ ...docTab.document, variants: [] }}
               makeDownloadableLink={false}
             />
           )}
@@ -142,7 +138,7 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     </Tabs>
   ));
 
-  const renderTabContent = (documentTab: DocumentTabModel): JSX.Element => {
+  const renderTabContent = (documentTab: DocumentTabModel): React.JSX.Element => {
     const { document, index }: DocumentTabModel = documentTab;
     const fullUrlPath = DocumentService.isQuickStartGuide(document)
       ? `${NeonEnvironment.getFullApiPath('quickStartGuides')}`
@@ -163,9 +159,9 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
     );
   };
 
-  const renderTabPanels = (): JSX.Element => (
+  const renderTabPanels = (): React.JSX.Element => (
     <div className={classes.tabPanels}>
-      {docTabs.map((docTab: DocumentTabModel): JSX.Element => renderTabContent(docTab))}
+      {docTabs.map((docTab: DocumentTabModel): React.JSX.Element => renderTabContent(docTab))}
     </div>
   );
 
@@ -177,6 +173,4 @@ const DocumentTabs: React.FC<DocumentTabsProps> = (props: DocumentTabsProps): JS
   );
 };
 
-const WrappedDocumentTabs = (Theme as any).getWrappedComponent(DocumentTabs);
-
-export default WrappedDocumentTabs;
+export default DocumentTabs;

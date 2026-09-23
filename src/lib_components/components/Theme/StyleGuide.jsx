@@ -1,25 +1,23 @@
 /* eslint react/jsx-one-expression-per-line: 0 */
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+
+import { makeStyles } from '@/components/Theme/makeStyles';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
-// import ExampleBlock from '../../../components/ExampleBlock';
 
-import Theme from './Theme';
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
 }));
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   const styleGuideUrl = 'https://raw.githubusercontent.com/NEONScience/portal-core-components/master/reference/NSF-NEON-BRAND.GUIDELINES.pdf';
 
   return (
@@ -30,7 +28,11 @@ export default function StyleGuide() {
       </DocBlock>
       <CodeBlock>
         {`
-import Theme from 'portal-core-components/lib/components/Theme';
+import { useTheme } from '@mui/material/styles';
+
+const SomeComponent = () => {
+  const theme = useTheme();
+};
         `}
       </CodeBlock>
 
@@ -67,18 +69,17 @@ import Theme from 'portal-core-components/lib/components/Theme';
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from '@material-ui/core/styles';
-import Theme from 'portal-core-components/lib/components/Theme';
+import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()((theme) => ({
   myCssClass: {
     padding: theme.spacing(3, 4),
     marginBottom: theme.spacing(2),
   },
-};
+}));
 
 const myComponent = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );
@@ -96,7 +97,7 @@ const myComponent = () => {
       </DocBlock>
       <CodeBlock language="json">
         {`
-${JSON.stringify(Theme.palette, null, 2)}
+${JSON.stringify(theme.palette, null, 2)}
 
 `}
       </CodeBlock>
@@ -106,18 +107,17 @@ ${JSON.stringify(Theme.palette, null, 2)}
       </DocBlock>
       <CodeBlock>
         {`
-import { makeStyles } from '@material-ui/core/styles';
-import Theme from 'portal-core-components/lib/components/Theme';
+import { makeStyles } from 'portal-core-components/lib/components/Theme/makeStyles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()((theme) => ({
   myCssClass: {
     backgroundColor: theme.palette.grey[50],
     border: \`1px solid $\{theme.palette.primary.main}\`,
   },
-};
+}));
 
 const myComponent = () => {
-  const classes = useStyles(Theme);
+  const { classes, theme } = useStyles();
   return (
     <BaseComponent className={classes.myCssClass} />
   );

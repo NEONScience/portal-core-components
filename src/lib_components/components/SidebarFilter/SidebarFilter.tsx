@@ -1,79 +1,69 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { useId } from 'react';
 
-import { useId } from 'react-id-generator';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import {
-  makeStyles,
-  createStyles,
-  Theme as MuiTheme,
-} from '@material-ui/core/styles';
+import Skeleton from '@mui/material/Skeleton';
 
-import Skeleton from '@material-ui/lab/Skeleton';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-
-import Theme from '../Theme/Theme';
-import { StylesHook } from '../../types/muiTypes';
+import { makeStyles } from '../Theme/makeStyles';
+import { NeonTheme } from '../Theme/types';
 import { isStringNonEmpty } from '../../util/typeUtil';
 
-const useStyles: StylesHook = makeStyles((muiTheme: MuiTheme) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  createStyles({
-    title: {
-      fontWeight: 500,
+const useStyles = makeStyles()((muiTheme: NeonTheme) => ({
+  title: {
+    fontWeight: 500,
+  },
+  titleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginBottom: muiTheme.spacing(1),
+  },
+  selectInput: {
+    width: '100%',
+    marginBottom: muiTheme.spacing(0.5),
+    backgroundColor: '#fff',
+  },
+  descriptionContainer: {
+    marginTop: muiTheme.spacing(0.5),
+  },
+  descriptionFlexInnerContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  description: {
+    display: 'block',
+    color: muiTheme.palette.grey[400],
+    overflowWrap: 'break-word',
+  },
+  descriptionLabel: {
+    fontWeight: 700,
+    color: muiTheme.palette.grey[400],
+    marginRight: muiTheme.spacing(1),
+  },
+  menuItemSubtitle: {
+    color: muiTheme.palette.grey[400],
+  },
+  horizontalFlex: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  horizontalDescriptions: {
+    marginLeft: muiTheme.spacing(3),
+    '& > div:first-of-type': {
+      marginTop: '-2px !important',
     },
-    titleContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      marginBottom: muiTheme.spacing(1),
-    },
-    selectInput: {
-      width: '100%',
-      marginBottom: muiTheme.spacing(0.5),
-      backgroundColor: '#fff',
-    },
-    descriptionContainer: {
-      marginTop: muiTheme.spacing(0.5),
-    },
-    descriptionFlexInnerContainer: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-    },
-    description: {
-      display: 'block',
-      color: muiTheme.palette.grey[400],
-      overflowWrap: 'break-word',
-    },
-    descriptionLabel: {
-      fontWeight: 700,
-      color: muiTheme.palette.grey[400],
-      marginRight: muiTheme.spacing(1),
-    },
-    menuItemSubtitle: {
-      color: muiTheme.palette.grey[400],
-    },
-    horizontalFlex: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-    },
-    horizontalDescriptions: {
-      marginLeft: Theme.spacing(3),
-      '& > div:first-child': {
-        marginTop: '-2px !important',
-      },
-    },
-  })) as StylesHook;
+  },
+}));
 
 export interface SidebarFilterOption {
   title: string;
@@ -92,8 +82,10 @@ export interface SidebarFilterProps {
   helperText?: string;
 }
 
-const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps): JSX.Element => {
-  const classes = useStyles(Theme);
+const SidebarFilter: React.FC<SidebarFilterProps> = (
+  props: SidebarFilterProps,
+): React.JSX.Element => {
+  const { classes, theme } = useStyles();
   const {
     title,
     skeleton,
@@ -107,7 +99,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     ...otherProps
   }: SidebarFilterProps = props;
 
-  const [instanceId] = useId();
+  const instanceId = useId();
   const selectSeleniumId = `sidebar-filter-select-selenium-${instanceId}`;
   const inputId = `sidebar-filter-input-${instanceId}`;
   const labelId = `sidebar-filter-label-${instanceId}`;
@@ -115,37 +107,39 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
   // SANITY CHECK: Render nothing if there are no releases and null release is excluded
   const optionCount = values.length + (values ? 0 : 1);
   if (!optionCount) { return (<></>); }
+  const valuesMap: Record<string, SidebarFilterOption> = {};
+  values.forEach((option: SidebarFilterOption) => {
+    valuesMap[option.value] = option;
+  });
 
   const handleChange = (nextValue: string): void => onChange(nextValue);
 
   const maxWidthStyle = maxWidth ? { maxWidth: `${maxWidth}px` } : {};
 
-  const input: JSX.Element = (
+  const input: React.JSX.Element = (
     <OutlinedInput
       id={inputId}
       name={inputId}
-      margin="dense"
+      size="small"
       className={classes.selectInput}
       style={maxWidthStyle}
     />
   );
 
-  /* eslint-disable react/jsx-one-expression-per-line */
-  const tooltip: React.ReactChild = !isStringNonEmpty(tooltipText)
+  const tooltip: React.ReactNode = !isStringNonEmpty(tooltipText)
     ? (<></>)
     : (
       <div>
         {tooltipText}
       </div>
     );
-  /* eslint-enable react/jsx-one-expression-per-line */
   const titleNode = !title ? null : (
     <div className={classes.titleContainer}>
       <Typography variant="h5" component="h3" className={classes.title} id={labelId}>
         {title}
       </Typography>
-      <Tooltip placement="right" title={tooltip} interactive>
-        <IconButton size="small" style={{ marginLeft: Theme.spacing(0.5) }}>
+      <Tooltip placement="right" title={tooltip}>
+        <IconButton size="small" style={{ marginLeft: theme.spacing(0.5) }}>
           <InfoIcon fontSize="small" />
         </IconButton>
       </Tooltip>
@@ -154,11 +148,11 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
 
   // Render skeleton
   if (skeleton) {
-    const skeletonStyle = { marginBottom: Theme.spacing(1) };
+    const skeletonStyle = { marginBottom: theme.spacing(1) };
     return (
       <div {...otherProps} style={{ maxWidth: `${maxWidth}px`, overflow: 'hidden' }}>
         {titleNode}
-        <Skeleton variant="rect" width={maxWidth} height={36} style={skeletonStyle} />
+        <Skeleton variant="rectangular" width={maxWidth} height={36} style={skeletonStyle} />
         <Skeleton width="70%" height={16} style={skeletonStyle} />
       </div>
     );
@@ -171,12 +165,13 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
       onChange={(event) => handleChange(event.target.value as string)}
       input={input}
       aria-labelledby={labelId}
+      renderValue={(value) => valuesMap[value].title}
       disabled={optionCount < 2}
     >
-      {values.map((option: SidebarFilterOption): JSX.Element => ((
+      {values.map((option: SidebarFilterOption): React.JSX.Element => ((
         <MenuItem key={option.value} value={option.value}>
           <div>
-            <Typography display="block">
+            <Typography style={{ display: 'block' }}>
               {option.title}
             </Typography>
           </div>
@@ -185,7 +180,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = (props: SidebarFilterProps):
     </Select>
   );
 
-  const renderHelperText = (): JSX.Element => {
+  const renderHelperText = (): React.JSX.Element => {
     if (!isStringNonEmpty(helperText)) {
       return (<></>);
     }

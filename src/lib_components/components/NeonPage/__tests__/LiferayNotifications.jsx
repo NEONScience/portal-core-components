@@ -1,18 +1,21 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
+import MockTheme from '../../../../__mocks__/MockTheme';
 import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
-jest.mock('@material-ui/core/Snackbar', () => mockReactComponent('@material-ui/core/Snackbar'));
+jest.mock('@mui/material/Snackbar', () => mockReactComponent('@mui/material/Snackbar'));
 
 // eslint-disable-next-line import/first
 import LiferayNotifications from '../LiferayNotifications';
 
 describe('NeonPage - LiferayNotifications', () => {
   test('renders nothing if passed an empty array', () => {
-    const tree = renderer.create(
-      <LiferayNotifications />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <LiferayNotifications />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders notifications with no actions if onHideNotifications not present', () => {
@@ -20,9 +23,11 @@ describe('NeonPage - LiferayNotifications', () => {
       { id: 'foo', message: 'bar', dismissed: false },
       { id: 'qux', message: '<b>HTML</b>', dismissed: true },
     ];
-    const tree = renderer.create(
-      <LiferayNotifications notifications={notifications} />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <LiferayNotifications notifications={notifications} />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
   test('renders notifications with actions if onHideNotifications is present', () => {
@@ -30,9 +35,11 @@ describe('NeonPage - LiferayNotifications', () => {
       { id: 'foo', message: 'bar', dismissed: false },
       { id: 'qux', message: '<b>HTML</b>', dismissed: true },
     ];
-    const tree = renderer.create(
-      <LiferayNotifications notifications={notifications} onHideNotifications={() => {}} />,
-    ).toJSON();
+    const tree = render(
+      <MockTheme>
+        <LiferayNotifications notifications={notifications} onHideNotifications={() => {}} />
+      </MockTheme>
+    );
     expect(tree).toMatchSnapshot();
   });
 });

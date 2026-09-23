@@ -1,31 +1,30 @@
-/* eslint-disable react/jsx-one-expression-per-line, jsx-a11y/anchor-is-valid, react/no-unescaped-entities, max-len */
+/* eslint-disable react/no-unescaped-entities */
 
 import React, { useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import AppBar from '@mui/material/AppBar';
+import Divider from '@mui/material/Divider';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
 
-import DocBlock from '../../../components/DocBlock';
-import CodeBlock from '../../../components/CodeBlock';
-import ExampleBlock from '../../../components/ExampleBlock';
-import PropsTable from '../../../components/PropsTable';
-
-import Theme from '../Theme/Theme';
-import SiteMap from './SiteMap';
-
+import SiteMap from '@/components/SiteMap/SiteMap';
 import {
   MAP_ZOOM_RANGE,
   FEATURE_TYPES,
   BASE_LAYERS,
   VIEWS,
-} from './SiteMapUtils';
+} from '@/components/SiteMap/SiteMapUtils';
+import { makeStyles } from '@/components/Theme/makeStyles';
 
-const useStyles = makeStyles((theme) => ({
+import DocBlock from '../../../components/DocBlock';
+import CodeBlock from '../../../components/CodeBlock';
+import ExampleBlock from '../../../components/ExampleBlock';
+import PropsTable from '../../../components/PropsTable';
+import BasicLeafletMap, { Provider } from '../../../components/BasicLeafletMap';
+
+const useStyles = makeStyles()((theme) => ({
   divider: {
     margin: theme.spacing(3, 0),
   },
@@ -374,7 +373,7 @@ const manualLocationData = [
 ];
 
 export default function StyleGuide() {
-  const classes = useStyles(Theme);
+  const { classes } = useStyles();
   const [tabValue, setTabValue] = useState(0);
 
   return (
@@ -443,7 +442,7 @@ import SiteMap from 'portal-core-components/lib/components/SiteMap';
         </div>
       )}
 
-      {/* 1: Basic */}
+      {/* 1: Preset Zoom */}
       {tabValue !== 1 ? null : (
         <div role="tabpanel">
           <Typography variant="h4" component="h2" gutterBottom>Zoom</Typography>
@@ -605,6 +604,17 @@ return (
       <DocBlock>
         <PropsTable props={propRows} fullHeight />
       </DocBlock>
+
+      <Divider className={classes.divider} />
+      <Typography variant="h4" component="h2" gutterBottom>Basic Leaflet</Typography>
+      <DocBlock>
+        Simple leaflet map.
+      </DocBlock>
+      <ExampleBlock>
+        <Provider>
+          <BasicLeafletMap />
+        </Provider>
+      </ExampleBlock>
     </>
   );
 }
