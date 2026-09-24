@@ -2342,7 +2342,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2465,7 +2465,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -2645,7 +2645,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2767,7 +2767,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -2893,7 +2893,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"
@@ -3076,7 +3076,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3198,7 +3198,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3323,7 +3323,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
                 </h6>
                 <button
                   aria-label="Show links to externally hosted data"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   style="margin-left: 16px;"
                   tabindex="0"
@@ -3446,7 +3446,7 @@ exports[`ExternalHostInfo renders with valid product code, sites, and expandable
               </h6>
               <button
                 aria-label="Show links to externally hosted data"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qh1p9r-MuiButtonBase-root-MuiIconButton-root"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-h2yxsa-MuiButtonBase-root-MuiIconButton-root"
                 data-mui-internal-clone-element="true"
                 style="margin-left: 16px;"
                 tabindex="0"

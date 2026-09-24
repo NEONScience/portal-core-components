@@ -112,7 +112,7 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
           >
             <button
               aria-label="close"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1v5gbu5-MuiButtonBase-root-MuiIconButton-root"
               tabindex="0"
               type="button"
             >
@@ -180,7 +180,7 @@ exports[`NeonPage - LiferayNotifications renders notifications with actions if o
         >
           <button
             aria-label="close"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-3qpppc-MuiButtonBase-root-MuiIconButton-root"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1v5gbu5-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
           >

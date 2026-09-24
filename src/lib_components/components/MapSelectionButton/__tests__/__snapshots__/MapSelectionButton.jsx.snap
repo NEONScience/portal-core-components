@@ -12,7 +12,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min >1
           data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
             data-selenium="map-selection-button"
             tabindex="0"
             type="button"
@@ -31,7 +31,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min >1
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
           data-selenium="map-selection-button"
           tabindex="0"
           type="button"
@@ -107,7 +107,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min 1)
           data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
             data-selenium="map-selection-button"
             tabindex="0"
             type="button"
@@ -141,7 +141,7 @@ exports[`MapSelectionButton Renders correctly with array selection limit (min 1)
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
           data-selenium="map-selection-button"
           tabindex="0"
           type="button"
@@ -232,7 +232,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (>1
           data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
             data-selenium="map-selection-button"
             tabindex="0"
             type="button"
@@ -266,7 +266,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (>1
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
           data-selenium="map-selection-button"
           tabindex="0"
           type="button"
@@ -357,7 +357,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (1)
           data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
             data-selenium="map-selection-button"
             tabindex="0"
             type="button"
@@ -391,7 +391,7 @@ exports[`MapSelectionButton Renders correctly with numerical selection limit (1)
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
           data-selenium="map-selection-button"
           tabindex="0"
           type="button"
@@ -482,7 +482,7 @@ exports[`MapSelectionButton Renders correctly with only a selection 1`] = `
           data-mui-internal-clone-element="true"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
             data-selenium="map-selection-button"
             tabindex="0"
             type="button"
@@ -516,7 +516,7 @@ exports[`MapSelectionButton Renders correctly with only a selection 1`] = `
         data-mui-internal-clone-element="true"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-lelat4-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
           data-selenium="map-selection-button"
           tabindex="0"
           type="button"

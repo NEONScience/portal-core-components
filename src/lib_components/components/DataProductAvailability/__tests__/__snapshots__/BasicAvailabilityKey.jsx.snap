@@ -18,7 +18,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-bat5m5-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -191,7 +191,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-bat5m5-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
@@ -421,7 +421,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
           </h6>
           <button
             aria-label="Help - Data Availability Chart Key"
-            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-bat5m5-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
             tabindex="0"
             title="Help - Data Availability Chart Key"
             type="button"
@@ -510,7 +510,7 @@ exports[`DataProductAvailability - BasicAvailabilityKey renders correctly when s
         </h6>
         <button
           aria-label="Help - Data Availability Chart Key"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-9c6k8z-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall css-bat5m5-MuiButtonBase-root-MuiIconButton-root-legendTitleIcon"
           tabindex="0"
           title="Help - Data Availability Chart Key"
           type="button"
