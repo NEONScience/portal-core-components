@@ -2,7 +2,7 @@ name: Node Publish NPM Repo
 
 on:
   push:
-    branches: [ main, next ]
+    branches: [ main ]
 env:
   NPM_REGISTRY: https://registry.npmjs.org
   GH_NPM_REGISTRY: https://npm.pkg.github.com
