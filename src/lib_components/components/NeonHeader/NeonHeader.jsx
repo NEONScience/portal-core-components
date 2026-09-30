@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
@@ -66,28 +66,48 @@ const useStyles = (customize) => {
         display: 'none !important',
       },
     };
-  return makeStyles()((theme) => ({
-    skeletonHeader: {
-      boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
-    },
-    // positioning of sign-in and sign-out buttons
-    coreAuthContainer: {
-      // common styles
-      textAlign: 'right',
-      position: 'absolute',
-      zIndex: 15,
-      // viewport-specific styles
-      [theme.breakpoints.up('lg')]: {
+  const getAuthContainerStyles = (theme, paramUseNewHeader) => {
+    if (!paramUseNewHeader) {
+      return {
+        [theme.breakpoints.up('lg')]: {
+          padding: '0px',
+          top: customize ? '47px' : '-1px',
+          right: customize ? '32px' : '0px',
+          ...viewportStyles,
+        },
+        [theme.breakpoints.down('lg')]: {
+          padding: customize ? theme.spacing(1, 1.5) : theme.spacing(1, 2),
+          top: theme.spacing(1),
+          right: theme.spacing(9),
+        },
+      };
+    }
+    return {
+      [`@media (min-width:${1100}px)`]: {
         padding: '0px',
         top: customize ? '47px' : '-1px',
         right: customize ? '32px' : '0px',
         ...viewportStyles,
       },
-      [theme.breakpoints.down('lg')]: {
+      [`@media (max-width:${1099}px)`]: {
         padding: customize ? theme.spacing(1, 1.5) : theme.spacing(1, 2),
         top: theme.spacing(1),
-        right: theme.spacing(9),
+        right: theme.spacing(11),
       },
+    };
+  };
+  return makeStyles()((theme, { useNewHeader }) => ({
+    skeletonHeader: {
+      boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
+    },
+    // Positioning of sign-in and sign-out buttons
+    coreAuthContainer: {
+      // Common styles
+      textAlign: 'right',
+      position: 'absolute',
+      zIndex: 15,
+      // Viewport-specific styles
+      ...getAuthContainerStyles(theme, useNewHeader),
     },
     // These styles are gross. We need to rework the header coming from the Drupal site to make this
     // less necessary.
@@ -112,6 +132,10 @@ const useStyles = (customize) => {
       },
     },
     headerContainerFallback: {
+      fontFeatureSettings: '"ss01", "ss03", "ss04" !important',
+      '& .nav__dropdown': {
+        lineHeight: 'normal',
+      },
       '& li.siteSearch > a': {
         background: `url('${HeaderSearchSvg.src}') center center no-repeat !important`,
       },
@@ -127,8 +151,11 @@ const useStyles = (customize) => {
       //   fontSize: '1.1rem !important',
       //   fontWeight: '700 !important',
       // },
+      '& .nav__dropdown': {
+        lineHeight: 'normal',
+      },
       ...headerContainer,
-      '& .header__search': {
+      '& #header.header .header__search, & #header.header .header__search-panel.is-open': {
         background: '#f5f6f7',
         position: 'relative',
         zIndex: 1,
@@ -137,12 +164,12 @@ const useStyles = (customize) => {
         visibility: 'visible',
         fontSize: '1.1rem', // Added, font sizes look bigger on Drupal site.
       },
-      '& .header__search.visually-hidden': {
+      '& #header.header .header__search.visually-hidden, #header.header .header__search-panel.visually-hidden': {
         visibility: 'hidden',
         opacity: 0,
         transition: 'all 0.2s ease-in-out',
       },
-      '& .header__search > .header__search--inner': {
+      '& #header.header .header__search > .header__search--inner, #header.header .header__search-panel > .header__search--inner': {
         display: 'flex',
         maxWidth: '1620px',
         margin: '0 auto',
@@ -156,12 +183,12 @@ const useStyles = (customize) => {
       },
       '& .header__search--inner > .header__search--title': {
         fontWeight: '600 !important', // Changed from 600 to match Drupal site.
-        fontSize: '0.9rem !important', // Changed from 0.9 to match Drupal site.
+        fontSize: '0.875rem !important', // Changed from 0.9 to match Drupal site.
         margin: '0 2.6rem 0 0 !important',
       },
       [theme.breakpoints.up('lg')]: {
         '& .header__search--inner > .header__search--title': {
-          fontSize: '1.25rem !important', // Changed from 1.0 to match Drupal site.
+          fontSize: '1.125rem !important', // Changed from 1.0 to match Drupal site.
         },
       },
       '& .header__search--inner > div.search-api-form > form#search-api-form': {
@@ -172,6 +199,7 @@ const useStyles = (customize) => {
         alignItems: 'center',
         width: '100%',
       },
+      // Previous version header styles
       '& .header__search--inner > div.search-api-form > form#search-api-form > .form-item': {
         width: '100%',
         display: 'flex',
@@ -180,6 +208,16 @@ const useStyles = (customize) => {
         msFlexAlign: 'center',
         alignItems: 'center',
         margin: '20px 0',
+      },
+      // New header version styles
+      '& #header.header .header__search-panel.is-open .header__search--inner > div.search-api-form > form#search-api-form > .form-item': {
+        width: '100%',
+        display: 'flex',
+        msFlexPack: 'start',
+        justifyContent: 'flex-start',
+        msFlexAlign: 'center',
+        alignItems: 'center',
+        margin: '0 0',
       },
       '& .header__search--inner > div.search-api-form': {
         width: '100%',
@@ -348,7 +386,9 @@ const NeonHeader = (inProps) => {
     showSkeleton,
     customizeAuthContainer,
   } = props;
-  const { classes, theme } = useStyles(customizeAuthContainer)();
+  // Temporary state to detect new header state and apply styling
+  const [useNewHeader, setUseNewHeader] = useState(false);
+  const { classes, theme } = useStyles(customizeAuthContainer)({ useNewHeader });
   const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [{
@@ -383,6 +423,21 @@ const NeonHeader = (inProps) => {
         break;
     }
   }
+
+  // Disabling this linter rule here for this temporary check for new
+  // header detection and backwards compat with previous version.
+  // To be removed once new version is live.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (useNewHeader || !headerRef || !headerRef.current) {
+      return;
+    }
+    const toggles = headerRef.current.querySelector('button.nav__toggle');
+    if (!toggles) {
+      return;
+    }
+    setUseNewHeader(true);
+  });
 
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
