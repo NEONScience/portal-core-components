@@ -4,7 +4,7 @@ export default html = `
   <div class="footer-top__inner l--offset-wide l--wrapper">
   <div class="footer-top__logo-social">
     <div class="footer-top__logo">
-      <img height="60" width="167" src="https://www.neonscience.org/themes/custom/neon/logo-white.svg" alt="" />
+      <img height="60" width="167" src="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/themes/custom/neon/logo-white.svg" alt="" />
     </div>
     <div class="footer-top__social">
       <h4>Follow Us:</h4>
@@ -26,7 +26,7 @@ export default html = `
         <p>Get updates on events, opportunities, and how NEON is being used today.</p>
       </div>
       <div class="footer-top__newsletter-btn">
-        <a href="https://www.neonscience.org/neon-newsletter-sign">Subscribe Now
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/neon-newsletter-sign">Subscribe Now
         <svg width="13px" height="10px" viewBox="0 0 13 10" xmlns="http://www.w3.org/2000/svg"><g class="chevronGroup" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke="#FFFFFF" stroke-width="2" transform="translate(1.000000, 1.000000)"><path d="M11,4 L7,8" class="bottom"></path><path d="M11,4 L7,0" class="top"></path><path d="M11,4 L0,4" class="line"></path></g></svg>
                 </a>
       </div>
@@ -48,19 +48,22 @@ export default html = `
         
           <ul  class="menu menu--footer" data-depth="0">
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-plugin-id="menu-link-content06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/about" title="About Us" class="menu__link" data-plugin-id="menu-link-content06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu-link-contentdd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/impact/newsroom" class="menu__link" data-plugin-id="menu-link-content214a668b-1f79-4871-a8d1-c0c86269b559" data-drupal-link-system-path="node/10890">Newsroom</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/terms-use" title="Terms &amp; Conditions" class="menu__link" data-plugin-id="menu-link-content07159864-5327-46a9-a026-e60fa4cbfa05" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu-link-contentdd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
+              </li>
+          <li  class="menu__item">
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/terms-use" title="Terms &amp; Conditions" class="menu__link" data-plugin-id="menu-link-content07159864-5327-46a9-a026-e60fa4cbfa05" data-drupal-link-system-path="node/31">Terms &amp; Conditions</a>
               </li>
           <li  class="menu__item">
         <a href="https://www.neonscience.org/get-involved/work-opportunities/careers" class="menu__link" data-plugin-id="menu-link-contentcbe8afdf-f98d-429d-aa0a-842196d4654e">Careers</a>
               </li>
           <li  class="menu__item">
-        <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-plugin-id="menu-link-content4557061a-f1f3-4fc9-a14d-d3a9517d4cfb" data-drupal-link-system-path="node/12759">Code of Conduct</a>
+        <a href="https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site/neon-code-conduct" class="menu__link" data-plugin-id="menu-link-content4557061a-f1f3-4fc9-a14d-d3a9517d4cfb" data-drupal-link-system-path="node/12759">Code of Conduct</a>
               </li>
         </ul>
   

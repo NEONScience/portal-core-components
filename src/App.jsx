@@ -397,7 +397,8 @@ const App = () => {
           sidebarSubtitle={sidebarSubtitle}
           sidebarLinks={sidebarLinks}
           sidebarLinksAsStandaloneChildren
-          customizeAuthContainer
+          showHeaderSkeleton
+          showFooterSkeleton
         >
           <Home />
         </NeonPage>

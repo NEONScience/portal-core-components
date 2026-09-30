@@ -118,7 +118,7 @@ const REMOTE_ASSET_NAMES = {
 const MAKE_HASHED_FILENAMES = [REMOTE_ASSET_NAMES.DRUPAL_THEME_CSS];
 const MAKE_MINIMIZED_FILENAMES = [REMOTE_ASSET_NAMES.DRUPAL_THEME_CSS];
 
-const WEB_HOST_URL = 'https://www.neonscience.org';
+const WEB_HOST_URL = 'https://www.develop-sr3snxi-di4alr4iwbwyg.us-2.platformsh.site';
 
 // When fetching cached remote assets, reference production
 const REMOTE_ASSETS_CACHE = {
