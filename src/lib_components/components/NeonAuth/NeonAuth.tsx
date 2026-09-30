@@ -26,6 +26,7 @@ import AuthService, { LOGOUT_REDIRECT_PATHS } from './AuthService';
 import NeonAuthContext, { FETCH_STATUS } from '../NeonContext/NeonAuthContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
+import { FONT_SIZES } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
 
@@ -69,6 +70,16 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   loadingContainer: {
     display: 'flex',
+    width: '110px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: theme.spacing(0.5),
+    '& span.MuiCircularProgress-root': {
+      marginRight: '5px',
+    },
+  },
+  loadingContainerCustom: {
+    display: 'flex',
     width: '64px',
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,6 +88,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   loadingContainerSpan: {
     marginRight: theme.spacing(1),
     color: theme.palette.grey[400],
+    fontSize: `${FONT_SIZES['12'].rem}rem`,
   },
   accountMenuContainer: {
     '& :focus': {
@@ -326,7 +338,7 @@ const renderAuth = (
       );
       if (showAuthWorking) {
         authContent = (
-          <div className={classes.loadingContainer}>
+          <div className={isCustom ? classes.loadingContainerCustom : classes.loadingContainer}>
             {isCustom ? null : (
               <span className={classes.loadingContainerSpan}>
                 {isAuthenticated ? 'Signing out...' : 'Signing in...'}
