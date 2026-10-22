@@ -66,6 +66,15 @@ const useStyles = (customize) => {
         display: 'none !important',
       },
     };
+  const getHeaderContainerStyles = (paramUseNewHeader) => {
+    if (!paramUseNewHeader) {
+      return {};
+    }
+    return {
+      position: 'relative',
+      zIndex: 10,
+    };
+  };
   const getAuthContainerStyles = (theme, paramUseNewHeader) => {
     if (!paramUseNewHeader) {
       return {
@@ -146,6 +155,7 @@ const useStyles = (customize) => {
     // Injecting these styles as a means of fixing up the search display
     // Ideally, this CSS comes from Drupal and is removed from here...
     headerContainer: {
+      ...getHeaderContainerStyles(useNewHeader),
       // // Added menu__link to more closely mimic Drupal site links.
       // '& .menu__link': {
       //   fontSize: '1.1rem !important',
