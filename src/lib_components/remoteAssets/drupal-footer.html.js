@@ -41,14 +41,17 @@ export default html = `
     <div class="footer-bottom__menu">
         <div>
     <nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer">
-            
-  <h2 class="visually-hidden" id="block-footer-menu">Footer</h2>
-  
 
-        
+  <h2 class="visually-hidden" id="block-footer-menu">Footer</h2>
+
+
+
           <ul  class="menu menu--footer" data-depth="0">
           <li  class="menu__item">
         <a href="https://www.neonscience.org/about" title="About Us" class="menu__link" data-plugin-id="menu-link-content06cc4ae6-95bb-4346-a0e9-6f27f3c48368" data-drupal-link-system-path="node/8793">About Us</a>
+              </li>
+          <li  class="menu__item">
+        <a href="https://www.neonscience.org/impact/newsroom" class="menu__link" data-plugin-id="menu-link-content214a668b-1f79-4871-a8d1-c0c86269b559" data-drupal-link-system-path="node/10890">Newsroom</a>
               </li>
           <li  class="menu__item">
         <a href="https://www.neonscience.org/about/contact-us" title="Contact Us" class="menu__link" data-plugin-id="menu-link-contentdd9d8fc1-0e31-4927-a1cc-33171a5e6843" data-drupal-link-system-path="node/24">Contact Us</a>
@@ -63,7 +66,7 @@ export default html = `
         <a href="https://www.neonscience.org/neon-code-conduct" class="menu__link" data-plugin-id="menu-link-content4557061a-f1f3-4fc9-a14d-d3a9517d4cfb" data-drupal-link-system-path="node/12759">Code of Conduct</a>
               </li>
         </ul>
-  
+
 
 
   </nav>
