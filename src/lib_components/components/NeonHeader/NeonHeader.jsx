@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
@@ -40,21 +40,21 @@ const useStyles = (customize) => {
     };
   const headerContainer = customize
     ? {
-      '& .header__inner.l--offset-wide': {
-        marginRight: '120px !important',
-        paddingRight: '0px !important',
-        maxWidth: 'unset !important',
+      // Viewport-specific styles
+      [`@media (min-width:${1100}px)`]: {
+        '& .header__inner.l--offset-wide': {
+          marginRight: '110px !important',
+          paddingRight: '0px !important',
+          maxWidth: 'unset !important',
+        },
+      },
+      [`@media (max-width:${1099}px)`]: {
+        '& .header__inner.l--offset-wide': {
+          paddingRight: '36px !important',
+        },
       },
       '& .header__inner.l--offset-wide > .authContainer': {
         display: 'none !important',
-      },
-      '& .header__inner > .header__site-navigation > .header__menu-main > nav > ul.menu--main': {
-        '& > li.menu__item': {
-          marginRight: '42px !important',
-        },
-        '& > li.siteSearch': {
-          marginLeft: '-10px !important',
-        },
       },
     } : {
       '& .header__inner.l--offset-wide': {
@@ -66,46 +66,7 @@ const useStyles = (customize) => {
         display: 'none !important',
       },
     };
-  const getHeaderContainerStyles = (paramUseNewHeader) => {
-    if (!paramUseNewHeader) {
-      return {};
-    }
-    return {
-      position: 'relative',
-      zIndex: 10,
-    };
-  };
-  const getAuthContainerStyles = (theme, paramUseNewHeader) => {
-    if (!paramUseNewHeader) {
-      return {
-        [theme.breakpoints.up('lg')]: {
-          padding: '0px',
-          top: customize ? '47px' : '-1px',
-          right: customize ? '32px' : '0px',
-          ...viewportStyles,
-        },
-        [theme.breakpoints.down('lg')]: {
-          padding: customize ? theme.spacing(1, 1.5) : theme.spacing(1, 2),
-          top: theme.spacing(1),
-          right: theme.spacing(9),
-        },
-      };
-    }
-    return {
-      [`@media (min-width:${1100}px)`]: {
-        padding: '0px',
-        top: customize ? '47px' : '-1px',
-        right: customize ? '32px' : '0px',
-        ...viewportStyles,
-      },
-      [`@media (max-width:${1099}px)`]: {
-        padding: customize ? theme.spacing(1, 1.5) : theme.spacing(1, 2),
-        top: theme.spacing(1),
-        right: theme.spacing(11),
-      },
-    };
-  };
-  return makeStyles()((theme, { useNewHeader }) => ({
+  return makeStyles()((theme) => ({
     skeletonHeader: {
       boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.25)',
     },
@@ -116,7 +77,19 @@ const useStyles = (customize) => {
       position: 'absolute',
       zIndex: 15,
       // Viewport-specific styles
-      ...getAuthContainerStyles(theme, useNewHeader),
+      [`@media (min-width:${1100}px)`]: {
+        padding: '0px',
+        top: customize ? '45px' : '-1px',
+        right: customize ? '32px' : '0px',
+        height: customize ? '120px' : undefined,
+        ...viewportStyles,
+      },
+      [`@media (max-width:${1099}px)`]: {
+        padding: customize ? theme.spacing(1, 0) : theme.spacing(1, 2),
+        top: customize ? '8px' : theme.spacing(1),
+        right: customize ? '90px' : theme.spacing(11),
+        height: customize ? '60px' : undefined,
+      },
     },
     // These styles are gross. We need to rework the header coming from the Drupal site to make this
     // less necessary.
@@ -155,7 +128,9 @@ const useStyles = (customize) => {
     // Injecting these styles as a means of fixing up the search display
     // Ideally, this CSS comes from Drupal and is removed from here...
     headerContainer: {
-      ...getHeaderContainerStyles(useNewHeader),
+      fontFeatureSettings: '"ss01", "ss03", "ss04" !important',
+      position: 'relative',
+      zIndex: 10,
       // // Added menu__link to more closely mimic Drupal site links.
       // '& .menu__link': {
       //   fontSize: '1.1rem !important',
@@ -396,9 +371,7 @@ const NeonHeader = (inProps) => {
     showSkeleton,
     customizeAuthContainer,
   } = props;
-  // Temporary state to detect new header state and apply styling
-  const [useNewHeader, setUseNewHeader] = useState(false);
-  const { classes, theme } = useStyles(customizeAuthContainer)({ useNewHeader });
+  const { classes, theme } = useStyles(customizeAuthContainer)();
   const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [{
@@ -433,21 +406,6 @@ const NeonHeader = (inProps) => {
         break;
     }
   }
-
-  // Disabling this linter rule here for this temporary check for new
-  // header detection and backwards compat with previous version.
-  // To be removed once new version is live.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (useNewHeader || !headerRef || !headerRef.current) {
-      return;
-    }
-    const toggles = headerRef.current.querySelector('button.nav__toggle');
-    if (!toggles) {
-      return;
-    }
-    setUseNewHeader(true);
-  });
 
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
