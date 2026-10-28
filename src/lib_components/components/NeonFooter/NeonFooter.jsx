@@ -10,6 +10,7 @@ import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAsse
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
+import { exists } from '../../util/typeUtil';
 
 const DRUPAL_FOOTER_HTML = REMOTE_ASSETS.DRUPAL_FOOTER_HTML.KEY;
 
@@ -24,11 +25,12 @@ const useStyles = makeStyles()((theme) => ({
 const defaultProps = {
   drupalCssLoaded: false,
   showSkeleton: false,
+  minWidth: undefined,
 };
 
 const NeonFooter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { drupalCssLoaded, showSkeleton } = props;
+  const { drupalCssLoaded, showSkeleton, minWidth } = props;
   const { classes } = useStyles();
   const [{
     isActive: neonPageAssetsContextIsActive,
@@ -55,8 +57,13 @@ const NeonFooter = (inProps) => {
     }
   }
 
+  const outerFooterContainerStyles = {};
+  if (exists(minWidth)) {
+    outerFooterContainerStyles.minWidth = minWidth;
+  }
+
   const renderFallback = () => ((
-    <footer id="footer" className={classes.footerContainer}>
+    <footer id="footer" className={classes.footerContainer} style={outerFooterContainerStyles}>
       {HTMLReactParser(DRUPAL_FOOTER_HTML_FALLBACK)}
     </footer>
   ));
@@ -67,14 +74,14 @@ const NeonFooter = (inProps) => {
         return renderFallback();
       }
       return (
-        <footer id="footer">
+        <footer id="footer" style={outerFooterContainerStyles}>
           <Skeleton variant="rectangular" height="300px" width="100%" />
         </footer>
       );
 
     case 'drupal':
       return (
-        <footer id="footer">
+        <footer id="footer" style={outerFooterContainerStyles}>
           {HTMLReactParser(footerHTML)}
         </footer>
       );
@@ -88,6 +95,7 @@ const NeonFooter = (inProps) => {
 NeonFooter.propTypes = {
   drupalCssLoaded: PropTypes.bool,
   showSkeleton: PropTypes.bool,
+  minWidth: PropTypes.string,
 };
 
 export default NeonFooter;

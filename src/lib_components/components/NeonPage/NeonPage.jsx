@@ -50,6 +50,7 @@ import DrupalAssetService from '../../service/DrupalAssetService';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 import { useNetworkAvailability } from '../../hooks/customHooks';
+import { exists } from '../../util/typeUtil';
 
 import './styles.css';
 
@@ -289,6 +290,7 @@ const defaultProps = {
   notification: null,
   notificationsDisable: false,
   outerPageContainerMaxWidth: '2000px',
+  outerPageContainerMinWidth: '380px',
   progress: null,
   resetStateAfterRuntimeError: () => { },
   sidebarContent: null,
@@ -326,6 +328,7 @@ const NeonPage = (inProps) => {
     notification,
     notificationsDisable,
     outerPageContainerMaxWidth,
+    outerPageContainerMinWidth,
     progress,
     resetStateAfterRuntimeError,
     sidebarContent,
@@ -856,6 +859,9 @@ const NeonPage = (inProps) => {
         ? outerPageContainerMaxWidth
         : `calc(${outerPageContainerMaxWidth} - ${sidebarWidth + 48}px)`;
     }
+    if (exists(outerPageContainerMinWidth)) {
+      outerPageContainerStyles.minWidth = outerPageContainerMinWidth;
+    }
     let content = children;
     if (hasSidebarLinks && sidebarLinksAsStandaloneChildren) {
       const CurrentComponent = sidebarLinks[sidebarHashMap[currentSidebarHash] || 0].component;
@@ -874,6 +880,7 @@ const NeonPage = (inProps) => {
             unstickyDrupalHeader={unstickyDrupalHeader}
             drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showHeaderSkeleton}
+            minWidth={outerPageContainerMinWidth}
           />
         )}
         <Container className={classes.outerPageContainer} style={outerPageContainerStyles}>
@@ -900,6 +907,7 @@ const NeonPage = (inProps) => {
           <NeonFooter
             drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showFooterSkeleton}
+            minWidth={outerPageContainerMinWidth}
           />
         )}
         {renderLoading()}
@@ -979,6 +987,7 @@ NeonPage.propTypes = {
   notification: PropTypes.string,
   notificationsDisable: PropTypes.bool,
   outerPageContainerMaxWidth: PropTypes.string,
+  outerPageContainerMinWidth: PropTypes.string,
   progress: PropTypes.number,
   resetStateAfterRuntimeError: PropTypes.func,
   sidebarContent: children,

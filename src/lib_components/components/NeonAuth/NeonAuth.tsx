@@ -56,7 +56,11 @@ export interface NeonAuthProps {
 }
 /* eslint-enable react/no-unused-prop-types */
 
-const useStyles = makeStyles()((theme: NeonTheme) => ({
+type UseStylesProps = {
+  displayType: NeonAuthDisplayType;
+};
+
+const useStyles = makeStyles<UseStylesProps>()((theme: NeonTheme, { displayType }) => ({
   button: {
     whiteSpace: 'nowrap',
     // The following styles are !important overrides to styles applied by the drupal header.css
@@ -67,6 +71,8 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     fontWeight: '600 !important' as any,
     fontFamily: '"Inter",Helvetica,Arial,sans-serif !important',
     lineHeight: '1.75 !important',
+    height: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '36px' : undefined,
+    width: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '76px' : undefined,
   },
   loadingContainer: {
     display: 'flex',
@@ -83,7 +89,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     width: '64px',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: theme.spacing(0.5),
+    margin: theme.spacing(0.85, 0.5),
   },
   loadingContainerSpan: {
     marginRight: theme.spacing(1),
@@ -106,7 +112,7 @@ export interface AccountMenuProps {
 
 const AccountMenu = (props: AccountMenuProps) => {
   const { accountPath, handleLogout } = props;
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles({ displayType: NeonAuthDisplayType.MENU_CUSTOM });
   const [
     {
       auth: {
@@ -117,7 +123,7 @@ const AccountMenu = (props: AccountMenuProps) => {
   const user = userData?.data?.user;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerRefEl, setContainerRefEl] = useState<HTMLElement | null>(null);
-  const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const belowXl = useMediaQuery('(max-width: 1499.5px)');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -143,11 +149,10 @@ const AccountMenu = (props: AccountMenuProps) => {
     width: '64px',
     alignItems: 'center',
     textAlign: 'center',
-    marginTop: '-4px',
+    marginTop: '0px',
   };
-  if (belowLg) {
-    avatarContainerSx.marginTop = '-3px';
-    avatarContainerSx.textAlign = 'right';
+  if (belowXl) {
+    avatarContainerSx.width = '34px';
   }
   return (
     <>
@@ -344,7 +349,7 @@ const renderAuth = (
                 {isAuthenticated ? 'Signing out...' : 'Signing in...'}
               </span>
             )}
-            <CircularProgress size={20} />
+            <CircularProgress size={22} />
           </div>
         );
       } else if (isAuthenticated) {
@@ -390,8 +395,9 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
     },
     dispatch,
   ] = NeonAuthContext.useNeonAuthContextState();
+  const { displayType } = props;
 
-  const { classes } = useStyles();
+  const { classes } = useStyles({ displayType });
   const isFetchingAuthentication: boolean = [
     FETCH_STATUS.AWAITING_CALL,
     FETCH_STATUS.FETCHING,

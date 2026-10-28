@@ -1,4 +1,11 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { flushSync } from 'react-dom';
 import PropTypes from 'prop-types';
 import HTMLReactParser, { domToReact } from 'html-react-parser';
 
@@ -14,8 +21,10 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import ApplicationMenu from './ApplicationMenu';
+import HeaderSearch, { SEARCH_BOX_MEDIA_QUERY, SEARCH_TOGGLE_MEDIA_QUERY } from './HeaderSearch';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
+import { exists } from '../../util/typeUtil';
 
 import HeaderSearchSvg from '../../images/svg/header-search.svg';
 import HeaderSearchHoverSvg from '../../images/svg/header-search-hover.svg';
@@ -23,6 +32,7 @@ import HeaderSearchHoverSvg from '../../images/svg/header-search-hover.svg';
 const DRUPAL_HEADER_HTML = REMOTE_ASSETS.DRUPAL_HEADER_HTML.KEY;
 
 const AUTH_ELEMENT_ID = 'header__authentication-ui';
+const SEARCH_PANEL_ID = 'header-search-panel';
 
 // Only do the delay effect if not in test
 const initialRenderDelay = process.env.NODE_ENV === 'test';
@@ -52,6 +62,9 @@ const useStyles = (customize) => {
         '& .header__inner.l--offset-wide': {
           paddingRight: '36px !important',
         },
+        '& #header.header .header__site-navigation': {
+          top: '61px',
+        },
       },
       '& .header__inner.l--offset-wide > .authContainer': {
         display: 'none !important',
@@ -79,16 +92,55 @@ const useStyles = (customize) => {
       // Viewport-specific styles
       [`@media (min-width:${1100}px)`]: {
         padding: '0px',
-        top: customize ? '45px' : '-1px',
+        top: customize ? '40px' : '-1px',
         right: customize ? '32px' : '0px',
-        height: customize ? '120px' : undefined,
+        height: customize ? '36px' : undefined,
         ...viewportStyles,
       },
       [`@media (max-width:${1099}px)`]: {
         padding: customize ? theme.spacing(1, 0) : theme.spacing(1, 2),
-        top: customize ? '8px' : theme.spacing(1),
+        top: customize ? '4px' : theme.spacing(1),
         right: customize ? '90px' : theme.spacing(11),
-        height: customize ? '60px' : undefined,
+        height: customize ? '44px' : undefined,
+      },
+    },
+    // Positions the custom header search relative to the injected auth element
+    customAuthAnchor: {
+      position: 'relative',
+      display: 'inline-block',
+      verticalAlign: 'top',
+    },
+    // Replaces the Drupal header search entry points with the custom header search
+    customSearch: {
+      [SEARCH_BOX_MEDIA_QUERY]: {
+        [`& .nav__item--search, & .header__search-mobile, & #${SEARCH_PANEL_ID}`]: {
+          display: 'none !important',
+        },
+      },
+      [SEARCH_TOGGLE_MEDIA_QUERY]: {
+        [`& #${SEARCH_PANEL_ID} .header__search--title`]: {
+          margin: '0px 12px 0px 0px !important',
+        },
+        [`& #${SEARCH_PANEL_ID} .header__search-close`]: {
+          margin: '0px 0px 0px 8px',
+        },
+      },
+    },
+    // Mirrors the opened Drupal search panel styles for the custom search toggle
+    customSearchPanelOpen: {
+      [SEARCH_TOGGLE_MEDIA_QUERY]: {
+        [`& #${SEARCH_PANEL_ID}.header__search-panel`]: {
+          background: '#f5f6f7',
+          position: 'relative',
+          zIndex: 1,
+          opacity: 1,
+          visibility: 'visible',
+          transitionDelay: '0s',
+          fontSize: '1.1rem',
+        },
+        [`& #${SEARCH_PANEL_ID} form#search-api-form > .form-item`]: {
+          margin: '0px',
+        },
       },
     },
     // These styles are gross. We need to rework the header coming from the Drupal site to make this
@@ -360,6 +412,7 @@ const defaultProps = {
   unstickyDrupalHeader: true,
   showSkeleton: false,
   customizeAuthContainer: false,
+  minWidth: undefined,
 };
 
 const NeonHeader = (inProps) => {
@@ -370,9 +423,11 @@ const NeonHeader = (inProps) => {
     unstickyDrupalHeader,
     showSkeleton,
     customizeAuthContainer,
+    minWidth,
   } = props;
   const { classes, theme } = useStyles(customizeAuthContainer)();
   const belowLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const isSearchToggleViewport = useMediaQuery(SEARCH_TOGGLE_MEDIA_QUERY);
 
   const [{
     isActive: neonPageAssetsContextIsActive,
@@ -386,6 +441,56 @@ const NeonHeader = (inProps) => {
 
   const [headerJsStatus, setHeaderJsStatus] = useState(FETCH_STATUS.AWAITING_CALL);
   const [headerRenderDelayed, setHeaderRenderDelayed] = useState(initialRenderDelay);
+
+  // The custom header search is rendered alongside the injected auth element
+  const shouldInjectAuth = auth.useCore && neonAuthContextIsActive;
+  const customizeSearch = customizeAuthContainer && shouldInjectAuth;
+  const searchToggleRef = useRef(null);
+  const [searchPanelOpenState, setSearchPanelOpenState] = useState(false);
+  // The custom search toggle only controls the search panel within its viewport range
+  const searchPanelOpen = customizeSearch && isSearchToggleViewport && searchPanelOpenState;
+
+  const handleToggleSearchPanel = useCallback(() => {
+    if (searchPanelOpen) {
+      setSearchPanelOpenState(false);
+      return;
+    }
+    const drupalHeader = searchToggleRef.current?.closest('.header');
+    // Close the navigation menu so that it does not obscure the search panel
+    if (document.body.classList.contains('nav-open')) {
+      drupalHeader?.querySelector('.nav__hamburger')?.click();
+    }
+    // Render the opened panel synchronously so the search input can be focused
+    flushSync(() => setSearchPanelOpenState(true));
+    drupalHeader?.querySelector(`#${SEARCH_PANEL_ID} input[type="search"]`)?.focus();
+  }, [searchPanelOpen]);
+
+  // Header JS search panel handlers do not apply to the custom search toggle state,
+  // handle closing from the panel close button, navigation menu toggle and escape key.
+  useEffect(() => {
+    if (!searchPanelOpen) return () => {};
+    const handleDocumentClick = (event) => {
+      const { target } = event;
+      if (!(target instanceof Element)) return;
+      if (target.closest(`#${SEARCH_PANEL_ID} .button__search-close`)) {
+        setSearchPanelOpenState(false);
+        searchToggleRef.current?.focus();
+      } else if (target.closest('.nav__hamburger')) {
+        setSearchPanelOpenState(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape') return;
+      setSearchPanelOpenState(false);
+      searchToggleRef.current?.focus();
+    };
+    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [searchPanelOpen]);
 
   let renderMode = 'loading';
   if (neonPageAssetsContextIsActive) {
@@ -470,17 +575,27 @@ const NeonHeader = (inProps) => {
     headerRenderDelayed,
   ]);
 
+  const outerHeaderContainerStyles = {};
+  if (exists(minWidth)) {
+    outerHeaderContainerStyles.minWidth = minWidth;
+  }
+
   // Render Loading
   if ((renderMode === 'loading') && showSkeleton) {
     return (
-      <header ref={headerRef} id="header" className={classes.skeletonHeader}>
+      <header
+        ref={headerRef}
+        id="header"
+        className={classes.skeletonHeader}
+        style={outerHeaderContainerStyles}
+      >
         <Skeleton variant="rectangular" height={`${belowLg ? 60 : 120}px`} width="100%" />
       </header>
     );
   }
 
   // Render Drupal header
-  const injectAuth = (!auth.useCore || !neonAuthContextIsActive) ? undefined : {
+  const injectAuth = !shouldInjectAuth ? undefined : {
     // eslint-disable-next-line react/no-unstable-nested-components
     replace: (domNode) => {
       const { attribs = {}, name } = domNode;
@@ -496,20 +611,34 @@ const NeonHeader = (inProps) => {
         );
       }
       if (attribs.id !== AUTH_ELEMENT_ID) { return null; }
+      const neonAuth = (
+        <NeonAuth
+          loginPath={NeonEnvironment.getFullAuthPath('login')}
+          logoutPath={NeonEnvironment.getFullAuthPath('logout')}
+          accountPath={NeonEnvironment.route.buildAccountRoute()}
+          loginType={NeonAuthType.REDIRECT}
+          logoutType={NeonAuthType.SILENT}
+          displayType={
+            customizeAuthContainer
+              ? NeonAuthDisplayType.MENU_CUSTOM
+              : NeonAuthDisplayType.MENU
+          }
+        />
+      );
       return (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
-          <NeonAuth
-            loginPath={NeonEnvironment.getFullAuthPath('login')}
-            logoutPath={NeonEnvironment.getFullAuthPath('logout')}
-            accountPath={NeonEnvironment.route.buildAccountRoute()}
-            loginType={NeonAuthType.REDIRECT}
-            logoutType={NeonAuthType.SILENT}
-            displayType={
-              customizeAuthContainer
-                ? NeonAuthDisplayType.MENU_CUSTOM
-                : NeonAuthDisplayType.MENU
-            }
-          />
+          {!customizeSearch ? neonAuth : (
+            <div className={classes.customAuthAnchor}>
+              <HeaderSearch
+                searchAction={buildSearchAction()}
+                searchPanelId={SEARCH_PANEL_ID}
+                searchPanelOpen={searchPanelOpen}
+                onToggleSearchPanel={handleToggleSearchPanel}
+                toggleRef={searchToggleRef}
+              />
+              {neonAuth}
+            </div>
+          )}
         </div>
       );
     },
@@ -521,6 +650,12 @@ const NeonHeader = (inProps) => {
   if ((renderMode === 'drupal-fallback') || ((renderMode === 'loading') && !showSkeleton)) {
     appliedClassName = `${appliedClassName} ${classes.headerContainerFallback}`;
   }
+  if (customizeSearch) {
+    appliedClassName = `${appliedClassName} ${classes.customSearch}`;
+    if (searchPanelOpen) {
+      appliedClassName = `${appliedClassName} ${classes.customSearchPanelOpen}`;
+    }
+  }
   const html = renderMode === 'drupal' ? headerHTML : DRUPAL_HEADER_HTML_FALLBACK;
   return (
     <>
@@ -528,6 +663,7 @@ const NeonHeader = (inProps) => {
         ref={headerRef}
         id="header"
         className={appliedClassName}
+        style={outerHeaderContainerStyles}
       >
         {HTMLReactParser(html, injectAuth)}
       </header>
@@ -542,6 +678,7 @@ NeonHeader.propTypes = {
   unstickyDrupalHeader: PropTypes.bool,
   showSkeleton: PropTypes.bool,
   customizeAuthContainer: PropTypes.bool,
+  minWidth: PropTypes.string,
 };
 
 export default NeonHeader;
