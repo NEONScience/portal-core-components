@@ -261,7 +261,7 @@ exports[`NeonPage renders a basic functional page with no props 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -296,7 +296,7 @@ exports[`NeonPage renders a basic functional page with no props 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -388,7 +388,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: calc(2000px - 348px);"
+        style="max-width: calc(2000px - 348px); min-width: 380px;"
       >
         <div
           class="css-qmaohn-sidebarContainer"
@@ -495,7 +495,7 @@ exports[`NeonPage renders sidebar items as skeletons when in appropriate state 1
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: calc(2000px - 348px);"
+      style="max-width: calc(2000px - 348px); min-width: 380px;"
     >
       <div
         class="css-qmaohn-sidebarContainer"
@@ -655,7 +655,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -683,7 +683,7 @@ exports[`NeonPage renders with a custom header/footer 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -772,7 +772,7 @@ exports[`NeonPage renders with a notification 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -860,7 +860,7 @@ exports[`NeonPage renders with a notification 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -1005,7 +1005,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -1052,7 +1052,7 @@ exports[`NeonPage renders with a title and subtitle 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -1156,7 +1156,7 @@ exports[`NeonPage renders with an error 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -1248,7 +1248,7 @@ exports[`NeonPage renders with an error 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -1397,7 +1397,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: calc(2000px - 348px);"
+        style="max-width: calc(2000px - 348px); min-width: 380px;"
       >
         <div
           class="css-qmaohn-sidebarContainer"
@@ -1440,7 +1440,7 @@ exports[`NeonPage renders with custom sidebar content 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: calc(2000px - 348px);"
+      style="max-width: calc(2000px - 348px); min-width: 380px;"
     >
       <div
         class="css-qmaohn-sidebarContainer"
@@ -1540,7 +1540,7 @@ exports[`NeonPage renders with loading message 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 3333px;"
+        style="max-width: 3333px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -1639,7 +1639,7 @@ exports[`NeonPage renders with loading message 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 3333px;"
+      style="max-width: 3333px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -1795,7 +1795,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: 2000px;"
+        style="max-width: 2000px; min-width: 380px;"
       >
         <div
           class="css-om5qko-pageContent"
@@ -1898,7 +1898,7 @@ exports[`NeonPage renders with loading message and progress 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: 2000px;"
+      style="max-width: 2000px; min-width: 380px;"
     >
       <div
         class="css-om5qko-pageContent"
@@ -2058,7 +2058,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: calc(2000px - 348px);"
+        style="max-width: calc(2000px - 348px); min-width: 380px;"
       >
         <div
           class="css-qmaohn-sidebarContainer"
@@ -2167,7 +2167,7 @@ exports[`NeonPage renders with sidebar links 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: calc(2000px - 348px);"
+      style="max-width: calc(2000px - 348px); min-width: 380px;"
     >
       <div
         class="css-qmaohn-sidebarContainer"
@@ -2333,7 +2333,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
       </header>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-        style="max-width: calc(2000px - 470px);"
+        style="max-width: calc(2000px - 470px); min-width: 380px;"
       >
         <div
           class="css-qmaohn-sidebarContainer sidebarClassName"
@@ -2408,7 +2408,7 @@ exports[`NeonPage renders with sidebar links as standlone children 1`] = `
     </header>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-1bvevnd-MuiContainer-root-outerPageContainer"
-      style="max-width: calc(2000px - 470px);"
+      style="max-width: calc(2000px - 470px); min-width: 380px;"
     >
       <div
         class="css-qmaohn-sidebarContainer sidebarClassName"
