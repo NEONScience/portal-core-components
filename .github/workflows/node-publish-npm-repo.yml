@@ -2,12 +2,12 @@ name: Node Publish NPM Repo
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, data-ava ]
 env:
   NPM_REGISTRY: https://registry.npmjs.org
   GH_NPM_REGISTRY: https://npm.pkg.github.com
   NPM_PACKAGE_SCOPE: '@neonscience'
-  NODE_VERSION: 24
+  NODE_VERSION: 26
 
 jobs:
   node-publish-npm-repo:
@@ -34,7 +34,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install packages
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Build package
         run: npm run publish:build

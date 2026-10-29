@@ -65,6 +65,15 @@ const useStyles = (customize) => {
         '& #header.header .header__site-navigation': {
           top: '61px',
         },
+        '& #header.header .nav__hamburger': {
+          width: '32px',
+          height: '32px',
+          backgroundColor: '#fff',
+          padding: '7px',
+          color: '#0073CF',
+          border: '1px solid #0073CF',
+          borderRadius: '3px',
+        },
       },
       '& .header__inner.l--offset-wide > .authContainer': {
         display: 'none !important',
@@ -92,16 +101,16 @@ const useStyles = (customize) => {
       // Viewport-specific styles
       [`@media (min-width:${1100}px)`]: {
         padding: '0px',
-        top: customize ? '40px' : '-1px',
+        top: customize ? '42px' : '-1px',
         right: customize ? '32px' : '0px',
-        height: customize ? '36px' : undefined,
+        height: customize ? '32px' : undefined,
         ...viewportStyles,
       },
       [`@media (max-width:${1099}px)`]: {
         padding: customize ? theme.spacing(1, 0) : theme.spacing(1, 2),
-        top: customize ? '4px' : theme.spacing(1),
-        right: customize ? '90px' : theme.spacing(11),
-        height: customize ? '44px' : undefined,
+        top: customize ? '6px' : theme.spacing(1),
+        right: customize ? '86px' : theme.spacing(11),
+        height: customize ? '48px' : undefined,
       },
     },
     // Positions the custom header search relative to the injected auth element

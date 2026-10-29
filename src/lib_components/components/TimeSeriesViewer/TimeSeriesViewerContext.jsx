@@ -452,7 +452,6 @@ const DATA_FILE_PARTS = {
 // const siteMonthCancelation$ = new Subject();
 const fetchCSV = (url) => ajax({
   method: 'GET',
-  crossDomain: true,
   responseType: 'text',
   headers: {
     'User-Agent': getUserAgentHeader('Time Series Viewer'),

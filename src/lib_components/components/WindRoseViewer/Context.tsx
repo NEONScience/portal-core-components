@@ -499,7 +499,6 @@ const buildFilesAjaxObservable = (
   const dataFilesAjax = dataFilesInfo.dataFileUrls.map((dataFileUrl) => (
     ajax({
       method: 'GET',
-      crossDomain: true,
       url: dataFileUrl,
       responseType: 'text',
       headers: {
@@ -517,7 +516,6 @@ const buildFilesAjaxObservable = (
     ajaxObservables.push(
       ajax({
         method: 'GET',
-        crossDomain: true,
         url: dataFilesInfo.variablesFileUrl,
         responseType: 'text',
         headers: {

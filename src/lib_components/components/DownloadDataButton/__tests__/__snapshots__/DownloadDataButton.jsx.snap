@@ -8,7 +8,7 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
   >
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-rosxx8-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-x280ap-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
         data-gtm-product-code="DPX.XXXXX.XXX"
         data-selenium="download-data-button"
         tabindex="0"
@@ -35,7 +35,7 @@ exports[`DownloadDataButton Automatically includes data-gtm props from product i
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-rosxx8-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-x280ap-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
       data-gtm-product-code="DPX.XXXXX.XXX"
       data-selenium="download-data-button"
       tabindex="0"
@@ -119,7 +119,7 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-oot4vk-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-8i9zcr-MuiButtonBase-root-MuiButton-root"
         data-selenium="download"
         tabindex="0"
         type="button"
@@ -145,7 +145,7 @@ exports[`DownloadDataButton Preserves MUI button props 1`] = `
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-oot4vk-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-8i9zcr-MuiButtonBase-root-MuiButton-root"
       data-selenium="download"
       tabindex="0"
       type="button"
@@ -228,7 +228,7 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-9ox2n6-MuiButtonBase-root-MuiButton-root"
         data-selenium="download-data-button"
         tabindex="0"
         type="button"
@@ -254,7 +254,7 @@ exports[`DownloadDataButton Renders correctly with only a label 1`] = `
   </body>,
   "container": <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-9ox2n6-MuiButtonBase-root-MuiButton-root"
       data-selenium="download-data-button"
       tabindex="0"
       type="button"
@@ -341,7 +341,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
       aria-hidden="true"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-9ox2n6-MuiButtonBase-root-MuiButton-root"
         data-selenium="download-data-button"
         tabindex="0"
         type="button"
@@ -530,7 +530,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
                     class="css-10jfmcl-endFlex"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-p739iq-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeLarge MuiButton-colorPrimary css-1dexx55-MuiButtonBase-root-MuiButton-root-gtmCaptureButton"
                       data-gtm="download-data-dialog.cancel-button"
                       data-selenium="download-data-dialog.cancel-button"
                       style="margin-right: 0px;"
@@ -559,7 +559,7 @@ exports[`DownloadDataButton Renders with the dialog open from context state 1`] 
     aria-hidden="true"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-m7yiif-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-sizeMedium MuiButton-colorPrimary css-9ox2n6-MuiButtonBase-root-MuiButton-root"
       data-selenium="download-data-button"
       tabindex="0"
       type="button"

@@ -2,14 +2,14 @@ name: Docker Publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, data-ava ]
     tags: [ 'v*' ]
 env:
   GCP_ARTIFACT_HOST: ${{ vars.SHARED_WIF_LOCATON }}-docker.pkg.dev
   GCP_REGISTRY: ${{ vars.SHARED_WIF_LOCATON }}-docker.pkg.dev/${{ vars.SHARED_WIF_PROJECT }}/${{ vars.SHARED_WIF_REPO }}
   GCP_BEI_REGISTRY: ${{ vars.SHARED_WIF_LOCATON }}-docker.pkg.dev/${{ vars.SHARED_WIF_PROJECT }}/bei
   IMAGE_NAME: portal-react-core-components
-  NODE_VERSION: 24
+  NODE_VERSION: 26
 
 jobs:
   docker-publish:
@@ -32,7 +32,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install packages
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Build application
         run: npm run build

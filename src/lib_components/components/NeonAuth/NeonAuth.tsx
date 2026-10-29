@@ -71,8 +71,8 @@ const useStyles = makeStyles<UseStylesProps>()((theme: NeonTheme, { displayType 
     fontWeight: '600 !important' as any,
     fontFamily: '"Inter",Helvetica,Arial,sans-serif !important',
     lineHeight: '1.75 !important',
-    height: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '36px' : undefined,
-    width: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '76px' : undefined,
+    height: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '32px' : undefined,
+    width: (displayType === NeonAuthDisplayType.MENU_CUSTOM) ? '72px' : undefined,
   },
   loadingContainer: {
     display: 'flex',
@@ -89,7 +89,7 @@ const useStyles = makeStyles<UseStylesProps>()((theme: NeonTheme, { displayType 
     width: '64px',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: theme.spacing(0.85, 0.5),
+    margin: '5px 4px',
   },
   loadingContainerSpan: {
     marginRight: theme.spacing(1),
@@ -146,13 +146,13 @@ const AccountMenu = (props: AccountMenuProps) => {
   }
   const avatarContainerSx = {
     display: 'block',
-    width: '64px',
+    width: '72px',
     alignItems: 'center',
     textAlign: 'center',
     marginTop: '0px',
   };
   if (belowXl) {
-    avatarContainerSx.width = '34px';
+    avatarContainerSx.width = '72px';
   }
   return (
     <>
@@ -170,7 +170,7 @@ const AccountMenu = (props: AccountMenuProps) => {
             <Avatar
               alt={avatarAlt}
               src={user?.picture}
-              sx={{ width: 32, height: 32 }}
+              sx={{ width: 30, height: 30 }}
             >
               {avatarAlt?.charAt(0)?.toUpperCase()}
             </Avatar>
@@ -196,8 +196,8 @@ const AccountMenu = (props: AccountMenuProps) => {
                 filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                 mt: 1.5,
                 '& .MuiAvatar-root': {
-                  width: 32,
-                  height: 32,
+                  width: 30,
+                  height: 30,
                   ml: -0.5,
                   mr: 1,
                 },
