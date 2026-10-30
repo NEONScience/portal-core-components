@@ -393,6 +393,10 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
         dataset. Release data are only available when signed in, so no data are shown when a release
         is specified until the user signs in.
       </DocBlock>
+      <DocBlock>
+        The <b>Download Image (PNG)</b> button saves an image of the viewer as currently shown,
+        including the selections, wind rose, legend, calendar and citation.
+      </DocBlock>
 
       <Typography variant="h5" component="h3" gutterBottom>Data Quality</Typography>
       <DocBlock>

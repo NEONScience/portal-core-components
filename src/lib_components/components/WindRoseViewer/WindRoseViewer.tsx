@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
@@ -7,6 +11,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
 import ErrorIcon from '@mui/icons-material/Error';
+import ImageIcon from '@mui/icons-material/Image';
 import InfoIcon from '@mui/icons-material/Info';
 
 import Provider, {
@@ -56,6 +61,9 @@ import { resolveProps } from '../../util/defaultProps';
 
 import NeonLogo from '../../images/NSF-NEON-logo.png';
 
+// Exported images are rendered at this multiple of the on-screen size so they stay sharp
+const IMAGE_EXPORT_SCALE = 2;
+
 const useStyles = makeStyles()((theme: NeonTheme) => ({
   root: {
     width: '100%',
@@ -76,6 +84,14 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
   },
   productCode: {
     color: theme.palette.text.secondary,
+  },
+  headerActions: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    // Keeps the release chip in place when the download button is left out of the image
+    justifyContent: 'flex-end',
+    gap: theme.spacing(1, 1.5),
   },
   controls: {
     padding: theme.spacing(2, 3),
@@ -231,6 +247,9 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
   const { colorScheme: propColorScheme }: WindRoseViewerContentProps = props;
   const state: WindRoseViewerState = useStateContext();
   const { isLoginRequired } = useWindRoseViewerAccess();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const downloadButtonRef = useRef<HTMLButtonElement>(null);
+  const [isExportingImage, setIsExportingImage] = useState<boolean>(false);
   const [
     colorSchemeSelection,
     setColorSchemeSelection,
@@ -249,6 +268,7 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
     aggregation,
     qualityFilter,
     selectedDay,
+    isPlaying,
     data,
     dataSets,
   }: WindRoseViewerState = state;
@@ -397,10 +417,49 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
     );
   };
 
+  const downloadImage = (): void => {
+    const card = cardRef.current;
+    if (!card) {
+      return;
+    }
+    const { width, height } = card.getBoundingClientRect();
+    const cardStyle = window.getComputedStyle(card);
+    const fileName = [
+      'NEON Wind Rose',
+      productCode,
+      productName,
+      site,
+      isDaily ? selectedDay : month,
+      release,
+    ].filter(isStringNonEmpty).join(' - ');
+    setIsExportingImage(true);
+    domtoimage.toBlob(card, {
+      bgcolor: '#fff',
+      width: Math.ceil(width * IMAGE_EXPORT_SCALE),
+      height: Math.ceil(height * IMAGE_EXPORT_SCALE),
+      // Scale the rendering up while keeping the card laid out at its on-screen size
+      style: {
+        width: cardStyle.width,
+        height: cardStyle.height,
+        transform: `scale(${IMAGE_EXPORT_SCALE})`,
+        transformOrigin: 'top left',
+      },
+      filter: (node: Node): boolean => (node !== downloadButtonRef.current)
+        && !((node instanceof HTMLElement) && node.hasAttribute('data-windrose-download-exclude')),
+    }).then((blob: Blob): void => {
+      saveAs(blob, `${fileName}.png`);
+    }).catch((error: unknown): void => {
+      // eslint-disable-next-line no-console
+      console.error('Unable to export wind rose image', error);
+    }).finally((): void => {
+      setIsExportingImage(false);
+    });
+  };
+
   return (
     <div className={classes.root}>
       <WindRoseViewerLimitedCard />
-      <Card className={classes.card}>
+      <Card ref={cardRef} className={classes.card}>
         <div className={classes.header}>
           <div>
             <Typography variant="h5" component="h3">{productName || productCode}</Typography>
@@ -410,12 +469,27 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
               </Typography>
             )}
           </div>
-          {!isStringNonEmpty(release) ? null : (
-            <ReleaseChip
-              chipLabel={release as string}
-              tooltipTitle={`Showing data from ${release}`}
-            />
-          )}
+          <div className={classes.headerActions}>
+            {!isStringNonEmpty(release) ? null : (
+              <ReleaseChip
+                chipLabel={release as string}
+                tooltipTitle={`Showing data from ${release}`}
+              />
+            )}
+            <Button
+              ref={downloadButtonRef}
+              size="small"
+              color="primary"
+              variant="outlined"
+              onClick={downloadImage}
+              disabled={isExportingImage || isPlaying || isLoading || isLoginRequired}
+              startIcon={isExportingImage
+                ? <CircularProgress size={18} color="inherit" />
+                : <ImageIcon />}
+            >
+              Download Image (PNG)
+            </Button>
+          </div>
         </div>
         <div className={classes.controls}>
           <WindRoseControls />

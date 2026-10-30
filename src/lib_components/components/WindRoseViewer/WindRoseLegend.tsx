@@ -167,7 +167,7 @@ const WindRoseLegend: React.FC<WindRoseLegendProps> = (
       <Typography variant="caption" className={classes.calmNote}>
         Calm observations (0 m/s) have no direction and are not drawn on the wind rose.
       </Typography>
-      <div className={classes.paletteContainer}>
+      <div className={classes.paletteContainer} data-windrose-download-exclude="true">
         <Typography id={paletteLabelId} variant="caption" className={classes.paletteLabel}>
           Color palette
         </Typography>

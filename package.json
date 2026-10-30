@@ -109,6 +109,8 @@
     "@types/d3-selection": "^3.0.12",
     "@types/d3-shape": "^3.2.0",
     "@types/d3-transition": "^3.0.9",
+    "@types/dom-to-image": "^2.6.7",
+    "@types/file-saver": "^2.0.7",
     "@types/leaflet": "^1.9.22",
     "@types/lodash": "^4.17.27",
     "@types/node": "^26.6.6",

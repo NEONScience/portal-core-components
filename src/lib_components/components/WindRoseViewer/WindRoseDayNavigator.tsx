@@ -136,7 +136,7 @@ const WindRoseDayNavigator: React.FC = (): React.JSX.Element => {
   const hasMonths = availableMonths.length > 0;
   const playLabel = isPlaying ? 'Pause' : 'Play through the days of the month';
   return (
-    <div className={classes.navigator}>
+    <div className={classes.navigator} data-windrose-download-exclude="true">
       <div className={classes.stepper}>
         <Tooltip title="Previous day">
           <span>
