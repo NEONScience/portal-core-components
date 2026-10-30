@@ -64,7 +64,7 @@ export const getDataApiRequest = (productCode, release, site, month, isViewerLim
     ? NeonEnvironment.getFullApiPath('demoData')
     : NeonEnvironment.getFullApiPath('data');
   const hasRelease = isStringNonEmpty(release);
-  const releaseParam = hasRelease
+  const releaseParam = (!isViewerLimited && hasRelease)
     ? `?release=${release}`
     : '';
   return `${root}/${productCode}/${site}/${month}${releaseParam}`;

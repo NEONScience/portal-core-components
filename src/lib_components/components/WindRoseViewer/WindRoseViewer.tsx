@@ -1,691 +1,485 @@
-import React, {
-  useEffect,
-  useCallback,
-  useRef,
-  Dispatch,
-} from 'react';
+import React, { useState } from 'react';
 
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Slider from '@mui/material/Slider';
-import { useTheme } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Skeleton from '@mui/material/Skeleton';
+import Typography from '@mui/material/Typography';
 
-import { select } from 'd3-selection';
-import {
-  scaleLinear,
-  scaleBand,
-  scaleOrdinal,
-  type NumberValue,
-  type ScaleLinear,
-} from 'd3-scale';
-import { arc, stack } from 'd3-shape';
-import { max, range } from 'd3-array';
-import { Axis, axisLeft } from 'd3-axis';
+import ErrorIcon from '@mui/icons-material/Error';
+import InfoIcon from '@mui/icons-material/Info';
 
 import Provider, {
-  ActionCreator,
   FetchStatusState,
-  useDispatchContext,
+  LOGIN_REQUIRED_MESSAGE,
   useStateContext,
+  useWindRoseViewerAccess,
+  WindRoseAggregation,
   WindRoseViewerState,
 } from './Context';
+import WindRoseCalendar from './WindRoseCalendar';
+import WindRoseChart from './WindRoseChart';
+import WindRoseControls, { WindRoseAggregationToggle } from './WindRoseControls';
+import WindRoseDayNavigator from './WindRoseDayNavigator';
+import WindRoseLegend from './WindRoseLegend';
+import WindRoseViewerLimitedCard from './WindRoseViewerLimitedCard';
 import {
-  VELOCITY_BINS,
-  WIND_ROSE_CHANGE_TYPE,
-  DIRECTION_BIN_LOOKUP,
-} from './windRoseUtil';
+  DEFAULT_WIND_ROSE_COLOR_SCHEME,
+  resolveWindRoseColorScheme,
+  WindRoseColorScheme,
+} from './colorSchemes';
+import { WindRoseAggregate } from './windRoseUtil';
+import {
+  buildSectors,
+  formatCount,
+  formatDay,
+  formatMonth,
+  formatSpeed,
+  getPrevailingSector,
+} from './windRoseChartUtil';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
+import DataProductCitation from '../Citation/DataProductCitation';
+import ErrorCard from '../Card/ErrorCard';
+import ReleaseChip from '../Chip/ReleaseChip';
 import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
+import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
-import {
-  AnyAction,
-  Nullable,
-  Undef,
-  UnknownRecord,
-} from '../../types/core';
-import { exists, isStringNonEmpty } from '../../util/typeUtil';
+import { Nullable, Undef } from '../../types/core';
 import { AsyncStateType } from '../../types/asyncFlow';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { resolveProps } from '../../util/defaultProps';
 
-import './styles.css';
+import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 const useStyles = makeStyles()((theme: NeonTheme) => ({
-  container: {
+  root: {
     width: '100%',
   },
-  sliderThumbRoot: {
-    '& .MuiSlider-valueLabel': {
-      right: 'unset',
-      top: 'unset',
-      transform: 'translate(45%, -95%) scale(0)',
-      transformOrigin: 'center',
+  card: {
+    width: '100%',
+  },
+  header: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: theme.spacing(1, 2),
+    padding: theme.spacing(2.5, 3),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
     },
-    '& .MuiSlider-valueLabelOpen': {
-      transform: 'translate(45%, -95%) scale(1)',
+  },
+  productCode: {
+    color: theme.palette.text.secondary,
+  },
+  controls: {
+    padding: theme.spacing(2, 3),
+    backgroundColor: COLORS.GREY[50],
+    borderTop: `1px solid ${COLORS.GREY[200]}`,
+    borderBottom: `1px solid ${COLORS.GREY[200]}`,
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
     },
+  },
+  body: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    gap: theme.spacing(3, 5),
+    padding: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+    },
+  },
+  chartColumn: {
+    flex: '3 1 400px',
+    minWidth: 0,
+  },
+  chartHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: theme.spacing(1, 2),
+  },
+  sideColumn: {
+    flex: '2 1 280px',
+    minWidth: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(3),
+  },
+  overline: {
+    display: 'block',
+    lineHeight: 1.6,
+    color: theme.palette.text.secondary,
+  },
+  stats: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: theme.spacing(1, 4),
+    margin: theme.spacing(1.5, 0, 2, 0),
+  },
+  statLabel: {
+    display: 'block',
+    fontSize: '0.6875rem',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    color: theme.palette.text.secondary,
+  },
+  statValue: {
+    fontWeight: 600,
+  },
+  chartContainer: {
+    position: 'relative',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  overlay: {
+    position: 'absolute',
+    inset: 0,
+    zIndex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing(2),
+    padding: theme.spacing(4),
+    textAlign: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+  overlayMessage: {
+    maxWidth: '360px',
+  },
+  errorIcon: {
+    color: COLORS.RED[400],
+  },
+  infoIcon: {
+    color: COLORS.GOLD[500],
+  },
+  navigator: {
+    marginTop: theme.spacing(2),
+  },
+  loading: {
+    opacity: 0.5,
+    pointerEvents: 'none',
+  },
+  citationContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(2),
+    padding: theme.spacing(2, 3),
+    borderTop: `1px solid ${COLORS.GREY[200]}`,
+    [theme.breakpoints.down('sm')]: {
+      alignItems: 'flex-start',
+      padding: theme.spacing(2),
+    },
+  },
+  neonLogo: {
+    flexShrink: 0,
+    maxHeight: theme.spacing(5),
+  },
+  citationText: {
+    flex: '1 1 auto',
+    minWidth: 0,
+  },
+  citation: {
+    color: theme.palette.grey[400],
   },
 }));
 
-const DEGREE_SYMBOL_UNICODE = '\u00B0';
-
-const enum DirectionLabelMode {
-  ANGLE = 'ANGLE',
-  DIRECTION = 'DIRECTION',
+interface StatProps {
+  label: string;
+  value: string;
 }
 
-const DIRECTION_LABEL_MODE: DirectionLabelMode = DirectionLabelMode.DIRECTION;
-
-const enum FrequencyLabelMode {
-  COUNT = 'COUNT',
-  PERCENTAGE = 'PERCENTAGE',
-}
-
-const FREQUENCY_LABEL_MODE: FrequencyLabelMode = FrequencyLabelMode.PERCENTAGE;
-
-const getDirectionLabel = (mode: DirectionLabelMode, d: any): string => {
-  switch (mode) {
-    case DirectionLabelMode.ANGLE:
-      return `${(DIRECTION_BIN_LOOKUP as DirectionBinLookupType)[d.angle].angle}`
-        + `${DEGREE_SYMBOL_UNICODE}`;
-    case DirectionLabelMode.DIRECTION:
-    default:
-      return `${(DIRECTION_BIN_LOOKUP as DirectionBinLookupType)[d.angle].direction}`;
-  }
-};
-
-const getFrequencyLabel = (mode: FrequencyLabelMode, d: number, totalSamples: number): string => {
-  switch (mode) {
-    case FrequencyLabelMode.COUNT:
-      return `${d}`;
-    case FrequencyLabelMode.PERCENTAGE:
-    default:
-      return `${((d / totalSamples) * 100.0).toFixed(0)}%`;
-  }
-};
-
-interface DirectionDefinition {
-  angle: number;
-  direction: string;
-}
-type DirectionBinLookupType = Record<number, DirectionDefinition>;
-
-const WindRose: React.FC = (): React.JSX.Element => {
+const Stat: React.FC<StatProps> = (props: StatProps): React.JSX.Element => {
   const { classes } = useStyles();
-  const state: WindRoseViewerState = useStateContext();
-  const dispatch: Dispatch<AnyAction> = useDispatchContext();
-  const {
-    fetchState,
-    dataStateMessage,
-    data: {
-      dailyBins,
-      current: currentChartData,
-    },
-  } = state;
-  let appliedStatusType = AsyncStateType.IDLE;
-  const { data: dataFetchState } = fetchState;
-  if (exists(dataFetchState)) {
-    const { status: dataFetchStatus } = dataFetchState as FetchStatusState;
-    appliedStatusType = dataFetchStatus;
-  }
-  const svgRef = useRef<SVGSVGElement>(null);
-  const dayLabelRef = useRef<HTMLLabelElement>(null);
-  const renderWindRoseChart = useCallback((data: []) => {
-    if (!svgRef.current) {
-      return;
-    }
-    svgRef.current.innerHTML = '';
-    if (!data || (Object.keys(data).length <= 0)) {
-      return;
-    }
-    const width = 1000;
-    const height = 680;
-    const svg = select(svgRef.current)
-      .attr('viewBox', `0 0 ${width.toString()} ${height.toString()}`);
-    const margin = {
-      top: 40,
-      right: 80,
-      bottom: 60,
-      left: 40,
-    };
-    const innerRadius = 20;
-    const chartWidth = width - margin.left - margin.right;
-    const chartHeight = height - margin.top - margin.bottom;
-    const outerRadius = (Math.min(chartWidth, chartHeight) / 2);
-
-    const g = svg.append('g')
-      .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
-    // const defaultRange = [
-    //   '#4242f4',
-    //   '#42c5f4',
-    //   '#42f4ce',
-    //   '#42f456',
-    //   '#adf442',
-    //   '#f4e242',
-    //   '#f4a142',
-    //   '#f44242',
-    //   '#ff00ff',
-    // ];
-    const defaultRange = [
-      '#002c77',
-      '#1f5fae',
-      '#168aad',
-      '#1ca58f',
-      '#58a65c',
-      '#a1b84f',
-      '#d5ad47',
-      '#d46957',
-      '#a04fa3',
-      '#d65a9e',
-    ];
-    // const defaultRange = [
-    //   '#1A237E',
-    //   '#64B5F6',
-    //   '#80DEEA',
-    //   '#42f456',
-    //   '#adf442',
-    //   '#f4e242',
-    //   '#f4a142',
-    //   '#f44242',
-    //   '#ff00ff'
-    // ];
-
-    const angle = scaleLinear()
-      .range([0, 2 * Math.PI]);
-    const radius = scaleLinear()
-      .range([innerRadius, outerRadius]);
-    const x = scaleBand()
-      .range([0, 2 * Math.PI])
-      .align(0);
-    const y = scaleLinear()
-      .range([innerRadius, outerRadius]);
-    const z = scaleOrdinal()
-      .range(defaultRange);
-
-    const dataColumns = ['angle'];
-    VELOCITY_BINS.forEach((bin) => { dataColumns.push(bin); });
-
-    x.domain(data.map((d: any) => d.angle));
-    y.domain([0, max(data, (d: any) => d.total)]);
-    z.domain(dataColumns.slice(1));
-
-    // Extend the domain slightly to match the range of [0, 2π].
-    angle.domain([0, max(data, (d: any, i: any) => i + 1)]);
-    radius.domain([0, max(data, (d: any) => d.y0 + d.y)]);
-    const yAxisRadialData = stack().keys(dataColumns.slice(1))(data);
-
-    const angleOffset = -360.0 / data.length / 2.0;
-    const arcPath = arc()
-      .innerRadius((d: any): number => y(d[0]))
-      .outerRadius((d: any): number => y(d[1]))
-      .startAngle((d: any): number => x(d.data.angle) as number)
-      .endAngle((d: any): number => x(d.data.angle) as number + x.bandwidth())
-      .padAngle(0.01)
-      .padRadius(100);
-    g.append('g')
-      .selectAll('g')
-      .data(yAxisRadialData)
-      .enter()
-      .append('g')
-      .attr('fill', (d: any): string => z(d.key) as string)
-      .selectAll('path')
-      .data((d: any) => d)
-      .enter()
-      .append('path')
-      .attr('d', arcPath as any)
-      .attr('transform', () => `rotate(${angleOffset})`);
-
-    const label = g.append('g')
-      .selectAll('g')
-      .data(data)
-      .enter()
-      .append('g')
-      .attr('text-anchor', 'middle')
-      .attr('transform', (d: any): string => {
-        const dAngle = x(d.angle) as number;
-        const rotate = (((dAngle + x.bandwidth() / 2) * 180) / Math.PI - (90 - angleOffset));
-        return `rotate(${rotate})`
-          + `translate(${(outerRadius + 30)}, 0)`;
-      });
-
-    label.append('text')
-      .attr('transform', (d: any) => (
-        (x(d.angle) as number + x.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI
-          ? 'rotate(90)translate(0, 10)'
-          : 'rotate(-90)translate(0, 0)'
-      ))
-      .text((d: any) => getDirectionLabel(DIRECTION_LABEL_MODE, d))
-      .style('font-size', 14);
-
-    // Draw polar axis with inner and outer bounds
-    g.selectAll('.axis-bounds')
-      .data([innerRadius - 1, outerRadius + 10])
-      .enter()
-      .append('g')
-      .attr('class', 'axis-bounds')
-      .append('circle')
-      .attr('fill', 'none')
-      .attr('stroke', 'rgba(0, 0, 0, 0.5)')
-      .attr('r', (d: any) => d);
-
-    const axisDataRange: number[] = range(angle.domain()[1]);
-    const polarAxisRange: ScaleLinear<number, number, never> = radius.copy()
-      .range([(-1) * innerRadius, (-1) * (outerRadius + 10)]);
-    const polarAxis: Axis<NumberValue> = axisLeft(polarAxisRange)
-      .tickSizeOuter(0);
-    g.selectAll('.axis')
-      .data(axisDataRange)
-      .enter()
-      .append('g')
-      .attr('class', 'axis')
-      .attr('color', 'rgba(0, 0, 0, 0.5)')
-      .attr('transform', (d: any) => `rotate(${(angle(d) * 180) / Math.PI})`)
-      .call(polarAxis);
-
-    const yAxis = g.append('g')
-      .attr('text-anchor', 'middle');
-
-    const totalSamples = data.map((d: any): number => d.total)
-      .reduce(
-        (prevValue: number, currentValue: number) => prevValue + currentValue,
-        0,
-      );
-    const frequencies: number[] = y.ticks(6).slice(1);
-    const yTick = yAxis
-      .selectAll('g')
-      .data(frequencies)
-      .enter()
-      .append('g');
-
-    yTick.append('circle')
-      .attr('fill', 'none')
-      .attr('stroke', 'gray')
-      .attr('stroke-dasharray', '4,4')
-      .attr('r', y);
-
-    yTick.append('text')
-      .attr('y', (d: number) => (-1) * y(d))
-      .attr('dy', `${(-1) * 0.35}em`)
-      .attr('x', () => (-1) * 10)
-      // .text(y.tickFormat(format('.00s'))
-      .text((d: number) => getFrequencyLabel(FREQUENCY_LABEL_MODE, d, totalSamples))
-      .style('font-size', 14)
-      .style('font-weight', 'bold');
-
-    const legend = svg.append('g')
-      .attr('transform', `translate(${(width / 2) + 60}, ${height / 2})`)
-      .selectAll('g')
-      .data(dataColumns.slice(1).reverse())
-      .enter()
-      .append('g')
-      // .attr('transform', function(d, i) {
-      //   return 'translate(-40,' + (i - (dataColumns.length - 1) / 2) * 20 + ')';
-      // });
-      .attr('transform', (d, i) => (
-        'translate('
-          + `${outerRadius}, `
-          + `${((-1) * outerRadius + 60 + (i - (dataColumns.length - 1) / 2) * 20)}`
-          + ')'
-      ));
-
-    legend.append('rect')
-      .attr('width', 18)
-      .attr('height', 18)
-      .attr('fill', z as any);
-
-    legend.append('text')
-      .attr('x', 24)
-      .attr('y', 9)
-      .attr('dy', '0.35em')
-      .text((d: string) => `${d} m/s`)
-      .style('font-size', 14)
-      .style('font-weight', 'bold');
-  }, []);
-
-  useEffect(() => {
-    renderWindRoseChart(currentChartData as []);
-  }, [renderWindRoseChart, currentChartData]);
-
-  const loadingContainerStyle = {
-    top: '30%',
-    left: '36%',
-  };
-  let chartContainerStyle: any = {
-    width: '90%',
-  };
-
-  let display = null;
-  switch (appliedStatusType) {
-    case AsyncStateType.WORKING:
-      chartContainerStyle = {
-        display: 'none',
-        width: '1000px',
-        float: 'right',
-      };
-      display = (
-        <div className="loading-container-background" style={loadingContainerStyle}>
-          <div className="loading-container">
-            <div>Generating wind rose...</div>
-            <i className="fa fa-circle-o-notch fa-spin fa-2x fa-fw" />
-          </div>
-        </div>
-      );
-      break;
-    case AsyncStateType.FAILED:
-      chartContainerStyle = {
-        display: 'none',
-        width: '1000px',
-        float: 'right',
-      };
-      display = (
-        <div className="loading-container-background" style={loadingContainerStyle}>
-          <div className="loading-container">
-            <div>
-              <p>
-                No wind rose data available for specified parameters
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-      break;
-    case AsyncStateType.FULLFILLED:
-      if (!currentChartData) {
-        chartContainerStyle = {
-          display: 'none',
-          width: '1000px',
-          float: 'right',
-        };
-        let dataMessage = (
-          <p>
-            No wind rose data available
-          </p>
-        );
-        if (dataStateMessage) {
-          const message = `  ${dataStateMessage}`;
-          dataMessage = (
-            <p>
-              No wind rose data available.
-              {message}
-            </p>
-          );
-        }
-        display = (
-          <div className="loading-container-background" style={loadingContainerStyle}>
-            <div className="loading-container loading-container-failed">
-              <div>
-                {dataMessage}
-              </div>
-            </div>
-          </div>
-        );
-      }
-      break;
-    default:
-      break;
-  }
-
-  let sliderLabel = '';
-  const sliderLabelStyle = {
-    marginTop: '20px',
-  };
-  let slider = null;
-  let sliderContainerStyle = {};
-  const dailyBinKeys = Object.keys(dailyBins);
-  if (dailyBinKeys.length > 0) {
-    sliderContainerStyle = {
-      display: 'inline-block',
-      height: '480px',
-      marginTop: '20px',
-      // marginLeft: '40px',
-      float: 'left',
-    };
-    sliderLabel = dailyBinKeys[0] as string;
-    const num = dailyBinKeys.length;
-    slider = (
-      <Slider
-        orientation="vertical"
-        defaultValue={0}
-        min={((-1) * num) + 1}
-        max={0}
-        marks={dailyBinKeys.map((binKey: string, index: number) => (
-          { value: (-1) * index, label: binKey }
-        ))}
-        valueLabelDisplay="auto"
-        valueLabelFormat={(value) => dailyBinKeys[(-1) * (value as number)]}
-        classes={{
-          thumb: classes.sliderThumbRoot,
-        }}
-        onChange={(event, newValue) => {
-          if (dayLabelRef.current) {
-            const newSliderLabel = dailyBinKeys[(-1) * (newValue as number)] as string;
-            dayLabelRef.current.innerHTML = newSliderLabel;
-            renderWindRoseChart(dailyBins[newSliderLabel as any] as []);
-          }
-        }}
-      />
-    );
-  }
+  const { label, value }: StatProps = props;
   return (
-    <div className="wind-rose-container">
-      {display}
-      <div style={sliderLabelStyle}>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label ref={dayLabelRef}>
-          {sliderLabel}
-        </label>
-      </div>
-      <div style={sliderContainerStyle}>
-        {slider}
-      </div>
-      <div className="svg-responsive-container" style={chartContainerStyle}>
-        <svg
-          ref={svgRef}
-          className="svg-responsive"
-          preserveAspectRatio="xMinYMin meet"
-        />
-      </div>
+    <div>
+      <span className={classes.statLabel}>{label}</span>
+      <Typography variant="body1" component="span" className={classes.statValue}>
+        {value}
+      </Typography>
     </div>
   );
 };
 
-const WindRoseViewer: React.FC = (): React.JSX.Element => {
+interface WindRoseViewerContentProps {
+  colorScheme: WindRoseColorScheme;
+}
+
+interface ColorSchemeSelection {
+  colorScheme: WindRoseColorScheme;
+  // The colorScheme prop when the selection was made
+  propColorScheme: WindRoseColorScheme;
+}
+
+const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
+  props: WindRoseViewerContentProps,
+): React.JSX.Element => {
+  const { classes, cx } = useStyles();
+  const { colorScheme: propColorScheme }: WindRoseViewerContentProps = props;
   const state: WindRoseViewerState = useStateContext();
-  const dispatch: Dispatch<AnyAction> = useDispatchContext();
-  const theme: NeonTheme = useTheme();
+  const { isLoginRequired } = useWindRoseViewerAccess();
+  const [
+    colorSchemeSelection,
+    setColorSchemeSelection,
+  ] = useState<Nullable<ColorSchemeSelection>>(null);
+  // A palette chosen in the legend applies until the colorScheme prop changes
+  const colorScheme = (colorSchemeSelection?.propColorScheme === propColorScheme)
+    ? colorSchemeSelection.colorScheme
+    : propColorScheme;
   const {
     product,
     productCode,
     release,
     fetchState,
-    siteOptions,
-    monthOptions,
-    positionOptions,
+    dataStateMessage,
     query,
-  } = state;
-  if (!exists(product)) {
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <></>;
-  }
-  const { product: productFetchState } = fetchState;
-  if (!exists(productFetchState)) {
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <></>;
-  }
-  const { status: productFetchStateStatus } = productFetchState as FetchStatusState;
-  let selectorsEnabled = false;
-  switch (productFetchStateStatus) {
-    case AsyncStateType.FULLFILLED:
-    case AsyncStateType.FAILED:
-      selectorsEnabled = true;
-      break;
-    case AsyncStateType.WORKING:
-    default:
-      break;
-  }
-  let siteSelector = null;
-  let monthSelector = null;
-  let positionSelector = null;
-  if (siteOptions && (siteOptions.length > 0)) {
-    siteSelector = (
-      <div className="wind-rose-selector-container">
-        <div className="wind-rose-selector-label">
-          Site:
+    aggregation,
+    selectedDay,
+    data,
+  }: WindRoseViewerState = state;
+  const productFetchState = fetchState.product as Nullable<FetchStatusState>;
+  // Without signing in, the product and data of a release are never fetched
+  if (!exists(product) && !isLoginRequired) {
+    if (productFetchState?.status === AsyncStateType.FAILED) {
+      return (
+        <div className={classes.root}>
+          <WindRoseViewerLimitedCard />
+          <ErrorCard
+            title="Wind Rose Viewer"
+            message="The data product could not be loaded. Please try again later."
+          />
         </div>
-        <div className="wind-rose-selector wind-rose-selector-sites">
-          <Select
-            disabled={!selectorsEnabled}
-            value={query.sites[0]}
-            onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(ActionCreator.fetchWindRose(
-                product as UnknownRecord,
-                release,
-                {
-                  ...query,
-                  changeType: WIND_ROSE_CHANGE_TYPE.SITE,
-                  sites: [event.target.value as string],
-                },
-              ));
-            }}
-          >
-            {siteOptions.map((siteOption) => ((
-              <MenuItem key={siteOption.value} value={siteOption.value}>
-                {siteOption.label}
-              </MenuItem>
-            )))}
-          </Select>
-        </div>
-      </div>
-    );
-  }
-  if (monthOptions && (monthOptions.length > 0)) {
-    monthSelector = (
-      <div className="wind-rose-selector-container">
-        <div className="wind-rose-selector-label">
-          Month:
-        </div>
-        <div className="wind-rose-selector wind-rose-selector-month">
-          <Select
-            disabled={!selectorsEnabled}
-            value={query.months[0]}
-            onChange={(event: SelectChangeEvent<string>) => {
-              dispatch(ActionCreator.fetchWindRose(
-                product as UnknownRecord,
-                release,
-                {
-                  ...query,
-                  changeType: WIND_ROSE_CHANGE_TYPE.MONTH,
-                  months: [event.target.value as string],
-                },
-              ));
-            }}
-          >
-            {monthOptions.map((monthOption) => ((
-              <MenuItem key={monthOption.value} value={monthOption.value}>
-                {monthOption.label}
-              </MenuItem>
-            )))}
-          </Select>
-        </div>
-      </div>
-    );
-  }
-
-  if (positionOptions && (positionOptions.length > 0)) {
-    const positionsValue = query.positions.map((position: any) => (
-      `(${position.horizontal}, ${position.vertical})`
-    ));
-    positionSelector = (
-      <div className="wind-rose-selector-container-positions">
-        <div key="position-si">
-          <div className="wind-rose-selector-label-positions">
-            Positions:
-          </div>
-          <div className="wind-rose-selector wind-rose-selector-positions">
-            <Select
-              multiple
-              disabled={!selectorsEnabled}
-              value={positionsValue as any}
-              onChange={(event: SelectChangeEvent<any[]>) => {
-                const selectedPositionOptions = positionOptions
-                  .filter((value) => (event.target.value as any[]).includes(value.value))
-                  .map((value) => value.position);
-                dispatch(ActionCreator.fetchWindRose(
-                  product as UnknownRecord,
-                  release,
-                  {
-                    ...query,
-                    changeType: WIND_ROSE_CHANGE_TYPE.POSITIONS,
-                    positions: selectedPositionOptions,
-                  },
-                ));
-              }}
-            >
-              {positionOptions.map((positionOption) => ((
-                <MenuItem key={positionOption.value} value={positionOption.value}>
-                  {positionOption.label}
-                </MenuItem>
-              )))}
-            </Select>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const renderSelectors = (): React.JSX.Element => ((
-    <div className="popup-wind-rose__row">
-      {siteSelector}
-      {monthSelector}
-      {positionSelector}
-    </div>
-  ));
-  const renderTitle = (): string => {
-    const productTitle = `${product?.productName} (${productCode})`;
-    let releaseTitle = '';
-    if (isStringNonEmpty(release)) {
-      releaseTitle = ` , ${release}`;
+      );
     }
-    return `${productTitle}${releaseTitle}`;
-  };
-  return (
-    <div className="popup__wind-rose__container">
-      <div className="popup-wind-rose">
-        <div className="popup-wind-rose__row">
-          <div className="popup-wind-rose__name">
-            {renderTitle()}
-          </div>
+    return (
+      <div className={classes.root}>
+        <WindRoseViewerLimitedCard />
+        <Skeleton variant="rectangular" width="100%" height={640} />
+      </div>
+    );
+  }
+  const dataFetchState = fetchState.data as Nullable<FetchStatusState>;
+  const dataStatus = dataFetchState ? dataFetchState.status : AsyncStateType.IDLE;
+  const isLoading = !isLoginRequired && ((dataStatus === AsyncStateType.IDLE)
+    || (dataStatus === AsyncStateType.WORKING));
+  const isDaily = aggregation === WindRoseAggregation.DAILY;
+  const site = query.sites[0] || '';
+  const month = query.months[0] || null;
+  let aggregate: Nullable<WindRoseAggregate> = data.monthly;
+  if (isDaily) {
+    aggregate = selectedDay ? data.daily[selectedDay] : null;
+  }
+  const hasData = !!aggregate && (aggregate.samples > 0);
+  // Calm observations have no direction, so are not drawn on the wind rose
+  const isAllCalm = !!aggregate && (aggregate.samples > 0)
+    && (aggregate.calm >= aggregate.samples);
+  const prevailing = getPrevailingSector(buildSectors(aggregate));
+  let heading = month ? formatMonth(month) : '';
+  if (isDaily) {
+    heading = selectedDay ? formatDay(selectedDay, 'dddd, MMMM D, YYYY') : '';
+  }
+  const aggregationLabel = isDaily ? 'Daily wind rose' : 'Monthly wind rose';
+  const chartTitle = [aggregationLabel, site, heading].filter(isStringNonEmpty).join(', ');
+  const productNameValue = exists(product)
+    ? (product as Record<string, unknown>).productName
+    : null;
+  const productName = isStringNonEmpty(productNameValue) ? productNameValue as string : null;
+
+  const renderOverlay = (): Nullable<React.JSX.Element> => {
+    if (isLoginRequired) {
+      return (
+        <div className={classes.overlay} role="status">
+          <InfoIcon fontSize="large" className={classes.infoIcon} />
+          <Typography variant="subtitle2" className={classes.overlayMessage}>
+            {LOGIN_REQUIRED_MESSAGE}
+          </Typography>
         </div>
-        {renderSelectors()}
-        <div className="popup-wind-rose__row">
-          <WindRose />
+      );
+    }
+    if (isLoading) {
+      return (
+        <div className={classes.overlay} role="status">
+          <CircularProgress />
+          <Typography variant="subtitle2">Loading wind data…</Typography>
+        </div>
+      );
+    }
+    if (dataStatus === AsyncStateType.FAILED) {
+      return (
+        <div className={classes.overlay} role="status">
+          <ErrorIcon fontSize="large" className={classes.errorIcon} />
+          <Typography variant="subtitle2" className={classes.overlayMessage}>
+            No wind rose data is available for the selected site, month and sensor positions.
+          </Typography>
+        </div>
+      );
+    }
+    if (!hasData) {
+      const period = isDaily ? 'day' : 'month';
+      const message = isStringNonEmpty(dataStateMessage) ? ` ${dataStateMessage}` : '';
+      return (
+        <div className={classes.overlay} role="status">
+          <InfoIcon fontSize="large" className={classes.infoIcon} />
+          <Typography variant="subtitle2" className={classes.overlayMessage}>
+            {`No wind rose data is available for this ${period}.${message}`}
+          </Typography>
+        </div>
+      );
+    }
+    if (isAllCalm) {
+      return (
+        <div className={classes.overlay} role="status">
+          <InfoIcon fontSize="large" className={classes.infoIcon} />
+          <Typography variant="subtitle2" className={classes.overlayMessage}>
+            {`Every observation for this ${isDaily ? 'day' : 'month'} was calm (0 m/s), `
+              + 'so there are no wind directions to show.'}
+          </Typography>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const renderCitation = (): Nullable<React.JSX.Element> => {
+    if (!isStringNonEmpty(productCode)) {
+      return null;
+    }
+    return (
+      <div className={classes.citationContainer}>
+        <img
+          title="NEON"
+          alt="NEON Logo"
+          className={classes.neonLogo}
+          src={NeonLogo.src}
+        />
+        <div className={classes.citationText}>
+          <DataProductCitation
+            showTextOnly
+            disableConditional
+            productCode={productCode as string}
+            release={release}
+            textOnlyProps={{ variant: 'caption', cssClass: classes.citation }}
+          />
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className={classes.root}>
+      <WindRoseViewerLimitedCard />
+      <Card className={classes.card}>
+        <div className={classes.header}>
+          <div>
+            <Typography variant="h5" component="h3">{productName || productCode}</Typography>
+            {!productName ? null : (
+              <Typography variant="body2" className={classes.productCode}>
+                {productCode}
+              </Typography>
+            )}
+          </div>
+          {!isStringNonEmpty(release) ? null : (
+            <ReleaseChip
+              chipLabel={release as string}
+              tooltipTitle={`Showing data from ${release}`}
+            />
+          )}
+        </div>
+        <div className={classes.controls}>
+          <WindRoseControls />
+        </div>
+        <div className={classes.body}>
+          <div className={classes.chartColumn}>
+            <div className={classes.chartHeader}>
+              <div>
+                <Typography variant="overline" component="div" className={classes.overline}>
+                  {[aggregationLabel, site].filter(isStringNonEmpty).join(' · ')}
+                </Typography>
+                <Typography variant="h5" component="h4">
+                  {heading || '\u00a0'}
+                </Typography>
+              </div>
+              <WindRoseAggregationToggle />
+            </div>
+            <div className={classes.stats}>
+              <Stat
+                label="Observations"
+                value={hasData ? formatCount((aggregate as WindRoseAggregate).samples) : '-'}
+              />
+              <Stat
+                label="Prevailing wind from"
+                value={prevailing ? `${prevailing.direction} (${prevailing.degrees}°)` : '-'}
+              />
+              <Stat
+                label="Mean speed"
+                value={hasData ? formatSpeed((aggregate as WindRoseAggregate).meanSpeed) : '-'}
+              />
+            </div>
+            <div className={classes.chartContainer}>
+              <WindRoseChart aggregate={aggregate} colorScheme={colorScheme} title={chartTitle} />
+              {renderOverlay()}
+            </div>
+            {!isDaily ? null : (
+              <div className={classes.navigator}>
+                <WindRoseDayNavigator />
+              </div>
+            )}
+          </div>
+          <div className={classes.sideColumn}>
+            <WindRoseLegend
+              aggregate={hasData ? aggregate : null}
+              colorScheme={colorScheme}
+              onColorSchemeChange={(nextColorScheme: WindRoseColorScheme) => {
+                setColorSchemeSelection({ colorScheme: nextColorScheme, propColorScheme });
+              }}
+            />
+            {!month ? null : (
+              <>
+                <Divider />
+                <div className={cx(isLoading && classes.loading)}>
+                  <WindRoseCalendar colorScheme={colorScheme} />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        {renderCitation()}
+      </Card>
     </div>
   );
 };
 
-interface WindRoseViewerProps {
+export interface WindRoseViewerProps {
   productCode: Nullable<string>;
   release: Undef<string>;
+  // Color scheme to draw the wind speed bins in, one of WIND_ROSE_COLOR_SCHEMES.
+  // Users may switch color schemes with the palette toggle in the legend.
+  colorScheme?: WindRoseColorScheme;
 }
 const windRoseViewerDefaultProps: WindRoseViewerProps = {
   productCode: null,
   release: undefined,
+  colorScheme: DEFAULT_WIND_ROSE_COLOR_SCHEME,
 };
 
 const WindRoseViewerContainer: React.FC<WindRoseViewerProps> = (
   inProps: WindRoseViewerProps,
 ): React.JSX.Element => {
   const props = resolveProps(windRoseViewerDefaultProps, inProps) as WindRoseViewerProps;
-  const { productCode, release }: WindRoseViewerProps = props;
+  const { productCode, release, colorScheme }: WindRoseViewerProps = props;
   return (
     <ComponentErrorBoundary onReset={() => { /* noop for boundary reset */ }}>
       <Provider productCode={productCode} release={release}>
-        <WindRoseViewer />
+        <WindRoseViewer colorScheme={resolveWindRoseColorScheme(colorScheme)} />
       </Provider>
     </ComponentErrorBoundary>
   );

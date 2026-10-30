@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  useCallback,
   useReducer,
   useContext,
   useEffect,
@@ -35,7 +36,16 @@ import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonContext from '../NeonContext/NeonContext';
 import NeonGraphQL from '../NeonGraphQL/NeonGraphQL';
 
-import { buildWindRoseData, parseWindRoseDataFiles } from './windRoseUtil';
+import {
+  buildWindRoseData,
+  parseWindRoseDataFiles,
+  resolveSelectedDay,
+  stepDay,
+  WindRoseAggregate,
+  WindRoseData,
+  WindRosePosition,
+  WindRosePositionOption,
+} from './windRoseUtil';
 import {
   AnyAction,
   Undef,
@@ -51,35 +61,40 @@ import {
 } from './dataUtil';
 import { resolveProps } from '../../util/defaultProps';
 import { NeonApiResponse } from '../../types/neonApi';
-import { exists } from '../../util/typeUtil';
+import { exists, isStringNonEmpty } from '../../util/typeUtil';
 import { getUserAgentHeader } from '../../util/requestUtil';
 
-interface Position {
-  horizontal: string;
-  vertical: string;
+/**
+ * Temporal aggregations a wind rose can be viewed at
+ */
+export enum WindRoseAggregation {
+  MONTHLY = 'MONTHLY',
+  DAILY = 'DAILY',
 }
 
-interface WindRoseViewerQueryState {
+export interface WindRoseViewerQueryState {
   changeType: Nullable<string>;
   sites: Array<string>;
   months: Array<string>;
   // Horizontal and vertical spatial index coordinates
-  positions: Array<Position>;
+  positions: Array<WindRosePosition>;
 }
 
-interface WindRoseViewerDataState {
-  dailyBins: Record<number, unknown>;
-  current: Nullable<[]>;
+export interface WindRoseViewerDataState {
+  // Wind rose of every observation in the month
+  monthly: Nullable<WindRoseAggregate>;
+  // Wind rose of each day in the month, keyed by YYYY-MM-DD
+  daily: Record<string, WindRoseAggregate>;
+  // Days with observations, sorted ascending
+  days: string[];
 }
 
-interface SelectionOption {
+export interface SelectionOption {
   value: string;
   label: string;
 }
 
-interface PositionDisplayOption extends SelectionOption {
-  position: Position;
-}
+export type PositionDisplayOption = WindRosePositionOption;
 
 export interface FetchStatusState {
   status: AsyncStateType;
@@ -101,7 +116,14 @@ export interface WindRoseViewerState {
   monthOptions: Array<SelectionOption>;
   positionOptions: Array<PositionDisplayOption>;
   query: WindRoseViewerQueryState;
+  aggregation: WindRoseAggregation;
+  // Day (YYYY-MM-DD) shown in the daily aggregation
+  selectedDay: Nullable<string>;
+  // Whether the daily aggregation is automatically stepping through the days
+  isPlaying: boolean;
   data: WindRoseViewerDataState;
+  // Whether the product (and so data) were fetched in limited mode, null until fetched
+  isViewerLimitedMode: Nullable<boolean>;
   neonContextState: UnknownRecord;
 }
 
@@ -126,15 +148,33 @@ const DEFAULT_STATE: WindRoseViewerState = {
     months: [],
     positions: [],
   },
+  aggregation: WindRoseAggregation.MONTHLY,
+  selectedDay: null,
+  isPlaying: false,
   data: {
-    dailyBins: {},
-    current: null,
+    monthly: null,
+    daily: {},
+    days: [],
   },
+  isViewerLimitedMode: null,
   neonContextState: cloneDeep(NeonContext.DEFAULT_STATE),
 };
 
 const getDefaultState = () => cloneDeep(DEFAULT_STATE);
 const getDefaultFetchProducState = () => cloneDeep(DEFAULT_STATE.fetchState.product);
+
+export const LOGIN_REQUIRED_MESSAGE = 'Login required to view release data';
+
+/**
+ * Whether viewing the release requires signing in, as release data are not available in limited
+ * mode (when the user cannot access data), in the same way as the time series viewer
+ * @param isViewerLimited Whether the viewer is limited to the demo dataset
+ * @param release The release to view, if any
+ */
+export const isReleaseLoginRequired = (
+  isViewerLimited: boolean,
+  release: Nullable<string>,
+): boolean => isViewerLimited && isStringNonEmpty(release);
 
 const StateContext = createContext<WindRoseViewerState>(getDefaultState());
 const DispatchContext = createContext<Undef<Dispatch<AnyAction>>>(undefined);
@@ -149,6 +189,30 @@ export const useDispatchContext = (): Dispatch<AnyAction> => {
     throw new Error('Failed to initialize dispatch context');
   }
   return dispatchContext;
+};
+
+export interface WindRoseViewerAccess {
+  // Whether the user's session state has been determined
+  ready: boolean;
+  // Whether the viewer is limited to the demo dataset as the user cannot access data
+  isViewerLimited: boolean;
+  // Whether signing in is required to view the selected release
+  isLoginRequired: boolean;
+}
+
+/**
+ * Gets which data the user can view, based on the same session state the viewer fetches with
+ */
+export const useWindRoseViewerAccess = (): WindRoseViewerAccess => {
+  const { release }: WindRoseViewerState = useStateContext();
+  const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
+  const ready = neonAuthContextSessionState.ready === true;
+  const isViewerLimited = !neonAuthContextSessionState.canAccessData;
+  return {
+    ready,
+    isViewerLimited,
+    isLoginRequired: ready && isReleaseLoginRequired(isViewerLimited, release),
+  };
 };
 
 type DataProductResponse = { 'product': Record<string, unknown> };
@@ -175,6 +239,10 @@ export enum ActionTypes {
   FETCH_WIND_ROSE_FAILED = 'FETCH_WIND_ROSE_FAILED',
   RESET_WIND_ROSE = 'RESET_WIND_ROSE',
   REINITIALIZE = 'REINITIALIZE',
+  SET_AGGREGATION = 'SET_AGGREGATION',
+  SELECT_DAY = 'SELECT_DAY',
+  STEP_DAY = 'STEP_DAY',
+  SET_PLAYING = 'SET_PLAYING',
 }
 
 export interface StoreFinalizedNeonContextStateAction extends AnyAction {
@@ -185,6 +253,8 @@ export interface FetchProductAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT;
   productCode: string;
   release: Undef<string>;
+  // Whether the product is fetched in limited mode
+  isViewerLimited: boolean;
 }
 export interface FetchProductStartedAction extends AnyAction {
   type: typeof ActionTypes.FETCH_PRODUCT_STARTED;
@@ -228,6 +298,26 @@ interface ReinitializeAction extends AnyAction {
   productCode: string;
   release: Undef<string>;
 }
+interface SetAggregationAction extends AnyAction {
+  type: typeof ActionTypes.SET_AGGREGATION;
+  aggregation: WindRoseAggregation;
+}
+interface SelectDayAction extends AnyAction {
+  type: typeof ActionTypes.SELECT_DAY;
+  day: string;
+}
+interface StepDayAction extends AnyAction {
+  type: typeof ActionTypes.STEP_DAY;
+  step: number;
+  // Whether to wrap around the days of the month rather than stop at either end
+  wrap: boolean;
+  // Whether the step is from playback rather than the user, which stops playback
+  fromPlayback: boolean;
+}
+interface SetPlayingAction extends AnyAction {
+  type: typeof ActionTypes.SET_PLAYING;
+  isPlaying: boolean;
+}
 
 type WindRoseViewerActionTypes = (
   StoreFinalizedNeonContextStateAction
@@ -242,6 +332,10 @@ type WindRoseViewerActionTypes = (
   | FetchWindRoseFailedAction
   | ResetWindRoseAction
   | ReinitializeAction
+  | SetAggregationAction
+  | SelectDayAction
+  | StepDayAction
+  | SetPlayingAction
   | AnyAction
 );
 
@@ -252,10 +346,15 @@ export const ActionCreator = {
     type: ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE,
     neonContextState,
   }),
-  fetchProduct: (productCode: string, release?: string): FetchProductAction => ({
+  fetchProduct: (
+    productCode: string,
+    release?: string,
+    isViewerLimited = false,
+  ): FetchProductAction => ({
     type: ActionTypes.FETCH_PRODUCT,
     productCode,
     release,
+    isViewerLimited,
   }),
   fetchProductStarted: (): FetchProductStartedAction => ({
     type: ActionTypes.FETCH_PRODUCT_STARTED,
@@ -312,6 +411,59 @@ export const ActionCreator = {
     productCode,
     release,
   }),
+  setAggregation: (aggregation: WindRoseAggregation): SetAggregationAction => ({
+    type: ActionTypes.SET_AGGREGATION,
+    aggregation,
+  }),
+  // Selecting a day shows its wind rose, switching to the daily aggregation if necessary.
+  // The day may be in a month that has not been fetched yet, see resolveSelectedDay.
+  selectDay: (day: string): SelectDayAction => ({
+    type: ActionTypes.SELECT_DAY,
+    day,
+  }),
+  stepDay: (step: number, wrap = false, fromPlayback = false): StepDayAction => ({
+    type: ActionTypes.STEP_DAY,
+    step,
+    wrap,
+    fromPlayback,
+  }),
+  setPlaying: (isPlaying: boolean): SetPlayingAction => ({
+    type: ActionTypes.SET_PLAYING,
+    isPlaying,
+  }),
+};
+
+export type FetchWindRoseFunc = (
+  changeType: string,
+  queryChanges: Partial<WindRoseViewerQueryState>,
+) => void;
+
+/**
+ * Gets a function to fetch the wind rose for the current query with the specified changes
+ */
+export const useFetchWindRose = (): FetchWindRoseFunc => {
+  const {
+    product,
+    release,
+    query,
+  }: WindRoseViewerState = useStateContext();
+  const dispatch: Dispatch<AnyAction> = useDispatchContext();
+  return useCallback((
+    changeType: string,
+    queryChanges: Partial<WindRoseViewerQueryState>,
+  ): void => {
+    if (!exists(product)) {
+      return;
+    }
+    // Copy the query arrays as building the request may default values into them
+    const nextQuery: WindRoseViewerQueryState = {
+      changeType,
+      sites: [...(queryChanges.sites || query.sites)],
+      months: [...(queryChanges.months || query.months)],
+      positions: [...(queryChanges.positions || query.positions)],
+    };
+    dispatch(ActionCreator.fetchWindRose(product as UnknownRecord, release, nextQuery));
+  }, [dispatch, product, release, query]);
 };
 
 const reducer = (
@@ -320,12 +472,15 @@ const reducer = (
 ): WindRoseViewerState => {
   const newState: WindRoseViewerState = { ...state };
   let wrfAction: FetchWindRoseFullfilledAction;
+  let wrfData: WindRoseData;
   let wrFailedAction: FetchWindRoseFailedAction;
+  let stepDayAction: StepDayAction;
   switch (action.type) {
     case ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE:
       newState.neonContextState = (action as StoreFinalizedNeonContextStateAction).neonContextState;
       return newState;
     case ActionTypes.FETCH_PRODUCT:
+      newState.isViewerLimitedMode = (action as FetchProductAction).isViewerLimited;
       return newState;
     case ActionTypes.FETCH_PRODUCT_STARTED:
       (newState.fetchState.product as FetchStatusState).status = AsyncStateType.WORKING;
@@ -349,6 +504,7 @@ const reducer = (
         },
       };
     case ActionTypes.FETCH_WIND_ROSE:
+      newState.isPlaying = false;
       return newState;
     case ActionTypes.FETCH_WIND_ROSE_WORKING:
       newState.fetchState.data = {
@@ -359,31 +515,30 @@ const reducer = (
       return newState;
     case ActionTypes.FETCH_WIND_ROSE_FULLFILLED:
       wrfAction = action as FetchWindRoseFullfilledAction;
+      wrfData = wrfAction.response as WindRoseData;
       newState.fetchState.data = {
         ...newState.fetchState.data,
         status: AsyncStateType.FULLFILLED,
         error: null,
       };
-      newState.dataStateMessage = (wrfAction.response as UnknownRecord).dataStateMessage as string;
+      newState.dataStateMessage = wrfData.dataStateMessage;
       newState.siteOptions = getSiteOptions(
         newState.product,
         (newState.neonContextState?.data as any).sites,
       );
       newState.monthOptions = getMonthOptions(newState.product, wrfAction.query.sites);
-      // eslint-disable-next-line max-len, @stylistic/max-len
-      newState.positionOptions = (wrfAction.response as UnknownRecord).positionOptions as PositionDisplayOption[];
+      newState.positionOptions = wrfData.positionOptions;
       newState.data = {
-        ...newState.data,
-        // eslint-disable-next-line max-len, @stylistic/max-len
-        dailyBins: (wrfAction.response as UnknownRecord).windRoseDailyBins as Record<number, unknown>,
-        current: (wrfAction.response as UnknownRecord).currentWindRose as [],
+        monthly: wrfData.monthly,
+        daily: wrfData.daily,
+        days: wrfData.days,
       };
+      newState.selectedDay = resolveSelectedDay(newState.selectedDay, wrfData.days);
       newState.query = {
         ...newState.query,
         sites: wrfAction.query.sites.map((value) => value),
         months: wrfAction.query.months.map((value) => value),
-        positions: ((wrfAction.response as UnknownRecord).positions as [])
-          .map((value) => value),
+        positions: wrfData.positions.map((value) => value),
       };
       return newState;
     case ActionTypes.FETCH_WIND_ROSE_FAILED:
@@ -403,10 +558,11 @@ const reducer = (
         wrFailedAction.initAction.query.sites,
       );
       newState.data = {
-        ...newState.data,
-        dailyBins: {},
-        current: null,
+        monthly: null,
+        daily: {},
+        days: [],
       };
+      newState.isPlaying = false;
       newState.query = {
         ...newState.query,
         ...wrFailedAction.initAction.query,
@@ -419,7 +575,43 @@ const reducer = (
         ...getDefaultState(),
         productCode: (action as ReinitializeAction).productCode,
         release: (action as ReinitializeAction).release,
+        // The finalized NEON context (e.g. the site descriptions used in the site options)
+        // does not depend on the product or release, and is only stored when it changes
+        neonContextState: newState.neonContextState,
       };
+    case ActionTypes.SET_AGGREGATION:
+      newState.aggregation = (action as SetAggregationAction).aggregation;
+      newState.isPlaying = false;
+      if (newState.aggregation === WindRoseAggregation.DAILY) {
+        newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
+      }
+      return newState;
+    case ActionTypes.SELECT_DAY:
+      newState.aggregation = WindRoseAggregation.DAILY;
+      newState.selectedDay = (action as SelectDayAction).day;
+      newState.isPlaying = false;
+      return newState;
+    case ActionTypes.STEP_DAY:
+      stepDayAction = action as StepDayAction;
+      newState.aggregation = WindRoseAggregation.DAILY;
+      newState.selectedDay = stepDay(
+        newState.data.days,
+        newState.selectedDay,
+        stepDayAction.step,
+        stepDayAction.wrap,
+      );
+      if (!stepDayAction.fromPlayback) {
+        newState.isPlaying = false;
+      }
+      return newState;
+    case ActionTypes.SET_PLAYING:
+      newState.isPlaying = (action as SetPlayingAction).isPlaying
+        && (newState.data.days.length > 1);
+      if (newState.isPlaying) {
+        newState.aggregation = WindRoseAggregation.DAILY;
+        newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
+      }
+      return newState;
     default:
       break;
   }
@@ -568,6 +760,14 @@ const buildDataApiObservable = (
   limited: boolean,
   sessionHeaders: Record<string, string>,
 ): Observable<unknown> => {
+  // Viewing release data requires authentication, the demo data endpoint is never queried
+  if (isReleaseLoginRequired(limited, (action as FetchWindRoseAction).release)) {
+    return of(ActionCreator.fetchWindRoseFailed(
+      LOGIN_REQUIRED_MESSAGE,
+      null,
+      (action as FetchWindRoseAction),
+    ));
+  }
   // Get query params to send with request
   const queryParams = getApiDataQueryParams(action);
   const url = getDataApiRequest(
@@ -683,6 +883,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       data: dataFetchState,
     },
     query,
+    isViewerLimitedMode,
   } = state;
   // Dispatch function enhanced to handle both reducer and action streams
   const enhancedDispatch: Dispatch<AnyAction> = useMemo(() => (
@@ -746,8 +947,10 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     if ((productFetchState as FetchStatusState).status !== AsyncStateType.IDLE) {
       return;
     }
+    // Viewing release data requires authentication, so nothing is fetched until signed in
+    if (isReleaseLoginRequired(isViewerLimited, propsRelease)) { return; }
     const queryProductCode: string = propsProductCode as string;
-    enhancedDispatch(ActionCreator.fetchProduct(queryProductCode, propsRelease));
+    enhancedDispatch(ActionCreator.fetchProduct(queryProductCode, propsRelease, isViewerLimited));
   }, [
     enhancedDispatch,
     neonContextIsFinal,
@@ -757,6 +960,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     product,
     productStringified,
     preconditionsSatisfied,
+    isViewerLimited,
   ]);
   useEffect(() => {
     if (!neonContextIsFinal) { return; }
@@ -791,6 +995,21 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     propsProductCode,
     propsRelease,
   ]);
+  // Refetch for the new limited mode when it changes after fetching
+  useEffect(() => {
+    if (!neonContextIsFinal) { return; }
+    if (!preconditionsSatisfied) { return; }
+    if (!exists(isViewerLimitedMode) || (isViewerLimitedMode === isViewerLimited)) { return; }
+    enhancedDispatch(ActionCreator.reinitialize(productCode as string, release));
+  }, [
+    enhancedDispatch,
+    neonContextIsFinal,
+    preconditionsSatisfied,
+    isViewerLimited,
+    isViewerLimitedMode,
+    productCode,
+    release,
+  ]);
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={enhancedDispatch}>
@@ -799,5 +1018,13 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     </StateContext.Provider>
   );
 };
+
+/**
+ * Exposes internals for unit testing
+ */
+export const getTestableItems = () => ({
+  getDefaultState,
+  reducer,
+});
 
 export default Provider;

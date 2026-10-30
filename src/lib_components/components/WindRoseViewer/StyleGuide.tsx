@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import {
   of,
@@ -14,6 +14,8 @@ import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 
 import NeonApi from '@/components/NeonApi';
@@ -25,6 +27,15 @@ import BundleService from '@/service/BundleService';
 import windRoseDataProductsJSON from '@/staticJSON/windRoseDataProducts.json';
 
 import WindRoseViewer from '@/components/WindRoseViewer/WindRoseViewer';
+import {
+  DEFAULT_WIND_ROSE_COLOR_SCHEME,
+  isWindRoseColorScheme,
+  WIND_ROSE_COLOR_SCHEME_LABELS,
+  WIND_ROSE_COLOR_SCHEMES,
+  WIND_ROSE_PALETTES,
+  WindRoseColorScheme,
+} from '@/components/WindRoseViewer/colorSchemes';
+import { VELOCITY_BIN_LABELS, VELOCITY_BINS } from '@/components/WindRoseViewer/windRoseUtil';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -33,6 +44,35 @@ import ExampleBlock from '../../../components/ExampleBlock';
 // Set this to initialize the all products demo on a particular product
 const DEMO_PRODUCT_CODE = null;
 const DEMO_RELEASE_TAG = null;
+
+interface ColorSchemeToggleProps {
+  colorScheme: WindRoseColorScheme;
+  onChange: (colorScheme: WindRoseColorScheme) => void;
+  labelId: string;
+}
+
+const ColorSchemeToggle = (props: ColorSchemeToggleProps) => {
+  const { colorScheme, onChange, labelId } = props;
+  return (
+    <ToggleButtonGroup
+      exclusive
+      color="primary"
+      size="small"
+      value={colorScheme}
+      aria-labelledby={labelId}
+      onChange={(event: React.MouseEvent<HTMLElement>, value: unknown) => {
+        // Clicking the selected button would otherwise leave no color scheme selected
+        if (isWindRoseColorScheme(value)) { onChange(value); }
+      }}
+    >
+      {Object.values(WIND_ROSE_COLOR_SCHEMES).map((value: WindRoseColorScheme) => (
+        <ToggleButton key={value} value={value}>
+          {WIND_ROSE_COLOR_SCHEME_LABELS[value]}
+        </ToggleButton>
+      ))}
+    </ToggleButtonGroup>
+  );
+};
 
 const allProductsInitialState = {
   fetchProducts: { status: 'AWAITING_CALL', error: null },
@@ -84,7 +124,13 @@ const allProductsReducer = (state: any, action: any) => {
       return state;
   }
 };
-const AllProductsTimeSeries = () => {
+interface AllProductsWindRoseProps {
+  colorScheme: WindRoseColorScheme;
+  onColorSchemeChange: (colorScheme: WindRoseColorScheme) => void;
+}
+
+const AllProductsWindRose = (props: AllProductsWindRoseProps) => {
+  const { colorScheme, onColorSchemeChange } = props;
   const [state, dispatch] = useReducer(allProductsReducer, cloneDeep(allProductsInitialState));
   const [{ data: neonContextData }] = NeonContext.useNeonContextState();
   const { bundles } = neonContextData;
@@ -184,12 +230,12 @@ const AllProductsTimeSeries = () => {
     <div style={{ width: '100%' }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h6" id="all-products-time-series-select-label" gutterBottom>
+          <Typography variant="h6" id="all-products-wind-rose-select-label" gutterBottom>
             Select Data Product
           </Typography>
           <Select
-            id="all-products-time-series-select"
-            aria-labelledby="all-products-time-series-select-label"
+            id="all-products-wind-rose-select"
+            aria-labelledby="all-products-wind-rose-select-label"
             variant="outlined"
             value={state.selectedProduct}
             onChange={handleChange}
@@ -215,18 +261,77 @@ const AllProductsTimeSeries = () => {
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <WindRoseViewer productCode={state.selectedProduct} release={state.selectedRelease} />
+          <Typography variant="h6" id="all-products-wind-rose-color-scheme-label" gutterBottom>
+            Color Scheme
+          </Typography>
+          <ColorSchemeToggle
+            colorScheme={colorScheme}
+            onChange={onColorSchemeChange}
+            labelId="all-products-wind-rose-color-scheme-label"
+          />
+        </Grid>
+        <Grid size={{ xs: 12 }}>
+          <WindRoseViewer
+            productCode={state.selectedProduct}
+            release={state.selectedRelease}
+            colorScheme={colorScheme}
+          />
         </Grid>
       </Grid>
     </div>
   );
 };
 
+const PaletteTable = () => (
+  <table style={{ borderCollapse: 'collapse', marginBottom: '16px' }}>
+    <thead>
+      <tr>
+        <th style={{ textAlign: 'left', padding: '4px 16px 4px 0' }}>Wind speed (m/s)</th>
+        {Object.values(WIND_ROSE_COLOR_SCHEMES).map((colorScheme: WindRoseColorScheme) => (
+          <th key={colorScheme} style={{ textAlign: 'left', padding: '4px 16px 4px 0' }}>
+            <code>{colorScheme}</code>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {VELOCITY_BINS.map((velocityBin: string, velocityIndex: number) => (
+        <tr key={velocityBin}>
+          <td style={{ padding: '2px 16px 2px 0' }}>{VELOCITY_BIN_LABELS[velocityBin]}</td>
+          {Object.values(WIND_ROSE_COLOR_SCHEMES).map((colorScheme: WindRoseColorScheme) => {
+            const color = WIND_ROSE_PALETTES[colorScheme][velocityIndex];
+            return (
+              <td key={colorScheme} style={{ padding: '2px 16px 2px 0' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '32px',
+                    height: '14px',
+                    marginRight: '8px',
+                    verticalAlign: 'middle',
+                    borderRadius: '2px',
+                    backgroundColor: color,
+                  }}
+                />
+                <code>{color}</code>
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
 export default function StyleGuide() {
+  const [colorScheme, setColorScheme] = useState<WindRoseColorScheme>(
+    DEFAULT_WIND_ROSE_COLOR_SCHEME,
+  );
   return (
     <>
       <DocBlock>
-        Wind Rose Viewer
+        A wind rose visualization of the 2D wind speed and direction data product, showing how
+        often the wind blew from each of the 16 compass directions, broken down by wind speed.
       </DocBlock>
       <CodeBlock>
         {`
@@ -241,12 +346,81 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
       </CodeBlock>
       <DocBlock>
         Initializing a WindRoseViewer requires only a valid <code>productCode</code> prop.
-        The example below wraps a TimeSeriesViewer instance with a data
-        product selector to demonstrate how different products perform.
+        A <code>release</code> prop may also be provided to view data from a specific release.
+        The example below wraps a WindRoseViewer instance with a data product selector, release
+        filter and color scheme toggle to demonstrate how different products perform.
       </DocBlock>
       <ExampleBlock>
-        <AllProductsTimeSeries />
+        <AllProductsWindRose colorScheme={colorScheme} onColorSchemeChange={setColorScheme} />
       </ExampleBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Monthly and Daily Wind Roses</Typography>
+      <DocBlock>
+        Data are fetched one site and month at a time. Use the <b>Monthly</b> and <b>Daily</b> toggle
+        to switch between viewing every observation in the month (the default) and a single
+        day (UTC).
+      </DocBlock>
+      <DocBlock>
+        A day can be selected in several ways:
+        <ul>
+          <li>
+            The <b>Days in</b> calendar shows a thumbnail wind rose for every day of the month,
+            making days with unusual wind patterns easy to spot. Click a day, or focus the
+            calendar and use the arrow, <code>Home</code> and <code>End</code> keys to move between days.
+          </li>
+          <li>
+            The previous and next day buttons step through the days with data, continuing into
+            the adjacent month at either end of the month.
+          </li>
+          <li>
+            The day picker jumps to any day with data, including days in other months.
+          </li>
+          <li>
+            <b>Play</b> steps through the days of the month automatically.
+          </li>
+        </ul>
+      </DocBlock>
+      <DocBlock>
+        Calm observations (a wind speed of exactly 0 m/s) have no direction, so they are not drawn on
+        the wind rose. Instead, the legend reports them as a <b>Calm</b> share of observations, alongside
+        the share of each wind speed bin. All shares are of every observation, including calm
+        observations, and the slowest bin (0-0.25 m/s) does not include 0.
+      </DocBlock>
+      <DocBlock>
+        The citation for the data product (and release, if specified) is shown below the wind rose.
+        As with the Time Series Viewer, users who are not signed in to an account that can access data
+        are shown a limited dataset, along with a card explaining how to sign in to view the full
+        dataset. Release data are only available when signed in, so no data are shown when a release
+        is specified until the user signs in.
+      </DocBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Color Scheme</Typography>
+      <DocBlock>
+        Wind speed bins can be drawn in one of two color schemes with the <code>colorScheme</code> prop.
+        Both are sequential: the slowest winds are the lightest and the fastest are the darkest.
+        <ul>
+          <li>
+            <code>neon</code> (default): built from the NEON style guide palette, from gold through
+            green and teal to NEON blue.
+          </li>
+          <li>
+            <code>color vision accessible</code>: a yellow, green, blue and purple ramp tuned so that every pair of
+            adjacent wind speed bins remains distinguishable with protanopia, deuteranopia and
+            tritanopia.
+          </li>
+        </ul>
+        Users can also switch between color schemes with the <b>Color palette</b> toggle in the
+        legend. Color schemes are listed in <code>WIND_ROSE_COLOR_SCHEMES</code>, exported
+        from <code>WindRoseViewer/colorSchemes</code>.
+      </DocBlock>
+      <PaletteTable />
+      <CodeBlock>
+        {`
+import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer';
+
+<WindRoseViewer productCode="DP1.00001.001" colorScheme="colorVisionAccessible" />
+        `}
+      </CodeBlock>
     </>
   );
 }
