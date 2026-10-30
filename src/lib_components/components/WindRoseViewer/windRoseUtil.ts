@@ -21,6 +21,18 @@ const FILE_RESOLUTION_MATCHERS = [
 const START_DATE_TIME_VAR = 'startDateTime';
 const WIND_DIRECTION_VAR = 'windDirMean';
 const WIND_SPEED_VAR = 'windSpeedMean';
+const WIND_DIRECTION_QF_VAR = 'windDirFinalQF';
+const WIND_SPEED_QF_VAR = 'windSpeedFinalQF';
+
+/**
+ * Observations a wind rose can be built from
+ */
+export enum WindRoseQualityFilter {
+  // Observations that pass the final quality flags of both wind speed and direction (0 = pass)
+  VALIDATED = 'VALIDATED',
+  // Every observation, including those that fail either final quality flag
+  ALL = 'ALL',
+}
 
 /**
  * Wind speed bins (m/s), ordered from the slowest to the fastest. Calm observations (a wind
@@ -143,16 +155,23 @@ export interface WindRoseAggregate {
   meanSpeed: Nullable<number>;
 }
 
-export interface WindRoseData {
-  positions: WindRosePosition[];
-  positionOptions: WindRosePositionOption[];
-  dataStateMessage: Nullable<string>;
+/**
+ * Monthly and daily wind roses built from the same observations
+ */
+export interface WindRoseDataSet {
   // Every observation in the fetched month
   monthly: Nullable<WindRoseAggregate>;
   // Observations per UTC day, keyed by YYYY-MM-DD
   daily: Record<string, WindRoseAggregate>;
   // Days (YYYY-MM-DD) with at least one observation, sorted ascending
   days: string[];
+}
+
+export interface WindRoseData {
+  positions: WindRosePosition[];
+  positionOptions: WindRosePositionOption[];
+  dataStateMessage: Nullable<string>;
+  dataSets: Record<WindRoseQualityFilter, WindRoseDataSet>;
 }
 
 interface ParsedDataFile {
@@ -277,9 +296,52 @@ const finalizeAggregate = (accumulator: AggregateAccumulator): WindRoseAggregate
   meanSpeed: (accumulator.samples > 0) ? (accumulator.speedSum / accumulator.samples) : null,
 });
 
+interface DataSetAccumulator {
+  monthly: AggregateAccumulator;
+  daily: Map<string, AggregateAccumulator>;
+}
+
+const createDataSetAccumulator = (): DataSetAccumulator => ({
+  monthly: createAccumulator(),
+  daily: new Map(),
+});
+
+const accumulateObservation = (
+  dataSet: DataSetAccumulator,
+  dayKey: string,
+  directionIndex: number,
+  velocityIndex: number,
+  speed: number,
+): void => {
+  let dailyAccumulator = dataSet.daily.get(dayKey);
+  if (!dailyAccumulator) {
+    dailyAccumulator = createAccumulator();
+    dataSet.daily.set(dayKey, dailyAccumulator);
+  }
+  [dataSet.monthly, dailyAccumulator].forEach((accumulator: AggregateAccumulator): void => {
+    if (isCalm(speed)) {
+      accumulateCalm(accumulator);
+    } else {
+      accumulate(accumulator, directionIndex, velocityIndex, speed);
+    }
+  });
+};
+
+const finalizeDataSet = (dataSet: DataSetAccumulator): WindRoseDataSet => {
+  const daily: Record<string, WindRoseAggregate> = {};
+  dataSet.daily.forEach((accumulator: AggregateAccumulator, dayKey: string): void => {
+    daily[dayKey] = finalizeAggregate(accumulator);
+  });
+  return {
+    monthly: (dataSet.monthly.samples > 0) ? finalizeAggregate(dataSet.monthly) : null,
+    daily,
+    days: Object.keys(daily).sort(),
+  };
+};
+
 /**
  * Builds the monthly and daily wind roses for display from the parsed data files
- * of a single site and month, along with the selectable position options
+ * of a single site and month for each quality filter, along with the selectable position options
  * @param data Parsed CSV data files
  * @param dataFilesInfo The data files info the data was fetched from
  */
@@ -287,54 +349,41 @@ export const buildWindRoseData = (
   data: ParsedDataFile[],
   dataFilesInfo: WindRoseDataFilesInfo,
 ): WindRoseData => {
-  const builtData: WindRoseData = {
-    positions: dataFilesInfo.positions,
-    positionOptions: dataFilesInfo.positionOptions,
-    dataStateMessage: null,
-    monthly: null,
-    daily: {},
-    days: [],
-  };
-  const monthlyAccumulator = createAccumulator();
-  const dailyAccumulators: Record<string, AggregateAccumulator> = {};
+  let dataStateMessage: Nullable<string> = null;
+  const validated = createDataSetAccumulator();
+  const all = createDataSetAccumulator();
   data.forEach((fileData: ParsedDataFile): void => {
     fileData.data.forEach((row: Record<string, unknown>): void => {
       // The row is invalid if not associated with a time variable
       const time = parseTime(row[START_DATE_TIME_VAR]);
       if (!time) {
-        builtData.dataStateMessage = 'Time variable could not be determined from data.';
+        dataStateMessage = 'Time variable could not be determined from data.';
         return;
       }
       const speed = parseNumber(row[WIND_SPEED_VAR]);
-      const dayKey = getDayKey(time);
-      if (isCalm(speed)) {
-        if (!dailyAccumulators[dayKey]) {
-          dailyAccumulators[dayKey] = createAccumulator();
-        }
-        accumulateCalm(dailyAccumulators[dayKey]);
-        accumulateCalm(monthlyAccumulator);
-        return;
-      }
       const directionIndex = getDirectionBinIndex(parseNumber(row[WIND_DIRECTION_VAR]));
       const velocityIndex = getVelocityBinIndex(speed);
-      if ((directionIndex < 0) || (velocityIndex < 0)) {
+      // Calm observations are counted without a direction or velocity bin
+      if (!isCalm(speed) && ((directionIndex < 0) || (velocityIndex < 0))) {
         return;
       }
-      if (!dailyAccumulators[dayKey]) {
-        dailyAccumulators[dayKey] = createAccumulator();
+      const dayKey = getDayKey(time);
+      accumulateObservation(all, dayKey, directionIndex, velocityIndex, speed);
+      if ((parseNumber(row[WIND_SPEED_QF_VAR]) === 0)
+          && (parseNumber(row[WIND_DIRECTION_QF_VAR]) === 0)) {
+        accumulateObservation(validated, dayKey, directionIndex, velocityIndex, speed);
       }
-      accumulate(dailyAccumulators[dayKey], directionIndex, velocityIndex, speed);
-      accumulate(monthlyAccumulator, directionIndex, velocityIndex, speed);
     });
   });
-  builtData.days = Object.keys(dailyAccumulators).sort();
-  builtData.days.forEach((dayKey: string): void => {
-    builtData.daily[dayKey] = finalizeAggregate(dailyAccumulators[dayKey]);
-  });
-  if (monthlyAccumulator.samples > 0) {
-    builtData.monthly = finalizeAggregate(monthlyAccumulator);
-  }
-  return builtData;
+  return {
+    positions: dataFilesInfo.positions,
+    positionOptions: dataFilesInfo.positionOptions,
+    dataStateMessage,
+    dataSets: {
+      [WindRoseQualityFilter.VALIDATED]: finalizeDataSet(validated),
+      [WindRoseQualityFilter.ALL]: finalizeDataSet(all),
+    },
+  };
 };
 
 const getDayOfMonth = (day: string): number => Number.parseInt(day.slice(8, 10), 10);

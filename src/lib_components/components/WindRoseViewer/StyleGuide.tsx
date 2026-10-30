@@ -383,8 +383,8 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
       <DocBlock>
         Calm observations (a wind speed of exactly 0 m/s) have no direction, so they are not drawn on
         the wind rose. Instead, the legend reports them as a <b>Calm</b> share of observations, alongside
-        the share of each wind speed bin. All shares are of every observation, including calm
-        observations, and the slowest bin (0-0.25 m/s) does not include 0.
+        the share of each wind speed bin. All shares are of every selected observation, including
+        calm observations, and the slowest bin (0-0.25 m/s) does not include 0.
       </DocBlock>
       <DocBlock>
         The citation for the data product (and release, if specified) is shown below the wind rose.
@@ -392,6 +392,31 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
         are shown a limited dataset, along with a card explaining how to sign in to view the full
         dataset. Release data are only available when signed in, so no data are shown when a release
         is specified until the user signs in.
+      </DocBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Data Quality</Typography>
+      <DocBlock>
+        The <b>Observations</b> toggle selects which observations the wind roses are built from:
+        <ul>
+          <li>
+            <b>Quality Flag Validated</b> (default): observations with a <code>windSpeedFinalQF</code> of 0
+            (pass) and a <code>windDirFinalQF</code> of 0 (pass).
+          </li>
+          <li>
+            <b>All</b>: every observation, including those with either quality flag of 1 (fail).
+          </li>
+        </ul>
+        Observation counts, shares, the prevailing direction, mean speed and the days with data all
+        reflect the selected observations. Both are built when a month is fetched, so switching
+        between them is immediate.
+      </DocBlock>
+      <DocBlock>
+        The <b>Quality Flag Validated</b> ring beside the observation count shows the share of the shown
+        observations that are Quality Flag validated for the month or day: the validated share of every
+        observation when viewing <b>All</b>, and a full ring with a check mark at 100% when
+        viewing <b>Quality Flag Validated</b>. Hovering over the ring shows how many observations fail a
+        quality flag when viewing <b>All</b>, and the validated share of every observation when
+        viewing <b>Quality Flag Validated</b>.
       </DocBlock>
 
       <Typography variant="h5" component="h3" gutterBottom>Color Scheme</Typography>

@@ -8,6 +8,7 @@ import {
   formatMonth,
   formatPercent,
   formatPosition,
+  formatShare,
   formatSpeed,
   formatTickPercent,
   getCalmPercent,
@@ -147,6 +148,13 @@ describe('WindRoseViewer - windRoseChartUtil', () => {
     expect(formatPercent(0)).toBe('0%');
     expect(formatPercent(0.04)).toBe('<0.1%');
     expect(formatPercent(12.345)).toBe('12.3%');
+    expect(formatShare(175, 720)).toBe('24.3%');
+    expect(formatShare(720, 720)).toBe('100%');
+    // Only the whole is 100%
+    expect(formatShare(7199, 7200)).toBe('99.9%');
+    expect(formatShare(1, 100000)).toBe('<0.1%');
+    expect(formatShare(0, 720)).toBe('0%');
+    expect(formatShare(0, 0)).toBe('-');
     expect(formatTickPercent(5)).toBe('5%');
     expect(formatTickPercent(0.5)).toBe('0.5%');
     expect(formatSpeed(3.25)).toBe('3.3 m/s');

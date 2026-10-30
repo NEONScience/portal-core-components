@@ -13,6 +13,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -32,7 +33,7 @@ import {
   WindRoseAggregation,
   WindRoseViewerState,
 } from './Context';
-import { WIND_ROSE_CHANGE_TYPE, WindRosePosition } from './windRoseUtil';
+import { WIND_ROSE_CHANGE_TYPE, WindRosePosition, WindRoseQualityFilter } from './windRoseUtil';
 import { formatPosition, MONTH_FORMAT } from './windRoseChartUtil';
 
 import { makeStyles } from '../Theme/makeStyles';
@@ -70,6 +71,14 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     gap: theme.spacing(0.5),
+  },
+  qualityControl: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(1),
+  },
+  qualityLabel: {
+    color: theme.palette.text.secondary,
   },
   toggleIcon: {
     fontSize: '1.15rem',
@@ -180,14 +189,17 @@ const WindRoseMonthPicker: React.FC<WindRoseMonthPickerProps> = (
 const WindRoseControls: React.FC = (): React.JSX.Element => {
   const { classes } = useStyles();
   const state: WindRoseViewerState = useStateContext();
+  const dispatch = useDispatchContext();
   const fetchWindRose = useFetchWindRose();
   const siteLabelId = useId();
   const positionsLabelId = useId();
+  const qualityLabelId = useId();
   const {
     siteOptions,
     monthOptions,
     positionOptions,
     query,
+    qualityFilter,
   }: WindRoseViewerState = state;
   const site = query.sites[0] || '';
   const month = query.months[0] || null;
@@ -270,6 +282,40 @@ const WindRoseControls: React.FC = (): React.JSX.Element => {
           ))}
         </Select>
       </FormControl>
+      <div className={classes.qualityControl}>
+        <Typography id={qualityLabelId} variant="caption" className={classes.qualityLabel}>
+          Observations
+        </Typography>
+        <ToggleButtonGroup
+          exclusive
+          size="small"
+          color="primary"
+          value={qualityFilter}
+          aria-labelledby={qualityLabelId}
+          onChange={(event: React.MouseEvent<HTMLElement>, value: unknown) => {
+            // Clicking the selected button would otherwise leave no quality filter selected
+            if ((value === WindRoseQualityFilter.VALIDATED)
+                || (value === WindRoseQualityFilter.ALL)) {
+              dispatch(ActionCreator.setQualityFilter(value));
+            }
+          }}
+        >
+          <Tooltip
+            describeChild
+            title="Every observation, including those where either flag is 1 (fail)"
+          >
+            <ToggleButton value={WindRoseQualityFilter.ALL}>All</ToggleButton>
+          </Tooltip>
+          <Tooltip
+            describeChild
+            title="Observations where windSpeedFinalQF and windDirFinalQF are both 0 (pass)"
+          >
+            <ToggleButton value={WindRoseQualityFilter.VALIDATED}>
+              Quality Flag Validated
+            </ToggleButton>
+          </Tooltip>
+        </ToggleButtonGroup>
+      </div>
     </div>
   );
 };

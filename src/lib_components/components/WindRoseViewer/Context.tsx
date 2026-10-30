@@ -45,6 +45,7 @@ import {
   WindRoseData,
   WindRosePosition,
   WindRosePositionOption,
+  WindRoseQualityFilter,
 } from './windRoseUtil';
 import {
   AnyAction,
@@ -117,15 +118,24 @@ export interface WindRoseViewerState {
   positionOptions: Array<PositionDisplayOption>;
   query: WindRoseViewerQueryState;
   aggregation: WindRoseAggregation;
+  qualityFilter: WindRoseQualityFilter;
   // Day (YYYY-MM-DD) shown in the daily aggregation
   selectedDay: Nullable<string>;
   // Whether the daily aggregation is automatically stepping through the days
   isPlaying: boolean;
+  // Wind roses of the observations selected by the quality filter
   data: WindRoseViewerDataState;
+  // Wind roses of each quality filter, so switching filters needs no refetch
+  dataSets: Record<WindRoseQualityFilter, WindRoseViewerDataState>;
   // Whether the product (and so data) were fetched in limited mode, null until fetched
   isViewerLimitedMode: Nullable<boolean>;
   neonContextState: UnknownRecord;
 }
+
+const getEmptyDataSets = (): Record<WindRoseQualityFilter, WindRoseViewerDataState> => ({
+  [WindRoseQualityFilter.VALIDATED]: { monthly: null, daily: {}, days: [] },
+  [WindRoseQualityFilter.ALL]: { monthly: null, daily: {}, days: [] },
+});
 
 const DEFAULT_STATE: WindRoseViewerState = {
   productCode: null,
@@ -149,6 +159,7 @@ const DEFAULT_STATE: WindRoseViewerState = {
     positions: [],
   },
   aggregation: WindRoseAggregation.MONTHLY,
+  qualityFilter: WindRoseQualityFilter.ALL,
   selectedDay: null,
   isPlaying: false,
   data: {
@@ -156,6 +167,7 @@ const DEFAULT_STATE: WindRoseViewerState = {
     daily: {},
     days: [],
   },
+  dataSets: getEmptyDataSets(),
   isViewerLimitedMode: null,
   neonContextState: cloneDeep(NeonContext.DEFAULT_STATE),
 };
@@ -240,6 +252,7 @@ export enum ActionTypes {
   RESET_WIND_ROSE = 'RESET_WIND_ROSE',
   REINITIALIZE = 'REINITIALIZE',
   SET_AGGREGATION = 'SET_AGGREGATION',
+  SET_QUALITY_FILTER = 'SET_QUALITY_FILTER',
   SELECT_DAY = 'SELECT_DAY',
   STEP_DAY = 'STEP_DAY',
   SET_PLAYING = 'SET_PLAYING',
@@ -302,6 +315,10 @@ interface SetAggregationAction extends AnyAction {
   type: typeof ActionTypes.SET_AGGREGATION;
   aggregation: WindRoseAggregation;
 }
+interface SetQualityFilterAction extends AnyAction {
+  type: typeof ActionTypes.SET_QUALITY_FILTER;
+  qualityFilter: WindRoseQualityFilter;
+}
 interface SelectDayAction extends AnyAction {
   type: typeof ActionTypes.SELECT_DAY;
   day: string;
@@ -333,6 +350,7 @@ type WindRoseViewerActionTypes = (
   | ResetWindRoseAction
   | ReinitializeAction
   | SetAggregationAction
+  | SetQualityFilterAction
   | SelectDayAction
   | StepDayAction
   | SetPlayingAction
@@ -414,6 +432,10 @@ export const ActionCreator = {
   setAggregation: (aggregation: WindRoseAggregation): SetAggregationAction => ({
     type: ActionTypes.SET_AGGREGATION,
     aggregation,
+  }),
+  setQualityFilter: (qualityFilter: WindRoseQualityFilter): SetQualityFilterAction => ({
+    type: ActionTypes.SET_QUALITY_FILTER,
+    qualityFilter,
   }),
   // Selecting a day shows its wind rose, switching to the daily aggregation if necessary.
   // The day may be in a month that has not been fetched yet, see resolveSelectedDay.
@@ -528,12 +550,9 @@ const reducer = (
       );
       newState.monthOptions = getMonthOptions(newState.product, wrfAction.query.sites);
       newState.positionOptions = wrfData.positionOptions;
-      newState.data = {
-        monthly: wrfData.monthly,
-        daily: wrfData.daily,
-        days: wrfData.days,
-      };
-      newState.selectedDay = resolveSelectedDay(newState.selectedDay, wrfData.days);
+      newState.dataSets = wrfData.dataSets;
+      newState.data = wrfData.dataSets[newState.qualityFilter];
+      newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
       newState.query = {
         ...newState.query,
         sites: wrfAction.query.sites.map((value) => value),
@@ -557,11 +576,8 @@ const reducer = (
         newState.product,
         wrFailedAction.initAction.query.sites,
       );
-      newState.data = {
-        monthly: null,
-        daily: {},
-        days: [],
-      };
+      newState.dataSets = getEmptyDataSets();
+      newState.data = newState.dataSets[newState.qualityFilter];
       newState.isPlaying = false;
       newState.query = {
         ...newState.query,
@@ -585,6 +601,12 @@ const reducer = (
       if (newState.aggregation === WindRoseAggregation.DAILY) {
         newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
       }
+      return newState;
+    case ActionTypes.SET_QUALITY_FILTER:
+      newState.qualityFilter = (action as SetQualityFilterAction).qualityFilter;
+      newState.data = newState.dataSets[newState.qualityFilter];
+      newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
+      newState.isPlaying = newState.isPlaying && (newState.data.days.length > 1);
       return newState;
     case ActionTypes.SELECT_DAY:
       newState.aggregation = WindRoseAggregation.DAILY;

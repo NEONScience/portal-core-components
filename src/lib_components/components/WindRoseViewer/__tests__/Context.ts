@@ -8,7 +8,11 @@ import {
   WindRoseViewerQueryState,
   WindRoseViewerState,
 } from '../Context';
-import { buildWindRoseData, WindRoseDataFilesInfo } from '../windRoseUtil';
+import {
+  buildWindRoseData,
+  WindRoseDataFilesInfo,
+  WindRoseQualityFilter,
+} from '../windRoseUtil';
 import { AsyncStateType } from '../../../types/asyncFlow';
 
 const { getDefaultState, reducer } = getTestableItems();
@@ -40,17 +44,25 @@ const getInitialState = (): WindRoseViewerState => ({
   product,
 });
 
-// Fulfills a fetch for the month with one observation on each of the days
+// Fulfills a fetch for the month with one Quality Flag validated observation on each of the days,
+// and one observation failing the wind direction quality flag on each of the failing days
 const fulfill = (
   state: WindRoseViewerState,
   month: string,
   days: string[],
+  failingDays: string[] = [],
 ): WindRoseViewerState => {
-  const rows = days.map((day: string) => ({
+  const toRow = (day: string, windDirFinalQF: string) => ({
     startDateTime: `${day}T12:00:00Z`,
     windDirMean: '270',
     windSpeedMean: '2.5',
-  }));
+    windSpeedFinalQF: '0',
+    windDirFinalQF,
+  });
+  const rows = [
+    ...days.map((day: string) => toRow(day, '0')),
+    ...failingDays.map((day: string) => toRow(day, '1')),
+  ];
   return reducer(
     state,
     ActionCreator.fetchWindRoseFullfilled(
@@ -59,6 +71,11 @@ const fulfill = (
     ),
   );
 };
+
+const filterBy = (
+  state: WindRoseViewerState,
+  qualityFilter: WindRoseQualityFilter,
+): WindRoseViewerState => reducer(state, ActionCreator.setQualityFilter(qualityFilter));
 
 const JUNE_DAYS = ['2026-06-01', '2026-06-02', '2026-06-15', '2026-06-30'];
 
@@ -89,6 +106,47 @@ describe('WindRoseViewer - Context reducer', () => {
     const state = reducer(fulfilled, ActionCreator.selectDay('2026-06-15'));
     expect(state.aggregation).toBe(WindRoseAggregation.DAILY);
     expect(state.selectedDay).toBe('2026-06-15');
+  });
+
+  test('defaults to the wind roses of all observations', () => {
+    expect(getDefaultState().qualityFilter).toBe(WindRoseQualityFilter.ALL);
+    const state = fulfill(getInitialState(), '2026-06', JUNE_DAYS);
+    expect(state.data.days).toEqual(JUNE_DAYS);
+    expect(state.data.monthly?.samples).toBe(JUNE_DAYS.length);
+  });
+
+  test('switches between Quality Flag validated and all observations of the fetched month', () => {
+    const fulfilled = fulfill(getInitialState(), '2026-06', JUNE_DAYS, ['2026-06-20']);
+    const all = filterBy(fulfilled, WindRoseQualityFilter.ALL);
+    expect(all.qualityFilter).toBe(WindRoseQualityFilter.ALL);
+    expect(all.data.days)
+      .toEqual(['2026-06-01', '2026-06-02', '2026-06-15', '2026-06-20', '2026-06-30']);
+    expect(all.data.monthly?.samples).toBe(JUNE_DAYS.length + 1);
+    const validated = filterBy(all, WindRoseQualityFilter.VALIDATED);
+    expect(validated.qualityFilter).toBe(WindRoseQualityFilter.VALIDATED);
+    expect(all.data).toEqual(fulfilled.data);
+  });
+
+  test('switching quality filters resolves the selected day and playback', () => {
+    const all = filterBy(
+      fulfill(getInitialState(), '2026-06', JUNE_DAYS, ['2026-06-20']),
+      WindRoseQualityFilter.ALL,
+    );
+    const validated = filterBy(
+      reducer(all, ActionCreator.selectDay('2026-06-20')),
+      WindRoseQualityFilter.VALIDATED,
+    );
+    // The closest day with Quality Flag validated observations
+    expect(validated.selectedDay).toBe('2026-06-15');
+    const playing = reducer(
+      filterBy(
+        fulfill(getInitialState(), '2026-06', ['2026-06-01'], ['2026-06-02']),
+        WindRoseQualityFilter.ALL,
+      ),
+      ActionCreator.setPlaying(true),
+    );
+    expect(playing.isPlaying).toBe(true);
+    expect(filterBy(playing, WindRoseQualityFilter.VALIDATED).isPlaying).toBe(false);
   });
 
   test('keeps a day selected in another month once that month is fetched', () => {
@@ -156,6 +214,7 @@ describe('WindRoseViewer - Context reducer', () => {
     );
     expect(failed.fetchState.data?.status).toBe(AsyncStateType.FAILED);
     expect(failed.data).toEqual({ monthly: null, daily: {}, days: [] });
+    expect(failed.dataSets[WindRoseQualityFilter.ALL]).toEqual(failed.data);
     expect(failed.query.months).toEqual(['2026-07']);
   });
 

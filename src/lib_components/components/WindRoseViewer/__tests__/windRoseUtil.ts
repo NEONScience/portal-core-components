@@ -12,6 +12,7 @@ import {
   VELOCITY_BINS,
   WindRoseAggregate,
   WindRoseDataFilesInfo,
+  WindRoseQualityFilter,
 } from '../windRoseUtil';
 
 const getDirectionBin = (direction: number): string => (
@@ -35,7 +36,15 @@ const row = (
   startDateTime: string,
   windDirMean: string,
   windSpeedMean: string,
-): Record<string, unknown> => ({ startDateTime, windDirMean, windSpeedMean });
+  windSpeedFinalQF = '0',
+  windDirFinalQF = '0',
+): Record<string, unknown> => ({
+  startDateTime,
+  windDirMean,
+  windSpeedMean,
+  windSpeedFinalQF,
+  windDirFinalQF,
+});
 
 const getCount = (
   aggregate: WindRoseAggregate,
@@ -119,24 +128,25 @@ describe('WindRoseViewer - windRoseUtil', () => {
       },
     ];
     const built = buildWindRoseData(data, dataFilesInfo);
+    const all = built.dataSets[WindRoseQualityFilter.ALL];
 
     test('builds a daily wind rose for each day with observations', () => {
-      expect(built.days).toEqual(['2026-06-01', '2026-06-02']);
-      expect(Object.keys(built.daily).sort()).toEqual(built.days);
-      const firstDay = built.daily['2026-06-01'];
+      expect(all.days).toEqual(['2026-06-01', '2026-06-02']);
+      expect(Object.keys(all.daily).sort()).toEqual(all.days);
+      const firstDay = all.daily['2026-06-01'];
       expect(firstDay.samples).toBe(3);
       expect(getCount(firstDay, '0', '0-.25')).toBe(1);
       expect(getCount(firstDay, '0', '3-5')).toBe(1);
       expect(getCount(firstDay, '90', '>8')).toBe(1);
       expect(firstDay.meanSpeed).toBeCloseTo((0.1 + 3.2 + 9.5) / 3);
-      const secondDay = built.daily['2026-06-02'];
+      const secondDay = all.daily['2026-06-02'];
       expect(secondDay.samples).toBe(2);
       expect(getCount(secondDay, '202.5', '1-1.5')).toBe(1);
       expect(getCount(secondDay, '247.5', '2-3')).toBe(1);
     });
 
     test('builds a monthly wind rose of every observation', () => {
-      const { monthly } = built;
+      const { monthly } = all;
       expect(monthly).not.toBeNull();
       const monthlyAggregate = monthly as WindRoseAggregate;
       expect(monthlyAggregate.samples).toBe(5);
@@ -144,8 +154,8 @@ describe('WindRoseViewer - windRoseUtil', () => {
       expect(monthlyAggregate.meanSpeed).toBeCloseTo((0.1 + 3.2 + 9.5 + 1.2 + 2.5) / 5);
       monthlyAggregate.bins.forEach((bin, directionIndex) => {
         bin.counts.forEach((count, velocityIndex) => {
-          const dailyCount = built.days.reduce((sum, day) => (
-            sum + built.daily[day].bins[directionIndex].counts[velocityIndex]
+          const dailyCount = all.days.reduce((sum, day) => (
+            sum + all.daily[day].bins[directionIndex].counts[velocityIndex]
           ), 0);
           expect(count).toBe(dailyCount);
         });
@@ -153,7 +163,7 @@ describe('WindRoseViewer - windRoseUtil', () => {
     });
 
     test('totals each direction bin, ordered clockwise from north', () => {
-      const monthlyAggregate = built.monthly as WindRoseAggregate;
+      const monthlyAggregate = all.monthly as WindRoseAggregate;
       expect(monthlyAggregate.bins.map((bin) => bin.angle)).toEqual(DIRECTION_BINS);
       monthlyAggregate.bins.forEach((bin) => {
         expect(bin.counts).toHaveLength(VELOCITY_BINS.length);
@@ -174,9 +184,51 @@ describe('WindRoseViewer - windRoseUtil', () => {
         dataFilesInfo,
       );
       expect(result.dataStateMessage).toBe('Time variable could not be determined from data.');
-      expect(result.monthly).toBeNull();
-      expect(result.daily).toEqual({});
-      expect(result.days).toEqual([]);
+      Object.values(result.dataSets).forEach((dataSet) => {
+        expect(dataSet).toEqual({ monthly: null, daily: {}, days: [] });
+      });
+    });
+  });
+
+  describe('buildWindRoseData quality filters', () => {
+    const built = buildWindRoseData(
+      [{
+        data: [
+          row('2026-06-01T00:00:00Z', '90', '1.2'),
+          row('2026-06-01T00:02:00Z', '90', '1.2', '1', '0'),
+          row('2026-06-01T00:04:00Z', '90', '1.2', '0', '1'),
+          // A missing quality flag is not a pass
+          row('2026-06-01T00:06:00Z', '90', '1.2', '', '0'),
+          row('2026-06-01T00:08:00Z', '', '0', '0', '1'),
+          row('2026-06-01T00:10:00Z', '', '0'),
+          // A day of only failing observations
+          row('2026-06-02T00:00:00Z', '270', '3.9', '1', '1'),
+        ],
+      }],
+      dataFilesInfo,
+    );
+    const validated = built.dataSets[WindRoseQualityFilter.VALIDATED];
+    const all = built.dataSets[WindRoseQualityFilter.ALL];
+
+    test('builds Quality Flag validated wind roses of observations passing both quality flags', () => {
+      expect(validated.days).toEqual(['2026-06-01']);
+      const monthlyAggregate = validated.monthly as WindRoseAggregate;
+      expect(monthlyAggregate.samples).toBe(2);
+      expect(monthlyAggregate.calm).toBe(1);
+      expect(getCount(monthlyAggregate, '90', '1-1.5')).toBe(1);
+      expect(monthlyAggregate.meanSpeed).toBeCloseTo(1.2 / 2);
+      expect(validated.daily['2026-06-01']).toEqual(monthlyAggregate);
+    });
+
+    test('builds wind roses of every observation regardless of quality flags', () => {
+      expect(all.days).toEqual(['2026-06-01', '2026-06-02']);
+      const monthlyAggregate = all.monthly as WindRoseAggregate;
+      expect(monthlyAggregate.samples).toBe(7);
+      expect(monthlyAggregate.calm).toBe(2);
+      expect(getCount(monthlyAggregate, '90', '1-1.5')).toBe(4);
+      expect(getCount(monthlyAggregate, '270', '3-5')).toBe(1);
+      expect(all.daily['2026-06-01'].samples).toBe(6);
+      expect(all.daily['2026-06-02'].samples).toBe(1);
     });
   });
 
@@ -197,7 +249,7 @@ describe('WindRoseViewer - windRoseUtil', () => {
     );
 
     test('counts calm observations separately from the wind speed bins', () => {
-      const firstDay = built.daily['2026-06-01'];
+      const firstDay = built.dataSets[WindRoseQualityFilter.ALL].daily['2026-06-01'];
       expect(firstDay.calm).toBe(2);
       expect(firstDay.samples).toBe(4);
       expect(getCount(firstDay, '90', '0-.25')).toBe(1);
@@ -208,14 +260,15 @@ describe('WindRoseViewer - windRoseUtil', () => {
     });
 
     test('includes days and months of only calm observations', () => {
-      expect(built.days).toEqual(['2026-06-01', '2026-06-02']);
-      const secondDay = built.daily['2026-06-02'];
+      const all = built.dataSets[WindRoseQualityFilter.ALL];
+      expect(all.days).toEqual(['2026-06-01', '2026-06-02']);
+      const secondDay = all.daily['2026-06-02'];
       expect(secondDay.samples).toBe(1);
       expect(secondDay.calm).toBe(1);
       expect(secondDay.bins.every((bin) => bin.total === 0)).toBe(true);
       expect(secondDay.meanSpeed).toBe(0);
-      expect(built.monthly?.calm).toBe(3);
-      expect(built.monthly?.samples).toBe(5);
+      expect(all.monthly?.calm).toBe(3);
+      expect(all.monthly?.samples).toBe(5);
     });
   });
 

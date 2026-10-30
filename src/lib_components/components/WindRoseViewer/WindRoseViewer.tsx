@@ -15,6 +15,7 @@ import Provider, {
   useStateContext,
   useWindRoseViewerAccess,
   WindRoseAggregation,
+  WindRoseViewerDataState,
   WindRoseViewerState,
 } from './Context';
 import WindRoseCalendar from './WindRoseCalendar';
@@ -22,13 +23,14 @@ import WindRoseChart from './WindRoseChart';
 import WindRoseControls, { WindRoseAggregationToggle } from './WindRoseControls';
 import WindRoseDayNavigator from './WindRoseDayNavigator';
 import WindRoseLegend from './WindRoseLegend';
+import WindRoseQualityMeter from './WindRoseQualityMeter';
 import WindRoseViewerLimitedCard from './WindRoseViewerLimitedCard';
 import {
   DEFAULT_WIND_ROSE_COLOR_SCHEME,
   resolveWindRoseColorScheme,
   WindRoseColorScheme,
 } from './colorSchemes';
-import { WindRoseAggregate } from './windRoseUtil';
+import { WindRoseAggregate, WindRoseQualityFilter } from './windRoseUtil';
 import {
   buildSectors,
   formatCount,
@@ -194,7 +196,7 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
 
 interface StatProps {
   label: string;
-  value: string;
+  value: React.ReactNode;
 }
 
 const Stat: React.FC<StatProps> = (props: StatProps): React.JSX.Element => {
@@ -203,9 +205,11 @@ const Stat: React.FC<StatProps> = (props: StatProps): React.JSX.Element => {
   return (
     <div>
       <span className={classes.statLabel}>{label}</span>
-      <Typography variant="body1" component="span" className={classes.statValue}>
-        {value}
-      </Typography>
+      {(typeof value !== 'string') ? value : (
+        <Typography variant="body1" component="span" className={classes.statValue}>
+          {value}
+        </Typography>
+      )}
     </div>
   );
 };
@@ -243,8 +247,10 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
     dataStateMessage,
     query,
     aggregation,
+    qualityFilter,
     selectedDay,
     data,
+    dataSets,
   }: WindRoseViewerState = state;
   const productFetchState = fetchState.product as Nullable<FetchStatusState>;
   // Without signing in, the product and data of a release are never fetched
@@ -274,11 +280,17 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
   const isDaily = aggregation === WindRoseAggregation.DAILY;
   const site = query.sites[0] || '';
   const month = query.months[0] || null;
-  let aggregate: Nullable<WindRoseAggregate> = data.monthly;
-  if (isDaily) {
-    aggregate = selectedDay ? data.daily[selectedDay] : null;
-  }
+  const getPeriodAggregate = (dataSet: WindRoseViewerDataState): Nullable<WindRoseAggregate> => {
+    if (!isDaily) {
+      return dataSet.monthly;
+    }
+    return (selectedDay && dataSet.daily[selectedDay]) || null;
+  };
+  const aggregate = getPeriodAggregate(data);
   const hasData = !!aggregate && (aggregate.samples > 0);
+  const hasOnlyUnvalidatedData = (qualityFilter === WindRoseQualityFilter.VALIDATED)
+    && (data.days.length <= 0)
+    && (dataSets[WindRoseQualityFilter.ALL].days.length > 0);
   // Calm observations have no direction, so are not drawn on the wind rose
   const isAllCalm = !!aggregate && (aggregate.samples > 0)
     && (aggregate.calm >= aggregate.samples);
@@ -319,6 +331,17 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
           <ErrorIcon fontSize="large" className={classes.errorIcon} />
           <Typography variant="subtitle2" className={classes.overlayMessage}>
             No wind rose data is available for the selected site, month and sensor positions.
+          </Typography>
+        </div>
+      );
+    }
+    if (hasOnlyUnvalidatedData) {
+      return (
+        <div className={classes.overlay} role="status">
+          <InfoIcon fontSize="large" className={classes.infoIcon} />
+          <Typography variant="subtitle2" className={classes.overlayMessage}>
+            {'No Quality Flag validated observations are available for this month. '
+              + 'Select All to include observations that fail a quality flag.'}
           </Typography>
         </div>
       );
@@ -414,6 +437,18 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
               <Stat
                 label="Observations"
                 value={hasData ? formatCount((aggregate as WindRoseAggregate).samples) : '-'}
+              />
+              <Stat
+                label="Quality Flag validated"
+                value={!hasData ? '-' : (
+                  <WindRoseQualityMeter
+                    validated={
+                      getPeriodAggregate(dataSets[WindRoseQualityFilter.VALIDATED])?.samples || 0
+                    }
+                    all={getPeriodAggregate(dataSets[WindRoseQualityFilter.ALL])?.samples || 0}
+                    qualityFilter={qualityFilter}
+                  />
+                )}
               />
               <Stat
                 label="Prevailing wind from"

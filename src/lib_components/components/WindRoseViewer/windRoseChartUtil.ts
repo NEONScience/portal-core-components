@@ -274,6 +274,19 @@ export const formatPercent = (percent: number): string => {
   return `${percent.toFixed(1)}%`;
 };
 
+/**
+ * Formats a count as a percentage of a total, only rounding to 100% when the count is the total
+ */
+export const formatShare = (count: number, total: number): string => {
+  if (total <= 0) {
+    return '-';
+  }
+  if (count >= total) {
+    return '100%';
+  }
+  return formatPercent(Math.min((count / total) * 100, 99.9));
+};
+
 export const formatTickPercent = (tick: number): string => `${Number(tick.toFixed(2))}%`;
 
 export const formatSpeed = (speed: Nullable<number>): string => (
