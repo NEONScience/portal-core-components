@@ -47,8 +47,11 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API',
   'NEXT_PUBLIC_NEON_PATH_VIZ_API',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_WS',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION',
+  'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION_PING',
   'NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API',
+  'NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_DESKTOP',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_MOBILE',
   'NEXT_PUBLIC_NEON_AOP_GEE_DATA_VIEWER_VIDEO',
@@ -64,6 +67,25 @@ const EnvType = {
   PROD: 'production',
 };
 
+/**
+ * Configuration profiles that drive collections of options.
+ */
+export enum NeonProfile {
+  DEFAULT = 'default',
+  AUTONOMOUS = 'autonomous',
+}
+
+/**
+ * Parses a NEON profile value
+ * @param value The value to parse
+ * @return The matching NeonProfile, undefined when not a known profile
+ */
+const parseNeonProfile = (value: unknown): Undef<NeonProfile> => {
+  if (typeof value !== 'string') return undefined;
+  const normalizedValue = value.trim().toLowerCase();
+  return Object.values(NeonProfile).find((profile) => profile === normalizedValue);
+};
+
 export interface NeonServerData {
   NeonPublicAPIHost: Undef<string>;
   NeonPublicAPIHostAllowInternal: Undef<boolean>;
@@ -73,19 +95,21 @@ export interface NeonServerData {
   NeonPublicAPIToken: Undef<string>;
   NeonAPISessionTokenHeader: Undef<string>;
   NeonAuthSilentType: Undef<string>;
+  NeonProfile: Undef<string>;
 }
 
 export interface INeonEnvironment {
   isValid: boolean;
   isDevEnv: boolean;
   isProdEnv: boolean;
-  authDisableWs: boolean;
-  auth0DisableApi: boolean;
-  authDisableBroadcastChannel: boolean;
-  sessionDisable: boolean;
-  sessionDisablePing: boolean;
-  enableGlobalSignInState: boolean;
-  fetchDrupalAssets: boolean;
+  authDisableWs: () => boolean;
+  auth0DisableApi: () => boolean;
+  authDisableBroadcastChannel: () => boolean;
+  sessionDisable: () => boolean;
+  sessionDisablePing: () => boolean;
+  enableGlobalSignInState: () => boolean;
+  fetchDrupalAssets: () => boolean;
+  showNeonAuthHeader: () => boolean;
 
   getReactAppName: () => string;
   getReactAppVersion: () => string;
@@ -123,6 +147,7 @@ export interface INeonEnvironment {
   getBioRepoHostOverride: () => string;
   getWsHostOverride: () => string;
   getApiSessionTokenHeaderOverride: () => Undef<string>;
+  getNeonProfileOverride: () => Undef<string>;
 
   route: Record<string, (p?: string) => string>;
 
@@ -143,6 +168,8 @@ export interface INeonEnvironment {
   getApiToken: () => string;
   getApiSessionTokenHeader: () => string;
   getAuthSilentType: () => AuthSilentType;
+  getNeonProfile: () => NeonProfile;
+  isAutonomousProfile: () => boolean;
 
   getFullApiPath: (path: string) => string;
   getFullJsonLdApiPath: (path: string) => string;
@@ -160,14 +187,35 @@ const NeonEnvironment: INeonEnvironment = {
   isValid: requiredEnvironmentVars.every((envVar) => typeof process.env[envVar] !== 'undefined'),
   isDevEnv: process.env.NODE_ENV === EnvType.DEV,
   isProdEnv: process.env.NODE_ENV === EnvType.PROD,
-  authDisableWs: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true',
-  auth0DisableApi: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true',
-  // eslint-disable-next-line max-len, @stylistic/max-len
-  authDisableBroadcastChannel: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true',
-  sessionDisable: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true',
-  sessionDisablePing: process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION_PING === 'true',
-  enableGlobalSignInState: process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true',
-  fetchDrupalAssets: process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false',
+  authDisableWs: (): boolean => (
+    NeonEnvironment.isAutonomousProfile()
+    || (process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_WS === 'true')
+  ),
+  auth0DisableApi: (): boolean => (
+    NeonEnvironment.isAutonomousProfile()
+    || (process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_AUTH0_API === 'true')
+  ),
+  authDisableBroadcastChannel: (): boolean => (
+    NeonEnvironment.isAutonomousProfile()
+    || (process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_BROADCAST_CHANNEL === 'true')
+  ),
+  sessionDisable: (): boolean => (
+    NeonEnvironment.isAutonomousProfile()
+    || (process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION === 'true')
+  ),
+  sessionDisablePing: (): boolean => (
+    NeonEnvironment.isAutonomousProfile()
+    || (process.env.NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION_PING === 'true')
+  ),
+  enableGlobalSignInState: (): boolean => (
+    !NeonEnvironment.isAutonomousProfile()
+    && (process.env.NEXT_PUBLIC_NEON_ENABLE_GLOBAL_SIGNIN_STATE === 'true')
+  ),
+  fetchDrupalAssets: (): boolean => (
+    !NeonEnvironment.isAutonomousProfile()
+    && (process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false')
+  ),
+  showNeonAuthHeader: (): boolean => !NeonEnvironment.isAutonomousProfile(),
 
   getReactAppName: () => process.env.NEXT_PUBLIC_NAME || '',
   getReactAppVersion: () => process.env.NEXT_PUBLIC_VERSION || '',
@@ -200,6 +248,7 @@ const NeonEnvironment: INeonEnvironment = {
     taxonomyDownload: (): string => '/taxonomy/download',
     arcgisAssets: (): string => '/arcgis-assets',
     doiCitations: (): string => '/dois/citations',
+    dataAvailability: (): string => '/data-availability',
   },
 
   getDownloadApiPath: {
@@ -263,6 +312,9 @@ const NeonEnvironment: INeonEnvironment = {
   ),
   getApiSessionTokenHeaderOverride: (): Undef<string> => (
     process.env.NEXT_PUBLIC_NEON_API_SESSION_TOKEN_HEADER_OVERRIDE || undefined
+  ),
+  getNeonProfileOverride: (): Undef<string> => (
+    process.env.NEXT_PUBLIC_NEON_PROFILE_OVERRIDE || undefined
   ),
 
   route: {
@@ -541,6 +593,34 @@ const NeonEnvironment: INeonEnvironment = {
     }
     return AuthSilentType.DISABLED;
   },
+
+  /**
+   * Gets the NEON profile. In a dev environment, a valid local override
+   * (NEXT_PUBLIC_NEON_PROFILE_OVERRIDE) takes precedence over the server data value.
+   * @return {NeonProfile} The NEON profile, defaults to NeonProfile.DEFAULT
+   */
+  getNeonProfile: (): NeonProfile => {
+    if (NeonEnvironment.isDevEnv) {
+      const overrideProfile = parseNeonProfile(NeonEnvironment.getNeonProfileOverride());
+      if (overrideProfile) {
+        return overrideProfile;
+      }
+    }
+    const serverData = NeonEnvironment.getNeonServerData();
+    if (serverData) {
+      const serverDataProfile = parseNeonProfile(serverData.NeonProfile);
+      if (serverDataProfile) {
+        return serverDataProfile;
+      }
+    }
+    return NeonProfile.DEFAULT;
+  },
+
+  /**
+   * Determines if the autonomous NEON profile is applied
+   * @return {boolean} True when the autonomous profile is applied
+   */
+  isAutonomousProfile: (): boolean => NeonEnvironment.getNeonProfile() === NeonProfile.AUTONOMOUS,
 
   getFullApiPath: (path: string = ''): string => {
     const host = NeonEnvironment.getApiHost();

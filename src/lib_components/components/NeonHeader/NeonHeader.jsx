@@ -119,6 +119,10 @@ const useStyles = (customize) => {
       display: 'inline-block',
       verticalAlign: 'top',
     },
+    // Retains the height of the absent auth UI to keep the custom header search aligned
+    customAuthAnchorSearchOnly: {
+      height: '32px',
+    },
     // Replaces the Drupal header search entry points with the custom header search
     customSearch: {
       [SEARCH_BOX_MEDIA_QUERY]: {
@@ -454,6 +458,7 @@ const NeonHeader = (inProps) => {
   // The custom header search is rendered alongside the injected auth element
   const shouldInjectAuth = auth.useCore && neonAuthContextIsActive;
   const customizeSearch = customizeAuthContainer && shouldInjectAuth;
+  const showNeonAuth = NeonEnvironment.showNeonAuthHeader();
   const searchToggleRef = useRef(null);
   const [searchPanelOpenState, setSearchPanelOpenState] = useState(false);
   // The custom search toggle only controls the search panel within its viewport range
@@ -512,7 +517,7 @@ const NeonHeader = (inProps) => {
         renderMode = drupalCssLoaded ? 'drupal-fallback' : 'loading';
         break;
       default:
-        if (!NeonEnvironment.fetchDrupalAssets) {
+        if (!NeonEnvironment.fetchDrupalAssets()) {
           renderMode = 'drupal-fallback';
         } else {
           renderMode = 'loading';
@@ -523,7 +528,7 @@ const NeonHeader = (inProps) => {
 
   // Load header.js only after initial delayed render of the drupal header is complete
   useLayoutEffect(() => {
-    if (!NeonEnvironment.fetchDrupalAssets) {
+    if (!NeonEnvironment.fetchDrupalAssets()) {
       (async () => {
         // eslint-disable-next-line import/extensions
         await import('../../remoteAssets/drupal-header.js');
@@ -620,7 +625,8 @@ const NeonHeader = (inProps) => {
         );
       }
       if (attribs.id !== AUTH_ELEMENT_ID) { return null; }
-      const neonAuth = (
+      if (!showNeonAuth && !customizeSearch) { return null; }
+      const neonAuth = !showNeonAuth ? null : (
         <NeonAuth
           loginPath={NeonEnvironment.getFullAuthPath('login')}
           logoutPath={NeonEnvironment.getFullAuthPath('logout')}
@@ -634,10 +640,13 @@ const NeonHeader = (inProps) => {
           }
         />
       );
+      const customAuthAnchorClassName = showNeonAuth
+        ? classes.customAuthAnchor
+        : `${classes.customAuthAnchor} ${classes.customAuthAnchorSearchOnly}`;
       return (
         <div id={AUTH_ELEMENT_ID} className={classes.coreAuthContainer}>
           {!customizeSearch ? neonAuth : (
-            <div className={classes.customAuthAnchor}>
+            <div className={customAuthAnchorClassName}>
               <HeaderSearch
                 searchAction={buildSearchAction()}
                 searchPanelId={SEARCH_PANEL_ID}

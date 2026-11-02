@@ -272,6 +272,23 @@ const NeonApi = {
   },
 
   /**
+   * Gets the data availability endpoint RxJS Observable for the specified product code.
+   * @param {string} productCode The product code to get availability for.
+   * @param {string} release An optional release to scope the availability to.
+   * @param {string} dataLevel An optional level of detail to get availability at,
+   *   either MONTHLY or COMPONENT.
+   * @return The RxJS Ajax Observable
+   */
+  getDataAvailabilityObservable: (productCode, release = null, dataLevel = null) => {
+    const root = `${NeonEnvironment.getFullApiPath('dataAvailability')}/products`;
+    const path = isStringNonEmpty(release)
+      ? `${root}/${productCode}/${release}`
+      : `${root}/${productCode}`;
+    const query = isStringNonEmpty(dataLevel) ? `?dataLevel=${dataLevel}` : '';
+    return getJsonObservable(`${path}${query}`);
+  },
+
+  /**
    * Gets the product DOI endpoint RxJS Observable for the specified product code and release.
    * @param {string} productCode The product code to get for.
    * @param {string} release An optional release to scope the product DOI.

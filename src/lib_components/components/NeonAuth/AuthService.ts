@@ -304,7 +304,7 @@ const state: IAuthServiceState = {
 const AuthService: IAuthService = {
   getState: (): IAuthServiceState => state,
   allowSilentAuth: (): boolean => {
-    if (NeonEnvironment.authDisableWs) {
+    if (NeonEnvironment.authDisableWs()) {
       return false;
     }
     switch (NeonEnvironment.getAuthSilentType()) {
@@ -496,7 +496,7 @@ const AuthService: IAuthService = {
 
   watchAuth0: (dispatch: Dispatch<any>, onConnectCbs?: [AnyVoidFunc]): Subscription => {
     // If the WS subscription is disabled, do not attempt to connect
-    if (NeonEnvironment.authDisableWs
+    if (NeonEnvironment.authDisableWs()
         || (NeonEnvironment.getAuthSilentType() === AuthSilentType.DISABLED)) {
       return (state.watchSubscription$ as Subscription);
     }

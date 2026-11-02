@@ -267,7 +267,7 @@ const Provider = (inProps) => {
   useEffect(() => {
     const subscription = NeonSignInButtonState.getObservable().subscribe({
       next: () => {
-        if (!NeonEnvironment.enableGlobalSignInState) return;
+        if (!NeonEnvironment.enableGlobalSignInState()) return;
         stateStorage.saveState(state);
       },
     });

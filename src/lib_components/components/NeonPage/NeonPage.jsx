@@ -378,7 +378,8 @@ const NeonPage = (inProps) => {
   const isNetworkAvailable = useNetworkAvailability();
 
   // Boolean - whether any Drupal assets are used; only false if both header and footer are custom
-  const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets && !(customHeader && customFooter);
+  const useSomeDrupalAssets = NeonEnvironment.fetchDrupalAssets()
+    && !(customHeader && customFooter);
 
   /**
     Continue Sidebar Setup

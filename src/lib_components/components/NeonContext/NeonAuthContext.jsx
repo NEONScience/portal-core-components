@@ -62,7 +62,7 @@ const useNeonAuthContextState = () => {
 };
 
 const deriveNeonAuthContextSessionState = ({ isFinal, isAuthenticated, userData }) => {
-  if (NeonEnvironment.sessionDisable) {
+  if (NeonEnvironment.sessionDisable()) {
     return {
       enabled: false,
       ready: true,
@@ -241,8 +241,8 @@ const Provider = (inProps) => {
   const appliedSessionToken = userData?.token;
   useEffect(() => {
     if (
-      NeonEnvironment.sessionDisable
-      || NeonEnvironment.sessionDisablePing
+      NeonEnvironment.sessionDisable()
+      || NeonEnvironment.sessionDisablePing()
       || !preconditionsSatisfied
       || !isNetworkOnline
       || isAuthWorking
@@ -293,7 +293,7 @@ const Provider = (inProps) => {
   const cascadeAuthFetches = [];
   const fetchMethods = {
     auth: () => {
-      if (NeonEnvironment.auth0DisableApi) {
+      if (NeonEnvironment.auth0DisableApi()) {
         dispatch({ type: 'fetchAuthSucceeded', isAuthenticated: false, response: null });
         return;
       }

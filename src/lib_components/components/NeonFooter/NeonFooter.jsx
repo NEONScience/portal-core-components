@@ -48,7 +48,7 @@ const NeonFooter = (inProps) => {
         renderMode = drupalCssLoaded ? 'drupal-fallback' : 'loading';
         break;
       default:
-        if (!NeonEnvironment.fetchDrupalAssets) {
+        if (!NeonEnvironment.fetchDrupalAssets()) {
           renderMode = 'drupal-fallback';
         } else {
           renderMode = 'loading';

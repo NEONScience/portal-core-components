@@ -172,7 +172,7 @@ const NotificationsManager = (inProps) => {
   */
   useEffect(() => {
     if (fetchNotificationState.fetchStatus !== null) { return; }
-    if (NeonEnvironment.auth0DisableApi) {
+    if (NeonEnvironment.auth0DisableApi()) {
       fetchNotificationDispatch({ type: 'fetchNotificationsSuccess' });
       return;
     }

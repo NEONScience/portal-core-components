@@ -1,5 +1,5 @@
 variable "PORTAL_WEB_SERVER_BUILDER_TAG" {
-  default = "v2.3.0"
+  default = "v-latest"
 }
 
 # Populated from GitHub Action

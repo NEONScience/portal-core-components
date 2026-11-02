@@ -11,7 +11,7 @@ export interface BroadcastChannelMessage {
 }
 
 const getAuthBroadcastChannel = (): Undef<BroadcastChannel> => {
-  if (NeonEnvironment.authDisableBroadcastChannel) {
+  if (NeonEnvironment.authDisableBroadcastChannel()) {
     return undefined;
   }
   if (!exists(AUTH_BROADCAST_CHANNEL)) {
@@ -51,7 +51,7 @@ export interface IBroadcastChannelService {
 
 const BroadcastChannelService: IBroadcastChannelService = {
   addAuthChannelMessageEventListener: (eventListener: MessageEventListener): void => {
-    if (NeonEnvironment.authDisableBroadcastChannel) {
+    if (NeonEnvironment.authDisableBroadcastChannel()) {
       return;
     }
     const undefBc: Undef<BroadcastChannel> = getAuthBroadcastChannel();
@@ -62,7 +62,7 @@ const BroadcastChannelService: IBroadcastChannelService = {
     bc.addEventListener('message', eventListener);
   },
   removeAuthChannelMessageEventListener: (eventListener: MessageEventListener): void => {
-    if (NeonEnvironment.authDisableBroadcastChannel) {
+    if (NeonEnvironment.authDisableBroadcastChannel()) {
       return;
     }
     const undefBc: Undef<BroadcastChannel> = getAuthBroadcastChannel();
@@ -73,7 +73,7 @@ const BroadcastChannelService: IBroadcastChannelService = {
     bc.removeEventListener('message', eventListener);
   },
   sendLoginMessage: (): void => {
-    if (NeonEnvironment.authDisableBroadcastChannel) {
+    if (NeonEnvironment.authDisableBroadcastChannel()) {
       return;
     }
     const undefBc: Undef<BroadcastChannel> = getAuthBroadcastChannel();
@@ -87,7 +87,7 @@ const BroadcastChannelService: IBroadcastChannelService = {
     bc.postMessage(message);
   },
   sendAccountDataChangedMessage: (): void => {
-    if (NeonEnvironment.authDisableBroadcastChannel) {
+    if (NeonEnvironment.authDisableBroadcastChannel()) {
       return;
     }
     const undefBc: Undef<BroadcastChannel> = getAuthBroadcastChannel();

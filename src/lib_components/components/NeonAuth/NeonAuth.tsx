@@ -276,7 +276,7 @@ const renderAuth = (
   }: NeonAuthProps = props;
 
   const handleLogin = (): void => {
-    if (NeonEnvironment.enableGlobalSignInState) {
+    if (NeonEnvironment.enableGlobalSignInState()) {
       // Notify observers the sign in button has been clicked.
       NeonSignInButtonState.sendNotification();
     }
@@ -409,7 +409,7 @@ const NeonAuth = (props: NeonAuthProps): React.JSX.Element => {
     AuthService.fetchUserInfoWithDispatch(dispatch);
   }, [dispatch]);
   useEffect(() => {
-    if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi) {
+    if (!isFetchingAuthentication && !isAuthFetched && !NeonEnvironment.auth0DisableApi()) {
       authFetchCb();
     }
   }, [authFetchCb, isFetchingAuthentication, isAuthFetched]);
