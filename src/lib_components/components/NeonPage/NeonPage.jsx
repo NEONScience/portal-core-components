@@ -277,6 +277,7 @@ const drupalAssetsReducer = (state, action) => {
 };
 
 const defaultProps = {
+  application: null,
   breadcrumbHomeHref: '/',
   breadcrumbs: [],
   customHeader: null,
@@ -315,6 +316,7 @@ const defaultProps = {
 const NeonPage = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const {
+    application,
     breadcrumbHomeHref,
     breadcrumbs,
     customHeader,
@@ -876,6 +878,7 @@ const NeonPage = (inProps) => {
           </header>
         ) : (
           <NeonHeader
+            application={application}
             customizeAuthContainer={customizeAuthContainer}
             ref={headerRef}
             unstickyDrupalHeader={unstickyDrupalHeader}
@@ -906,6 +909,7 @@ const NeonPage = (inProps) => {
           </footer>
         ) : (
           <NeonFooter
+            application={application}
             drupalCssLoaded={isDrupalCssStatusFinished}
             showSkeleton={showFooterSkeleton}
             minWidth={outerPageContainerMinWidth}
@@ -970,6 +974,15 @@ const children = PropTypes.oneOfType([
 ]);
 
 NeonPage.propTypes = {
+  application: PropTypes.shape({
+    title: PropTypes.string,
+    href: PropTypes.string,
+    version: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+    ]),
+  }),
   breadcrumbHomeHref: PropTypes.string,
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({

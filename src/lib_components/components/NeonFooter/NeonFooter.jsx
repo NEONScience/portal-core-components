@@ -8,6 +8,7 @@ import REMOTE_ASSETS from '../../remoteAssetsMap/remoteAssetsMap';
 import DRUPAL_FOOTER_HTML_FALLBACK from '../../remoteAssets/drupal-footer.html';
 import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
+import AutonomousFooter from './AutonomousFooter';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 import { exists } from '../../util/typeUtil';
@@ -28,7 +29,7 @@ const defaultProps = {
   minWidth: undefined,
 };
 
-const NeonFooter = (inProps) => {
+const DefaultFooter = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const { drupalCssLoaded, showSkeleton, minWidth } = props;
   const { classes } = useStyles();
@@ -92,10 +93,32 @@ const NeonFooter = (inProps) => {
   }
 };
 
-NeonFooter.propTypes = {
+// The autonomous profile replaces the default footer with the autonomous footer
+const NeonFooter = (inProps) => {
+  if (!NeonEnvironment.isAutonomousProfile()) {
+    return <DefaultFooter {...inProps} />;
+  }
+  const { application, minWidth } = inProps;
+  return (
+    <AutonomousFooter
+      title={application?.title}
+      version={application?.version}
+      minWidth={minWidth}
+    />
+  );
+};
+
+const NeonFooterPropTypes = {
+  application: PropTypes.shape({
+    title: PropTypes.string,
+    version: PropTypes.string,
+  }),
   drupalCssLoaded: PropTypes.bool,
   showSkeleton: PropTypes.bool,
   minWidth: PropTypes.string,
 };
+
+DefaultFooter.propTypes = NeonFooterPropTypes;
+NeonFooter.propTypes = NeonFooterPropTypes;
 
 export default NeonFooter;

@@ -1,5 +1,5 @@
 import React, { act } from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import '../../../../__mocks__/ajax';
 import '../../../../__mocks__/NeonPageAssetsContext';
@@ -84,5 +84,20 @@ describe('NeonHeader', () => {
       tree = render(<MockTheme><NeonHeader drupalCssLoaded /></MockTheme>);
     });
     expect(tree).toMatchSnapshot();
+  });
+  test('renders the autonomous header in place of the Drupal header for the autonomous profile', () => {
+    window.NEON_SERVER_DATA = { NeonProfile: 'autonomous' };
+    try {
+      render(
+        <MockTheme>
+          <NeonHeader application={{ title: 'Test Application', href: '/test' }} />
+        </MockTheme>,
+      );
+      const link = screen.getByRole('link', { name: 'Test Application' });
+      expect(link.getAttribute('href')).toBe('/test');
+      expect(screen.queryByText('MOCK-FALLBACK-DRUPAL-HEADER-HTML')).toBeNull();
+    } finally {
+      delete window.NEON_SERVER_DATA;
+    }
   });
 });

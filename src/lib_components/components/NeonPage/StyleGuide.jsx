@@ -38,6 +38,33 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const propRows = [
+  // application
+  {
+    name: 'application',
+    type: 'object',
+    default: 'null',
+    examples: (
+      <CodeBlock>
+        {`
+{
+  title: 'Portal Core Components',
+  href: '/core-components',
+  version: '3.1.0',
+  icon: WidgetsIcon,
+}
+        `}
+      </CodeBlock>
+    ),
+    description: (
+      <p>
+        Identifies the application in the header and footer that replace the default header and
+        footer when the autonomous NEON profile is applied. All properties are
+        optional: <tt>title</tt> defaults to the application name, <tt>href</tt> to the router
+        base home path, <tt>version</tt> to the application version and <tt>icon</tt> to a
+        generic application icon.
+      </p>
+    ),
+  },
   // breadcrumbHomeHref
   {
     name: 'breadcrumbHomeHref',
@@ -762,6 +789,13 @@ const notification = 'Here is a sample NeonPage notification with a <a href="htt
       <DocBlock>
         By default NeonPage will pull Header and Footer content from the NeonScience.org Drupal
         site. If the fetch fails then core components has a cached copy to use instead.
+      </DocBlock>
+      <DocBlock>
+        When the autonomous NEON profile is applied, a self-contained header and footer are
+        rendered in place of the default content. The header is titled with the application and
+        provides a navigation drawer linking to the application, while the footer labels the
+        application name and version. Use the <tt>application</tt> prop to identify the
+        application.
       </DocBlock>
       <DocBlock>
         NeonPage can also optionally render an entirely custom header or footer using

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/NeonPageAssetsContext';
@@ -71,5 +71,20 @@ describe('NeonFooter', () => {
     }]);
     const tree = render(<MockTheme><NeonFooter drupalCssLoaded /></MockTheme>);
     expect(tree).toMatchSnapshot();
+  });
+  test('renders the autonomous footer in place of the Drupal footer for the autonomous profile', () => {
+    window.NEON_SERVER_DATA = { NeonProfile: 'autonomous' };
+    try {
+      render(
+        <MockTheme>
+          <NeonFooter application={{ title: 'Test Application', version: '1.2.3' }} />
+        </MockTheme>,
+      );
+      expect(screen.getByText('Test Application')).toBeTruthy();
+      expect(screen.getByText('v1.2.3')).toBeTruthy();
+      expect(screen.queryByText('MOCK-FALLBACK-DRUPAL-FOOTER-HTML')).toBeNull();
+    } finally {
+      delete window.NEON_SERVER_DATA;
+    }
   });
 });

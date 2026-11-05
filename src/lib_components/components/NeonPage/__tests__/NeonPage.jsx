@@ -1,5 +1,5 @@
 import React, { act } from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 import MockTheme from '../../../../__mocks__/MockTheme';
 import '../../../../__mocks__/ajax';
@@ -249,6 +249,30 @@ describe('NeonPage', () => {
       </MockTheme>
     );
     expect(tree).toMatchSnapshot();
+  });
+  test('renders the application in the autonomous header and footer for the autonomous profile', async () => {
+    window.NEON_SERVER_DATA = { NeonProfile: 'autonomous' };
+    try {
+      await act(async () => {
+        render(
+          <MockTheme>
+            <NeonPage
+              title="Title"
+              application={{ title: 'Test Application', href: '/test', version: '1.2.3' }}
+            >
+              <div>content</div>
+            </NeonPage>
+          </MockTheme>
+        );
+      });
+      const header = screen.getByRole('banner');
+      expect(within(header).getByRole('link', { name: 'Test Application' })).toBeTruthy();
+      const footer = screen.getByRole('contentinfo');
+      expect(within(footer).getByText('Test Application')).toBeTruthy();
+      expect(within(footer).getByText('v1.2.3')).toBeTruthy();
+    } finally {
+      delete window.NEON_SERVER_DATA;
+    }
   });
   test('NeonErrorPage', async () => {
     const error = {

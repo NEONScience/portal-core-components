@@ -21,6 +21,7 @@ import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import NeonAuthContext from '../NeonContext/NeonAuthContext';
 import NeonPageAssetsContext, { FETCH_STATUS } from '../NeonContext/NeonPageAssetsContext';
 import ApplicationMenu from './ApplicationMenu';
+import AutonomousHeader from './AutonomousHeader';
 import HeaderSearch, { SEARCH_BOX_MEDIA_QUERY, SEARCH_TOGGLE_MEDIA_QUERY } from './HeaderSearch';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
@@ -428,7 +429,7 @@ const defaultProps = {
   minWidth: undefined,
 };
 
-const NeonHeader = (inProps) => {
+const DefaultHeader = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
   const {
     ref: headerRef,
@@ -690,13 +691,41 @@ const NeonHeader = (inProps) => {
   );
 };
 
-NeonHeader.propTypes = {
+// The autonomous profile replaces the default header with the autonomous header
+const NeonHeader = (inProps) => {
+  if (!NeonEnvironment.isAutonomousProfile()) {
+    return <DefaultHeader {...inProps} />;
+  }
+  const { ref, application, minWidth } = inProps;
+  return (
+    <AutonomousHeader
+      ref={ref}
+      title={application?.title}
+      href={application?.href}
+      icon={application?.icon}
+      minWidth={minWidth}
+    />
+  );
+};
+
+const NeonHeaderPropTypes = {
   ref: PropTypes.element,
+  application: PropTypes.shape({
+    title: PropTypes.string,
+    href: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+    ]),
+  }),
   drupalCssLoaded: PropTypes.bool,
   unstickyDrupalHeader: PropTypes.bool,
   showSkeleton: PropTypes.bool,
   customizeAuthContainer: PropTypes.bool,
   minWidth: PropTypes.string,
 };
+
+DefaultHeader.propTypes = NeonHeaderPropTypes;
+NeonHeader.propTypes = NeonHeaderPropTypes;
 
 export default NeonHeader;
