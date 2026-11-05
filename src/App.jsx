@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import HomeIcon from '@mui/icons-material/Home';
 import BasicComponentsIcon from '@mui/icons-material/ViewModule';
+import ApplicationIcon from '@mui/icons-material/WidgetsRounded';
 
 import NeonPage from '@/components/NeonPage/NeonPage';
 import NeonRouter from '@/components/NeonRouter/NeonRouter';
@@ -382,6 +383,12 @@ const sidebarLinks = [
   },
 ];
 
+// Identifies the application in the autonomous profile header and footer
+const application = {
+  title: 'Portal Core Components',
+  icon: ApplicationIcon,
+};
+
 const App = () => {
   let sidebarSubtitle = null;
   const appVersion = NeonEnvironment.getReactAppVersion();
@@ -393,6 +400,7 @@ const App = () => {
       <NeonThemeProvider>
         <NeonPage
           title="NEON Data Portal Core Components"
+          application={application}
           outerPageContainerMaxWidth="3000px"
           sidebarSubtitle={sidebarSubtitle}
           sidebarLinks={sidebarLinks}
