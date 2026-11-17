@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "download-progress",
+  "main": "./DownloadProgress.tsx",
+  "module": "./DownloadProgress.js"
+}

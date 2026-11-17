@@ -7,11 +7,12 @@ import uniqueId from 'lodash/uniqueId';
 
 import { COLORS } from '../Theme/Theme';
 
-import { CELL_ATTRS } from './AvailabilitySvgComponents';
+import { getCellAttrs, createStripeColumnGetter } from './AvailabilitySvgComponents';
 import {
   SVG,
   TIME,
   SVG_STYLES,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
   calcBasicRollupStatus,
 } from './AvailabilityUtils';
 
@@ -37,6 +38,8 @@ import {
  *       parent to set state for dateRange
  * * @param {boolean} selectionEnabled Whether to hook up interactions to allow
  *       user selection of sites
+ * * @param {string} colorScheme Color scheme to draw cells in, one of
+ *       AVAILABILITY_COLOR_SCHEMES (defaults to DEFAULT_AVAILABILITY_COLOR_SCHEME)
  */
 export default function BasicAvailabilityGrid(config) {
   /**
@@ -54,6 +57,7 @@ export default function BasicAvailabilityGrid(config) {
     dateRange = { value: [], validValues: [TIME.MIN_YEAR_MONTH, TIME.MAX_YEAR_MONTH] },
     setDateRangeValue = () => {},
     selectionEnabled = true,
+    colorScheme = DEFAULT_AVAILABILITY_COLOR_SCHEME,
   } = config;
 
   /**
@@ -565,29 +569,49 @@ export default function BasicAvailabilityGrid(config) {
      SVG: Row Data
   */
   const dataG = dragContentG.append('g').attr('class', 'dataG');
+  // Stripes of striped cells (e.g. provisional) are drawn over the cells, see CELL_STRIPES
+  const stripesG = dragContentG.append('g').attr('class', 'stripesG');
   const dataMasksG = svg.append('g').attr('class', 'dataMasksG');
-  const redrawData = () => {
-    // Click/drag masks
-    dataMasksG.selectAll('rect')
-      .data(rowKeys)
-      .join('rect')
-      .attr('x', getLabelWidth())
-      .attr('y', (d, idx) => (
-        (SVG.CELL_PADDING / 2) + (rowCount - idx) * (SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      ))
-      .attr('width', svgWidth - getLabelWidth())
-      .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      .attr('fill', 'transparent')
-      .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
-      .style('outline', 'none')
-      .on('mouseover', (event, d) => rowHighlightHover(d))
-      .on('focus', (event, d) => rowHighlightHover(d))
-      .on('mouseout', (event, d) => rowHighlightReset(true))
-      .on('blur', (event, d) => rowHighlightReset(true))
-      .on('click', selectionEnabled && setSitesValue ? (event, d) => {
-        SVG_STYLES.touchRipple(select(event.currentTarget), 15);
-        setTimeout(() => toggleSelection(d), 15);
-      } : (event, d) => {});
+  const cellAttrsByStatus = getCellAttrs(colorScheme);
+  const getStripeColumns = createStripeColumnGetter({
+    rowCount,
+    getStatus: (rowIdx, month) => calcBasicRollupStatus(data.rows[rowKeys[rowIdx]]?.[month]),
+    getMonthX: getYearMonthStartX,
+    getRowY,
+    colorScheme,
+  });
+  let prevMonthsKey = '';
+  const redrawData = (force = true) => {
+    const monthsInView = getYearMonthsInView(svgWidth, getTimeOffset());
+    const monthsKey = monthsInView.length
+      ? `${monthsInView[0]}:${monthsInView[monthsInView.length - 1]}`
+      : 'empty';
+    if (!force && monthsKey === prevMonthsKey) { return; }
+    prevMonthsKey = monthsKey;
+
+    if (force) {
+      // Click/drag masks
+      dataMasksG.selectAll('rect')
+        .data(rowKeys)
+        .join('rect')
+        .attr('x', getLabelWidth())
+        .attr('y', (d, idx) => (
+          (SVG.CELL_PADDING / 2) + (rowCount - idx) * (SVG.CELL_HEIGHT + SVG.CELL_PADDING)
+        ))
+        .attr('width', svgWidth - getLabelWidth())
+        .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
+        .attr('fill', 'transparent')
+        .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
+        .style('outline', 'none')
+        .on('mouseover', (event, d) => rowHighlightHover(d))
+        .on('focus', (event, d) => rowHighlightHover(d))
+        .on('mouseout', (event, d) => rowHighlightReset(true))
+        .on('blur', (event, d) => rowHighlightReset(true))
+        .on('click', selectionEnabled && setSitesValue ? (event, d) => {
+          SVG_STYLES.touchRipple(select(event.currentTarget), 15);
+          setTimeout(() => toggleSelection(d), 15);
+        } : (event, d) => {});
+    }
     // Cells
     dataG.selectAll('g')
       .data(rowKeys)
@@ -595,28 +619,34 @@ export default function BasicAvailabilityGrid(config) {
       .attr('transform', getRowTranslation)
       .each((rowKey, rowIdx, gNodes) => {
         const rowData = data.rows[rowKey];
-        const getCellAttr = (month, attr) => {
-          const status = calcBasicRollupStatus(rowData[month]);
-          return (
-            !CELL_ATTRS[status]
-              ? CELL_ATTRS['not available'][attr] || null
-              : CELL_ATTRS[status][attr] || null
-          );
-        };
         select(gNodes[rowIdx])
           .selectAll('rect')
-          .data(() => getYearMonthsInView(svgWidth, getTimeOffset()))
-          .join('rect')
-          .attr('cursor', 'pointer')
-          .attr('x', (month) => getYearMonthStartX(month) + (getCellAttr(month, 'nudge') || 0))
-          .attr('y', (month) => getCellAttr(month, 'nudge') || 0)
-          .attr('rx', `${SVG.CELL_RX}px`)
-          .attr('width', (month) => getCellAttr(month, 'width'))
-          .attr('height', (month) => getCellAttr(month, 'height'))
-          .attr('fill', (month) => getCellAttr(month, 'fill'))
-          .attr('stroke', (month) => getCellAttr(month, 'stroke'))
-          .attr('stroke-width', (month) => getCellAttr(month, 'strokeWidth'));
+          .data(monthsInView, (month) => month)
+          .join((enter) => enter
+            .append('rect')
+            .each((month, idx, rectNodes) => {
+              const status = calcBasicRollupStatus(rowData[month]);
+              const cellAttrs = cellAttrsByStatus[status] || cellAttrsByStatus['not available'];
+              const nudge = cellAttrs.nudge || 0;
+              select(rectNodes[idx])
+                .attr('cursor', 'pointer')
+                .attr('x', getYearMonthStartX(month) + nudge)
+                .attr('y', nudge)
+                .attr('rx', `${SVG.CELL_RX}px`)
+                .attr('width', cellAttrs.width || null)
+                .attr('height', cellAttrs.height || null)
+                .attr('fill', cellAttrs.fill || null)
+                .attr('stroke', cellAttrs.stroke || null)
+                .attr('stroke-width', cellAttrs.strokeWidth || null);
+            }));
       });
+    // Cell stripes, one path for each month in view and stripe fill
+    stripesG.selectAll('path')
+      .data(monthsInView.flatMap(getStripeColumns), (column) => column.key)
+      .join((enter) => enter
+        .append('path')
+        .attr('fill', (column) => column.fill)
+        .attr('d', (column) => column.d));
   };
 
   /**
@@ -796,7 +826,7 @@ export default function BasicAvailabilityGrid(config) {
     })
     .on('drag', (event, d) => {
       setTimeOffset(getTimeOffset() + event.dx);
-      redrawData();
+      redrawData(false);
       redrawDateRangeHandleMasks();
     })
     .on('end', (event, d) => {

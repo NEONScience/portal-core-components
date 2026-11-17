@@ -15,28 +15,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
         >
           <defs>
             <pattern
-              height="3"
-              id="availableProvisionalPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#e1e3ea"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
               height="1"
               id="mixedAvailableProvisionalPattern"
               patternContentUnits="userSpaceOnUse"
@@ -45,46 +23,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               x="0"
               y="0"
             >
-              <polygon
+              <rect
                 fill="#e1e3ea"
                 fill-opacity="0.25"
-                points="0,0 0,1 1,1 1,0"
+                height="12"
+                width="7"
+                x="0"
+                y="0"
               />
-              <line
+              <path
+                d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
                 stroke="#002c77"
                 stroke-linecap="square"
                 stroke-width="1.00"
-                x1="3.46"
-                x2="7.00"
-                y1="0.00"
-                y2="3.54"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="0.07"
-                y2="7.07"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="3.61"
-                y2="10.61"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="4.85"
-                y1="7.15"
-                y2="12.00"
               />
               <polygon
                 fill="#002c77"
@@ -92,69 +43,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
               />
             </pattern>
             <pattern
-              height="3"
-              id="beingProcessedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
-              id="delayedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#f8bb32"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
+              height="4.24"
               id="partialSelectionPattern"
-              patternTransform="rotate(45)"
               patternUnits="userSpaceOnUse"
-              width="7"
+              width="4.24"
             >
-              <rect
-                fill="#5ca6e3"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
               <rect
                 fill="#b8d8f4"
-                height="1.75"
-                width="7"
+                height="4.24"
+                width="4.24"
                 x="0"
-                y="1.25"
+                y="0"
+              />
+              <path
+                d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+                fill="#5ca6e3"
               />
             </pattern>
             <pattern
@@ -260,7 +163,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -274,7 +177,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
@@ -577,7 +480,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -585,7 +488,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -970,28 +873,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -1000,46 +881,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -1047,69 +901,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -1215,7 +1021,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -1229,7 +1035,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
@@ -1532,7 +1338,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -1540,7 +1346,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with expli
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -1982,28 +1788,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
         >
           <defs>
             <pattern
-              height="3"
-              id="availableProvisionalPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#e1e3ea"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
               height="1"
               id="mixedAvailableProvisionalPattern"
               patternContentUnits="userSpaceOnUse"
@@ -2012,46 +1796,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               x="0"
               y="0"
             >
-              <polygon
+              <rect
                 fill="#e1e3ea"
                 fill-opacity="0.25"
-                points="0,0 0,1 1,1 1,0"
+                height="12"
+                width="7"
+                x="0"
+                y="0"
               />
-              <line
+              <path
+                d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
                 stroke="#002c77"
                 stroke-linecap="square"
                 stroke-width="1.00"
-                x1="3.46"
-                x2="7.00"
-                y1="0.00"
-                y2="3.54"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="0.07"
-                y2="7.07"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="3.61"
-                y2="10.61"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="4.85"
-                y1="7.15"
-                y2="12.00"
               />
               <polygon
                 fill="#002c77"
@@ -2059,69 +1816,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
               />
             </pattern>
             <pattern
-              height="3"
-              id="beingProcessedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
-              id="delayedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#f8bb32"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
+              height="4.24"
               id="partialSelectionPattern"
-              patternTransform="rotate(45)"
               patternUnits="userSpaceOnUse"
-              width="7"
+              width="4.24"
             >
-              <rect
-                fill="#5ca6e3"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
               <rect
                 fill="#b8d8f4"
-                height="1.75"
-                width="7"
+                height="4.24"
+                width="4.24"
                 x="0"
-                y="1.25"
+                y="0"
+              />
+              <path
+                d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+                fill="#5ca6e3"
               />
             </pattern>
             <pattern
@@ -2227,7 +1936,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -2241,7 +1950,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
@@ -2544,7 +2253,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -2552,7 +2261,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -2937,28 +2646,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -2967,46 +2654,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -3014,69 +2674,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -3182,7 +2794,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -3196,7 +2808,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
@@ -3499,7 +3111,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -3507,7 +3119,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with no pr
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -3949,28 +3561,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
         >
           <defs>
             <pattern
-              height="3"
-              id="availableProvisionalPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#e1e3ea"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
               height="1"
               id="mixedAvailableProvisionalPattern"
               patternContentUnits="userSpaceOnUse"
@@ -3979,46 +3569,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
               x="0"
               y="0"
             >
-              <polygon
+              <rect
                 fill="#e1e3ea"
                 fill-opacity="0.25"
-                points="0,0 0,1 1,1 1,0"
+                height="12"
+                width="7"
+                x="0"
+                y="0"
               />
-              <line
+              <path
+                d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
                 stroke="#002c77"
                 stroke-linecap="square"
                 stroke-width="1.00"
-                x1="3.46"
-                x2="7.00"
-                y1="0.00"
-                y2="3.54"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="0.07"
-                y2="7.07"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="3.61"
-                y2="10.61"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="4.85"
-                y1="7.15"
-                y2="12.00"
               />
               <polygon
                 fill="#002c77"
@@ -4026,69 +3589,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
               />
             </pattern>
             <pattern
-              height="3"
-              id="beingProcessedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
-              id="delayedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#f8bb32"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
+              height="4.24"
               id="partialSelectionPattern"
-              patternTransform="rotate(45)"
               patternUnits="userSpaceOnUse"
-              width="7"
+              width="4.24"
             >
-              <rect
-                fill="#5ca6e3"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
               <rect
                 fill="#b8d8f4"
-                height="1.75"
-                width="7"
+                height="4.24"
+                width="4.24"
                 x="0"
-                y="1.25"
+                y="0"
+              />
+              <path
+                d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+                fill="#5ca6e3"
               />
             </pattern>
             <pattern
@@ -4339,28 +3854,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -4369,46 +3862,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -4416,69 +3882,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with selec
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -4786,28 +4204,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
         >
           <defs>
             <pattern
-              height="3"
-              id="availableProvisionalPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#e1e3ea"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
               height="1"
               id="mixedAvailableProvisionalPattern"
               patternContentUnits="userSpaceOnUse"
@@ -4816,46 +4212,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               x="0"
               y="0"
             >
-              <polygon
+              <rect
                 fill="#e1e3ea"
                 fill-opacity="0.25"
-                points="0,0 0,1 1,1 1,0"
+                height="12"
+                width="7"
+                x="0"
+                y="0"
               />
-              <line
+              <path
+                d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
                 stroke="#002c77"
                 stroke-linecap="square"
                 stroke-width="1.00"
-                x1="3.46"
-                x2="7.00"
-                y1="0.00"
-                y2="3.54"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="0.07"
-                y2="7.07"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="3.61"
-                y2="10.61"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="4.85"
-                y1="7.15"
-                y2="12.00"
               />
               <polygon
                 fill="#002c77"
@@ -4863,69 +4232,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
               />
             </pattern>
             <pattern
-              height="3"
-              id="beingProcessedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
-              id="delayedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#f8bb32"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
+              height="4.24"
               id="partialSelectionPattern"
-              patternTransform="rotate(45)"
               patternUnits="userSpaceOnUse"
-              width="7"
+              width="4.24"
             >
-              <rect
-                fill="#5ca6e3"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
               <rect
                 fill="#b8d8f4"
-                height="1.75"
-                width="7"
+                height="4.24"
+                width="4.24"
                 x="0"
-                y="1.25"
+                y="0"
+              />
+              <path
+                d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+                fill="#5ca6e3"
               />
             </pattern>
             <pattern
@@ -5031,7 +4352,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -5045,7 +4366,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
@@ -5348,7 +4669,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -5356,7 +4677,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -5741,28 +5062,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -5771,46 +5070,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -5818,69 +5090,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -5986,7 +5210,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -6000,7 +5224,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
@@ -6303,7 +5527,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -6311,7 +5535,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with siteC
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"
@@ -6753,28 +5977,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
         >
           <defs>
             <pattern
-              height="3"
-              id="availableProvisionalPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#e1e3ea"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
               height="1"
               id="mixedAvailableProvisionalPattern"
               patternContentUnits="userSpaceOnUse"
@@ -6783,46 +5985,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               x="0"
               y="0"
             >
-              <polygon
+              <rect
                 fill="#e1e3ea"
                 fill-opacity="0.25"
-                points="0,0 0,1 1,1 1,0"
+                height="12"
+                width="7"
+                x="0"
+                y="0"
               />
-              <line
+              <path
+                d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
                 stroke="#002c77"
                 stroke-linecap="square"
                 stroke-width="1.00"
-                x1="3.46"
-                x2="7.00"
-                y1="0.00"
-                y2="3.54"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="0.07"
-                y2="7.07"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="7.00"
-                y1="3.61"
-                y2="10.61"
-              />
-              <line
-                stroke="#002c77"
-                stroke-linecap="square"
-                stroke-width="1.00"
-                x1="0.00"
-                x2="4.85"
-                y1="7.15"
-                y2="12.00"
               />
               <polygon
                 fill="#002c77"
@@ -6830,69 +6005,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
               />
             </pattern>
             <pattern
-              height="3"
-              id="beingProcessedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#002c77"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
-              id="delayedPattern"
-              patternTransform="rotate(45)"
-              patternUnits="userSpaceOnUse"
-              width="7"
-            >
-              <rect
-                fill="#f8bb32"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
-              <rect
-                fill="#ffffff"
-                height="1.75"
-                width="7"
-                x="0"
-                y="1.25"
-              />
-            </pattern>
-            <pattern
-              height="3"
+              height="4.24"
               id="partialSelectionPattern"
-              patternTransform="rotate(45)"
               patternUnits="userSpaceOnUse"
-              width="7"
+              width="4.24"
             >
-              <rect
-                fill="#5ca6e3"
-                height="1.25"
-                width="7"
-                x="0"
-                y="0"
-              />
               <rect
                 fill="#b8d8f4"
-                height="1.75"
-                width="7"
+                height="4.24"
+                width="4.24"
                 x="0"
-                y="1.25"
+                y="0"
+              />
+              <path
+                d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+                fill="#5ca6e3"
               />
             </pattern>
             <pattern
@@ -6998,7 +6125,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.select-all-sites-button"
                     tabindex="0"
                     type="button"
@@ -7012,7 +6139,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                       data-mui-internal-clone-element="true"
                     >
                       <button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                         data-selenium="map-selection-button"
                         style="margin-left: 8px;"
                         tabindex="0"
@@ -7315,7 +6442,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   style="display: flex; margin-top: 8px;"
                 >
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.all-years-button"
                     tabindex="0"
                     type="button"
@@ -7323,7 +6450,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     Select All Years
                   </button>
                   <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                     data-selenium="data-product-availability.latest-year-button"
                     style="margin-left: 8px;"
                     tabindex="0"
@@ -7705,28 +6832,6 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -7735,46 +6840,19 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -7782,69 +6860,21 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -7950,7 +6980,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.select-all-sites-button"
                   tabindex="0"
                   type="button"
@@ -7964,7 +6994,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                     data-mui-internal-clone-element="true"
                   >
                     <button
-                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                       data-selenium="map-selection-button"
                       style="margin-left: 8px;"
                       tabindex="0"
@@ -8267,7 +7297,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                 style="display: flex; margin-top: 8px;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.all-years-button"
                   tabindex="0"
                   type="button"
@@ -8275,7 +7305,7 @@ exports[`DataProductAvailability - BasicAvailabilityInterface renders with ungro
                   Select All Years
                 </button>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-47gfdb-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeSmall MuiButton-colorPrimary css-1t50z2v-MuiButtonBase-root-MuiButton-root"
                   data-selenium="data-product-availability.latest-year-button"
                   style="margin-left: 8px;"
                   tabindex="0"

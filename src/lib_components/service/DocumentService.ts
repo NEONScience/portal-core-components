@@ -202,7 +202,7 @@ const DocumentService: IDocumentService = {
     if (!Number.isInteger(bytes) || bytes < 0) {
       return '0.000 B';
     }
-    const scales: string[] = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    const scales: string[] = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
     const log: number = Math.log(bytes) / Math.log(1024);
     const scale: number = Math.floor(log);
     const precision: number = Math.floor(3 - ((log - scale) * 3));

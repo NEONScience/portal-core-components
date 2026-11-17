@@ -2,6 +2,7 @@ import { describe, expect, test } from '@jest/globals';
 
 import {
   ActionCreator,
+  getAggregationPeriodType,
   getTestableItems,
   isReleaseLoginRequired,
   WindRoseAggregation,
@@ -13,6 +14,9 @@ import {
   WindRoseDataFilesInfo,
   WindRoseQualityFilter,
 } from '../windRoseUtil';
+import { getEmptyTimeSeries } from '../windRoseTimeSeriesUtil';
+import { WindRosePeriodType } from '../windRosePeriodUtil';
+import { estimateWindRoseDataSize, getEmptyMonthCache } from '../windRoseMonthCache';
 import { AsyncStateType } from '../../../types/asyncFlow';
 
 const { getDefaultState, reducer } = getTestableItems();
@@ -79,13 +83,20 @@ const filterBy = (
 
 const JUNE_DAYS = ['2026-06-01', '2026-06-02', '2026-06-15', '2026-06-30'];
 
+const EMPTY_DATA = {
+  monthly: null,
+  daily: {},
+  days: [],
+  timeSeries: getEmptyTimeSeries(),
+};
+
 describe('WindRoseViewer - Context reducer', () => {
   test('defaults to the monthly aggregation', () => {
     const state = getDefaultState();
     expect(state.aggregation).toBe(WindRoseAggregation.MONTHLY);
     expect(state.selectedDay).toBeNull();
     expect(state.isPlaying).toBe(false);
-    expect(state.data).toEqual({ monthly: null, daily: {}, days: [] });
+    expect(state.data).toEqual(EMPTY_DATA);
   });
 
   test('stores the monthly and daily wind roses of a fetched month', () => {
@@ -94,6 +105,8 @@ describe('WindRoseViewer - Context reducer', () => {
     expect(state.data.monthly?.samples).toBe(JUNE_DAYS.length);
     expect(state.data.days).toEqual(JUNE_DAYS);
     expect(state.data.daily['2026-06-15'].samples).toBe(1);
+    expect(state.data.timeSeries.points.map((point) => point.samples))
+      .toEqual(JUNE_DAYS.map(() => 1));
     expect(state.selectedDay).toBe('2026-06-01');
     expect(state.aggregation).toBe(WindRoseAggregation.MONTHLY);
     expect(state.query.months).toEqual(['2026-06']);
@@ -122,8 +135,10 @@ describe('WindRoseViewer - Context reducer', () => {
     expect(all.data.days)
       .toEqual(['2026-06-01', '2026-06-02', '2026-06-15', '2026-06-20', '2026-06-30']);
     expect(all.data.monthly?.samples).toBe(JUNE_DAYS.length + 1);
+    expect(all.data.timeSeries.points).toHaveLength(JUNE_DAYS.length + 1);
     const validated = filterBy(all, WindRoseQualityFilter.VALIDATED);
     expect(validated.qualityFilter).toBe(WindRoseQualityFilter.VALIDATED);
+    expect(validated.data.timeSeries.points).toHaveLength(JUNE_DAYS.length);
     expect(all.data).toEqual(fulfilled.data);
   });
 
@@ -213,7 +228,7 @@ describe('WindRoseViewer - Context reducer', () => {
       ),
     );
     expect(failed.fetchState.data?.status).toBe(AsyncStateType.FAILED);
-    expect(failed.data).toEqual({ monthly: null, daily: {}, days: [] });
+    expect(failed.data).toEqual(EMPTY_DATA);
     expect(failed.dataSets[WindRoseQualityFilter.ALL]).toEqual(failed.data);
     expect(failed.query.months).toEqual(['2026-07']);
   });
@@ -255,6 +270,150 @@ describe('WindRoseViewer - Context reducer', () => {
       ActionCreator.reinitialize(product.productCode, undefined),
     );
     expect(reinitialized.isViewerLimitedMode).toBeNull();
+  });
+});
+
+describe('WindRoseViewer - Context seasonal and annual aggregations', () => {
+  const KEY = 'CPER|000.010';
+  const monthData = buildWindRoseData([{ data: [] }], dataFilesInfo);
+
+  test('span the season or year containing the month', () => {
+    expect(getAggregationPeriodType(WindRoseAggregation.SEASONAL)).toBe(WindRosePeriodType.SEASON);
+    expect(getAggregationPeriodType(WindRoseAggregation.ANNUAL)).toBe(WindRosePeriodType.YEAR);
+    expect(getAggregationPeriodType(WindRoseAggregation.MONTHLY)).toBeNull();
+    expect(getAggregationPeriodType(WindRoseAggregation.DAILY)).toBeNull();
+    const seasonal = reducer(
+      fulfill(getInitialState(), '2026-06', JUNE_DAYS),
+      ActionCreator.setAggregation(WindRoseAggregation.SEASONAL),
+    );
+    expect(seasonal.aggregation).toBe(WindRoseAggregation.SEASONAL);
+  });
+
+  test('cache each month fetched for the site and positions', () => {
+    const june = fulfill(getInitialState(), '2026-06', JUNE_DAYS);
+    expect(getDefaultState().monthCache).toEqual(getEmptyMonthCache());
+    expect(june.monthCache.key).toBe(KEY);
+    expect(Object.keys(june.monthCache.months)).toEqual(['2026-06']);
+    expect(june.monthCache.months['2026-06'].dataSets[WindRoseQualityFilter.ALL].days)
+      .toEqual(JUNE_DAYS);
+    const july = fulfill(june, '2026-07', ['2026-07-01']);
+    expect(Object.keys(july.monthCache.months).sort()).toEqual(['2026-06', '2026-07']);
+    // The cache is for one site and positions at a time
+    const otherSite = reducer(july, ActionCreator.fetchWindRoseFullfilled(
+      buildWindRoseData([{ data: [] }], dataFilesInfo),
+      { ...getQuery('2026-07'), sites: ['ONAQ'] },
+    ));
+    expect(otherSite.monthCache.key).toBe('ONAQ|000.010');
+    expect(Object.keys(otherSite.monthCache.months)).toEqual(['2026-07']);
+  });
+
+  test('fetch the months of the period that are not cached', () => {
+    const june = reducer(
+      fulfill(getInitialState(), '2026-06', JUNE_DAYS),
+      ActionCreator.setAggregation(WindRoseAggregation.SEASONAL),
+    );
+    const fetching = reducer(june, ActionCreator.fetchPeriod(
+      product.productCode,
+      undefined,
+      'CPER',
+      [{ horizontal: '000', vertical: '010' }],
+      KEY,
+      ['2026-07', '2026-08'],
+    ));
+    expect(fetching.periodFetch).toEqual({ key: KEY, pending: ['2026-07', '2026-08'] });
+    const july = reducer(
+      fetching,
+      ActionCreator.fetchPeriodMonthFulfilled(KEY, '2026-07', monthData),
+    );
+    expect(july.periodFetch.pending).toEqual(['2026-08']);
+    expect(july.monthCache.months['2026-07']).toBe(monthData);
+    const august = reducer(july, ActionCreator.fetchPeriodMonthFailed(KEY, '2026-08', 'error'));
+    expect(august.periodFetch.pending).toEqual([]);
+    expect(august.monthCache.failed).toEqual(['2026-08']);
+    expect(Object.keys(august.monthCache.months).sort()).toEqual(['2026-06', '2026-07']);
+    // Fetching a month that failed before clears the failure
+    expect(fulfill(august, '2026-08', ['2026-08-01']).monthCache.failed).toEqual([]);
+  });
+
+  test('ignore months fetched for a previous site or positions', () => {
+    const june = fulfill(getInitialState(), '2026-06', JUNE_DAYS);
+    const fetching = reducer(june, ActionCreator.fetchPeriod(
+      product.productCode,
+      undefined,
+      'ONAQ',
+      [],
+      'ONAQ',
+      ['2026-07'],
+    ));
+    const fulfilled = reducer(
+      fetching,
+      ActionCreator.fetchPeriodMonthFulfilled('ONAQ', '2026-07', monthData),
+    );
+    expect(Object.keys(fulfilled.monthCache.months)).toEqual(['2026-06']);
+    expect(fulfilled.periodFetch.pending).toEqual([]);
+    const failed = reducer(fetching, ActionCreator.fetchPeriodMonthFailed('ONAQ', '2026-07', 'x'));
+    expect(failed.monthCache.failed).toEqual([]);
+  });
+
+  // Fulfills a fetch for a month with an observation on each of its first four days
+  const fulfillMonth = (state: WindRoseViewerState, month: string): WindRoseViewerState => (
+    fulfill(state, month, ['01', '02', '03', '04'].map((day: string) => `${month}-${day}`))
+  );
+  // Memory taken by the data of a month fulfilled by fulfillMonth
+  const MONTH_BYTES = estimateWindRoseDataSize(
+    fulfillMonth(getInitialState(), '2026-01').monthCache.months['2026-01'],
+  );
+  const withMaxCachedBytes = (maxBytes: number): WindRoseViewerState => ({
+    ...getInitialState(),
+    monthCache: getEmptyMonthCache(maxBytes),
+  });
+  const getCachedMonths = (state: WindRoseViewerState): string[] => (
+    Object.keys(state.monthCache.months).sort()
+  );
+
+  test('evict the least recently used months when over the most memory allowed', () => {
+    expect(MONTH_BYTES).toBeGreaterThan(0);
+    // Room for two months
+    let state = fulfillMonth(withMaxCachedBytes(MONTH_BYTES * 2.5), '2026-01');
+    state = fulfillMonth(state, '2026-02');
+    expect(getCachedMonths(state)).toEqual(['2026-01', '2026-02']);
+    state = fulfillMonth(state, '2026-03');
+    expect(getCachedMonths(state)).toEqual(['2026-02', '2026-03']);
+    // Viewing February again leaves March the least recently used
+    state = fulfillMonth(state, '2026-02');
+    state = fulfillMonth(state, '2026-04');
+    expect(getCachedMonths(state)).toEqual(['2026-02', '2026-04']);
+  });
+
+  test('never evict the months of the season or year viewed', () => {
+    const getMonthData = (month: string) => (
+      fulfillMonth(getInitialState(), month).monthCache.months[month]
+    );
+    // Room for one month
+    let state = reducer(
+      fulfillMonth(withMaxCachedBytes(MONTH_BYTES * 1.5), '2026-06'),
+      ActionCreator.setAggregation(WindRoseAggregation.SEASONAL),
+    );
+    ['2026-07', '2026-08'].forEach((month: string) => {
+      state = reducer(
+        state,
+        ActionCreator.fetchPeriodMonthFulfilled(KEY, month, getMonthData(month)),
+      );
+    });
+    expect(getCachedMonths(state)).toEqual(['2026-06', '2026-07', '2026-08']);
+    // Once no longer viewed, the months of the season can be evicted
+    state = fulfillMonth(
+      reducer(state, ActionCreator.setAggregation(WindRoseAggregation.MONTHLY)),
+      '2026-09',
+    );
+    expect(getCachedMonths(state)).toEqual(['2026-09']);
+  });
+
+  test('are cleared when reinitialized', () => {
+    const june = fulfill(getInitialState(), '2026-06', JUNE_DAYS);
+    const reinitialized = reducer(june, ActionCreator.reinitialize(product.productCode, undefined));
+    expect(reinitialized.monthCache.months).toEqual({});
+    expect(reinitialized.periodFetch).toEqual({ key: null, pending: [] });
   });
 });
 

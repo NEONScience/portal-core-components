@@ -10,7 +10,7 @@ import NeonPage from '@/components/NeonPage/NeonPage';
 import NeonRouter from '@/components/NeonRouter/NeonRouter';
 import NeonEnvironment from '@/components/NeonEnvironment/NeonEnvironment';
 import NeonThemeProvider from '@/components/Theme/NeonThemeProvider';
-import { isStringNonEmpty } from '@/util/typeUtil';
+import { isStringNonEmpty, exists } from '@/util/typeUtil';
 
 import Home from './components/Home';
 
@@ -35,11 +35,19 @@ const CustomButtonStyleGuide = React.lazy(
 const DataProductAvailabilityStyleGuide = React.lazy(
   () => import('./lib_components/components/DataProductAvailability/StyleGuide'),
 );
+const EnhancedDataProductAvailabilityStyleGuide = React.lazy(
+  () => import(
+    './lib_components/components/DataProductAvailability/EnhancedDataAvailability/StyleGuide',
+  ),
+);
 const DataThemeIconStyleGuide = React.lazy(
   () => import('./lib_components/components/DataThemeIcon/StyleGuide'),
 );
 const DocumentsStyleGuide = React.lazy(
   () => import('./lib_components/components/Documents/StyleGuide'),
+);
+const DownloadDataStyleGuide = React.lazy(
+  () => import('./lib_components/components/DownloadDataDialog/StyleGuide'),
 );
 const DownloadDataButtonStyleGuide = React.lazy(
   () => import('./lib_components/components/DownloadDataButton/StyleGuide'),
@@ -121,6 +129,23 @@ const SuspenseFallback = () => (
   </Grid>
 );
 
+const enhancedDataProductAvailabilityLink = {
+  name: 'Data Product Availability - Enhanced',
+  hash: '#EnhancedDataProductAvailability',
+  component: () => (
+    <Suspense fallback={<SuspenseFallback />}>
+      <EnhancedDataProductAvailabilityStyleGuide />
+    </Suspense>
+  ),
+};
+
+const getEnhancedDataProductAvailabilityLink = () => {
+  if (NeonEnvironment.isAutonomousProfile()) {
+    return enhancedDataProductAvailabilityLink;
+  }
+  return null;
+};
+
 const sidebarLinks = [
   {
     name: 'Home',
@@ -192,6 +217,7 @@ const sidebarLinks = [
       </Suspense>
     ),
   },
+  getEnhancedDataProductAvailabilityLink(),
   {
     name: 'Data Theme Icon',
     hash: '#DataThemeIcon',
@@ -207,6 +233,15 @@ const sidebarLinks = [
     component: () => (
       <Suspense fallback={<SuspenseFallback />}>
         <DocumentsStyleGuide />
+      </Suspense>
+    ),
+  },
+  {
+    name: 'Download Data',
+    hash: '#DownloadData',
+    component: () => (
+      <Suspense fallback={<SuspenseFallback />}>
+        <DownloadDataStyleGuide />
       </Suspense>
     ),
   },
@@ -403,7 +438,7 @@ const App = () => {
           application={application}
           outerPageContainerMaxWidth="3000px"
           sidebarSubtitle={sidebarSubtitle}
-          sidebarLinks={sidebarLinks}
+          sidebarLinks={sidebarLinks.filter((link) => exists(link))}
           sidebarLinksAsStandaloneChildren
           customizeAuthContainer
         >

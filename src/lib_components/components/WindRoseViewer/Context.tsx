@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import {
   of,
+  from,
   forkJoin,
   concat,
   Subject,
@@ -47,6 +48,22 @@ import {
   WindRosePositionOption,
   WindRoseQualityFilter,
 } from './windRoseUtil';
+import { getEmptyTimeSeries, WindSpeedTimeSeries } from './windRoseTimeSeriesUtil';
+import {
+  buildPeriodDataSets,
+  getAvailablePeriodMonths,
+  getMonthCacheKey,
+  getPeriodMonths,
+  WindRosePeriodDataState,
+  WindRosePeriodType,
+} from './windRosePeriodUtil';
+import {
+  cacheMonth,
+  getEmptyMonthCache,
+  markMonthFailed,
+  touchMonths,
+  WindRoseMonthCache,
+} from './windRoseMonthCache';
 import {
   AnyAction,
   Undef,
@@ -71,7 +88,27 @@ import { getUserAgentHeader } from '../../util/requestUtil';
 export enum WindRoseAggregation {
   MONTHLY = 'MONTHLY',
   DAILY = 'DAILY',
+  // The meteorological season containing the selected month, e.g. June to August
+  SEASONAL = 'SEASONAL',
+  // The calendar year containing the selected month
+  ANNUAL = 'ANNUAL',
 }
+
+/**
+ * Gets the period of more than a month an aggregation spans, if any
+ */
+export const getAggregationPeriodType = (
+  aggregation: WindRoseAggregation,
+): Nullable<WindRosePeriodType> => {
+  switch (aggregation) {
+    case WindRoseAggregation.SEASONAL:
+      return WindRosePeriodType.SEASON;
+    case WindRoseAggregation.ANNUAL:
+      return WindRosePeriodType.YEAR;
+    default:
+      return null;
+  }
+};
 
 export interface WindRoseViewerQueryState {
   changeType: Nullable<string>;
@@ -88,6 +125,8 @@ export interface WindRoseViewerDataState {
   daily: Record<string, WindRoseAggregate>;
   // Days with observations, sorted ascending
   days: string[];
+  // Wind speed over time of every observation in the month
+  timeSeries: WindSpeedTimeSeries;
 }
 
 export interface SelectionOption {
@@ -105,6 +144,13 @@ export interface FetchStatusState {
 interface WindRoseViewerFetchState {
   product: Nullable<FetchStatusState>;
   data: Nullable<FetchStatusState>;
+}
+
+interface WindRosePeriodFetchState {
+  // Cache key of the site and positions the months are being fetched for
+  key: Nullable<string>;
+  // Months still being fetched
+  pending: string[];
 }
 
 export interface WindRoseViewerState {
@@ -127,14 +173,28 @@ export interface WindRoseViewerState {
   data: WindRoseViewerDataState;
   // Wind roses of each quality filter, so switching filters needs no refetch
   dataSets: Record<WindRoseQualityFilter, WindRoseViewerDataState>;
+  // Months fetched for the site and positions, so each is only fetched once
+  monthCache: WindRoseMonthCache;
+  // Months being fetched for the seasonal and annual aggregations
+  periodFetch: WindRosePeriodFetchState;
   // Whether the product (and so data) were fetched in limited mode, null until fetched
   isViewerLimitedMode: Nullable<boolean>;
   neonContextState: UnknownRecord;
 }
 
 const getEmptyDataSets = (): Record<WindRoseQualityFilter, WindRoseViewerDataState> => ({
-  [WindRoseQualityFilter.VALIDATED]: { monthly: null, daily: {}, days: [] },
-  [WindRoseQualityFilter.ALL]: { monthly: null, daily: {}, days: [] },
+  [WindRoseQualityFilter.VALIDATED]: {
+    monthly: null,
+    daily: {},
+    days: [],
+    timeSeries: getEmptyTimeSeries(),
+  },
+  [WindRoseQualityFilter.ALL]: {
+    monthly: null,
+    daily: {},
+    days: [],
+    timeSeries: getEmptyTimeSeries(),
+  },
 });
 
 const DEFAULT_STATE: WindRoseViewerState = {
@@ -166,14 +226,43 @@ const DEFAULT_STATE: WindRoseViewerState = {
     monthly: null,
     daily: {},
     days: [],
+    timeSeries: getEmptyTimeSeries(),
   },
   dataSets: getEmptyDataSets(),
+  monthCache: getEmptyMonthCache(),
+  periodFetch: {
+    key: null,
+    pending: [],
+  },
   isViewerLimitedMode: null,
   neonContextState: cloneDeep(NeonContext.DEFAULT_STATE),
 };
 
 const getDefaultState = () => cloneDeep(DEFAULT_STATE);
 const getDefaultFetchProducState = () => cloneDeep(DEFAULT_STATE.fetchState.product);
+
+/**
+ * Gets the months being viewed: the month viewed, and the months of the season or year viewed
+ */
+const getMonthsInUse = (state: WindRoseViewerState): string[] => {
+  const month = state.query.months[0];
+  if (!month) {
+    return [];
+  }
+  const periodType = getAggregationPeriodType(state.aggregation);
+  return periodType ? getPeriodMonths(periodType, month) : [month];
+};
+
+const removePendingMonth = (
+  periodFetch: WindRosePeriodFetchState,
+  key: string,
+  month: string,
+): WindRosePeriodFetchState => (
+  (periodFetch.key !== key) ? periodFetch : {
+    ...periodFetch,
+    pending: periodFetch.pending.filter((pendingMonth: string) => pendingMonth !== month),
+  }
+);
 
 export const LOGIN_REQUIRED_MESSAGE = 'Login required to view release data';
 
@@ -256,6 +345,9 @@ export enum ActionTypes {
   SELECT_DAY = 'SELECT_DAY',
   STEP_DAY = 'STEP_DAY',
   SET_PLAYING = 'SET_PLAYING',
+  FETCH_PERIOD = 'FETCH_PERIOD',
+  FETCH_PERIOD_MONTH_FULFILLED = 'FETCH_PERIOD_MONTH_FULFILLED',
+  FETCH_PERIOD_MONTH_FAILED = 'FETCH_PERIOD_MONTH_FAILED',
 }
 
 export interface StoreFinalizedNeonContextStateAction extends AnyAction {
@@ -288,6 +380,8 @@ interface FetchWindRoseAction extends AnyAction {
   product: UnknownRecord;
   release: Undef<string>;
   query: WindRoseViewerQueryState;
+  // Wind rose data already fetched for the query, which is used rather than fetching it again
+  cached: Nullable<WindRoseData>;
 }
 interface FetchWindRoseWorkingAction extends AnyAction {
   type: typeof ActionTypes.FETCH_WIND_ROSE_WORKING;
@@ -335,6 +429,29 @@ interface SetPlayingAction extends AnyAction {
   type: typeof ActionTypes.SET_PLAYING;
   isPlaying: boolean;
 }
+interface FetchPeriodAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_PERIOD;
+  productCode: string;
+  release: Undef<string>;
+  site: string;
+  positions: WindRosePosition[];
+  // Cache key of the site and positions, see getMonthCacheKey
+  key: string;
+  // Months (YYYY-MM) of the season or year to fetch
+  months: string[];
+}
+interface FetchPeriodMonthFulfilledAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_PERIOD_MONTH_FULFILLED;
+  key: string;
+  month: string;
+  data: WindRoseData;
+}
+interface FetchPeriodMonthFailedAction extends AnyAction {
+  type: typeof ActionTypes.FETCH_PERIOD_MONTH_FAILED;
+  key: string;
+  month: string;
+  error: unknown;
+}
 
 type WindRoseViewerActionTypes = (
   StoreFinalizedNeonContextStateAction
@@ -354,6 +471,9 @@ type WindRoseViewerActionTypes = (
   | SelectDayAction
   | StepDayAction
   | SetPlayingAction
+  | FetchPeriodAction
+  | FetchPeriodMonthFulfilledAction
+  | FetchPeriodMonthFailedAction
   | AnyAction
 );
 
@@ -394,11 +514,13 @@ export const ActionCreator = {
     product: UnknownRecord,
     release: Undef<string>,
     query: WindRoseViewerQueryState,
+    cached: Nullable<WindRoseData> = null,
   ): FetchWindRoseAction => ({
     type: ActionTypes.FETCH_WIND_ROSE,
     product,
     release,
     query,
+    cached,
   }),
   fetchWindRoseWorking: (): FetchWindRoseWorkingAction => ({
     type: ActionTypes.FETCH_WIND_ROSE_WORKING,
@@ -453,6 +575,43 @@ export const ActionCreator = {
     type: ActionTypes.SET_PLAYING,
     isPlaying,
   }),
+  // Fetches the months of a season or year that are not cached, one action per month fulfilled
+  fetchPeriod: (
+    productCode: string,
+    release: Undef<string>,
+    site: string,
+    positions: WindRosePosition[],
+    key: string,
+    months: string[],
+  ): FetchPeriodAction => ({
+    type: ActionTypes.FETCH_PERIOD,
+    productCode,
+    release,
+    site,
+    positions,
+    key,
+    months,
+  }),
+  fetchPeriodMonthFulfilled: (
+    key: string,
+    month: string,
+    data: WindRoseData,
+  ): FetchPeriodMonthFulfilledAction => ({
+    type: ActionTypes.FETCH_PERIOD_MONTH_FULFILLED,
+    key,
+    month,
+    data,
+  }),
+  fetchPeriodMonthFailed: (
+    key: string,
+    month: string,
+    error: unknown,
+  ): FetchPeriodMonthFailedAction => ({
+    type: ActionTypes.FETCH_PERIOD_MONTH_FAILED,
+    key,
+    month,
+    error,
+  }),
 };
 
 export type FetchWindRoseFunc = (
@@ -468,6 +627,7 @@ export const useFetchWindRose = (): FetchWindRoseFunc => {
     product,
     release,
     query,
+    monthCache,
   }: WindRoseViewerState = useStateContext();
   const dispatch: Dispatch<AnyAction> = useDispatchContext();
   return useCallback((
@@ -484,8 +644,70 @@ export const useFetchWindRose = (): FetchWindRoseFunc => {
       months: [...(queryChanges.months || query.months)],
       positions: [...(queryChanges.positions || query.positions)],
     };
-    dispatch(ActionCreator.fetchWindRose(product as UnknownRecord, release, nextQuery));
-  }, [dispatch, product, release, query]);
+    const site = nextQuery.sites[0];
+    const month = nextQuery.months[0];
+    // Months of a season or year that were fetched are not fetched again
+    const isCached = !!site && !!month
+      && (monthCache.key === getMonthCacheKey(site, nextQuery.positions));
+    const cached = isCached ? (monthCache.months[month] || null) : null;
+    dispatch(ActionCreator.fetchWindRose(product as UnknownRecord, release, nextQuery, cached));
+  }, [dispatch, product, release, query, monthCache]);
+};
+
+/**
+ * The season or year being viewed
+ */
+export interface WindRoseViewerPeriodState {
+  type: WindRosePeriodType;
+  // Months of the period with data, sorted ascending
+  months: string[];
+  // Months of the period still being fetched
+  pendingMonths: string[];
+  // Wind roses of the period built from the months fetched so far, for each quality filter
+  dataSets: Record<WindRoseQualityFilter, WindRosePeriodDataState>;
+}
+
+// No cached months, which keeps its identity between renders
+const NO_CACHED_MONTHS: Record<string, WindRoseData> = {};
+
+/**
+ * Gets the season or year being viewed, when viewing the seasonal or annual aggregation
+ */
+export const useWindRoseViewerPeriod = (): Nullable<WindRoseViewerPeriodState> => {
+  const {
+    aggregation,
+    query,
+    monthOptions,
+    monthCache,
+  }: WindRoseViewerState = useStateContext();
+  const type = getAggregationPeriodType(aggregation);
+  const site = query.sites[0] || null;
+  const month = query.months[0] || null;
+  // The cache may still be of the previous site or positions, e.g. when fetching them failed
+  const isCacheOfQuery = !!site && (monthCache.key === getMonthCacheKey(site, query.positions));
+  const cachedMonths = isCacheOfQuery ? monthCache.months : NO_CACHED_MONTHS;
+  const months = useMemo(() => ((type && month)
+    ? getAvailablePeriodMonths(
+      type,
+      month,
+      monthOptions.map((option: SelectionOption): string => option.value),
+    )
+    : []), [type, month, monthOptions]);
+  const dataSets = useMemo(() => (
+    buildPeriodDataSets(cachedMonths, months)
+  ), [cachedMonths, months]);
+  if (!type) {
+    return null;
+  }
+  return {
+    type,
+    months,
+    pendingMonths: months.filter((periodMonth: string): boolean => (
+      !cachedMonths[periodMonth]
+      && !(isCacheOfQuery && monthCache.failed.includes(periodMonth))
+    )),
+    dataSets,
+  };
 };
 
 const reducer = (
@@ -497,6 +719,8 @@ const reducer = (
   let wrfData: WindRoseData;
   let wrFailedAction: FetchWindRoseFailedAction;
   let stepDayAction: StepDayAction;
+  let periodMonthFulfilledAction: FetchPeriodMonthFulfilledAction;
+  let periodMonthFailedAction: FetchPeriodMonthFailedAction;
   switch (action.type) {
     case ActionTypes.STORE_FINALIZED_NEON_CONTEXT_STATE:
       newState.neonContextState = (action as StoreFinalizedNeonContextStateAction).neonContextState;
@@ -559,6 +783,19 @@ const reducer = (
         months: wrfAction.query.months.map((value) => value),
         positions: wrfData.positions.map((value) => value),
       };
+      if (newState.query.sites[0] && newState.query.months[0]) {
+        // The months of the season or year viewed are in use along with the month viewed
+        newState.monthCache = touchMonths(
+          cacheMonth(
+            newState.monthCache,
+            getMonthCacheKey(newState.query.sites[0], newState.query.positions),
+            newState.query.months[0],
+            wrfData,
+            getMonthsInUse(newState),
+          ),
+          getMonthsInUse(newState),
+        );
+      }
       return newState;
     case ActionTypes.FETCH_WIND_ROSE_FAILED:
       wrFailedAction = action as FetchWindRoseFailedAction;
@@ -601,6 +838,7 @@ const reducer = (
       if (newState.aggregation === WindRoseAggregation.DAILY) {
         newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
       }
+      newState.monthCache = touchMonths(newState.monthCache, getMonthsInUse(newState));
       return newState;
     case ActionTypes.SET_QUALITY_FILTER:
       newState.qualityFilter = (action as SetQualityFilterAction).qualityFilter;
@@ -634,6 +872,43 @@ const reducer = (
         newState.selectedDay = resolveSelectedDay(newState.selectedDay, newState.data.days);
       }
       return newState;
+    case ActionTypes.FETCH_PERIOD:
+      newState.periodFetch = {
+        key: (action as FetchPeriodAction).key,
+        pending: [...(action as FetchPeriodAction).months],
+      };
+      return newState;
+    case ActionTypes.FETCH_PERIOD_MONTH_FULFILLED:
+      periodMonthFulfilledAction = action as FetchPeriodMonthFulfilledAction;
+      // Months fetched for a previous site or positions are of no use
+      if (periodMonthFulfilledAction.key === newState.monthCache.key) {
+        newState.monthCache = cacheMonth(
+          newState.monthCache,
+          periodMonthFulfilledAction.key,
+          periodMonthFulfilledAction.month,
+          periodMonthFulfilledAction.data,
+          getMonthsInUse(newState),
+        );
+      }
+      newState.periodFetch = removePendingMonth(
+        newState.periodFetch,
+        periodMonthFulfilledAction.key,
+        periodMonthFulfilledAction.month,
+      );
+      return newState;
+    case ActionTypes.FETCH_PERIOD_MONTH_FAILED:
+      periodMonthFailedAction = action as FetchPeriodMonthFailedAction;
+      newState.monthCache = markMonthFailed(
+        newState.monthCache,
+        periodMonthFailedAction.key,
+        periodMonthFailedAction.month,
+      );
+      newState.periodFetch = removePendingMonth(
+        newState.periodFetch,
+        periodMonthFailedAction.key,
+        periodMonthFailedAction.month,
+      );
+      return newState;
     default:
       break;
   }
@@ -648,6 +923,7 @@ const actionStream$ = new Subject<AnyAction>();
 // Cancellation subjects
 const cancelProduct$ = new Subject<void>();
 const cancelWindRose$ = new Subject<void>();
+const cancelPeriod$ = new Subject<void>();
 
 /**
  * Gets the data endpoint AJAX observable to subscribe to
@@ -691,18 +967,20 @@ const buildFetchProductObservable = (
 };
 
 /**
- * Builds the files AJAX observable to obtain wind rose raw data
- * and variables
- * @param {*} action
- * @param {*} response
- * @param {*} takeUntilOperator
+ * Builds the files AJAX observable to obtain the wind rose data of a month from the data files
+ * listed by the data endpoint
+ * @param response The data endpoint response
+ * @param query The query of the month, whose positions select the data files
+ * @param takeUntilOperator
+ * @param includeVariables Whether to also fetch the variables file
  */
-const buildFilesAjaxObservable = (
-  action: AnyAction,
+const buildWindRoseDataObservable = (
   response: any,
+  query: WindRoseViewerQueryState,
   takeUntilOperator: MonoTypeOperatorFunction<unknown>,
-): Observable<unknown> => {
-  const dataFilesInfo = parseWindRoseDataFiles(response.response.data, action.query);
+  includeVariables = true,
+): Observable<WindRoseData> => {
+  const dataFilesInfo = parseWindRoseDataFiles(response.response.data, query);
   if (!dataFilesInfo
       || (dataFilesInfo.dataFileUrls === null)
       || (dataFilesInfo.dataFileUrls.length <= 0)) {
@@ -726,7 +1004,7 @@ const buildFilesAjaxObservable = (
       catchError(() => of([])),
     ),
   );
-  if (dataFilesInfo.variablesFileUrl) {
+  if (includeVariables && dataFilesInfo.variablesFileUrl) {
     ajaxObservables.push(
       ajax({
         method: 'GET',
@@ -739,7 +1017,7 @@ const buildFilesAjaxObservable = (
     );
   }
   return forkJoin(ajaxObservables).pipe(
-    mergeMap((responses) => {
+    map((responses): WindRoseData => {
       // Parse each data file response
       let dataFilesResponseData: any[] = [];
       const dataResponses: any[] = responses[0] as any[];
@@ -752,22 +1030,10 @@ const buildFilesAjaxObservable = (
           });
         });
       }
-      // Build wind rose data, return the fullfilled action to be dispatched
-      const windRoseData = buildWindRoseData(
-        dataFilesResponseData,
-        dataFilesInfo,
-      );
-      return of(ActionCreator.fetchWindRoseFullfilled(
-        windRoseData,
-        (action as FetchWindRoseAction).query,
-      ));
-    }),
-    catchError((error) => {
-      const message = error.xhr ? error.xhr.response : null;
-      return of(ActionCreator.fetchWindRoseFailed(error, message, (action as FetchWindRoseAction)));
+      return buildWindRoseData(dataFilesResponseData, dataFilesInfo);
     }),
     takeUntilOperator,
-  );
+  ) as Observable<WindRoseData>;
 };
 
 /**
@@ -804,8 +1070,17 @@ const buildDataApiObservable = (
     ...sessionHeaders,
   };
   return (NeonApi.getJsonAjaxObservable(url, headers) as Observable<AjaxResponse<unknown>>).pipe(
-    mergeMap((response: AjaxResponse<unknown>): Observable<unknown> => (
-      buildFilesAjaxObservable(action, response, takeUntilOperator)
+    mergeMap((response: AjaxResponse<unknown>): Observable<WindRoseData> => (
+      buildWindRoseDataObservable(
+        response,
+        (action as FetchWindRoseAction).query,
+        takeUntilOperator,
+      )
+    )),
+    // Return the fullfilled action to be dispatched
+    map((windRoseData: WindRoseData) => ActionCreator.fetchWindRoseFullfilled(
+      windRoseData,
+      (action as FetchWindRoseAction).query,
     )),
     catchError((error: Record<string, unknown>): ObservableInput<any> => {
       const response = error && error.xhr ? (error.xhr as XMLHttpRequest).response : null;
@@ -815,6 +1090,48 @@ const buildDataApiObservable = (
         (action as FetchWindRoseAction),
       ));
     }),
+    takeUntilOperator,
+  );
+};
+
+// Most months of a season or year fetched at once
+const PERIOD_FETCH_CONCURRENCY = 3;
+
+/**
+ * Gets the observable fetching a month of a season or year for the positions of the month viewed
+ * @param action The fetch period action
+ * @param month The month (YYYY-MM)
+ * @param takeUntilOperator
+ * @param limited
+ * @param sessionHeaders
+ */
+const buildPeriodMonthObservable = (
+  action: FetchPeriodAction,
+  month: string,
+  takeUntilOperator: MonoTypeOperatorFunction<unknown>,
+  limited: boolean,
+  sessionHeaders: Record<string, string>,
+): Observable<unknown> => {
+  // Selecting the data files may default the positions, so each month gets its own query
+  const query: WindRoseViewerQueryState = {
+    changeType: null,
+    sites: [action.site],
+    months: [month],
+    positions: action.positions.map((position: WindRosePosition) => ({ ...position })),
+  };
+  const url = getDataApiRequest(action.productCode, action.release, action.site, month, limited);
+  return (NeonApi.getJsonAjaxObservable(url, { ...sessionHeaders }) as Observable<
+    AjaxResponse<unknown>
+  >).pipe(
+    mergeMap((response: AjaxResponse<unknown>): Observable<WindRoseData> => (
+      buildWindRoseDataObservable(response, query, takeUntilOperator, false)
+    )),
+    map((windRoseData: WindRoseData) => (
+      ActionCreator.fetchPeriodMonthFulfilled(action.key, month, windRoseData)
+    )),
+    catchError((error: unknown): ObservableInput<any> => (
+      of(ActionCreator.fetchPeriodMonthFailed(action.key, month, error))
+    )),
     takeUntilOperator,
   );
 };
@@ -851,10 +1168,57 @@ const createFetchWindRoseDataEpic: SessionHeadersEpicCreator = (
   (action$: Observable<AnyAction>): Observable<unknown> => ((
     action$.pipe(
       filter((action: AnyAction) => action.type === ActionTypes.FETCH_WIND_ROSE),
-      switchMap((action: AnyAction) => concat(
-        of(ActionCreator.fetchWindRoseWorking()),
-        buildDataApiObservable(action, takeUntil(cancelWindRose$), limited, sessionHeaders),
-      )),
+      switchMap((action: AnyAction) => {
+        const { cached, query } = action as FetchWindRoseAction;
+        if (cached) {
+          return of(
+            ActionCreator.fetchWindRoseWorking(),
+            ActionCreator.fetchWindRoseFullfilled(cached, query),
+          );
+        }
+        return concat(
+          of(ActionCreator.fetchWindRoseWorking()),
+          buildDataApiObservable(action, takeUntil(cancelWindRose$), limited, sessionHeaders),
+        );
+      }),
+    )
+  ))
+);
+
+/**
+ * Epic for fetching the months of a season or year
+ * @param {*} limited Viewer limited setting
+ * @param {*} sessionHeaders Session headers to fetch with
+ */
+const createFetchPeriodEpic: SessionHeadersEpicCreator = (
+  limited: boolean,
+  sessionHeaders: Record<string, string>,
+): Epic => (
+  (action$: Observable<AnyAction>): Observable<unknown> => ((
+    action$.pipe(
+      filter((action: AnyAction) => action.type === ActionTypes.FETCH_PERIOD),
+      switchMap((action: AnyAction) => {
+        const fetchPeriodAction = action as FetchPeriodAction;
+        // Viewing release data requires authentication, the demo data endpoint is never queried
+        if (isReleaseLoginRequired(limited, fetchPeriodAction.release)) {
+          return of(...fetchPeriodAction.months.map((month: string) => (
+            ActionCreator.fetchPeriodMonthFailed(
+              fetchPeriodAction.key,
+              month,
+              LOGIN_REQUIRED_MESSAGE,
+            )
+          )));
+        }
+        return from(fetchPeriodAction.months).pipe(
+          mergeMap((month: string) => buildPeriodMonthObservable(
+            fetchPeriodAction,
+            month,
+            takeUntil(cancelPeriod$),
+            limited,
+            sessionHeaders,
+          ), PERIOD_FETCH_CONCURRENCY),
+        );
+      }),
     )
   ))
 );
@@ -905,6 +1269,10 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       data: dataFetchState,
     },
     query,
+    aggregation,
+    monthOptions,
+    monthCache,
+    periodFetch,
     isViewerLimitedMode,
   } = state;
   // Dispatch function enhanced to handle both reducer and action streams
@@ -923,6 +1291,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       case ActionTypes.REINITIALIZE:
         cancelProduct$.next();
         cancelWindRose$.next();
+        cancelPeriod$.next();
         break;
       default:
         break;
@@ -937,6 +1306,8 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
         .subscribe(enhancedDispatch as EpicSubscribeFunc),
       createFetchWindRoseDataEpic(isViewerLimited, appliedSessionHeaders)(actionStream$)
         .subscribe(enhancedDispatch as EpicSubscribeFunc),
+      createFetchPeriodEpic(isViewerLimited, appliedSessionHeaders)(actionStream$)
+        .subscribe(enhancedDispatch as EpicSubscribeFunc),
     ];
     // Cleanup subscription when component unmounts
     return () => {
@@ -944,6 +1315,7 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
       // Ensure any ongoing operations are canceled
       cancelProduct$.next();
       cancelWindRose$.next();
+      cancelPeriod$.next();
     };
   }, [
     enhancedDispatch,
@@ -1001,6 +1373,56 @@ const Provider: React.FC<ProviderProps> = (inProps: ProviderProps): React.JSX.El
     query,
     dataFetchState,
     preconditionsSatisfied,
+  ]);
+  // Months of the season or year being viewed that have not been fetched
+  const periodType = getAggregationPeriodType(aggregation);
+  const periodMonth = query.months[0] || null;
+  const missingPeriodMonths = useMemo(() => {
+    if (!periodType || !periodMonth) {
+      return [];
+    }
+    return getAvailablePeriodMonths(
+      periodType,
+      periodMonth,
+      monthOptions.map((option: SelectionOption): string => option.value),
+    ).filter((month: string): boolean => (
+      !monthCache.months[month] && !monthCache.failed.includes(month)
+    ));
+  }, [periodType, periodMonth, monthOptions, monthCache]);
+  useEffect(() => {
+    if (!neonContextIsFinal) { return; }
+    if (!preconditionsSatisfied) { return; }
+    if (!exists(product) || (missingPeriodMonths.length <= 0)) { return; }
+    // The month viewed is fetched first, which settles the positions the other months are fetched
+    // for, and so the key they are cached by
+    const site = query.sites[0];
+    if (!site || !monthCache.key
+        || ((dataFetchState as Nullable<FetchStatusState>)?.status !== AsyncStateType.FULLFILLED)
+        || (monthCache.key !== getMonthCacheKey(site, query.positions))) {
+      return;
+    }
+    const isFetching = (periodFetch.key === monthCache.key)
+      && missingPeriodMonths.every((month: string): boolean => periodFetch.pending.includes(month));
+    if (isFetching) { return; }
+    enhancedDispatch(ActionCreator.fetchPeriod(
+      (product as UnknownRecord).productCode as string,
+      release,
+      site,
+      query.positions,
+      monthCache.key,
+      missingPeriodMonths,
+    ));
+  }, [
+    enhancedDispatch,
+    neonContextIsFinal,
+    preconditionsSatisfied,
+    product,
+    release,
+    query,
+    dataFetchState,
+    monthCache.key,
+    missingPeriodMonths,
+    periodFetch,
   ]);
   useEffect(() => {
     if (!neonContextIsFinal) { return; }

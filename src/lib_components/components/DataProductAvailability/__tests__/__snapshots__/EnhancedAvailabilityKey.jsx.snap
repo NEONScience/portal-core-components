@@ -66,31 +66,65 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data have been collected and will be published after processing has completed"
+            title="Provisional data have been published and are available for download"
           >
             <svg
               height="14"
-              width="135"
+              width="103"
             >
               <rect
-                fill="url(#beingProcessedPattern)"
-                height="10.5px"
-                rx="1px"
+                fill="#e1e3ea"
+                height="10.85px"
+                rx="1.25px"
                 stroke="#002c77"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
+                stroke-width="1.15px"
+                width="5.85px"
+                x="0.6"
+                y="0.6"
+              />
+              <path
+                d="M3.07,0.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+                fill="#002c77"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Being Processed
+                Provisional
               </text>
             </svg>
           </div>
+          <div
+            class="css-11bsayg-keyElement"
+            role="button"
+            title="Data have been published and are available for download. Some data are released and some data are provisional."
+          >
+            <svg
+              height="14"
+              width="55"
+            >
+              <rect
+                fill="url(#mixedAvailableProvisionalPattern)"
+                height="11.2px"
+                rx="1.5px"
+                stroke="#002c77"
+                stroke-width="0.8px"
+                width="6.2px"
+                x="0.4"
+                y="0.4"
+              />
+              <text
+                class="css-1g8m8ll-keyElementText"
+                x="15"
+                y="9"
+              >
+                Mixed
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
           <div
             class="css-11bsayg-keyElement"
             role="button"
@@ -122,11 +156,39 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="No data collection is scheduled"
+            title="Data collection is desired but not expected until other conditions are met"
           >
             <svg
               height="14"
-              width="111"
+              width="87"
+            >
+              <rect
+                fill="#ffffff"
+                height="10.5px"
+                rx="1px"
+                stroke="#b39076"
+                stroke-width="1.5px"
+                width="5.5px"
+                x="0.75"
+                y="0.75"
+              />
+              <text
+                class="css-1g8m8ll-keyElementText"
+                x="15"
+                y="9"
+              >
+                Potential
+              </text>
+            </svg>
+          </div>
+          <div
+            class="css-11bsayg-keyElement"
+            role="button"
+            title="No data collection is planned"
+          >
+            <svg
+              height="14"
+              width="103"
             >
               <rect
                 fill="#ffffff"
@@ -143,7 +205,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 x="15"
                 y="9"
               >
-                Not Expected
+                Not Planned
               </text>
             </svg>
           </div>
@@ -152,26 +214,32 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data was neither expected nor collected"
+            title="Data collection was incomplete."
           >
             <svg
               height="14"
-              width="119"
+              width="71"
             >
               <rect
-                fill="#d7d9d9"
-                height="12px"
-                rx="2px"
-                width="7px"
-                x="0"
-                y="0"
+                fill="#ffffff"
+                height="10.5px"
+                rx="1px"
+                stroke="#f8bb32"
+                stroke-width="1.5px"
+                width="5.5px"
+                x="0.75"
+                y="0.75"
+              />
+              <path
+                d="M3.22,0.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+                fill="#f8bb32"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Not Available
+                Partial
               </text>
             </svg>
           </div>
@@ -204,56 +272,26 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data should be available for download but something has prevented publication"
+            title="Data was neither expected nor collected"
           >
             <svg
               height="14"
-              width="71"
+              width="119"
             >
               <rect
-                fill="url(#delayedPattern)"
-                height="10.5px"
-                rx="1px"
-                stroke="#f8bb32"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                width="7px"
+                x="0"
+                y="0"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Delayed
-              </text>
-            </svg>
-          </div>
-          <div
-            class="css-11bsayg-keyElement"
-            role="button"
-            title="Data collection is desired but not expected until other conditions are met"
-          >
-            <svg
-              height="14"
-              width="87"
-            >
-              <rect
-                fill="#ffffff"
-                height="10.5px"
-                rx="1px"
-                stroke="#b39076"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
-              />
-              <text
-                class="css-1g8m8ll-keyElementText"
-                x="15"
-                y="9"
-              >
-                Potential
+                Not Available
               </text>
             </svg>
           </div>
@@ -411,31 +449,65 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data have been collected and will be published after processing has completed"
+          title="Provisional data have been published and are available for download"
         >
           <svg
             height="14"
-            width="135"
+            width="103"
           >
             <rect
-              fill="url(#beingProcessedPattern)"
-              height="10.5px"
-              rx="1px"
+              fill="#e1e3ea"
+              height="10.85px"
+              rx="1.25px"
               stroke="#002c77"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
+              stroke-width="1.15px"
+              width="5.85px"
+              x="0.6"
+              y="0.6"
+            />
+            <path
+              d="M3.07,0.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+              fill="#002c77"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Being Processed
+              Provisional
             </text>
           </svg>
         </div>
+        <div
+          class="css-11bsayg-keyElement"
+          role="button"
+          title="Data have been published and are available for download. Some data are released and some data are provisional."
+        >
+          <svg
+            height="14"
+            width="55"
+          >
+            <rect
+              fill="url(#mixedAvailableProvisionalPattern)"
+              height="11.2px"
+              rx="1.5px"
+              stroke="#002c77"
+              stroke-width="0.8px"
+              width="6.2px"
+              x="0.4"
+              y="0.4"
+            />
+            <text
+              class="css-1g8m8ll-keyElementText"
+              x="15"
+              y="9"
+            >
+              Mixed
+            </text>
+          </svg>
+        </div>
+      </div>
+      <div>
         <div
           class="css-11bsayg-keyElement"
           role="button"
@@ -467,11 +539,39 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="No data collection is scheduled"
+          title="Data collection is desired but not expected until other conditions are met"
         >
           <svg
             height="14"
-            width="111"
+            width="87"
+          >
+            <rect
+              fill="#ffffff"
+              height="10.5px"
+              rx="1px"
+              stroke="#b39076"
+              stroke-width="1.5px"
+              width="5.5px"
+              x="0.75"
+              y="0.75"
+            />
+            <text
+              class="css-1g8m8ll-keyElementText"
+              x="15"
+              y="9"
+            >
+              Potential
+            </text>
+          </svg>
+        </div>
+        <div
+          class="css-11bsayg-keyElement"
+          role="button"
+          title="No data collection is planned"
+        >
+          <svg
+            height="14"
+            width="103"
           >
             <rect
               fill="#ffffff"
@@ -488,7 +588,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               x="15"
               y="9"
             >
-              Not Expected
+              Not Planned
             </text>
           </svg>
         </div>
@@ -497,26 +597,32 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data was neither expected nor collected"
+          title="Data collection was incomplete."
         >
           <svg
             height="14"
-            width="119"
+            width="71"
           >
             <rect
-              fill="#d7d9d9"
-              height="12px"
-              rx="2px"
-              width="7px"
-              x="0"
-              y="0"
+              fill="#ffffff"
+              height="10.5px"
+              rx="1px"
+              stroke="#f8bb32"
+              stroke-width="1.5px"
+              width="5.5px"
+              x="0.75"
+              y="0.75"
+            />
+            <path
+              d="M3.22,0.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+              fill="#f8bb32"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Not Available
+              Partial
             </text>
           </svg>
         </div>
@@ -549,56 +655,26 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data should be available for download but something has prevented publication"
+          title="Data was neither expected nor collected"
         >
           <svg
             height="14"
-            width="71"
+            width="119"
           >
             <rect
-              fill="url(#delayedPattern)"
-              height="10.5px"
-              rx="1px"
-              stroke="#f8bb32"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
+              fill="#d7d9d9"
+              height="12px"
+              rx="2px"
+              width="7px"
+              x="0"
+              y="0"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Delayed
-            </text>
-          </svg>
-        </div>
-        <div
-          class="css-11bsayg-keyElement"
-          role="button"
-          title="Data collection is desired but not expected until other conditions are met"
-        >
-          <svg
-            height="14"
-            width="87"
-          >
-            <rect
-              fill="#ffffff"
-              height="10.5px"
-              rx="1px"
-              stroke="#b39076"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
-            />
-            <text
-              class="css-1g8m8ll-keyElementText"
-              x="15"
-              y="9"
-            >
-              Potential
+              Not Available
             </text>
           </svg>
         </div>
@@ -813,31 +889,65 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data have been collected and will be published after processing has completed"
+            title="Provisional data have been published and are available for download"
           >
             <svg
               height="14"
-              width="135"
+              width="103"
             >
               <rect
-                fill="url(#beingProcessedPattern)"
-                height="10.5px"
-                rx="1px"
+                fill="#e1e3ea"
+                height="10.85px"
+                rx="1.25px"
                 stroke="#002c77"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
+                stroke-width="1.15px"
+                width="5.85px"
+                x="0.6"
+                y="0.6"
+              />
+              <path
+                d="M3.07,0.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+                fill="#002c77"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Being Processed
+                Provisional
               </text>
             </svg>
           </div>
+          <div
+            class="css-11bsayg-keyElement"
+            role="button"
+            title="Data have been published and are available for download. Some data are released and some data are provisional."
+          >
+            <svg
+              height="14"
+              width="55"
+            >
+              <rect
+                fill="url(#mixedAvailableProvisionalPattern)"
+                height="11.2px"
+                rx="1.5px"
+                stroke="#002c77"
+                stroke-width="0.8px"
+                width="6.2px"
+                x="0.4"
+                y="0.4"
+              />
+              <text
+                class="css-1g8m8ll-keyElementText"
+                x="15"
+                y="9"
+              >
+                Mixed
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div>
           <div
             class="css-11bsayg-keyElement"
             role="button"
@@ -869,11 +979,39 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="No data collection is scheduled"
+            title="Data collection is desired but not expected until other conditions are met"
           >
             <svg
               height="14"
-              width="111"
+              width="87"
+            >
+              <rect
+                fill="#ffffff"
+                height="10.5px"
+                rx="1px"
+                stroke="#b39076"
+                stroke-width="1.5px"
+                width="5.5px"
+                x="0.75"
+                y="0.75"
+              />
+              <text
+                class="css-1g8m8ll-keyElementText"
+                x="15"
+                y="9"
+              >
+                Potential
+              </text>
+            </svg>
+          </div>
+          <div
+            class="css-11bsayg-keyElement"
+            role="button"
+            title="No data collection is planned"
+          >
+            <svg
+              height="14"
+              width="103"
             >
               <rect
                 fill="#ffffff"
@@ -890,7 +1028,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
                 x="15"
                 y="9"
               >
-                Not Expected
+                Not Planned
               </text>
             </svg>
           </div>
@@ -899,26 +1037,32 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data was neither expected nor collected"
+            title="Data collection was incomplete."
           >
             <svg
               height="14"
-              width="119"
+              width="71"
             >
               <rect
-                fill="#d7d9d9"
-                height="12px"
-                rx="2px"
-                width="7px"
-                x="0"
-                y="0"
+                fill="#ffffff"
+                height="10.5px"
+                rx="1px"
+                stroke="#f8bb32"
+                stroke-width="1.5px"
+                width="5.5px"
+                x="0.75"
+                y="0.75"
+              />
+              <path
+                d="M3.22,0.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+                fill="#f8bb32"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Not Available
+                Partial
               </text>
             </svg>
           </div>
@@ -951,56 +1095,26 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
           <div
             class="css-11bsayg-keyElement"
             role="button"
-            title="Data should be available for download but something has prevented publication"
+            title="Data was neither expected nor collected"
           >
             <svg
               height="14"
-              width="71"
+              width="119"
             >
               <rect
-                fill="url(#delayedPattern)"
-                height="10.5px"
-                rx="1px"
-                stroke="#f8bb32"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
+                fill="#d7d9d9"
+                height="12px"
+                rx="2px"
+                width="7px"
+                x="0"
+                y="0"
               />
               <text
                 class="css-1g8m8ll-keyElementText"
                 x="15"
                 y="9"
               >
-                Delayed
-              </text>
-            </svg>
-          </div>
-          <div
-            class="css-11bsayg-keyElement"
-            role="button"
-            title="Data collection is desired but not expected until other conditions are met"
-          >
-            <svg
-              height="14"
-              width="87"
-            >
-              <rect
-                fill="#ffffff"
-                height="10.5px"
-                rx="1px"
-                stroke="#b39076"
-                stroke-width="1.5px"
-                width="5.5px"
-                x="0.75"
-                y="0.75"
-              />
-              <text
-                class="css-1g8m8ll-keyElementText"
-                x="15"
-                y="9"
-              >
-                Potential
+                Not Available
               </text>
             </svg>
           </div>
@@ -1070,31 +1184,65 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data have been collected and will be published after processing has completed"
+          title="Provisional data have been published and are available for download"
         >
           <svg
             height="14"
-            width="135"
+            width="103"
           >
             <rect
-              fill="url(#beingProcessedPattern)"
-              height="10.5px"
-              rx="1px"
+              fill="#e1e3ea"
+              height="10.85px"
+              rx="1.25px"
               stroke="#002c77"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
+              stroke-width="1.15px"
+              width="5.85px"
+              x="0.6"
+              y="0.6"
+            />
+            <path
+              d="M3.07,0.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+              fill="#002c77"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Being Processed
+              Provisional
             </text>
           </svg>
         </div>
+        <div
+          class="css-11bsayg-keyElement"
+          role="button"
+          title="Data have been published and are available for download. Some data are released and some data are provisional."
+        >
+          <svg
+            height="14"
+            width="55"
+          >
+            <rect
+              fill="url(#mixedAvailableProvisionalPattern)"
+              height="11.2px"
+              rx="1.5px"
+              stroke="#002c77"
+              stroke-width="0.8px"
+              width="6.2px"
+              x="0.4"
+              y="0.4"
+            />
+            <text
+              class="css-1g8m8ll-keyElementText"
+              x="15"
+              y="9"
+            >
+              Mixed
+            </text>
+          </svg>
+        </div>
+      </div>
+      <div>
         <div
           class="css-11bsayg-keyElement"
           role="button"
@@ -1126,11 +1274,39 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="No data collection is scheduled"
+          title="Data collection is desired but not expected until other conditions are met"
         >
           <svg
             height="14"
-            width="111"
+            width="87"
+          >
+            <rect
+              fill="#ffffff"
+              height="10.5px"
+              rx="1px"
+              stroke="#b39076"
+              stroke-width="1.5px"
+              width="5.5px"
+              x="0.75"
+              y="0.75"
+            />
+            <text
+              class="css-1g8m8ll-keyElementText"
+              x="15"
+              y="9"
+            >
+              Potential
+            </text>
+          </svg>
+        </div>
+        <div
+          class="css-11bsayg-keyElement"
+          role="button"
+          title="No data collection is planned"
+        >
+          <svg
+            height="14"
+            width="103"
           >
             <rect
               fill="#ffffff"
@@ -1147,7 +1323,7 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
               x="15"
               y="9"
             >
-              Not Expected
+              Not Planned
             </text>
           </svg>
         </div>
@@ -1156,26 +1332,32 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data was neither expected nor collected"
+          title="Data collection was incomplete."
         >
           <svg
             height="14"
-            width="119"
+            width="71"
           >
             <rect
-              fill="#d7d9d9"
-              height="12px"
-              rx="2px"
-              width="7px"
-              x="0"
-              y="0"
+              fill="#ffffff"
+              height="10.5px"
+              rx="1px"
+              stroke="#f8bb32"
+              stroke-width="1.5px"
+              width="5.5px"
+              x="0.75"
+              y="0.75"
+            />
+            <path
+              d="M3.22,0.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+              fill="#f8bb32"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Not Available
+              Partial
             </text>
           </svg>
         </div>
@@ -1208,56 +1390,26 @@ exports[`DataProductAvailability - EnhancedAvailabilityKey renders correctly whe
         <div
           class="css-11bsayg-keyElement"
           role="button"
-          title="Data should be available for download but something has prevented publication"
+          title="Data was neither expected nor collected"
         >
           <svg
             height="14"
-            width="71"
+            width="119"
           >
             <rect
-              fill="url(#delayedPattern)"
-              height="10.5px"
-              rx="1px"
-              stroke="#f8bb32"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
+              fill="#d7d9d9"
+              height="12px"
+              rx="2px"
+              width="7px"
+              x="0"
+              y="0"
             />
             <text
               class="css-1g8m8ll-keyElementText"
               x="15"
               y="9"
             >
-              Delayed
-            </text>
-          </svg>
-        </div>
-        <div
-          class="css-11bsayg-keyElement"
-          role="button"
-          title="Data collection is desired but not expected until other conditions are met"
-        >
-          <svg
-            height="14"
-            width="87"
-          >
-            <rect
-              fill="#ffffff"
-              height="10.5px"
-              rx="1px"
-              stroke="#b39076"
-              stroke-width="1.5px"
-              width="5.5px"
-              x="0.75"
-              y="0.75"
-            />
-            <text
-              class="css-1g8m8ll-keyElementText"
-              x="15"
-              y="9"
-            >
-              Potential
+              Not Available
             </text>
           </svg>
         </div>

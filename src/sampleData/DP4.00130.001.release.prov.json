@@ -1718,7 +1718,7 @@
         "specNumber": "NEON.DOC.005277vA",
         "specType": "application/pdf",
         "specSize": 1461313,
-        "specDescription": "AOS Protocol and Procedure: GAG – Aquatic Staff Gauge Measurement Readings",
+        "specDescription": "AOS Protocol and Procedure: GAG - Aquatic Staff Gauge Measurement Readings",
         "specUrl": "https://data.neonscience.org/api/v0/documents/NEON.DOC.005277vA"
       },
       {
@@ -1726,7 +1726,7 @@
         "specNumber": "NEON.DOC.001085vH",
         "specType": "application/pdf",
         "specSize": 6706965,
-        "specDescription": "AOS Protocol and Procedure: DSC – Stream Discharge",
+        "specDescription": "AOS Protocol and Procedure: DSC - Stream Discharge",
         "specUrl": "https://data.neonscience.org/api/v0/documents/NEON.DOC.001085vH"
       },
       {

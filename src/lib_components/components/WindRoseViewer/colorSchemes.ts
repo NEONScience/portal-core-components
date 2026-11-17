@@ -63,6 +63,35 @@ export const WIND_ROSE_PALETTES: Record<WindRoseColorScheme, readonly string[]> 
 
 const WIND_ROSE_COLOR_SCHEME_SET: Set<string> = new Set(Object.values(WIND_ROSE_COLOR_SCHEMES));
 
+export interface WindSpeedSeriesColors {
+  mean: string;
+  min: string;
+  max: string;
+}
+
+/**
+ * Colors to draw the wind speed time series statistics in. The mean is drawn as water in blue,
+ * with the minimum and maximum in hues apart from it.
+ * - neon: NEON light blue, with NEON green for the minimum and gold for the maximum.
+ * - colorVisionAccessible: the Okabe-Ito blue, bluish green and vermillion.
+ *
+ * In both, every pair of statistics differs by an OKLab difference (x100) of at least 11 under
+ * simulated protanopia and deuteranopia and 8 under tritanopia (Machado et al. 2009), and of at
+ * least 18 with typical color vision. Each contrasts at least 3:1 with white.
+ */
+export const WIND_SPEED_SERIES_PALETTES: Record<WindRoseColorScheme, WindSpeedSeriesColors> = {
+  [WIND_ROSE_COLOR_SCHEMES.NEON]: {
+    mean: COLORS.LIGHT_BLUE[500],
+    min: COLORS.GREEN[700],
+    max: COLORS.GOLD[700],
+  },
+  [WIND_ROSE_COLOR_SCHEMES.COLOR_VISION_ACCESSIBLE]: {
+    mean: '#0072b2',
+    min: '#009e73',
+    max: '#d55e00',
+  },
+};
+
 export const isWindRoseColorScheme = (value: unknown): value is WindRoseColorScheme => (
   (typeof value === 'string') && WIND_ROSE_COLOR_SCHEME_SET.has(value)
 );
@@ -75,4 +104,8 @@ export const resolveWindRoseColorScheme = (
 
 export const getWindRosePalette = (colorScheme: Nullable<string>): readonly string[] => (
   WIND_ROSE_PALETTES[resolveWindRoseColorScheme(colorScheme)]
+);
+
+export const getWindSpeedSeriesColors = (colorScheme: Nullable<string>): WindSpeedSeriesColors => (
+  WIND_SPEED_SERIES_PALETTES[resolveWindRoseColorScheme(colorScheme)]
 );

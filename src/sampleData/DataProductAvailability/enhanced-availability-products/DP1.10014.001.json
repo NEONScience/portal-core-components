@@ -1,0 +1,1066 @@
+{
+  "data": {
+    "productCode": "DP1.10014.001",
+    "siteCodes": [
+      {
+        "siteCode": "ABBY",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-01",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-04",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BART",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-11",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLAN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BONA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DEJU",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DELA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-12",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DSNY",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GRSM",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GUAN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-12",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "HARV",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "JERC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-04",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "KONZ",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-05",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MLBS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-11",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "NIWO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "ORNL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-12",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-02",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-03",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OSBS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-04",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "RMNP",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-12",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SCBI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-04",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SERC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-12",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-01",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-04",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SJER",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SOAP",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-05",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "STEI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-04",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TALL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-12",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-01",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-02",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TREE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-05",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "cdw_densitylog",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "UKFS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-11",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "cdw_densitydisk",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "UNDE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

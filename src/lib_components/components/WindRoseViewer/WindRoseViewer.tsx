@@ -2,11 +2,13 @@ import React, { useRef, useState } from 'react';
 
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import { FallbackProps } from 'react-error-boundary';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 
@@ -15,12 +17,15 @@ import ImageIcon from '@mui/icons-material/Image';
 import InfoIcon from '@mui/icons-material/Info';
 
 import Provider, {
+  ActionCreator,
   FetchStatusState,
   LOGIN_REQUIRED_MESSAGE,
+  useDispatchContext,
+  useFetchWindRose,
   useStateContext,
   useWindRoseViewerAccess,
+  useWindRoseViewerPeriod,
   WindRoseAggregation,
-  WindRoseViewerDataState,
   WindRoseViewerState,
 } from './Context';
 import WindRoseCalendar from './WindRoseCalendar';
@@ -28,14 +33,16 @@ import WindRoseChart from './WindRoseChart';
 import WindRoseControls, { WindRoseAggregationToggle } from './WindRoseControls';
 import WindRoseDayNavigator from './WindRoseDayNavigator';
 import WindRoseLegend from './WindRoseLegend';
+import WindRoseMonthCalendar from './WindRoseMonthCalendar';
 import WindRoseQualityMeter from './WindRoseQualityMeter';
+import WindRoseTimeSeries from './WindRoseTimeSeries';
 import WindRoseViewerLimitedCard from './WindRoseViewerLimitedCard';
 import {
   DEFAULT_WIND_ROSE_COLOR_SCHEME,
   resolveWindRoseColorScheme,
   WindRoseColorScheme,
 } from './colorSchemes';
-import { WindRoseAggregate, WindRoseQualityFilter } from './windRoseUtil';
+import { WIND_ROSE_CHANGE_TYPE, WindRoseAggregate, WindRoseQualityFilter } from './windRoseUtil';
 import {
   buildSectors,
   formatCount,
@@ -44,8 +51,17 @@ import {
   formatSpeed,
   getPrevailingSector,
 } from './windRoseChartUtil';
+import {
+  getPeriodLabel,
+  getPeriodMonths,
+  getPeriodRange,
+  getPeriodRangeLabel,
+  WindRosePeriodType,
+} from './windRosePeriodUtil';
+import { getMonthRange } from './windRoseTimeSeriesUtil';
 
 import ComponentErrorBoundary from '../Error/ComponentErrorBoundary';
+import CustomComponentFallback from '../Error/CustomComponentFallback';
 import DataProductCitation from '../Citation/DataProductCitation';
 import ErrorCard from '../Card/ErrorCard';
 import ReleaseChip from '../Chip/ReleaseChip';
@@ -63,6 +79,18 @@ import NeonLogo from '../../images/NSF-NEON-logo.png';
 
 // Exported images are rendered at this multiple of the on-screen size so they stay sharp
 const IMAGE_EXPORT_SCALE = 2;
+
+const AGGREGATION_LABELS: Record<WindRoseAggregation, string> = {
+  [WindRoseAggregation.ANNUAL]: 'Annual wind rose',
+  [WindRoseAggregation.SEASONAL]: 'Seasonal wind rose',
+  [WindRoseAggregation.MONTHLY]: 'Monthly wind rose',
+  [WindRoseAggregation.DAILY]: 'Daily wind rose',
+};
+
+const PERIOD_NAMES: Record<WindRosePeriodType, string> = {
+  [WindRosePeriodType.SEASON]: 'season',
+  [WindRosePeriodType.YEAR]: 'year',
+};
 
 const useStyles = makeStyles()((theme: NeonTheme) => ({
   root: {
@@ -135,6 +163,11 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     lineHeight: 1.6,
     color: theme.palette.text.secondary,
   },
+  periodRange: {
+    display: 'block',
+    marginTop: theme.spacing(0.25),
+    color: theme.palette.text.secondary,
+  },
   stats: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -186,6 +219,18 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     opacity: 0.5,
     pointerEvents: 'none',
   },
+  timeSeries: {
+    padding: theme.spacing(0, 3, 3, 3),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0, 2, 2, 2),
+    },
+  },
+  timeSeriesDivider: {
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(2),
+    },
+  },
   citationContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -209,6 +254,30 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
     color: theme.palette.grey[400],
   },
 }));
+
+const WindRoseViewerFallbackComponent: React.FC<FallbackProps> = (
+  inProps: FallbackProps,
+): React.JSX.Element => {
+  const { resetErrorBoundary } = inProps;
+  return (
+    <CustomComponentFallback
+      {...inProps}
+      // eslint-disable-next-line react/no-unstable-nested-components
+      FallbackComponent={() => (
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 12 }}>
+            <ErrorCard
+              title="Component Error"
+              message="Wind Rose Viewer encountered a problem"
+              actionLabel="Reset"
+              onActionClick={resetErrorBoundary}
+            />
+          </Grid>
+        </Grid>
+      )}
+    />
+  );
+};
 
 interface StatProps {
   label: string;
@@ -246,6 +315,9 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
   const { classes, cx } = useStyles();
   const { colorScheme: propColorScheme }: WindRoseViewerContentProps = props;
   const state: WindRoseViewerState = useStateContext();
+  const dispatch = useDispatchContext();
+  const fetchWindRose = useFetchWindRose();
+  const period = useWindRoseViewerPeriod();
   const { isLoginRequired } = useWindRoseViewerAccess();
   const cardRef = useRef<HTMLDivElement>(null);
   const downloadButtonRef = useRef<HTMLButtonElement>(null);
@@ -295,22 +367,35 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
   }
   const dataFetchState = fetchState.data as Nullable<FetchStatusState>;
   const dataStatus = dataFetchState ? dataFetchState.status : AsyncStateType.IDLE;
-  const isLoading = !isLoginRequired && ((dataStatus === AsyncStateType.IDLE)
+  const isMonthLoading = !isLoginRequired && ((dataStatus === AsyncStateType.IDLE)
     || (dataStatus === AsyncStateType.WORKING));
+  // The other months of a season or year are fetched once the month viewed is
+  const isPeriodLoading = !!period && (dataStatus === AsyncStateType.FULLFILLED)
+    && (period.pendingMonths.length > 0);
+  const isLoading = isMonthLoading || isPeriodLoading;
   const isDaily = aggregation === WindRoseAggregation.DAILY;
   const site = query.sites[0] || '';
   const month = query.months[0] || null;
-  const getPeriodAggregate = (dataSet: WindRoseViewerDataState): Nullable<WindRoseAggregate> => {
+  let periodName = isDaily ? 'day' : 'month';
+  if (period) {
+    periodName = PERIOD_NAMES[period.type];
+  }
+  const getAggregate = (filter: WindRoseQualityFilter): Nullable<WindRoseAggregate> => {
+    if (period) {
+      return period.dataSets[filter].aggregate;
+    }
+    const dataSet = dataSets[filter];
     if (!isDaily) {
       return dataSet.monthly;
     }
     return (selectedDay && dataSet.daily[selectedDay]) || null;
   };
-  const aggregate = getPeriodAggregate(data);
+  const aggregate = getAggregate(qualityFilter);
   const hasData = !!aggregate && (aggregate.samples > 0);
-  const hasOnlyUnvalidatedData = (qualityFilter === WindRoseQualityFilter.VALIDATED)
-    && (data.days.length <= 0)
-    && (dataSets[WindRoseQualityFilter.ALL].days.length > 0);
+  const hasOnlyUnvalidatedData = (qualityFilter === WindRoseQualityFilter.VALIDATED) && (period
+    ? ((period.dataSets[WindRoseQualityFilter.VALIDATED].months.length <= 0)
+      && (period.dataSets[WindRoseQualityFilter.ALL].months.length > 0))
+    : ((data.days.length <= 0) && (dataSets[WindRoseQualityFilter.ALL].days.length > 0)));
   // Calm observations have no direction, so are not drawn on the wind rose
   const isAllCalm = !!aggregate && (aggregate.samples > 0)
     && (aggregate.calm >= aggregate.samples);
@@ -319,12 +404,37 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
   if (isDaily) {
     heading = selectedDay ? formatDay(selectedDay, 'dddd, MMMM D, YYYY') : '';
   }
-  const aggregationLabel = isDaily ? 'Daily wind rose' : 'Monthly wind rose';
+  let periodRange: Nullable<string> = null;
+  if (period && month) {
+    heading = getPeriodLabel(period.type, month);
+    periodRange = getPeriodRangeLabel(period.type, month);
+    if (!isLoading) {
+      const monthsWithData = period.dataSets[qualityFilter].months.length;
+      periodRange += ` · ${monthsWithData} of ${getPeriodMonths(period.type, month).length} `
+        + 'months with data';
+    }
+  }
+  const aggregationLabel = AGGREGATION_LABELS[aggregation];
   const chartTitle = [aggregationLabel, site, heading].filter(isStringNonEmpty).join(', ');
+  const timeSeriesTitle = ['Wind speed over time', site, heading]
+    .filter(isStringNonEmpty)
+    .join(', ');
+  let timeSeriesRange: Nullable<[number, number]> = null;
+  if (month) {
+    timeSeriesRange = period ? getPeriodRange(period.type, month) : getMonthRange(month);
+  }
   const productNameValue = exists(product)
     ? (product as Record<string, unknown>).productName
     : null;
   const productName = isStringNonEmpty(productNameValue) ? productNameValue as string : null;
+
+  // Shows the monthly wind rose of a month of the season or year
+  const selectMonth = (selectedMonth: string): void => {
+    dispatch(ActionCreator.setAggregation(WindRoseAggregation.MONTHLY));
+    if (selectedMonth !== month) {
+      fetchWindRose(WIND_ROSE_CHANGE_TYPE.MONTH, { months: [selectedMonth] });
+    }
+  };
 
   const renderOverlay = (): Nullable<React.JSX.Element> => {
     if (isLoginRequired) {
@@ -333,6 +443,20 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
           <InfoIcon fontSize="large" className={classes.infoIcon} />
           <Typography variant="subtitle2" className={classes.overlayMessage}>
             {LOGIN_REQUIRED_MESSAGE}
+          </Typography>
+        </div>
+      );
+    }
+    if (isPeriodLoading && period) {
+      const loadedMonths = period.months.length - period.pendingMonths.length;
+      return (
+        <div className={classes.overlay} role="status">
+          <CircularProgress
+            variant="determinate"
+            value={(loadedMonths / Math.max(period.months.length, 1)) * 100}
+          />
+          <Typography variant="subtitle2">
+            {`Loading wind data… ${loadedMonths} of ${period.months.length} months`}
           </Typography>
         </div>
       );
@@ -360,20 +484,20 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
         <div className={classes.overlay} role="status">
           <InfoIcon fontSize="large" className={classes.infoIcon} />
           <Typography variant="subtitle2" className={classes.overlayMessage}>
-            {'No Quality Flag validated observations are available for this month. '
+            {`No Quality Flag validated observations are available for this ${
+              period ? periodName : 'month'}. `
               + 'Select All to include observations that fail a quality flag.'}
           </Typography>
         </div>
       );
     }
     if (!hasData) {
-      const period = isDaily ? 'day' : 'month';
       const message = isStringNonEmpty(dataStateMessage) ? ` ${dataStateMessage}` : '';
       return (
         <div className={classes.overlay} role="status">
           <InfoIcon fontSize="large" className={classes.infoIcon} />
           <Typography variant="subtitle2" className={classes.overlayMessage}>
-            {`No wind rose data is available for this ${period}.${message}`}
+            {`No wind rose data is available for this ${periodName}.${message}`}
           </Typography>
         </div>
       );
@@ -383,7 +507,7 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
         <div className={classes.overlay} role="status">
           <InfoIcon fontSize="large" className={classes.infoIcon} />
           <Typography variant="subtitle2" className={classes.overlayMessage}>
-            {`Every observation for this ${isDaily ? 'day' : 'month'} was calm (0 m/s), `
+            {`Every observation for this ${periodName} was calm (0 m/s), `
               + 'so there are no wind directions to show.'}
           </Typography>
         </div>
@@ -417,6 +541,10 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
     );
   };
 
+  let fileNamePeriod = isDaily ? selectedDay : month;
+  if (period) {
+    fileNamePeriod = heading;
+  }
   const downloadImage = (): void => {
     const card = cardRef.current;
     if (!card) {
@@ -429,7 +557,7 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
       productCode,
       productName,
       site,
-      isDaily ? selectedDay : month,
+      fileNamePeriod,
       release,
     ].filter(isStringNonEmpty).join(' - ');
     setIsExportingImage(true);
@@ -504,6 +632,11 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
                 <Typography variant="h5" component="h4">
                   {heading || '\u00a0'}
                 </Typography>
+                {!periodRange ? null : (
+                  <Typography variant="caption" className={classes.periodRange}>
+                    {periodRange}
+                  </Typography>
+                )}
               </div>
               <WindRoseAggregationToggle />
             </div>
@@ -516,10 +649,8 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
                 label="Quality Flag validated"
                 value={!hasData ? '-' : (
                   <WindRoseQualityMeter
-                    validated={
-                      getPeriodAggregate(dataSets[WindRoseQualityFilter.VALIDATED])?.samples || 0
-                    }
-                    all={getPeriodAggregate(dataSets[WindRoseQualityFilter.ALL])?.samples || 0}
+                    validated={getAggregate(WindRoseQualityFilter.VALIDATED)?.samples || 0}
+                    all={getAggregate(WindRoseQualityFilter.ALL)?.samples || 0}
                     qualityFilter={qualityFilter}
                   />
                 )}
@@ -554,13 +685,47 @@ const WindRoseViewer: React.FC<WindRoseViewerContentProps> = (
             {!month ? null : (
               <>
                 <Divider />
-                <div className={cx(isLoading && classes.loading)}>
-                  <WindRoseCalendar colorScheme={colorScheme} />
+                {/* Months of a season or year appear as they are fetched */}
+                <div className={cx(isMonthLoading && classes.loading)}>
+                  {!period ? <WindRoseCalendar colorScheme={colorScheme} /> : (
+                    <WindRoseMonthCalendar
+                      periodType={period.type}
+                      month={month}
+                      periodLabel={heading}
+                      dataSet={period.dataSets[qualityFilter]}
+                      pendingMonths={period.pendingMonths}
+                      colorScheme={colorScheme}
+                      onSelectMonth={selectMonth}
+                    />
+                  )}
                 </div>
               </>
             )}
           </div>
         </div>
+        {!timeSeriesRange ? null : (
+          <div className={classes.timeSeries}>
+            <Divider className={classes.timeSeriesDivider} />
+            <div className={cx(isLoading && classes.loading)}>
+              <WindRoseTimeSeries
+                timeSeries={period
+                  ? period.dataSets[qualityFilter].timeSeries
+                  : data.timeSeries}
+                rangeStart={timeSeriesRange[0]}
+                rangeEnd={timeSeriesRange[1]}
+                rangeName={period ? periodName : 'month'}
+                day={isDaily ? selectedDay : null}
+                selectionUnit={period ? 'month' : 'day'}
+                colorScheme={colorScheme}
+                title={timeSeriesTitle}
+                isLoading={isLoading}
+                onSelect={period
+                  ? selectMonth
+                  : (day: string) => dispatch(ActionCreator.selectDay(day))}
+              />
+            </div>
+          </div>
+        )}
         {renderCitation()}
       </Card>
     </div>
@@ -586,7 +751,10 @@ const WindRoseViewerContainer: React.FC<WindRoseViewerProps> = (
   const props = resolveProps(windRoseViewerDefaultProps, inProps) as WindRoseViewerProps;
   const { productCode, release, colorScheme }: WindRoseViewerProps = props;
   return (
-    <ComponentErrorBoundary onReset={() => { /* noop for boundary reset */ }}>
+    <ComponentErrorBoundary
+      fallbackComponent={WindRoseViewerFallbackComponent}
+      onReset={() => { /* noop for boundary reset */ }}
+    >
       <Provider productCode={productCode} release={release}>
         <WindRoseViewer colorScheme={resolveWindRoseColorScheme(colorScheme)} />
       </Provider>

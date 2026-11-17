@@ -26,16 +26,16 @@ import { resolveProps } from '../../util/defaultProps';
 
 import EnhancedAvailabilityKey from './EnhancedAvailabilityKey';
 import EnhancedAvailabilityGrid from './EnhancedAvailabilityGrid';
-import { SVG, AvailabilityPropTypes } from './AvailabilityUtils';
+import {
+  SVG,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
+  AvailabilityPropTypes,
+} from './AvailabilityUtils';
 import { SvgDefs } from './AvailabilitySvgComponents';
 
-const preStyle = {
-  width: '100%',
-  height: '50vh',
-  overflowY: 'scroll',
-  padding: '2px',
-  border: '1px dotted black',
-};
+// Breakouts that together present every row as a single, non-rolled-up source
+const SITE_LEVEL_SOURCE_BREAKOUTS = ['sites'];
+const COMPONENT_LEVEL_SOURCE_BREAKOUTS = ['sites', 'packages', 'tables'];
 
 /**
    Setup: CSS classes
@@ -70,17 +70,18 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const defaultProps = {
-  sites: [],
   view: null,
   table: 'ALL',
   sortMethod: null,
   sortDirection: 'ASC',
   disableSelection: false,
+  rowLabelWidth: null,
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 const EnhancedAvailabilityInterface = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { sites: availabilitySites, ...other } = props;
+  const { rowLabelWidth, colorScheme } = props;
 
   const { classes, theme } = useStyles();
 
@@ -93,10 +94,11 @@ const EnhancedAvailabilityInterface = (inProps) => {
     rows,
     rowLabels,
     rowTitles,
-    tables,
     breakouts,
     validBreakouts,
     sortDirection,
+    isComponentLevel,
+    siteMonths,
   } = availabilityState;
 
   /**
@@ -108,8 +110,22 @@ const EnhancedAvailabilityInterface = (inProps) => {
      Redraw setup
   */
   const svgRef = useRef(null);
+  const drawnDataRef = useRef({ siteMonths, isComponentLevel, rowLabels });
   const handleSvgRedraw = useCallback(() => {
     if (!rowLabels.length) { return; }
+    // New data or switching between site and component rows changes which months have data,
+    // so clear the preserved time offset to let the grid bring the latest data into view
+    const drawnData = drawnDataRef.current;
+    if (svgRef.current && (
+      (drawnData.siteMonths !== siteMonths) || (drawnData.isComponentLevel !== isComponentLevel)
+    )) {
+      svgRef.current.removeAttribute('data-timeOffset');
+    }
+    // New rows reset any scrolled row labels to show the ends of the labels again
+    if (svgRef.current && (drawnData.rowLabels !== rowLabels)) {
+      svgRef.current.removeAttribute('data-labelOffset');
+    }
+    drawnDataRef.current = { siteMonths, isComponentLevel, rowLabels };
     EnhancedAvailabilityGrid({
       theme,
       rows,
@@ -117,6 +133,8 @@ const EnhancedAvailabilityInterface = (inProps) => {
       rowTitles,
       svgRef,
       selectionEnabled,
+      rowLabelWidth,
+      colorScheme,
     });
   }, [
     theme,
@@ -125,8 +143,12 @@ const EnhancedAvailabilityInterface = (inProps) => {
     rowLabels,
     rowTitles,
     selectionEnabled,
+    isComponentLevel,
+    siteMonths,
+    rowLabelWidth,
+    colorScheme,
   ]);
-  useEffect(() => { handleSvgRedraw(); });
+  useEffect(() => { handleSvgRedraw(); }, [handleSvgRedraw]);
 
   /*
   let justify = 'end';
@@ -260,40 +282,42 @@ const EnhancedAvailabilityInterface = (inProps) => {
   */
   const svgHeight = SVG.CELL_PADDING
     + (SVG.CELL_HEIGHT + SVG.CELL_PADDING) * (rowLabels.length + 1);
-  const rollUpPresent = !(breakouts.includes('sites') && breakouts.includes('tables'));
+  const sourceBreakouts = isComponentLevel
+    ? COMPONENT_LEVEL_SOURCE_BREAKOUTS
+    : SITE_LEVEL_SOURCE_BREAKOUTS;
+  const rollUpPresent = !sourceBreakouts.every((breakout) => breakouts.includes(breakout));
   return (
     <FullWidthVisualization
       vizRef={svgRef}
       minWidth={SVG.MIN_WIDTH}
       handleRedraw={handleSvgRedraw}
       data-selenium="data-product-availability"
-      {...other}
+      {...props}
     >
-      <SvgDefs />
+      <SvgDefs colorScheme={colorScheme} />
       <div className={classes.viewAndSortOptionsContainer}>
         {renderBreakoutOptions()}
         {renderSortOptions()}
       </div>
-      <EnhancedAvailabilityKey selectionEnabled rollUpPresent={rollUpPresent} />
+      <EnhancedAvailabilityKey
+        selectionEnabled={selectionEnabled}
+        rollUpPresent={rollUpPresent}
+        colorScheme={colorScheme}
+      />
       <br />
       <svg id={uniqueId('dpa-')} ref={svgRef} height={svgHeight} className={classes.svg} />
-      <br />
-      <br />
-      <br />
-      <pre style={preStyle}>
-        {JSON.stringify(tables, null, 2)}
-      </pre>
     </FullWidthVisualization>
   );
 };
 
 EnhancedAvailabilityInterface.propTypes = {
-  sites: AvailabilityPropTypes.enhancedSites,
   view: PropTypes.oneOf(['summary', 'sites', 'states', 'domains', 'ungrouped']),
   table: PropTypes.string,
   sortMethod: PropTypes.oneOf(['sites', 'states', 'domains']),
   sortDirection: PropTypes.oneOf(['ASC', 'DESC']),
   disableSelection: PropTypes.bool,
+  rowLabelWidth: PropTypes.number,
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };
 
 export default EnhancedAvailabilityInterface;

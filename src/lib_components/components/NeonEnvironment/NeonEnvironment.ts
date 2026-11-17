@@ -60,6 +60,7 @@ export const optionalEnvironmentVars = [
   'NEXT_PUBLIC_NEON_WEB_HOST_OVERRIDE',
   'NEXT_PUBLIC_NEON_WS_HOST_OVERRIDE',
   'NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS',
+  'NEXT_PUBLIC_NEON_DOWNLOAD_ENABLE_PROGRESS',
 ];
 
 const EnvType = {
@@ -110,6 +111,7 @@ export interface INeonEnvironment {
   enableGlobalSignInState: () => boolean;
   fetchDrupalAssets: () => boolean;
   showNeonAuthHeader: () => boolean;
+  downloadProgressEnabled: () => boolean;
 
   getReactAppName: () => string;
   getReactAppVersion: () => string;
@@ -176,6 +178,7 @@ export interface INeonEnvironment {
   getFullAuthApiPath: (path: string, useWs: boolean) => string;
   getFullGraphqlPath: () => string;
   getFullDownloadApiPath: (path: string) => string;
+  getFullDownloadApiWsPath: (path: string) => string;
   getFullVizApiPath: (path: string) => string;
 
   getFullAuthPath: (path: string) => string;
@@ -216,6 +219,10 @@ const NeonEnvironment: INeonEnvironment = {
     && (process.env.NEXT_PUBLIC_NEON_FETCH_DRUPAL_ASSETS !== 'false')
   ),
   showNeonAuthHeader: (): boolean => !NeonEnvironment.isAutonomousProfile(),
+  downloadProgressEnabled: (): boolean => (
+    (process.env.NEXT_PUBLIC_NEON_DOWNLOAD_ENABLE_PROGRESS === 'true')
+    && !NeonEnvironment.sessionDisable()
+  ),
 
   getReactAppName: () => process.env.NEXT_PUBLIC_NAME || '',
   getReactAppVersion: () => process.env.NEXT_PUBLIC_VERSION || '',
@@ -253,6 +260,8 @@ const NeonEnvironment: INeonEnvironment = {
 
   getDownloadApiPath: {
     downloadStream: (): string => '/stream',
+    downloadProgressTicket: (): string => '/stream/ws/progress/ticket',
+    downloadProgressWs: (): string => '/stream/ws/progress',
     manifestRollup: (): string => '/manifest/rollup',
     prototypeDownloadStream: (): string => '/prototype/stream',
     prototypeManifestRollup: (): string => '/prototype/manifest/rollup',
@@ -638,6 +647,23 @@ const NeonEnvironment: INeonEnvironment = {
     return NeonEnvironment.getDownloadApiPath[path]
       ? `${host}${root}${NeonEnvironment.getDownloadApiPath[path]()}`
       : `${host}${root}`;
+  },
+
+  /**
+   * Creates the full download API websocket path from the API host and path.
+   * The scheme is mapped to the websocket equivalent (http to ws, https to wss)
+   * while the host and port are preserved.
+   * @param {string} path - The path to build from
+   */
+  getFullDownloadApiWsPath: (path: string = ''): string => {
+    const fullPath = NeonEnvironment.getFullDownloadApiPath(path);
+    try {
+      const url = new URL(fullPath);
+      url.protocol = (url.protocol === 'https:') ? 'wss:' : 'ws:';
+      return url.toString();
+    } catch (e) {
+      return fullPath;
+    }
   },
 
   getFullVizApiPath: (path: string = ''): string => {

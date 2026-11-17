@@ -28,7 +28,8 @@ const modulesToTransform = [
   'unist-util-.+',
   'markdown-.+',
   'ccount',
-  'd3-[a-z]+',
+  'd3-[a-z-]+',
+  'internmap',
   'domhandler',
   'domelementtype',
   '@mui/material/styles',
@@ -70,7 +71,7 @@ const jestConfig = {
     '\\.(svg)$': '<rootDir>/src/__mocks__/svgMock.js',
   },
   transform: {
-    '\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './test/babel.config.test.json' }],
+    '\\.(js|jsx|mjs|ts|tsx)$': ['babel-jest', { configFile: './test/babel.config.test.json' }],
     [`\\.(${fileTypesToMockTransform} )$`]: '<rootDir>/src/__mocks__/fileTransformer.js',
   },
   // Transform modules that are in ES6 format.

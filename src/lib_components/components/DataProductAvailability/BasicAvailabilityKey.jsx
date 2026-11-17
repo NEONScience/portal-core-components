@@ -16,7 +16,12 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 
-import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
+import {
+  SVG,
+  VALID_ENHANCED_STATUSES,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
+  AvailabilityPropTypes,
+} from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
 import { COLORS } from '../Theme/Theme';
@@ -71,12 +76,13 @@ const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by 
 const statusLegendElementDefaultProps = {
   status: null,
   dialog: false,
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 const StatusLegendElement = (inProps) => {
   const props = resolveProps(statusLegendElementDefaultProps, inProps);
   const { classes, theme } = useStyles();
-  const { status, dialog } = props;
+  const { status, dialog, colorScheme } = props;
   if (!exists(status) || !VALID_ENHANCED_STATUSES[status]) {
     return null;
   }
@@ -95,7 +101,7 @@ const StatusLegendElement = (inProps) => {
           viewBox={`0 0 ${SVG.CELL_WIDTH} ${SVG.CELL_HEIGHT}`}
           style={{ marginRight: theme.spacing(1) }}
         >
-          <JsxCell status={status} />
+          <JsxCell status={status} colorScheme={colorScheme} />
         </svg>
         <Typography variant="subtitle2" style={{ marginTop: '2px' }}>
           {title}
@@ -106,7 +112,7 @@ const StatusLegendElement = (inProps) => {
   ) : (
     <div className={classes.legendElement} title={description}>
       <svg width={statusSvgWidth} height={statusSvgHeight}>
-        <JsxCell status={status} />
+        <JsxCell status={status} colorScheme={colorScheme} />
         <text className={classes.legendElementText} x={statusLabelX} y={labelY}>
           {title}
         </text>
@@ -118,6 +124,7 @@ const StatusLegendElement = (inProps) => {
 StatusLegendElement.propTypes = {
   status: PropTypes.oneOf(Object.keys(VALID_ENHANCED_STATUSES)),
   dialog: PropTypes.bool,
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };
 
 const selectionLegendElementDefaultProps = {
@@ -191,6 +198,7 @@ const legendDialogDefaultProps = {
   selectionEnabled: false,
   delineateRelease: false,
   availabilityStatusType: 'available',
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 const LegendDialog = (inProps) => {
@@ -202,7 +210,11 @@ const LegendDialog = (inProps) => {
     selectionEnabled,
     delineateRelease,
     availabilityStatusType,
+    colorScheme,
   } = props;
+  const renderStatus = (status) => (
+    <StatusLegendElement status={status} colorScheme={colorScheme} dialog />
+  );
   return (
     <Dialog
       open={dialogOpen}
@@ -229,19 +241,19 @@ const LegendDialog = (inProps) => {
       <DialogContent dividers>
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 6 }}>
-            <StatusLegendElement status={availabilityStatusType} dialog />
+            {renderStatus(availabilityStatusType)}
           </Grid>
           {!delineateRelease ? null : (
             <Grid size={{ xs: 12, sm: 6 }}>
-              <StatusLegendElement status="available-provisional" dialog />
+              {renderStatus('available-provisional')}
             </Grid>
           )}
           <Grid size={{ xs: 12, sm: 6 }}>
-            <StatusLegendElement status="not available" dialog />
+            {renderStatus('not available')}
           </Grid>
           {!delineateRelease ? null : (
             <Grid size={{ xs: 12, sm: 6 }}>
-              <StatusLegendElement status="mixed-available-provisional" dialog />
+              {renderStatus('mixed-available-provisional')}
             </Grid>
           )}
           {!selectionEnabled ? null : (
@@ -266,6 +278,7 @@ LegendDialog.propTypes = {
   selectionEnabled: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };
 
 const basicAvailabilityKeyDefaultProps = {
@@ -273,6 +286,7 @@ const basicAvailabilityKeyDefaultProps = {
   delineateRelease: false,
   availabilityStatusType: 'available',
   dialogOnly: false,
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 const BasicAvailabilityKey = (inProps) => {
@@ -283,6 +297,7 @@ const BasicAvailabilityKey = (inProps) => {
     delineateRelease,
     availabilityStatusType,
     dialogOnly,
+    colorScheme,
   } = props;
   const appliedAvaStatusType = !exists(availabilityStatusType)
     ? 'available'
@@ -328,20 +343,20 @@ const BasicAvailabilityKey = (inProps) => {
     };
   }, [containerRef, handleResizeCb]);
 
+  const renderStatus = (status) => (
+    <StatusLegendElement status={status} colorScheme={colorScheme} dialog={false} />
+  );
+
   const renderLegendItems = () => {
     if (dialogOnly) return null;
     if (selectionEnabled) {
       return (
         <>
           <div>
-            <StatusLegendElement status={appliedAvaStatusType} dialog={false} />
-            {!delineateRelease ? null : (
-              <StatusLegendElement status="available-provisional" dialog={false} />
-            )}
-            <StatusLegendElement status="not available" dialog={false} />
-            {!delineateRelease ? null : (
-              <StatusLegendElement status="mixed-available-provisional" dialog={false} />
-            )}
+            {renderStatus(appliedAvaStatusType)}
+            {!delineateRelease ? null : renderStatus('available-provisional')}
+            {renderStatus('not available')}
+            {!delineateRelease ? null : renderStatus('mixed-available-provisional')}
           </div>
           {!selectionEnabled ? null : (
             <div>
@@ -355,16 +370,12 @@ const BasicAvailabilityKey = (inProps) => {
     return (
       <>
         <div>
-          <StatusLegendElement status={appliedAvaStatusType} dialog={false} />
-          {!delineateRelease ? null : (
-            <StatusLegendElement status="available-provisional" dialog={false} />
-          )}
+          {renderStatus(appliedAvaStatusType)}
+          {!delineateRelease ? null : renderStatus('available-provisional')}
         </div>
         <div>
-          <StatusLegendElement status="not available" dialog={false} />
-          {!delineateRelease ? null : (
-            <StatusLegendElement status="mixed-available-provisional" dialog={false} />
-          )}
+          {renderStatus('not available')}
+          {!delineateRelease ? null : renderStatus('mixed-available-provisional')}
         </div>
       </>
     );
@@ -418,6 +429,7 @@ const BasicAvailabilityKey = (inProps) => {
         selectionEnabled={selectionEnabled}
         delineateRelease={delineateRelease}
         availabilityStatusType={appliedAvaStatusType}
+        colorScheme={colorScheme}
       />
     </>
   );
@@ -428,6 +440,7 @@ BasicAvailabilityKey.propTypes = {
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
   dialogOnly: PropTypes.bool,
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };
 
 export default BasicAvailabilityKey;

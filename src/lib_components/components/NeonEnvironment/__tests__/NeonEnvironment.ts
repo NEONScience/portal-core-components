@@ -72,6 +72,7 @@ describe('NeonEnvironment', () => {
       'enableGlobalSignInState',
       'fetchDrupalAssets',
       'isAutonomousProfile',
+      'downloadProgressEnabled',
     ];
     methods.forEach((method) => {
       test(`${method}()`, () => {
@@ -179,6 +180,57 @@ describe('NeonEnvironment', () => {
 
   test('getAuthSilentType()', () => {
     expect(NeonEnvironment.getAuthSilentType()).toBe('DISABLED');
+  });
+
+  describe('download progress', () => {
+    const ENABLE_PROGRESS = 'NEXT_PUBLIC_NEON_DOWNLOAD_ENABLE_PROGRESS';
+    const DISABLE_SESSION = 'NEXT_PUBLIC_NEON_AUTH_DISABLE_SESSION';
+    const ORIGINAL_ENV = process.env;
+
+    beforeEach(() => {
+      process.env = { ...ORIGINAL_ENV };
+      setEnv('NEXT_PUBLIC_NEON_PATH_DOWNLOAD_API', '/api/download/v0');
+      setEnv(ENABLE_PROGRESS, undefined);
+      setEnv(DISABLE_SESSION, undefined);
+    });
+    afterEach(() => {
+      process.env = ORIGINAL_ENV;
+      delete (window as ServerDataWindow).NEON_SERVER_DATA;
+    });
+
+    test('downloadProgressEnabled() requires the enable flag', () => {
+      expect(NeonEnvironment.downloadProgressEnabled()).toBe(false);
+      setEnv(ENABLE_PROGRESS, 'false');
+      expect(NeonEnvironment.downloadProgressEnabled()).toBe(false);
+      setEnv(ENABLE_PROGRESS, 'true');
+      expect(NeonEnvironment.downloadProgressEnabled()).toBe(true);
+    });
+    test('downloadProgressEnabled() is disabled when sessions are disabled', () => {
+      setEnv(ENABLE_PROGRESS, 'true');
+      setEnv(DISABLE_SESSION, 'true');
+      expect(NeonEnvironment.downloadProgressEnabled()).toBe(false);
+    });
+    test('downloadProgressEnabled() is disabled for the autonomous profile', () => {
+      setEnv(ENABLE_PROGRESS, 'true');
+      setServerData({ NeonProfile: 'autonomous' });
+      expect(NeonEnvironment.downloadProgressEnabled()).toBe(false);
+    });
+    test('getFullDownloadApiWsPath() maps https to wss', () => {
+      const httpPath = NeonEnvironment.getFullDownloadApiPath('downloadProgressWs');
+      expect(httpPath.startsWith('https://')).toBe(true);
+      expect(NeonEnvironment.getFullDownloadApiWsPath('downloadProgressWs'))
+        .toBe(`wss://${httpPath.substring('https://'.length)}`);
+    });
+    test('getFullDownloadApiWsPath() maps http to ws and keeps the port', () => {
+      setServerData({
+        NeonPublicAPIHost: 'http://localhost:1234',
+        NeonPublicAPIHostAllowInternal: true,
+      });
+      expect(NeonEnvironment.getFullDownloadApiWsPath('downloadProgressWs'))
+        .toBe('ws://localhost:1234/api/download/v0/stream/ws/progress');
+      expect(NeonEnvironment.getFullDownloadApiPath('downloadProgressTicket'))
+        .toBe('http://localhost:1234/api/download/v0/stream/ws/progress/ticket');
+    });
   });
 
   describe('NeonProfile', () => {

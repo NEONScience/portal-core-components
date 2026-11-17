@@ -1,0 +1,418 @@
+{
+  "data": {
+    "productCode": "DP4.00132.001",
+    "siteCodes": [
+      {
+        "siteCode": "BARC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-04",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLWA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CRAM",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2015-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "FLNT",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LIRO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRLA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRPO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SUGG",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-04",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOMB",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bat_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_pointcollection",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bat_sonarRecord",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOOK",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

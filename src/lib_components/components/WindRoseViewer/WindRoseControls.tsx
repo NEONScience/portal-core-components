@@ -19,12 +19,15 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import TodayIcon from '@mui/icons-material/Today';
 
 import {
   ActionCreator,
+  getAggregationPeriodType,
   PositionDisplayOption,
   SelectionOption,
   useDispatchContext,
@@ -35,6 +38,14 @@ import {
 } from './Context';
 import { WIND_ROSE_CHANGE_TYPE, WindRosePosition, WindRoseQualityFilter } from './windRoseUtil';
 import { formatPosition, MONTH_FORMAT } from './windRoseChartUtil';
+import {
+  getAvailablePeriodStarts,
+  getPeriodAnchorMonth,
+  getPeriodLabel,
+  getPeriodStartMonth,
+  stepPeriod,
+  WindRosePeriodType,
+} from './windRosePeriodUtil';
 
 import { makeStyles } from '../Theme/makeStyles';
 import { NeonTheme } from '../Theme/types';
@@ -90,18 +101,74 @@ const getPositionValue = (position: WindRosePosition): string => (
   `(${position.horizontal}, ${position.vertical})`
 );
 
-interface WindRoseMonthPickerProps {
+interface WindRosePeriodStepperProps {
+  // Name of the period stepped through, e.g. month, season or year
+  periodName: string;
+  // Month (YYYY-MM) of the previous and next periods with data, if any
+  previousMonth: Nullable<string>;
+  nextMonth: Nullable<string>;
+  onChange: (month: string) => void;
+  children: React.ReactNode;
+}
+
+/**
+ * Picker of a month, season or year between buttons stepping to the previous and next with data
+ */
+const WindRosePeriodStepper: React.FC<WindRosePeriodStepperProps> = (
+  props: WindRosePeriodStepperProps,
+): React.JSX.Element => {
+  const { classes } = useStyles();
+  const {
+    periodName,
+    previousMonth,
+    nextMonth,
+    onChange,
+    children,
+  }: WindRosePeriodStepperProps = props;
+  return (
+    <div className={classes.monthControl}>
+      <Tooltip title={`Previous ${periodName} with data`}>
+        <span>
+          <IconButton
+            size="small"
+            aria-label={`Previous ${periodName} with data`}
+            disabled={!previousMonth}
+            onClick={() => { if (previousMonth) { onChange(previousMonth); } }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
+      <div className={classes.monthPicker}>
+        {children}
+      </div>
+      <Tooltip title={`Next ${periodName} with data`}>
+        <span>
+          <IconButton
+            size="small"
+            aria-label={`Next ${periodName} with data`}
+            disabled={!nextMonth}
+            onClick={() => { if (nextMonth) { onChange(nextMonth); } }}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
+    </div>
+  );
+};
+
+interface WindRosePickerProps {
   month: Nullable<string>;
   // Months with data (YYYY-MM), sorted ascending
   availableMonths: readonly string[];
   onChange: (month: string) => void;
 }
 
-const WindRoseMonthPicker: React.FC<WindRoseMonthPickerProps> = (
-  props: WindRoseMonthPickerProps,
+const WindRoseMonthPicker: React.FC<WindRosePickerProps> = (
+  props: WindRosePickerProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles();
-  const { month, availableMonths, onChange }: WindRoseMonthPickerProps = props;
+  const { month, availableMonths, onChange }: WindRosePickerProps = props;
   const [open, setOpen] = useState<boolean>(false);
   const availableMonthSet = useMemo(() => new Set(availableMonths), [availableMonths]);
   const availableYearSet = useMemo(() => (
@@ -123,67 +190,193 @@ const WindRoseMonthPicker: React.FC<WindRoseMonthPickerProps> = (
     }
   };
   return (
-    <div className={classes.monthControl}>
-      <Tooltip title="Previous month with data">
-        <span>
-          <IconButton
-            size="small"
-            aria-label="Previous month with data"
-            disabled={!previousMonth}
-            onClick={() => { if (previousMonth) { onChange(previousMonth); } }}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
+    <WindRosePeriodStepper
+      periodName="month"
+      previousMonth={previousMonth}
+      nextMonth={nextMonth}
+      onChange={onChange}
+    >
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <div className={classes.monthPicker}>
-          <DatePicker
-            label="Month"
-            views={['year', 'month']}
-            openTo="month"
-            format="MMMM YYYY"
-            disabled={!hasMonths}
-            open={open}
-            onOpen={() => setOpen(true)}
-            onClose={() => setOpen(false)}
-            value={month ? moment(month, MONTH_FORMAT) : null}
-            minDate={hasMonths ? moment(availableMonths[0], MONTH_FORMAT) : undefined}
-            maxDate={hasMonths
-              ? moment(availableMonths[availableMonths.length - 1], MONTH_FORMAT).endOf('month')
-              : undefined}
-            shouldDisableMonth={(value: Moment): boolean => (
-              !availableMonthSet.has(value.format(MONTH_FORMAT))
-            )}
-            shouldDisableYear={(value: Moment): boolean => (
-              !availableYearSet.has(value.format('YYYY'))
-            )}
-            onAccept={handleAccept}
-            slotProps={{
-              textField: {
-                size: 'small',
-                fullWidth: true,
-                readOnly: true,
-                onClick: () => { if (hasMonths) setOpen(true); },
-              },
-            }}
-          />
-        </div>
+        <DatePicker
+          label="Month"
+          views={['year', 'month']}
+          openTo="month"
+          format="MMMM YYYY"
+          disabled={!hasMonths}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          value={month ? moment(month, MONTH_FORMAT) : null}
+          minDate={hasMonths ? moment(availableMonths[0], MONTH_FORMAT) : undefined}
+          maxDate={hasMonths
+            ? moment(availableMonths[availableMonths.length - 1], MONTH_FORMAT).endOf('month')
+            : undefined}
+          shouldDisableMonth={(value: Moment): boolean => (
+            !availableMonthSet.has(value.format(MONTH_FORMAT))
+          )}
+          shouldDisableYear={(value: Moment): boolean => (
+            !availableYearSet.has(value.format('YYYY'))
+          )}
+          onAccept={handleAccept}
+          slotProps={{
+            textField: {
+              size: 'small',
+              fullWidth: true,
+              readOnly: true,
+              onClick: () => { if (hasMonths) setOpen(true); },
+            },
+          }}
+        />
       </LocalizationProvider>
-      <Tooltip title="Next month with data">
-        <span>
-          <IconButton
-            size="small"
-            aria-label="Next month with data"
-            disabled={!nextMonth}
-            onClick={() => { if (nextMonth) onChange(nextMonth); }}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
-    </div>
+    </WindRosePeriodStepper>
   );
+};
+
+const WindRoseYearPicker: React.FC<WindRosePickerProps> = (
+  props: WindRosePickerProps,
+): React.JSX.Element => {
+  const { month, availableMonths, onChange }: WindRosePickerProps = props;
+  const [open, setOpen] = useState<boolean>(false);
+  const availableYearSet = useMemo(() => (
+    new Set(availableMonths.map((availableMonth: string): string => availableMonth.slice(0, 4)))
+  ), [availableMonths]);
+  const hasMonths = availableMonths.length > 0;
+  const handleAccept = (value: Nullable<Moment>): void => {
+    if (!value || !value.isValid()) {
+      return;
+    }
+    // Views the year by the same month of the year as viewed now, where it has data
+    const acceptedMonth = getPeriodAnchorMonth(
+      WindRosePeriodType.YEAR,
+      value.format(MONTH_FORMAT),
+      month,
+      availableMonths,
+    );
+    if (acceptedMonth && (acceptedMonth !== month)) {
+      onChange(acceptedMonth);
+    }
+  };
+  return (
+    <WindRosePeriodStepper
+      periodName="year"
+      previousMonth={month ? stepPeriod(WindRosePeriodType.YEAR, month, availableMonths, -1) : null}
+      nextMonth={month ? stepPeriod(WindRosePeriodType.YEAR, month, availableMonths, 1) : null}
+      onChange={onChange}
+    >
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <DatePicker
+          label="Year"
+          views={['year']}
+          openTo="year"
+          format="YYYY"
+          disabled={!hasMonths}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          value={month ? moment(month, MONTH_FORMAT) : null}
+          minDate={hasMonths ? moment(availableMonths[0], MONTH_FORMAT) : undefined}
+          maxDate={hasMonths
+            ? moment(availableMonths[availableMonths.length - 1], MONTH_FORMAT).endOf('month')
+            : undefined}
+          shouldDisableYear={(value: Moment): boolean => (
+            !availableYearSet.has(value.format('YYYY'))
+          )}
+          onAccept={handleAccept}
+          slotProps={{
+            textField: {
+              size: 'small',
+              fullWidth: true,
+              readOnly: true,
+              onClick: () => { if (hasMonths) setOpen(true); },
+            },
+          }}
+        />
+      </LocalizationProvider>
+    </WindRosePeriodStepper>
+  );
+};
+
+const WindRoseSeasonPicker: React.FC<WindRosePickerProps> = (
+  props: WindRosePickerProps,
+): React.JSX.Element => {
+  const { month, availableMonths, onChange }: WindRosePickerProps = props;
+  const labelId = useId();
+  const seasons = useMemo(() => (
+    getAvailablePeriodStarts(WindRosePeriodType.SEASON, availableMonths)
+  ), [availableMonths]);
+  const season = month ? getPeriodStartMonth(WindRosePeriodType.SEASON, month) : '';
+  const step = (direction: 1 | -1): Nullable<string> => (
+    month ? stepPeriod(WindRosePeriodType.SEASON, month, availableMonths, direction) : null
+  );
+  return (
+    <WindRosePeriodStepper
+      periodName="season"
+      previousMonth={step(-1)}
+      nextMonth={step(1)}
+      onChange={onChange}
+    >
+      <FormControl size="small" fullWidth disabled={seasons.length <= 0}>
+        <InputLabel id={labelId}>Season</InputLabel>
+        <Select
+          labelId={labelId}
+          label="Season"
+          value={seasons.includes(season) ? season : ''}
+          onChange={(event: SelectChangeEvent<string>) => {
+            // Views the season by the same month of the season as viewed now, where it has data
+            const selectedMonth = getPeriodAnchorMonth(
+              WindRosePeriodType.SEASON,
+              event.target.value,
+              month,
+              availableMonths,
+            );
+            if (selectedMonth && (selectedMonth !== month)) {
+              onChange(selectedMonth);
+            }
+          }}
+          MenuProps={{ slotProps: { paper: { style: { maxHeight: '420px' } } } }}
+        >
+          {seasons.map((seasonStart: string): React.JSX.Element => (
+            <MenuItem key={seasonStart} value={seasonStart}>
+              {getPeriodLabel(WindRosePeriodType.SEASON, seasonStart)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </WindRosePeriodStepper>
+  );
+};
+
+export interface WindRosePeriodPickerProps extends WindRosePickerProps {
+  aggregation: WindRoseAggregation;
+}
+
+/**
+ * Picks the year, season or month to view by a month (YYYY-MM) of it, following the aggregation.
+ * Days are picked by the month they are in.
+ */
+export const WindRosePeriodPicker: React.FC<WindRosePeriodPickerProps> = (
+  props: WindRosePeriodPickerProps,
+): React.JSX.Element => {
+  const {
+    aggregation,
+    month,
+    availableMonths,
+    onChange,
+  }: WindRosePeriodPickerProps = props;
+  switch (getAggregationPeriodType(aggregation)) {
+    case WindRosePeriodType.YEAR:
+      return (
+        <WindRoseYearPicker month={month} availableMonths={availableMonths} onChange={onChange} />
+      );
+    case WindRosePeriodType.SEASON:
+      return (
+        <WindRoseSeasonPicker month={month} availableMonths={availableMonths} onChange={onChange} />
+      );
+    default:
+      return (
+        <WindRoseMonthPicker month={month} availableMonths={availableMonths} onChange={onChange} />
+      );
+  }
 };
 
 const WindRoseControls: React.FC = (): React.JSX.Element => {
@@ -199,6 +392,7 @@ const WindRoseControls: React.FC = (): React.JSX.Element => {
     monthOptions,
     positionOptions,
     query,
+    aggregation,
     qualityFilter,
   }: WindRoseViewerState = state;
   const site = query.sites[0] || '';
@@ -229,7 +423,8 @@ const WindRoseControls: React.FC = (): React.JSX.Element => {
           ))}
         </Select>
       </FormControl>
-      <WindRoseMonthPicker
+      <WindRosePeriodPicker
+        aggregation={aggregation}
         month={month}
         availableMonths={availableMonths}
         onChange={(nextMonth: string) => {
@@ -321,7 +516,7 @@ const WindRoseControls: React.FC = (): React.JSX.Element => {
 };
 
 /**
- * Toggles between the monthly and daily wind rose aggregations
+ * Toggles between the annual, seasonal, monthly and daily wind rose aggregations
  */
 export const WindRoseAggregationToggle: React.FC = (): React.JSX.Element => {
   const { classes } = useStyles();
@@ -335,11 +530,19 @@ export const WindRoseAggregationToggle: React.FC = (): React.JSX.Element => {
       aria-label="Wind rose aggregation"
       onChange={(event: React.MouseEvent<HTMLElement>, value: unknown) => {
         // Clicking the selected button would otherwise leave no aggregation selected
-        if ((value === WindRoseAggregation.MONTHLY) || (value === WindRoseAggregation.DAILY)) {
-          dispatch(ActionCreator.setAggregation(value));
+        if (Object.values(WindRoseAggregation).includes(value as WindRoseAggregation)) {
+          dispatch(ActionCreator.setAggregation(value as WindRoseAggregation));
         }
       }}
     >
+      <ToggleButton value={WindRoseAggregation.ANNUAL}>
+        <CalendarViewMonthIcon className={classes.toggleIcon} />
+        Annual
+      </ToggleButton>
+      <ToggleButton value={WindRoseAggregation.SEASONAL}>
+        <DateRangeIcon className={classes.toggleIcon} />
+        Seasonal
+      </ToggleButton>
       <ToggleButton value={WindRoseAggregation.MONTHLY}>
         <CalendarMonthIcon className={classes.toggleIcon} />
         Monthly

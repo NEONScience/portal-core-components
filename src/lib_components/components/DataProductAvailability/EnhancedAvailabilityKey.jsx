@@ -10,7 +10,12 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import HelpIcon from '@mui/icons-material/HelpOutlineOutlined';
 
-import { SVG, VALID_ENHANCED_STATUSES } from './AvailabilityUtils';
+import {
+  SVG,
+  VALID_ENHANCED_STATUSES,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
+  AvailabilityPropTypes,
+} from './AvailabilityUtils';
 import { JsxCell } from './AvailabilitySvgComponents';
 
 import { COLORS } from '../Theme/Theme';
@@ -52,6 +57,7 @@ const SOME_SELECTED_TITLE = 'If the chart is presenting a roll-up (e.g. view by 
 const defaultProps = {
   selectionEnabled: false,
   rollUpPresent: false,
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 /**
@@ -61,7 +67,7 @@ export default function EnhancedAvailabilityKey(inProps) {
   const props = resolveProps(defaultProps, inProps);
   const { classes, theme } = useStyles();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { selectionEnabled, rollUpPresent } = props;
+  const { selectionEnabled, rollUpPresent, colorScheme } = props;
 
   const statusSvgHeight = SVG.CELL_HEIGHT + 2;
   const labelLetterWidth = 8;
@@ -82,7 +88,7 @@ export default function EnhancedAvailabilityKey(inProps) {
     statusSvgs[status] = (
       <div className={classes.keyElement} title={description} {...dialogOpenerProps}>
         <svg width={statusSvgWidth} height={statusSvgHeight}>
-          <JsxCell status={status} />
+          <JsxCell status={status} colorScheme={colorScheme} />
           <text className={classes.keyElementText} x={statusLabelX} y={labelY}>
             {label}
           </text>
@@ -153,7 +159,7 @@ export default function EnhancedAvailabilityKey(inProps) {
               viewBox={`0 0 ${SVG.CELL_WIDTH} ${SVG.CELL_HEIGHT}`}
               style={{ marginRight: theme.spacing(1) }}
             >
-              <JsxCell status={status} />
+              <JsxCell status={status} colorScheme={colorScheme} />
             </svg>
             <Typography variant="subtitle2" style={{ fontSize: '0.95rem', marginTop: '2px' }}>
               {title}
@@ -190,15 +196,16 @@ export default function EnhancedAvailabilityKey(inProps) {
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
             <div style={{ flex: '50%', marginRight: theme.spacing(2) }}>
               {renderStatus('available')}
-              {renderStatus('being processed')}
+              {renderStatus('available-provisional')}
+              {renderStatus('mixed-available-provisional')}
               {renderStatus('expected')}
-              {renderStatus('not expected')}
+              {renderStatus('tentative')}
             </div>
             <div style={{ flex: '50%' }}>
-              {renderStatus('not available')}
+              {renderStatus('not expected')}
+              {renderStatus('partial')}
               {renderStatus('not collected')}
-              {renderStatus('delayed')}
-              {renderStatus('tentative')}
+              {renderStatus('not available')}
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
@@ -246,15 +253,18 @@ export default function EnhancedAvailabilityKey(inProps) {
         </div>
         <div>
           {statusSvgs.available}
-          {statusSvgs['being processed']}
+          {statusSvgs['available-provisional']}
+          {statusSvgs['mixed-available-provisional']}
+        </div>
+        <div>
           {statusSvgs.expected}
+          {statusSvgs.tentative}
           {statusSvgs['not expected']}
         </div>
         <div>
-          {statusSvgs['not available']}
+          {statusSvgs.partial}
           {statusSvgs['not collected']}
-          {statusSvgs.delayed}
-          {statusSvgs.tentative}
+          {statusSvgs['not available']}
         </div>
         {!(selectionEnabled || rollUpPresent) ? null : (
           <div>
@@ -281,4 +291,5 @@ export default function EnhancedAvailabilityKey(inProps) {
 EnhancedAvailabilityKey.propTypes = {
   selectionEnabled: PropTypes.bool,
   rollUpPresent: PropTypes.bool,
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };

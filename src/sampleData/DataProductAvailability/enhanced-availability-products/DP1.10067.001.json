@@ -1,0 +1,1290 @@
+{
+  "data": {
+    "productCode": "DP1.10067.001",
+    "siteCodes": [
+      {
+        "siteCode": "ABBY",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BARR",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BART",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLAN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BONA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CLBJ",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DCFS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DEJU",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DELA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "DSNY",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GUAN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-11",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "HARV",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "JERC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "JORN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-10",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "KONA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "KONZ",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LAJA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LENO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MLBS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MOAB",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "NIWO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "NOGP",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OAES",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-11",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "ONAQ",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "ORNL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PUUM",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "RMNP",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SCBI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SJER",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-04",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SOAP",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SRER",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "STEI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "STER",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TALL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOOL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TREE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "UKFS",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "UNDE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "WOOD",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2016-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2016-08",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "WREF",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "YELL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "bbc_chemistryPooling",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_dilution",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_percore",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "bbc_rootmass",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

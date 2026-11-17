@@ -14,6 +14,7 @@ import {
   WindRoseDataFilesInfo,
   WindRoseQualityFilter,
 } from '../windRoseUtil';
+import { getEmptyTimeSeries, TIME_SERIES_BASE_INTERVAL_MS } from '../windRoseTimeSeriesUtil';
 
 const getDirectionBin = (direction: number): string => (
   DIRECTION_BINS[getDirectionBinIndex(direction)]
@@ -38,10 +39,14 @@ const row = (
   windSpeedMean: string,
   windSpeedFinalQF = '0',
   windDirFinalQF = '0',
+  windSpeedMinimum = '',
+  windSpeedMaximum = '',
 ): Record<string, unknown> => ({
   startDateTime,
   windDirMean,
   windSpeedMean,
+  windSpeedMinimum,
+  windSpeedMaximum,
   windSpeedFinalQF,
   windDirFinalQF,
 });
@@ -185,8 +190,89 @@ describe('WindRoseViewer - windRoseUtil', () => {
       );
       expect(result.dataStateMessage).toBe('Time variable could not be determined from data.');
       Object.values(result.dataSets).forEach((dataSet) => {
-        expect(dataSet).toEqual({ monthly: null, daily: {}, days: [] });
+        expect(dataSet).toEqual({
+          monthly: null,
+          daily: {},
+          days: [],
+          timeSeries: getEmptyTimeSeries(),
+        });
       });
+    });
+  });
+
+  describe('buildWindRoseData time series', () => {
+    const built = buildWindRoseData(
+      [
+        {
+          data: [
+            row('2026-06-01T00:00:00Z', '90', '1.0', '0', '0', '0.2', '2.5'),
+            row('2026-06-01T00:02:00Z', '90', '3.0', '0', '0', '0.6', '6.1'),
+            // Minimum and maximum are not always reported
+            row('2026-06-01T00:04:00Z', '90', '2.0', '0', '0', '', ''),
+            // Calm observations are part of the mean
+            row('2026-06-01T00:06:00Z', '', '0', '0', '0', '0', '0.4'),
+            // A failing observation in the next interval
+            row('2026-06-01T00:12:00Z', '270', '4.0', '1', '0', '1.1', '9.4'),
+            // Observations not on the wind rose are not on the time series
+            row('2026-06-01T00:14:00Z', '', '5.0', '0', '0', '2.0', '12'),
+          ],
+        },
+        {
+          // Observations from every data file (position) are combined
+          data: [row('2026-06-01T00:08:00Z', '45', '6.0', '0', '0', '0.1', '8.2')],
+        },
+      ],
+      dataFilesInfo,
+    );
+
+    test('aggregates the observations of the wind roses into 10 minute intervals', () => {
+      const { timeSeries } = built.dataSets[WindRoseQualityFilter.ALL];
+      expect(timeSeries.interval).toBe(TIME_SERIES_BASE_INTERVAL_MS);
+      expect(timeSeries.points).toHaveLength(2);
+      const [first, second] = timeSeries.points;
+      expect(first.time).toBe(Date.parse('2026-06-01T00:00:00Z'));
+      expect(first.samples).toBe(5);
+      expect(first.mean).toBeCloseTo((1 + 3 + 2 + 0 + 6) / 5);
+      expect(first.min).toBe(0);
+      expect(first.max).toBe(8.2);
+      expect(second).toEqual({
+        time: Date.parse('2026-06-01T00:10:00Z'),
+        samples: 1,
+        mean: 4,
+        min: 1.1,
+        max: 9.4,
+      });
+    });
+
+    test('builds the time series of Quality Flag validated observations', () => {
+      const { timeSeries } = built.dataSets[WindRoseQualityFilter.VALIDATED];
+      expect(timeSeries.points).toHaveLength(1);
+      expect(timeSeries.points[0].samples).toBe(5);
+    });
+
+    test('agrees with the mean speed of the wind roses', () => {
+      const all = built.dataSets[WindRoseQualityFilter.ALL];
+      const samples = all.timeSeries.points.reduce((sum, point) => sum + point.samples, 0);
+      const speedSum = all.timeSeries.points.reduce((sum, point) => (
+        sum + (point.mean * point.samples)
+      ), 0);
+      expect(samples).toBe(all.monthly?.samples);
+      expect(speedSum / samples).toBeCloseTo(all.monthly?.meanSpeed as number);
+    });
+
+    test('aggregates observations averaged over longer periods into those periods', () => {
+      const result = buildWindRoseData(
+        [{
+          data: [
+            row('2026-06-01T00:00:00Z', '90', '1.0', '0', '0', '0.2', '2.5'),
+            row('2026-06-01T00:30:00Z', '90', '2.0', '0', '0', '0.4', '4.5'),
+          ],
+        }],
+        { ...dataFilesInfo, dataFileMatcher: { tmi: '030', fileName: '30min' } },
+      );
+      const { timeSeries } = result.dataSets[WindRoseQualityFilter.ALL];
+      expect(timeSeries.interval).toBe(30 * 60 * 1000);
+      expect(timeSeries.points.map((point) => point.mean)).toEqual([1, 2]);
     });
   });
 

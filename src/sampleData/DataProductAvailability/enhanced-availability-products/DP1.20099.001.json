@@ -1,0 +1,360 @@
+{
+  "data": {
+    "productCode": "DP1.20099.001",
+    "siteCodes": [
+      {
+        "siteCode": "CARI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OKSR",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOOK",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "agw_groundwaterFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

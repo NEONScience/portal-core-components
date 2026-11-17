@@ -15,6 +15,8 @@ import NeonContext from '../NeonContext/NeonContext';
 import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 
 import { AvailabilityPropTypes } from './AvailabilityUtils';
+import { parseEnhancedAvailability } from './EnhancedAvailabilityParser';
+import { DEFAULT_AVAILABILITY_INHERITANCE_MODE } from './EnhancedAvailabilityInheritance';
 
 import NeonSignInButtonState from '../NeonSignInButton/NeonSignInButtonState';
 import makeStateStorage from '../../service/StateStorageService';
@@ -22,14 +24,21 @@ import { resolveProps } from '../../util/defaultProps';
 import { exists } from '../../util/typeUtil';
 
 const SORT_DIRECTIONS = { ASC: 'ASC', DESC: 'DESC' };
+const SITE_BREAKOUTS = ['states', 'domains', 'sites'];
+const COMPONENT_BREAKOUTS = ['packages', 'tables'];
+const PACKAGE_CODES = { basic: 'basic', expanded: 'expanded' };
 const DEFAULT_STATE = {
-  sites: [],
+  productCode: null,
+  siteMonths: {},
+  componentRows: [],
   tables: {},
+  hasComponents: false,
+  isComponentLevel: false,
   rows: {},
   rowTitles: {},
   rowLabels: [],
   breakouts: [],
-  validBreakouts: ['states', 'domains', 'sites', 'tables'],
+  validBreakouts: [...SITE_BREAKOUTS],
   sortDirection: SORT_DIRECTIONS.ASC,
   neonContextHydrated: false, // Whether NeonContext data has been one-time hydrated into state
   reference: {
@@ -52,105 +61,108 @@ const hydrateNeonContextData = (state, neonContextData) => {
 };
 
 /**
-   Extract Tables
+   Parse enhanced availability data into state with the inheritance mode, one of
+   AvailabilityInheritanceMode. Package and table breakouts are only valid when the data includes
+   component (table) detail.
 */
-const extractTables = (state) => {
-  const tables = {};
-  state.sites.forEach((site) => {
-    const { siteCode } = site;
-    site.tables.forEach((table) => {
-      const { name, description, waitInterval } = table;
-      if (!tables[name]) {
-        tables[name] = {
-          name,
-          description,
-          waitInterval,
-          sites: [siteCode],
-        };
-      } else if (!tables[name].sites.includes(siteCode)) {
-        tables[name].sites.push(siteCode);
-      }
-    });
-  });
-  const digits = Math.floor(Math.log10(Object.keys(tables).length) + 1);
-  Object.keys(tables).forEach((table, idx) => {
-    tables[table].tableCode = `T${(idx + 1).toString().padStart(digits, '0')}`;
-  });
-  return tables;
+const applyAvailability = (state, availability, inheritanceMode) => {
+  const parsed = parseEnhancedAvailability(availability, inheritanceMode);
+  const validBreakouts = parsed.hasComponents
+    ? [...SITE_BREAKOUTS, ...COMPONENT_BREAKOUTS]
+    : [...SITE_BREAKOUTS];
+  return {
+    ...state,
+    ...parsed,
+    validBreakouts,
+    breakouts: state.breakouts.filter((breakout) => validBreakouts.includes(breakout)),
+  };
+};
+
+const capitalize = (value) => `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+
+/**
+   Get the [label code, title] pair a breakout contributes to a row for a given source
+   (a site or a site / package / table component)
+*/
+const getLabelPart = (breakout, source, state) => {
+  const { siteCode, packageType, tableName } = source;
+  const { reference, tables } = state;
+  const { stateCode, domainCode, description } = reference.sites[siteCode];
+  switch (breakout) {
+    case 'states':
+      return [stateCode, reference.states[stateCode]?.name || stateCode];
+    case 'domains':
+      return [domainCode, reference.domains[domainCode]?.name || domainCode];
+    case 'sites':
+      return [siteCode, description || siteCode];
+    case 'packages':
+      return [
+        PACKAGE_CODES[packageType] || packageType.slice(0, 3).toUpperCase(),
+        `${capitalize(packageType)} package`,
+      ];
+    case 'tables':
+      return [tables[tableName].tableCode, tableName];
+    default:
+      return null;
+  }
 };
 
 /**
   Calculate Rows
-  Take a state object and spit out a new state containing rows for use in the SVG grid
+  Take a state object and spit out a new state containing rows for use in the SVG grid.
+  Rows are built from site-month statuses unless a package or table breakout is selected,
+  in which case they are built from component (table) statuses.
 */
 const calculateRows = (state) => {
   if (!state.neonContextHydrated) { return state; }
+  const {
+    siteMonths,
+    componentRows,
+    breakouts,
+    reference,
+    sortDirection,
+  } = state;
+  const isComponentLevel = breakouts.some((breakout) => COMPONENT_BREAKOUTS.includes(breakout));
   const newState = {
     ...state,
+    isComponentLevel,
     rows: {},
     rowLabels: [],
     rowTitles: {},
   };
-  const {
-    sites,
-    breakouts,
-    reference,
-    sortDirection,
-    tables: knownTables,
-  } = state;
   if (!breakouts.length) {
     newState.rowLabels = ['ALL'];
     newState.rows.ALL = {};
+    newState.rowTitles.ALL = 'Summary of all sites';
   }
-  // Generate unsorted row labels and row data respecting breakouts
-  sites.forEach((site) => {
-    const { siteCode, tables } = site;
-    if (!reference.sites[siteCode]) { return; }
-    const { stateCode, domainCode } = reference.sites[siteCode];
-    tables.forEach((table) => {
-      const { name: tableName, months } = table;
-      if (!knownTables[tableName]) { return; }
-      const { tableCode } = knownTables[tableName];
-      // turn siteCode / stateCode / domainCode / tableCode into a label
-      // then populate that label's row
-      let title = !breakouts.length ? 'Summary of all sites and tables' : '';
-      const label = !breakouts.length ? 'ALL' : (
-        breakouts.reduce((acc, cur) => {
-          switch (cur) {
-            case 'states':
-              title = `${title}${title.length ? ' - ' : ''}${reference.states[stateCode].name}`;
-              return `${acc}${acc.length ? '-' : ''}${stateCode}`;
-            case 'domains':
-              title = `${title}${title.length ? ' - ' : ''}${reference.domains[domainCode].name}`;
-              return `${acc}${acc.length ? '-' : ''}${domainCode}`;
-            case 'sites':
-              // eslint-disable-next-line max-len, @stylistic/max-len
-              title = `${title}${title.length ? ' - ' : ''}${reference.sites[siteCode].description}`;
-              return `${acc}${acc.length ? '-' : ''}${siteCode}`;
-            case 'tables':
-              title = `${title}${title.length ? ' - ' : ''}${tableName}`;
-              return `${acc}${acc.length ? '-' : ''}${tableCode}`;
-            default:
-              return acc;
-          }
-        }, '')
-      );
-      if (!newState.rowLabels.includes(label)) {
-        newState.rowLabels.push(label);
-        newState.rows[label] = {};
+  const sources = isComponentLevel
+    ? componentRows
+    : Object.keys(siteMonths).map((siteCode) => ({ siteCode, months: siteMonths[siteCode] }));
+  sources.forEach((source) => {
+    if (!reference.sites[source.siteCode]) { return; }
+    const parts = breakouts
+      .map((breakout) => getLabelPart(breakout, source, state))
+      .filter((part) => part !== null);
+    const label = parts.length ? parts.map(([code]) => code).join('-') : 'ALL';
+    if (!newState.rows[label]) {
+      newState.rows[label] = {};
+      newState.rowLabels.push(label);
+      newState.rowTitles[label] = parts.map(([, title]) => title).join(' - ');
+    }
+    Object.keys(source.months).forEach((month) => {
+      if (!newState.rows[label][month]) {
+        newState.rows[label][month] = [source.months[month]];
+      } else {
+        newState.rows[label][month].push(source.months[month]);
       }
-      newState.rowTitles[label] = title;
-      Object.keys(months).forEach((month) => {
-        newState.rows[label][month] = [...(newState.rows[label][month] || []), months[month]];
-      });
     });
-    // Sort row labels
-    const sortReturns = [
-      sortDirection === SORT_DIRECTIONS.ASC ? 1 : -1,
-      sortDirection === SORT_DIRECTIONS.ASC ? -1 : 1,
-    ];
-    newState.rowLabels.sort((a, b) => (a < b ? sortReturns[0] : sortReturns[1]));
   });
+  // Rows are drawn bottom-up so this produces ascending order from top to bottom
+  const sortReturns = [
+    sortDirection === SORT_DIRECTIONS.ASC ? 1 : -1,
+    sortDirection === SORT_DIRECTIONS.ASC ? -1 : 1,
+  ];
+  newState.rowLabels.sort((a, b) => (a < b ? sortReturns[0] : sortReturns[1]));
   return newState;
 };
 
@@ -163,6 +175,11 @@ const reducer = (state, action) => {
     case 'hydrateNeonContextData':
       if (!action.neonContextData) { return state; }
       return calculateRows(hydrateNeonContextData(newState, action.neonContextData));
+
+    case 'setAvailability':
+      return calculateRows(
+        applyAvailability(newState, action.availability, action.inheritanceMode),
+      );
 
     case 'setBreakouts':
       if (!action.breakouts) { return state; }
@@ -207,7 +224,8 @@ const useAvailabilityState = () => {
 
 const defaultProps = {
   dataAvailabilityUniqueId: 0,
-  sites: [],
+  enhancedAvailability: null,
+  inheritanceMode: DEFAULT_AVAILABILITY_INHERITANCE_MODE,
 };
 
 /**
@@ -215,7 +233,12 @@ const defaultProps = {
 */
 const Provider = (inProps) => {
   const props = resolveProps(defaultProps, inProps);
-  const { sites, dataAvailabilityUniqueId, children } = props;
+  const {
+    enhancedAvailability,
+    inheritanceMode,
+    dataAvailabilityUniqueId,
+    children,
+  } = props;
 
   const [
     { data: neonContextData, isFinal: neonContextIsFinal, hasError: neonContextHasError },
@@ -224,15 +247,6 @@ const Provider = (inProps) => {
   // Initialize the storage state and restore state
   const key = `availabilityContextState-${dataAvailabilityUniqueId}`;
   const stateStorage = useMemo(() => makeStateStorage(key), [key]);
-  // Compute the initial context state when props change
-  const contextState = useMemo(() => {
-    let initialState = { ...cloneDeep(DEFAULT_STATE), sites };
-    initialState.tables = extractTables(initialState);
-    if (neonContextIsFinal && !neonContextHasError) {
-      initialState = hydrateNeonContextData(initialState, neonContextData);
-    }
-    return initialState;
-  }, [sites, neonContextData, neonContextIsFinal, neonContextHasError]);
   // Determine initial state from session storage once
   const [initState] = useState(() => {
     const savedState = stateStorage.readState();
@@ -248,17 +262,42 @@ const Provider = (inProps) => {
       initialState,
     };
   });
-  // Determine initialized state from stored state once
-  const appliedInitialState = initState.restoredStateFromStorage
-    ? initState.initialState
-    : contextState;
-  const [state, dispatch] = useReducer(reducer, calculateRows(appliedInitialState));
+  // Determine initialized state from stored state or props once
+  const [state, dispatch] = useReducer(reducer, null, () => {
+    if (initState.restoredStateFromStorage) {
+      return calculateRows({ ...cloneDeep(DEFAULT_STATE), ...initState.initialState });
+    }
+    let initialState = applyAvailability(
+      cloneDeep(DEFAULT_STATE),
+      enhancedAvailability,
+      inheritanceMode,
+    );
+    if (neonContextIsFinal && !neonContextHasError) {
+      initialState = hydrateNeonContextData(initialState, neonContextData);
+    }
+    return calculateRows(initialState);
+  });
   // Clean up session state
   useEffect(() => {
     if (initState.restoredStateFromStorage) {
       stateStorage.removeState();
     }
   }, [stateStorage, initState]);
+
+  /**
+     Effect - Apply availability data provided after the initial render (e.g. once fetched), and
+     apply it again when the inheritance mode changes
+  */
+  const appliedAvailabilityRef = useRef({ enhancedAvailability, inheritanceMode });
+  useEffect(() => {
+    const applied = appliedAvailabilityRef.current;
+    if (
+      (applied.enhancedAvailability === enhancedAvailability)
+      && (applied.inheritanceMode === inheritanceMode)
+    ) { return; }
+    appliedAvailabilityRef.current = { enhancedAvailability, inheritanceMode };
+    dispatch({ type: 'setAvailability', availability: enhancedAvailability, inheritanceMode });
+  }, [enhancedAvailability, inheritanceMode]);
 
   // The current sign in process uses a separate domain. This function
   // persists the current state in storage when the button is clicked
@@ -302,7 +341,8 @@ const Provider = (inProps) => {
 
 Provider.propTypes = {
   dataAvailabilityUniqueId: PropTypes.number,
-  sites: AvailabilityPropTypes.enhancedSites,
+  enhancedAvailability: AvailabilityPropTypes.enhancedAvailability,
+  inheritanceMode: AvailabilityPropTypes.inheritanceMode,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.node,
@@ -328,8 +368,8 @@ export default AvailabilityContext;
 export const getTestableItems = () => (
   process.env.NODE_ENV !== 'test' ? {} : {
     DEFAULT_STATE,
+    applyAvailability,
     calculateRows,
-    extractTables,
     hydrateNeonContextData,
     reducer,
   }

@@ -45,7 +45,12 @@ import { resolveProps } from '../../util/defaultProps';
 import AvailabilityPending from './AvailabilityPending';
 import BasicAvailabilityGrid from './BasicAvailabilityGrid';
 import BasicAvailabilityKey from './BasicAvailabilityKey';
-import { SVG, TIME, AvailabilityPropTypes } from './AvailabilityUtils';
+import {
+  SVG,
+  TIME,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
+  AvailabilityPropTypes,
+} from './AvailabilityUtils';
 import { SvgDefs } from './AvailabilitySvgComponents';
 
 /**
@@ -114,6 +119,7 @@ const defaultProps = {
   disableSelection: false,
   delineateRelease: false,
   availabilityStatusType: null,
+  colorScheme: DEFAULT_AVAILABILITY_COLOR_SCHEME,
 };
 
 /**
@@ -254,7 +260,12 @@ const BasicAvailabilityInterface = (inProps) => {
     dispatchSelection,
   ] = DownloadDataContext.useDownloadDataState();
 
-  const { disableSelection, delineateRelease, availabilityStatusType } = props;
+  const {
+    disableSelection,
+    delineateRelease,
+    availabilityStatusType,
+    colorScheme,
+  } = props;
   const selectionEnabled = !disableSelection
     && requiredSteps.some((step) => step.key === 'sitesAndDateRange');
 
@@ -533,6 +544,7 @@ const BasicAvailabilityInterface = (inProps) => {
       dateRange: appliedDateRange,
       setDateRangeValue,
       selectionEnabled,
+      colorScheme,
     });
   }, [
     theme,
@@ -547,6 +559,7 @@ const BasicAvailabilityInterface = (inProps) => {
     appliedDateRange,
     setDateRangeValue,
     selectionEnabled,
+    colorScheme,
   ]);
 
   useLayoutEffect(() => {
@@ -722,6 +735,7 @@ const BasicAvailabilityInterface = (inProps) => {
           selectionEnabled={selectionEnabled}
           delineateRelease={delineateRelease}
           availabilityStatusType={availabilityStatusType}
+          colorScheme={colorScheme}
           style={{ flexGrow: 1 }}
         />
       </Grid>
@@ -891,7 +905,7 @@ const BasicAvailabilityInterface = (inProps) => {
       data-selenium="data-product-availability"
       {...other}
     >
-      <SvgDefs />
+      <SvgDefs colorScheme={colorScheme} />
       <Grid
         container
         spacing={2}
@@ -925,6 +939,7 @@ BasicAvailabilityInterface.propTypes = {
   disableSelection: PropTypes.bool,
   delineateRelease: PropTypes.bool,
   availabilityStatusType: PropTypes.oneOf(['available', 'tombstoned']),
+  colorScheme: AvailabilityPropTypes.colorScheme,
 };
 
 export default BasicAvailabilityInterface;

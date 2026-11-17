@@ -5,6 +5,8 @@ import moment from 'moment';
 import { transition } from 'd3-transition';
 
 import { COLORS } from '../Theme/Theme';
+import { AVAILABILITY_DATA_LEVELS } from './EnhancedAvailabilitySchema';
+import { AVAILABILITY_INHERITANCE_MODES } from './EnhancedAvailabilityInheritance';
 
 /**
   All possible valid statuses (enhanced availability only)
@@ -14,10 +16,6 @@ export const VALID_ENHANCED_STATUSES = {
   expected: {
     title: 'Expected',
     description: 'Data collection is scheduled to happen',
-  },
-  'being processed': {
-    title: 'Being Processed',
-    description: 'Data have been collected and will be published after processing has completed',
   },
   available: {
     title: 'Release Available',
@@ -31,17 +29,17 @@ export const VALID_ENHANCED_STATUSES = {
     title: 'Mixed',
     description: 'Data have been published and are available for download. Some data are released and some data are provisional.',
   },
-  delayed: {
-    title: 'Delayed',
-    description: 'Data should be available for download but something has prevented publication',
+  partial: {
+    title: 'Partial',
+    description: 'Data collection was incomplete.',
   },
   tentative: {
     title: 'Potential',
     description: 'Data collection is desired but not expected until other conditions are met',
   },
   'not expected': {
-    title: 'Not Expected',
-    description: 'No data collection is scheduled',
+    title: 'Not Planned',
+    description: 'No data collection is planned',
   },
   'not collected': {
     title: 'Not Collected',
@@ -57,46 +55,127 @@ export const VALID_ENHANCED_STATUSES = {
   },
   'mixed some availability': {
     title: 'Mixed (Some Availability)',
-    description: 'More than one status including at least one "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)',
+    description: 'More than one status including at least one "Available" across sites / packages / tables in the rollup (e.g. viewing states, all tables, etc.)',
   },
   'mixed no availability': {
     title: 'Mixed (No Availability)',
-    description: 'More than one status with none "Available" across sites / tables in the rollup (e.g. viewing states, all tables, etc.)',
+    description: 'More than one status with none "Available" across sites / packages / tables in the rollup (e.g. viewing states, all tables, etc.)',
   },
 };
 /* eslint-enable max-len, @stylistic/max-len */
 
+/**
+   Enhanced availability API constants
+*/
+export const PROVISIONAL_RELEASE = 'PROVISIONAL';
+export const TABLE_COMPONENT_TYPE = 'tablename';
+// Maps statuses reported by the enhanced availability API to enhanced statuses
+export const API_STATUS_MAP = {
+  Expected: 'expected',
+  Potential: 'tentative',
+  'Not Planned': 'not expected',
+  'Not Collected': 'not collected',
+  Partial: 'partial',
+};
+export const AVAILABLE_STATUSES = [
+  'available',
+  'available-provisional',
+  'mixed-available-provisional',
+];
+const VALID_ENHANCED_STATUS_SET = new Set(Object.keys(VALID_ENHANCED_STATUSES));
+const AVAILABLE_STATUS_SET = new Set(AVAILABLE_STATUSES);
+
 export const calcBasicRollupStatus = (statuses) => {
-  if (!statuses) {
+  if (!statuses || statuses.size === 0) {
     return null;
   }
-  if (Array.from(statuses).some((s) => !Object.keys(VALID_ENHANCED_STATUSES).includes(s))) {
-    return null;
+  let firstStatus = null;
+  let hasTomb = false;
+  let hasProvisional = false;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const s of statuses) {
+    if (!VALID_ENHANCED_STATUS_SET.has(s)) {
+      return null;
+    }
+    if (firstStatus === null) { firstStatus = s; }
+    if (s === 'tombstoned') { hasTomb = true; }
+    if (s === 'available-provisional') { hasProvisional = true; }
   }
-  if (statuses.size === 0) { return null; }
-  if (statuses.size === 1) { return Array.from(statuses)[0]; }
-  const hasTomb = statuses.has('tombstoned');
+  if (statuses.size === 1) { return firstStatus; }
   if (hasTomb) { return 'tombstoned'; }
-  return statuses.has('available-provisional') ? 'mixed-available-provisional' : 'available';
+  return hasProvisional ? 'mixed-available-provisional' : 'available';
 };
 
 export const calcRollupStatus = (statuses = []) => {
   if (!Array.isArray(statuses)) {
-    return Object.keys(VALID_ENHANCED_STATUSES).includes(statuses) ? statuses : null;
+    return VALID_ENHANCED_STATUS_SET.has(statuses) ? statuses : null;
   }
-  if (statuses.some((status) => !Object.keys(VALID_ENHANCED_STATUSES).includes(status))) {
+  const len = statuses.length;
+  if (len === 0) { return null; }
+  const firstStatus = statuses[0];
+  if (!VALID_ENHANCED_STATUS_SET.has(firstStatus)) {
     return null;
   }
-  const set = new Set(statuses);
-  if (set.size === 0) { return null; }
-  if (set.size === 1) { return Array.from(set)[0]; }
-  return set.has('available') ? 'mixed some availability' : 'mixed no availability';
+  let allSame = true;
+  let allAvailable = AVAILABLE_STATUS_SET.has(firstStatus);
+  let hasAvailability = allAvailable || (firstStatus === 'mixed some availability');
+  for (let i = 1; i < len; i += 1) {
+    const status = statuses[i];
+    if (!VALID_ENHANCED_STATUS_SET.has(status)) {
+      return null;
+    }
+    if (status !== firstStatus) {
+      allSame = false;
+    }
+    const isAvailable = AVAILABLE_STATUS_SET.has(status);
+    if (!isAvailable) {
+      allAvailable = false;
+    }
+    if (isAvailable || (status === 'mixed some availability')) {
+      hasAvailability = true;
+    }
+  }
+  if (allSame) { return firstStatus; }
+  if (allAvailable) { return 'mixed-available-provisional'; }
+  return hasAvailability ? 'mixed some availability' : 'mixed no availability';
 };
+
+/**
+   Color schemes to draw statuses in, see CELL_ATTRS_BY_COLOR_SCHEME in AvailabilitySvgComponents
+   * neonBlue: NEON blue available data, with outlined cells for most statuses without data
+   * neonGreen: every status is filled with its own color. Released data are solid, provisional
+     data are striped, and mixed statuses use the same patterns as the NEON blue scheme.
+   * colorVisionAccessible: NEON blue and gold stepped apart in lightness, so statuses remain
+     distinguishable with protanopia, deuteranopia, tritanopia, and achromatopsia. Fill styles
+     carry meaning as well as color: solid for final statuses, striped for partial versions of
+     them, outlined for future statuses, and split diagonally for mixed statuses.
+*/
+export const AVAILABILITY_COLOR_SCHEMES = {
+  NEON_BLUE: 'neonBlue',
+  NEON_GREEN: 'neonGreen',
+  COLOR_VISION_ACCESSIBLE: 'colorVisionAccessible',
+};
+export const AVAILABILITY_COLOR_SCHEME_LABELS = {
+  [AVAILABILITY_COLOR_SCHEMES.NEON_BLUE]: 'NEON Blue',
+  [AVAILABILITY_COLOR_SCHEMES.NEON_GREEN]: 'NEON Green',
+  [AVAILABILITY_COLOR_SCHEMES.COLOR_VISION_ACCESSIBLE]: 'Color Vision Accessible',
+};
+// Color scheme used wherever one is not specified
+export const DEFAULT_AVAILABILITY_COLOR_SCHEME = AVAILABILITY_COLOR_SCHEMES.NEON_BLUE;
+const AVAILABILITY_COLOR_SCHEME_SET = new Set(Object.values(AVAILABILITY_COLOR_SCHEMES));
+export const resolveColorScheme = (colorScheme) => (
+  AVAILABILITY_COLOR_SCHEME_SET.has(colorScheme) ? colorScheme : DEFAULT_AVAILABILITY_COLOR_SCHEME
+);
 
 /**
    PropTypes for different major modes
 */
 export const AvailabilityPropTypes = {
+  colorScheme: PropTypes.oneOf(Object.values(AVAILABILITY_COLOR_SCHEMES)),
+  // Enhanced availability data level, one of AvailabilityDataLevel
+  dataLevel: PropTypes.oneOf(AVAILABILITY_DATA_LEVELS),
+  // Enhanced availability inheritance mode, one of AvailabilityInheritanceMode
+  inheritanceMode: PropTypes.oneOf(AVAILABILITY_INHERITANCE_MODES),
   basicSiteCodes: PropTypes.arrayOf(
     PropTypes.shape({
       siteCode: PropTypes.string.isRequired,
@@ -109,21 +188,39 @@ export const AvailabilityPropTypes = {
       ),
     }),
   ),
-  enhancedSites: PropTypes.arrayOf(
-    PropTypes.shape({
-      siteCode: PropTypes.string.isRequired,
-      tables: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired,
-          waitInterval: PropTypes.string.isRequired,
-          months: PropTypes.objectOf(
-            PropTypes.oneOf(Object.keys(VALID_ENHANCED_STATUSES)),
-          ).isRequired,
-        }),
-      ).isRequired,
-    }),
-  ),
+  // The "data" object of an enhanced availability API response
+  enhancedAvailability: PropTypes.shape({
+    productCode: PropTypes.string,
+    siteCodes: PropTypes.arrayOf(
+      PropTypes.shape({
+        siteCode: PropTypes.string.isRequired,
+        availableReleases: PropTypes.arrayOf(
+          PropTypes.shape({
+            release: PropTypes.string.isRequired,
+            months: PropTypes.arrayOf(
+              PropTypes.shape({
+                month: PropTypes.string.isRequired,
+                available: PropTypes.bool.isRequired,
+                status: PropTypes.oneOf(Object.keys(API_STATUS_MAP)),
+                packages: PropTypes.arrayOf(
+                  PropTypes.shape({
+                    packageType: PropTypes.string.isRequired,
+                    components: PropTypes.arrayOf(
+                      PropTypes.shape({
+                        name: PropTypes.string.isRequired,
+                        type: PropTypes.string.isRequired,
+                        status: PropTypes.oneOf(Object.keys(API_STATUS_MAP)),
+                      }),
+                    ).isRequired,
+                  }),
+                ),
+              }),
+            ).isRequired,
+          }),
+        ).isRequired,
+      }),
+    ).isRequired,
+  }),
   dataProducts: PropTypes.arrayOf(
     PropTypes.shape({
       dataProductCode: PropTypes.string.isRequired,
@@ -159,6 +256,8 @@ export const SVG = {
   PRODUCT_LABEL_WIDTH: 105,
   DATE_RANGE_HANDLE_WIDTH: 4,
   DATE_RANGE_MASK_WIDTH: 24,
+  LABEL_SCROLLBAR_HEIGHT: 4,
+  LABEL_SCROLLBAR_MIN_THUMB_WIDTH: 12,
 };
 SVG.MIN_WIDTH = (SVG.CELL_WIDTH + SVG.CELL_PADDING) * SVG.MIN_CELLS
   + Math.floor(SVG.MIN_CELLS / 12) * SVG.YEAR_PADDING;
@@ -222,6 +321,20 @@ export const SVG_STYLES = {
     rowLabelMask: {
       fill: 'transparent',
       cursor: 'pointer',
+      outline: 'none',
+    },
+    rowLabelScrollTrack: {
+      fill: COLORS.GREY[100],
+    },
+    rowLabelScrollThumb: {
+      fill: COLORS.GREY[300],
+    },
+    rowLabelScrollThumbActive: {
+      fill: COLORS.GREY[500],
+    },
+    rowLabelScrollMask: {
+      fill: 'transparent',
+      cursor: 'grab',
       outline: 'none',
     },
     timeDivider: {

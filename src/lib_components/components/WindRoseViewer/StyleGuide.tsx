@@ -33,9 +33,14 @@ import {
   WIND_ROSE_COLOR_SCHEME_LABELS,
   WIND_ROSE_COLOR_SCHEMES,
   WIND_ROSE_PALETTES,
+  WIND_SPEED_SERIES_PALETTES,
   WindRoseColorScheme,
 } from '@/components/WindRoseViewer/colorSchemes';
 import { VELOCITY_BIN_LABELS, VELOCITY_BINS } from '@/components/WindRoseViewer/windRoseUtil';
+import {
+  WIND_SPEED_STATISTIC_LABELS,
+  WindSpeedStatistic,
+} from '@/components/WindRoseViewer/windRoseTimeSeriesUtil';
 
 import DocBlock from '../../../components/DocBlock';
 import CodeBlock from '../../../components/CodeBlock';
@@ -323,6 +328,49 @@ const PaletteTable = () => (
   </table>
 );
 
+const SERIES_STATISTICS: WindSpeedStatistic[] = ['mean', 'min', 'max'];
+
+const SeriesPaletteTable = () => (
+  <table style={{ borderCollapse: 'collapse', marginBottom: '16px' }}>
+    <thead>
+      <tr>
+        <th style={{ textAlign: 'left', padding: '4px 16px 4px 0' }}>Wind speed over time</th>
+        {Object.values(WIND_ROSE_COLOR_SCHEMES).map((colorScheme: WindRoseColorScheme) => (
+          <th key={colorScheme} style={{ textAlign: 'left', padding: '4px 16px 4px 0' }}>
+            <code>{colorScheme}</code>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {SERIES_STATISTICS.map((statistic: WindSpeedStatistic) => (
+        <tr key={statistic}>
+          <td style={{ padding: '2px 16px 2px 0' }}>{WIND_SPEED_STATISTIC_LABELS[statistic]}</td>
+          {Object.values(WIND_ROSE_COLOR_SCHEMES).map((colorScheme: WindRoseColorScheme) => {
+            const color = WIND_SPEED_SERIES_PALETTES[colorScheme][statistic];
+            return (
+              <td key={colorScheme} style={{ padding: '2px 16px 2px 0' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '32px',
+                    height: '3px',
+                    marginRight: '8px',
+                    verticalAlign: 'middle',
+                    borderRadius: '2px',
+                    backgroundColor: color,
+                  }}
+                />
+                <code>{color}</code>
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
 export default function StyleGuide() {
   const [colorScheme, setColorScheme] = useState<WindRoseColorScheme>(
     DEFAULT_WIND_ROSE_COLOR_SCHEME,
@@ -354,11 +402,38 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
         <AllProductsWindRose colorScheme={colorScheme} onColorSchemeChange={setColorScheme} />
       </ExampleBlock>
 
-      <Typography variant="h5" component="h3" gutterBottom>Monthly and Daily Wind Roses</Typography>
+      <Typography variant="h5" component="h3" gutterBottom>
+        Annual, Seasonal, Monthly and Daily Wind Roses
+      </Typography>
       <DocBlock>
-        Data are fetched one site and month at a time. Use the <b>Monthly</b> and <b>Daily</b> toggle
-        to switch between viewing every observation in the month (the default) and a single
-        day (UTC).
+        Data are fetched one site and month at a time. Use the <b>Annual</b>, <b>Seasonal</b>,
+        <b> Monthly</b> and <b>Daily</b> toggle to switch between viewing every observation in the
+        year, season or month of the selected month (monthly is the default), or a single day (UTC).
+        The selector at the top follows the toggle: a <b>Year</b> when viewing a year,
+        a <b>Season</b> when viewing a season, and a <b>Month</b> when viewing a month or a day of
+        it. Its previous and next buttons step through the years, seasons or months with data.
+      </DocBlock>
+      <DocBlock>
+        Seasons are meteorological seasons: spring (March to May), summer (June to August), fall
+        (September to November) and winter (December to February, so winter spans the end of one year
+        and the start of the next). Years are calendar years. The wind rose of a season or year
+        combines the wind roses of its months with data, built from the same data files as the
+        monthly wind roses, so it is exactly the sum of them. The heading notes how many months of
+        the season or year have data.
+      </DocBlock>
+      <DocBlock>
+        The months of a season or year are fetched a few at a time when it is first viewed, with the
+        progress shown. The <b>Months in</b> calendar shows a thumbnail wind rose for each month of
+        the season or year, which fill in as they are fetched. Select a month to view its monthly
+        wind rose.
+      </DocBlock>
+      <DocBlock>
+        Each month fetched is kept for the site and sensor positions, so moving between the
+        aggregations, months, seasons and years only fetches months not seen before. So that this
+        cannot exhaust the memory of the browser, the months kept may take up to an estimated 32 MB
+        (around 30 months, a month taking up to about 1 MB), after which the least recently used
+        months are dropped, other than the months being viewed. Months dropped are fetched again if
+        viewed again.
       </DocBlock>
       <DocBlock>
         A day can be selected in several ways:
@@ -395,7 +470,42 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
       </DocBlock>
       <DocBlock>
         The <b>Download Image (PNG)</b> button saves an image of the viewer as currently shown,
-        including the selections, wind rose, legend, calendar and citation.
+        including the selections, wind rose, legend, calendar, wind speed over time and citation.
+      </DocBlock>
+
+      <Typography variant="h5" component="h3" gutterBottom>Wind Speed Over Time</Typography>
+      <DocBlock>
+        Below the wind rose, a time series shows how the wind speed changed through the year, season
+        or month being viewed, or through the day when viewing a daily wind rose. It is built from the
+        same observations as the wind rose, from the <code>windSpeedMean</code>,
+        <code> windSpeedMinimum</code> and <code>windSpeedMaximum</code> of each observation:
+        <ul>
+          <li>
+            <b>Mean</b>: the mean wind speed of the observations in each interval, drawn as water
+            filling the chart.
+          </li>
+          <li>
+            <b>Minimum</b>: the lowest wind speed measured during each interval, drawn within the
+            water with deeper water below it.
+          </li>
+          <li>
+            <b>Maximum</b>: the highest wind speed (gust) measured during each interval, drawn above
+            the water with a gust envelope reaching down to the mean.
+          </li>
+        </ul>
+        The minimum and maximum can be toggled on and off. A month is shown in hourly intervals and
+        a day in 10 minute intervals, or in the averaging period of the observations when longer,
+        while seasons and years are shown in longer intervals (e.g. 3 or 12 hours) so that each
+        stays at least a pixel or so wide; narrow screens use longer intervals too. Means are
+        weighted by the number of observations in each interval, and intervals without observations
+        are left as gaps. Observations from every selected sensor position are combined, as in the
+        wind rose. Times are in UTC, as are the days of the daily wind roses.
+      </DocBlock>
+      <DocBlock>
+        Hover over the time series, or focus it and use the arrow keys, to read the wind speed at
+        each time. When viewing a month, selecting a time shows the wind rose of that day, and when
+        viewing a season or year, the wind rose of that month. When viewing a day, the time series
+        pans to each day selected, including while playing through the days.
       </DocBlock>
 
       <Typography variant="h5" component="h3" gutterBottom>Data Quality</Typography>
@@ -410,9 +520,9 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
             <b>All</b>: every observation, including those with either quality flag of 1 (fail).
           </li>
         </ul>
-        Observation counts, shares, the prevailing direction, mean speed and the days with data all
-        reflect the selected observations. Both are built when a month is fetched, so switching
-        between them is immediate.
+        Observation counts, shares, the prevailing direction, mean speed, the days with data and the
+        wind speed over time all reflect the selected observations. Both are built when a month is
+        fetched, so switching between them is immediate.
       </DocBlock>
       <DocBlock>
         The <b>Quality Flag Validated</b> ring beside the observation count shows the share of the shown
@@ -443,6 +553,13 @@ import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer
         from <code>WindRoseViewer/colorSchemes</code>.
       </DocBlock>
       <PaletteTable />
+      <DocBlock>
+        The wind speed over time follows the color scheme too: the mean is drawn as water in blue,
+        with the minimum and maximum in hues apart from it. In both schemes, every pair remains
+        distinguishable with protanopia, deuteranopia and tritanopia, and contrasts at least 3:1
+        with the background. The color vision accessible scheme uses the Okabe-Ito colors.
+      </DocBlock>
+      <SeriesPaletteTable />
       <CodeBlock>
         {`
 import WindRoseViewer from 'portal-core-components/lib/components/WindRoseViewer';

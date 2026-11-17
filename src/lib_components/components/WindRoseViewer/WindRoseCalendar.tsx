@@ -136,13 +136,14 @@ const useStyles = makeStyles()((theme: NeonTheme) => ({
 interface MiniWindRoseProps {
   aggregate: WindRoseAggregate;
   palette: readonly string[];
+  className?: string;
 }
 
 const MiniWindRoseBase: React.FC<MiniWindRoseProps> = (
   props: MiniWindRoseProps,
 ): React.JSX.Element => {
-  const { classes } = useStyles();
-  const { aggregate, palette }: MiniWindRoseProps = props;
+  const { classes, cx } = useStyles();
+  const { aggregate, palette, className }: MiniWindRoseProps = props;
   const miniRose = useMemo(() => buildMiniRose(
     aggregate,
     MINI_ROSE_INNER_RADIUS,
@@ -152,7 +153,7 @@ const MiniWindRoseBase: React.FC<MiniWindRoseProps> = (
   const viewBoxSize = (MINI_ROSE_RADIUS + 1) * 2;
   return (
     <svg
-      className={classes.miniRose}
+      className={cx(classes.miniRose, className)}
       viewBox={`${-viewBoxSize / 2} ${-viewBoxSize / 2} ${viewBoxSize} ${viewBoxSize}`}
       aria-hidden="true"
       focusable="false"
@@ -166,7 +167,10 @@ const MiniWindRoseBase: React.FC<MiniWindRoseProps> = (
   );
 };
 
-const MiniWindRose = React.memo(MiniWindRoseBase);
+/**
+ * Thumbnail wind rose, scaled so its largest sector fills it
+ */
+export const MiniWindRose = React.memo(MiniWindRoseBase);
 
 interface CalendarDay {
   day: string;

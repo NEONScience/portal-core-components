@@ -1,0 +1,1585 @@
+{
+  "data": {
+    "productCode": "DP4.00131.001",
+    "siteCodes": [
+      {
+        "siteCode": "ARIK",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BARC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BIGC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-12",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLDE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "BLUE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CARI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "COMO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CUPE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-03",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "GUIL",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-01",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-03",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "HOPB",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "KING",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LECO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-12",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LEWI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MART",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MAYF",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MCDI",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "MCRA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-12",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "OKSR",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Not Collected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "POSE",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRIN",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-09",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "REDB",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SUGG",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SYCA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-11",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-12",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TECR",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_featureInfo",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_mappedPointErrors",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_pebbleCount",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_resultsFile",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_surveyFieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "geo_totalStation",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "WALK",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-12",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "WLOU",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "geo_controlInfo",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_controlType",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_missingLine",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "geo_priorParameters",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

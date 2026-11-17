@@ -9,6 +9,9 @@ import mockReactComponent from '../../../../__mocks__/mockReactComponent';
 
 import DownloadDataContext from '../../DownloadDataContext/DownloadDataContext';
 import BasicAvailabilityInterface from '../BasicAvailabilityInterface';
+import { NEON_GREEN_PALETTE } from '../AvailabilitySvgComponents';
+import { AVAILABILITY_COLOR_SCHEMES } from '../AvailabilityUtils';
+import { COLORS } from '../../Theme/Theme';
 
 jest.mock('@mui/material/Select', () => mockReactComponent('@mui/material/Select'));
 jest.mock('@mui/material/MenuItem', () => mockReactComponent('@mui/material/MenuItem'));
@@ -78,5 +81,27 @@ describe('DataProductAvailability - BasicAvailabilityInterface', () => {
       </MockTheme>
     );
     expect(tree).toMatchSnapshot();
+  });
+  test('renders patterns and key in the given color scheme', () => {
+    const { container } = render(
+      <MockTheme>
+        <BasicAvailabilityInterface
+          siteCodes={siteCodes}
+          view="sites"
+          delineateRelease
+          colorScheme={AVAILABILITY_COLOR_SCHEMES.NEON_GREEN}
+        />
+      </MockTheme>
+    );
+    expect(container.querySelector('#neonGreenMixedAvailableProvisionalPattern')).not.toBeNull();
+    expect(container.querySelector('#mixedAvailableProvisionalPattern')).toBeNull();
+    const keyFills = Array.from(container.querySelectorAll('rect'))
+      .map((rect) => rect.getAttribute('fill'));
+    expect(keyFills).toEqual(expect.arrayContaining([
+      NEON_GREEN_PALETTE.AVAILABLE,
+      NEON_GREEN_PALETTE.PROVISIONAL_BACKGROUND,
+      'url(#neonGreenMixedAvailableProvisionalPattern)',
+    ]));
+    expect(keyFills).not.toContain(COLORS.NEON_BLUE[700]);
   });
 });

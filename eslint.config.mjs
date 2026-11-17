@@ -72,6 +72,7 @@ const jsRules = {
   '@stylistic/quote-props': 'off',
   '@stylistic/space-infix-ops': 'off',
   '@stylistic/arrow-parens': 'off',
+  '@stylistic/list-style': 'off',
   '@stylistic/member-delimiter-style': [
     'error',
     {

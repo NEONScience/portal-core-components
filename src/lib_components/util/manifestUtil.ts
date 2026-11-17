@@ -127,11 +127,24 @@ export const buildS3FilesRequestUrl = (
   return `${root}?presign=false${releaseParam}`;
 };
 
-export const downloadManifest = (manifest: ManifestRequest, params?: Record<string, string>) => {
+export interface DownloadManifestOptions {
+  // Name of the browsing context (e.g. a hidden iframe) to submit the download form into.
+  // When not specified, the form is submitted in the current window.
+  target?: string;
+}
+
+export const downloadManifest = (
+  manifest: ManifestRequest,
+  params?: Record<string, string>,
+  options?: DownloadManifestOptions,
+) => {
   const form: HTMLFormElement = document.createElement('form');
   form.style.display = 'none';
   form.action = NeonEnvironment.getFullDownloadApiPath('downloadStream');
   form.method = 'POST';
+  if (exists(options) && (typeof (options as DownloadManifestOptions).target === 'string')) {
+    form.target = (options as DownloadManifestOptions).target as string;
+  }
   // Build form parameters
   if (exists(params)) {
     const paramNames: string[] = Object.keys(params as Record<string, string>);
@@ -156,12 +169,11 @@ export const downloadManifest = (manifest: ManifestRequest, params?: Record<stri
   return submit;
 };
 
-export const downloadAopManifest = (
+export const buildAopManifestRequest = (
   config: ManifestConfig,
   s3Files: Record<string, unknown>,
-  params?: Record<string, string>,
   documentation = 'include',
-) => {
+): ManifestRequest => {
   const siteCodes: string[] = [];
   const s3FileValues: Record<string, unknown>[] = s3Files.validValues as Record<string, unknown>[];
   const manifestS3Files: ManifestFile[] = s3FileValues
@@ -190,7 +202,7 @@ export const downloadAopManifest = (
   const productCodeParam: string = config.productCode.startsWith('NEON.DOM.SITE')
     ? config.productCode
     : `NEON.DOM.SITE.${config.productCode}`;
-  const manifestRequest: ManifestRequest = {
+  return {
     dpCode: productCodeParam,
     startDateMonth: null,
     endDateMonth: null,
@@ -202,18 +214,27 @@ export const downloadAopManifest = (
     includeDocs,
     includeProvisional: null,
   };
+};
 
-  return downloadManifest(manifestRequest, params);
+export const downloadAopManifest = (
+  config: ManifestConfig,
+  s3Files: Record<string, unknown>,
+  params?: Record<string, string>,
+  documentation = 'include',
+  options?: DownloadManifestOptions,
+) => {
+  const manifestRequest: ManifestRequest = buildAopManifestRequest(config, s3Files, documentation);
+  return downloadManifest(manifestRequest, params, options);
 };
 
 export const MAX_POST_BODY_SIZE = 20 * (1024 * 1024); // 20MiB
-export const DOWNLOAD_SIZE_WARN = 42949672960; // 40GB
+export const DOWNLOAD_SIZE_WARN = 42949672960; // 40GiB
 
 export const formatBytes = (bytes: number) => {
   if (!Number.isInteger(bytes) || bytes <= 0) {
     return '0.000 B';
   }
-  const scales = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+  const scales = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
   const log = Math.log(bytes) / Math.log(1024);
   const scale = Math.floor(log);
   const precision = Math.floor(3 - ((log - scale) * 3));

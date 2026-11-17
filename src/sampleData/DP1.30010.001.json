@@ -16,7 +16,7 @@
     "productStudyDescription": "NEON AOP data are planned for yearly collects at all NEON sites at 90% of maximum greenness or greater. Coverage is planned to include at least 95% of NIS Tower Airshed area as well as at least 80% of a minimum 10km x 10 km box around that. All acquisitions are subject to change due to weather conditions as well as program planning changes.",
     "productBasicDescription": "Includes the data product as a single orthorectified RGB camera image in GeoTIFF format. An expanded package is not available for this product.",
     "productExpandedDescription": "",
-    "productSensor": "NEON Airborne Observation Platform (AOP) High Resolution Digital Camera – Optech Gemini",
+    "productSensor": "NEON Airborne Observation Platform (AOP) High Resolution Digital Camera - Optech Gemini",
     "productRemarks": "",
     "themes": ["Land Use, Land Cover, and Land Processes"],
     "changeLogs": null,

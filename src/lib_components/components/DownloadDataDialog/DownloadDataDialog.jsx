@@ -24,6 +24,7 @@ import Typography from '@mui/material/Typography';
 import CircleStarIcon from '@mui/icons-material/Stars';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 import ErrorIcon from '@mui/icons-material/ErrorOutlined';
+import HourglassIcon from '@mui/icons-material/HourglassEmpty';
 import LeftIcon from '@mui/icons-material/ChevronLeft';
 import RightIcon from '@mui/icons-material/ChevronRight';
 import WarningIcon from '@mui/icons-material/Warning';
@@ -31,11 +32,18 @@ import WarningIcon from '@mui/icons-material/Warning';
 import DialogBase from '../DialogBase/DialogBase';
 import DownloadStepForm from '../DownloadStepForm/DownloadStepForm';
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
+import {
+  useDownloadProgressActions,
+  useIsDownloadLimitReached,
+  useIsDownloadProgressActive,
+} from '../DownloadProgress/DownloadProgressContext';
 import DataThemeIcon from '../DataThemeIcon/DataThemeIcon';
 import ExternalHost, { HOST_TYPES } from '../ExternalHost/ExternalHost';
 import ExternalHostInfo from '../ExternalHostInfo/ExternalHostInfo';
 import LoginRequiredCard from '../Card/LoginRequiredCard';
+import WarningCard from '../Card/WarningCard';
 import NeonAuthContext from '../NeonContext/NeonAuthContext';
+import NeonEnvironment from '../NeonEnvironment/NeonEnvironment';
 import ReleaseChip from '../Chip/ReleaseChip';
 import { COLORS } from '../Theme/Theme';
 import { makeStyles } from '../Theme/makeStyles';
@@ -48,6 +56,12 @@ import {
   formatBytes,
   DOWNLOAD_SIZE_WARN,
 } from '../../util/manifestUtil';
+import { buildDownloadSummary } from '../../util/downloadProgressUtil';
+import { MAX_CONCURRENT_DOWNLOADS } from '../../service/DownloadProgressRegistry';
+
+const DOWNLOAD_LIMIT_TITLE = `Up to ${MAX_CONCURRENT_DOWNLOADS} downloads can run at once`;
+const DOWNLOAD_LIMIT_MESSAGE = 'Wait for one to finish, or dismiss a download whose live '
+  + 'progress is unavailable.';
 
 const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
   stepChip: {
@@ -106,6 +120,11 @@ const useStyles = makeStyles()((theme, { belowSm, belowSmMd }) => ({
     color: COLORS.GOLD[800],
     marginRight: theme.spacing(2),
   },
+  limitCallout: {
+    margin: theme.spacing(2, 0, 0, 0),
+    backgroundColor: theme.colors.BROWN[50],
+    borderColor: theme.colors.BROWN[300],
+  },
   gtmCaptureButton: {
     '& span': {
       pointerEvents: 'none',
@@ -156,6 +175,21 @@ export default function DownloadDataDialog() {
   ] = DownloadDataContext.useDownloadDataState();
 
   const neonAuthContextSessionState = NeonAuthContext.useNeonAuthContextSessionState();
+
+  /**
+     Download progress (from DownloadProgressContext)
+     Only boolean selectors are applied so the dialog does not re-render as progress changes
+  */
+  const downloadProgressActions = useDownloadProgressActions();
+  const isDownloadProgressActive = useIsDownloadProgressActive();
+  const isDownloadLimitReached = useIsDownloadLimitReached();
+  const downloadProgressEnabled = NeonEnvironment.downloadProgressEnabled()
+    && (downloadProgressActions !== null)
+    && (Object.keys(neonAuthContextSessionState.sessionHeaders || {}).length > 0);
+  const downloadInProgress = downloadProgressEnabled && isDownloadProgressActive;
+  const downloadLimitReached = downloadProgressEnabled
+    && !isDownloadProgressActive
+    && isDownloadLimitReached;
 
   /**
      State (local)
@@ -239,6 +273,7 @@ export default function DownloadDataDialog() {
   };
 
   const handleDownload = () => {
+    if (downloadInProgress || downloadLimitReached) { return null; }
     setDownloadExecuted(true);
     const manifestSelection = {
       productData,
@@ -252,14 +287,43 @@ export default function DownloadDataDialog() {
     const headers = {
       ...neonAuthContextSessionState.sessionHeaders,
     };
+    let submitDownload;
     if (fromAOPManifest) {
       const config = buildManifestConfig(manifestSelection, null, true);
-      return downloadAopManifest(config, s3Files, headers, documentation.value);
+      submitDownload = (params, options) => (
+        downloadAopManifest(config, s3Files, params, documentation.value, options)
+      );
+    } else {
+      if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
+      const config = buildManifestConfig(manifestSelection);
+      const manifestBody = buildManifestRequestBody(config);
+      submitDownload = (params, options) => downloadManifest(manifestBody, params, options);
     }
-    if (manifest.status !== 'fetched' || !manifest.body || !manifest.body.data) { return null; }
-    const config = buildManifestConfig(manifestSelection);
-    const manifestBody = buildManifestRequestBody(config);
-    return downloadManifest(manifestBody, headers);
+    if (!downloadProgressEnabled) {
+      return submitDownload(headers);
+    }
+    // Live progress is an enhancement, the download is submitted regardless of its availability
+    return downloadProgressActions.start({
+      summary: buildDownloadSummary({
+        productData,
+        release,
+        latestRelease,
+        sites,
+        dateRange,
+        documentation,
+        packageType,
+        provisionalData,
+        requiredSteps,
+        fromAOPManifest,
+        s3Files,
+        manifest,
+      }),
+      sessionHeaders: headers,
+      submit: ({ downloadId, target }) => submitDownload(
+        downloadId ? { ...headers, downloadId } : headers,
+        { target },
+      ),
+    });
   };
 
   /**
@@ -424,6 +488,14 @@ export default function DownloadDataDialog() {
     } else if (downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.DISALLOW_DOWNLOAD) {
       disabled = true;
       buttonText = 'Login Required';
+    } else if (downloadInProgress) {
+      disabled = true;
+      buttonText = 'Download in progress';
+      icon = <CircularProgress size={16} color="inherit" {...iconProps} />;
+    } else if (downloadLimitReached) {
+      disabled = true;
+      buttonText = 'Download limit reached';
+      icon = <HourglassIcon {...iconProps} />;
     } else if (allStepsComplete) {
       if (fromAOPManifest) {
         disabled = false;
@@ -479,6 +551,50 @@ export default function DownloadDataDialog() {
     );
   };
 
+  const renderDownloadProgressNote = (textAlign = 'right') => {
+    const noteStyle = { marginTop: theme.spacing(2), textAlign };
+    if (downloadInProgress) {
+      return (
+        <Typography
+          variant="body2"
+          style={noteStyle}
+          data-selenium="download-data-dialog.download-in-progress-note"
+        >
+          A download of this data product is in progress.
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => downloadProgressActions.expand()}
+            style={{ marginLeft: theme.spacing(0.5) }}
+            data-gtm="download-data-dialog.view-download-progress-button"
+          >
+            View progress
+          </Button>
+        </Typography>
+      );
+    }
+    if (downloadLimitReached) {
+      return (
+        <div data-selenium="download-data-dialog.download-limit-note">
+          <WarningCard
+            title={DOWNLOAD_LIMIT_TITLE}
+            message={DOWNLOAD_LIMIT_MESSAGE}
+            classes={{ callout: classes.limitCallout }}
+          />
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // The download button with any note on the download progress, as shown in the summary step
+  const renderSummaryDownloadButton = () => (
+    <>
+      {renderDownloadButton()}
+      {renderDownloadProgressNote('left')}
+    </>
+  );
+
   const renderLoginRequired = () => {
     const init = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.AWAITING_PRECONDITIONS;
     const allowDownload = downloadStatus === DownloadDataContext.DOWNLOAD_STATUS.ALLOW_DOWNLOAD;
@@ -499,6 +615,9 @@ export default function DownloadDataDialog() {
   const renderDownloadButtonStepNote = () => {
     const showDownloadButton = fromManifest || fromAOPManifest;
     if (!showDownloadButton) { return null; }
+    if (downloadInProgress || downloadLimitReached) {
+      return renderDownloadProgressNote();
+    }
     const completableSteps = requiredSteps.filter((step) => step.key !== 'summary');
     const completedSteps = requiredSteps.filter((step) => (
       step.key !== 'summary' && step.isComplete
@@ -742,7 +861,7 @@ export default function DownloadDataDialog() {
             stepKey={requiredSteps[activeStepIndex].key}
             changeToStep={changeToStep}
             changeToNextUncompletedStep={changeToNextUncompletedStep}
-            renderDownloadButton={renderDownloadButton}
+            renderDownloadButton={renderSummaryDownloadButton}
           />
         </div>
       </>

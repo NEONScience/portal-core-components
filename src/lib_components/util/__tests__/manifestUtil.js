@@ -12,7 +12,9 @@ import {
   buildS3FilesRequestUrl,
   getSizeEstimateFromManifestResponse,
   getSizeEstimateFromManifestRollupResponse,
+  buildAopManifestRequest,
   downloadAopManifest,
+  downloadManifest,
 } from '../manifestUtil';
 
 jest.mock('../../components/NeonEnvironment/NeonEnvironment', () => ({
@@ -40,9 +42,9 @@ describe('Utils - manifestUtil', () => {
 
   describe.each([
     ['(int) 1', 1, '1.000 B'],
-    ['(int) 234234', 234234, '229 KB'],
+    ['(int) 234234', 234234, '229 KiB'],
     ['(int) -6', -6, '0.000 B'],
-    ['(int) 42949672960', 42949672960, '40.0 GB'],
+    ['(int) 42949672960', 42949672960, '40.0 GiB'],
     ['null', null, '0.000 B'],
     ['(float) 5.6', 5.6, '0.000 B'],
     ['(string) "1"', '1', '0.000 B'],
@@ -385,6 +387,131 @@ describe('Utils - manifestUtil', () => {
         includeDocs: true,
         includeProvisional: null,
       });
+    });
+    test('submits into the specified target', () => {
+      const { submit } = window.HTMLFormElement.prototype;
+      submit.mockClear();
+      const config = {
+        productCode: 'DP123',
+        release: 'foo',
+        isError: false,
+      };
+      const s3Files = {
+        value: ['root/f1'],
+        validValues: [{ url: 'root/f1', site: 'JERC', size: 101 }],
+      };
+      downloadAopManifest(config, s3Files, { downloadId: 'id-1' }, 'exclude', { target: 'frame-1' });
+      expect(submit).toHaveBeenCalledTimes(1);
+      const form = submit.mock.contexts[0];
+      expect(form.target).toBe('frame-1');
+      expect(form.querySelector('input[name="downloadId"]').value).toBe('id-1');
+    });
+  });
+
+  describe('buildAopManifestRequest()', () => {
+    test('builds the request for the selected files only', () => {
+      const config = {
+        productCode: 'NEON.DOM.SITE.DP123',
+        release: 'foo',
+        isError: false,
+      };
+      const s3Files = {
+        value: ['root/f2'],
+        validValues: [
+          {
+            url: 'root/f1',
+            site: 'JERC',
+            productCode: 'DP123',
+            release: 'foo',
+            yearMonth: '2020-01',
+            size: 101,
+            checksum: 'abc',
+            checksumAlgorithm: 'MD5',
+          },
+          {
+            url: 'root/f2',
+            site: 'BONA',
+            productCode: 'DP123',
+            release: 'foo',
+            yearMonth: '2020-02',
+            size: 202,
+            checksum: 'def',
+            checksumAlgorithm: 'MD5',
+          },
+        ],
+      };
+      expect(buildAopManifestRequest(config, s3Files, 'exclude')).toStrictEqual({
+        dpCode: 'NEON.DOM.SITE.DP123',
+        startDateMonth: null,
+        endDateMonth: null,
+        release: 'foo',
+        pkgType: null,
+        presign: true,
+        manifestFiles: [
+          {
+            release: 'foo',
+            productCode: 'DP123',
+            siteCode: 'BONA',
+            month: '2020-02',
+            packageType: 'basic',
+            fileName: 'f2',
+            fileSizeBytes: 202,
+            checksum: 'def',
+            checksumAlgorithm: 'MD5',
+            uri: 'root/f2',
+          },
+        ],
+        siteCodes: ['BONA'],
+        includeDocs: false,
+        includeProvisional: null,
+      });
+      expect(JSON.stringify).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('downloadManifest()', () => {
+    const manifest = {
+      dpCode: 'NEON.DOM.SITE.DP1.00001.001',
+      siteCodes: ['JERC'],
+      startDateMonth: '2020-01',
+      endDateMonth: '2020-06',
+      release: null,
+      includeDocs: true,
+      pkgType: 'basic',
+      presign: true,
+      includeProvisional: false,
+    };
+    beforeEach(() => {
+      window.HTMLFormElement.prototype.submit.mockClear();
+      NeonEnvironment.getFullDownloadApiPath.mockReturnValue('DOWNLOAD_STREAM_URL');
+    });
+    test('submits a hidden form in the current window by default', () => {
+      downloadManifest(manifest, { 'some-header': 'token' });
+      expect(JSON.stringify).toHaveBeenCalledTimes(1);
+      expect(JSON.stringify).toHaveBeenCalledWith(manifest);
+      const { submit } = window.HTMLFormElement.prototype;
+      expect(submit).toHaveBeenCalledTimes(1);
+      const form = submit.mock.contexts[0];
+      expect(form.getAttribute('action')).toBe('DOWNLOAD_STREAM_URL');
+      expect(form.getAttribute('method').toUpperCase()).toBe('POST');
+      expect(form.getAttribute('target')).toBeNull();
+      expect(form.querySelector('input[name="some-header"]').value).toBe('token');
+      expect(form.querySelector('input[name="manifest"]')).not.toBeNull();
+      expect(document.body.contains(form)).toBe(false);
+    });
+    test('submits into the specified target with additional params', () => {
+      downloadManifest(
+        manifest,
+        { 'some-header': 'token', downloadId: 'id-1' },
+        { target: 'frame-1' },
+      );
+      expect(JSON.stringify).toHaveBeenCalledTimes(1);
+      const { submit } = window.HTMLFormElement.prototype;
+      expect(submit).toHaveBeenCalledTimes(1);
+      const form = submit.mock.contexts[0];
+      expect(form.target).toBe('frame-1');
+      expect(form.querySelector('input[name="downloadId"]').value).toBe('id-1');
+      expect(form.querySelector('input[name="some-header"]').value).toBe('token');
     });
   });
 });

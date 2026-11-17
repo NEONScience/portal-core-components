@@ -1733,7 +1733,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
                 >
-                  3 files (12.1 KB uncompressed)
+                  3 files (12.1 KiB uncompressed)
                 </p>
               </div>
             </div>
@@ -1998,7 +1998,7 @@ exports[`DownloadStepForm Step summary renders correctly 1`] = `
               <p
                 class="MuiTypography-root MuiTypography-body2 css-7qa0mm-MuiTypography-root-summaryText"
               >
-                3 files (12.1 KB uncompressed)
+                3 files (12.1 KiB uncompressed)
               </p>
             </div>
           </div>

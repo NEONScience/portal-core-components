@@ -87,7 +87,7 @@ export default html = `<header id="header" class="header" role="banner">
                   <a href="https://www.neonscience.org/impact/observatory-blog" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content8a557196-631b-4be1-b9c5-120bc654861e" data-drupal-link-system-path="node/8857">Observatory Blog</a>
                 </li>
                                               <li class="nav__dropdown-item nav__dropdown-item--primary">
-                  <a href="https://www.neonscience.org/newsletter-archive" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content69db29a4-8a8b-4597-9f2e-3f19cf6db7ad" data-drupal-link-system-path="node/7826">Newsletters</a>
+                  <a href="https://www.neonscience.org/newsletter" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content69db29a4-8a8b-4597-9f2e-3f19cf6db7ad" data-drupal-link-system-path="node/7826">Newsletter</a>
                 </li>
                                               <li class="nav__dropdown-item nav__dropdown-item--primary">
                   <a href="https://www.neonscience.org/about/staff" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content7a99e7e0-f51a-4607-ab02-1d3f0056a4e5" data-drupal-link-system-path="node/8802">Staff</a>
@@ -189,15 +189,12 @@ export default html = `<header id="header" class="header" role="banner">
                   <a href="https://www.neonscience.org/requesting-and-using-samples" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-contentfcb7739c-e28e-47db-95d3-ec27c4b068fc" data-drupal-link-system-path="node/14878">Requesting and Using Samples</a>
                 </li>
                                                       <li class="nav__dropdown-item nav__dropdown-item--secondary">
-                      <a href="https://biorepo.neonscience.org/portal/misc/samplerequests.php" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-contentfa143c2b-8afe-4f65-88c2-e3671ab4580f">Requesting Samples from the NEON Biorepository</a>
-                    </li>
-                                      <li class="nav__dropdown-item nav__dropdown-item--secondary">
-                      <a href="https://biorepo.neonscience.org/portal/misc/sampleguidelines.php" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content79ef888e-cc9c-4909-b278-bf9f406b88b9">Sample Use Guidelines</a>
-                    </li>
-                                      <li class="nav__dropdown-item nav__dropdown-item--secondary">
                       <a href="https://biorepo.neonscience.org/portal/misc/cite.php" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-contentd63bcbba-09c5-452c-90fe-1e60554793cf">Acknowledging and Citing the NEON Biorepository</a>
                     </li>
-                                                            </ul>
+                                                                <li class="nav__dropdown-item nav__dropdown-item--primary">
+                  <a href="https://biorepo.neonscience.org/portal/neon/datasets/neonpubliclist.php" class="menu__link nav__dropdown-link" data-plugin-id="menu-link-content833d1c2a-4f8f-4785-bbc7-5bd7dd111abd">Biorepository Research Projects</a>
+                </li>
+                                          </ul>
 
           
         </li>

@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/SaveAlt';
 
 import DownloadDataContext from '../DownloadDataContext/DownloadDataContext';
+import DownloadProgress from '../DownloadProgress/DownloadProgress';
+import DownloadProgressContext from '../DownloadProgress/DownloadProgressContext';
 import { makeStyles } from '../Theme/makeStyles';
 import { resolveProps } from '../../util/defaultProps';
 
@@ -44,7 +46,8 @@ const DownloadDataButton = (inProps) => {
   }
 
   return (
-    <>
+    // Tracks the progress of downloads started from the dialog, outliving the dialog
+    <DownloadProgressContext.Provider>
       <Button
         color="primary"
         variant="contained"
@@ -61,7 +64,8 @@ const DownloadDataButton = (inProps) => {
           <DownloadDataDialog />
         </Suspense>
       )}
-    </>
+      <DownloadProgress />
+    </DownloadProgressContext.Provider>
   );
 };
 

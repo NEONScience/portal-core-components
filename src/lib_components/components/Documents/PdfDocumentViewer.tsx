@@ -209,21 +209,21 @@ const PdfDocumentViewer: React.FC<PdfDocumentViewerProps> = (
       }
     };
     eventBus.on('pagesinit', handlePagesInit);
-    let isCancelled = false;
+    let isCanceled = false;
     const loadingTask = pdfjs.getDocument(config);
     loadingTask.promise.then((doc: PDFDocumentProxy) => {
-      if (isCancelled || pdfViewerRef.current !== pdfViewer) { return; }
+      if (isCanceled || pdfViewerRef.current !== pdfViewer) { return; }
       pdfViewer.setDocument(doc);
       pdfLinkService.setDocument(doc, null);
       handleSetErrorStateCb(false);
     }, (reason: unknown) => {
-      if (isCancelled) { return; }
+      if (isCanceled) { return; }
       // eslint-disable-next-line no-console
       console.error(`Error during ${dataUrl} loading: ${reason}`);
       handleSetErrorStateCb(true);
     });
     return () => {
-      isCancelled = true;
+      isCanceled = true;
       eventBus.off('pagesinit', handlePagesInit);
       if (pdfViewerRef.current === pdfViewer) {
         pdfViewerRef.current = undefined;

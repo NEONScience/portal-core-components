@@ -5,10 +5,12 @@ import { renderHook } from '@testing-library/react';
 import cloneDeep from 'lodash/cloneDeep';
 
 import sitesJSON from '../../../../sampleData/sites.json';
+import componentSample from '../../../../sampleData/DataProductAvailability/enhanced-availability-components.json';
 import statesJSON from '../../../staticJSON/states.json';
 import domainsJSON from '../../../staticJSON/domains.json';
 
 import AvailabilityContext, { getTestableItems } from '../AvailabilityContext';
+import { AvailabilityInheritanceMode } from '../EnhancedAvailabilityInheritance';
 
 const {
   Provider,
@@ -18,11 +20,13 @@ const {
 
 const {
   DEFAULT_STATE,
+  applyAvailability,
   calculateRows,
-  extractTables,
   hydrateNeonContextData,
   reducer,
 } = getTestableItems();
+
+const { TECHNICAL_AVAILABILITY, CATEGORICAL_STATUS, NONE } = AvailabilityInheritanceMode;
 
 const initialHydratedState = {
   ...cloneDeep(DEFAULT_STATE),
@@ -47,6 +51,52 @@ describe('DataProductAvailability - AvailabilityContext', () => {
         done();
       });
     });
+    test('applies availability provided after the initial render', () => {
+      const ProductCode = () => {
+        const [{ productCode }] = useAvailabilityState();
+        return <div>{productCode || 'none'}</div>;
+      };
+      const { getByText, rerender } = render(
+        <Provider>
+          <ProductCode />
+        </Provider>,
+      );
+      expect(getByText('none')).toBeTruthy();
+      rerender(
+        <Provider enhancedAvailability={{ productCode: 'DP1.00000.001', siteCodes: [] }}>
+          <ProductCode />
+        </Provider>,
+      );
+      expect(getByText('DP1.00000.001')).toBeTruthy();
+    });
+    test('applies availability again when the inheritance mode changes', () => {
+      // ABBY lists its tables as Expected in 2021-03, a month it is available in another release
+      const TableStatus = () => {
+        const [{ componentRows }] = useAvailabilityState();
+        return <div>{componentRows[0]?.months['2021-03'] || 'none'}</div>;
+      };
+      const { getByText, rerender } = render(
+        <Provider enhancedAvailability={componentSample.data}>
+          <TableStatus />
+        </Provider>,
+      );
+      expect(getByText('available')).toBeTruthy();
+      rerender(
+        <Provider enhancedAvailability={componentSample.data} inheritanceMode={NONE}>
+          <TableStatus />
+        </Provider>,
+      );
+      expect(getByText('expected')).toBeTruthy();
+      rerender(
+        <Provider
+          enhancedAvailability={componentSample.data}
+          inheritanceMode={TECHNICAL_AVAILABILITY}
+        >
+          <TableStatus />
+        </Provider>,
+      );
+      expect(getByText('available')).toBeTruthy();
+    });
   });
 
   describe('useAvailabilityState()', () => {
@@ -70,160 +120,295 @@ describe('DataProductAvailability - AvailabilityContext', () => {
       rows: { foo: 'bar' },
       rowTitles: { baz: 'qux' },
       rowLabels: ['foo', 'bar'],
-      sites: [
+      siteMonths: {
+        ABBY: { '2010-01': 'available', '2010-10': 'partial' }, // WA / D16
+        BARR: { '2010-10': 'not collected', '2013-10': 'available-provisional' }, // AK / D18
+        CLBJ: { '2013-10': 'expected', '2017-10': 'tentative' }, // TX / D11
+        INVALID: { '2013-10': 'available' },
+      },
+      componentRows: [
         {
           siteCode: 'ABBY',
-          tables: [ // WA / D16
-            { name: 't1', months: { '2010-01': 'available', '2010-10': 'delayed' } },
-            { name: 't2', months: { '2010-01': 'available', '2010-10': 'tentative' } },
-          ],
+          packageType: 'basic',
+          tableName: 't1',
+          months: { '2010-10': 'partial' },
         },
         {
-          siteCode: 'BARR',
-          tables: [ // AK / D18
-            { name: 't1', months: { '2010-10': 'not collected', '2013-10': 'expected' } },
-            { name: 't3', months: { '2010-10': 'delayed', '2013-10': 'available' } },
-          ],
+          siteCode: 'ABBY',
+          packageType: 'expanded',
+          tableName: 't1',
+          months: { '2010-10': 'expected' },
+        },
+        {
+          siteCode: 'ABBY',
+          packageType: 'basic',
+          tableName: 't2',
+          months: { '2010-10': 'not collected' },
         },
         {
           siteCode: 'CLBJ',
-          tables: [ // TX / D11
-            { name: 't2', months: { '2013-10': 'delayed', '2017-10': 'expected' } },
-            { name: 't3', months: { '2013-10': 'tentative', '2017-10': 'being processed' } },
-            { name: 'unknown table' },
-          ],
+          packageType: 'basic',
+          tableName: 't2',
+          months: { '2013-10': 'expected' },
         },
         {
-          siteCode: 'INVALID', tables: [],
+          siteCode: 'INVALID',
+          packageType: 'basic',
+          tableName: 't1',
+          months: { '2013-10': 'expected' },
         },
       ],
       tables: {
-        t1: { name: 't1', sites: ['ABBY', 'BARR'], tableCode: 'T1' },
-        t2: { name: 't2', sites: ['ABBY', 'CLBJ'], tableCode: 'T2' },
-        t3: { name: 't3', sites: ['BARR', 'CLBJ'], tableCode: 'T3' },
+        t1: { name: 't1', tableCode: 'T1' },
+        t2: { name: 't2', tableCode: 'T2' },
       },
+      hasComponents: true,
+      validBreakouts: ['states', 'domains', 'sites', 'packages', 'tables'],
     };
-    test('appropriately calculates rows, rowTitles, and rowLabels for no breakouts (ALL)', () => {
-      const expectedOutput = {
-        rows: {
-          ALL: {
-            '2010-01': ['available', 'available'],
-            '2010-10': ['delayed', 'tentative', 'not collected', 'delayed'],
-            '2013-10': ['expected', 'available', 'delayed', 'tentative'],
-            '2017-10': ['expected', 'being processed'],
-          },
-        },
-        rowTitles: {
-          ALL: 'Summary of all sites and tables',
-        },
-        rowLabels: ['ALL'],
-      };
+    test('calculates a summary row of all sites for no breakouts (ALL)', () => {
       const newState = calculateRows({ ...initialState, breakouts: [] });
-      expect(newState.rows).toStrictEqual(expectedOutput.rows);
-      expect(newState.rowTitles).toStrictEqual(expectedOutput.rowTitles);
-      expect(newState.rowLabels).toStrictEqual(expectedOutput.rowLabels);
+      expect(newState.isComponentLevel).toBe(false);
+      expect(newState.rows).toStrictEqual({
+        ALL: {
+          '2010-01': ['available'],
+          '2010-10': ['partial', 'not collected'],
+          '2013-10': ['available-provisional', 'expected'],
+          '2017-10': ['tentative'],
+        },
+      });
+      expect(newState.rowTitles).toStrictEqual({ ALL: 'Summary of all sites' });
+      expect(newState.rowLabels).toStrictEqual(['ALL']);
     });
-    test('appropriately calculates rows, rowTitles, and rowLabels for discrete breakouts', () => {
-      const expectedOutput = {
-        rows: {
-          'AK-D18-BARR-T1': {
-            '2010-10': ['not collected'],
-            '2013-10': ['expected'],
-          },
-          'AK-D18-BARR-T3': {
-            '2010-10': ['delayed'],
-            '2013-10': ['available'],
-          },
-          'TX-D11-CLBJ-T2': {
-            '2013-10': ['delayed'],
-            '2017-10': ['expected'],
-          },
-          'TX-D11-CLBJ-T3': {
-            '2013-10': ['tentative'],
-            '2017-10': ['being processed'],
-          },
-          'WA-D16-ABBY-T1': {
-            '2010-01': ['available'],
-            '2010-10': ['delayed'],
-          },
-          'WA-D16-ABBY-T2': {
-            '2010-01': ['available'],
-            '2010-10': ['tentative'],
-          },
-        },
-        rowTitles: {
-          'AK-D18-BARR-T1': 'Alaska - Tundra - Utqiaġvik - t1',
-          'AK-D18-BARR-T3': 'Alaska - Tundra - Utqiaġvik - t3',
-          'TX-D11-CLBJ-T2': 'Texas - Southern Plains - LBJ National Grassland - t2',
-          'TX-D11-CLBJ-T3': 'Texas - Southern Plains - LBJ National Grassland - t3',
-          'WA-D16-ABBY-T1': 'Washington - Pacific Northwest - Abby Road - t1',
-          'WA-D16-ABBY-T2': 'Washington - Pacific Northwest - Abby Road - t2',
-        },
-        rowLabels: [
-          'WA-D16-ABBY-T2',
-          'WA-D16-ABBY-T1',
-          'TX-D11-CLBJ-T3',
-          'TX-D11-CLBJ-T2',
-          'AK-D18-BARR-T3',
-          'AK-D18-BARR-T1',
-        ],
-      };
+    test('calculates site rows for site breakouts, ignoring unknown breakouts', () => {
       const newState = calculateRows({
         ...initialState,
-        breakouts: ['states', 'domains', 'sites', 'foo', 'tables'],
+        breakouts: ['states', 'domains', 'sites', 'foo'],
       });
-      expect(newState.rows).toStrictEqual(expectedOutput.rows);
-      expect(newState.rowTitles).toStrictEqual(expectedOutput.rowTitles);
-      expect(newState.rowLabels).toStrictEqual(expectedOutput.rowLabels);
+      expect(newState.isComponentLevel).toBe(false);
+      expect(newState.rows).toStrictEqual({
+        'WA-D16-ABBY': { '2010-01': ['available'], '2010-10': ['partial'] },
+        'AK-D18-BARR': { '2010-10': ['not collected'], '2013-10': ['available-provisional'] },
+        'TX-D11-CLBJ': { '2013-10': ['expected'], '2017-10': ['tentative'] },
+      });
+      expect(newState.rowTitles).toStrictEqual({
+        'WA-D16-ABBY': 'Washington - Pacific Northwest - Abby Road',
+        'AK-D18-BARR': 'Alaska - Tundra - Utqiaġvik',
+        'TX-D11-CLBJ': 'Texas - Southern Plains - LBJ National Grassland',
+      });
+      expect(newState.rowLabels).toStrictEqual(['WA-D16-ABBY', 'TX-D11-CLBJ', 'AK-D18-BARR']);
+    });
+    test('calculates component rows when package or table breakouts are present', () => {
+      const newState = calculateRows({
+        ...initialState,
+        breakouts: ['sites', 'packages', 'tables'],
+      });
+      expect(newState.isComponentLevel).toBe(true);
+      expect(newState.rows).toStrictEqual({
+        'ABBY-basic-T1': { '2010-10': ['partial'] },
+        'ABBY-expanded-T1': { '2010-10': ['expected'] },
+        'ABBY-basic-T2': { '2010-10': ['not collected'] },
+        'CLBJ-basic-T2': { '2013-10': ['expected'] },
+      });
+      expect(newState.rowTitles).toStrictEqual({
+        'ABBY-basic-T1': 'Abby Road - Basic package - t1',
+        'ABBY-expanded-T1': 'Abby Road - Expanded package - t1',
+        'ABBY-basic-T2': 'Abby Road - Basic package - t2',
+        'CLBJ-basic-T2': 'LBJ National Grassland - Basic package - t2',
+      });
+      expect(newState.rowLabels).toStrictEqual([
+        'CLBJ-basic-T2',
+        'ABBY-expanded-T1',
+        'ABBY-basic-T2',
+        'ABBY-basic-T1',
+      ]);
+    });
+    test('rolls up component rows across sites and packages', () => {
+      const newState = calculateRows({
+        ...initialState,
+        breakouts: ['tables'],
+        sortDirection: SORT_DIRECTIONS.DESC,
+      });
+      expect(newState.isComponentLevel).toBe(true);
+      expect(newState.rows).toStrictEqual({
+        T1: { '2010-10': ['partial', 'expected'] },
+        T2: { '2010-10': ['not collected'], '2013-10': ['expected'] },
+      });
+      expect(newState.rowTitles).toStrictEqual({ T1: 't1', T2: 't2' });
+      expect(newState.rowLabels).toStrictEqual(['T1', 'T2']);
+    });
+    test('derives a fixed width code for unrecognized package types', () => {
+      const newState = calculateRows({
+        ...initialState,
+        componentRows: [{
+          siteCode: 'ABBY',
+          packageType: 'other',
+          tableName: 't1',
+          months: { '2010-10': 'expected' },
+        }],
+        breakouts: ['packages'],
+      });
+      expect(newState.rows).toStrictEqual({ OTH: { '2010-10': ['expected'] } });
+      expect(newState.rowTitles).toStrictEqual({ OTH: 'Other package' });
+    });
+    test('presents component rows without any statuses', () => {
+      const newState = calculateRows({
+        ...initialState,
+        componentRows: [{
+          siteCode: 'ABBY',
+          packageType: 'basic',
+          tableName: 't1',
+          months: {},
+        }],
+        breakouts: ['sites', 'tables'],
+      });
+      expect(newState.rows).toStrictEqual({ 'ABBY-T1': {} });
+      expect(newState.rowLabels).toStrictEqual(['ABBY-T1']);
+    });
+    describe('with the component level sample', () => {
+      // Only ABBY (WA / D16) reports tables, BART (NH / D01) only reports site-months
+      const sampleState = applyAvailability(cloneDeep(initialHydratedState), componentSample.data);
+      test('presents every site without package or table breakouts', () => {
+        expect(calculateRows({ ...sampleState, breakouts: ['sites'] }).rowLabels)
+          .toStrictEqual(['BART', 'ABBY']);
+      });
+      test.each([
+        [['sites', 'tables'], ['ABBY-ltr_massdata', 'ABBY-ltr_fielddata']],
+        [['states', 'tables'], ['WA-ltr_massdata', 'WA-ltr_fielddata']],
+        [['domains', 'tables'], ['D16-ltr_massdata', 'D16-ltr_fielddata']],
+        [['packages', 'tables'], [
+          'expanded-ltr_massdata',
+          'expanded-ltr_fielddata',
+          'basic-ltr_massdata',
+          'basic-ltr_fielddata',
+        ]],
+        [['sites', 'packages', 'tables'], [
+          'ABBY-expanded-ltr_massdata',
+          'ABBY-expanded-ltr_fielddata',
+          'ABBY-basic-ltr_massdata',
+          'ABBY-basic-ltr_fielddata',
+        ]],
+      ])('only presents the sites reporting the tables for %j breakouts', (breakouts, rowLabels) => {
+        expect(calculateRows({ ...sampleState, breakouts }).rowLabels).toStrictEqual(rowLabels);
+      });
+      test('only presents the statuses of the sites reporting the tables', () => {
+        // Each package / table row is ABBY's alone, which matches its site-month availability
+        const abbyRow = Object.fromEntries(
+          Object.entries(sampleState.siteMonths.ABBY).map(([month, status]) => [month, [status]]),
+        );
+        const { rows } = calculateRows({ ...sampleState, breakouts: ['packages', 'tables'] });
+        Object.values(rows).forEach((row) => { expect(row).toStrictEqual(abbyRow); });
+      });
+      test('never presents packages / tables with sites, states, or domains not reporting them', () => {
+        const allBreakouts = ['states', 'domains', 'sites', 'packages', 'tables'];
+        const combinations = allBreakouts
+          .reduce((acc, breakout) => [...acc, ...acc.map((combo) => [...combo, breakout])], [[]])
+          .filter((combo) => combo.includes('packages') || combo.includes('tables'));
+        combinations.forEach((breakouts) => {
+          const { rowLabels } = calculateRows({ ...sampleState, breakouts });
+          expect(rowLabels.length).toBeGreaterThan(0);
+          rowLabels.forEach((label) => {
+            expect(label.split('-').filter((code) => ['BART', 'NH', 'D01'].includes(code)))
+              .toStrictEqual([]);
+          });
+        });
+      });
     });
   });
 
-  describe('extractTables()', () => {
-    const initialState = {
-      ...cloneDeep(initialHydratedState),
-      sites: [
-        {
+  describe('applyAvailability()', () => {
+    const siteMonthAvailability = {
+      productCode: 'DP1.00000.001',
+      siteCodes: [{
+        siteCode: 'ABBY',
+        availableReleases: [{
+          release: 'PROVISIONAL',
+          months: [{ month: '2020-01', available: true, status: null }],
+        }],
+      }],
+    };
+    const componentAvailability = {
+      productCode: 'DP1.00000.002',
+      siteCodes: [{
+        siteCode: 'ABBY',
+        availableReleases: [{
+          release: 'PROVISIONAL',
+          months: [{
+            month: '2020-01',
+            available: false,
+            status: null,
+            packages: [{
+              packageType: 'basic',
+              components: [{ name: 't1', type: 'tablename', status: 'Partial' }],
+            }],
+          }],
+        }],
+      }],
+    };
+    test('applies site-month availability without package or table breakouts', () => {
+      const newState = applyAvailability(
+        { ...cloneDeep(DEFAULT_STATE), breakouts: ['tables', 'sites'] },
+        siteMonthAvailability,
+      );
+      expect(newState.productCode).toBe('DP1.00000.001');
+      expect(newState.siteMonths).toStrictEqual({ ABBY: { '2020-01': 'available-provisional' } });
+      expect(newState.componentRows).toStrictEqual([]);
+      expect(newState.hasComponents).toBe(false);
+      expect(newState.validBreakouts).toStrictEqual(['states', 'domains', 'sites']);
+      expect(newState.breakouts).toStrictEqual(['sites']);
+    });
+    test('applies component availability with package and table breakouts', () => {
+      const newState = applyAvailability(
+        { ...cloneDeep(DEFAULT_STATE), breakouts: ['tables', 'sites'] },
+        componentAvailability,
+      );
+      expect(newState.productCode).toBe('DP1.00000.002');
+      expect(newState.siteMonths).toStrictEqual({ ABBY: { '2020-01': 'partial' } });
+      expect(newState.componentRows).toStrictEqual([{
+        siteCode: 'ABBY',
+        packageType: 'basic',
+        tableName: 't1',
+        months: { '2020-01': 'partial' },
+      }]);
+      expect(newState.tables).toStrictEqual({ t1: { name: 't1', tableCode: 't1' } });
+      expect(newState.hasComponents).toBe(true);
+      expect(newState.validBreakouts).toStrictEqual([
+        'states', 'domains', 'sites', 'packages', 'tables',
+      ]);
+      expect(newState.breakouts).toStrictEqual(['tables', 'sites']);
+    });
+    test('applies component availability with the inheritance mode', () => {
+      const availableMonthAvailability = {
+        productCode: 'DP1.00000.002',
+        siteCodes: [{
           siteCode: 'ABBY',
-          tables: [
-            { name: 't1', description: 'table 1', waitInterval: 60 },
-            { name: 't2', description: 'table 2', waitInterval: 40 },
-            { name: 't1', description: 'table 1', waitInterval: 60 },
-          ],
-        },
-        {
-          siteCode: 'BARR',
-          tables: [
-            { name: 't1', description: 'table 1 different description', waitInterval: 60 },
-            { name: 't3', description: 'table 3', waitInterval: 100 },
-          ],
-        },
-      ],
-    };
-    const expectedOutput = {
-      t1: {
-        name: 't1',
-        description: 'table 1',
-        waitInterval: 60,
-        sites: ['ABBY', 'BARR'],
-        tableCode: 'T1',
-      },
-      t2: {
-        name: 't2',
-        description: 'table 2',
-        waitInterval: 40,
-        sites: ['ABBY'],
-        tableCode: 'T2',
-      },
-      t3: {
-        name: 't3',
-        description: 'table 3',
-        waitInterval: 100,
-        sites: ['BARR'],
-        tableCode: 'T3',
-      },
-    };
-    test('properly generates extracted tables object', () => {
-      expect(extractTables(initialState)).toStrictEqual(expectedOutput);
+          availableReleases: [{
+            release: 'PROVISIONAL',
+            months: [{
+              month: '2020-01',
+              available: true,
+              status: null,
+              packages: [{
+                packageType: 'basic',
+                components: [{ name: 't1', type: 'tablename', status: 'Partial' }],
+              }],
+            }],
+          }],
+        }],
+      };
+      const inherited = applyAvailability(cloneDeep(DEFAULT_STATE), availableMonthAvailability);
+      expect(inherited.siteMonths).toStrictEqual({ ABBY: { '2020-01': 'available-provisional' } });
+      expect(inherited.componentRows.map(({ months }) => months))
+        .toStrictEqual([{ '2020-01': 'available-provisional' }]);
+      [CATEGORICAL_STATUS, NONE].forEach((inheritanceMode) => {
+        const newState = applyAvailability(
+          cloneDeep(DEFAULT_STATE),
+          availableMonthAvailability,
+          inheritanceMode,
+        );
+        expect(newState.siteMonths).toStrictEqual(inherited.siteMonths);
+        expect(newState.componentRows.map(({ months }) => months))
+          .toStrictEqual([{ '2020-01': 'partial' }]);
+      });
     });
   });
 
@@ -286,6 +471,11 @@ describe('DataProductAvailability - AvailabilityContext', () => {
           reducer(initialHydratedState, { type: 'setBreakouts', breakouts: ['states', 'qux'] }),
         ).toStrictEqual(initialHydratedState);
       });
+      test('rejects package and table breakouts without component detail', () => {
+        expect(
+          reducer(initialHydratedState, { type: 'setBreakouts', breakouts: ['sites', 'tables'] }),
+        ).toStrictEqual(initialHydratedState);
+      });
       test('sets breakouts and caluclates rows', () => {
         const newState = reducer(
           initialHydratedState,
@@ -317,6 +507,7 @@ describe('DataProductAvailability - AvailabilityContext', () => {
       test('adds valid action method to the front of the breakout list', () => {
         const previousState = {
           ...initialHydratedState,
+          validBreakouts: ['states', 'domains', 'sites', 'packages', 'tables'],
           breakouts: ['states', 'domains', 'tables'],
         };
         const newState = reducer(
@@ -345,6 +536,48 @@ describe('DataProductAvailability - AvailabilityContext', () => {
           { type: 'setSortDirection', direction: SORT_DIRECTIONS.DESC },
         );
         expect(newState.sortDirection).toBe(SORT_DIRECTIONS.DESC);
+      });
+    });
+    describe('setAvailability', () => {
+      const availability = {
+        productCode: 'DP1.00000.001',
+        siteCodes: [{
+          siteCode: 'ABBY',
+          availableReleases: [{
+            release: 'RELEASE-2026',
+            months: [{ month: '2020-01', available: true, status: null }],
+          }],
+        }],
+      };
+      test('parses availability and calculates rows', () => {
+        const newState = reducer(
+          { ...cloneDeep(initialHydratedState), breakouts: ['sites'] },
+          { type: 'setAvailability', availability },
+        );
+        expect(newState.productCode).toBe('DP1.00000.001');
+        expect(newState.rows).toStrictEqual({ ABBY: { '2020-01': ['available'] } });
+        expect(newState.rowLabels).toStrictEqual(['ABBY']);
+      });
+      test('parses availability with the inheritance mode', () => {
+        const newState = reducer(
+          { ...cloneDeep(initialHydratedState), breakouts: ['tables'] },
+          { type: 'setAvailability', availability: componentSample.data, inheritanceMode: NONE },
+        );
+        // Each table rolls up ABBY's basic and expanded packages, only listed in 2021-03
+        expect(newState.rows).toStrictEqual({
+          ltr_fielddata: { '2021-03': ['expected', 'expected'] },
+          ltr_massdata: { '2021-03': ['expected', 'expected'] },
+        });
+      });
+      test('clears data when availability is removed', () => {
+        const previousState = reducer(
+          cloneDeep(initialHydratedState),
+          { type: 'setAvailability', availability },
+        );
+        const newState = reducer(previousState, { type: 'setAvailability', availability: null });
+        expect(newState.productCode).toBe(null);
+        expect(newState.siteMonths).toStrictEqual({});
+        expect(newState.rows).toStrictEqual({ ALL: {} });
       });
     });
   });

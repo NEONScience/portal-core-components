@@ -1,5 +1,2501 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: available 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#002c77"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#002c77"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: available-provisional 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#002c77"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+        <path
+          d="M12.87,20.4h1.77l1.96,1.96v1.77zm-2.47,0l6.2,6.2v1.77l-6.2,-6.2zm6.2,10.44v0.76h-1.01l-5.19,-5.19v-1.77zm-3.49,0.76h-1.76l-0.95,-0.95v-1.76z"
+          fill="#002c77"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#002c77"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+      <path
+        d="M12.87,20.4h1.77l1.96,1.96v1.77zm-2.47,0l6.2,6.2v1.77l-6.2,-6.2zm6.2,10.44v0.76h-1.01l-5.19,-5.19v-1.77zm-3.49,0.76h-1.76l-0.95,-0.95v-1.76z"
+        fill="#002c77"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="10.5px"
+          rx="1px"
+          stroke="#001960"
+          stroke-width="1.5px"
+          width="5.5px"
+          x="10.75"
+          y="20.75"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="10.5px"
+        rx="1px"
+        stroke="#001960"
+        stroke-width="1.5px"
+        width="5.5px"
+        x="10.75"
+        y="20.75"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: mixed no availability 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#colorVisionAccessibleMixedNoAvailabilityPattern)"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#colorVisionAccessibleMixedNoAvailabilityPattern)"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: mixed some availability 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#colorVisionAccessibleMixedSomeAvailabilityPattern)"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#colorVisionAccessibleMixedSomeAvailabilityPattern)"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: mixed-available-provisional 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#colorVisionAccessibleMixedAvailableProvisionalPattern)"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#002c77"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+        <path
+          d="M16.6,22.36v1.77l-1.33,-1.33l0.63,-1.14zm0,4.24v1.77l-2.84,-2.84l0.63,-1.14zm0,4.24v0.76h-1.01l-3.34,-3.34l0.63,-1.14zm-3.49,0.76h-1.76l-0.61,-0.61l0.63,-1.14z"
+          fill="#002c77"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#colorVisionAccessibleMixedAvailableProvisionalPattern)"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#002c77"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+      <path
+        d="M16.6,22.36v1.77l-1.33,-1.33l0.63,-1.14zm0,4.24v1.77l-2.84,-2.84l0.63,-1.14zm0,4.24v0.76h-1.01l-3.34,-3.34l0.63,-1.14zm-3.49,0.76h-1.76l-0.61,-0.61l0.63,-1.14z"
+        fill="#002c77"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: not available 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#d7d9d9"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#d7d9d9"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: not collected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#b68200"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#b68200"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: not expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="10.5px"
+          rx="1px"
+          stroke="#a2a4a3"
+          stroke-width="1.5px"
+          width="5.5px"
+          x="10.75"
+          y="20.75"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="10.5px"
+        rx="1px"
+        stroke="#a2a4a3"
+        stroke-width="1.5px"
+        width="5.5px"
+        x="10.75"
+        y="20.75"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: partial 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#b68200"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+        <path
+          d="M12.87,20.4h1.77l1.96,1.96v1.77zm-2.47,0l6.2,6.2v1.77l-6.2,-6.2zm6.2,10.44v0.76h-1.01l-5.19,-5.19v-1.77zm-3.49,0.76h-1.76l-0.95,-0.95v-1.76z"
+          fill="#b68200"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#b68200"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+      <path
+        d="M12.87,20.4h1.77l1.96,1.96v1.77zm-2.47,0l6.2,6.2v1.77l-6.2,-6.2zm6.2,10.44v0.76h-1.01l-5.19,-5.19v-1.77zm-3.49,0.76h-1.76l-0.95,-0.95v-1.76z"
+        fill="#b68200"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: tentative 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="10.5px"
+          rx="1px"
+          stroke="#805b00"
+          stroke-width="1.5px"
+          width="5.5px"
+          x="10.75"
+          y="20.75"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="10.5px"
+        rx="1px"
+        stroke="#805b00"
+        stroke-width="1.5px"
+        width="5.5px"
+        x="10.75"
+        y="20.75"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders JsxCell correctly for every status JsxCell for status: tombstoned 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="rgba(39, 39, 39, 0.9)"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="rgba(39, 39, 39, 0.9)"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents colorVisionAccessible color scheme renders SvgDefs correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg
+        height="0px"
+        width="0px"
+      >
+        <defs>
+          <pattern
+            height="1"
+            id="colorVisionAccessibleMixedAvailableProvisionalPattern"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+          >
+            <path
+              d="M 0 0 V 1 L 1 0 Z"
+              fill="#002c77"
+            />
+            <path
+              d="M 1 1 V 0 L 0 1 Z"
+              fill="#ffffff"
+            />
+          </pattern>
+          <pattern
+            height="4.24"
+            id="partialSelectionPattern"
+            patternUnits="userSpaceOnUse"
+            width="4.24"
+          >
+            <rect
+              fill="#b8d8f4"
+              height="4.24"
+              width="4.24"
+              x="0"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
+            />
+          </pattern>
+          <pattern
+            height="1"
+            id="colorVisionAccessibleMixedSomeAvailabilityPattern"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+          >
+            <path
+              d="M 0 0 V 1 L 1 0 Z"
+              fill="#002c77"
+            />
+            <path
+              d="M 1 1 V 0 L 0 1 Z"
+              fill="#b68200"
+            />
+          </pattern>
+          <pattern
+            height="1"
+            id="colorVisionAccessibleMixedNoAvailabilityPattern"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+          >
+            <path
+              d="M 0 0 V 1 L 1 0 Z"
+              fill="#d7d9d9"
+            />
+            <path
+              d="M 1 1 V 0 L 0 1 Z"
+              fill="#b68200"
+            />
+          </pattern>
+        </defs>
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg
+      height="0px"
+      width="0px"
+    >
+      <defs>
+        <pattern
+          height="1"
+          id="colorVisionAccessibleMixedAvailableProvisionalPattern"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+        >
+          <path
+            d="M 0 0 V 1 L 1 0 Z"
+            fill="#002c77"
+          />
+          <path
+            d="M 1 1 V 0 L 0 1 Z"
+            fill="#ffffff"
+          />
+        </pattern>
+        <pattern
+          height="4.24"
+          id="partialSelectionPattern"
+          patternUnits="userSpaceOnUse"
+          width="4.24"
+        >
+          <rect
+            fill="#b8d8f4"
+            height="4.24"
+            width="4.24"
+            x="0"
+            y="0"
+          />
+          <path
+            d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+            fill="#5ca6e3"
+          />
+        </pattern>
+        <pattern
+          height="1"
+          id="colorVisionAccessibleMixedSomeAvailabilityPattern"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+        >
+          <path
+            d="M 0 0 V 1 L 1 0 Z"
+            fill="#002c77"
+          />
+          <path
+            d="M 1 1 V 0 L 0 1 Z"
+            fill="#b68200"
+          />
+        </pattern>
+        <pattern
+          height="1"
+          id="colorVisionAccessibleMixedNoAvailabilityPattern"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+        >
+          <path
+            d="M 0 0 V 1 L 1 0 Z"
+            fill="#d7d9d9"
+          />
+          <path
+            d="M 1 1 V 0 L 0 1 Z"
+            fill="#b68200"
+          />
+        </pattern>
+      </defs>
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: available 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#2E7D32"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#2E7D32"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: available-provisional 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#E8F5E9"
+          height="10.85px"
+          rx="1.25px"
+          stroke="#2E7D32"
+          stroke-width="1.15px"
+          width="5.85px"
+          x="10.6"
+          y="20.6"
+        />
+        <path
+          d="M13.07,20.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+          fill="#2E7D32"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#E8F5E9"
+        height="10.85px"
+        rx="1.25px"
+        stroke="#2E7D32"
+        stroke-width="1.15px"
+        width="5.85px"
+        x="10.6"
+        y="20.6"
+      />
+      <path
+        d="M13.07,20.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+        fill="#2E7D32"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#66BB6A"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#66BB6A"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: mixed no availability 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#neonGreenMixedNoAvailabilityPattern)"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#FDD835"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#neonGreenMixedNoAvailabilityPattern)"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#FDD835"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: mixed some availability 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#neonGreenMixedSomeAvailabilityPattern)"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#2E7D32"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#neonGreenMixedSomeAvailabilityPattern)"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#2E7D32"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: mixed-available-provisional 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="url(#neonGreenMixedAvailableProvisionalPattern)"
+          height="11.2px"
+          rx="1.5px"
+          stroke="#2E7D32"
+          stroke-width="0.8px"
+          width="6.2px"
+          x="10.4"
+          y="20.4"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="url(#neonGreenMixedAvailableProvisionalPattern)"
+        height="11.2px"
+        rx="1.5px"
+        stroke="#2E7D32"
+        stroke-width="0.8px"
+        width="6.2px"
+        x="10.4"
+        y="20.4"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: not available 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#d7d9d9"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#d7d9d9"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: not collected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#616161"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#616161"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: not expected 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#9E9E9E"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#9E9E9E"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: partial 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#FDD835"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#FDD835"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: tentative 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#1976D2"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#1976D2"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders JsxCell correctly for every status JsxCell for status: tombstoned 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="rgba(39, 39, 39, 0.9)"
+          height="12px"
+          rx="2px"
+          width="7px"
+          x="10"
+          y="20"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="rgba(39, 39, 39, 0.9)"
+        height="12px"
+        rx="2px"
+        width="7px"
+        x="10"
+        y="20"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DataProductAvailability - AvailabilitySvgComponents neonGreen color scheme renders SvgDefs correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg
+        height="0px"
+        width="0px"
+      >
+        <defs>
+          <pattern
+            height="1"
+            id="neonGreenMixedAvailableProvisionalPattern"
+            patternContentUnits="userSpaceOnUse"
+            patternUnits="objectBoundingBox"
+            width="1"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="#E8F5E9"
+              fill-opacity="0.25"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
+            />
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
+              stroke="#2E7D32"
+              stroke-linecap="square"
+              stroke-width="1.00"
+            />
+            <polygon
+              fill="#2E7D32"
+              points="0,0 6,0 0,12"
+            />
+          </pattern>
+          <pattern
+            height="4.24"
+            id="partialSelectionPattern"
+            patternUnits="userSpaceOnUse"
+            width="4.24"
+          >
+            <rect
+              fill="#b8d8f4"
+              height="4.24"
+              width="4.24"
+              x="0"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
+            />
+          </pattern>
+          <pattern
+            height="1"
+            id="neonGreenMixedSomeAvailabilityPattern"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+          >
+            <path
+              d="M 0 0 V 1 L 1 0 Z"
+              fill="#2E7D32"
+            />
+            <path
+              d="M 1 1 V 0 L 0 1 Z"
+              fill="#FDD835"
+            />
+          </pattern>
+          <pattern
+            height="1"
+            id="neonGreenMixedNoAvailabilityPattern"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+          >
+            <path
+              d="M 0 0 V 1 L 1 0 Z"
+              fill="#d7d9d9"
+            />
+            <path
+              d="M 1 1 V 0 L 0 1 Z"
+              fill="#FDD835"
+            />
+          </pattern>
+        </defs>
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg
+      height="0px"
+      width="0px"
+    >
+      <defs>
+        <pattern
+          height="1"
+          id="neonGreenMixedAvailableProvisionalPattern"
+          patternContentUnits="userSpaceOnUse"
+          patternUnits="objectBoundingBox"
+          width="1"
+          x="0"
+          y="0"
+        >
+          <rect
+            fill="#E8F5E9"
+            fill-opacity="0.25"
+            height="12"
+            width="7"
+            x="0"
+            y="0"
+          />
+          <path
+            d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
+            stroke="#2E7D32"
+            stroke-linecap="square"
+            stroke-width="1.00"
+          />
+          <polygon
+            fill="#2E7D32"
+            points="0,0 6,0 0,12"
+          />
+        </pattern>
+        <pattern
+          height="4.24"
+          id="partialSelectionPattern"
+          patternUnits="userSpaceOnUse"
+          width="4.24"
+        >
+          <rect
+            fill="#b8d8f4"
+            height="4.24"
+            width="4.24"
+            x="0"
+            y="0"
+          />
+          <path
+            d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+            fill="#5ca6e3"
+          />
+        </pattern>
+        <pattern
+          height="1"
+          id="neonGreenMixedSomeAvailabilityPattern"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+        >
+          <path
+            d="M 0 0 V 1 L 1 0 Z"
+            fill="#2E7D32"
+          />
+          <path
+            d="M 1 1 V 0 L 0 1 Z"
+            fill="#FDD835"
+          />
+        </pattern>
+        <pattern
+          height="1"
+          id="neonGreenMixedNoAvailabilityPattern"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+        >
+          <path
+            d="M 0 0 V 1 L 1 0 Z"
+            fill="#d7d9d9"
+          />
+          <path
+            d="M 1 1 V 0 L 0 1 Z"
+            fill="#FDD835"
+          />
+        </pattern>
+      </defs>
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
 exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: available 1`] = `
 {
   "asFragment": [Function],
@@ -90,7 +2586,7 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
     <div>
       <svg>
         <rect
-          fill="url(#availableProvisionalPattern)"
+          fill="#e1e3ea"
           height="10.85px"
           rx="1.25px"
           stroke="#002c77"
@@ -99,13 +2595,17 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
           x="10.6"
           y="20.6"
         />
+        <path
+          d="M13.07,20.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+          fill="#002c77"
+        />
       </svg>
     </div>
   </body>,
   "container": <div>
     <svg>
       <rect
-        fill="url(#availableProvisionalPattern)"
+        fill="#e1e3ea"
         height="10.85px"
         rx="1.25px"
         stroke="#002c77"
@@ -114,179 +2614,9 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
         x="10.6"
         y="20.6"
       />
-    </svg>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: being processed 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <svg>
-        <rect
-          fill="url(#beingProcessedPattern)"
-          height="10.5px"
-          rx="1px"
-          stroke="#002c77"
-          stroke-width="1.5px"
-          width="5.5px"
-          x="10.75"
-          y="20.75"
-        />
-      </svg>
-    </div>
-  </body>,
-  "container": <div>
-    <svg>
-      <rect
-        fill="url(#beingProcessedPattern)"
-        height="10.5px"
-        rx="1px"
-        stroke="#002c77"
-        stroke-width="1.5px"
-        width="5.5px"
-        x="10.75"
-        y="20.75"
-      />
-    </svg>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: delayed 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <svg>
-        <rect
-          fill="url(#delayedPattern)"
-          height="10.5px"
-          rx="1px"
-          stroke="#f8bb32"
-          stroke-width="1.5px"
-          width="5.5px"
-          x="10.75"
-          y="20.75"
-        />
-      </svg>
-    </div>
-  </body>,
-  "container": <div>
-    <svg>
-      <rect
-        fill="url(#delayedPattern)"
-        height="10.5px"
-        rx="1px"
-        stroke="#f8bb32"
-        stroke-width="1.5px"
-        width="5.5px"
-        x="10.75"
-        y="20.75"
+      <path
+        d="M13.07,20.6h1.77l1.61,1.61v1.77zm-2.47,0l5.85,5.85v1.77l-5.85,-5.85zm5.85,10.09v0.76h-1.01l-4.84,-4.84v-1.77zm-3.49,0.76h-1.76l-0.6,-0.6v-1.76z"
+        fill="#002c77"
       />
     </svg>
   </div>,
@@ -945,6 +3275,101 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell cor
 }
 `;
 
+exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: partial 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <svg>
+        <rect
+          fill="#ffffff"
+          height="10.5px"
+          rx="1px"
+          stroke="#f8bb32"
+          stroke-width="1.5px"
+          width="5.5px"
+          x="10.75"
+          y="20.75"
+        />
+        <path
+          d="M13.22,20.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+          fill="#f8bb32"
+        />
+      </svg>
+    </div>
+  </body>,
+  "container": <div>
+    <svg>
+      <rect
+        fill="#ffffff"
+        height="10.5px"
+        rx="1px"
+        stroke="#f8bb32"
+        stroke-width="1.5px"
+        width="5.5px"
+        x="10.75"
+        y="20.75"
+      />
+      <path
+        d="M13.22,20.75h1.77l1.26,1.26v1.77zm-2.47,0l5.5,5.5v1.77l-5.5,-5.5zm5.5,9.74v0.76h-1.01l-4.49,-4.49v-1.77zm-3.49,0.76h-1.76l-0.25,-0.25v-1.76z"
+        fill="#f8bb32"
+      />
+    </svg>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
 exports[`DataProductAvailability - AvailabilitySvgComponents renders JsxCell correctly for every status JsxCell for status: tentative 1`] = `
 {
   "asFragment": [Function],
@@ -1126,28 +3551,6 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
       >
         <defs>
           <pattern
-            height="3"
-            id="availableProvisionalPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#e1e3ea"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
             height="1"
             id="mixedAvailableProvisionalPattern"
             patternContentUnits="userSpaceOnUse"
@@ -1156,46 +3559,19 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
             x="0"
             y="0"
           >
-            <polygon
+            <rect
               fill="#e1e3ea"
               fill-opacity="0.25"
-              points="0,0 0,1 1,1 1,0"
+              height="12"
+              width="7"
+              x="0"
+              y="0"
             />
-            <line
+            <path
+              d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
               stroke="#002c77"
               stroke-linecap="square"
               stroke-width="1.00"
-              x1="3.46"
-              x2="7.00"
-              y1="0.00"
-              y2="3.54"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="0.07"
-              y2="7.07"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="7.00"
-              y1="3.61"
-              y2="10.61"
-            />
-            <line
-              stroke="#002c77"
-              stroke-linecap="square"
-              stroke-width="1.00"
-              x1="0.00"
-              x2="4.85"
-              y1="7.15"
-              y2="12.00"
             />
             <polygon
               fill="#002c77"
@@ -1203,69 +3579,21 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
             />
           </pattern>
           <pattern
-            height="3"
-            id="beingProcessedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#002c77"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
-            id="delayedPattern"
-            patternTransform="rotate(45)"
-            patternUnits="userSpaceOnUse"
-            width="7"
-          >
-            <rect
-              fill="#f8bb32"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
-            <rect
-              fill="#ffffff"
-              height="1.75"
-              width="7"
-              x="0"
-              y="1.25"
-            />
-          </pattern>
-          <pattern
-            height="3"
+            height="4.24"
             id="partialSelectionPattern"
-            patternTransform="rotate(45)"
             patternUnits="userSpaceOnUse"
-            width="7"
+            width="4.24"
           >
-            <rect
-              fill="#5ca6e3"
-              height="1.25"
-              width="7"
-              x="0"
-              y="0"
-            />
             <rect
               fill="#b8d8f4"
-              height="1.75"
-              width="7"
+              height="4.24"
+              width="4.24"
               x="0"
-              y="1.25"
+              y="0"
+            />
+            <path
+              d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+              fill="#5ca6e3"
             />
           </pattern>
           <pattern
@@ -1309,28 +3637,6 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
     >
       <defs>
         <pattern
-          height="3"
-          id="availableProvisionalPattern"
-          patternTransform="rotate(45)"
-          patternUnits="userSpaceOnUse"
-          width="7"
-        >
-          <rect
-            fill="#002c77"
-            height="1.25"
-            width="7"
-            x="0"
-            y="0"
-          />
-          <rect
-            fill="#e1e3ea"
-            height="1.75"
-            width="7"
-            x="0"
-            y="1.25"
-          />
-        </pattern>
-        <pattern
           height="1"
           id="mixedAvailableProvisionalPattern"
           patternContentUnits="userSpaceOnUse"
@@ -1339,46 +3645,19 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
           x="0"
           y="0"
         >
-          <polygon
+          <rect
             fill="#e1e3ea"
             fill-opacity="0.25"
-            points="0,0 0,1 1,1 1,0"
+            height="12"
+            width="7"
+            x="0"
+            y="0"
           />
-          <line
+          <path
+            d="M3.46,0.00L7.00,3.54 M0.00,0.07L7.00,7.07 M0.00,3.61L7.00,10.61 M0.00,7.15L4.85,12.00"
             stroke="#002c77"
             stroke-linecap="square"
             stroke-width="1.00"
-            x1="3.46"
-            x2="7.00"
-            y1="0.00"
-            y2="3.54"
-          />
-          <line
-            stroke="#002c77"
-            stroke-linecap="square"
-            stroke-width="1.00"
-            x1="0.00"
-            x2="7.00"
-            y1="0.07"
-            y2="7.07"
-          />
-          <line
-            stroke="#002c77"
-            stroke-linecap="square"
-            stroke-width="1.00"
-            x1="0.00"
-            x2="7.00"
-            y1="3.61"
-            y2="10.61"
-          />
-          <line
-            stroke="#002c77"
-            stroke-linecap="square"
-            stroke-width="1.00"
-            x1="0.00"
-            x2="4.85"
-            y1="7.15"
-            y2="12.00"
           />
           <polygon
             fill="#002c77"
@@ -1386,69 +3665,21 @@ exports[`DataProductAvailability - AvailabilitySvgComponents renders SvgDefs cor
           />
         </pattern>
         <pattern
-          height="3"
-          id="beingProcessedPattern"
-          patternTransform="rotate(45)"
-          patternUnits="userSpaceOnUse"
-          width="7"
-        >
-          <rect
-            fill="#002c77"
-            height="1.25"
-            width="7"
-            x="0"
-            y="0"
-          />
-          <rect
-            fill="#ffffff"
-            height="1.75"
-            width="7"
-            x="0"
-            y="1.25"
-          />
-        </pattern>
-        <pattern
-          height="3"
-          id="delayedPattern"
-          patternTransform="rotate(45)"
-          patternUnits="userSpaceOnUse"
-          width="7"
-        >
-          <rect
-            fill="#f8bb32"
-            height="1.25"
-            width="7"
-            x="0"
-            y="0"
-          />
-          <rect
-            fill="#ffffff"
-            height="1.75"
-            width="7"
-            x="0"
-            y="1.25"
-          />
-        </pattern>
-        <pattern
-          height="3"
+          height="4.24"
           id="partialSelectionPattern"
-          patternTransform="rotate(45)"
           patternUnits="userSpaceOnUse"
-          width="7"
+          width="4.24"
         >
-          <rect
-            fill="#5ca6e3"
-            height="1.25"
-            width="7"
-            x="0"
-            y="0"
-          />
           <rect
             fill="#b8d8f4"
-            height="1.75"
-            width="7"
+            height="4.24"
+            width="4.24"
             x="0"
-            y="1.25"
+            y="0"
+          />
+          <path
+            d="M0,0L4.24,4.24H2.47L0,1.77ZM2.47,0H4.24V1.77Z"
+            fill="#5ca6e3"
           />
         </pattern>
         <pattern

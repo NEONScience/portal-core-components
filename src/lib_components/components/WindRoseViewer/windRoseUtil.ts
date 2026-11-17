@@ -1,4 +1,13 @@
 import { parseDataFiles } from './dataUtil';
+import {
+  accumulateWindSpeed,
+  createTimeSeriesAccumulator,
+  finalizeTimeSeries,
+  getTimeSeriesInterval,
+  WindSpeedObservation,
+  WindSpeedTimeSeries,
+  WindSpeedTimeSeriesAccumulator,
+} from './windRoseTimeSeriesUtil';
 import { Nullable } from '../../types/core';
 
 /**
@@ -21,6 +30,8 @@ const FILE_RESOLUTION_MATCHERS = [
 const START_DATE_TIME_VAR = 'startDateTime';
 const WIND_DIRECTION_VAR = 'windDirMean';
 const WIND_SPEED_VAR = 'windSpeedMean';
+const WIND_SPEED_MIN_VAR = 'windSpeedMinimum';
+const WIND_SPEED_MAX_VAR = 'windSpeedMaximum';
 const WIND_DIRECTION_QF_VAR = 'windDirFinalQF';
 const WIND_SPEED_QF_VAR = 'windSpeedFinalQF';
 
@@ -165,6 +176,8 @@ export interface WindRoseDataSet {
   daily: Record<string, WindRoseAggregate>;
   // Days (YYYY-MM-DD) with at least one observation, sorted ascending
   days: string[];
+  // Wind speed over time of the same observations
+  timeSeries: WindSpeedTimeSeries;
 }
 
 export interface WindRoseData {
@@ -299,11 +312,13 @@ const finalizeAggregate = (accumulator: AggregateAccumulator): WindRoseAggregate
 interface DataSetAccumulator {
   monthly: AggregateAccumulator;
   daily: Map<string, AggregateAccumulator>;
+  timeSeries: WindSpeedTimeSeriesAccumulator;
 }
 
-const createDataSetAccumulator = (): DataSetAccumulator => ({
+const createDataSetAccumulator = (timeSeriesInterval: number): DataSetAccumulator => ({
   monthly: createAccumulator(),
   daily: new Map(),
+  timeSeries: createTimeSeriesAccumulator(timeSeriesInterval),
 });
 
 const accumulateObservation = (
@@ -311,8 +326,9 @@ const accumulateObservation = (
   dayKey: string,
   directionIndex: number,
   velocityIndex: number,
-  speed: number,
+  observation: WindSpeedObservation,
 ): void => {
+  const { speed } = observation;
   let dailyAccumulator = dataSet.daily.get(dayKey);
   if (!dailyAccumulator) {
     dailyAccumulator = createAccumulator();
@@ -325,6 +341,7 @@ const accumulateObservation = (
       accumulate(accumulator, directionIndex, velocityIndex, speed);
     }
   });
+  accumulateWindSpeed(dataSet.timeSeries, observation);
 };
 
 const finalizeDataSet = (dataSet: DataSetAccumulator): WindRoseDataSet => {
@@ -336,12 +353,14 @@ const finalizeDataSet = (dataSet: DataSetAccumulator): WindRoseDataSet => {
     monthly: (dataSet.monthly.samples > 0) ? finalizeAggregate(dataSet.monthly) : null,
     daily,
     days: Object.keys(daily).sort(),
+    timeSeries: finalizeTimeSeries(dataSet.timeSeries),
   };
 };
 
 /**
  * Builds the monthly and daily wind roses for display from the parsed data files
- * of a single site and month for each quality filter, along with the selectable position options
+ * of a single site and month for each quality filter, along with the wind speed time series of
+ * the same observations and the selectable position options
  * @param data Parsed CSV data files
  * @param dataFilesInfo The data files info the data was fetched from
  */
@@ -350,8 +369,12 @@ export const buildWindRoseData = (
   dataFilesInfo: WindRoseDataFilesInfo,
 ): WindRoseData => {
   let dataStateMessage: Nullable<string> = null;
-  const validated = createDataSetAccumulator();
-  const all = createDataSetAccumulator();
+  // The temporal index of the data files is the averaging period of the observations in minutes
+  const timeSeriesInterval = getTimeSeriesInterval(
+    Number.parseInt(dataFilesInfo.dataFileMatcher?.tmi || '', 10),
+  );
+  const validated = createDataSetAccumulator(timeSeriesInterval);
+  const all = createDataSetAccumulator(timeSeriesInterval);
   data.forEach((fileData: ParsedDataFile): void => {
     fileData.data.forEach((row: Record<string, unknown>): void => {
       // The row is invalid if not associated with a time variable
@@ -368,10 +391,16 @@ export const buildWindRoseData = (
         return;
       }
       const dayKey = getDayKey(time);
-      accumulateObservation(all, dayKey, directionIndex, velocityIndex, speed);
+      const observation: WindSpeedObservation = {
+        time: time.getTime(),
+        speed,
+        minimum: parseNumber(row[WIND_SPEED_MIN_VAR]),
+        maximum: parseNumber(row[WIND_SPEED_MAX_VAR]),
+      };
+      accumulateObservation(all, dayKey, directionIndex, velocityIndex, observation);
       if ((parseNumber(row[WIND_SPEED_QF_VAR]) === 0)
           && (parseNumber(row[WIND_DIRECTION_QF_VAR]) === 0)) {
-        accumulateObservation(validated, dayKey, directionIndex, velocityIndex, speed);
+        accumulateObservation(validated, dayKey, directionIndex, velocityIndex, observation);
       }
     });
   });

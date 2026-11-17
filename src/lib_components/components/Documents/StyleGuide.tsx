@@ -41,7 +41,7 @@ export default function StyleGuide() {
     name: 'NEON.DOC.000780vB.pdf',
     type: 'application/pdf',
     size: 993762,
-    description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
+    description: 'NEON Algorithm Theoretical Basis Document (ATBD) - 2D Wind Speed and Direction',
   };
   const qsgDoc = {
     name: 'NEON.QSG.DP1.00001.001v1.pdf',
@@ -54,7 +54,7 @@ export default function StyleGuide() {
     name: 'NEON.DOC.000230vA.pdf',
     type: 'application/pdf',
     size: 599913,
-    description: 'NEON sensor command, control and configuration – Barometric pressure',
+    description: 'NEON sensor command, control and configuration - Barometric pressure',
     variants: [],
   };
   const invalidDoc = {
@@ -103,7 +103,7 @@ const exampleDoc: NeonDocument = {
   name: 'NEON.DOC.000780vB.pdf',
   type: 'application/pdf',
   size: 993762,
-  description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
+  description: 'NEON Algorithm Theoretical Basis Document (ATBD) - 2D Wind Speed and Direction',
 };
 
 <DocumentViewer
@@ -282,7 +282,7 @@ const exampleDoc: NeonDocument = {
   name: 'NEON.DOC.000780vB.pdf',
   type: 'application/pdf',
   size: 993762,
-  description: 'NEON Algorithm Theoretical Basis Document (ATBD) – 2D Wind Speed and Direction',
+  description: 'NEON Algorithm Theoretical Basis Document (ATBD) - 2D Wind Speed and Direction',
 };
 
 <PdfDocumentViewer

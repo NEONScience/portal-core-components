@@ -11,9 +11,22 @@ import {
   SVG,
   TIME,
   SVG_STYLES,
+  DEFAULT_AVAILABILITY_COLOR_SCHEME,
   calcRollupStatus,
 } from './AvailabilityUtils';
-import { CELL_ATTRS } from './AvailabilitySvgComponents';
+import { getCellAttrs, createStripeColumnGetter } from './AvailabilitySvgComponents';
+
+/**
+   Get the width of the row label column and how far its labels can scroll. The column fits the
+   longest label unless a width is given, and is capped to leave the data area its minimum width.
+*/
+export const getRowLabelLayout = (svgWidth, labelTextWidth, rowLabelWidth = null) => {
+  const fitWidth = Math.ceil(labelTextWidth + (2 * SVG.CELL_PADDING));
+  const maxWidth = Math.max(svgWidth - SVG.MIN_WIDTH, 2 * SVG.CELL_PADDING);
+  const hasRowLabelWidth = Number.isFinite(rowLabelWidth) && (rowLabelWidth > 0);
+  const labelWidth = Math.min(hasRowLabelWidth ? rowLabelWidth : fitWidth, maxWidth);
+  return { labelWidth, maxLabelOffset: Math.max(0, fitWidth - labelWidth) };
+};
 
 /**
  * EnhancedAvailabilityGrid generator function
@@ -37,6 +50,12 @@ import { CELL_ATTRS } from './AvailabilitySvgComponents';
  *       parent to set state for dateRange
  * * @param {boolean} selectionEnabled Whether to hook up interactions to allow
  *       user selection of sites
+ * * @param {boolean} emptyMissingMonths Whether to leave months without data in a row
+ *       empty rather than drawing a default status cell
+ * * @param {number} rowLabelWidth Width in pixels of the row label column. Defaults to fit the
+ *       longest label. Labels that don't fit the column can be scrolled horizontally.
+ * * @param {string} colorScheme Color scheme to draw cells in, one of
+ *       AVAILABILITY_COLOR_SCHEMES (defaults to DEFAULT_AVAILABILITY_COLOR_SCHEME)
  */
 export default function EnhancedAvailabilityGrid(config) {
   /**
@@ -54,6 +73,9 @@ export default function EnhancedAvailabilityGrid(config) {
     dateRange = { value: [], validValues: [TIME.MIN_YEAR_MONTH, TIME.MAX_YEAR_MONTH] },
     setDateRangeValue = () => {},
     selectionEnabled = true,
+    emptyMissingMonths = false,
+    rowLabelWidth = null,
+    colorScheme = DEFAULT_AVAILABILITY_COLOR_SCHEME,
   } = config;
 
   /**
@@ -78,8 +100,6 @@ export default function EnhancedAvailabilityGrid(config) {
   const svgId = svg.attr('id');
   const svgWidth = parseFloat(svg.attr('width'));
   const svgHeight = parseFloat(svg.attr('height'));
-  const labelWidth = (rowLabels[0].length * SVG.LABEL_WIDTH_MULTIPLIER)
-    + SVG.LABEL_WIDTH_RIGHT_BUFFER;
 
   /**
      Sanity Check: svg must have discrete numeric dimensions
@@ -87,6 +107,27 @@ export default function EnhancedAvailabilityGrid(config) {
   if (Number.isNaN(svgWidth) || Number.isNaN(svgHeight)) {
     return null;
   }
+
+  /**
+     Setup: Row label column
+     Labels use a monospace font so measuring the longest gives the width needed for all of them.
+     Fall back to an estimate where text can't be measured (e.g. when not rendered).
+  */
+  const longestRowLabel = rowLabels.reduce((acc, label) => (
+    label.length > acc.length ? label : acc
+  ), '');
+  const measureText = svg.append('text').text(longestRowLabel);
+  SVG_STYLES.apply(measureText, 'rowLabel');
+  const measureNode = measureText.node();
+  const measuredTextWidth = typeof measureNode.getComputedTextLength === 'function'
+    ? measureNode.getComputedTextLength()
+    : 0;
+  measureText.remove();
+  const { labelWidth, maxLabelOffset } = getRowLabelLayout(
+    svgWidth,
+    measuredTextWidth || (longestRowLabel.length * SVG.LABEL_WIDTH_MULTIPLIER),
+    rowLabelWidth,
+  );
 
   /**
      Setup: Static site/domain/state data
@@ -126,21 +167,24 @@ export default function EnhancedAvailabilityGrid(config) {
      feed data to d3 selections in order to only draw what will actually
      be visible.
   */
-  const getMinTimeOffset = () => 0 - (SVG.ABS_MAX_DATA_WIDTH - (svgWidth - labelWidth));
-  const getYearStartX = (year) => {
-    const intYear = parseInt(year, 10);
-    return labelWidth + SVG.END_PADDING
-      + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_WIDTH)
-      + (TIME.YEARS.indexOf(intYear) * SVG.YEAR_PADDING);
-  };
-  const getYearCenterX = (year) => getYearStartX(year) + (SVG.YEAR_WIDTH / 2);
-  const getYearMonthStartX = (yearMonth) => {
+  const yearStartXMap = {};
+  TIME.YEARS.forEach((year, yearIdx) => {
+    yearStartXMap[year] = labelWidth + SVG.END_PADDING
+      + (yearIdx * SVG.YEAR_WIDTH)
+      + (yearIdx * SVG.YEAR_PADDING);
+  });
+  const yearMonthStartXMap = {};
+  TIME.YEAR_MONTHS.forEach((yearMonth) => {
     const year = parseInt(yearMonth.substr(0, 4), 10);
     const month = parseInt(yearMonth.substr(5, 2), 10);
-    const yearIdx = TIME.YEARS.indexOf(year);
-    if (yearIdx === -1 || month < 1 || month > 12) { return 0; }
-    return getYearStartX(year) + ((month - 1) * SVG.YEAR_MONTH_WIDTH);
-  };
+    if (yearStartXMap[year] !== undefined && month >= 1 && month <= 12) {
+      yearMonthStartXMap[yearMonth] = yearStartXMap[year] + ((month - 1) * SVG.YEAR_MONTH_WIDTH);
+    }
+  });
+  const getMinTimeOffset = () => 0 - (SVG.ABS_MAX_DATA_WIDTH - (svgWidth - labelWidth));
+  const getYearStartX = (year) => yearStartXMap[parseInt(year, 10)] || 0;
+  const getYearCenterX = (year) => getYearStartX(year) + (SVG.YEAR_WIDTH / 2);
+  const getYearMonthStartX = (yearMonth) => yearMonthStartXMap[yearMonth] || 0;
   const getYearMonthsInView = (totalSvgWidth, dragOffset) => TIME.YEAR_MONTHS
     .filter((yearMonth) => {
       const tX = getYearMonthStartX(yearMonth) + dragOffset;
@@ -217,6 +261,8 @@ export default function EnhancedAvailabilityGrid(config) {
   const clipG = svg.append('g')
     .attr('class', 'clipG')
     .attr('clip-path', `url(#${svgId}-clip)`);
+  // Panning changes the transform of this group. It's not given will-change: transform, as in
+  // Chrome that re-layerizes everything painted over it (row labels, masks) on every pan step.
   const dragG = clipG.append('g')
     .attr('class', 'dragG');
   const rowSelectionsG = dragG.append('g')
@@ -439,22 +485,37 @@ export default function EnhancedAvailabilityGrid(config) {
 
   /**
      SVG: Row Labels
+     Labels are right aligned in a clipped column. Labels too long for the column can be scrolled
+     by dragging them or the scrollbar above them, or with a horizontal mouse wheel / trackpad.
   */
+  const labelX = labelWidth - SVG.CELL_PADDING;
+  defs.append('clipPath')
+    .attr('id', `${svgId}-labelClip`)
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', labelWidth - (SVG.CELL_PADDING / 2))
+    .attr('height', svgHeight);
   const rowLabelsG = svg.append('g').attr('class', 'rowLabelsG');
+  const rowLabelTextsG = rowLabelsG.append('g')
+    .attr('clip-path', `url(#${svgId}-labelClip)`)
+    .append('g')
+    .attr('class', 'rowLabelTextsG');
+  const rowLabelMasksG = rowLabelsG.append('g').attr('class', 'rowLabelMasksG');
   rowLabels.forEach((label, rowIdx) => {
     const transform = getRowTranslation(label, rowIdx);
-    const labelX = labelWidth - SVG.CELL_PADDING;
-    const rowLabelG = rowLabelsG.append('g').attr('transform', transform);
     const fill = selectionEnabled && setSitesValue && viewSelections[label]
       ? theme.palette.primary.contrastText
       : theme.palette.grey[700];
-    const text = rowLabelG.append('text')
+    const text = rowLabelTextsG.append('text')
+      .attr('transform', transform)
       .attr('x', labelX)
       .attr('y', SVG.LABEL_FONT_SIZE - (SVG.CELL_PADDING / 2))
       .attr('fill', fill)
       .text(label);
     SVG_STYLES.apply(text, 'rowLabel');
-    const mask = rowLabelG.append('rect')
+    const mask = rowLabelMasksG.append('rect')
+      .attr('transform', transform)
       .attr('x', 0)
       .attr('y', -1 * (SVG.CELL_PADDING / 2))
       .attr('width', labelWidth)
@@ -473,6 +534,65 @@ export default function EnhancedAvailabilityGrid(config) {
     mask.on('click', maskClick);
     mask.append('svg:title').text(rowTitles[label]);
   });
+
+  /**
+     SVG: Row Label Scrollbar
+     A label offset of 0 keeps the ends of labels in view next to the data. Increasing the offset
+     shifts labels right to bring their beginnings into view, so the scrollbar thumb starts at the
+     right end of its track. The offset is preserved through redraws like the time offset.
+  */
+  let labelOffset = 0;
+  let draggingLabels = false;
+  const labelScrollbar = {};
+  const labelScrollTrackX = SVG.CELL_PADDING;
+  const labelScrollTrackWidth = Math.max(0, labelWidth - (2 * SVG.CELL_PADDING));
+  const labelScrollThumbWidth = Math.min(
+    labelScrollTrackWidth,
+    Math.max(
+      SVG.LABEL_SCROLLBAR_MIN_THUMB_WIDTH,
+      (labelScrollTrackWidth ** 2) / (labelScrollTrackWidth + maxLabelOffset),
+    ),
+  );
+  const labelScrollThumbTravel = labelScrollTrackWidth - labelScrollThumbWidth;
+  const getLabelScrollThumbX = () => labelScrollTrackX + (
+    maxLabelOffset ? labelScrollThumbTravel * (1 - (labelOffset / maxLabelOffset)) : 0
+  );
+  const setLabelOffset = (offset) => {
+    labelOffset = Math.min(Math.max(0, offset), maxLabelOffset) || 0;
+    rowLabelTextsG.attr('transform', `translate(${labelOffset},0)`);
+    svg.attr('data-labelOffset', labelOffset);
+    if (labelScrollbar.thumb) { labelScrollbar.thumb.attr('x', getLabelScrollThumbX()); }
+  };
+  const setLabelOffsetFromThumbX = (thumbX) => {
+    if (labelScrollThumbTravel <= 0) { return; }
+    const scrolled = (thumbX - labelScrollTrackX) / labelScrollThumbTravel;
+    setLabelOffset(maxLabelOffset * (1 - scrolled));
+  };
+  if (maxLabelOffset > 0) {
+    const scrollbarY = (SVG.CELL_HEIGHT + SVG.CELL_PADDING - SVG.LABEL_SCROLLBAR_HEIGHT) / 2;
+    labelScrollbar.g = svg.append('g').attr('class', 'labelScrollbarG');
+    labelScrollbar.track = labelScrollbar.g.append('rect')
+      .attr('x', labelScrollTrackX)
+      .attr('y', scrollbarY)
+      .attr('width', labelScrollTrackWidth)
+      .attr('height', SVG.LABEL_SCROLLBAR_HEIGHT)
+      .attr('rx', SVG.LABEL_SCROLLBAR_HEIGHT / 2);
+    SVG_STYLES.apply(labelScrollbar.track, 'rowLabelScrollTrack');
+    labelScrollbar.thumb = labelScrollbar.g.append('rect')
+      .attr('y', scrollbarY)
+      .attr('width', labelScrollThumbWidth)
+      .attr('height', SVG.LABEL_SCROLLBAR_HEIGHT)
+      .attr('rx', SVG.LABEL_SCROLLBAR_HEIGHT / 2);
+    SVG_STYLES.apply(labelScrollbar.thumb, 'rowLabelScrollThumb');
+    labelScrollbar.mask = labelScrollbar.g.append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', labelWidth)
+      .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING);
+    SVG_STYLES.apply(labelScrollbar.mask, 'rowLabelScrollMask');
+    labelScrollbar.mask.append('svg:title').text('Scroll row labels');
+  }
+  setLabelOffset(parseFloat(svg.attr('data-labelOffset')));
 
   /**
      SVG: Time Axis
@@ -528,60 +648,102 @@ export default function EnhancedAvailabilityGrid(config) {
      SVG: Row Data
   */
   const dataG = dragContentG.append('g').attr('class', 'dataG');
+  // Stripes of striped cells (e.g. provisional) are drawn over the cells, see CELL_STRIPES
+  const stripesG = dragContentG.append('g').attr('class', 'stripesG');
   const dataMasksG = svg.append('g').attr('class', 'dataMasksG');
-  const redrawData = () => {
-    // Click/drag masks
-    dataMasksG.selectAll('rect')
-      .data(rowLabels)
-      .join('rect')
-      .attr('x', labelWidth)
-      .attr('y', (d, idx) => (
-        (SVG.CELL_PADDING / 2) + (rowLabels.length - idx) * (SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      ))
-      .attr('width', svgWidth - labelWidth)
-      .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
-      .attr('fill', 'transparent')
-      .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
-      .style('outline', 'none')
-      .on('mouseover', (event, d) => rowHighlightHover(d))
-      .on('focus', (event, d) => rowHighlightHover(d))
-      .on('mouseout', (event, d) => rowHighlightReset(true))
-      .on('blur', (event, d) => rowHighlightReset(true))
-      .on('click', selectionEnabled && setSitesValue ? (event, d) => {
-        SVG_STYLES.touchRipple(select(event.currentTarget), 15);
-        setTimeout(() => toggleSelection(d), 15);
-      } : (event, d) => {});
+  const getDefaultStatus = (month, defaultNotAvailable = true) => {
+    if (defaultNotAvailable === true) {
+      return 'not available';
+    }
+    return month >= TIME.CURRENT_MONTH ? 'not expected' : 'not available';
+  };
+  const resolvedRows = {};
+  rowLabels.forEach((label) => {
+    const rowData = rows[label] || {};
+    const resolvedRow = {};
+    Object.keys(rowData).forEach((month) => {
+      resolvedRow[month] = calcRollupStatus(rowData[month]);
+    });
+    resolvedRows[label] = resolvedRow;
+  });
+  const cellAttrsByStatus = getCellAttrs(colorScheme);
+  const getStripeColumns = createStripeColumnGetter({
+    rowCount: rowLabels.length,
+    getStatus: (rowIdx, month) => resolvedRows[rowLabels[rowIdx]][month],
+    getMonthX: getYearMonthStartX,
+    getRowY,
+    colorScheme,
+  });
+  let prevMonthsKey = '';
+  const redrawData = (force = true) => {
+    const monthsInView = getYearMonthsInView(svgWidth, getTimeOffset());
+    const monthsKey = monthsInView.length
+      ? `${monthsInView[0]}:${monthsInView[monthsInView.length - 1]}`
+      : 'empty';
+    if (!force && monthsKey === prevMonthsKey) { return; }
+    prevMonthsKey = monthsKey;
+
+    if (force) {
+      // Click/drag masks
+      dataMasksG.selectAll('rect')
+        .data(rowLabels)
+        .join('rect')
+        .attr('x', labelWidth)
+        .attr('y', (d, idx) => (
+          (SVG.CELL_PADDING / 2) + (rowLabels.length - idx) * (SVG.CELL_HEIGHT + SVG.CELL_PADDING)
+        ))
+        .attr('width', svgWidth - labelWidth)
+        .attr('height', SVG.CELL_HEIGHT + SVG.CELL_PADDING)
+        .attr('fill', 'transparent')
+        .style('cursor', selectionEnabled && setSitesValue ? 'pointer' : 'grab')
+        .style('outline', 'none')
+        .on('mouseover', (event, d) => rowHighlightHover(d))
+        .on('focus', (event, d) => rowHighlightHover(d))
+        .on('mouseout', (event, d) => rowHighlightReset(true))
+        .on('blur', (event, d) => rowHighlightReset(true))
+        .on('click', selectionEnabled && setSitesValue ? (event, d) => {
+          SVG_STYLES.touchRipple(select(event.currentTarget), 15);
+          setTimeout(() => toggleSelection(d), 15);
+        } : (event, d) => {});
+    }
     // Cells
     dataG.selectAll('g')
       .data(rowLabels)
       .join('g')
       .attr('transform', getRowTranslation)
       .each((label, idx, gNodes) => {
-        const rowData = rows[label];
-        const getDefaultStatus = (month) => (
-          month >= TIME.CURRENT_MONTH ? 'not expected' : 'not available'
-        );
-        const getCellAttr = (month, attr) => {
-          const status = calcRollupStatus(rowData[month]);
-          return (
-            !CELL_ATTRS[status]
-              ? CELL_ATTRS[getDefaultStatus(month)][attr] || null
-              : CELL_ATTRS[status][attr] || null
-          );
-        };
+        const resolvedRow = resolvedRows[label];
+        const rowMonths = emptyMissingMonths
+          ? monthsInView.filter((month) => resolvedRow[month])
+          : monthsInView;
         select(gNodes[idx])
           .selectAll('rect')
-          .data(() => getYearMonthsInView(svgWidth, getTimeOffset()))
-          .join('rect')
-          .attr('x', (month) => getYearMonthStartX(month) + (getCellAttr(month, 'nudge') || 0))
-          .attr('y', (month) => getCellAttr(month, 'nudge') || 0)
-          .attr('rx', `${SVG.CELL_RX}px`)
-          .attr('width', (month) => getCellAttr(month, 'width'))
-          .attr('height', (month) => getCellAttr(month, 'height'))
-          .attr('fill', (month) => getCellAttr(month, 'fill'))
-          .attr('stroke', (month) => getCellAttr(month, 'stroke'))
-          .attr('stroke-width', (month) => getCellAttr(month, 'strokeWidth'));
+          .data(rowMonths, (month) => month)
+          .join((enter) => enter
+            .append('rect')
+            .each((month, rectIdx, rectNodes) => {
+              const status = resolvedRow[month];
+              const cellAttrs = cellAttrsByStatus[status]
+                || cellAttrsByStatus[getDefaultStatus(month)];
+              const nudge = cellAttrs.nudge || 0;
+              select(rectNodes[rectIdx])
+                .attr('x', getYearMonthStartX(month) + nudge)
+                .attr('y', nudge)
+                .attr('rx', `${SVG.CELL_RX}px`)
+                .attr('width', cellAttrs.width || null)
+                .attr('height', cellAttrs.height || null)
+                .attr('fill', cellAttrs.fill || null)
+                .attr('stroke', cellAttrs.stroke || null)
+                .attr('stroke-width', cellAttrs.strokeWidth || null);
+            }));
       });
+    // Cell stripes, one path for each month in view and stripe fill
+    stripesG.selectAll('path')
+      .data(monthsInView.flatMap(getStripeColumns), (column) => column.key)
+      .join((enter) => enter
+        .append('path')
+        .attr('fill', (column) => column.fill)
+        .attr('d', (column) => column.d));
   };
 
   /**
@@ -761,7 +923,7 @@ export default function EnhancedAvailabilityGrid(config) {
     })
     .on('drag', (event, d) => {
       setTimeOffset(getTimeOffset() + event.dx);
-      redrawData();
+      redrawData(false);
       redrawDateRangeHandleMasks();
     })
     .on('end', (event, d) => {
@@ -797,6 +959,60 @@ export default function EnhancedAvailabilityGrid(config) {
     .on('focus', (event, d) => timeHighlightHover())
     .on('mouseout', (event, d) => timeHighlightReset())
     .on('blur', (event, d) => timeHighlightReset());
+
+  // Row label scrolling (only when labels don't fit the label column)
+  if (maxLabelOffset > 0) {
+    const labelMasks = rowLabelMasksG.selectAll('rect');
+    const setLabelScrollHighlight = (highlight) => {
+      SVG_STYLES.apply(
+        labelScrollbar.thumb,
+        highlight ? 'rowLabelScrollThumbActive' : 'rowLabelScrollThumb',
+      );
+    };
+    const setDraggingLabels = (dragging) => {
+      draggingLabels = dragging;
+      labelMasks.style('cursor', dragging ? 'grabbing' : 'grab');
+      labelScrollbar.mask.style('cursor', dragging ? 'grabbing' : 'grab');
+      setLabelScrollHighlight(dragging);
+    };
+    labelMasks.style('cursor', 'grab');
+    // Only horizontal (or shift) wheel gestures scroll labels so vertical page scrolling works
+    const scrollLabelsWithWheel = (event) => {
+      let delta = 0;
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+        delta = event.deltaX;
+      } else if (event.shiftKey) {
+        delta = event.deltaY;
+      }
+      if (!delta) { return; }
+      const previousLabelOffset = labelOffset;
+      const deltaScale = event.deltaMode === 1 ? (SVG.CELL_HEIGHT + SVG.CELL_PADDING) : 1;
+      setLabelOffset(labelOffset - (delta * deltaScale));
+      if (labelOffset !== previousLabelOffset) { event.preventDefault(); }
+    };
+    const dragLabels = drag()
+      .on('start', () => setDraggingLabels(true))
+      .on('drag', (event) => setLabelOffset(labelOffset + event.dx))
+      .on('end', () => setDraggingLabels(false));
+    const dragLabelScrollbar = drag()
+      .on('start', (event) => {
+        setDraggingLabels(true);
+        // Pressing the track outside the thumb moves the thumb to center on the pointer
+        const thumbX = getLabelScrollThumbX();
+        if ((event.x < thumbX) || (event.x > thumbX + labelScrollThumbWidth)) {
+          setLabelOffsetFromThumbX(event.x - (labelScrollThumbWidth / 2));
+        }
+      })
+      .on('drag', (event) => setLabelOffsetFromThumbX(getLabelScrollThumbX() + event.dx))
+      .on('end', () => setDraggingLabels(false));
+    labelMasks.on('wheel', scrollLabelsWithWheel);
+    dragLabels(labelMasks);
+    labelScrollbar.mask
+      .on('wheel', scrollLabelsWithWheel)
+      .on('mouseover', () => setLabelScrollHighlight(true))
+      .on('mouseout', () => setLabelScrollHighlight(draggingLabels));
+    dragLabelScrollbar(labelScrollbar.mask);
+  }
 
   if (selectionEnabled) {
     const dateRangeHandleReset = debounce(() => {

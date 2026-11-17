@@ -1,0 +1,2019 @@
+{
+  "data": {
+    "productCode": "DP1.20221.001",
+    "siteCodes": [
+      {
+        "siteCode": "BARC",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-10",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-02",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "CRAM",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "LIRO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRLA",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-04",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "PRPO",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-05",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-04",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-04",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "SUGG",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2017-11",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-07",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-02",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-10",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-02",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-06",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-10",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "siteCode": "TOOK",
+        "availableReleases": [
+          {
+            "release": "PROVISIONAL",
+            "months": [
+              {
+                "month": "2018-06",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2018-08",
+                "available": true,
+                "status": null
+              },
+              {
+                "month": "2018-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-06",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Potential"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Potential"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-07",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2019-09",
+                "available": true,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-07",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-08",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "month": "2020-09",
+                "available": false,
+                "status": null,
+                "packages": [
+                  {
+                    "packageType": "basic",
+                    "components": [
+                      {
+                        "name": "zoo_dnaExtraction",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_dnaRawDataFiles",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_fieldData",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_markerGeneSequencing",
+                        "type": "tablename",
+                        "status": "Expected"
+                      },
+                      {
+                        "name": "zoo_pcrAmplification",
+                        "type": "tablename",
+                        "status": "Expected"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
